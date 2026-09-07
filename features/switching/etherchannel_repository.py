@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 import sqlite3
-from contextlib import closing
+from contextlib import closing, nullcontext
 from typing import Any
 
 from .common import choice, failed, integer, ok, text
@@ -61,7 +61,13 @@ def _normalize_members(value: Any) -> str:
     return ",".join(normalized)
 
 
-def save_etherchannel(db: Any, host: str, payload: dict[str, Any]) -> dict[str, Any]:
+def save_etherchannel(
+    db: Any,
+    host: str,
+    payload: dict[str, Any],
+    *,
+    connection: sqlite3.Connection | None = None,
+) -> dict[str, Any]:
     """Create or update an EtherChannel using the legacy t06 table as-is."""
     target = text(host)
     if not target:
@@ -77,8 +83,12 @@ def save_etherchannel(db: Any, host: str, payload: dict[str, Any]) -> dict[str, 
         if "\n" in description or "\r" in description:
             raise ValueError("Description must be a single line")
 
-        with closing(db._connect()) as conn:
-            with conn:
+        connection_owner = (
+            closing(db._connect()) if connection is None else nullcontext(connection)
+        )
+        with connection_owner as conn:
+            transaction = conn if connection is None else nullcontext()
+            with transaction:
                 require_etherchannel_members(conn, target, member_ports.split(","))
                 duplicate = conn.execute(
                     """

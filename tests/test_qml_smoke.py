@@ -2819,6 +2819,7 @@ class QmlSmokeTests(unittest.TestCase):
             "UI/qml/sidebar/devices/DeviceContextMenu.qml",
             "UI/components/standard/ConfigTextContextMenu.qml",
             "UI/qml/shared/ViewPushDialog.qml",
+            "UI/qml/features/switching/switching/EtherChannelQuickDialog.qml",
         ):
             with self.subTest(qml=relative_path):
                 component = self._create(relative_path)

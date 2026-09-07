@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import sqlite3
-from contextlib import closing
+from contextlib import closing, nullcontext
 from typing import Any
 
 from .common import (
@@ -235,7 +235,11 @@ def _save_optional_profiles(
         )
 
 def save_switch_interface(
-    db: Any, host: str, payload: dict[str, Any]
+    db: Any,
+    host: str,
+    payload: dict[str, Any],
+    *,
+    connection: sqlite3.Connection | None = None,
 ) -> dict[str, Any]:
     """Save an interface and all related profiles in one transaction."""
     target = text(host)
@@ -272,8 +276,12 @@ def save_switch_interface(
             ),
             choice(payload.get("duplex"), "Duplex", {"auto", "full", "half"}, "auto"),
         )
-        with closing(db._connect()) as conn:
-            with conn:
+        connection_owner = (
+            closing(db._connect()) if connection is None else nullcontext(connection)
+        )
+        with connection_owner as conn:
+            transaction = conn if connection is None else nullcontext()
+            with transaction:
                 if mode == "routed":
                     device = conn.execute(
                         "SELECT role FROM t01_devices WHERE host = ?;", (target,)

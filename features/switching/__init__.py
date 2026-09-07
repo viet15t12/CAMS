@@ -1,6 +1,7 @@
 """Switch SW2/SW3 desired-state persistence and Cisco IOS Layer 2 push support."""
 
 from .etherchannel_repository import delete_etherchannel, get_etherchannels, save_etherchannel
+from .etherchannel_quick import EtherChannelQuickService
 from .interface_repository import get_switch_interfaces, save_switch_interface
 from .l3_repository import delete_svi, get_ip_routing, get_svis, save_ip_routing, save_svi
 from .monitoring_repository import get_mac_table, get_port_counters
@@ -24,6 +25,7 @@ from .vtp_group import VtpGroupService
 
 __all__ = [
     "ensure_switch_schema",
+    "EtherChannelQuickService",
     "add_l2_trust_port",
     "delete_etherchannel",
     "delete_l2_trust_port",

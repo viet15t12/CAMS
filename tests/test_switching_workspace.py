@@ -12,6 +12,7 @@ APP_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP_DIR / "features"))
 
 from switching import (  # noqa: E402
+    EtherChannelQuickService,
     VtpGroupService,
     add_l2_trust_port,
     delete_etherchannel,
@@ -215,6 +216,163 @@ class SwitchingWorkspaceTests(unittest.TestCase):
         )
         self.assertIn("interface Port-channel12", commands)
         self.assertIn(" no description", commands)
+
+    def test_quick_etherchannel_stages_matching_trunk_on_two_switches(self) -> None:
+        self.add_interface_inventory("sw2.local", "GigabitEthernet0/1")
+        self.add_interface_inventory("sw3.local", "GigabitEthernet0/2")
+        with closing(self.db._connect()) as connection:
+            connection.execute(
+                "UPDATE t01_devices SET connection_status = 'connected';"
+            )
+            connection.commit()
+        service = EtherChannelQuickService(self.db)
+
+        options = service.options("sw2.local")
+        self.assertTrue(options["ok"], options)
+        self.assertEqual(options["source"]["ports"][0]["if_name"], "GigabitEthernet0/1")
+        self.assertEqual(options["targets"][0]["host"], "sw3.local")
+
+        result = service.save(
+            {
+                "source_host": "sw2.local",
+                "source_port": "GigabitEthernet0/1",
+                "target_host": "sw3.local",
+                "target_port": "GigabitEthernet0/2",
+                "po_number": 7,
+                "protocol": "lacp",
+                "switchport_mode": "trunk",
+                "native_vlan": 10,
+                "allowed_vlans": "10",
+            }
+        )
+
+        self.assertTrue(result["ok"], result)
+        self.assertEqual(result["successful"], ["sw2.local", "sw3.local"])
+        with closing(self.db._connect()) as connection:
+            channels = connection.execute(
+                """
+                SELECT host, po_number, protocol, mode, member_ports
+                FROM t06_etherchannel ORDER BY host;
+                """
+            ).fetchall()
+            trunks = connection.execute(
+                """
+                SELECT i.host, i.if_name, i.mode, t.native_vlan, t.allowed_vlans
+                FROM t06_interface_l2 AS i
+                JOIN t06_iface_trunk AS t ON t.iface_id = i.id
+                ORDER BY i.host, i.if_name;
+                """
+            ).fetchall()
+        self.assertEqual(
+            [tuple(row) for row in channels],
+            [
+                ("sw2.local", 7, "lacp", "active", "GigabitEthernet0/1"),
+                ("sw3.local", 7, "lacp", "active", "GigabitEthernet0/2"),
+            ],
+        )
+        self.assertEqual(len(trunks), 4)
+        self.assertTrue(all(row["mode"] == "trunk" for row in trunks))
+        self.assertTrue(all(row["native_vlan"] == 10 for row in trunks))
+
+        for host in ("sw2.local", "sw3.local"):
+            tasks = SwitchingViewPushController(self.db)._etherchannel_tasks(host)
+            self.assertEqual(len(tasks), 1)
+            self.assertIn(" switchport mode trunk", tasks[0]["commands"])
+            self.assertIn(" channel-group 7 mode active", tasks[0]["commands"])
+            self.assertIn("interface Port-channel7", tasks[0]["commands"])
+
+    def test_quick_etherchannel_rolls_back_both_ends_when_vlan_is_invalid(self) -> None:
+        self.add_interface_inventory("sw2.local", "GigabitEthernet0/1")
+        self.add_interface_inventory("sw3.local", "GigabitEthernet0/2")
+        with closing(self.db._connect()) as connection:
+            connection.execute(
+                "UPDATE t01_devices SET connection_status = 'connected';"
+            )
+            connection.commit()
+
+        result = EtherChannelQuickService(self.db).save(
+            {
+                "source_host": "sw2.local",
+                "source_port": "GigabitEthernet0/1",
+                "target_host": "sw3.local",
+                "target_port": "GigabitEthernet0/2",
+                "po_number": 8,
+                "protocol": "lacp",
+                "switchport_mode": "access",
+                "access_vlan": 1,
+            }
+        )
+
+        self.assertFalse(result["ok"])
+        self.assertIn("does not exist", result["message"])
+        with closing(self.db._connect()) as connection:
+            self.assertEqual(
+                connection.execute("SELECT COUNT(*) FROM t06_etherchannel;").fetchone()[0],
+                0,
+            )
+            self.assertEqual(
+                connection.execute(
+                    "SELECT COUNT(*) FROM t06_interface_l2 "
+                    "WHERE lower(if_name) = 'port-channel8';"
+                ).fetchone()[0],
+                0,
+            )
+
+    def test_quick_etherchannel_stages_matching_access_vlan_on_both_ends(self) -> None:
+        self.add_interface_inventory("sw2.local", "GigabitEthernet0/3")
+        self.add_interface_inventory("sw3.local", "GigabitEthernet0/4")
+        with closing(self.db._connect()) as connection:
+            connection.execute(
+                "UPDATE t01_devices SET connection_status = 'connected';"
+            )
+            connection.commit()
+
+        result = EtherChannelQuickService(self.db).save(
+            {
+                "source_host": "sw2.local",
+                "source_port": "GigabitEthernet0/3",
+                "target_host": "sw3.local",
+                "target_port": "GigabitEthernet0/4",
+                "po_number": 11,
+                "protocol": "pagp",
+                "switchport_mode": "access",
+                "access_vlan": 10,
+            }
+        )
+
+        self.assertTrue(result["ok"], result)
+        with closing(self.db._connect()) as connection:
+            access_rows = connection.execute(
+                """
+                SELECT i.host, i.if_name, i.mode, a.access_vlan
+                FROM t06_interface_l2 AS i
+                JOIN t06_iface_access AS a ON a.iface_id = i.id
+                WHERE i.if_name IN (
+                    'GigabitEthernet0/3', 'GigabitEthernet0/4', 'Port-channel11'
+                )
+                ORDER BY i.host, i.if_name;
+                """
+            ).fetchall()
+            channel_rows = connection.execute(
+                """
+                SELECT host, protocol, mode FROM t06_etherchannel
+                WHERE po_number = 11 ORDER BY host;
+                """
+            ).fetchall()
+        self.assertEqual(len(access_rows), 4)
+        self.assertTrue(all(row["mode"] == "access" for row in access_rows))
+        self.assertTrue(all(row["access_vlan"] == 10 for row in access_rows))
+        self.assertEqual(
+            [tuple(row) for row in channel_rows],
+            [("sw2.local", "pagp", "desirable"), ("sw3.local", "pagp", "desirable")],
+        )
+        for host in ("sw2.local", "sw3.local"):
+            commands = SwitchingViewPushController(self.db)._etherchannel_tasks(host)[0][
+                "commands"
+            ]
+            self.assertIn(" switchport mode access", commands)
+            self.assertIn(" switchport access vlan 10", commands)
+            self.assertIn(" channel-group 11 mode desirable", commands)
 
     def test_etherchannel_delete_discards_draft_or_stages_device_removal(self) -> None:
         self.add_interface_inventory(

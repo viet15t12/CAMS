@@ -197,6 +197,11 @@ Item {
         if (reason === "manual") message = "EtherChannel inventory reloaded."
     }
 
+    function notify(detail, type) {
+        message = String(detail || "")
+        messageError = String(type || "") === "error"
+    }
+
     function beginCreate() {
         draftData = {
             id: 0,
@@ -291,6 +296,14 @@ Item {
                     root.messageError = !ok
                     if (ok) root.load()
                 }
+            }
+
+            StandardButton {
+                objectName: "etherChannelQuickButton"
+                text: "Quick Link"
+                icon.source: AppAssets.actionListAdd
+                type: "Primary"
+                onClicked: quickDialog.openFor(root.host, root)
             }
 
             App.CrudFormActions {
@@ -574,5 +587,29 @@ Item {
         enabled: root.visible && root.formMode === 0 && root.selectedIndex >= 0
                  && !root.saving
         onActivated: root.deleteSelected()
+    }
+
+    EtherChannelQuickDialog {
+        id: quickDialog
+        parent: Overlay.overlay
+        onSaved: function(hosts) {
+            root.load()
+            Qt.callLater(function() {
+                quickBatchDialog.openPreview(hosts, "etherchannel")
+            })
+        }
+    }
+
+    MultiHostViewPushDialog {
+        id: quickBatchDialog
+        parent: Overlay.overlay
+        controllerName: "switching"
+        featureLabel: "Quick EtherChannel"
+        ownerForm: root
+        onPushCompleted: function(ok, detail) {
+            root.message = detail
+            root.messageError = !ok
+            root.load()
+        }
     }
 }

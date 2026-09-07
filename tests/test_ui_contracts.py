@@ -2326,6 +2326,9 @@ class DataTableUiContractTests(unittest.TestCase):
         svi = self.source("qml/features/switching/interfaces/SviPage.qml")
         vlan = self.source("qml/features/switching/switching/VlanPage.qml")
         etherchannel = self.source("qml/features/switching/switching/EtherChannelPage.qml")
+        etherchannel_quick = self.source(
+            "qml/features/switching/switching/EtherChannelQuickDialog.qml"
+        )
         stp = self.source("qml/features/switching/switching/StpPage.qml")
         vtp = self.source("qml/features/switching/switching/VtpPage.qml")
         l2_security = self.source("qml/features/switching/security/L2SecurityPage.qml")
@@ -2333,6 +2336,19 @@ class DataTableUiContractTests(unittest.TestCase):
 
         self.assertIn("deleteSwitchEtherChannel", etherchannel)
         self.assertIn('objectName: "etherChannelRowDeleteButton"', etherchannel)
+        self.assertIn('objectName: "etherChannelQuickButton"', etherchannel)
+        self.assertIn(
+            'quickBatchDialog.openPreview(hosts, "etherchannel")', etherchannel
+        )
+        self.assertIn("getEtherChannelQuickOptions", etherchannel_quick)
+        self.assertIn("saveEtherChannelQuick", etherchannel_quick)
+        for object_name in (
+            "quickEtherChannelSourcePortCombo",
+            "quickEtherChannelTargetHostCombo",
+            "quickEtherChannelTargetPortCombo",
+            "quickEtherChannelSavePushButton",
+        ):
+            self.assertIn(f'objectName: "{object_name}"', etherchannel_quick)
         self.assertIn('objectName: "switchPortEditorActions"', inspector)
         self.assertIn('objectName: "sviEditorActions"', svi)
         self.assertIn('objectName: "sviAddButton"', svi)

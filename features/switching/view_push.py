@@ -170,6 +170,7 @@ class SwitchingViewPushController(BaseViewPushController):
         return build_interface_tasks(self.db, host, self._task)
 
     def _etherchannel_tasks(self, host: str) -> list[dict[str, Any]]:
+        pending_interface_tasks = build_interface_tasks(self.db, host, self._task)
         with closing(self.db._connect()) as conn:
             rows = conn.execute(
                 """
@@ -220,6 +221,37 @@ class SwitchingViewPushController(BaseViewPushController):
                 "id": row_id,
                 "action": "delete" if success == "pending_delete" else "sync",
             }]
+            commands: list[str] = []
+            if success != "pending_delete":
+                related_names = {
+                    value.strip().casefold()
+                    for value in str(row["member_ports"] or "").split(",")
+                    if value.strip()
+                }
+                related_names.update(
+                    {
+                        f"port-channel{row['po_number']}".casefold(),
+                        f"portchannel{row['po_number']}".casefold(),
+                        f"po{row['po_number']}".casefold(),
+                    }
+                )
+                for interface_task in pending_interface_tasks:
+                    interfaces = interface_task.get("config", {}).get("interfaces", [])
+                    if not interfaces:
+                        continue
+                    interface_name = str(interfaces[0].get("if_name") or "")
+                    normalized_name = interface_name.casefold()
+                    compact_name = normalized_name.replace("-", "").replace(" ", "")
+                    if normalized_name not in related_names and compact_name not in {
+                        name.replace("-", "").replace(" ", "")
+                        for name in related_names
+                    }:
+                        continue
+                    payload["interfaces"].extend(interfaces)
+                    commands.extend(interface_task.get("commands") or [])
+                    success_rows.extend(
+                        interface_task.get("tracking", {}).get("success_rows") or []
+                    )
             logical_interface_id = logical_interface_ids.get(int(row["po_number"]))
             if success == "pending_delete" and logical_interface_id is not None:
                 success_rows.append({
@@ -227,6 +259,9 @@ class SwitchingViewPushController(BaseViewPushController):
                     "id": logical_interface_id,
                     "action": "delete",
                 })
+            commands.extend(render_commands("interfaces", {
+                "interfaces": [], "etherchannels": [row]
+            }))
             tasks.append(
                 self._task(
                     host,
@@ -234,7 +269,7 @@ class SwitchingViewPushController(BaseViewPushController):
                     f"port-channel:{row['po_number']}",
                     f"Port-channel{row['po_number']}",
                     payload,
-                    render_commands("interfaces", payload),
+                    commands,
                     {"success_rows": success_rows},
                 )
             )
