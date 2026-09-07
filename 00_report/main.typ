@@ -17,10 +17,10 @@
 #set page(numbering: "i")
 #counter(page).update(1)
 
-#include "contents/00_loi_cam_doan.typ"
-#include "contents/00_loi_cam_on.typ"
-#include "contents/00_tom_tat.typ"
-#include "contents/00_danh_muc_tu_viet_tat.typ"
+#include "contents/01_loi_cam_doan.typ"
+#include "contents/02_loi_cam_on.typ"
+#include "contents/03_tom_tat.typ"
+#include "contents/04_danh_muc_tu_viet_tat.typ"
 
 #pagebreak()
 #outline(title: upper[Mục lục], depth: 4)
@@ -50,12 +50,12 @@
 #set page(numbering: "1")
 #counter(page).update(1)
 
-#include "contents/01_tong_quan.typ"
-#include "contents/02_co_so_ly_thuyet.typ"
-#include "contents/03_phan_tich_thiet_ke.typ"
-#include "contents/04_xay_dung_phan_mem.typ"
-#include "contents/05_thu_nghiem_danh_gia.typ"
-#include "contents/06_ket_luan_huong_phat_trien.typ"
+#include "contents/05_tong_quan.typ"
+#include "contents/06_co_so_ly_thuyet.typ"
+#include "contents/07_phan_tich_thiet_ke.typ"
+#include "contents/08_xay_dung_phan_mem.typ"
+#include "contents/09_thu_nghiem_danh_gia.typ"
+#include "contents/10_ket_luan_huong_phat_trien.typ"
 
 // ----------------------------------------------------------
 // TÀI LIỆU THAM KHẢO
