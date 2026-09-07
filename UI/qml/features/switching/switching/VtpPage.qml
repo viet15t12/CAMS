@@ -14,12 +14,14 @@ Rectangle {
     property string errorText: ""
     property string hostFilterText: ""
     property int selectedGroupIndex: -1
+    property var pendingPushHosts: []
     property int dataRevision: 0
     readonly property int maxHosts: 5
     readonly property bool isViewLoading: false
     readonly property bool compactLayout: width < Theme.dataWorkspaceBreakpoint
     readonly property bool readyToSave: memberModel.count >= 2
                                             && domainField.text.trim() !== ""
+                                            && !root.selectedGroupPendingDelete()
     readonly property var filteredHostOptions: {
         const options = root.hostOptions || []
         const query = root.hostFilterText.trim().toLocaleLowerCase()
@@ -69,6 +71,7 @@ Rectangle {
             groupModel.append(normalizedGroup(rows[i]))
         if (selectedGroupIndex >= groupModel.count)
             selectedGroupIndex = -1
+        refreshPendingPushHosts()
         dataRevision++
     }
 
@@ -150,6 +153,46 @@ Rectangle {
         return members
     }
 
+    function groupPendingDelete(members) {
+        members = members || []
+        for (let i = 0; i < listCount(members); i++) {
+            if (String(listItem(members, i).success || "") === "pending_delete")
+                return true
+        }
+        return false
+    }
+
+    function selectedGroupPendingDelete() {
+        if (selectedGroupIndex < 0 || selectedGroupIndex >= groupModel.count)
+            return false
+        return groupPendingDelete(groupModel.get(selectedGroupIndex).members)
+    }
+
+    function refreshPendingPushHosts() {
+        const hosts = []
+        const seen = ({})
+        for (let groupIndex = 0; groupIndex < groupModel.count; groupIndex++) {
+            const members = groupModel.get(groupIndex).members || []
+            for (let memberIndex = 0; memberIndex < listCount(members); memberIndex++) {
+                const member = listItem(members, memberIndex)
+                const status = String(member.success || "")
+                const memberHost = String(member.host || "").trim()
+                if ((status === "pending_apply" || status === "pending_delete")
+                        && memberHost !== "" && !seen[memberHost]) {
+                    seen[memberHost] = true
+                    hosts.push(memberHost)
+                }
+            }
+        }
+        pendingPushHosts = hosts
+    }
+
+    function openViewPush() {
+        if (pendingPushHosts.length === 0)
+            return
+        batchDialog.openPreview(pendingPushHosts, "vtp")
+    }
+
     function resetDraft() {
         memberModel.clear()
         domainField.clear()
@@ -209,6 +252,26 @@ Rectangle {
             batchDialog.openPreview(result.successful || [], "vtp")
     }
 
+    function deleteGroup() {
+        if (selectedGroupIndex < 0 || selectedGroupIndex >= groupModel.count)
+            return
+        const domainId = Number(groupModel.get(selectedGroupIndex).vtp_domain_id || 0)
+        const result = dbManager.deleteVtpGroup(domainId)
+        notify(String(result.message || ""), result.ok ? "success" : "error")
+        if (result.ok)
+            loadGroups()
+    }
+
+    function cancelGroupDelete() {
+        if (selectedGroupIndex < 0 || selectedGroupIndex >= groupModel.count)
+            return
+        const domainId = Number(groupModel.get(selectedGroupIndex).vtp_domain_id || 0)
+        const result = dbManager.cancelVtpGroupDelete(domainId)
+        notify(String(result.message || ""), result.ok ? "success" : "error")
+        if (result.ok)
+            loadGroups()
+    }
+
     Component.onCompleted: reloadData("initial")
 
     ColumnLayout {
@@ -235,6 +298,16 @@ Rectangle {
                 autoCompact: false
                 Layout.minimumWidth: expandedImplicitWidth
                 onClicked: root.reloadData("manual")
+            }
+
+            StandardButton {
+                objectName: "vtpViewPushButton"
+                text: "View & Push"
+                icon.source: AppAssets.actionPush
+                type: "Primary"
+                enabled: root.pendingPushHosts.length > 0
+                tooltip: enabled ? "" : "No VTP configuration is waiting for Push."
+                onClicked: root.openViewPush()
             }
         }
 
@@ -495,6 +568,22 @@ Rectangle {
                             onClicked: root.resetDraft()
                         }
                         StandardButton {
+                            objectName: "vtpDeleteButton"
+                            text: "Delete"
+                            icon.source: AppAssets.actionDelete
+                            type: "Danger"
+                            visible: root.selectedGroupIndex >= 0
+                                     && !root.selectedGroupPendingDelete()
+                            onClicked: root.deleteGroup()
+                        }
+                        StandardButton {
+                            objectName: "vtpCancelDeleteButton"
+                            text: "Cancel Delete"
+                            type: "Text"
+                            visible: root.selectedGroupPendingDelete()
+                            onClicked: root.cancelGroupDelete()
+                        }
+                        StandardButton {
                             text: "Save"
                             icon.source: AppAssets.actionSave
                             type: "Secondary"
@@ -588,9 +677,12 @@ Rectangle {
                                 }
                                 Text {
                                     Layout.fillWidth: true
-                                    text: "Version " + version + " · "
+                                    text: (root.groupPendingDelete(groupCard.members)
+                                           ? "Waiting for delete push · " : "")
+                                          + "Version " + version + " · "
                                           + root.listCount(members) + " switch(es)"
-                                    color: Theme.textSecondary
+                                    color: root.groupPendingDelete(groupCard.members)
+                                           ? Theme.alertWarning : Theme.textSecondary
                                     font.family: Theme.fontFamily
                                     font.pixelSize: Theme.fontSizeSmall
                                 }

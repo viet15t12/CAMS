@@ -44,6 +44,8 @@ StatefulWindow {
         typeof welcomeController !== "undefined" ? welcomeController : null
     readonly property var workspaceBackend:
         typeof workspaceSaveController !== "undefined" ? workspaceSaveController : null
+    readonly property var updateBackend:
+        typeof updateManager !== "undefined" ? updateManager : null
     readonly property bool backendWantsNativeMenu:
         typeof menuPresentation !== "undefined"
         && menuPresentation !== null
@@ -97,6 +99,19 @@ StatefulWindow {
         titleDragArea.forceActiveFocus(Qt.OtherFocusReason)
     }
 
+    function maybeShowUpdatePrompt() {
+        if (!root.visible || root.updateBackend === null
+                || !root.updateBackend.notificationPending)
+            return false
+        if (!root.updateBackend.claimUpdateNotification())
+            return false
+        updateAvailableDialog.messageText =
+            "A new CAMS version (" + root.updateBackend.latestVersion
+            + ") is available. Press OK to download and install it now."
+        updateAvailableDialog.open()
+        return true
+    }
+
     function toggleMaximized() {
         if (root.visibility === Window.Maximized)
             root.showNormal()
@@ -133,6 +148,23 @@ StatefulWindow {
             root.pendingRollbackSnapshotId = ""
         }
         onRejected: root.pendingRollbackSnapshotId = ""
+    }
+
+    SftpMessageDialog {
+        id: updateAvailableDialog
+        objectName: "workspaceUpdateAvailableDialog"
+        titleText: "CAMS Update Available"
+        confirmation: true
+        rejectText: "Later"
+        acceptText: "OK"
+        onAccepted: if (root.updateBackend !== null)
+                        root.updateBackend.checkAndUpdate()
+    }
+
+    Connections {
+        target: root.updateBackend
+        enabled: root.updateBackend !== null
+        function onStateChanged() { root.maybeShowUpdatePrompt() }
     }
 
     Connections {
@@ -587,7 +619,11 @@ StatefulWindow {
         }
     }
 
-    Component.onCompleted: attachPersistentSettingsBackends()
+    Component.onCompleted: {
+        attachPersistentSettingsBackends()
+        Qt.callLater(root.maybeShowUpdatePrompt)
+    }
+    onVisibleChanged: if (visible) Qt.callLater(root.maybeShowUpdatePrompt)
 
     NotificationPanel {
         id: notificationPanel

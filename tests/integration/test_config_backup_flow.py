@@ -109,6 +109,22 @@ class ConfigBackupFlowTests(unittest.TestCase):
             self.assertEqual(result["diff"], "")
             self.assertIn("40 hexadecimal", result["message"])
 
+    def test_selected_running_config_commit_exports_as_cfg(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            service = ConfigBackupService(root / "backup")
+            first = service.save_snapshot("10.2.3.1", "hostname old\n")
+            service.save_snapshot("10.2.3.1", "hostname current\n")
+
+            result = service.export_commit(
+                "10.2.3.1", first["commitId"], root / "selected-running-config"
+            )
+
+            self.assertTrue(result["ok"], result)
+            exported = Path(result["path"])
+            self.assertEqual(exported.suffix, ".cfg")
+            self.assertEqual(exported.read_text(encoding="utf-8"), "hostname old\n")
+
     def test_manual_sys_previews_before_explicit_force_apply(self) -> None:
         class FakeConnector:
             def collect_running_config(self):

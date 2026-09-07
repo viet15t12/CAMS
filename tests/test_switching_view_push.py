@@ -217,6 +217,36 @@ class SwitchingViewPushTests(unittest.TestCase):
         self.assertIn("switchport port-security maximum 2", preview["commands"])
         self.assertEqual(self.connector.connection.commands, [])
 
+    def test_vtp_delete_push_removes_switch_row_and_orphan_domain(self) -> None:
+        with closing(self.db._connect()) as connection:
+            connection.execute(
+                """
+                UPDATE t09_vtp_switches
+                SET sync_status = 'pending_delete', success = 'pending_delete'
+                WHERE host = 'sw2.local';
+                """
+            )
+            connection.commit()
+
+        tasks = self.controller.collect_pending_tasks("sw2.local", "vtp")
+        self.assertEqual(len(tasks), 1)
+        self.assertEqual(tasks[0]["commands"], ["no vtp domain"])
+        self.assertEqual(
+            tasks[0]["tracking"]["success_rows"][0]["action"], "delete"
+        )
+
+        result = self.controller.push_tasks("sw2.local", "vtp", tasks)
+        self.assertTrue(result["ok"], result)
+        with closing(self.db._connect()) as connection:
+            counts = connection.execute(
+                """
+                SELECT
+                    (SELECT COUNT(*) FROM t09_vtp_switches),
+                    (SELECT COUNT(*) FROM t09_vtp_domains);
+                """
+            ).fetchone()
+        self.assertEqual(tuple(counts), (0, 0))
+
     def test_post_push_restores_full_operational_pull_for_every_switch_tab(self) -> None:
         for module in (
             "all",

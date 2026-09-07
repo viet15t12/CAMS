@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import os
 import shutil
+import tempfile
 from datetime import datetime
 from pathlib import Path
 
@@ -122,3 +124,51 @@ class ConfigBackupService:
             return self.repository.read_latest(normalized_host)
         except Exception as exc:
             return {"ok": False, "host": (host or "").strip(), "commitId": "", "content": "", "path": "", "message": str(exc)}
+
+    def export_commit(
+        self, host: str, commit_id: str, destination: Path
+    ) -> dict[str, object]:
+        """Export one selected snapshot to a user-selected local CFG file."""
+        try:
+            normalized_host = validate_host(host)
+            self.migrate_legacy_backup(normalized_host)
+            snapshot = self.repository.read_commit(
+                normalized_host, (commit_id or "").strip()
+            )
+            target = Path(destination).expanduser()
+            if not target.name:
+                raise ValueError("Choose a file name for the exported configuration.")
+            if target.suffix == "":
+                target = target.with_suffix(".cfg")
+            parent = target.parent.resolve()
+            if not parent.is_dir():
+                raise ValueError("The selected export folder does not exist.")
+            target = parent / target.name
+            temporary_name = ""
+            try:
+                with tempfile.NamedTemporaryFile(
+                    mode="w",
+                    encoding="utf-8",
+                    newline="\n",
+                    prefix=".running-config-export.",
+                    suffix=".tmp",
+                    dir=parent,
+                    delete=False,
+                ) as stream:
+                    temporary_name = stream.name
+                    stream.write(str(snapshot["content"]))
+                os.replace(temporary_name, target)
+            finally:
+                if temporary_name:
+                    Path(temporary_name).unlink(missing_ok=True)
+            return {
+                "ok": True,
+                "path": str(target),
+                "message": f"Exported running-config to {target}.",
+            }
+        except Exception as exc:
+            return {
+                "ok": False,
+                "path": "",
+                "message": f"Could not export running-config: {exc}",
+            }

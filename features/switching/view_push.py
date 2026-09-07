@@ -269,7 +269,15 @@ class SwitchingViewPushController(BaseViewPushController):
                 payload,
                 render_commands("vtp", payload),
                 {"success_rows": [
-                    {"kind": "vtp", "id": int(row["vtp_switch_id"])}
+                    {
+                        "kind": "vtp",
+                        "id": int(row["vtp_switch_id"]),
+                        "action": (
+                            "delete"
+                            if str(row["success"] or "") == "pending_delete"
+                            else "sync"
+                        ),
+                    }
                     for row in pending
                 ]},
             )

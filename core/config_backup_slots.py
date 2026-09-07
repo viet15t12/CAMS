@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from PyQt6.QtCore import pyqtSlot
+from pathlib import Path
+
+from PyQt6.QtCore import QUrl, pyqtSlot
 
 
 class ConfigBackupSlotsMixin:
@@ -35,4 +37,16 @@ class ConfigBackupSlotsMixin:
             host,
             base_commit_id,
             target_commit_id,
+        )
+
+    @pyqtSlot(str, str, str, result="QVariant")
+    def exportRunningConfigAtCommit(
+        self, host: str, commit_id: str, destination_url: str
+    ) -> dict[str, object]:
+        """Export the selected history snapshot to a local user-selected file."""
+        value = str(destination_url or "").strip()
+        url = QUrl(value)
+        destination = Path(url.toLocalFile()) if url.isLocalFile() else Path(value)
+        return self._config_backup_service.export_commit(
+            host, commit_id, destination
         )

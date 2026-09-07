@@ -146,7 +146,7 @@ def _set_windows_app_user_model_id() -> None:
 _configure_qt_logging()
 _bootstrap_pyqt6_paths()
 
-from PyQt6.QtCore import QMetaObject
+from PyQt6.QtCore import QMetaObject, QTimer
 from PyQt6.QtGui import QIcon
 from PyQt6.QtQml import QQmlApplicationEngine
 from PyQt6.QtWidgets import QApplication
@@ -431,6 +431,10 @@ def main() -> int:
     welcome_window = engine.rootObjects()[0]
     if not application_icon.isNull():
         welcome_window.setIcon(application_icon)
+
+    # The updater uses QProcess, so this network check never blocks either UI.
+    # Installation remains opt-in through the confirmation shown by QML.
+    QTimer.singleShot(1_500, update_manager.checkForUpdates)
 
     def request_shutdown(_signum: int, _frame: object) -> None:
         app.quit()

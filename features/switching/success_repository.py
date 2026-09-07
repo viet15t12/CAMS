@@ -76,6 +76,21 @@ def mark_task_success(db: Any, tracking: dict[str, Any]) -> None:
                     raise ValueError(
                         f"Switching success row no longer exists: {kind}:{row_id}"
                     )
+            if any(
+                str(row.get("kind") or "") == "vtp"
+                and row.get("action") == "delete"
+                for row in rows
+            ):
+                models.database.execute_sql(
+                    """
+                    DELETE FROM t09_vtp_domains
+                    WHERE NOT EXISTS (
+                        SELECT 1 FROM t09_vtp_switches
+                        WHERE t09_vtp_switches.vtp_domain_id =
+                              t09_vtp_domains.vtp_domain_id
+                    );
+                    """
+                )
 
 
 __all__ = ["mark_task_success"]

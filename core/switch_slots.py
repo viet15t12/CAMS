@@ -154,6 +154,16 @@ class SwitchSlotsMixin:
         """Stage one VTP domain for several switches."""
         return VtpGroupService(self).save(self._as_dict(payload))
 
+    @pyqtSlot(int, result="QVariant")
+    def deleteVtpGroup(self, domain_id: int) -> dict[str, Any]:
+        """Stage one VTP domain for removal from all member switches."""
+        return VtpGroupService(self).delete(domain_id)
+
+    @pyqtSlot(int, result="QVariant")
+    def cancelVtpGroupDelete(self, domain_id: int) -> dict[str, Any]:
+        """Cancel a staged VTP domain removal before it is pushed."""
+        return VtpGroupService(self).cancel_delete(domain_id)
+
     @pyqtSlot(str, result="QVariant")
     def getSwitchPortCounters(self, host: str) -> list[dict[str, Any]]:
         return get_port_counters(self, host)

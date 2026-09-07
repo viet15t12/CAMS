@@ -24,6 +24,8 @@ ApplicationWindow {
     property bool nativePresenterFailed: false
     readonly property var backend:
         typeof welcomeController !== "undefined" ? welcomeController : null
+    readonly property var updateBackend:
+        typeof updateManager !== "undefined" ? updateManager : null
     readonly property bool backendWantsNativeMenu:
         typeof menuPresentation !== "undefined"
         && menuPresentation !== null
@@ -72,6 +74,19 @@ ApplicationWindow {
         welcomeContent.forceActiveFocus(Qt.OtherFocusReason)
     }
 
+    function maybeShowUpdatePrompt() {
+        if (!root.visible || root.updateBackend === null
+                || !root.updateBackend.notificationPending)
+            return false
+        if (!root.updateBackend.claimUpdateNotification())
+            return false
+        updateAvailableDialog.messageText =
+            "A new CAMS version (" + root.updateBackend.latestVersion
+            + ") is available. Press OK to download and install it now."
+        updateAvailableDialog.open()
+        return true
+    }
+
     onRequestedModeChanged: if (requestedMode !== "") Qt.callLater(openRequestedMode)
 
     Component.onCompleted: {
@@ -85,7 +100,9 @@ ApplicationWindow {
             root.y = Screen.virtualY
                      + Math.round((Screen.desktopAvailableHeight - root.height) / 2)
         }
+        Qt.callLater(root.maybeShowUpdatePrompt)
     }
+    onVisibleChanged: if (visible) Qt.callLater(root.maybeShowUpdatePrompt)
 
     OpenProjectFileDialog {
         id: openProjectDialog
@@ -138,6 +155,23 @@ ApplicationWindow {
         title: "CAMS"
         text: ""
         buttons: MessageDialog.Ok
+    }
+
+    SftpMessageDialog {
+        id: updateAvailableDialog
+        objectName: "welcomeUpdateAvailableDialog"
+        titleText: "CAMS Update Available"
+        confirmation: true
+        rejectText: "Later"
+        acceptText: "OK"
+        onAccepted: if (root.updateBackend !== null)
+                        root.updateBackend.checkAndUpdate()
+    }
+
+    Connections {
+        target: root.updateBackend
+        enabled: root.updateBackend !== null
+        function onStateChanged() { root.maybeShowUpdatePrompt() }
     }
 
     Connections {

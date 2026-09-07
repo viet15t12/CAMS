@@ -1148,6 +1148,55 @@ class SwitchingWorkspaceTests(unittest.TestCase):
         self.assertFalse(unsafe["ok"])
         self.assertIn("may only contain", unsafe["message"])
 
+    def test_vtp_group_delete_can_be_staged_and_cancelled(self) -> None:
+        with closing(self.db._connect()) as connection:
+            connection.execute(
+                "UPDATE t01_devices SET connection_status = 'connected';"
+            )
+            connection.commit()
+        service = VtpGroupService(self.db)
+        saved = service.save(
+            {
+                "domain_name": "DELETE-ME",
+                "version": 2,
+                "members": [
+                    {"host": "sw2.local", "mode": "server"},
+                    {"host": "sw3.local", "mode": "client"},
+                ],
+            }
+        )
+
+        deleted = service.delete(saved["vtp_domain_id"])
+        self.assertTrue(deleted["ok"], deleted)
+        self.assertEqual(deleted["hosts"], ["sw2.local", "sw3.local"])
+        with closing(self.db._connect()) as connection:
+            statuses = connection.execute(
+                """
+                SELECT sync_status, success FROM t09_vtp_switches
+                WHERE vtp_domain_id = ? ORDER BY host;
+                """,
+                (saved["vtp_domain_id"],),
+            ).fetchall()
+        self.assertEqual(
+            [tuple(row) for row in statuses],
+            [("pending_delete", "pending_delete")] * 2,
+        )
+
+        cancelled = service.cancel_delete(saved["vtp_domain_id"])
+        self.assertTrue(cancelled["ok"], cancelled)
+        with closing(self.db._connect()) as connection:
+            statuses = connection.execute(
+                """
+                SELECT sync_status, success FROM t09_vtp_switches
+                WHERE vtp_domain_id = ? ORDER BY host;
+                """,
+                (saved["vtp_domain_id"],),
+            ).fetchall()
+        self.assertEqual(
+            [tuple(row) for row in statuses],
+            [("pending_apply", "pending_apply")] * 2,
+        )
+
     def test_switch_modules_expose_shared_view_push_actions(self) -> None:
         vlan_source = (
             APP_DIR
@@ -1233,6 +1282,9 @@ class SwitchingWorkspaceTests(unittest.TestCase):
             'batchDialog.openPreview(result.successful || [], "vtp")',
             vtp_source,
         )
+        self.assertIn('objectName: "vtpDeleteButton"', vtp_source)
+        self.assertIn('objectName: "vtpViewPushButton"', vtp_source)
+        self.assertIn("deleteVtpGroup", vtp_source)
 
         workspace_source = (
             APP_DIR / "UI" / "qml" / "features" / "switching" / "SwitchWorkspace.qml"

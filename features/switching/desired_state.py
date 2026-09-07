@@ -134,7 +134,7 @@ def collect_vtp_state(conn: Any, host: str) -> dict[str, Any]:
         conn,
         """
         SELECT d.domain_name, d.version, d.password_type, d.password_value,
-               s.pruning, m.database_type, m.mode, m.primary_server
+               s.pruning, s.success, m.database_type, m.mode, m.primary_server
         FROM t09_vtp_switches AS s
         JOIN t09_vtp_domains AS d ON d.vtp_domain_id = s.vtp_domain_id
         LEFT JOIN t09_vtp_database_modes AS m ON m.vtp_switch_id = s.vtp_switch_id
@@ -143,6 +143,8 @@ def collect_vtp_state(conn: Any, host: str) -> dict[str, Any]:
         """,
         host,
     )
+    if any(row.get("success") == "pending_delete" for row in rows):
+        return {"vtp": rows}
     if any(row["password_type"] != "none" for row in rows):
         raise ValueError(
             "VTP authentication is stored encrypted and cannot be pushed until a decryptor is wired"

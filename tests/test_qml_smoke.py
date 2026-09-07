@@ -3894,6 +3894,9 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertIsNotNone(information.findChild(QObject, "informationCommitHistoryComboBox"))
         viewer = information.findChild(QObject, "informationConfigViewer")
         self.assertIsNotNone(viewer)
+        self.assertIsNotNone(
+            information.findChild(QObject, "informationExportConfigButton")
+        )
         self.assertTrue(viewer.property("wrapLongLines"))
         self.assertTrue(viewer.property("smoothVerticalScrolling"))
         self.assertEqual(self.warnings, [])

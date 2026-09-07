@@ -32,7 +32,10 @@ class UpdateManager(QObject):
         self._process.finished.connect(self._on_finished)
         self._output = bytearray()
         self._busy = False
+        self._operation = ""
         self._restart_required = False
+        self._update_available = False
+        self._notification_pending = False
         self._status_message = "Ready to check for updates."
         self._status_severity = "info"
         self._result_status = ""
@@ -84,6 +87,14 @@ class UpdateManager(QObject):
     def restartRequired(self) -> bool:
         return self._restart_required
 
+    @pyqtProperty(bool, notify=stateChanged)
+    def updateAvailable(self) -> bool:
+        return self._update_available
+
+    @pyqtProperty(bool, notify=stateChanged)
+    def notificationPending(self) -> bool:
+        return self._notification_pending
+
     @pyqtProperty(str, notify=stateChanged)
     def statusMessage(self) -> str:
         return self._status_message
@@ -105,8 +116,7 @@ class UpdateManager(QObject):
     def latestVersion(self) -> str:
         return self._latest_commit[:12]
 
-    @pyqtSlot(result=bool)
-    def checkAndUpdate(self) -> bool:
+    def _start(self, operation: str) -> bool:
         if self._busy:
             return False
         if not self.available:
@@ -117,13 +127,36 @@ class UpdateManager(QObject):
 
         self._output.clear()
         self._result_status = ""
+        self._operation = operation
         self._busy = True
+        self._notification_pending = False
         self._status_message = "Checking for CAMS updates..."
         self._status_severity = "info"
         self.stateChanged.emit()
         self._process.setWorkingDirectory(str(self._app_dir))
-        self._process.start("/bin/sh", [str(self.script_path), "--update"])
+        argument = "--check" if operation == "check" else "--update"
+        self._process.start("/bin/sh", [str(self.script_path), argument])
         return True
+
+    @pyqtSlot(result=bool)
+    def checkForUpdates(self) -> bool:
+        """Check in a non-blocking child process without installing anything."""
+        if self._restart_required:
+            return False
+        return self._start("check")
+
+    @pyqtSlot(result=bool)
+    def claimUpdateNotification(self) -> bool:
+        """Let exactly one visible top-level window present the update prompt."""
+        if not self._notification_pending:
+            return False
+        self._notification_pending = False
+        self.stateChanged.emit()
+        return True
+
+    @pyqtSlot(result=bool)
+    def checkAndUpdate(self) -> bool:
+        return self._start("update")
 
     def _drain_output(self) -> None:
         self._output.extend(bytes(self._process.readAllStandardOutput()))
@@ -160,16 +193,26 @@ class UpdateManager(QObject):
         elif self._result_status == "updated":
             self._current_commit = self._latest_commit or self._current_commit
             self._restart_required = True
+            self._update_available = False
+            self._notification_pending = False
             self._status_message = (
                 "CAMS was updated successfully. Restart the app to use the new version."
             )
             self._status_severity = "success"
         elif self._result_status == "current":
+            self._update_available = False
+            self._notification_pending = False
             self._status_message = "CAMS is already up to date."
             self._status_severity = "success"
+        elif self._result_status == "available":
+            self._update_available = True
+            self._notification_pending = self._operation == "check"
+            self._status_message = "A CAMS update is available."
+            self._status_severity = "warning"
         else:
             self._status_message = "The update check finished without a recognizable result."
             self._status_severity = "warning"
+        self._operation = ""
         self.stateChanged.emit()
 
     @pyqtSlot(QProcess.ProcessError)
@@ -177,6 +220,7 @@ class UpdateManager(QObject):
         if self._process.state() != QProcess.ProcessState.NotRunning:
             return
         self._busy = False
+        self._operation = ""
         self._status_message = self._process.errorString() or "Could not start the CAMS updater."
         self._status_severity = "error"
         self.stateChanged.emit()

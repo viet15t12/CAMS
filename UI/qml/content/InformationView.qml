@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls.Basic
+import QtQuick.Dialogs
 import QtQuick.Layouts
 import UI
 
@@ -138,6 +139,27 @@ Rectangle {
             return root.loadDiff()
         }
         root.viewMode = "snapshot"
+        return true
+    }
+
+    function notify(message, type) {
+        if (typeof statusBar !== "undefined")
+            statusBar.showMessage(message, type)
+    }
+
+    function exportFileName() {
+        const hostPart = String(root.currentHostIp || "device")
+                         .replace(/[^A-Za-z0-9._-]+/g, "-")
+        const commitPart = String(root.selectedCommitId || "snapshot").slice(0, 7)
+        return hostPart + "-running-config-" + commitPart + ".cfg"
+    }
+
+    function openExportDialog() {
+        if (root.viewMode !== "snapshot" || root.configText === ""
+                || root.selectedCommitId === "")
+            return false
+        exportConfigDialog.selectedFile = root.exportFileName()
+        exportConfigDialog.open()
         return true
     }
 
@@ -284,6 +306,20 @@ Rectangle {
                 tooltip: "Copy all displayed configuration"
                 enabled: root.displayedText !== ""
                 onClicked: informationConfigViewer.copyAll()
+            }
+
+            StandardButton {
+                objectName: "informationExportConfigButton"
+                text: "Export CFG"
+                icon.source: AppAssets.actionDownload
+                type: "Primary"
+                tooltip: root.viewMode === "diff"
+                         ? "Switch to Snapshot to export a running-config version"
+                         : "Export the displayed running-config snapshot"
+                enabled: root.viewMode === "snapshot"
+                         && root.configText !== ""
+                         && root.selectedCommitId !== ""
+                onClicked: root.openExportDialog()
             }
         }
 
@@ -512,6 +548,23 @@ Rectangle {
                               ? "Choose a device to view its running-config backup."
                               : "No running-config data is available.")
             }
+        }
+    }
+
+    FileDialog {
+        id: exportConfigDialog
+        objectName: "informationExportConfigDialog"
+        title: "Export Running Configuration"
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: "cfg"
+        nameFilters: ["Configuration file (*.cfg)", "Text file (*.txt)"]
+        onAccepted: {
+            const result = dbManager.exportRunningConfigAtCommit(
+                String(root.currentHostIp || ""),
+                String(root.selectedCommitId || ""),
+                selectedFile.toString()
+            )
+            root.notify(String(result.message || ""), result.ok ? "success" : "error")
         }
     }
 }

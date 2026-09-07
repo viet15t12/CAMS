@@ -110,6 +110,58 @@ class VtpGroupRepository:
             "message": message,
         }
 
+    def mark_group_for_delete(self, domain_id: int) -> list[str]:
+        """Stage removal on every switch that belongs to one VTP domain."""
+        with closing(self.db._connect()) as conn:
+            with conn:
+                rows = conn.execute(
+                    """
+                    SELECT host
+                    FROM t09_vtp_switches
+                    WHERE vtp_domain_id = ?
+                    ORDER BY host COLLATE NOCASE;
+                    """,
+                    (domain_id,),
+                ).fetchall()
+                hosts = [str(row["host"]) for row in rows]
+                if hosts:
+                    conn.execute(
+                        """
+                        UPDATE t09_vtp_switches
+                        SET sync_status = 'pending_delete',
+                            success = 'pending_delete'
+                        WHERE vtp_domain_id = ?;
+                        """,
+                        (domain_id,),
+                    )
+        return hosts
+
+    def cancel_group_delete(self, domain_id: int) -> list[str]:
+        """Cancel a staged removal and queue the saved policy for reconciliation."""
+        with closing(self.db._connect()) as conn:
+            with conn:
+                rows = conn.execute(
+                    """
+                    SELECT host
+                    FROM t09_vtp_switches
+                    WHERE vtp_domain_id = ? AND success = 'pending_delete'
+                    ORDER BY host COLLATE NOCASE;
+                    """,
+                    (domain_id,),
+                ).fetchall()
+                hosts = [str(row["host"]) for row in rows]
+                if hosts:
+                    conn.execute(
+                        """
+                        UPDATE t09_vtp_switches
+                        SET sync_status = 'pending_apply',
+                            success = 'pending_apply'
+                        WHERE vtp_domain_id = ? AND success = 'pending_delete';
+                        """,
+                        (domain_id,),
+                    )
+        return hosts
+
     def _save_domain(self, domain: dict[str, Any]) -> int:
         with closing(self.db._connect()) as conn:
             with conn:
@@ -285,6 +337,40 @@ class VtpGroupService:
                 "failed": [],
                 "message": str(exc),
             }
+
+    def delete(self, domain_id: int) -> dict[str, Any]:
+        if domain_id <= 0:
+            return {"ok": False, "hosts": [], "message": "Invalid VTP domain ID."}
+        try:
+            hosts = self.repository.mark_group_for_delete(domain_id)
+            return {
+                "ok": bool(hosts),
+                "hosts": hosts,
+                "message": (
+                    f"Marked VTP domain for removal on {len(hosts)} switches."
+                    if hosts
+                    else "VTP domain was not found."
+                ),
+            }
+        except sqlite3.Error as exc:
+            return {"ok": False, "hosts": [], "message": str(exc)}
+
+    def cancel_delete(self, domain_id: int) -> dict[str, Any]:
+        if domain_id <= 0:
+            return {"ok": False, "hosts": [], "message": "Invalid VTP domain ID."}
+        try:
+            hosts = self.repository.cancel_group_delete(domain_id)
+            return {
+                "ok": bool(hosts),
+                "hosts": hosts,
+                "message": (
+                    f"Cancelled VTP domain removal on {len(hosts)} switches."
+                    if hosts
+                    else "VTP domain is not waiting for removal."
+                ),
+            }
+        except sqlite3.Error as exc:
+            return {"ok": False, "hosts": [], "message": str(exc)}
 
     def _normalize(
         self, payload: dict[str, Any]
