@@ -14,6 +14,8 @@ _QT_LABS_PLATFORM_REGISTERED = False
 APP_USER_MODEL_ID = "NetCamsTeam.CAMS.App"
 APP_DESKTOP_FILE_NAME = "cams"
 RUNTIME_QML_DIR = Path(__file__).resolve().parent / "runtime_qml"
+PACKAGING_SMOKE_TEST_FLAG = "--packaging-smoke-test"
+PACKAGING_QML_SMOKE_TEST_FLAG = "--packaging-qml-smoke-test"
 
 
 def _prepend_env_path(name: str, value: Path) -> None:
@@ -146,7 +148,7 @@ def _set_windows_app_user_model_id() -> None:
 _configure_qt_logging()
 _bootstrap_pyqt6_paths()
 
-from PyQt6.QtCore import QMetaObject, QTimer
+from PyQt6.QtCore import QMetaObject, QTimer, QUrl
 from PyQt6.QtGui import QIcon
 from PyQt6.QtQml import QQmlApplicationEngine
 from PyQt6.QtWidgets import QApplication
@@ -175,7 +177,7 @@ from features.devices import DeviceLoginService, DeviceRepository, DeviceService
 from features.sftp import SftpController
 from features.syslog import SyslogManager
 from infrastructure.network.session_registry import DeviceSessionRegistry
-from infrastructure.database.paths import DEVICE_NETWORK_DB, INFO_COLLECTED_DB
+from infrastructure.database.paths import BACKUP_DIR, DEVICE_NETWORK_DB, INFO_COLLECTED_DB
 from infrastructure.system.runtime_tmp import cleanup_runtime_tmp
 
 
@@ -186,11 +188,23 @@ def _runtime_arguments(argv: list[str]) -> tuple[list[str], str]:
     for argument in argv[1:]:
         if argument in brand_flags:
             brand_mode = brand_flags[argument]
+    private_flags = {*brand_flags, PACKAGING_QML_SMOKE_TEST_FLAG}
     qt_arguments = [
         argument for index, argument in enumerate(argv)
-        if index == 0 or argument not in brand_flags
+        if index == 0 or argument not in private_flags
     ]
     return qt_arguments, brand_mode
+
+
+def _project_argument(argv: list[str]) -> Path | None:
+    """Return the first existing .ntp path passed by a file association."""
+    for argument in argv[1:]:
+        if argument.startswith("-"):
+            continue
+        candidate = Path(argument).expanduser()
+        if candidate.suffix.casefold() == ".ntp" and candidate.is_file():
+            return candidate.resolve()
+    return None
 
 
 def _application_icon_path(platform_name: str | None = None) -> Path:
@@ -200,7 +214,27 @@ def _application_icon_path(platform_name: str | None = None) -> Path:
     return QML_MODULE_DIR / "resources" / "brand" / f"logo.{suffix}"
 
 
+def _packaging_smoke_test() -> int:
+    """Validate files that must survive freezing without opening a window."""
+    required = (
+        QML_MODULE_DIR / "qmldir",
+        QML_MODULE_DIR / "qml" / "app" / "Main.qml",
+        QML_MODULE_DIR / "qml" / "app" / "Welcome.qml",
+        _application_icon_path("win32"),
+    )
+    if any(not path.is_file() for path in required):
+        return 2
+    try:
+        ensure_runtime_databases()
+    except Exception:
+        return 3
+    return 0
+
+
 def main() -> int:
+    if PACKAGING_SMOKE_TEST_FLAG in sys.argv:
+        return _packaging_smoke_test()
+    packaging_qml_smoke_test = PACKAGING_QML_SMOKE_TEST_FLAG in sys.argv
     _set_windows_app_user_model_id()
     qt_arguments, brand_easter_egg = _runtime_arguments(sys.argv)
     try:
@@ -227,7 +261,7 @@ def main() -> int:
     engine.addImportPath(str(Path(__file__).resolve().parent))
     engine.warnings.connect(lambda warnings: [print(w.toString(), file=sys.stderr) for w in warnings])
 
-    default_backup_root = Path(__file__).resolve().parent / "backup"
+    default_backup_root = BACKUP_DIR
     config_backup_service = ConfigBackupService(default_backup_root)
     device_repository = DeviceRepository()
     # A previous unclean exit may leave process-local connection state behind.
@@ -432,9 +466,27 @@ def main() -> int:
     if not application_icon.isNull():
         welcome_window.setIcon(application_icon)
 
+    if packaging_qml_smoke_test:
+        engine.loadFromModule("UI", "Main")
+        if len(engine.rootObjects()) < 2:
+            return 4
+        for root_window in engine.rootObjects():
+            root_window.hide()
+        QTimer.singleShot(0, app.quit)
+
+    requested_project = _project_argument(sys.argv)
+    if requested_project is not None and not packaging_qml_smoke_test:
+        QTimer.singleShot(
+            0,
+            lambda: welcome_controller.openProject(
+                QUrl.fromLocalFile(str(requested_project))
+            ),
+        )
+
     # The updater uses QProcess, so this network check never blocks either UI.
     # Installation remains opt-in through the confirmation shown by QML.
-    QTimer.singleShot(1_500, update_manager.checkForUpdates)
+    if update_manager.available and not packaging_qml_smoke_test:
+        QTimer.singleShot(1_500, update_manager.checkForUpdates)
 
     def request_shutdown(_signum: int, _frame: object) -> None:
         app.quit()

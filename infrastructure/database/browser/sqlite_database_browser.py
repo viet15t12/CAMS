@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
 
+from infrastructure.database.paths import DEVICE_NETWORK_DB
+
 from PyQt6.QtSql import QSqlDatabase, QSqlQuery, QSqlTableModel
 from PyQt6.QtWidgets import (
     QApplication,
@@ -18,7 +20,7 @@ from PyQt6.QtWidgets import (
 )
 
 
-DEFAULT_DB_PATH = Path(__file__).resolve().parents[2] / "device_network.db"
+DEFAULT_DB_PATH = DEVICE_NETWORK_DB
 
 
 class SQLiteDatabaseBrowser(QMainWindow):

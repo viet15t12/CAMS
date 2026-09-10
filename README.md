@@ -46,11 +46,37 @@ Dự án được phát triển trong khuôn khổ nghiên cứu:
 
 ## Yêu cầu hệ thống
 
-- Python **3.11 trở lên**;
-- [`uv`](https://docs.astral.sh/uv/) để quản lý môi trường và dependency;
-- Windows là nền tảng phát triển chính; Linux cần có đầy đủ thư viện Qt tương ứng;
+- Windows 11 64-bit hoặc Linux desktop 64-bit;
+- Python **3.11 trở lên** và [`uv`](https://docs.astral.sh/uv/) chỉ cần khi chạy từ mã nguồn;
 - TShark/Wireshark nếu sử dụng tính năng Device Logs;
 - quyền truy cập hợp lệ tới thiết bị mạng khi sử dụng kết nối thật.
+
+## Cài đặt CAMS trên Windows 11
+
+Tải `CAMS-<version>-windows-x64-setup.exe` và `SHA256SUMS.txt` từ trang
+**Releases**, kiểm tra checksum rồi chạy file setup. Bộ cài theo user không cần
+quyền Administrator và người dùng cuối không phải cài Python hay `uv`.
+
+Ứng dụng nằm tại `%LOCALAPPDATA%\Programs\CAMS`; database, backup và thiết lập
+được giữ riêng tại `%LOCALAPPDATA%\NetCamsTeam\CAMS\data`. Vì vậy cài bản mới
+hoặc gỡ ứng dụng không tự xóa dữ liệu. Bộ cài cũng tạo shortcut Start Menu, cho
+phép tạo shortcut Desktop và đăng ký mở project `.ntp` bằng CAMS.
+
+Khi bật Syslog listener lần đầu, chỉ cấp quyền Windows Defender Firewall cho
+mạng Private/lab tin cậy. Device Logs cần cài Wireshark/TShark và Npcap riêng.
+
+Để nâng cấp, thoát CAMS rồi chạy bộ cài phiên bản mới. Windows có thể hiện
+SmartScreen đối với artifact chưa ký; bản phát hành công khai nên dùng chữ ký
+Authenticode.
+
+Nhà phát triển có thể tạo trọn bộ `.exe` và installer trên Windows 11 bằng:
+
+```powershell
+.\packaging\windows\build.ps1
+```
+
+Xem yêu cầu build và tùy chọn tại
+[`packaging/windows/README.md`](packaging/windows/README.md).
 
 ## Cài đặt, cập nhật và gỡ CAMS trên Linux
 

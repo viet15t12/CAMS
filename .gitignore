@@ -196,6 +196,7 @@ dist/
 /site/
 vendor/alacritty/target/
 *.spec
+!packaging/windows/cams.spec
 features/devices/sync/_engine.c
 features/devices/sync/_engine*.so
 features/devices/sync/_engine*.pyd

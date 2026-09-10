@@ -97,7 +97,7 @@ class SyslogManager(QObject):
 
     @property
     def receiver(self) -> object | None:
-        return self.native if self.native.is_running else None
+        return self.native if self.native.is_running else self.service.receiver
 
     def set_database_paths(self, info_db: Any, device_db: Any) -> None:
         was_running = self.listenerState in {"starting", "listening"}
@@ -124,7 +124,7 @@ class SyslogManager(QObject):
 
     @pyqtProperty(int, notify=stateChanged)
     def droppedCount(self) -> int:
-        return self.native.dropped
+        return self.native.dropped if self.native.is_running else self.service.dropped
 
     def _set_state(self, state: str, message: str) -> None:
         with self._state_lock:
@@ -142,12 +142,22 @@ class SyslogManager(QObject):
             config = self.settings.listener_config()
             self._set_state("starting", "Starting Syslog server...")
             run_retention(self.service.repository, self.settings.retentionDays)
-            message = self.native.start(
-                self.settings.path,
-                self.service.repository.info_db,
-                self.service.repository.device_db,
-            )
             transports = "UDP+TCP" if config.protocol == "both" else config.protocol.upper()
+            if self.native.executable_path().is_file():
+                message = self.native.start(
+                    self.settings.path,
+                    self.service.repository.info_db,
+                    self.service.repository.device_db,
+                )
+            else:
+                # The native collector is currently a Linux optimization.  The
+                # bounded Python receiver provides the same UDP/TCP contract on
+                # Windows and in source checkouts without that optional binary.
+                self.service.start(config, self.settings.retentionDays)
+                message = (
+                    f"Listening on {config.bind_ip}:{config.port}/{transports} "
+                    "(portable receiver)"
+                )
             message = message or f"Listening on {config.bind_ip}:{config.port}/{transports}"
             self._set_state("listening", message)
             return {"ok": True, "message": message}
@@ -162,6 +172,7 @@ class SyslogManager(QObject):
             return {"ok": True, "message": self.statusMessage}
         self._set_state("stopping", "Stopping Syslog server...")
         self.native.stop()
+        self.service.stop()
         self._set_state("stopped", "Syslog server is stopped.")
         return {"ok": True, "message": self.statusMessage}
 

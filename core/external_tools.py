@@ -15,14 +15,14 @@ from typing import Any
 
 from PyQt6.QtCore import QObject, QUrl, pyqtProperty, pyqtSignal, pyqtSlot
 
-from core.app_paths import APP_DIR
+from core.app_paths import APP_DIR, DATA_DIR
 from core.tool_catalog import EXTERNAL_TOOL_CATALOG
 from features.devices import DeviceLoginService, DeviceRepository
 from infrastructure.database.paths import DEVICE_NETWORK_DB
 from infrastructure.system.network_info import _decode_command_output
 
 DB_PATH = DEVICE_NETWORK_DB
-EXTERNAL_TOOLS_DB_PATH = APP_DIR / "external_tools.db"
+EXTERNAL_TOOLS_DB_PATH = DATA_DIR / "external_tools.db"
 _device_login_service = DeviceLoginService(DeviceRepository(DB_PATH))
 
 

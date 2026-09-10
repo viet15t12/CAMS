@@ -2,11 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from infrastructure.database.paths import APP_DIR, DEVICE_NETWORK_DB
+from infrastructure.database.paths import (
+    APP_DIR,
+    BACKUP_DIR as RUNTIME_BACKUP_DIR,
+    DEVICE_NETWORK_DB,
+    TMP_DIR as RUNTIME_TMP_DIR,
+)
 
 DB_PATH = str(DEVICE_NETWORK_DB)
-TMP_DIR = str(APP_DIR / "tmp")
-BACKUP_DIR = str(APP_DIR / "backup")
+TMP_DIR = str(RUNTIME_TMP_DIR)
+BACKUP_DIR = str(RUNTIME_BACKUP_DIR)
 ROUTE_OUTPUT = str(Path(TMP_DIR) / "routing_output.json")
 DHCP_OUTPUT = str(Path(TMP_DIR) / "dhcp_output.json")
 NAT_OUTPUT = str(Path(TMP_DIR) / "nat_output.json")

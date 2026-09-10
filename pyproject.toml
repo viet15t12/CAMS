@@ -42,6 +42,9 @@ speed = [
     "Cython>=3.0,<4.0",
     "setuptools>=69",
 ]
+packaging = [
+    "pyinstaller==6.22.2",
+]
 
 [tool.uv.sources]
 qtpyterminal = { path = "qtpyTerminal-main" }
