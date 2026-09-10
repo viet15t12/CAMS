@@ -124,7 +124,7 @@ lỗi mà không block UI hoặc mất khả năng truy vết.
 | UX-01 | Chuẩn hóa loading/empty/error/partial state và dirty-state protection | P1 | `planned` |
 | UX-02 | Hoàn thiện keyboard navigation, focus, accessible name, contrast và high-DPI test | P2 | `planned` |
 | OPS-01 | Retention/size budget cho log, backup, capture và temporary output | P1 | `planned` |
-| PKG-01 | Đóng gói Windows/Linux có checksum, license notice và hướng dẫn nâng cấp | P1 | `planned` |
+| PKG-01 | Đóng gói Windows/Linux có checksum, license notice và hướng dẫn nâng cấp | P1 | `implemented` |
 
 ### Exit criteria v0.4.0
 

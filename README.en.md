@@ -44,13 +44,41 @@ The project is developed as part of a research initiative:
 
 ## System Requirements
 
-- Python **3.11 or later**;
-- [`uv`](https://docs.astral.sh/uv/) for environment and dependency management;
-- Windows is the primary development platform; Linux requires the corresponding Qt libraries to be fully installed;
+- 64-bit Windows 11 or a 64-bit Linux desktop;
+- Python **3.11 or later** and [`uv`](https://docs.astral.sh/uv/) only when running from source;
 - TShark/Wireshark if using the Device Logs feature;
 - valid access credentials to network devices when using real connections.
 
 ## Quick Start
+
+### Windows 11: install the packaged application
+
+Download `CAMS-<version>-windows-x64-setup.exe` and `SHA256SUMS.txt` from the
+**Releases** page, verify the checksum, and run Setup. This is a per-user install
+that does not require Administrator access, Python, or `uv`.
+
+Program files are installed under `%LOCALAPPDATA%\Programs\CAMS`, while mutable
+databases, backups, and settings are stored separately under
+`%LOCALAPPDATA%\NetCamsTeam\CAMS\data`. Installing a newer version or
+uninstalling the application therefore preserves user data. Setup also creates
+a Start Menu shortcut, offers an optional Desktop shortcut, and associates
+`.ntp` projects with CAMS.
+
+When enabling the Syslog listener for the first time, allow Windows Defender
+Firewall access only on trusted Private/lab networks. Device Logs requires a
+separate Wireshark/TShark and Npcap installation.
+
+To upgrade, exit CAMS and run the newer installer. Public releases should be
+Authenticode-signed to avoid warnings for an unknown publisher.
+
+Developers can build the complete executable and installer on Windows 11 with:
+
+```powershell
+.\packaging\windows\build.ps1
+```
+
+See [`packaging/windows/README.md`](packaging/windows/README.md) for build
+requirements and options.
 
 ### Linux: install as a desktop application
 

@@ -7,7 +7,7 @@ from typing import Any
 
 from PyQt6.QtCore import QObject, pyqtSignal, pyqtSlot
 
-from core.app_paths import APP_DIR
+from core.app_paths import APP_DIR, DATA_DIR
 from core.tasks import AsyncTaskCoordinator
 from features.devices import (
     DeviceLoginService,
@@ -91,7 +91,7 @@ class TerminalHelper(QObject):
         if config_backup_service is None:
             from features.config_backup import ConfigBackupService
 
-            config_backup_service = ConfigBackupService(APP_DIR / "backup")
+            config_backup_service = ConfigBackupService(DATA_DIR / "backup")
         self._config_backup_service = config_backup_service
         if config_sync_service is None:
             from features.config_sync import ConfigSyncService

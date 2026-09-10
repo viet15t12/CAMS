@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -47,7 +48,8 @@ class NativeSyslogCollector(QObject):
         override = os.environ.get("CAMS_SYSLOG_COLLECTOR", "").strip()
         if override:
             return Path(override).expanduser().resolve()
-        return APP_DIR / "bin" / "cams-syslog-collector"
+        suffix = ".exe" if sys.platform.startswith("win") else ""
+        return APP_DIR / "bin" / f"cams-syslog-collector{suffix}"
 
     def start(self, settings_path: Path, info_db: Path, device_db: Path) -> str:
         if self.is_running:

@@ -18,6 +18,21 @@ nav:
       - "Chương 2 · Cài đặt và bắt đầu sử dụng": DOC/02_cai_dat_su_dung.md
       - "Chương 3 · Giao diện và điều hướng": DOC/03_giao_dien_dieu_huong.md
       - "Chương 4 · Quản lý thiết bị": DOC/04_quan_ly_thiet_bi.md
+      - "Chương 5 · Interface trên Router": DOC/05_cau_hinh_interface_router.md
+      - "Chương 6 · Routing trên Router": DOC/06_cau_hinh_routing.md
+      - "Chương 7 · DHCP trên Router": DOC/07_cau_hinh_dhcp.md
+      - "Chương 8 · ACL trên Router": DOC/08_cau_hinh_acl.md
+      - "Chương 9 · FHRP trên Router": DOC/09_cau_hinh_fhrp.md
+      - "Chương 10 · Syslog Server trên Router": DOC/10_cau_hinh_syslog_server.md
+      - "Chương 11 · NAT trên Router": DOC/11_cau_hinh_nat.md
+      - "Chương 12 · Truyền tệp bằng SFTP": DOC/12_truyen_tep_sftp.md
+      - "Chương 13 · Xem log trên System Logs": DOC/13_xem_system_logs.md
+      - "Chương 14 · Interface trên Switch Layer 2": DOC/14_interface_switch_l2.md
+      - "Chương 15 · Switching trên SW2": DOC/15_vlan_etherchannel_stp_vtp.md
+      - "Chương 16 · Bảo mật Switch Layer 2": DOC/16_bao_mat_switch_l2.md
+      - "Chương 17 · Giám sát Switch Layer 2": DOC/17_giam_sat_switch_l2.md
+      - "Chương 18 · Interface trên Switch Layer 3": DOC/18_interface_switch_l3.md
+      - "Chương 19 · DHCP và ACL trên Switch Layer 3": DOC/19_dhcp_acl_switch_l3.md
 
 # Giữ mã nguồn Typst trong 00_book nhưng không đưa các file đó lên website.
 # Các file Markdown được xuất bản được sắp xếp trong mục nav phía trên.

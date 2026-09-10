@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from core.app_paths import APP_DIR
+from core.app_paths import DATA_DIR
 from core.tasks import AsyncTaskCoordinator
 from core.view_push import ViewPushControllerFactory
 from core.view_push_batch import ViewPushBatchService
@@ -23,7 +23,7 @@ def initialize_view_push_runtime(
     owner._background_tasks = {}
     owner._task_coordinator = task_coordinator or AsyncTaskCoordinator(owner)
     owner._config_backup_service = config_backup_service or ConfigBackupService(
-        APP_DIR / "backup"
+        DATA_DIR / "backup"
     )
     owner._config_sync_service = config_sync_service
     owner._post_push_service = PostPushService(

@@ -9,7 +9,8 @@ if /I "%~1"=="setup" goto setup
 if /I "%~1"=="check" goto check
 if /I "%~1"=="run" goto run
 if /I "%~1"=="all" goto all
-echo Usage: %~nx0 [sync^|build^|setup^|check^|run^|all]
+if /I "%~1"=="package" goto package
+echo Usage: %~nx0 [sync^|build^|setup^|check^|run^|all^|package]
 exit /b 2
 
 :sync
@@ -100,6 +101,15 @@ exit /b %errorlevel%
 "%ComSpec%" /d /c ""%~f0" setup"
 if errorlevel 1 exit /b %errorlevel%
 "%ComSpec%" /d /c ""%~f0" run"
+exit /b %errorlevel%
+
+:package
+where powershell.exe >nul 2>nul
+if errorlevel 1 (
+    echo ERROR: Windows PowerShell is not available.
+    exit /b 1
+)
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0packaging\windows\build.ps1"
 exit /b %errorlevel%
 
 :menu

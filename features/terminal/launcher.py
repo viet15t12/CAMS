@@ -54,16 +54,15 @@ class TerminalLauncher:
         discovered = shutil.which("cams-terminal")
         if discovered:
             return discovered
-        bundled = (
-            Path(__file__).resolve().parents[2]
-            / "vendor"
-            / "alacritty"
-            / "target"
-            / "release"
-            / ("cams-terminal.exe" if os.name == "nt" else "cams-terminal")
+        app_root = Path(__file__).resolve().parents[2]
+        executable = "cams-terminal.exe" if os.name == "nt" else "cams-terminal"
+        bundled_candidates = (
+            app_root / "bin" / executable,
+            app_root / "vendor" / "alacritty" / "target" / "release" / executable,
         )
-        if bundled.is_file() and os.access(bundled, os.X_OK):
-            return str(bundled)
+        for bundled in bundled_candidates:
+            if bundled.is_file() and os.access(bundled, os.X_OK):
+                return str(bundled)
         raise TerminalLaunchError(
             "CAMS Terminal is not installed, built in vendor/alacritty, "
             "or available on PATH."

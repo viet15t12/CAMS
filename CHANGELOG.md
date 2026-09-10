@@ -11,6 +11,9 @@ nhận là baseline phát triển đầu tiên, không phải tuyên bố sẵn 
 
 ### Added
 
+- Bổ sung quy trình Windows 11 x64 dùng PyInstaller one-folder và Inno Setup:
+  bộ cài per-user, Start Menu/Desktop shortcut, liên kết `.ntp`, metadata/icon,
+  smoke test QML, checksum SHA-256, ký Authenticode tùy chọn và GitHub Actions.
 - Bổ sung bộ cài Linux user-local, lệnh `cams`, desktop entry và bộ gỡ cài đặt;
   dữ liệu người dùng được tách khỏi program files để cập nhật an toàn.
 - Bổ sung bản đồ tài liệu `docs/README.md`, hướng dẫn SFTP chuyên sâu, README cho
@@ -43,6 +46,9 @@ nhận là baseline phát triển đầu tiên, không phải tuyên bố sẵn 
 
 ### Changed
 
+- Bản đóng gói Windows lưu database, backup và file tạm trong LocalAppData thay
+  vì cạnh executable; Syslog tự dùng receiver Python portable khi không có
+  collector native Linux và CAMS Terminal được tìm trong bundle trước.
 - Sửa icon ứng dụng Linux: desktop entry dùng đường dẫn SVG tuyệt đối, cài thêm
   PNG 256 px, làm mới icon cache và đồng bộ desktop file name với cửa sổ Qt.
 - Loại bỏ tài liệu Markdown lịch sử/trùng lặp; bản đồ tài liệu chỉ còn trỏ tới

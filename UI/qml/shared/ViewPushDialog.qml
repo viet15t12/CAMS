@@ -30,6 +30,12 @@ StandardDialog {
         const controller = String(controllerName || "").toLowerCase()
         if (controller === "dhcp")
             return "DHCP"
+        if (controller === "acl")
+            return "ACL"
+        if (controller === "syslog")
+            return "SYSLOG"
+        if (controller === "nat")
+            return "NAT"
         return String(moduleName || "all").toUpperCase()
     }
 

@@ -515,38 +515,3 @@ vị trí độc lập trước khi thực hiện thay đổi lớn. Chỉ đón
 di chuyển project sau khi thao tác lưu đã hoàn tất. Không chỉnh trực
 tiếp database hoặc nội dung package `.ntp` bằng công cụ ngoài khi
 Workspace đang mở.
-
-## Tóm tắt chương
-
-Chương này đã hoàn thành workflow từ môi trường chưa chạy ứng dụng đến
-một Workspace hợp lệ:
-
-- Chuẩn bị môi trường
-
-<!-- -->
-
-- Lấy CAMS
-
-<!-- -->
-
-- Kiểm tra Python và uv
-
-<!-- -->
-
-- Khởi chạy ứng dụng
-
-<!-- -->
-
-- Welcome
-
-<!-- -->
-
-- Create/Open project
-
-<!-- -->
-
-- Workspace sẵn sàng
-
-Ở thời điểm này, người dùng đã có thể tạo, mở, lưu và nhận biết snapshot
-của project. Việc thêm thiết bị và cấu hình router/switch được chuyển
-sang các chương sau.

@@ -415,38 +415,3 @@ Terminal hoặc lệnh cấu hình để hoàn thành bài tập.
 
 Bài tập hoàn tất khi người dùng xác định được chế độ, host, feature đang
 xem và biết cách hiện lại Sidebar.
-
-## Tóm tắt chương
-
-Ghi nhớ luồng điều hướng thiết bị dưới đây. Menu Bar cung cấp các lệnh
-chung.
-
-- Activity Bar  
-  Chọn chế độ
-
-<!-- -->
-
-- Sidebar  
-  Chọn đối tượng
-
-<!-- -->
-
-- Device Tab  
-  Xác định host
-
-<!-- -->
-
-- Feature Bar  
-  Chọn chức năng
-
-<!-- -->
-
-- Content Area  
-  Xem nội dung
-
-<!-- -->
-
-- Status Bar  
-  Đọc trạng thái
-
-Chương 4 sẽ tiếp tục với **Quản lý thiết bị**.
