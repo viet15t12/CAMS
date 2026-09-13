@@ -45,8 +45,8 @@ CAMS là ứng dụng desktop hỗ trợ quản lý, cấu hình và giám sát 
 [**Chương 11 · NAT trên Router**
 <span>Cấu hình Quick PAT, Interfaces, NAT ACL, Static, Dynamic, PAT, Route Map và View & Push NAT riêng.</span>](DOC/11_cau_hinh_nat.md)
 
-[**Chương 12 · Truyền tệp bằng SFTP**
-<span>Tạo kết nối an toàn, xác minh host key, quản lý tệp local/remote và theo dõi hàng đợi truyền tệp.</span>](DOC/12_truyen_tep_sftp.md)
+[**Chương 12 · SFTP/SCP và lịch sử cấu hình**
+<span>Truyền tệp bằng SFTP/SCP, lấy running-config, theo dõi đồng bộ, xem snapshot cũ và so sánh Diff.</span>](DOC/12_truyen_tep_sftp.md)
 
 [**Chương 13 · Xem log trên System Logs**
 <span>Vận hành listener, hiểu tám mức severity Cisco 0–7, lọc, đọc chi tiết và xuất log.</span>](DOC/13_xem_system_logs.md)
@@ -73,6 +73,6 @@ CAMS là ứng dụng desktop hỗ trợ quản lý, cấu hình và giám sát 
 
 ## Bắt đầu nhanh
 
-Nếu đây là lần đầu sử dụng CAMS, hãy đọc [Chương 2 · Cài đặt và bắt đầu sử dụng](DOC/02_cai_dat_su_dung.md). Sau khi mở được Workspace, tiếp tục với [Chương 3 · Giao diện và điều hướng](DOC/03_giao_dien_dieu_huong.md) và [Chương 4 · Quản lý thiết bị](DOC/04_quan_ly_thiet_bi.md). Với router, bắt đầu tại [Chương 5 · Interface trên Router](DOC/05_cau_hinh_interface_router.md). Với switch SW2, đọc lần lượt [Chương 14 · Interface trên Switch Layer 2](DOC/14_interface_switch_l2.md), [Chương 15 · Switching trên SW2](DOC/15_vlan_etherchannel_stp_vtp.md), [Chương 16 · Bảo mật Switch Layer 2](DOC/16_bao_mat_switch_l2.md) và [Chương 17 · Giám sát Switch Layer 2](DOC/17_giam_sat_switch_l2.md). Với switch SW3, đọc tiếp [Chương 18 · Interface trên Switch Layer 3](DOC/18_interface_switch_l3.md) và [Chương 19 · DHCP và ACL trên Switch Layer 3](DOC/19_dhcp_acl_switch_l3.md); các chức năng switching chung vẫn dùng Chương 14–17. Dùng [Chương 12 · SFTP](DOC/12_truyen_tep_sftp.md) để quản lý backup và [Chương 13 · System Logs](DOC/13_xem_system_logs.md) để nhận, lọc, phân tích log.
+Nếu đây là lần đầu sử dụng CAMS, hãy đọc [Chương 2 · Cài đặt và bắt đầu sử dụng](DOC/02_cai_dat_su_dung.md). Sau khi mở được Workspace, tiếp tục với [Chương 3 · Giao diện và điều hướng](DOC/03_giao_dien_dieu_huong.md) và [Chương 4 · Quản lý thiết bị](DOC/04_quan_ly_thiet_bi.md). Với router, bắt đầu tại [Chương 5 · Interface trên Router](DOC/05_cau_hinh_interface_router.md). Với switch SW2, đọc lần lượt [Chương 14 · Interface trên Switch Layer 2](DOC/14_interface_switch_l2.md), [Chương 15 · Switching trên SW2](DOC/15_vlan_etherchannel_stp_vtp.md), [Chương 16 · Bảo mật Switch Layer 2](DOC/16_bao_mat_switch_l2.md) và [Chương 17 · Giám sát Switch Layer 2](DOC/17_giam_sat_switch_l2.md). Với switch SW3, đọc tiếp [Chương 18 · Interface trên Switch Layer 3](DOC/18_interface_switch_l3.md) và [Chương 19 · DHCP và ACL trên Switch Layer 3](DOC/19_dhcp_acl_switch_l3.md); các chức năng switching chung vẫn dùng Chương 14–17. Dùng [Chương 12 · SFTP/SCP và lịch sử cấu hình](DOC/12_truyen_tep_sftp.md) để truyền tệp, xem backup/Diff và [Chương 13 · System Logs](DOC/13_xem_system_logs.md) để nhận, lọc, phân tích log.
 
 Mã nguồn và lịch sử phát triển được lưu tại [viet15t12/CAMS](https://github.com/viet15t12/CAMS).

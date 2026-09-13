@@ -510,6 +510,10 @@ tác vụ thất bại, kiểm tra thông báo và thử lại khi phiên quản
 sàng. Mốc backup này thuộc riêng thiết bị; snapshot toàn project trong
 menu File được trình bày ở Chương 2.
 
+Quy trình đọc thông báo đồng bộ, chọn một cấu hình cũ và so sánh hai mốc
+bằng Diff được minh họa chi tiết tại
+[Chương 12 · SFTP/SCP và lịch sử cấu hình](12_truyen_tep_sftp.md#xem-lai-cau-hinh-cu).
+
 ## Lưu cấu hình và đồng bộ
 
 **Save configuration** lưu cấu hình đang chạy thành cấu hình khởi động

@@ -25,7 +25,7 @@ nav:
       - "Chương 9 · FHRP trên Router": DOC/09_cau_hinh_fhrp.md
       - "Chương 10 · Syslog Server trên Router": DOC/10_cau_hinh_syslog_server.md
       - "Chương 11 · NAT trên Router": DOC/11_cau_hinh_nat.md
-      - "Chương 12 · Truyền tệp bằng SFTP": DOC/12_truyen_tep_sftp.md
+      - "Chương 12 · SFTP/SCP và lịch sử cấu hình": DOC/12_truyen_tep_sftp.md
       - "Chương 13 · Xem log trên System Logs": DOC/13_xem_system_logs.md
       - "Chương 14 · Interface trên Switch Layer 2": DOC/14_interface_switch_l2.md
       - "Chương 15 · Switching trên SW2": DOC/15_vlan_etherchannel_stp_vtp.md
