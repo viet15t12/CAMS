@@ -21,6 +21,7 @@ from .credential_store import DpapiCredentialStore
 from .file_model import FileListModel
 from .local_service import LocalFileService
 from .scp_running_config import ScpRunningConfigService
+from .scp_service import ScpService
 from .sftp_service import ConnectionOptions, SftpService
 from .transfer_model import TransferItem, TransferModel
 from .workers import OperationWorker
@@ -47,6 +48,7 @@ class SftpController(QObject):
     savedConnectionsChanged = pyqtSignal()
     selectedConnectionChanged = pyqtSignal()
     settingsChanged = pyqtSignal()
+    protocolChanged = pyqtSignal()
     errorOccurred = pyqtSignal(str)
     logMessage = pyqtSignal(str, str)
     hostKeyConfirmationRequired = pyqtSignal(str, str, str)
@@ -59,6 +61,7 @@ class SftpController(QObject):
         settings: QSettings | None = None,
         credential_store=None,
         scp_service=None,
+        scp_transfer_service=None,
         device_login_service=None,
     ) -> None:
         super().__init__(parent)
@@ -73,6 +76,7 @@ class SftpController(QObject):
         self._local_service = LocalFileService()
         self._sftp_service = SftpService()
         self._scp_service = scp_service or ScpRunningConfigService()
+        self._scp_transfer_service = scp_transfer_service or ScpService()
         self._device_login_service = device_login_service
         self._local_model = FileListModel(self)
         self._remote_model = FileListModel(self)
@@ -82,6 +86,8 @@ class SftpController(QObject):
         self._pool.setMaxThreadCount(1)
         self._pending = 0
         self._connected = False
+        self._active_transfer_mode = "sftp"
+        self._pending_transfer_mode = "sftp"
         self._default_local_path = self._load_default_local_path()
         self._default_remote_path = self._normalize_remote_path(
             self._settings.value("SFTP/defaultRemotePath", "/")
@@ -98,7 +104,7 @@ class SftpController(QObject):
         self._persist_saved_connections()
         self._selected_connection_id = ""
         self._active_connection_id = ""
-        self._status_message = "SFTP disconnected"
+        self._status_message = "SFTP/SCP disconnected"
         self._cancel_events: dict[str, threading.Event] = {}
         self._pending_connection: ConnectionOptions | None = None
         self._pending_connection_id = ""
@@ -123,6 +129,14 @@ class SftpController(QObject):
     @pyqtProperty(bool, notify=connectedChanged)
     def connected(self) -> bool:
         return self._connected
+
+    @pyqtProperty(str, notify=protocolChanged)
+    def transferMode(self) -> str:
+        return self._active_transfer_mode
+
+    @pyqtProperty(bool, notify=protocolChanged)
+    def remoteBrowsingAvailable(self) -> bool:
+        return self._active_transfer_mode == "sftp"
 
     @pyqtProperty(bool, notify=busyChanged)
     def busy(self) -> bool:
@@ -195,6 +209,18 @@ class SftpController(QObject):
             self._connected = value
             self.connectedChanged.emit()
 
+    def _set_transfer_mode(self, value: str) -> None:
+        normalized = "scp" if str(value).casefold() == "scp" else "sftp"
+        if self._active_transfer_mode != normalized:
+            self._active_transfer_mode = normalized
+            self.protocolChanged.emit()
+
+    def _transfer_service(self, mode: str | None = None):
+        selected = mode or self._active_transfer_mode
+        return (
+            self._scp_transfer_service if selected == "scp" else self._sftp_service
+        )
+
     def _set_local_path(self, value: str, *, record_history: bool = True) -> None:
         if self._local_path != value:
             self._local_path = value
@@ -254,6 +280,11 @@ class SftpController(QObject):
             path = "/" + path
         return posixpath.normpath(path)
 
+    @staticmethod
+    def _normalize_scp_path(value) -> str:
+        path = str(value or "/").strip().replace("\\", "/")
+        return posixpath.normpath(path or "/")
+
     def _load_saved_connections(self) -> list[dict]:
         raw = self._settings.value("SFTP/savedConnections", "[]")
         try:
@@ -275,6 +306,11 @@ class SftpController(QObject):
             if not host or not username or not 1 <= port <= 65535:
                 continue
             profile_id = str(item.get("id", "")).strip() or uuid.uuid4().hex
+            transfer_mode = (
+                "scp"
+                if str(item.get("transferMode", "sftp")).casefold() == "scp"
+                else "sftp"
+            )
             profiles.append({
                 "id": profile_id,
                 "name": str(item.get("name", "")).strip() or host,
@@ -283,12 +319,12 @@ class SftpController(QObject):
                 "username": username,
                 "keyPath": str(item.get("keyPath", "")),
                 "localPath": str(item.get("localPath", "")) or self._default_local_path,
-                "remotePath": self._normalize_remote_path(item.get("remotePath", "/")),
-                "transferMode": (
-                    "scp"
-                    if str(item.get("transferMode", "sftp")).casefold() == "scp"
-                    else "sftp"
+                "remotePath": (
+                    self._normalize_scp_path(item.get("remotePath", "/"))
+                    if transfer_mode == "scp"
+                    else self._normalize_remote_path(item.get("remotePath", "/"))
                 ),
+                "transferMode": transfer_mode,
                 "lastConnected": str(item.get("lastConnected", "")),
                 "passwordSaved": (
                     self._setting_bool(item.get("passwordSaved", False))
@@ -362,7 +398,21 @@ class SftpController(QObject):
         password: str,
         key_url: str,
     ) -> None:
-        self._connect_server("", host, port, username, password, key_url)
+        self._connect_server("", host, port, username, password, key_url, "sftp")
+
+    @pyqtSlot(str, int, str, str, str, str)
+    def connectServerWithMode(
+        self,
+        host: str,
+        port: int,
+        username: str,
+        password: str,
+        key_url: str,
+        transfer_mode: str,
+    ) -> None:
+        self._connect_server(
+            "", host, port, username, password, key_url, transfer_mode
+        )
 
     @pyqtSlot(str, str, int, str, str, str)
     def connectServerForProfile(
@@ -381,7 +431,37 @@ class SftpController(QObject):
             and profile.get("passwordSaved", False)
         ):
             password = self._credential_store.read(profile["id"])
-        self._connect_server(profile_id, host, port, username, password, key_url)
+        self._connect_server(
+            profile_id, host, port, username, password, key_url, "sftp"
+        )
+
+    @pyqtSlot(str, str, int, str, str, str, str)
+    def connectServerForProfileWithMode(
+        self,
+        profile_id: str,
+        host: str,
+        port: int,
+        username: str,
+        password: str,
+        key_url: str,
+        transfer_mode: str,
+    ) -> None:
+        profile = self._connection_by_id(profile_id)
+        if (
+            not password
+            and profile is not None
+            and profile.get("passwordSaved", False)
+        ):
+            password = self._credential_store.read(profile["id"])
+        self._connect_server(
+            profile_id,
+            host,
+            port,
+            username,
+            password,
+            key_url,
+            transfer_mode,
+        )
 
     def _connect_server(
         self,
@@ -391,6 +471,7 @@ class SftpController(QObject):
         username: str,
         password: str,
         key_url: str,
+        transfer_mode: str = "sftp",
     ) -> None:
         host, username = host.strip(), username.strip()
         if not host or not username or not 1 <= port <= 65535:
@@ -398,7 +479,11 @@ class SftpController(QObject):
             return
         key_path = self._url_to_path(key_url) if key_url else ""
         options = ConnectionOptions(host, port, username, password, key_path)
+        normalized_mode = (
+            "scp" if str(transfer_mode).casefold() == "scp" else "sftp"
+        )
         self._pending_connection = options
+        self._pending_transfer_mode = normalized_mode
         profile = self._connection_by_id(profile_id)
         self._pending_connection_id = profile["id"] if profile else ""
         self._pending_initial_remote_path = (
@@ -413,11 +498,17 @@ class SftpController(QObject):
                     self.refreshLocal()
             except Exception:
                 pass
-        self._set_status(f"Connecting to {host}:{port}...")
+        protocol = normalized_mode.upper()
+        self._set_status(f"Connecting to {host}:{port} via {protocol}...")
         self.logMessage.emit(self._status_message, "info")
         self._start(
             "connect",
-            lambda: (self._sftp_service.connect(options), host, port),
+            lambda: (
+                self._transfer_service(normalized_mode).connect(options),
+                host,
+                port,
+                normalized_mode,
+            ),
         )
 
     @pyqtSlot(bool)
@@ -439,7 +530,8 @@ class SftpController(QObject):
             )
             self._start_scp_download(scp_info["fingerprint"])
             return
-        info = self._sftp_service.pending_host_key
+        service = self._transfer_service(self._pending_transfer_mode)
+        info = service.pending_host_key
         options = self._pending_connection
         if not accepted or not info or options is None:
             self._pending_connection = None
@@ -453,9 +545,10 @@ class SftpController(QObject):
         self._start(
             "connect",
             lambda: (
-                self._sftp_service.connect(options, fingerprint),
+                service.connect(options, fingerprint),
                 options.host,
                 options.port,
+                self._pending_transfer_mode,
             ),
         )
 
@@ -464,7 +557,7 @@ class SftpController(QObject):
         if not self._connected:
             return
         self._set_status("Disconnecting...")
-        self._start("disconnect", self._sftp_service.disconnect)
+        self._start("disconnect", self._transfer_service().disconnect)
 
     @pyqtSlot()
     def refreshLocal(self) -> None:
@@ -495,14 +588,16 @@ class SftpController(QObject):
 
     @pyqtSlot()
     def refreshRemote(self) -> None:
-        if not self._connected:
+        if not self._connected or not self.remoteBrowsingAvailable:
             return
         path = self._remote_path
         self._start("remote:list", lambda: (path, self._sftp_service.list_directory(path)))
 
     @pyqtSlot(str)
     def openRemoteDirectory(self, path: str) -> None:
-        if self._connected:
+        if self._connected and self._active_transfer_mode == "scp":
+            self._set_remote_path(self._normalize_scp_path(path))
+        elif self._connected:
             self._start("remote:open", lambda: self._sftp_service.normalize(path))
 
     @pyqtSlot()
@@ -581,6 +676,9 @@ class SftpController(QObject):
             profile = {"id": uuid.uuid4().hex, "lastConnected": ""}
             self._saved_connections.append(profile)
         had_saved_password = bool(profile.get("passwordSaved", False))
+        normalized_transfer_mode = (
+            "scp" if str(transfer_mode).casefold() == "scp" else "sftp"
+        )
         profile.update({
             "name": str(name or "").strip() or host,
             "host": host,
@@ -588,10 +686,12 @@ class SftpController(QObject):
             "username": username,
             "keyPath": self._url_to_path(str(key_path or "")) if key_path else "",
             "localPath": normalized_local,
-            "remotePath": self._normalize_remote_path(remote_path),
-            "transferMode": (
-                "scp" if str(transfer_mode).casefold() == "scp" else "sftp"
+            "remotePath": (
+                self._normalize_scp_path(remote_path)
+                if normalized_transfer_mode == "scp"
+                else self._normalize_remote_path(remote_path)
             ),
+            "transferMode": normalized_transfer_mode,
         })
         if save_password:
             if not self._credential_store.available:
@@ -855,6 +955,20 @@ class SftpController(QObject):
                 "download", item["path"], self._local_path, item["name"]
             )
 
+    @pyqtSlot(str)
+    def downloadRemotePath(self, remote_path: str) -> None:
+        source = str(remote_path or "").strip()
+        if not self._connected or self._active_transfer_mode != "scp":
+            return
+        if not source or source in {"/", "."}:
+            self._report_error(
+                "Enter the full remote file or directory path for SCP download"
+            )
+            return
+        name = posixpath.basename(source.rstrip("/")) or source
+        self._set_remote_path(self._normalize_scp_path(source))
+        self._queue_transfer("download", source, self._local_path, name)
+
     @pyqtSlot("QVariant")
     def uploadEntries(self, rows) -> None:
         for row in self._normalize_rows(rows):
@@ -898,9 +1012,9 @@ class SftpController(QObject):
             if cancel_event.is_set():
                 raise TransferCancelled("Transfer cancelled")
             if direction == "upload":
-                self._sftp_service.upload(source, destination, progress)
+                self._transfer_service().upload(source, destination, progress)
             else:
-                self._sftp_service.download(source, destination, progress)
+                self._transfer_service().download(source, destination, progress)
             return task_id
 
         self.logMessage.emit(f"Queued {direction}: {name}", "info")
@@ -920,6 +1034,9 @@ class SftpController(QObject):
             return
         clean_name = name.strip()
         if remote:
+            if not self.remoteBrowsingAvailable:
+                self._report_error("SCP does not support remote folder management")
+                return
             if self._connected:
                 self._start(
                     "remote:mutate",
@@ -946,6 +1063,9 @@ class SftpController(QObject):
             return
         clean_name = new_name.strip()
         if remote:
+            if not self.remoteBrowsingAvailable:
+                self._report_error("SCP does not support remote rename operations")
+                return
             self._start(
                 "remote:mutate",
                 lambda: self._sftp_service.rename(item["path"], clean_name),
@@ -963,6 +1083,9 @@ class SftpController(QObject):
         if not item:
             return
         if remote:
+            if not self.remoteBrowsingAvailable:
+                self._report_error("SCP does not support remote delete operations")
+                return
             self._start(
                 "remote:mutate",
                 lambda: self._sftp_service.delete(
@@ -986,14 +1109,22 @@ class SftpController(QObject):
         if self._shutting_down:
             return
         if operation == "connect":
-            path, host, port = result
+            if len(result) == 4:
+                path, host, port, transfer_mode = result
+            else:
+                path, host, port = result
+                transfer_mode = self._pending_transfer_mode
             options = self._pending_connection
             profile_id = self._pending_connection_id
             initial_remote_path = self._pending_initial_remote_path
             self._pending_connection = None
             self._pending_connection_id = ""
             self._pending_initial_remote_path = ""
+            self._pending_transfer_mode = "sftp"
+            self._set_transfer_mode(transfer_mode)
             self._set_connected(True)
+            if transfer_mode == "scp":
+                path = self._normalize_scp_path(initial_remote_path or path or "/")
             self._set_remote_path(path, record_history=False)
             self._reset_history("remote", path)
             if options is not None:
@@ -1017,7 +1148,7 @@ class SftpController(QObject):
                     initial_remote_path or path,
                     options.password if save_password else "",
                     save_password,
-                    profile.get("transferMode", "sftp") if profile else "sftp",
+                    transfer_mode,
                 )
                 saved = self._connection_by_id(saved_id)
                 if saved is not None:
@@ -1025,9 +1156,11 @@ class SftpController(QObject):
                     self._persist_saved_connections()
                     self.savedConnectionsChanged.emit()
                 self._active_connection_id = saved_id
-            self._set_status(f"Connected to {host}:{port}")
+            self._set_status(f"Connected to {host}:{port} via {transfer_mode.upper()}")
             self.logMessage.emit(self._status_message, "success")
-            if initial_remote_path and self._normalize_remote_path(initial_remote_path) != path:
+            if transfer_mode == "scp":
+                self._remote_model.clear()
+            elif initial_remote_path and self._normalize_remote_path(initial_remote_path) != path:
                 self.openRemoteDirectory(initial_remote_path)
             else:
                 self.refreshRemote()
@@ -1078,7 +1211,7 @@ class SftpController(QObject):
             self._active_connection_id = ""
             self._set_connected(False)
             self._remote_model.clear()
-            self._set_status("SFTP disconnected")
+            self._set_status("SFTP/SCP disconnected")
             self.logMessage.emit(self._status_message, "info")
         elif operation == "local:list":
             if result[0] == self._local_path:
@@ -1109,7 +1242,9 @@ class SftpController(QObject):
         if operation == "connect":
             self._set_connected(False)
             self._remote_model.clear()
-            host_key = self._sftp_service.pending_host_key
+            host_key = self._transfer_service(
+                self._pending_transfer_mode
+            ).pending_host_key
             if host_key and self._pending_connection is not None:
                 self._set_status("Waiting for SSH host key confirmation")
                 self.logMessage.emit(self._status_message, "warning")
@@ -1122,7 +1257,9 @@ class SftpController(QObject):
             self._pending_connection = None
             self._pending_connection_id = ""
             self._pending_initial_remote_path = ""
-            self._set_status("SFTP connection failed")
+            failed_mode = self._pending_transfer_mode.upper()
+            self._pending_transfer_mode = "sftp"
+            self._set_status(f"{failed_mode} connection failed")
         elif operation == "scp:running":
             host_key = self._scp_service.pending_host_key
             request = self._pending_scp_request
@@ -1176,5 +1313,6 @@ class SftpController(QObject):
         self._pool.clear()
         # Abort blocking SSH/SFTP calls first; only then allow a short worker grace period.
         self._sftp_service.disconnect()
+        self._scp_transfer_service.disconnect()
         self._pool.waitForDone(1000)
         self._set_connected(False)

@@ -14,6 +14,8 @@ Rectangle {
     readonly property bool backendAvailable: backend !== null && backend !== undefined
     readonly property bool remoteDisconnected: remoteSide
                                                && (!backendAvailable || !backend.connected)
+    readonly property bool scpMode: remoteSide && backendAvailable
+                                    && backend.transferMode === "scp"
     property bool remoteSide: false
     property bool activePane: false
     property int selectedIndex: -1
@@ -166,6 +168,10 @@ Rectangle {
     function openSelected() {
         if (!backendAvailable)
             return
+        if (root.scpMode) {
+            backend.downloadRemotePath(pathField.text)
+            return
+        }
         const item = selectedItem()
         if (!item)
             return
@@ -184,7 +190,9 @@ Rectangle {
             return
         const rows = selectedRows()
         if (remoteSide)
-            backend.downloadEntries(rows)
+            root.scpMode
+                ? backend.downloadRemotePath(pathField.text)
+                : backend.downloadEntries(rows)
         else
             backend.uploadEntries(rows)
     }
@@ -232,7 +240,7 @@ Rectangle {
                          && root.selectedItem()
                          && root.selectedItem().isDirectory
         remoteSide: root.remoteSide
-        connected: root.backendAvailable && root.backend.connected
+        connected: root.backendAvailable && root.backend.connected && !root.scpMode
         onPrimaryRequested: root.openSelected()
         onRenameRequested: root.beginEdit("rename")
         onDeleteRequested: root.requestDelete()
@@ -276,7 +284,9 @@ Rectangle {
         RowLayout {
             Layout.fillWidth: true
             Text {
-                text: root.remoteSide ? "REMOTE" : "LOCAL"
+                text: root.remoteSide
+                      ? (root.scpMode ? "REMOTE SCP PATH" : "REMOTE")
+                      : "LOCAL"
                 color: Theme.textPrimary
                 font.bold: true
                 font.family: Theme.fontFamily
@@ -287,7 +297,7 @@ Rectangle {
                 text: root.remoteSide
                       ? (root.backendAvailable
                          ? root.backend.statusMessage
-                         : "SFTP backend unavailable")
+                         : "SFTP/SCP backend unavailable")
                       : "Local filesystem"
                 elide: Text.ElideRight
                 color: Theme.textSecondary
@@ -302,24 +312,30 @@ Rectangle {
                 id: pathField
                 objectName: root.remoteSide ? "sftpRemotePathField" : "sftpLocalPathField"
                 Layout.fillWidth: true
-                placeholderText: root.remoteSide ? "/" : "Local path"
+                placeholderText: root.scpMode
+                                 ? "/path/to/remote/file-or-directory"
+                                 : root.remoteSide ? "/" : "Local path"
                 onAccepted: {
                     root.activated()
                     root.openPath(text)
+                }
+                onEditingFinished: {
+                    if (root.scpMode)
+                        root.openPath(text)
                 }
             }
             IconButton {
                 objectName: root.remoteSide ? "sftpRemoteBack" : "sftpLocalBack"
                 iconSource: AppAssets.navigationChevronLeft
                 tooltip: "Back (Alt+Left / Mouse Back)"
-                enabled: root.canGoBack
+                enabled: root.canGoBack && !root.scpMode
                 onClicked: { root.activated(); root.goBack() }
             }
             IconButton {
                 objectName: root.remoteSide ? "sftpRemoteForward" : "sftpLocalForward"
                 iconSource: AppAssets.navigationChevronRight
                 tooltip: "Forward (Alt+Right / Mouse Forward)"
-                enabled: root.canGoForward
+                enabled: root.canGoForward && !root.scpMode
                 onClicked: { root.activated(); root.goForward() }
             }
             IconButton {
@@ -332,6 +348,7 @@ Rectangle {
                 objectName: root.remoteSide ? "sftpRemoteRefresh" : "sftpLocalRefresh"
                 iconSource: AppAssets.actionRefresh
                 tooltip: "Refresh (F5 / Ctrl+R)"
+                enabled: !root.scpMode
                 onClicked: { root.activated(); root.refresh() }
             }
         }
@@ -344,6 +361,7 @@ Rectangle {
                                             : "sftpLocalNewFolderButton"
                 width: Math.ceil(expandedImplicitWidth)
                 text: "New folder"
+                visible: !root.scpMode
                 onClicked: root.beginEdit("create")
             }
             StandardButton {
@@ -352,6 +370,7 @@ Rectangle {
                 width: Math.ceil(expandedImplicitWidth)
                 text: "Rename"
                 icon.source: AppAssets.actionEdit
+                visible: !root.scpMode
                 enabled: root.selectedCount === 1
                 onClicked: root.beginEdit("rename")
             }
@@ -362,6 +381,7 @@ Rectangle {
                 text: "Delete"
                 type: "Danger"
                 icon.source: AppAssets.actionDelete
+                visible: !root.scpMode
                 enabled: root.selectedCount > 0
                 onClicked: {
                     root.requestDelete()
@@ -371,17 +391,22 @@ Rectangle {
                 objectName: root.remoteSide ? "sftpRemoteTransferButton"
                                             : "sftpLocalTransferButton"
                 width: Math.ceil(expandedImplicitWidth)
-                text: (root.remoteSide ? "Download" : "Upload")
+                text: (root.remoteSide ? (root.scpMode ? "Download path" : "Download") : "Upload")
                       + (root.selectedCount > 1 ? " (" + root.selectedCount + ")" : "")
                 type: "Primary"
                 icon.source: root.remoteSide
                              ? AppAssets.actionDownload
                              : AppAssets.actionUpload
-                enabled: root.selectedCount > 0
-                         && root.backendAvailable
+                enabled: root.backendAvailable
                          && root.backend.connected
+                         && (root.scpMode
+                             ? pathField.text.trim() !== ""
+                             : root.selectedCount > 0)
                 onClicked: {
-                    root.transferSelected()
+                    if (root.scpMode)
+                        root.backend.downloadRemotePath(pathField.text)
+                    else
+                        root.transferSelected()
                 }
             }
         }
@@ -389,6 +414,7 @@ Rectangle {
         DataTableHeader {
             Layout.fillWidth: true
             Layout.preferredHeight: Theme.tableHeaderHeight
+            visible: !root.scpMode
 
             RowLayout {
                 anchors.fill: parent
@@ -410,6 +436,7 @@ Rectangle {
             clip: true
             spacing: 0
             model: root.fileModel
+            visible: !root.scpMode
             ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
             delegate: DataTableRow {
                 id: row
@@ -500,12 +527,25 @@ Rectangle {
                 anchors.fill: parent
                 visible: fileList.count === 0
                 title: root.remoteDisconnected
-                    ? "Connect to an SFTP server"
+                    ? "Connect to an SFTP/SCP server"
                     : "This directory is empty"
                 description: root.remoteDisconnected
                     ? "Enter a connection above to browse the remote file system."
                     : "No files or folders are available at this path."
             }
+        }
+
+        EmptyState {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            visible: root.scpMode
+            title: root.remoteDisconnected
+                   ? "Connect to an SCP server"
+                   : "SCP uses explicit remote paths"
+            description: root.remoteDisconnected
+                         ? "Choose SCP above and connect to start transferring files."
+                         : "Enter a remote file or directory path above to download. "
+                           + "Select local files or folders on the left to upload to this path."
         }
     }
 

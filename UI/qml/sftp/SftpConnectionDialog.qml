@@ -10,14 +10,12 @@ StandardDialog {
     id: root
     preferredWidth: 640
     height: Math.min(590, parent.height - Theme.spacing16 * 2)
-    title: "Edit SFTP connection"
+    title: "Edit SFTP/SCP connection"
     subtitle: "Connection details and initial directories"
     closeTooltip: "Close connection editor"
 
     required property var backend
     property string profileId: ""
-    // NOTE: chuc nang chua phat trien xong, khong tam quan tam nieu viet bao cao
-    readonly property bool scpFeatureVisible: false
 
     function openFor(profile) {
         const value = profile || ({})
@@ -31,8 +29,7 @@ StandardDialog {
         keyField.text = String(value.keyPath || "")
         localField.text = String(value.localPath || (backend ? backend.defaultLocalPath : ""))
         remoteField.text = String(value.remotePath || (backend ? backend.defaultRemotePath : "/"))
-        modeCombo.currentIndex = scpFeatureVisible
-                               && String(value.transferMode || "sftp").toLowerCase() === "scp"
+        modeCombo.currentIndex = String(value.transferMode || "sftp").toLowerCase() === "scp"
                                ? 1 : 0
         open()
     }
@@ -78,7 +75,6 @@ StandardDialog {
                 StandardComboBox {
                     id: modeCombo
                     objectName: "sftpProfileTransferMode"
-                    visible: root.scpFeatureVisible
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
                     labelText: "Transfer mode"
@@ -165,8 +161,9 @@ StandardDialog {
                     id: remoteField
                     Layout.fillWidth: true
                     Layout.columnSpan: 2
-                    labelText: "Initial remote directory (SFTP only)"
-                    enabled: modeCombo.currentValue === "sftp"
+                    labelText: modeCombo.currentValue === "scp"
+                               ? "Remote upload/download path"
+                               : "Initial remote directory"
                 }
             }
         }

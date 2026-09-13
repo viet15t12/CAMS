@@ -58,7 +58,7 @@ Item {
     readonly property string reloadShortcut: "Ctrl+R"
     readonly property string dashboardLabel: qsTr("Dashboard")
     readonly property string dashboardShortcut: "Ctrl+Alt+D"
-    readonly property string sftpLabel: qsTr("SFTP")
+    readonly property string sftpLabel: qsTr("SFTP/SCP")
     readonly property string sftpShortcut: "Ctrl+Alt+F"
     readonly property string systemLogsLabel: qsTr("System Logs")
     readonly property string systemLogsShortcut: "Ctrl+Alt+L"

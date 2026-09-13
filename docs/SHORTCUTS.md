@@ -23,7 +23,7 @@ Quy ước tab bám theo Google Chrome: `Ctrl+1` đến `Ctrl+8` chọn tab theo
 | Phím | Hành vi |
 |---|---|
 | `Ctrl+Alt+D` | Mở Dashboard/Devices. |
-| `Ctrl+Alt+F` | Mở SFTP. |
+| `Ctrl+Alt+F` | Mở SFTP/SCP. |
 | `Ctrl+Alt+L` | Mở System Logs. |
 | `Ctrl+Alt+B` | Mở Database; bị vô hiệu nếu backend không khả dụng. |
 | `Ctrl+,` | Mở Settings. |
@@ -62,7 +62,7 @@ Các tổ hợp này dùng chữ cái trong tên chức năng và không chiếm
 | `Ctrl+K`, `Ctrl+W` | Đóng toàn bộ tab. |
 | `Shift+F10` | Mở menu chuột phải của tab hiện tại. |
 
-## 5. SFTP
+## 5. SFTP/SCP
 
 | Phím | Hành vi |
 |---|---|

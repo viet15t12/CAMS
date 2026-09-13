@@ -39,7 +39,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.leftMargin: 16
                 anchors.verticalCenter: parent.verticalCenter
-                text: "SFTP CONNECTIONS"
+                text: "SFTP/SCP CONNECTIONS"
                 color: Theme.panelSideBarTextSecondary
                 font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeSmall
@@ -100,7 +100,7 @@ Rectangle {
                     spacing: Theme.spacing2
                     Text {
                         Layout.fillWidth: true
-                        text: String(profileRow.modelData.name || profileRow.modelData.host || "SFTP")
+                        text: String(profileRow.modelData.name || profileRow.modelData.host || "SFTP/SCP")
                         color: Theme.panelSideBarTextPrimary
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeNormal
@@ -109,7 +109,9 @@ Rectangle {
                     }
                     Text {
                         Layout.fillWidth: true
-                        text: String(profileRow.modelData.username || "") + "@"
+                        text: String(profileRow.modelData.transferMode || "sftp").toUpperCase()
+                              + "  •  "
+                              + String(profileRow.modelData.username || "") + "@"
                               + String(profileRow.modelData.host || "") + ":"
                               + String(profileRow.modelData.port || 22)
                         color: Theme.panelSideBarTextSecondary
@@ -145,7 +147,7 @@ Rectangle {
                        ? "No saved connections"
                        : "No matching connections"
                 description: searchField.text.trim() === ""
-                    ? "A server is added here after the first successful SFTP connection."
+                    ? "A server is added here after the first successful SFTP or SCP connection."
                     : "Try a different host, name, or username."
             }
         }
@@ -159,7 +161,7 @@ Rectangle {
         onDeleteRequested: function(profile) {
             deleteDialog.profileId = String(profile.id || "")
             deleteDialog.messageText = "Remove \"" + String(profile.name || profile.host)
-                                     + "\" from saved SFTP connections?"
+                                     + "\" from saved SFTP/SCP connections?"
             deleteDialog.open()
         }
     }

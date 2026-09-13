@@ -59,7 +59,7 @@ Rectangle {
     SftpMessageDialog {
         id: errorDialog
         objectName: "sftpErrorDialog"
-        titleText: "SFTP Error"
+        titleText: "SFTP/SCP Error"
     }
     SftpMessageDialog {
         id: hostKeyDialog
@@ -143,7 +143,7 @@ Rectangle {
     Text {
         anchors.centerIn: parent
         visible: root.backend === null
-        text: "SFTP backend is unavailable"
+        text: "SFTP/SCP backend is unavailable"
         color: Theme.alertError
         font.family: Theme.fontFamily
     }

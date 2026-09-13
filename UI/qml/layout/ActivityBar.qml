@@ -141,7 +141,7 @@ Rectangle {
             iconSource:  AppAssets.navigationSftp
             tooltipText: (activityBar.usesExternalSftp
                           ? "Open external SFTP Client"
-                          : "SFTP") + " (Ctrl+Alt+F)"
+                          : "SFTP/SCP") + " (Ctrl+Alt+F)"
             enabled:     true
             isActive:    activityBar.appMode === "sftp"
             opacity:     1.0

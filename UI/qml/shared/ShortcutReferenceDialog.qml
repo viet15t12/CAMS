@@ -29,7 +29,7 @@ StandardDialog {
         ListElement { sectionName: "General"; shortcutText: "Ctrl+B"; description: "Toggle the PanelSideBar" }
         ListElement { sectionName: "General"; shortcutText: "Ctrl+R"; description: "Reload the active UI" }
         ListElement { sectionName: "Activity Bar"; shortcutText: "Ctrl+Alt+D"; description: "Open Dashboard" }
-        ListElement { sectionName: "Activity Bar"; shortcutText: "Ctrl+Alt+F"; description: "Open SFTP" }
+        ListElement { sectionName: "Activity Bar"; shortcutText: "Ctrl+Alt+F"; description: "Open SFTP/SCP" }
         ListElement { sectionName: "Activity Bar"; shortcutText: "Ctrl+Alt+L"; description: "Open System Logs" }
         ListElement { sectionName: "Activity Bar"; shortcutText: "Ctrl+Alt+B"; description: "Open Database" }
         ListElement { sectionName: "Activity Bar"; shortcutText: "Ctrl+,"; description: "Open Settings" }
@@ -57,18 +57,18 @@ StandardDialog {
         ListElement { sectionName: "Device tabs"; shortcutText: "Ctrl+K Ctrl+W"; description: "Close all tabs" }
         ListElement { sectionName: "Device tabs"; shortcutText: "Shift+F10"; description: "Open the active tab context menu" }
 
-        ListElement { sectionName: "SFTP"; shortcutText: "Alt+Left"; description: "Go back in the active pane" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Alt+Right"; description: "Go forward in the active pane" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Alt+Up"; description: "Open the parent directory" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Backspace"; description: "Go back in the active pane" }
-        ListElement { sectionName: "SFTP"; shortcutText: "F5 / Ctrl+R"; description: "Refresh the active pane" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Ctrl+Shift+N"; description: "Create a folder in the active pane" }
-        ListElement { sectionName: "SFTP"; shortcutText: "F2"; description: "Rename the selected entry" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Del"; description: "Delete the selected entries" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Enter"; description: "Open or transfer the selected entry" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Ctrl+A"; description: "Select every entry in the active pane" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Esc"; description: "Clear the current selection" }
-        ListElement { sectionName: "SFTP"; shortcutText: "Shift+F10"; description: "Open the file context menu" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Alt+Left"; description: "Go back in the active pane" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Alt+Right"; description: "Go forward in the active pane" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Alt+Up"; description: "Open the parent directory" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Backspace"; description: "Go back in the active pane" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "F5 / Ctrl+R"; description: "Refresh the active pane" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Ctrl+Shift+N"; description: "Create a folder in the active pane" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "F2"; description: "Rename the selected entry" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Del"; description: "Delete the selected entries" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Enter"; description: "Open or transfer the selected entry" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Ctrl+A"; description: "Select every entry in the active pane" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Esc"; description: "Clear the current selection" }
+        ListElement { sectionName: "SFTP/SCP"; shortcutText: "Shift+F10"; description: "Open the file context menu" }
 
         ListElement { sectionName: "Interfaces"; shortcutText: "F2"; description: "Edit the selected saved interface" }
         ListElement { sectionName: "Interfaces"; shortcutText: "Del"; description: "Delete the selected saved interface" }

@@ -1388,7 +1388,7 @@ class QmlModuleContractTests(unittest.TestCase):
             "Activity Bar",
             "Devices",
             "Device tabs",
-            "SFTP",
+            "SFTP/SCP",
             "Interfaces",
             "Configuration viewer",
             "Dialogs",

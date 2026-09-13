@@ -38,7 +38,7 @@ Dự án được phát triển trong khuôn khổ nghiên cứu:
 | Sao lưu cấu hình | Lưu lịch sử running-config theo thiết bị bằng Dulwich |
 | System Logs | Nhận, lọc và lưu Syslog qua UDP/TCP |
 | Device Logs | Bắt và phân tích lưu lượng với TShark trong môi trường được cấp quyền |
-| SFTP | Duyệt file, upload/download và theo dõi hàng đợi truyền file |
+| SFTP/SCP | Duyệt file qua SFTP, truyền file/thư mục qua SFTP hoặc SCP và theo dõi hàng đợi |
 | Công cụ ngoài | Tích hợp SSH client, terminal và trình duyệt SQLite trên máy người dùng |
 | Project/workspace | Package `.ntp`, mã hóa tùy chọn, snapshot và rollback |
 
@@ -195,12 +195,13 @@ Config Backup lưu lịch sử Git nội bộ bằng Dulwich trong thư mục
 `.cams-git`. Khi lưu workspace, layout `.git` cũ được migrate trong staging
 để `.ntp` tiếp tục cấm metadata Git chuẩn nhưng vẫn bảo toàn toàn bộ lịch sử.
 
-### Syslog, Device Logs và SFTP
+### Syslog, Device Logs và SFTP/SCP
 
 - **System Logs:** cấu hình listener trong **Settings → System Logs**, xác thực bind address/port rồi khởi động listener từ Activity Bar.
 - **Device Logs:** chọn capture interface và filter trước khi bắt gói; chỉ sử dụng trên mạng mà bạn được phép giám sát.
-- **SFTP:** xác minh fingerprint SHA-256 của máy chủ trước khi chấp nhận kết nối
-  và truyền file; xem [tài liệu SFTP](docs/SFTP.md).
+- **SFTP/SCP:** xác minh fingerprint SHA-256 của máy chủ trước khi chấp nhận
+  kết nối. SFTP hỗ trợ duyệt remote; SCP truyền theo đường dẫn remote nhập trực
+  tiếp cho thiết bị không có SFTP subsystem; xem [tài liệu SFTP/SCP](docs/SFTP.md).
 
 Hướng dẫn chi tiết cho từng màn hình nằm trong [docs/USAGE_GUIDE.md](docs/USAGE_GUIDE.md). Danh sách phím tắt nằm tại [docs/SHORTCUTS.md](docs/SHORTCUTS.md).
 

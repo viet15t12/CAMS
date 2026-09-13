@@ -1,7 +1,7 @@
-# SFTP trong CAMS
+# SFTP/SCP trong CAMS
 
-Cập nhật: **2026-08-16**. Tài liệu này mô tả client SFTP tích hợp và cách Activity
-Bar chọn giữa client tích hợp với ứng dụng SFTP ngoài.
+Cập nhật: **2026-09-13**. Tài liệu này mô tả client SFTP/SCP tích hợp và cách
+Activity Bar chọn giữa client tích hợp với ứng dụng SFTP ngoài.
 
 ## 1. Kiến trúc và ownership
 
@@ -11,6 +11,7 @@ SftpView.qml / panels
 SftpController (QObject, state và điều phối)
        ├─ LocalFileService → filesystem cục bộ
        ├─ SftpService → Paramiko SSH/SFTP
+       ├─ ScpService → Paramiko SSH + SCP
        ├─ FileListModel / TransferModel → QML
        └─ OperationWorker → QThreadPool
 ```
@@ -28,14 +29,15 @@ Kết nối yêu cầu host, port 1–65535, username và password hoặc privat
 1. lần kết nối đầu chỉ lấy key type và fingerprint SHA-256;
 2. UI yêu cầu người dùng xác minh fingerprint qua kênh đáng tin cậy;
 3. nếu chấp nhận, lần kết nối xác nhận lại fingerprint bằng so sánh constant-time;
-4. chỉ khi khớp mới ghi key vào `~/.ssh/known_hosts` và mở SFTP.
+4. chỉ khi khớp mới ghi key vào `~/.ssh/known_hosts` và mở giao thức đã chọn.
 
 Nếu key đổi giữa hai bước, kết nối bị hủy. Không chấp nhận host key tự động và
 không bỏ qua kiểm tra chỉ để kết nối được.
 
 ## 3. File browser và transfer
 
-Hai panel local/remote hỗ trợ:
+Với SFTP, hai panel local/remote hỗ trợ:
+
 
 - liệt kê thư mục; folder xếp trước file; hiển thị tên, loại, size, thời gian và
   quyền remote;
@@ -48,6 +50,12 @@ Hai panel local/remote hỗ trợ:
 Upload thư mục bỏ qua symlink và tạo cây remote; download thư mục tạo cây local.
 Xóa không đệ quy: local dùng `rmdir()`, remote dùng `rmdir()`, nên folder còn dữ
 liệu sẽ báo lỗi thay vì bị xóa hàng loạt.
+
+Với SCP, chọn `SCP` ngay trên thanh kết nối. Panel remote chuyển sang trường
+đường dẫn rõ ràng vì SCP không hỗ trợ liệt kê thư mục. Chọn file/thư mục local
+để upload tới đường dẫn đó, hoặc nhập đầy đủ đường dẫn file/thư mục remote và
+chọn **Download path**. Profile ghi nhớ cả giao thức và đường dẫn SCP, gồm các
+đường dẫn kiểu thiết bị mạng như `flash:/backups`.
 
 Cancel là cooperative: event được kiểm tra trước/sau mỗi lời gọi transfer. Một
 lời gọi Paramiko đang blocking không bị ngắt giữa chunk; vì vậy cancel có thể chỉ

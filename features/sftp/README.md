@@ -3,18 +3,18 @@
 Trạng thái: **implemented** cho client tích hợp một session.
 
 Feature sở hữu kết nối Paramiko, xác minh host key SHA-256, hai file panel,
-profile, local/remote navigation và transfer queue. QML ở `UI/qml/sftp/` và
+profile, transfer queue và lựa chọn giao thức SFTP/SCP. QML ở `UI/qml/sftp/` và
 `UI/qml/panels/SftpConnectionsPanel.qml`; public context là `sftpController`.
 
-Luồng SCP đang được giữ trong source nhưng toàn bộ điểm vào trên UI đang ẩn.
-`chuc nang chua phat trien xong, khong tam quan tam nieu viet bao cao`.
-Backend thử nghiệm kiểm tra `ip scp server enable`, copy running-config sang
-file tạm trong flash, tải file về local rồi cố gắng xóa file tạm trên thiết bị.
+SFTP cung cấp file browser và thao tác quản lý remote đầy đủ. SCP hỗ trợ
+upload/download file hoặc thư mục bằng đường dẫn remote nhập trực tiếp; SCP
+không có API duyệt hoặc quản lý filesystem remote như SFTP.
 
 | File | Trách nhiệm |
 | --- | --- |
 | `controller.py` | QObject state, QSettings, profile, history, queue và slot QML |
 | `sftp_service.py` | SSH/SFTP, host key, list và file operation remote |
+| `scp_service.py` | SSH/SCP upload/download theo đường dẫn remote |
 | `scp_running_config.py` | Cisco CLI + SCP running-config có cleanup file tạm |
 | `local_service.py` | File operation local có giới hạn an toàn |
 | `file_model.py` | Metadata/role của hai panel |

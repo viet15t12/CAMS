@@ -15,6 +15,7 @@ from features.sftp.credential_store import DpapiCredentialStore
 from features.sftp.file_model import FileItem, FileListModel, file_type_text, format_size
 from features.sftp.local_service import LocalFileService
 from features.sftp.scp_running_config import ScpRunningConfigService
+from features.sftp.scp_service import ScpService
 from features.sftp.sftp_service import (
     CaptureHostKeyPolicy,
     ConnectionOptions,
@@ -144,7 +145,135 @@ class _FakeScpClient:
             self.progress(remote_path.encode(), len(payload), len(payload))
 
 
+class _FakeTransferScpClient:
+    def __init__(self, _transport, progress=None) -> None:
+        self.progress = progress
+        self.put_calls = []
+        self.get_calls = []
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_args) -> None:
+        pass
+
+    def put(self, local_path, **kwargs) -> None:
+        self.put_calls.append((local_path, kwargs))
+        if self.progress:
+            self.progress(str(local_path).encode(), 12, 12)
+
+    def get(self, remote_path, **kwargs) -> None:
+        self.get_calls.append((remote_path, kwargs))
+        if self.progress:
+            self.progress(str(remote_path).encode(), 20, 20)
+
+
 class SftpClientTests(unittest.TestCase):
+    def test_scp_service_connects_without_opening_sftp_and_transfers_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            ssh = _FakeScpSsh()
+            clients = []
+
+            def make_client(*args, **kwargs):
+                client = _FakeTransferScpClient(*args, **kwargs)
+                clients.append(client)
+                return client
+
+            service = ScpService(
+                ssh_client_factory=lambda: ssh,
+                scp_client_factory=make_client,
+                known_hosts_path=Path(temp) / "known_hosts",
+            )
+            self.assertEqual(
+                service.connect(
+                    ConnectionOptions("192.0.2.60", 22, "admin", "secret")
+                ),
+                "/",
+            )
+            source = Path(temp) / "config.cfg"
+            source.write_text("hostname R1\n", encoding="utf-8")
+            progress = []
+            service.upload(
+                str(source),
+                "flash:/",
+                lambda done, total: progress.append((done, total)),
+            )
+            service.download(
+                "flash:/startup-config",
+                temp,
+                lambda done, total: progress.append((done, total)),
+            )
+
+            self.assertEqual(clients[0].put_calls[0][1]["remote_path"], "flash:/")
+            self.assertFalse(clients[0].put_calls[0][1]["recursive"])
+            self.assertEqual(clients[1].get_calls[0][0], "flash:/startup-config")
+            self.assertTrue(clients[1].get_calls[0][1]["recursive"])
+            self.assertEqual(progress, [(12, 12), (20, 20)])
+
+    def test_controller_scp_mode_routes_upload_and_explicit_download(self) -> None:
+        class FakeTransferService:
+            pending_host_key = None
+
+            def __init__(self) -> None:
+                self.uploads = []
+                self.downloads = []
+
+            def connect(self, _options, _fingerprint=""):
+                return "/"
+
+            def disconnect(self) -> None:
+                pass
+
+            def upload(self, source, destination, callback) -> None:
+                self.uploads.append((source, destination))
+                callback(1, 1)
+
+            def download(self, source, destination, callback) -> None:
+                self.downloads.append((source, destination))
+                callback(1, 1)
+
+        with tempfile.TemporaryDirectory() as temp:
+            transfer_service = FakeTransferService()
+            settings = QSettings(
+                str(Path(temp) / "scp-transfer.ini"), QSettings.Format.IniFormat
+            )
+            settings.setValue("SFTP/defaultLocalPath", temp)
+            controller = SftpController(
+                settings=settings,
+                scp_transfer_service=transfer_service,
+            )
+            try:
+                controller._start = (
+                    lambda operation, function: controller._operation_completed(
+                        operation, function()
+                    )
+                )
+                controller.connectServerWithMode(
+                    "192.0.2.61", 22, "admin", "secret", "", "scp"
+                )
+                self.assertTrue(controller.connected)
+                self.assertEqual(controller.transferMode, "scp")
+                self.assertFalse(controller.remoteBrowsingAvailable)
+
+                source = Path(temp) / "backup.cfg"
+                source.write_text("hostname R2\n", encoding="utf-8")
+                controller._local_model.set_items(
+                    [FileItem(source.name, str(source), False, source.stat().st_size)]
+                )
+                controller.openRemoteDirectory("flash:/backups")
+                controller.uploadFile(0)
+                controller.downloadRemotePath("flash:/startup-config")
+
+                self.assertEqual(
+                    transfer_service.uploads, [(str(source), "flash:/backups")]
+                )
+                self.assertEqual(
+                    transfer_service.downloads,
+                    [("flash:/startup-config", temp)],
+                )
+            finally:
+                controller.shutdown()
+
     def test_scp_running_config_enables_server_downloads_and_cleans_flash(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             ssh = _FakeScpSsh()
