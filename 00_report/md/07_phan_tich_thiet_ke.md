@@ -51,7 +51,7 @@ Hệ thống phải đáp ứng các tiêu chuẩn kỹ thuật nghiêm ngặt v
 
 Kiến trúc phần mềm CAMS được thiết kế theo mô hình 4 tầng độc lập, bảo đảm nguyên tắc phân tách trách nhiệm và phân định ranh giới rõ ràng:
 
-![Kiến trúc phân lớp tổng thể của phần mềm CAMS](../contents/diagrams/22_architecture_overview.svg)
+![Kiến trúc phân lớp tổng thể của phần mềm CAMS](../../00_book/figures/report/diagrams/22_architecture_overview.svg)
 *Kiến trúc phân lớp tổng thể của phần mềm CAMS*
 
 - **1. Lớp Giao diện (Presentation Layer - Qt Quick / QML):** Chịu trách nhiệm hiển thị các thành phần trực quan (Cửa sổ, Bảng dữ liệu, Biểu mẫu, Thẻ tiến trình, Hộp thoại View & Push) và tiếp nhận tương tác từ người dùng. Lớp này hoàn toàn không chứa câu lệnh SQL hay mã kết nối mạng trực tiếp.
@@ -67,7 +67,7 @@ Kiến trúc phần mềm CAMS được thiết kế theo mô hình 4 tầng đ�
 
 Quy trình kết nối và thu thập trạng thái ban đầu diễn ra theo các bước:
 
-![Vòng đời phiên kết nối và thu thập dữ liệu thiết bị](../contents/diagrams/05_session_lifecycle.svg)
+![Vòng đời phiên kết nối và thu thập dữ liệu thiết bị](../../00_book/figures/report/diagrams/05_session_lifecycle.svg)
 *Vòng đời phiên kết nối và thu thập dữ liệu thiết bị*
 
 1. Người dùng thêm thiết bị vào Inventory và mở phiên làm việc (Tab thiết bị).
@@ -89,7 +89,7 @@ Quá trình ghi nhận cấu hình do người dùng thiết lập diễn ra an 
 
 Đây là luồng tác vụ quan trọng nhất để chuyển đổi dữ liệu cấu hình mong muốn thành trạng thái thực tế trên thiết bị:
 
-![Quy trình chuyển đổi trạng thái cấu hình từ Desired State sang Applied](../contents/diagrams/02_state_flow.svg)
+![Quy trình chuyển đổi trạng thái cấu hình từ Desired State sang Applied](../../00_book/figures/report/diagrams/02_state_flow.svg)
 *Quy trình chuyển đổi trạng thái cấu hình từ Desired State sang Applied*
 
 1. *Quét dữ liệu chờ:* Bộ điều khiển (Controller) truy vấn cơ sở dữ liệu để lọc toàn bộ các bản ghi có `success = 0` hoặc `success = -1` của thiết bị được chọn.

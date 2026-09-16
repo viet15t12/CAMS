@@ -11,17 +11,24 @@ docs/research/report/
 ├── chapters/ ------------------------- Chương
 ├── config/ --------------------------- Cấu hình chung
 ├── cover/ ---------------------------- Trang bìa
-├── figures/ -------------------------- Hình ảnh
+├── md/ ------------------------------- Bản Markdown của các chương
 ├── DETAILED_OUTLINE.md --------------- Đề cương Báo cáo Nghiên cứu khoa học
 └── main.typ  
 ```
 
-## Ảnh
+## Kho ảnh dùng chung
 
-Đặt ảnh vào `figures/`, ví dụ:
+Toàn bộ ảnh của sách hướng dẫn và báo cáo được quản lý tập trung trong
+`../00_book/figures/`. Không tạo thêm bản sao ảnh trong `00_report`.
+
+- Ảnh giao diện CAMS: `../00_book/figures/gui/`
+- Sơ đồ và ảnh thử nghiệm của báo cáo: `../00_book/figures/report/diagrams/`
+- Ảnh phụ lục của báo cáo: `../00_book/figures/report/appendix/`
+
+Ví dụ một ảnh giao diện dùng chung:
 
 ```text
-figures/gui/main_window.png
+../00_book/figures/gui/chapter-03/01-workspace-overview.png
 ```
 
 ## Bảng trong báo cáo
@@ -48,7 +55,7 @@ Trong file `.typ`:
 
 ```typst
 #insert-image(
-  "figures/gui/main_window.png",
+  "/00_book/figures/gui/chapter-03/01-workspace-overview.png",
   width: 80%,
   caption: [Giao diện chính của CAMS],
 ) <fig-main-window>
@@ -58,6 +65,13 @@ Tham chiếu:
 
 ```typst
 Xem @fig-main-window.
+```
+
+Đường dẫn bắt đầu bằng `/00_book/` được tính từ gốc dự án. Vì vậy, dựng báo cáo
+từ thư mục chứa `00_book` và `00_report` bằng lệnh:
+
+```bash
+typst compile --root . 00_report/main.typ 00_report/main.pdf
 ```
 
 ## Tài liệu tham khảo

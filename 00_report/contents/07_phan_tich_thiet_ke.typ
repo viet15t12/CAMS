@@ -56,7 +56,7 @@ Hệ thống phải đáp ứng các tiêu chuẩn kỹ thuật nghiêm ngặt v
 Kiến trúc phần mềm CAMS được thiết kế theo mô hình 4 tầng độc lập, bảo đảm nguyên tắc phân tách trách nhiệm và phân định ranh giới rõ ràng:
 
 #figure(
-  image("diagrams/22_architecture_overview.svg", width: 78%),
+  image("/00_book/figures/report/diagrams/22_architecture_overview.svg", width: 78%),
   caption: [Kiến trúc phân lớp tổng thể của phần mềm CAMS],
 ) <fig-layer-architecture>
 
@@ -74,7 +74,7 @@ Kiến trúc phần mềm CAMS được thiết kế theo mô hình 4 tầng đ�
 Quy trình kết nối và thu thập trạng thái ban đầu diễn ra theo các bước:
 
 #figure(
-  image("diagrams/05_session_lifecycle.svg", width: 85%),
+  image("/00_book/figures/report/diagrams/05_session_lifecycle.svg", width: 85%),
   caption: [Vòng đời phiên kết nối và thu thập dữ liệu thiết bị],
 ) <fig-session-lifecycle>
 
@@ -98,7 +98,7 @@ Quá trình ghi nhận cấu hình do người dùng thiết lập diễn ra an 
 Đây là luồng tác vụ quan trọng nhất để chuyển đổi dữ liệu cấu hình mong muốn thành trạng thái thực tế trên thiết bị:
 
 #figure(
-  image("diagrams/02_state_flow.svg", width: 55%),
+  image("/00_book/figures/report/diagrams/02_state_flow.svg", width: 55%),
   caption: [Quy trình chuyển đổi trạng thái cấu hình từ Desired State sang Applied],
 ) <fig-state-flow>
 

@@ -21,7 +21,7 @@ Quá trình thử nghiệm thực nghiệm được thiết kế xoay quanh 4 k�
 
 *Mục tiêu kịch bản:* Thiết lập hạ tầng mạng chuyển mạch đa tầng trên môi trường lab, bao gồm khởi tạo phân vùng VLAN, tự động đồng bộ qua VTP, gom kênh liên kết EtherChannel bằng LACP và kích hoạt các cơ chế phòng vệ Lớp 2 (DHCP Snooping, Dynamic ARP Inspection, Port Security).
 
-![Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2](../contents/diagrams/LAB_KICH_BAN_1.svg)
+![Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2](../../00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg)
 *Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2*
 
 *Quy trình thực hiện trên phần mềm CAMS:*
@@ -34,7 +34,7 @@ Quá trình cấu hình toàn diện hạ tầng Layer 2 trên phần mềm đư
 
 Để tối ưu hóa việc quản lý phân vùng trên 6 switch mà không cần khai báo lặp lại thủ công trên từng thiết bị, người dùng truy cập phân hệ *Switching* → thẻ *VTP*. Tại đây, tính năng *VTP Group* cho phép cấu hình đồng bộ hàng loạt (Batch capacity 5/5) với tên miền `PTIT_LAB`, phiên bản `VTP Version 2`, áp dụng đồng thời cho 5 thiết bị `SW1` đến `SW5` trong đó `SW1` đóng vai trò VTP Server và các switch còn lại là VTP Client.
 
-![Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB](../contents/diagrams/Anh_chuong_5/1_16.png)
+![Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB](../../00_book/figures/report/diagrams/switching-lab/1_16.png)
 *Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB*
 
 *Giải thích Hình (fig-k1-vtp-group):* Giao diện trực quan thể hiện danh sách các switch kết nối (Connected switches: 6), số thiết bị được chọn tham gia miền (Selected: 5) và các miền đã lưu trữ (`Saved domains`). Quản trị viên chỉ cần chọn danh sách switch và nhấn *Save & Push* để thiết lập toàn bộ hạ tầng VTP chỉ trong một thao tác duy nhất.
@@ -43,7 +43,7 @@ Quá trình cấu hình toàn diện hạ tầng Layer 2 trên phần mềm đư
 
 Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùng chuyển sang thẻ *VLAN* để khởi tạo các phân vùng mạng nghiệp vụ: `VLAN 10` (Tên: `IT_VLAN`) và `VLAN 20` (Tên: `HR_VLAN`). Sau khi lưu vào trạng thái mong muốn (`Desired State`), người dùng nhấn nút *View & Push* để mở cửa sổ duyệt trước mã lệnh.
 
-![Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1](../contents/diagrams/Anh_chuong_5/1_20.png)
+![Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1](../../00_book/figures/report/diagrams/switching-lab/1_20.png)
 *Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1*
 
 *Giải thích Hình (fig-k1-vlan-push):* Cửa sổ modal hiển thị chính xác khối lệnh Cisco IOS do Template Engine Jinja2 biên dịch từ dữ liệu đồ họa (`vlan 10`, `name IT_VLAN`, `state active`, `vlan 20`, `name HR_VLAN`). Người dùng có thể đối soát từng dòng lệnh trước khi nhấn nút *Push* để gửi lệnh xuống thiết bị thật qua luồng SSH chạy nền an toàn.
@@ -52,7 +52,7 @@ Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùn
 
 Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truyền Trunk giữa `SW1` và `SW3`, người dùng truy cập thẻ *EtherChannel* trên tab `SW1`. Tại đây, người dùng gom 2 cổng vật lý `GigabitEthernet1/0` và `GigabitEthernet1/1` vào nhóm logic `Port-channel1` với giao thức LACP (`mode active`) và gán nhãn mô tả `Link_To_SW3`.
 
-![Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 – SW3](../contents/diagrams/Anh_chuong_5/1_3.png)
+![Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 – SW3](../../00_book/figures/report/diagrams/switching-lab/1_3.png)
 *Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 – SW3*
 
 *Giải thích Hình (fig-k1-etherchannel-push):* Hệ thống tự động tách và sinh mã cấu hình chuẩn cho từng giao diện thành phần (`interface GigabitEthernet1/1`, `channel-group 1 mode active`) và giao diện logic tổng hợp (`interface Port-channel1`, `description Link_To_SW3`), loại bỏ nguy cơ cấu hình lệch mode gây nghẽn vòng lặp Spanning Tree.
@@ -61,7 +61,7 @@ Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truy�
 
 Để ngăn chặn các cuộc tấn công mạng Lớp 2 (DHCP Rogue Server, Man-in-the-Middle và ARP Spoofing), người dùng chuyển sang phân hệ *Security* → thẻ *L2 Security*.
 
-![Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection](../contents/diagrams/Anh_chuong_5/1_21.png)
+![Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection](../../00_book/figures/report/diagrams/switching-lab/1_21.png)
 *Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection*
 
 *Giải thích Hình (fig-k1-l2-security):* Bảng điều khiển cho phép bật/tắt chính sách bảo vệ VLAN Protection theo từng phân vùng (VLAN 1, 10, 20, 99). Tại ngăn thuộc tính bên phải, quản trị viên kích hoạt tính năng *Enable DHCP Snooping* và *Enable DAI* chỉ bằng một nút gạt chuyển trạng thái; đồng thời chỉ định các đường gom Trunk là *Trusted Uplinks* để cho phép lưu lượng DHCP/ARP hợp lệ đi qua.
@@ -70,7 +70,7 @@ Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truy�
 
 Trên switch truy cập `SW5` (IP: `192.168.122.105`), người dùng chuyển sang thẻ *Port Security* để bảo vệ các cổng kết nối đến người dùng cuối. Với cổng `GigabitEthernet0/2`, người dùng thiết lập số lượng địa chỉ MAC tối đa là `4`, kích hoạt học địa chỉ tự động (`mac-address sticky`), thời gian lưu vết `5 phút` và cơ chế xử lý vi phạm là ngắt cổng tức thì (`violation shutdown`).
 
-![Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5](../contents/diagrams/Anh_chuong_5/1_25.png)
+![Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5](../../00_book/figures/report/diagrams/switching-lab/1_25.png)
 *Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5*
 
   
@@ -89,7 +89,7 @@ switchport port-security aging time 5
 
 Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng Terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
 
-![Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp](../contents/diagrams/Anh_chuong_5/1_30.png)
+![Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp](../../00_book/figures/report/diagrams/switching-lab/1_30.png)
 *Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp*
 
 *Giải thích Hình (fig-k1-terminal-verify):* Kết quả lệnh `show vlan` trên `SW3` chứng minh toàn bộ các VLAN (`10 IT_VLAN`, `20 HR_VLAN`, `99 VLAN0099`) đã được đồng bộ tự động từ `SW1`. Lệnh `show vtp status` xác nhận `SW3` đang hoạt động ở chế độ `Client`, thuộc VTP Domain `PTIT_LAB`, chạy phiên bản 2, có chỉ số `Configuration Revision: 12` và chuỗi `MD5 digest` trùng khớp hoàn toàn với thông tin cấu hình từ server `192.168.122.101`.
@@ -117,7 +117,7 @@ Security Violation Count   : 0
 
 *Mục tiêu kịch bản:* Thiết lập hạ tầng định tuyến động OSPFv2 liên kết hai chi nhánh doanh nghiệp (Chi nhánh A và Chi nhánh B) thông qua mạng đường trục ISP (Backbone Area 0). Ứng dụng tính năng *Routing Group - OSPF* của CAMS để tự động hóa quá trình cấu hình đồng loạt trên 6 bộ định tuyến (`R1`, `R2`, `R3`, `ISP1`, `ISP2`, `R6`), đồng thời kích hoạt cơ chế *Tái phân phối tuyến (Route Redistribution)* nhằm quảng bá các dải mạng LAN cục bộ vào miền OSPF, đảm bảo lưu lượng giữa các phòng ban thuộc hai chi nhánh được thông suốt 100%.
 
-![Sơ đồ Topo Kịch bản 2: Định tuyến OSPF đa vùng giữa hai chi nhánh](../contents/diagrams/LAB_2-report.png)
+![Sơ đồ Topo Kịch bản 2: Định tuyến OSPF đa vùng giữa hai chi nhánh](../../00_book/figures/report/diagrams/LAB_2-report.png)
 *Sơ đồ Topo Kịch bản 2: Định tuyến OSPF đa vùng giữa hai chi nhánh*
 
 *Quy hoạch địa chỉ IP và Phân vùng Định tuyến:*
@@ -142,7 +142,7 @@ Mô hình kịch bản được chia làm 3 phân vùng định tuyến chính v
 
 Trước khi triển khai định tuyến, quản trị viên sử dụng phân hệ *Interfaces* trên CAMS để thiết lập các thông số IP, Subnet Mask và kích hoạt trạng thái hoạt động cho từng cổng vật lý (`GigabitEthernet`) trên các thiết bị.
 
-![Giao diện phân hệ Interfaces quản lý và cấu hình tham số Lớp 3 cho các cổng Router](../contents/diagrams/Chuong_5_lab2/1.png)
+![Giao diện phân hệ Interfaces quản lý và cấu hình tham số Lớp 3 cho các cổng Router](../../00_book/figures/report/diagrams/routing-ospf-lab/1.png)
 *Giao diện phân hệ Interfaces quản lý và cấu hình tham số Lớp 3 cho các cổng Router*
 
 *Giải thích Hình (fig-k2-interfaces):* Bảng điều khiển bên trái liệt kê trực quan trạng thái IP của tất cả cổng mạng trên router `R1`. Ngăn thuộc tính bên phải cho phép chọn cấu hình nhanh IP Address, Subnet Mask, gán nhãn mô tả đường truyền và chuyển đổi trạng thái cổng (`Up/Down`) chỉ qua vài thao tác chuột.
@@ -151,14 +151,14 @@ Trước khi triển khai định tuyến, quản trị viên sử dụng phân 
 
 Thay vì phải truy cập thủ công vào từng router để gõ từng dòng lệnh OSPF, quản trị viên sử dụng tính năng *Routing Group - OSPF* để cấu hình tự động cho toàn bộ 6 Router (`R1`, `R2`, `R3`, `ISP1`, `ISP2`, `R6`).
 
-![Cửa sổ Routing Group - OSPF (Bước 1: Chọn đồng thời 6 Router tham gia cấu hình nhóm)](../contents/diagrams/Chuong_5_lab2/10.png)
+![Cửa sổ Routing Group - OSPF (Bước 1: Chọn đồng thời 6 Router tham gia cấu hình nhóm)](../../00_book/figures/report/diagrams/routing-ospf-lab/10.png)
 *Cửa sổ Routing Group - OSPF (Bước 1: Chọn đồng thời 6 Router tham gia cấu hình nhóm)*
 
 *Giải thích Hình (fig-k2-group-hosts):* Quản trị viên chỉ cần tích chọn danh sách các router cần cấu hình trong không gian làm việc `LAB_KICH_BAN_2`. Hệ thống tự động xác định các giao diện kết nối và địa chỉ IP tương ứng trên từng thiết bị.
 
 Tiếp theo, tại bước *Networks*, quản trị viên gán các dải mạng kết nối trực tiếp vào từng vùng định tuyến phù hợp (Area 0 cho các liên kết Backbone ISP và Area 1 cho các liên kết nội bộ Chi nhánh A).
 
-![Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)](../contents/diagrams/Chuong_5_lab2/11.png)
+![Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)](../../00_book/figures/report/diagrams/routing-ospf-lab/11.png)
 *Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)*
 
   
@@ -179,7 +179,7 @@ Tiếp theo, tại bước *Networks*, quản trị viên gán các dải mạng
 
 Để các dải mạng người dùng (`192.168.10.0/24`, `192.168.20.0/24` ở Chi nhánh A và `192.168.30.0/24`, `192.168.40.0/24` ở Chi nhánh B) được quảng bá xuyên suốt qua mạng OSPF mà không cần chạy OSPF trực tiếp xuống Switch mạng truy cập, quản trị viên cấu hình tính năng *Redistribute Connected Subnets* trên các router biên `R2`, `R3` và `R6`.
 
-![Giao diện thiết lập tham số Tái phân phối tuyến (OSPF Redistribute) trên Router biên R6](../contents/diagrams/Chuong_5_lab2/16.png)
+![Giao diện thiết lập tham số Tái phân phối tuyến (OSPF Redistribute) trên Router biên R6](../../00_book/figures/report/diagrams/routing-ospf-lab/16.png)
 *Giao diện thiết lập tham số Tái phân phối tuyến (OSPF Redistribute) trên Router biên R6*
 
 *Giải thích Hình (fig-k2-redistribute-gui):* Quản trị viên mở tab `R6`, chọn phân hệ *Routing* → thẻ *OSPF* → tiểu mục *Redistribute*. Tại đây, người dùng thực hiện:
@@ -191,7 +191,7 @@ Tiếp theo, tại bước *Networks*, quản trị viên gán các dải mạng
 
 Sau khi lưu cấu hình trên giao diện, quản trị viên nhấn nút *View & Push* để kiểm duyệt khối lệnh chuẩn bị đẩy xuống router.
 
-![Cửa sổ View & Push OSPF tự động sinh khối lệnh tái phân phối tuyến cho Router R2](../contents/diagrams/Chuong_5_lab2/14.png)
+![Cửa sổ View & Push OSPF tự động sinh khối lệnh tái phân phối tuyến cho Router R2](../../00_book/figures/report/diagrams/routing-ospf-lab/14.png)
 *Cửa sổ View & Push OSPF tự động sinh khối lệnh tái phân phối tuyến cho Router R2*
 
 *Giải thích Hình (fig-k2-redistribute-push):* Cửa sổ kiểm duyệt hiển thị khối lệnh Cisco IOS sinh ra:
@@ -211,7 +211,7 @@ Lệnh `redistribute connected subnets` giúp router biên chuyển đổi các 
 
 Sau khi hoàn tất tiến trình đẩy cấu hình từ phần mềm, quản trị viên mở các cửa sổ Terminal tích hợp để kiểm tra trực tiếp tệp cấu hình chạy trên cả 6 router.
 
-![Xác minh đồng thời cấu hình OSPF trên 6 Router (R1, R2, R3, ISP1, ISP2, R6) qua Terminal nhúng](../contents/diagrams/Chuong_5_lab2/12.png)
+![Xác minh đồng thời cấu hình OSPF trên 6 Router (R1, R2, R3, ISP1, ISP2, R6) qua Terminal nhúng](../../00_book/figures/report/diagrams/routing-ospf-lab/12.png)
 *Xác minh đồng thời cấu hình OSPF trên 6 Router (R1, R2, R3, ISP1, ISP2, R6) qua Terminal nhúng*
 
 *Giải thích Hình (fig-k2-multi-terminal-ospf):* Lệnh `show run | section ospf` trên từng cửa sổ chứng minh tất cả 6 router đã nhận đầy đủ tiến trình OSPF Process 1, Router-ID duy nhất (`1.1.1.1` đến `6.6.6.6`) và các dải mạng được gán chính xác vào Area 0 và Area 1 đúng theo thiết kế ban đầu.
@@ -220,7 +220,7 @@ Sau khi hoàn tất tiến trình đẩy cấu hình từ phần mềm, quản t
 
 Quản trị viên thực hiện lệnh `show ip route` trên router trung tâm `R1` để kiểm tra khả năng hội tụ của hệ thống định tuyến:
 
-![Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2](../contents/diagrams/Chuong_5_lab2/18.png)
+![Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2](../../00_book/figures/report/diagrams/routing-ospf-lab/18.png)
 *Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2*
 
 *Giải thích Hình (fig-k2-route-table-r1):* Bảng định tuyến của `R1` ghi nhận đầy đủ:
@@ -235,7 +235,7 @@ Quản trị viên thực hiện lệnh `show ip route` trên router trung tâm 
 
 Để chứng minh hai chi nhánh đã hoàn toàn thông suốt, quản trị viên mở terminal trên các máy trạm đầu cuối (VPC) để thực hiện kiểm tra ping chéo giữa hai chi nhánh:
 
-![Kết quả kiểm tra Ping từ VPC11 (Chi nhánh A) sang VPC14 (Chi nhánh B) thành công 100%](../contents/diagrams/Chuong_5_lab2/25.png)
+![Kết quả kiểm tra Ping từ VPC11 (Chi nhánh A) sang VPC14 (Chi nhánh B) thành công 100%](../../00_book/figures/report/diagrams/routing-ospf-lab/25.png)
 *Kết quả kiểm tra Ping từ VPC11 (Chi nhánh A) sang VPC14 (Chi nhánh B) thành công 100%*
 
 *Giải thích Hình (fig-k2-ping-vpc11-vpc14):* Từ máy trạm `VPC11` (`192.168.10.10` thuộc phân vùng `A1_VLAN` tại Chi nhánh A), lệnh `ping 192.168.30.10` (máy trạm `VPC14` thuộc phân vùng `B1_VLAN` tại Chi nhánh B) đạt tỷ lệ phản hồi 5/5 gói tin thành công, thời gian trễ trung bình cực thấp (~6.9 ms), gói tin đi qua 5 hop định tuyến (`ttl=59`).
@@ -263,7 +263,7 @@ VPCS> ping 192.168.20.10
 
 *Mục tiêu kịch bản:* Xây dựng mô hình mạng LAN có khả năng cấp phát địa chỉ IP tự động, sử dụng cổng mặc định dự phòng và cân bằng tải bằng giao thức GLBP, đồng thời cho phép các máy trạm trong mạng nội bộ truy cập ra mạng ngoài thông qua cơ chế NAT/PAT. Kịch bản tập trung kiểm thử khả năng phối hợp nhiều chức năng Lớp 3 trên CAMS theo cùng một quy trình *Thiết lập trên GUI → View & Push → Xác minh trực tiếp trên thiết bị*.
 
-![Sơ đồ Topo Kịch bản 3: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN](../contents/diagrams/fhrp_nat_dhcp_lap/fhrp-nat-dhcp-report.png)
+![Sơ đồ Topo Kịch bản 3: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png)
 *Sơ đồ Topo Kịch bản 3: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN*
 
 *Quy hoạch địa chỉ và vai trò thiết bị:*
@@ -286,7 +286,7 @@ VPCS> ping 192.168.20.10
 
 Trên thiết bị `NAT` có địa chỉ quản trị `192.168.122.103`, quản trị viên truy cập phân hệ *NAT* → thẻ *Interfaces* để xác định hướng lưu lượng cho từng cổng. Hai giao diện `GigabitEthernet0/1` và `GigabitEthernet0/3` được đánh dấu là *Inside*, trong khi `GigabitEthernet0/2` được đánh dấu là *Outside*.
 
-![Giao diện khai báo vai trò NAT Inside/Outside trên Router NAT](../contents/diagrams/fhrp_nat_dhcp_lap/01-nat-interfaces.png)
+![Giao diện khai báo vai trò NAT Inside/Outside trên Router NAT](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png)
 *Giao diện khai báo vai trò NAT Inside/Outside trên Router NAT*
 
 *Giải thích Hình (fig-k3-nat-interfaces):* Bảng *NAT Interfaces* bên phải thể hiện rõ ba giao diện đã được lưu ở trạng thái mong muốn: `Gi0/1` và `Gi0/3` mang vai trò `Inside`, còn `Gi0/2` mang vai trò `Outside`. Cách biểu diễn này giúp người dùng kiểm tra nhanh hướng NAT trước khi sinh lệnh cấu hình.
@@ -295,12 +295,12 @@ Trên thiết bị `NAT` có địa chỉ quản trị `192.168.122.103`, quản
 
 Tại thẻ *ACL* của phân hệ NAT, quản trị viên tạo ACL chuẩn có tên `NAT_demo`, hành động `permit`, áp dụng cho mạng nguồn `192.168.0.0` với wildcard mask `0.0.7.255`. Dải này bao phủ các mạng nội bộ được sử dụng trong mô hình thử nghiệm.
 
-![Khai báo ACL NAT_demo xác định các mạng nội bộ được phép chuyển đổi địa chỉ](../contents/diagrams/fhrp_nat_dhcp_lap/02-nat-acl.png)
+![Khai báo ACL NAT_demo xác định các mạng nội bộ được phép chuyển đổi địa chỉ](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png)
 *Khai báo ACL NAT_demo xác định các mạng nội bộ được phép chuyển đổi địa chỉ*
 
 Sau khi lưu các tham số giao diện và ACL, người dùng mở cửa sổ *View & Push* để kiểm duyệt tập lệnh trước khi gửi xuống thiết bị.
 
-![Cửa sổ View & Push sinh cấu hình NAT Interface và ACL cho Router NAT](../contents/diagrams/fhrp_nat_dhcp_lap/03-nat-config-preview.png)
+![Cửa sổ View & Push sinh cấu hình NAT Interface và ACL cho Router NAT](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png)
 *Cửa sổ View & Push sinh cấu hình NAT Interface và ACL cho Router NAT*
 
 *Giải thích Hình (fig-k3-nat-preview):* CAMS tự động sinh đúng các lệnh `ip nat inside`, `ip nat outside` trên từng giao diện và khối ACL:
@@ -314,12 +314,12 @@ Người dùng có thể đối soát toàn bộ lệnh trước khi nhấn *Pus
 
 Sau khi xác định vùng Inside/Outside và ACL, quản trị viên chuyển sang thẻ *PAT*. Tại đây, ACL `NAT_demo` được chọn làm nguồn cần chuyển đổi, `Source Type` được đặt là *Outside Interface* và giao diện `GigabitEthernet0/2` được sử dụng làm địa chỉ đại diện phía ngoài.
 
-![Giao diện cấu hình PAT Overload sử dụng cổng Outside GigabitEthernet0/2](../contents/diagrams/fhrp_nat_dhcp_lap/04-nat-pat.png)
+![Giao diện cấu hình PAT Overload sử dụng cổng Outside GigabitEthernet0/2](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png)
 *Giao diện cấu hình PAT Overload sử dụng cổng Outside GigabitEthernet0/2*
 
 Cửa sổ *View & Push* cho thấy lệnh PAT được sinh tự động:
 
-![Cửa sổ View & Push kiểm duyệt lệnh PAT Overload trước khi đẩy xuống Router NAT](../contents/diagrams/fhrp_nat_dhcp_lap/05-nat-pat-preview.png)
+![Cửa sổ View & Push kiểm duyệt lệnh PAT Overload trước khi đẩy xuống Router NAT](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png)
 *Cửa sổ View & Push kiểm duyệt lệnh PAT Overload trước khi đẩy xuống Router NAT*
 
 ```text
@@ -332,29 +332,29 @@ Lệnh trên cho phép nhiều địa chỉ IPv4 trong mạng nội bộ dùng c
 
 Sau khi Push, quản trị viên mở Terminal tích hợp và kiểm tra cấu hình thực tế trên Router NAT. Kết quả xác nhận `Gi0/1` và `Gi0/3` đã nhận `ip nat inside`, trong khi `Gi0/2` đã nhận `ip nat outside`.
 
-![Xác minh vai trò NAT trên ba giao diện của Router NAT bằng lệnh show running-config](../contents/diagrams/fhrp_nat_dhcp_lap/06-nat-interface-verify.png)
+![Xác minh vai trò NAT trên ba giao diện của Router NAT bằng lệnh show running-config](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png)
 *Xác minh vai trò NAT trên ba giao diện của Router NAT bằng lệnh show running-config*
 
 Tiếp tục kiểm tra cấu hình tổng thể cho thấy lệnh PAT, ACL `NAT_demo` và tuyến mặc định tới `10.0.10.1` đã tồn tại trong running-config.
 
-![Xác minh ACL, PAT Overload và Default Route trên Router NAT](../contents/diagrams/fhrp_nat_dhcp_lap/07-nat-config-verify.png)
+![Xác minh ACL, PAT Overload và Default Route trên Router NAT](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png)
 *Xác minh ACL, PAT Overload và Default Route trên Router NAT*
 
 *Bước 5: Thiết lập GLBP làm Default Gateway dự phòng cho mạng LAN*
 
 Để tránh phụ thuộc vào một router gateway duy nhất, quản trị viên sử dụng phân hệ *FHRP* → *GLBP*. Hai router `R1` (`192.168.122.101`) và `R2` (`192.168.122.102`) được chọn làm thành viên của nhóm `113`, sử dụng địa chỉ gateway ảo `192.168.4.1` trên mạng LAN `192.168.4.0/24`.
 
-![Giao diện tạo GLBP Group 113 với Virtual IP 192.168.4.1 trên R1 và R2](../contents/diagrams/fhrp_nat_dhcp_lap/08-glbp-setup.png)
+![Giao diện tạo GLBP Group 113 với Virtual IP 192.168.4.1 trên R1 và R2](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png)
 *Giao diện tạo GLBP Group 113 với Virtual IP 192.168.4.1 trên R1 và R2*
 
 Tại phần *Member policy*, CAMS tự động ghép các giao diện cùng subnet với địa chỉ Virtual IP. `R1 Gi0/0 - 192.168.4.2/24` được đặt Priority `101`, `R2 Gi0/0 - 192.168.4.3/24` có Priority `100`; cả hai cho phép `Preempt`, sử dụng `Maximum Weighting 100` và cấu hình `Forwarder Preempt Delay` là `30` giây.
 
-![Thiết lập chính sách thành viên GLBP cho R1 và R2](../contents/diagrams/fhrp_nat_dhcp_lap/09-glbp-member-policy.png)
+![Thiết lập chính sách thành viên GLBP cho R1 và R2](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png)
 *Thiết lập chính sách thành viên GLBP cho R1 và R2*
 
 Trước khi áp dụng, cửa sổ *View & Push FHRP* tổng hợp lệnh cho cả hai thiết bị trong cùng một phiên kiểm duyệt.
 
-![Cửa sổ View & Push FHRP sinh đồng thời cấu hình GLBP cho R1 và R2](../contents/diagrams/fhrp_nat_dhcp_lap/10-glbp-config-preview.png)
+![Cửa sổ View & Push FHRP sinh đồng thời cấu hình GLBP cho R1 và R2](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png)
 *Cửa sổ View & Push FHRP sinh đồng thời cấu hình GLBP cho R1 và R2*
 
 *Giải thích Hình (fig-k3-glbp-preview):* Trên cả hai router, hệ thống sinh các lệnh `glbp 113 ip 192.168.4.1`, `glbp 113 preempt`, `glbp 113 load-balancing round-robin`, `glbp 113 weighting 100` và `glbp 113 forwarder preempt delay minimum 30`. Riêng R1 được đặt `priority 101`, cao hơn R2 là `100`, phù hợp với chính sách ưu tiên đã khai báo trên GUI.
@@ -363,12 +363,12 @@ Trước khi áp dụng, cửa sổ *View & Push FHRP* tổng hợp lệnh cho c
 
 Sau khi gateway ảo đã được thiết lập, quản trị viên chuyển sang thiết bị `R1`, mở phân hệ *DHCP* và tạo pool `LAN_R1` cho mạng `192.168.4.0/24`. Trường *Default Router* được đặt là `192.168.4.1`, chính là Virtual IP của GLBP thay vì địa chỉ vật lý của riêng R1 hoặc R2.
 
-![Giao diện tạo DHCP Pool LAN_R1 với Default Gateway là GLBP Virtual IP 192.168.4.1](../contents/diagrams/fhrp_nat_dhcp_lap/11-dhcp-pool.png)
+![Giao diện tạo DHCP Pool LAN_R1 với Default Gateway là GLBP Virtual IP 192.168.4.1](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png)
 *Giao diện tạo DHCP Pool LAN_R1 với Default Gateway là GLBP Virtual IP 192.168.4.1*
 
 Cửa sổ kiểm duyệt cho thấy cấu hình DHCP được sinh tương ứng:
 
-![Cửa sổ View & Push DHCP sinh cấu hình pool LAN_R1 trên R1](../contents/diagrams/fhrp_nat_dhcp_lap/13-dhcp-config-preview.png)
+![Cửa sổ View & Push DHCP sinh cấu hình pool LAN_R1 trên R1](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png)
 *Cửa sổ View & Push DHCP sinh cấu hình pool LAN_R1 trên R1*
 
 ```text
@@ -384,19 +384,19 @@ Cách cấu hình này giúp máy trạm không phụ thuộc trực tiếp vào
 
 Trên `R1`, lệnh `show ip dhcp pool` xác nhận pool `LAN_R1` đã được tạo cho mạng `192.168.4.0/24`. Đồng thời, `show running-config interface g0/0` xác nhận giao diện LAN `192.168.4.2/24` đang tham gia GLBP Group `113`, có Virtual IP `192.168.4.1`, Priority `101` và bật `preempt`.
 
-![Xác minh DHCP Pool và cấu hình GLBP trên Router R1](../contents/diagrams/fhrp_nat_dhcp_lap/14-dhcp&glbp-r1-verify.png)
+![Xác minh DHCP Pool và cấu hình GLBP trên Router R1](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png)
 *Xác minh DHCP Pool và cấu hình GLBP trên Router R1*
 
 Trên `R2`, giao diện `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, đảm bảo hai router cùng cung cấp dịch vụ gateway cho một mạng LAN.
 
-![Xác minh cấu hình GLBP Group 113 trên Router R2](../contents/diagrams/fhrp_nat_dhcp_lap/15-glbp-r2-verify.png)
+![Xác minh cấu hình GLBP Group 113 trên Router R2](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png)
 *Xác minh cấu hình GLBP Group 113 trên Router R2*
 
 *Bước 8: Kiểm tra cấp phát DHCP và đường đi lưu lượng từ máy trạm*
 
 Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng để yêu cầu cấp phát địa chỉ. Máy trạm nhận thành công địa chỉ `192.168.4.4/24` cùng default gateway `192.168.4.1`.
 
-![Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream](../contents/diagrams/fhrp_nat_dhcp_lap/16-client-connectivity-test.png)
+![Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream](../../00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png)
 *Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream*
 
 *Giải thích Hình (fig-k3-client-test):* Kết quả `trace 1.1.1.1` ghi nhận hop đầu tiên là `192.168.4.2` (R1), tiếp theo là `192.168.1.2` (Router NAT) và sau đó tới `10.0.10.1` ở phía upstream. Kết quả này chứng minh máy trạm đã nhận đúng cấu hình DHCP, sử dụng được GLBP Virtual Gateway và lưu lượng đã đi qua đúng chuỗi thiết bị theo thiết kế. Tại hop `10.0.10.1`, thiết bị upstream trả về ICMP `Destination port unreachable`; vì vậy phép thử này được sử dụng để xác minh đường đi tới mạng ngoài của mô hình lab, không được xem là bằng chứng kết nối Internet hoàn chỉnh tới địa chỉ `1.1.1.1`.
@@ -407,7 +407,7 @@ Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng đ�
 
 *Mục tiêu kịch bản:* Kiểm thử khả năng cấu hình đồng loạt dịch vụ Syslog trên nhiều thiết bị Cisco và khả năng tiếp nhận, phân tích, hiển thị nhật ký thời gian thực ngay trong CAMS. Kịch bản sử dụng 4 thiết bị gồm ba router `R1`, `R2`, `R3` và switch `SW1`; tất cả gửi log về Syslog Server tại địa chỉ `192.168.122.1`, sử dụng cổng `5514/UDP`. Ngoài việc kiểm tra cấu hình trên từng thiết bị, kịch bản còn xác minh khả năng phân loại thông điệp theo Host, Source IP, Facility/Severity, Mnemonic và nội dung Raw Message.
 
-![Sơ đồ Topo Kịch bản 4: Thu thập Syslog tập trung](../contents/diagrams/syslog lab/syslog-lab-topology-report.png)
+![Sơ đồ Topo Kịch bản 4: Thu thập Syslog tập trung](../../00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png)
 *Sơ đồ Topo Kịch bản 4: Thu thập Syslog tập trung*
 
 *Quy hoạch thiết bị và chính sách Syslog:*
@@ -427,7 +427,7 @@ Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng đ�
 
 Từ thiết bị đang được quản lý, quản trị viên mở thẻ *Syslog Server*. Tại thời điểm ban đầu chưa có đích Syslog nào được cấu hình, các chỉ số `Destinations`, `Applied`, `Pending apply` và `Pending removal` đều bằng `0`. Người dùng sử dụng chức năng *Syslog Group* để tạo một chính sách chung và áp dụng đồng thời cho nhiều thiết bị thay vì khai báo lặp lại từng router/switch.
 
-![Giao diện quản lý Syslog Server trước khi tạo chính sách gửi log](../contents/diagrams/syslog lab/01-syslog-configuration.png)
+![Giao diện quản lý Syslog Server trước khi tạo chính sách gửi log](../../00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png)
 *Giao diện quản lý Syslog Server trước khi tạo chính sách gửi log*
 
 *Giải thích Hình (fig-k4-syslog-config):* Giao diện thể hiện mô hình quản lý trạng thái tương tự các phân hệ cấu hình khác của CAMS. Người dùng có thể tạo mới đích Syslog, kiểm duyệt lệnh bằng *View & Push* hoặc cấu hình theo nhóm bằng *Syslog Group*.
@@ -436,7 +436,7 @@ Từ thiết bị đang được quản lý, quản trị viên mở thẻ *Sysl
 
 Tại bước *Hosts*, quản trị viên chọn cả bốn thiết bị đang kết nối gồm `R1`, `R2`, `R3` và `SW1`. Hệ thống hiển thị số lượng giao diện phát hiện được trên từng thiết bị để làm dữ liệu đầu vào cho bước lựa chọn Source Interface.
 
-![Bước Hosts của Syslog Group: chọn 4 thiết bị cùng tham gia chính sách gửi log](../contents/diagrams/syslog lab/02-syslog-select-hosts.png)
+![Bước Hosts của Syslog Group: chọn 4 thiết bị cùng tham gia chính sách gửi log](../../00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png)
 *Bước Hosts của Syslog Group: chọn 4 thiết bị cùng tham gia chính sách gửi log*
 
 *Giải thích Hình (fig-k4-syslog-hosts):* Việc nhóm nhiều host vào cùng một workflow giúp giảm thao tác lặp lại và đảm bảo các thiết bị sử dụng thống nhất địa chỉ máy chủ, giao thức vận chuyển và mức severity.
@@ -445,7 +445,7 @@ Tại bước *Hosts*, quản trị viên chọn cả bốn thiết bị đang k
 
 Tại bước *Interfaces*, CAMS cho phép chọn riêng giao diện nguồn trên từng host. Ba router sử dụng `GigabitEthernet0/0`, tương ứng với mạng quản trị `192.168.122.0/24`; switch `SW1` sử dụng giao diện logic `Vlan1`.
 
-![Lựa chọn Source Interface cho từng Router và Switch trong Syslog Group](../contents/diagrams/syslog lab/03-syslog-source-interfaces.png)
+![Lựa chọn Source Interface cho từng Router và Switch trong Syslog Group](../../00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png)
 *Lựa chọn Source Interface cho từng Router và Switch trong Syslog Group*
 
 Cấu hình `logging source-interface` giúp các bản tin Syslog phát ra với địa chỉ nguồn ổn định, nhờ đó CAMS có thể ánh xạ chính xác bản tin về đúng thiết bị trong danh sách quản lý.
@@ -454,7 +454,7 @@ Cấu hình `logging source-interface` giúp các bản tin Syslog phát ra vớ
 
 Tại bước *Policy*, quản trị viên nhập địa chỉ máy chủ `192.168.122.1`, chọn giao thức `UDP`, cổng `5514` và mức *Trap severity* là `5 - Notifications`. Hai tùy chọn bổ sung *Include millisecond log timestamps* và *Include sequence numbers* được bật để tăng độ chính xác khi sắp xếp, đối chiếu sự kiện.
 
-![Thiết lập đích Syslog 192.168.122.1:5514/UDP và mức severity Notifications](../contents/diagrams/syslog lab/04-syslog-policy.png)
+![Thiết lập đích Syslog 192.168.122.1:5514/UDP và mức severity Notifications](../../00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png)
 *Thiết lập đích Syslog 192.168.122.1:5514/UDP và mức severity Notifications*
 
 Với mức `notifications`, thiết bị gửi các thông điệp từ severity 0 đến severity 5 tới máy chủ Syslog. Đây là mức phù hợp cho bài thử vì có thể thu nhận các sự kiện thay đổi trạng thái interface, thông báo cấu hình và các bản tin kiểm thử do người quản trị chủ động tạo ra.
@@ -463,7 +463,7 @@ Với mức `notifications`, thiết bị gửi các thông điệp từ severit
 
 Sau khi hoàn tất ba bước của wizard, CAMS mở cửa sổ *View & Push Syslog Group* để tổng hợp cấu hình cho cả bốn thiết bị. Quản trị viên có thể xem toàn bộ lệnh trước khi nhấn *Push*.
 
-![Cửa sổ View & Push Syslog Group tổng hợp lệnh cho 4 thiết bị trước khi thực thi](../contents/diagrams/syslog lab/05-syslog-config-preview.png)
+![Cửa sổ View & Push Syslog Group tổng hợp lệnh cho 4 thiết bị trước khi thực thi](../../00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png)
 *Cửa sổ View & Push Syslog Group tổng hợp lệnh cho 4 thiết bị trước khi thực thi*
 
 *Giải thích Hình (fig-k4-syslog-preview):* Với router, hệ thống sinh các lệnh tiêu biểu:
@@ -480,18 +480,18 @@ Riêng `SW1`, lệnh cuối được thay bằng `logging source-interface Vlan1
 
 Sau khi Push thành công, quản trị viên mở Terminal tích hợp và thực hiện lệnh `show running-config | section logging` trên từng thiết bị. Kết quả trên `R1`, `R2` và `R3` đều ghi nhận máy chủ `192.168.122.1`, giao thức UDP cổng `5514`, mức `notifications` và Source Interface `GigabitEthernet0/0`.
 
-![Xác minh cấu hình Syslog trên Router R1](../contents/diagrams/syslog lab/06-syslog-r1-verify.png)
+![Xác minh cấu hình Syslog trên Router R1](../../00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png)
 *Xác minh cấu hình Syslog trên Router R1*
 
-![Xác minh cấu hình Syslog trên Router R2](../contents/diagrams/syslog lab/07-syslog-r2-verify.png)
+![Xác minh cấu hình Syslog trên Router R2](../../00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png)
 *Xác minh cấu hình Syslog trên Router R2*
 
-![Xác minh cấu hình Syslog trên Router R3](../contents/diagrams/syslog lab/08-syslog-r3-verify.png)
+![Xác minh cấu hình Syslog trên Router R3](../../00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png)
 *Xác minh cấu hình Syslog trên Router R3*
 
 Trên switch `SW1`, cấu hình tương tự nhưng sử dụng `Vlan1` làm Source Interface.
 
-![Xác minh cấu hình Syslog trên Switch SW1 với Source Interface Vlan1](../contents/diagrams/syslog lab/09-syslog-sw1-verify.png)
+![Xác minh cấu hình Syslog trên Switch SW1 với Source Interface Vlan1](../../00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png)
 *Xác minh cấu hình Syslog trên Switch SW1 với Source Interface Vlan1*
 
 Các kết quả xác minh cho thấy cấu hình thực tế trên thiết bị khớp với nội dung đã xem trước trên GUI, qua đó xác nhận quy trình *Syslog Group → View & Push → Verify* hoạt động đúng trên cả Router và Switch.
@@ -500,12 +500,12 @@ Các kết quả xác minh cho thấy cấu hình thực tế trên thiết bị
 
 Tiếp theo, quản trị viên chuyển sang màn hình *System Logs*. Trước khi khởi động, trạng thái hiển thị *Listener stopped*, số bản tin nhận được bằng `0` và bảng log chưa có dữ liệu.
 
-![Màn hình System Logs trước khi khởi động Syslog Listener](../contents/diagrams/syslog lab/10-syslog-listener-before-start.png)
+![Màn hình System Logs trước khi khởi động Syslog Listener](../../00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png)
 *Màn hình System Logs trước khi khởi động Syslog Listener*
 
 Sau khi nhấn *Start Listener*, dịch vụ chuyển sang trạng thái *Listener active* và lắng nghe trên `0.0.0.0:5514/UDP+TCP`. Khi các thiết bị phát sinh sự kiện, các bản tin được đưa trực tiếp vào bảng System Logs theo thời gian thực.
 
-![Syslog Listener đang hoạt động và tiếp nhận bản tin từ các thiết bị mạng](../contents/diagrams/syslog lab/11-syslog-listener-receiving.png)
+![Syslog Listener đang hoạt động và tiếp nhận bản tin từ các thiết bị mạng](../../00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png)
 *Syslog Listener đang hoạt động và tiếp nhận bản tin từ các thiết bị mạng*
 
 *Giải thích Hình (fig-k4-listener-active):* Tại thời điểm chụp, hệ thống đã tiếp nhận `245` bản tin. Mỗi dòng được phân tách thành các trường `Time`, `Host`, `Source IP`, `Facility/Severity`, `Mnemonic` và `Message`. Các sự kiện như `LINK`, `LINEPROTO`, `SYS` được hiển thị rõ ràng, cho phép quản trị viên nhanh chóng xác định thiết bị và loại sự kiện phát sinh.
@@ -514,7 +514,7 @@ Sau khi nhấn *Start Listener*, dịch vụ chuyển sang trạng thái *Listen
 
 Khi chọn một dòng log, CAMS mở cửa sổ *System Log Message* để hiển thị cả dữ liệu đã phân tích và bản tin nguyên gốc. Trong mẫu thử từ `192.168.122.101`, hệ thống nhận dạng thành công giao thức `UDP`, Cisco facility `LINEPROTO`, severity `5`, mnemonic `UPDOWN`, sequence number `104` và trạng thái parser là `parsed`.
 
-![Cửa sổ chi tiết một bản tin Syslog sau khi được parser phân tích](../contents/diagrams/syslog lab/12-syslog-message-detail.png)
+![Cửa sổ chi tiết một bản tin Syslog sau khi được parser phân tích](../../00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png)
 *Cửa sổ chi tiết một bản tin Syslog sau khi được parser phân tích*
 
 Phần *Raw message* vẫn được giữ nguyên để phục vụ đối chiếu khi cần:
@@ -528,16 +528,16 @@ Việc đồng thời lưu trường đã chuẩn hóa và Raw Message giúp gia
 
 Để tạo lượng log đủ lớn và có tính lặp lại, trên các router CAMS thực hiện chu kỳ thay đổi trạng thái `Loopback99`; trên switch, giao diện `GigabitEthernet1/3` được chuyển trạng thái Up/Down. Các thiết bị đồng thời phát sinh các bản tin `USERLOG_WARNING`, `USERLOG_NOTICE`, `LINK`, `LINEPROTO` và `CONFIG_I`.
 
-![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R1](../contents/diagrams/syslog lab/13-syslog-r1-device-logs.png)
+![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R1](../../00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png)
 *Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R1*
 
-![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R2](../contents/diagrams/syslog lab/14-syslog-r2-device-logs.png)
+![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R2](../../00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png)
 *Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R2*
 
-![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R3](../contents/diagrams/syslog lab/15-syslog-r3-device-logs.png)
+![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R3](../../00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png)
 *Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R3*
 
-![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Switch SW1](../contents/diagrams/syslog lab/16-syslog-sw1-device-logs.png)
+![Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Switch SW1](../../00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png)
 *Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Switch SW1*
 
 *Giải thích các Hình Hình (fig-k4-r1-device-logs) – Hình (fig-k4-sw1-device-logs):* Các terminal cho thấy chuỗi sự kiện được tạo liên tục trên cả bốn thiết bị. Khi giao diện bị `shutdown` hoặc `no shutdown`, IOS phát sinh các thông điệp trạng thái liên kết và line protocol; đồng thời các bản tin `USERLOG_*` được dùng để đánh dấu từng chu kỳ thử nghiệm. Những sự kiện tương ứng xuất hiện trên màn hình System Logs, chứng minh luồng truyền bản tin từ thiết bị tới CAMS hoạt động liên tục và đúng nguồn.

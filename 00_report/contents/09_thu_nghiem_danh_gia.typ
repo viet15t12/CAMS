@@ -26,7 +26,7 @@ Quá trình thử nghiệm thực nghiệm được thiết kế xoay quanh 4 k�
 *Mục tiêu kịch bản:* Thiết lập hạ tầng mạng chuyển mạch đa tầng trên môi trường lab, bao gồm khởi tạo phân vùng VLAN, tự động đồng bộ qua VTP, gom kênh liên kết EtherChannel bằng LACP và kích hoạt các cơ chế phòng vệ Lớp 2 (DHCP Snooping, Dynamic ARP Inspection, Port Security).
 
 #figure(
-  image("diagrams/LAB_KICH_BAN_1.svg", width: 90%),
+  image("/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg", width: 90%),
   caption: [Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2],
 ) <fig-topo-scenario-1>
 
@@ -41,7 +41,7 @@ Quá trình cấu hình toàn diện hạ tầng Layer 2 trên phần mềm đư
 Để tối ưu hóa việc quản lý phân vùng trên 6 switch mà không cần khai báo lặp lại thủ công trên từng thiết bị, người dùng truy cập phân hệ *Switching* $arrow$ thẻ *VTP*. Tại đây, tính năng *VTP Group* cho phép cấu hình đồng bộ hàng loạt (Batch capacity 5/5) với tên miền `PTIT_LAB`, phiên bản `VTP Version 2`, áp dụng đồng thời cho 5 thiết bị `SW1` đến `SW5` trong đó `SW1` đóng vai trò VTP Server và các switch còn lại là VTP Client.
 
 #figure(
-  image("diagrams/Anh_chuong_5/1_16.png", width: 85%),
+  image("/00_book/figures/report/diagrams/switching-lab/1_16.png", width: 85%),
   caption: [Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB],
 ) <fig-k1-vtp-group>
 *Giải thích @fig-k1-vtp-group:* Giao diện trực quan thể hiện danh sách các switch kết nối (Connected switches: 6), số thiết bị được chọn tham gia miền (Selected: 5) và các miền đã lưu trữ (`Saved domains`). Quản trị viên chỉ cần chọn danh sách switch và nhấn *Save & Push* để thiết lập toàn bộ hạ tầng VTP chỉ trong một thao tác duy nhất.
@@ -51,7 +51,7 @@ Quá trình cấu hình toàn diện hạ tầng Layer 2 trên phần mềm đư
 Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùng chuyển sang thẻ *VLAN* để khởi tạo các phân vùng mạng nghiệp vụ: `VLAN 10` (Tên: `IT_VLAN`) và `VLAN 20` (Tên: `HR_VLAN`). Sau khi lưu vào trạng thái mong muốn (`Desired State`), người dùng nhấn nút *View & Push* để mở cửa sổ duyệt trước mã lệnh.
 
 #figure(
-  image("diagrams/Anh_chuong_5/1_20.png", width: 80%),
+  image("/00_book/figures/report/diagrams/switching-lab/1_20.png", width: 80%),
   caption: [Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1],
 ) <fig-k1-vlan-push>
 *Giải thích @fig-k1-vlan-push:* Cửa sổ modal hiển thị chính xác khối lệnh Cisco IOS do Template Engine Jinja2 biên dịch từ dữ liệu đồ họa (`vlan 10`, `name IT_VLAN`, `state active`, `vlan 20`, `name HR_VLAN`). Người dùng có thể đối soát từng dòng lệnh trước khi nhấn nút *Push* để gửi lệnh xuống thiết bị thật qua luồng SSH chạy nền an toàn.
@@ -61,7 +61,7 @@ Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùn
 Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truyền Trunk giữa `SW1` và `SW3`, người dùng truy cập thẻ *EtherChannel* trên tab `SW1`. Tại đây, người dùng gom 2 cổng vật lý `GigabitEthernet1/0` và `GigabitEthernet1/1` vào nhóm logic `Port-channel1` với giao thức LACP (`mode active`) và gán nhãn mô tả `Link_To_SW3`.
 
 #figure(
-  image("diagrams/Anh_chuong_5/1_3.png", width: 80%),
+  image("/00_book/figures/report/diagrams/switching-lab/1_3.png", width: 80%),
   caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
 ) <fig-k1-etherchannel-push>
 *Giải thích @fig-k1-etherchannel-push:* Hệ thống tự động tách và sinh mã cấu hình chuẩn cho từng giao diện thành phần (`interface GigabitEthernet1/1`, `channel-group 1 mode active`) và giao diện logic tổng hợp (`interface Port-channel1`, `description Link_To_SW3`), loại bỏ nguy cơ cấu hình lệch mode gây nghẽn vòng lặp Spanning Tree.
@@ -71,7 +71,7 @@ Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truy�
 Để ngăn chặn các cuộc tấn công mạng Lớp 2 (DHCP Rogue Server, Man-in-the-Middle và ARP Spoofing), người dùng chuyển sang phân hệ *Security* $arrow$ thẻ *L2 Security*.
 
 #figure(
-  image("diagrams/Anh_chuong_5/1_21.png", width: 85%),
+  image("/00_book/figures/report/diagrams/switching-lab/1_21.png", width: 85%),
   caption: [Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection],
 ) <fig-k1-l2-security>
 *Giải thích @fig-k1-l2-security:* Bảng điều khiển cho phép bật/tắt chính sách bảo vệ VLAN Protection theo từng phân vùng (VLAN 1, 10, 20, 99). Tại ngăn thuộc tính bên phải, quản trị viên kích hoạt tính năng *Enable DHCP Snooping* và *Enable DAI* chỉ bằng một nút gạt chuyển trạng thái; đồng thời chỉ định các đường gom Trunk là *Trusted Uplinks* để cho phép lưu lượng DHCP/ARP hợp lệ đi qua.
@@ -81,7 +81,7 @@ Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truy�
 Trên switch truy cập `SW5` (IP: `192.168.122.105`), người dùng chuyển sang thẻ *Port Security* để bảo vệ các cổng kết nối đến người dùng cuối. Với cổng `GigabitEthernet0/2`, người dùng thiết lập số lượng địa chỉ MAC tối đa là `4`, kích hoạt học địa chỉ tự động (`mac-address sticky`), thời gian lưu vết `5 phút` và cơ chế xử lý vi phạm là ngắt cổng tức thì (`violation shutdown`).
 
 #figure(
-  image("diagrams/Anh_chuong_5/1_25.png", width: 80%),
+  image("/00_book/figures/report/diagrams/switching-lab/1_25.png", width: 80%),
   caption: [Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5],
 ) <fig-k1-port-security-push>
 #block[
@@ -103,7 +103,7 @@ switchport port-security aging time 5
 Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng Terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
 
 #figure(
-  image("diagrams/Anh_chuong_5/1_30.png", width: 85%),
+  image("/00_book/figures/report/diagrams/switching-lab/1_30.png", width: 85%),
   caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp],
 ) <fig-k1-terminal-verify>
 *Giải thích @fig-k1-terminal-verify:* Kết quả lệnh `show vlan` trên `SW3` chứng minh toàn bộ các VLAN (`10 IT_VLAN`, `20 HR_VLAN`, `99 VLAN0099`) đã được đồng bộ tự động từ `SW1`. Lệnh `show vtp status` xác nhận `SW3` đang hoạt động ở chế độ `Client`, thuộc VTP Domain `PTIT_LAB`, chạy phiên bản 2, có chỉ số `Configuration Revision: 12` và chuỗi `MD5 digest` trùng khớp hoàn toàn với thông tin cấu hình từ server `192.168.122.101`.
@@ -134,7 +134,7 @@ Security Violation Count   : 0
 *Mục tiêu kịch bản:* Thiết lập hạ tầng định tuyến động OSPFv2 liên kết hai chi nhánh doanh nghiệp (Chi nhánh A và Chi nhánh B) thông qua mạng đường trục ISP (Backbone Area 0). Ứng dụng tính năng *Routing Group - OSPF* của CAMS để tự động hóa quá trình cấu hình đồng loạt trên 6 bộ định tuyến (`R1`, `R2`, `R3`, `ISP1`, `ISP2`, `R6`), đồng thời kích hoạt cơ chế *Tái phân phối tuyến (Route Redistribution)* nhằm quảng bá các dải mạng LAN cục bộ vào miền OSPF, đảm bảo lưu lượng giữa các phòng ban thuộc hai chi nhánh được thông suốt 100%.
 
 #figure(
-  image("diagrams/LAB_2-report.png", width: 95%),
+  image("/00_book/figures/report/diagrams/LAB_2-report.png", width: 95%),
   caption: [Sơ đồ Topo Kịch bản 2: Định tuyến OSPF đa vùng giữa hai chi nhánh],
 ) <fig-topo-scenario-2>
 
@@ -169,7 +169,7 @@ Mô hình kịch bản được chia làm 3 phân vùng định tuyến chính v
 Trước khi triển khai định tuyến, quản trị viên sử dụng phân hệ *Interfaces* trên CAMS để thiết lập các thông số IP, Subnet Mask và kích hoạt trạng thái hoạt động cho từng cổng vật lý (`GigabitEthernet`) trên các thiết bị.
 
 #figure(
-  image("diagrams/Chuong_5_lab2/1.png", width: 85%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/1.png", width: 85%),
   caption: [Giao diện phân hệ Interfaces quản lý và cấu hình tham số Lớp 3 cho các cổng Router],
 ) <fig-k2-interfaces>
 *Giải thích @fig-k2-interfaces:* Bảng điều khiển bên trái liệt kê trực quan trạng thái IP của tất cả cổng mạng trên router `R1`. Ngăn thuộc tính bên phải cho phép chọn cấu hình nhanh IP Address, Subnet Mask, gán nhãn mô tả đường truyền và chuyển đổi trạng thái cổng (`Up/Down`) chỉ qua vài thao tác chuột.
@@ -179,7 +179,7 @@ Trước khi triển khai định tuyến, quản trị viên sử dụng phân 
 Thay vì phải truy cập thủ công vào từng router để gõ từng dòng lệnh OSPF, quản trị viên sử dụng tính năng *Routing Group - OSPF* để cấu hình tự động cho toàn bộ 6 Router (`R1`, `R2`, `R3`, `ISP1`, `ISP2`, `R6`).
 
 #figure(
-  image("diagrams/Chuong_5_lab2/10.png", width: 80%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/10.png", width: 80%),
   caption: [Cửa sổ Routing Group - OSPF (Bước 1: Chọn đồng thời 6 Router tham gia cấu hình nhóm)],
 ) <fig-k2-group-hosts>
 *Giải thích @fig-k2-group-hosts:* Quản trị viên chỉ cần tích chọn danh sách các router cần cấu hình trong không gian làm việc `LAB_KICH_BAN_2`. Hệ thống tự động xác định các giao diện kết nối và địa chỉ IP tương ứng trên từng thiết bị.
@@ -187,7 +187,7 @@ Thay vì phải truy cập thủ công vào từng router để gõ từng dòng
 Tiếp theo, tại bước *Networks*, quản trị viên gán các dải mạng kết nối trực tiếp vào từng vùng định tuyến phù hợp (Area 0 cho các liên kết Backbone ISP và Area 1 cho các liên kết nội bộ Chi nhánh A).
 
 #figure(
-  image("diagrams/Chuong_5_lab2/11.png", width: 80%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/11.png", width: 80%),
   caption: [Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)],
 ) <fig-k2-group-networks>
 #block[
@@ -221,7 +221,7 @@ Tiếp theo, tại bước *Networks*, quản trị viên gán các dải mạng
 Để các dải mạng người dùng (`192.168.10.0/24`, `192.168.20.0/24` ở Chi nhánh A và `192.168.30.0/24`, `192.168.40.0/24` ở Chi nhánh B) được quảng bá xuyên suốt qua mạng OSPF mà không cần chạy OSPF trực tiếp xuống Switch mạng truy cập, quản trị viên cấu hình tính năng *Redistribute Connected Subnets* trên các router biên `R2`, `R3` và `R6`.
 
 #figure(
-  image("diagrams/Chuong_5_lab2/16.png", width: 85%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/16.png", width: 85%),
   caption: [Giao diện thiết lập tham số Tái phân phối tuyến (OSPF Redistribute) trên Router biên R6],
 ) <fig-k2-redistribute-gui>
 *Giải thích @fig-k2-redistribute-gui:* Quản trị viên mở tab `R6`, chọn phân hệ *Routing* $arrow$ thẻ *OSPF* $arrow$ tiểu mục *Redistribute*. Tại đây, người dùng thực hiện:
@@ -234,7 +234,7 @@ Tiếp theo, tại bước *Networks*, quản trị viên gán các dải mạng
 Sau khi lưu cấu hình trên giao diện, quản trị viên nhấn nút *View & Push* để kiểm duyệt khối lệnh chuẩn bị đẩy xuống router.
 
 #figure(
-  image("diagrams/Chuong_5_lab2/14.png", width: 80%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/14.png", width: 80%),
   caption: [Cửa sổ View & Push OSPF tự động sinh khối lệnh tái phân phối tuyến cho Router R2],
 ) <fig-k2-redistribute-push>
 *Giải thích @fig-k2-redistribute-push:* Cửa sổ kiểm duyệt hiển thị khối lệnh Cisco IOS sinh ra:
@@ -255,7 +255,7 @@ Lệnh `redistribute connected subnets` giúp router biên chuyển đổi các 
 Sau khi hoàn tất tiến trình đẩy cấu hình từ phần mềm, quản trị viên mở các cửa sổ Terminal tích hợp để kiểm tra trực tiếp tệp cấu hình chạy trên cả 6 router.
 
 #figure(
-  image("diagrams/Chuong_5_lab2/12.png", width: 90%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/12.png", width: 90%),
   caption: [Xác minh đồng thời cấu hình OSPF trên 6 Router (R1, R2, R3, ISP1, ISP2, R6) qua Terminal nhúng],
 ) <fig-k2-multi-terminal-ospf>
 *Giải thích @fig-k2-multi-terminal-ospf:* Lệnh `show run | section ospf` trên từng cửa sổ chứng minh tất cả 6 router đã nhận đầy đủ tiến trình OSPF Process 1, Router-ID duy nhất (`1.1.1.1` đến `6.6.6.6`) và các dải mạng được gán chính xác vào Area 0 và Area 1 đúng theo thiết kế ban đầu.
@@ -265,7 +265,7 @@ Sau khi hoàn tất tiến trình đẩy cấu hình từ phần mềm, quản t
 Quản trị viên thực hiện lệnh `show ip route` trên router trung tâm `R1` để kiểm tra khả năng hội tụ của hệ thống định tuyến:
 
 #figure(
-  image("diagrams/Chuong_5_lab2/18.png", width: 85%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/18.png", width: 85%),
   caption: [Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2],
 ) <fig-k2-route-table-r1>
 *Giải thích @fig-k2-route-table-r1:* Bảng định tuyến của `R1` ghi nhận đầy đủ:
@@ -281,7 +281,7 @@ Quản trị viên thực hiện lệnh `show ip route` trên router trung tâm 
 Để chứng minh hai chi nhánh đã hoàn toàn thông suốt, quản trị viên mở terminal trên các máy trạm đầu cuối (VPC) để thực hiện kiểm tra ping chéo giữa hai chi nhánh:
 
 #figure(
-  image("diagrams/Chuong_5_lab2/25.png", width: 75%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/25.png", width: 75%),
   caption: [Kết quả kiểm tra Ping từ VPC11 (Chi nhánh A) sang VPC14 (Chi nhánh B) thành công 100%],
 ) <fig-k2-ping-vpc11-vpc14>
 *Giải thích @fig-k2-ping-vpc11-vpc14:* Từ máy trạm `VPC11` (`192.168.10.10` thuộc phân vùng `A1_VLAN` tại Chi nhánh A), lệnh `ping 192.168.30.10` (máy trạm `VPC14` thuộc phân vùng `B1_VLAN` tại Chi nhánh B) đạt tỷ lệ phản hồi 5/5 gói tin thành công, thời gian trễ trung bình cực thấp (~6.9 ms), gói tin đi qua 5 hop định tuyến (`ttl=59`).
@@ -312,7 +312,7 @@ VPCS> ping 192.168.20.10
 *Mục tiêu kịch bản:* Xây dựng mô hình mạng LAN có khả năng cấp phát địa chỉ IP tự động, sử dụng cổng mặc định dự phòng và cân bằng tải bằng giao thức GLBP, đồng thời cho phép các máy trạm trong mạng nội bộ truy cập ra mạng ngoài thông qua cơ chế NAT/PAT. Kịch bản tập trung kiểm thử khả năng phối hợp nhiều chức năng Lớp 3 trên CAMS theo cùng một quy trình *Thiết lập trên GUI $arrow$ View & Push $arrow$ Xác minh trực tiếp trên thiết bị*.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/fhrp-nat-dhcp-report.png", width: 95%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png", width: 95%),
   caption: [Sơ đồ Topo Kịch bản 3: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN],
 ) <fig-topo-scenario-3>
 
@@ -342,7 +342,7 @@ VPCS> ping 192.168.20.10
 Trên thiết bị `NAT` có địa chỉ quản trị `192.168.122.103`, quản trị viên truy cập phân hệ *NAT* $arrow$ thẻ *Interfaces* để xác định hướng lưu lượng cho từng cổng. Hai giao diện `GigabitEthernet0/1` và `GigabitEthernet0/3` được đánh dấu là *Inside*, trong khi `GigabitEthernet0/2` được đánh dấu là *Outside*.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/01-nat-interfaces.png", width: 90%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png", width: 90%),
   caption: [Giao diện khai báo vai trò NAT Inside/Outside trên Router NAT],
 ) <fig-k3-nat-interfaces>
 
@@ -353,14 +353,14 @@ Trên thiết bị `NAT` có địa chỉ quản trị `192.168.122.103`, quản
 Tại thẻ *ACL* của phân hệ NAT, quản trị viên tạo ACL chuẩn có tên `NAT_demo`, hành động `permit`, áp dụng cho mạng nguồn `192.168.0.0` với wildcard mask `0.0.7.255`. Dải này bao phủ các mạng nội bộ được sử dụng trong mô hình thử nghiệm.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/02-nat-acl.png", width: 90%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png", width: 90%),
   caption: [Khai báo ACL NAT_demo xác định các mạng nội bộ được phép chuyển đổi địa chỉ],
 ) <fig-k3-nat-acl>
 
 Sau khi lưu các tham số giao diện và ACL, người dùng mở cửa sổ *View & Push* để kiểm duyệt tập lệnh trước khi gửi xuống thiết bị.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/03-nat-config-preview.png", width: 78%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png", width: 78%),
   caption: [Cửa sổ View & Push sinh cấu hình NAT Interface và ACL cho Router NAT],
 ) <fig-k3-nat-preview>
 
@@ -376,14 +376,14 @@ Người dùng có thể đối soát toàn bộ lệnh trước khi nhấn *Pus
 Sau khi xác định vùng Inside/Outside và ACL, quản trị viên chuyển sang thẻ *PAT*. Tại đây, ACL `NAT_demo` được chọn làm nguồn cần chuyển đổi, `Source Type` được đặt là *Outside Interface* và giao diện `GigabitEthernet0/2` được sử dụng làm địa chỉ đại diện phía ngoài.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/04-nat-pat.png", width: 90%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png", width: 90%),
   caption: [Giao diện cấu hình PAT Overload sử dụng cổng Outside GigabitEthernet0/2],
 ) <fig-k3-pat-gui>
 
 Cửa sổ *View & Push* cho thấy lệnh PAT được sinh tự động:
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/05-nat-pat-preview.png", width: 78%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png", width: 78%),
   caption: [Cửa sổ View & Push kiểm duyệt lệnh PAT Overload trước khi đẩy xuống Router NAT],
 ) <fig-k3-pat-preview>
 
@@ -398,14 +398,14 @@ Lệnh trên cho phép nhiều địa chỉ IPv4 trong mạng nội bộ dùng c
 Sau khi Push, quản trị viên mở Terminal tích hợp và kiểm tra cấu hình thực tế trên Router NAT. Kết quả xác nhận `Gi0/1` và `Gi0/3` đã nhận `ip nat inside`, trong khi `Gi0/2` đã nhận `ip nat outside`.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/06-nat-interface-verify.png", width: 72%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png", width: 72%),
   caption: [Xác minh vai trò NAT trên ba giao diện của Router NAT bằng lệnh show running-config],
 ) <fig-k3-nat-interface-verify>
 
 Tiếp tục kiểm tra cấu hình tổng thể cho thấy lệnh PAT, ACL `NAT_demo` và tuyến mặc định tới `10.0.10.1` đã tồn tại trong running-config.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/07-nat-config-verify.png", width: 82%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png", width: 82%),
   caption: [Xác minh ACL, PAT Overload và Default Route trên Router NAT],
 ) <fig-k3-nat-config-verify>
 
@@ -414,21 +414,21 @@ Tiếp tục kiểm tra cấu hình tổng thể cho thấy lệnh PAT, ACL `NAT
 Để tránh phụ thuộc vào một router gateway duy nhất, quản trị viên sử dụng phân hệ *FHRP* $arrow$ *GLBP*. Hai router `R1` (`192.168.122.101`) và `R2` (`192.168.122.102`) được chọn làm thành viên của nhóm `113`, sử dụng địa chỉ gateway ảo `192.168.4.1` trên mạng LAN `192.168.4.0/24`.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/08-glbp-setup.png", width: 86%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png", width: 86%),
   caption: [Giao diện tạo GLBP Group 113 với Virtual IP 192.168.4.1 trên R1 và R2],
 ) <fig-k3-glbp-setup>
 
 Tại phần *Member policy*, CAMS tự động ghép các giao diện cùng subnet với địa chỉ Virtual IP. `R1 Gi0/0 - 192.168.4.2/24` được đặt Priority `101`, `R2 Gi0/0 - 192.168.4.3/24` có Priority `100`; cả hai cho phép `Preempt`, sử dụng `Maximum Weighting 100` và cấu hình `Forwarder Preempt Delay` là `30` giây.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/09-glbp-member-policy.png", width: 86%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png", width: 86%),
   caption: [Thiết lập chính sách thành viên GLBP cho R1 và R2],
 ) <fig-k3-glbp-member-policy>
 
 Trước khi áp dụng, cửa sổ *View & Push FHRP* tổng hợp lệnh cho cả hai thiết bị trong cùng một phiên kiểm duyệt.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/10-glbp-config-preview.png", width: 80%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png", width: 80%),
   caption: [Cửa sổ View & Push FHRP sinh đồng thời cấu hình GLBP cho R1 và R2],
 ) <fig-k3-glbp-preview>
 
@@ -439,14 +439,14 @@ Trước khi áp dụng, cửa sổ *View & Push FHRP* tổng hợp lệnh cho c
 Sau khi gateway ảo đã được thiết lập, quản trị viên chuyển sang thiết bị `R1`, mở phân hệ *DHCP* và tạo pool `LAN_R1` cho mạng `192.168.4.0/24`. Trường *Default Router* được đặt là `192.168.4.1`, chính là Virtual IP của GLBP thay vì địa chỉ vật lý của riêng R1 hoặc R2.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/11-dhcp-pool.png", width: 88%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png", width: 88%),
   caption: [Giao diện tạo DHCP Pool LAN_R1 với Default Gateway là GLBP Virtual IP 192.168.4.1],
 ) <fig-k3-dhcp-pool>
 
 Cửa sổ kiểm duyệt cho thấy cấu hình DHCP được sinh tương ứng:
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/13-dhcp-config-preview.png", width: 78%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png", width: 78%),
   caption: [Cửa sổ View & Push DHCP sinh cấu hình pool LAN_R1 trên R1],
 ) <fig-k3-dhcp-preview>
 
@@ -464,14 +464,14 @@ Cách cấu hình này giúp máy trạm không phụ thuộc trực tiếp vào
 Trên `R1`, lệnh `show ip dhcp pool` xác nhận pool `LAN_R1` đã được tạo cho mạng `192.168.4.0/24`. Đồng thời, `show running-config interface g0/0` xác nhận giao diện LAN `192.168.4.2/24` đang tham gia GLBP Group `113`, có Virtual IP `192.168.4.1`, Priority `101` và bật `preempt`.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/14-dhcp&glbp-r1-verify.png", width: 88%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png", width: 88%),
   caption: [Xác minh DHCP Pool và cấu hình GLBP trên Router R1],
 ) <fig-k3-r1-verify>
 
 Trên `R2`, giao diện `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, đảm bảo hai router cùng cung cấp dịch vụ gateway cho một mạng LAN.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/15-glbp-r2-verify.png", width: 82%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png", width: 82%),
   caption: [Xác minh cấu hình GLBP Group 113 trên Router R2],
 ) <fig-k3-r2-verify>
 
@@ -480,7 +480,7 @@ Trên `R2`, giao diện `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia 
 Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng để yêu cầu cấp phát địa chỉ. Máy trạm nhận thành công địa chỉ `192.168.4.4/24` cùng default gateway `192.168.4.1`.
 
 #figure(
-  image("diagrams/fhrp_nat_dhcp_lap/16-client-connectivity-test.png", width: 82%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png", width: 82%),
   caption: [Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream],
 ) <fig-k3-client-test>
 
@@ -494,7 +494,7 @@ Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng đ�
 *Mục tiêu kịch bản:* Kiểm thử khả năng cấu hình đồng loạt dịch vụ Syslog trên nhiều thiết bị Cisco và khả năng tiếp nhận, phân tích, hiển thị nhật ký thời gian thực ngay trong CAMS. Kịch bản sử dụng 4 thiết bị gồm ba router `R1`, `R2`, `R3` và switch `SW1`; tất cả gửi log về Syslog Server tại địa chỉ `192.168.122.1`, sử dụng cổng `5514/UDP`. Ngoài việc kiểm tra cấu hình trên từng thiết bị, kịch bản còn xác minh khả năng phân loại thông điệp theo Host, Source IP, Facility/Severity, Mnemonic và nội dung Raw Message.
 
 #figure(
-  image("diagrams/syslog lab/syslog-lab-topology-report.png", width: 92%),
+  image("/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png", width: 92%),
   caption: [Sơ đồ Topo Kịch bản 4: Thu thập Syslog tập trung],
 ) <fig-topo-scenario-4>
 
@@ -521,7 +521,7 @@ Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng đ�
 Từ thiết bị đang được quản lý, quản trị viên mở thẻ *Syslog Server*. Tại thời điểm ban đầu chưa có đích Syslog nào được cấu hình, các chỉ số `Destinations`, `Applied`, `Pending apply` và `Pending removal` đều bằng `0`. Người dùng sử dụng chức năng *Syslog Group* để tạo một chính sách chung và áp dụng đồng thời cho nhiều thiết bị thay vì khai báo lặp lại từng router/switch.
 
 #figure(
-  image("diagrams/syslog lab/01-syslog-configuration.png", width: 92%),
+  image("/00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png", width: 92%),
   caption: [Giao diện quản lý Syslog Server trước khi tạo chính sách gửi log],
 ) <fig-k4-syslog-config>
 
@@ -532,7 +532,7 @@ Từ thiết bị đang được quản lý, quản trị viên mở thẻ *Sysl
 Tại bước *Hosts*, quản trị viên chọn cả bốn thiết bị đang kết nối gồm `R1`, `R2`, `R3` và `SW1`. Hệ thống hiển thị số lượng giao diện phát hiện được trên từng thiết bị để làm dữ liệu đầu vào cho bước lựa chọn Source Interface.
 
 #figure(
-  image("diagrams/syslog lab/02-syslog-select-hosts.png", width: 78%),
+  image("/00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png", width: 78%),
   caption: [Bước Hosts của Syslog Group: chọn 4 thiết bị cùng tham gia chính sách gửi log],
 ) <fig-k4-syslog-hosts>
 
@@ -543,7 +543,7 @@ Tại bước *Hosts*, quản trị viên chọn cả bốn thiết bị đang k
 Tại bước *Interfaces*, CAMS cho phép chọn riêng giao diện nguồn trên từng host. Ba router sử dụng `GigabitEthernet0/0`, tương ứng với mạng quản trị `192.168.122.0/24`; switch `SW1` sử dụng giao diện logic `Vlan1`.
 
 #figure(
-  image("diagrams/syslog lab/03-syslog-source-interfaces.png", width: 78%),
+  image("/00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png", width: 78%),
   caption: [Lựa chọn Source Interface cho từng Router và Switch trong Syslog Group],
 ) <fig-k4-syslog-source>
 
@@ -554,7 +554,7 @@ Cấu hình `logging source-interface` giúp các bản tin Syslog phát ra vớ
 Tại bước *Policy*, quản trị viên nhập địa chỉ máy chủ `192.168.122.1`, chọn giao thức `UDP`, cổng `5514` và mức *Trap severity* là `5 - Notifications`. Hai tùy chọn bổ sung *Include millisecond log timestamps* và *Include sequence numbers* được bật để tăng độ chính xác khi sắp xếp, đối chiếu sự kiện.
 
 #figure(
-  image("diagrams/syslog lab/04-syslog-policy.png", width: 78%),
+  image("/00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png", width: 78%),
   caption: [Thiết lập đích Syslog 192.168.122.1:5514/UDP và mức severity Notifications],
 ) <fig-k4-syslog-policy>
 
@@ -565,7 +565,7 @@ Với mức `notifications`, thiết bị gửi các thông điệp từ severit
 Sau khi hoàn tất ba bước của wizard, CAMS mở cửa sổ *View & Push Syslog Group* để tổng hợp cấu hình cho cả bốn thiết bị. Quản trị viên có thể xem toàn bộ lệnh trước khi nhấn *Push*.
 
 #figure(
-  image("diagrams/syslog lab/05-syslog-config-preview.png", width: 82%),
+  image("/00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png", width: 82%),
   caption: [Cửa sổ View & Push Syslog Group tổng hợp lệnh cho 4 thiết bị trước khi thực thi],
 ) <fig-k4-syslog-preview>
 
@@ -584,24 +584,24 @@ Riêng `SW1`, lệnh cuối được thay bằng `logging source-interface Vlan1
 Sau khi Push thành công, quản trị viên mở Terminal tích hợp và thực hiện lệnh `show running-config | section logging` trên từng thiết bị. Kết quả trên `R1`, `R2` và `R3` đều ghi nhận máy chủ `192.168.122.1`, giao thức UDP cổng `5514`, mức `notifications` và Source Interface `GigabitEthernet0/0`.
 
 #figure(
-  image("diagrams/syslog lab/06-syslog-r1-verify.png", width: 88%),
+  image("/00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png", width: 88%),
   caption: [Xác minh cấu hình Syslog trên Router R1],
 ) <fig-k4-r1-verify>
 
 #figure(
-  image("diagrams/syslog lab/07-syslog-r2-verify.png", width: 88%),
+  image("/00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png", width: 88%),
   caption: [Xác minh cấu hình Syslog trên Router R2],
 ) <fig-k4-r2-verify>
 
 #figure(
-  image("diagrams/syslog lab/08-syslog-r3-verify.png", width: 88%),
+  image("/00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png", width: 88%),
   caption: [Xác minh cấu hình Syslog trên Router R3],
 ) <fig-k4-r3-verify>
 
 Trên switch `SW1`, cấu hình tương tự nhưng sử dụng `Vlan1` làm Source Interface.
 
 #figure(
-  image("diagrams/syslog lab/09-syslog-sw1-verify.png", width: 88%),
+  image("/00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png", width: 88%),
   caption: [Xác minh cấu hình Syslog trên Switch SW1 với Source Interface Vlan1],
 ) <fig-k4-sw1-verify>
 
@@ -612,14 +612,14 @@ Các kết quả xác minh cho thấy cấu hình thực tế trên thiết bị
 Tiếp theo, quản trị viên chuyển sang màn hình *System Logs*. Trước khi khởi động, trạng thái hiển thị *Listener stopped*, số bản tin nhận được bằng `0` và bảng log chưa có dữ liệu.
 
 #figure(
-  image("diagrams/syslog lab/10-syslog-listener-before-start.png", width: 94%),
+  image("/00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png", width: 94%),
   caption: [Màn hình System Logs trước khi khởi động Syslog Listener],
 ) <fig-k4-listener-before>
 
 Sau khi nhấn *Start Listener*, dịch vụ chuyển sang trạng thái *Listener active* và lắng nghe trên `0.0.0.0:5514/UDP+TCP`. Khi các thiết bị phát sinh sự kiện, các bản tin được đưa trực tiếp vào bảng System Logs theo thời gian thực.
 
 #figure(
-  image("diagrams/syslog lab/11-syslog-listener-receiving.png", width: 94%),
+  image("/00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png", width: 94%),
   caption: [Syslog Listener đang hoạt động và tiếp nhận bản tin từ các thiết bị mạng],
 ) <fig-k4-listener-active>
 
@@ -630,7 +630,7 @@ Sau khi nhấn *Start Listener*, dịch vụ chuyển sang trạng thái *Listen
 Khi chọn một dòng log, CAMS mở cửa sổ *System Log Message* để hiển thị cả dữ liệu đã phân tích và bản tin nguyên gốc. Trong mẫu thử từ `192.168.122.101`, hệ thống nhận dạng thành công giao thức `UDP`, Cisco facility `LINEPROTO`, severity `5`, mnemonic `UPDOWN`, sequence number `104` và trạng thái parser là `parsed`.
 
 #figure(
-  image("diagrams/syslog lab/12-syslog-message-detail.png", width: 68%),
+  image("/00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png", width: 68%),
   caption: [Cửa sổ chi tiết một bản tin Syslog sau khi được parser phân tích],
 ) <fig-k4-message-detail>
 
@@ -646,22 +646,22 @@ Việc đồng thời lưu trường đã chuẩn hóa và Raw Message giúp gia
 Để tạo lượng log đủ lớn và có tính lặp lại, trên các router CAMS thực hiện chu kỳ thay đổi trạng thái `Loopback99`; trên switch, giao diện `GigabitEthernet1/3` được chuyển trạng thái Up/Down. Các thiết bị đồng thời phát sinh các bản tin `USERLOG_WARNING`, `USERLOG_NOTICE`, `LINK`, `LINEPROTO` và `CONFIG_I`.
 
 #figure(
-  image("diagrams/syslog lab/13-syslog-r1-device-logs.png", width: 94%),
+  image("/00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png", width: 94%),
   caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R1],
 ) <fig-k4-r1-device-logs>
 
 #figure(
-  image("diagrams/syslog lab/14-syslog-r2-device-logs.png", width: 94%),
+  image("/00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png", width: 94%),
   caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R2],
 ) <fig-k4-r2-device-logs>
 
 #figure(
-  image("diagrams/syslog lab/15-syslog-r3-device-logs.png", width: 94%),
+  image("/00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png", width: 94%),
   caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R3],
 ) <fig-k4-r3-device-logs>
 
 #figure(
-  image("diagrams/syslog lab/16-syslog-sw1-device-logs.png", width: 94%),
+  image("/00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png", width: 94%),
   caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Switch SW1],
 ) <fig-k4-sw1-device-logs>
 

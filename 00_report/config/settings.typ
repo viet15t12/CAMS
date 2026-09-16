@@ -101,7 +101,7 @@
 
   set text(
     font: "Times New Roman",
-    size: 13pt,
+    size: 12.5pt,
     lang: "vi",
   )
 

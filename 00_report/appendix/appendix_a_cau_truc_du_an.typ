@@ -14,7 +14,7 @@
 Toàn bộ mã nguồn ứng dụng desktop CAMS được tổ chức trực tiếp ở root repository theo kiến trúc Clean Architecture. Sơ đồ dưới đây thể hiện các lớp chính, nhóm module và trách nhiệm tương ứng:
 
 #figure(
-  image("appendix_a_cau_truc_du_an (1).svg", width: 90%),
+  image("/00_book/figures/report/appendix/project-structure.svg", width: 90%),
   caption: [Sơ đồ cấu trúc thư mục mã nguồn ứng dụng desktop CAMS ở root repository],
 ) <fig-appendix-project-structure>
 
