@@ -102,8 +102,8 @@
   set par(
     justify: true,
     first-line-indent: 0pt,
-    leading: 1.05em,
-    spacing: 16pt,
+    leading: 0.7em,
+    spacing: 10pt,
   )
 
   set list(
@@ -111,32 +111,32 @@
     indent: 0.5cm,
     body-indent: 0.5cm,
     tight: false,
-    spacing: 1.4em,
+    spacing: 0.7em,
   )
   set enum(
     indent: 0.5cm,
     body-indent: 0.5cm,
     tight: false,
-    spacing: 1.4em,
+    spacing: 0.7em,
   )
 
-  // Bullet/enum: Times New Roman 13 pt, 1,5 dòng, 0 pt trước/sau,
+  // Bullet/enum: Times New Roman 13 pt; khoảng cách phù hợp quy trình dài,
   // không thụt dòng đầu và căn trái.
   show list: it => {
-  set list(tight: false, spacing: 1.4em)
+  set list(tight: false, spacing: 0.7em)
   set par(
     justify: false,
     first-line-indent: 0pt,
-    leading: 1.05em,
+    leading: 0.7em,
   )
   it
   }
   show enum: it => {
-    set enum(tight: false, spacing: 1.4em)
+    set enum(tight: false, spacing: 0.7em)
     set par(
       justify: false,
       first-line-indent: 0pt,
-      leading: 1.05em,
+      leading: 0.7em,
     )
     it
   }
@@ -152,7 +152,18 @@
     radius: 4pt,
   )
 
-  set heading(numbering: report-heading-numbering)
+  set heading(numbering: report-heading-numbering, supplement: [Chương])
+  // Số chương trong tham chiếu không lặp tiền tố CHƯƠNG của tiêu đề.
+  show ref: it => {
+    let target = it.element
+    if target != none and target.func() == heading and target.level == 1 {
+      link(target.location())[
+        Chương #counter(heading).at(target.location()).first()
+      ]
+    } else {
+      it
+    }
+  }
   set outline(indent: 0.46cm)
   set math.equation(
     numbering: report-equation-numbering,

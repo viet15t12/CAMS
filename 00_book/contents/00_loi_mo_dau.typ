@@ -1,6 +1,9 @@
-#import "../config/commands.typ": front-heading, todo
+// Nguồn nội dung: DOC/00_loi_mo_dau.md
+#import "../config/commands.typ": front-heading
 
 #front-heading[LỜI MỞ ĐẦU]
+
+Quyển hướng dẫn này giúp người dùng bắt đầu với CAMS, quản lý project và thiết bị, xây dựng cấu hình mong muốn, kiểm tra View & Push và sử dụng các công cụ vận hành. Người dùng mới nên đọc phần cài đặt và điều hướng trước, sau đó tra cứu chương tương ứng với chức năng cần thực hiện. Các ví dụ cấu hình dành cho môi trường lab; hãy đối chiếu thiết bị, địa chỉ và điều kiện thao tác trước khi áp dụng.
 
 Nhóm tác giả xin cảm ơn giảng viên hướng dẫn, khoa/bộ môn, phòng thực hành và các cá nhân đã hỗ trợ trong quá trình khảo sát, xây dựng, kiểm thử và hoàn thiện đề tài.
 
@@ -10,13 +13,6 @@ Nhóm cũng xin chân thành cảm ơn Khoa Viễn thông 2 và Học viện Cô
 
 Xin cảm ơn quý thầy cô trong Bộ môn Mạng Viễn thông đã truyền đạt kiến thức nền tảng về mạng máy tính, định tuyến, chuyển mạch và an ninh mạng — là cơ sở quan trọng để nhóm có thể xây dựng và phát triển đề tài này.
 
+Do thời gian thực hiện và kiến thức còn hạn chế, tài liệu khó tránh khỏi những thiếu sót. Nhóm tác giả rất mong nhận được sự góp ý của quý thầy cô và người sử dụng để đề tài được hoàn thiện hơn.
 
-Do thời gian thực hiện và kiến thức còn hạn chế, báo cáo khó tránh khỏi những thiếu sót. Nhóm tác giả rất mong nhận được sự góp ý của quý thầy cô và Hội đồng đánh giá để đề tài được hoàn thiện hơn.
-
-```text
-TODO: Thay đổi nội dung Lời mở đầu, phù hợp với Hướng dẫn sử dụng phần mềm.
-```
-
-#align(right)[
-  *Nhóm tác giả*
-]
+#align(right)[*Nhóm tác giả*]

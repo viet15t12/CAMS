@@ -36,6 +36,7 @@
 
 #let report-note(body) = block(
   width: 100%,
+  breakable: false,
   inset: 10pt,
   radius: 4pt,
   stroke: 0.5pt,
