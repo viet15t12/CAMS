@@ -51,8 +51,18 @@
 #include "contents/02_cai_dat_su_dung.typ"
 #include "contents/03_giao_dien_dieu_huong.typ"
 #include "contents/04_quan_ly_thiet_bi.typ"
-
-// ----------------------------------------------------------
-// PHỤ LỤC
-// ----------------------------------------------------------
-// #include "appendix/appendix_a_cau_truc_du_an.typ"
+#include "contents/05_cau_hinh_interface_router.typ"
+#include "contents/06_cau_hinh_routing.typ"
+#include "contents/07_cau_hinh_dhcp.typ"
+#include "contents/08_cau_hinh_acl.typ"
+#include "contents/09_cau_hinh_fhrp.typ"
+#include "contents/10_cau_hinh_syslog_server.typ"
+#include "contents/11_cau_hinh_nat.typ"
+#include "contents/12_truyen_tep_sftp.typ"
+#include "contents/13_xem_system_logs.typ"
+#include "contents/14_interface_switch_l2.typ"
+#include "contents/15_vlan_etherchannel_stp_vtp.typ"
+#include "contents/16_bao_mat_switch_l2.typ"
+#include "contents/17_giam_sat_switch_l2.typ"
+#include "contents/18_interface_switch_l3.typ"
+#include "contents/19_dhcp_acl_switch_l3.typ"

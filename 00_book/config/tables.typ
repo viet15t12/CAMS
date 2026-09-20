@@ -29,6 +29,7 @@
   valign: top,
   width: 100%,
   note: none,
+  breakable: false,
 ) = {
   let header-cells = header.map(cell => table.cell(
     fill: rgb("#e8e8e8"),
@@ -37,7 +38,7 @@
 
   let table-content = block(
     width: width,
-    breakable: false,
+    breakable: breakable,
   )[
     #set text(size: 11pt)
     #set par(first-line-indent: 0pt, leading: 0.7em)
@@ -71,7 +72,8 @@
     table-content
   } else {
     set figure.caption(position: top)
-    show figure: set block(breakable: false)
+    // Chỉ ngắt bảng dài khi được yêu cầu; tiêu đề cột sẽ lặp lại.
+    show figure: set block(breakable: breakable)
 
     let result = figure(
       table-content,

@@ -1,20 +1,20 @@
+// Nguồn nội dung: DOC/04_quan_ly_thiet_bi.md
 #import "../config/commands.typ": report-note
-#import "../config/diagrams.typ": flow-diagram
 #import "../config/images.typ": insert-image
 #import "../config/tables.typ": report-table
 
-= Quản lý thiết bị <ch04-devices>
+= Quản lý thiết bị <ch04>
 
-Chương 3 đã giới thiệu đường đi từ Activity Bar tới Devices Sidebar, Device Tabs, Feature Bar và vùng nội dung. Chương này sử dụng các thành phần đó để xây dựng danh sách thiết bị, quản lý kết nối, thu thập cấu hình và thực hiện thao tác trên nhiều host. Các phần cấu hình Interface, Routing, VLAN và dịch vụ mạng được trình bày ở những chương sau.
+@ch03 đã giới thiệu đường đi từ Activity Bar tới Devices Sidebar, Device Tabs, Feature Bar và vùng nội dung. Chương này sử dụng các thành phần đó để xây dựng danh sách thiết bị, quản lý kết nối, thu thập cấu hình và thực hiện thao tác trên nhiều host. Các phần cấu hình Interface, Routing, VLAN và dịch vụ mạng được trình bày ở những chương sau.
 
 == Tổng quan quản lý thiết bị
 
 *Inventory* là danh sách thiết bị trong project đang mở. Mỗi thiết bị được nhận diện bằng Host; tên hiển thị giúp người dùng phân biệt vai trò trong hệ thống. Thêm thiết bị là lưu thông tin vào inventory; kết nối là một bước riêng.
 
-Ví dụ xuyên suốt chương dùng R1 (`192.168.56.11`, Router), R2 (`192.168.56.12`, Router), SW1 (`192.168.56.21`, Switch Layer 2) và SW3 (`192.168.56.23`, Switch Layer 3). Dùng địa chỉ tương ứng với mạng lab của mình khi thực hành. Kiểm tra đúng project trước khi thay đổi danh sách.
+Ví dụ xuyên suốt chương dùng R1 (#raw("192.168.56.11"), Router), R2 (#raw("192.168.56.12"), Router), SW1 (#raw("192.168.56.21"), Switch Layer 2) và SW3 (#raw("192.168.56.23"), Switch Layer 3). Dùng địa chỉ tương ứng với mạng lab của mình khi thực hành. Kiểm tra đúng project trước khi thay đổi danh sách.
 
 #insert-image("figures/gui/chapter-04/01-devices-inventory.png",
-  caption: [Inventory gồm bốn thiết bị vừa được khai báo.], width: 47%) <fig:ch04-inventory>
+  caption: [Inventory gồm bốn thiết bị vừa được khai báo.], width: 47.0%) <fig:ch04-inventory>
 
 Trong @fig:ch04-inventory, cả bốn thiết bị thuộc nhóm Waiting. Nút thêm một thiết bị và nút thêm nhiều thiết bị nằm ở phần đầu panel DEVICES. Có thể đưa con trỏ lên từng biểu tượng để xem tên lệnh trước khi chọn.
 
@@ -23,12 +23,14 @@ Trong @fig:ch04-inventory, cả bốn thiết bị thuộc nhóm Waiting. Nút t
 Nhóm trạng thái giúp chọn thao tác phù hợp. Màu xanh, vàng và đỏ lần lượt hỗ trợ nhận diện Connected, Waiting và Disconnected; hãy đọc cả nhãn nhóm, không chỉ dựa vào màu.
 
 #report-table(
-  columns: (1fr, 2.9fr), header: ([Trạng thái], [Ý nghĩa và bước tiếp theo]),
+  columns: (1.15fr, 2.85fr),
+  header: ([Trạng thái], [Ý nghĩa và bước tiếp theo]),
   rows: (
     ([Waiting], [Thiết bị đã được lưu, đang chờ kết nối quản lý. Thiết bị mới thêm hoặc import có trạng thái này. Dùng *Connect* khi đã sẵn sàng.]),
     ([Connected], [CAMS đã đánh dấu kết nối thành công. Các lệnh Ping, thu thập cấu hình, Save configuration và Sync được mở theo ngữ cảnh. Vẫn cần đọc kết quả từng tác vụ.]),
     ([Disconnected], [Thiết bị đang được đánh dấu mất/ngắt kết nối; một lần Connect thất bại cũng có thể đưa thiết bị vào nhóm này. Dùng *Reconnect* để đưa về Waiting, rồi *Connect*.]),
-  ), caption: [Ba trạng thái quản lý thiết bị.],
+  ),
+  caption: [Trạng thái thiết bị],
   figure-label: <tab:ch04-status>,
 )
 
@@ -40,17 +42,18 @@ Thiết bị Waiting chưa cho mở vùng cấu hình bằng thao tác chọn đ
 
 === Mở cửa sổ Add New Device
 
-Trong Dashboard, chọn nút thêm một thiết bị ở đầu DEVICES hoặc nhấn `Ctrl+N`. Cửa sổ *Add New Device* xuất hiện như @fig:ch04-add-device. Đây là cửa sổ riêng; dùng *Cancel* hoặc nút đóng nếu chưa muốn lưu.
+Trong Dashboard, chọn nút thêm một thiết bị ở đầu DEVICES hoặc nhấn #raw("Ctrl+N"). Cửa sổ *Add New Device* xuất hiện như @fig:ch04-add-device. Đây là cửa sổ riêng; dùng *Cancel* hoặc nút đóng nếu chưa muốn lưu.
 
 #insert-image("figures/gui/chapter-04/02-add-device-empty.png",
-  caption: [Cửa sổ khai báo một thiết bị mới.], width: 75%) <fig:ch04-add-device>
+  caption: [Cửa sổ khai báo một thiết bị mới.], width: 75.0%) <fig:ch04-add-device>
 
 === Khai báo Host và tên thiết bị
 
-Nhập `192.168.56.11` vào *Host* và `R1` vào *Device Name*. Host phải là IPv4 private hoặc domain hợp lệ có dạng phân cấp, chẳng hạn `r1.lab.example`. Tên ngắn như `R1` dùng cho Device Name, không thay thế domain trong Host. Nếu để trống Device Name, danh sách dùng Host làm tên hiển thị.
+Nhập #raw("192.168.56.11") vào *Host* và #raw("R1") vào *Device Name*. Host phải là IPv4 private hoặc domain hợp lệ có dạng phân cấp, chẳng hạn #raw("r1.lab.example"). Tên ngắn như #raw("R1") dùng cho Device Name, không thay thế domain trong Host. Nếu để trống Device Name, danh sách dùng Host làm tên hiển thị.
 
 #report-table(
-  columns: (1fr, 2.8fr), header: ([Trường], [Ý nghĩa]),
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa]),
   rows: (
     ([Host], [IPv4 private hoặc domain của thiết bị. Host là giá trị nhận diện và không được trùng với host đã có.]),
     ([Device Name], [Tên hiển thị trong CAMS, ví dụ R1 hoặc Core-Router.]),
@@ -59,20 +62,27 @@ Nhập `192.168.56.11` vào *Host* và `R1` vào *Device Name*. Host phải là 
     ([OS], [Platform/driver mà CAMS dùng để giao tiếp với thiết bị. Chọn theo hệ điều hành thực tế.]),
     ([Role], [Vai trò Router, Switch Layer 2 hoặc Switch Layer 3; quyết định nhóm feature được hiển thị.]),
     ([Username / Password], [Thông tin xác thực dùng khi mở phiên quản lý. Form cho phép để trống, nhưng dịch vụ của thiết bị có thể yêu cầu.]),
-  ), caption: [Các trường khai báo thiết bị.],
+  ),
+  caption: [Khai báo Host và tên thiết bị],
   figure-label: <tab:ch04-fields>,
 )
 
-#report-note[*Lưu ý:* Add Device hiện chỉ nhận IPv4 thuộc các dải `10.x.x.x`, `172.16.x.x` đến `172.31.x.x`, hoặc `192.168.x.x`. IPv4 public và các dải địa chỉ dành cho ví dụ tài liệu không được form này chấp nhận.]
+#report-note[*Lưu ý:* Add Device hiện chỉ nhận IPv4 thuộc các dải #raw("10.x.x.x"), #raw("172.16.x.x") đến #raw("172.31.x.x"), hoặc #raw("192.168.x.x"). IPv4 public và các dải địa chỉ dành cho ví dụ tài liệu không được form này chấp nhận.]
 
 === Chọn giao thức và cổng
 
 Chọn *SSH* cho ví dụ R1. Khi đổi Protocol trong form thêm mới, CAMS tự điền cổng tương ứng. Nếu dịch vụ dùng cổng khác, sửa Port sau khi chọn giao thức.
 
 #report-table(
-  columns: (1fr, 1fr), header: ([Protocol], [Cổng mặc định]),
-  rows: (([SSH], [`22`]), ([TELNET], [`23`]), ([NETCONF], [`830`]), ([RESTCONF], [`443`])),
-  caption: [Cổng mặc định trong form thiết bị.],
+  columns: (1.15fr, 2.85fr),
+  header: ([Protocol], [Cổng mặc định]),
+  rows: (
+    ([SSH], [#raw("22")]),
+    ([TELNET], [#raw("23")]),
+    ([NETCONF], [#raw("830")]),
+    ([RESTCONF], [#raw("443")]),
+  ),
+  caption: [Chọn giao thức và cổng],
   figure-label: <tab:ch04-protocols>,
 )
 
@@ -80,15 +90,17 @@ Chọn *SSH* cho ví dụ R1. Khi đổi Protocol trong form thêm mới, CAMS t
 
 === Chọn hệ điều hành và vai trò
 
-Ví dụ R1 dùng *OS: cisco_ios* và *Role: rou*. Các lựa chọn OS hiện có là `cisco_ios`, `cisco_xe`, `cisco_nxos`, `cisco_asa` và `mikrotik_routeros`. Việc chọn OS không tự cấu hình dịch vụ quản lý trên thiết bị.
+Ví dụ R1 dùng *OS: cisco\_ios* và *Role: rou*. Các lựa chọn OS hiện có là #raw("cisco_ios"), #raw("cisco_xe"), #raw("cisco_nxos"), #raw("cisco_asa") và #raw("mikrotik_routeros"). Việc chọn OS không tự cấu hình dịch vụ quản lý trên thiết bị.
 
 #report-table(
-  columns: (0.65fr, 1.4fr, 1.7fr), header: ([Mã Role], [Vai trò], [Ví dụ]),
+  columns: (1fr, 1.4fr, 2.4fr),
+  header: ([Mã Role], [Vai trò], [Ví dụ]),
   rows: (
-    ([`rou`], [Router], [R1, R2]),
-    ([`sw2`], [Switch Layer 2], [SW1]),
-    ([`sw3`], [Switch Layer 3], [SW3]),
-  ), caption: [Ý nghĩa mã vai trò đang hiển thị trong form.],
+    ([#raw("rou")], [Router], [R1, R2]),
+    ([#raw("sw2")], [Switch Layer 2], [SW1]),
+    ([#raw("sw3")], [Switch Layer 3], [SW3]),
+  ),
+  caption: [Chọn hệ điều hành và vai trò],
   figure-label: <tab:ch04-roles>,
 )
 
@@ -99,14 +111,14 @@ Role mô tả cách CAMS tổ chức chức năng cho thiết bị; nó không c
 Nhập tài khoản được cấp cho thiết bị vào Username và Password. Username chỉ nhận chữ cái Latin, chữ số, dấu gạch dưới, dấu chấm và dấu gạch ngang. Password không được chứa khoảng trắng. Giữ mật khẩu ở chế độ che khi trình chiếu hoặc chụp ảnh.
 
 #insert-image("figures/gui/chapter-04/03-add-device-filled.png",
-  caption: [Thông tin của R1 đã được điền, mật khẩu được che.], width: 75%) <fig:ch04-add-filled>
+  caption: [Thông tin của R1 đã được điền, mật khẩu được che.], width: 75.0%) <fig:ch04-add-filled>
 
 === SSH Compatibility cho thiết bị cũ
 
 Nút *SSH Compatibility — Legacy devices only* chỉ khả dụng khi Protocol là SSH. Đây là thiết lập nâng cao cho từng thiết bị, dành cho trường hợp đã xác định thiết bị cũ cần thuật toán tương thích riêng.
 
 #insert-image("figures/gui/chapter-04/05-ssh-compatibility.png",
-  caption: [Các trường tương thích SSH riêng cho một thiết bị.], width: 66%) <fig:ch04-ssh>
+  caption: [Các trường tương thích SSH riêng cho một thiết bị.], width: 66.0%) <fig:ch04-ssh>
 
 Các trường *Key exchange algorithms*, *Host key algorithms*, *Ciphers* và *MAC algorithms* nhận danh sách phân cách bằng dấu phẩy. *Note* ghi lý do cần ngoại lệ. Chữ màu nhạt trong ô trống là gợi ý của giao diện, không phải bộ thuật toán đã được bật. Để trống các ô nếu không cần thay đổi mặc định.
 
@@ -121,46 +133,46 @@ Kiểm tra lại Host, Protocol, Port, OS và Role rồi chọn *Add Device*. N�
 Khi lưu thành công, cửa sổ đóng và Devices Panel nạp lại danh sách. R1 xuất hiện trong Waiting như @fig:ch04-added-waiting; thao tác thêm chưa tự kết nối tới thiết bị.
 
 #insert-image("figures/gui/chapter-04/04-device-added-waiting.png",
-  caption: [R1 xuất hiện trong Waiting sau khi được thêm.], width: 47%) <fig:ch04-added-waiting>
+  caption: [R1 xuất hiện trong Waiting sau khi được thêm.], width: 47.0%) <fig:ch04-added-waiting>
 
 == Thêm nhiều thiết bị
 
 === Add Multiple Devices
 
-Chọn nút thêm nhiều thiết bị ở đầu DEVICES hoặc nhấn `Ctrl+Alt+N`. *Add Multiple Devices* có phần thiết lập chung, bảng nhập từng host và thanh nút ở cuối cửa sổ.
+Chọn nút thêm nhiều thiết bị ở đầu DEVICES hoặc nhấn #raw("Ctrl+Alt+N"). *Add Multiple Devices* có phần thiết lập chung, bảng nhập từng host và thanh nút ở cuối cửa sổ.
 
 #insert-image("figures/gui/chapter-04/06-add-multiple-devices.png",
-  caption: [Cửa sổ thêm nhiều thiết bị và các nút nhập danh sách.], width: 100%) <fig:ch04-batch-empty>
+  caption: [Cửa sổ thêm nhiều thiết bị và các nút nhập danh sách.], width: 100.0%) <fig:ch04-batch-empty>
 
 === Shared connection settings
 
 Phần *Shared connection settings* gồm Protocol, Port, OS, Role, Username và Password. Dòng mới kế thừa các giá trị này. Khi thay đổi thiết lập chung, các dòng đã có không tự đổi: dùng *Apply to all* để cập nhật chúng, rồi chỉnh riêng từng dòng nếu cần.
 
-Ví dụ, đặt SSH, 22, cisco_ios, rou và tài khoản dùng chung trước khi tạo các dòng mới. Sau đó đổi Role của SW1 thành sw2 và SW3 thành sw3. Nếu nhấn Apply to all sau bước đó, Role riêng của các dòng cũng bị thay bằng Role chung; cần kiểm tra lại trước khi lưu.
+Ví dụ, đặt SSH, 22, cisco\_ios, rou và tài khoản dùng chung trước khi tạo các dòng mới. Sau đó đổi Role của SW1 thành sw2 và SW3 thành sw3. Nếu nhấn Apply to all sau bước đó, Role riêng của các dòng cũng bị thay bằng Role chung; cần kiểm tra lại trước khi lưu.
 
 === Thêm và chỉnh sửa các dòng
 
 R1 đã có từ bước trước, vì vậy chỉ thêm R2, SW1 và SW3 vào bảng. Dùng *Add another row* để thêm dòng; sửa trực tiếp Host, Name và các trường còn lại. Nút xóa ở cuối dòng bỏ dòng nhập đó; *Clear* đưa bảng về một dòng trống, không xóa các thiết bị đã lưu trong inventory.
 
 #insert-image("figures/gui/chapter-04/07-batch-devices-filled.png",
-  caption: [Ba thiết bị bổ sung với Role riêng trên từng dòng.], width: 100%) <fig:ch04-batch-filled>
+  caption: [Ba thiết bị bổ sung với Role riêng trên từng dòng.], width: 100.0%) <fig:ch04-batch-filled>
 
 @fig:ch04-batch-detail phóng phần Host và Name để dễ đối chiếu. Mỗi host chỉ xuất hiện một lần trong danh sách nhập.
 
 #insert-image("figures/gui/chapter-04/19-batch-table-detail.png",
-  caption: [Chi tiết Host và Name của ba dòng nhập.], width: 85%) <fig:ch04-batch-detail>
+  caption: [Chi tiết Host và Name của ba dòng nhập.], width: 70.9%) <fig:ch04-batch-detail>
 
 === Xác nhận danh sách thiết bị
 
-Nút *Add 3 devices* thể hiện số dòng đã nhập trong ví dụ. Chọn nút này để kiểm tra và lưu toàn bộ danh sách; có thể dùng `Ctrl+Enter` khi cửa sổ đang mở. Nếu một dòng không hợp lệ hoặc cùng host xuất hiện hai lần trong bảng, CAMS báo dòng lỗi để sửa trước khi thêm.
+Nút *Add 3 devices* thể hiện số dòng đã nhập trong ví dụ. Chọn nút này để kiểm tra và lưu toàn bộ danh sách; có thể dùng #raw("Ctrl+Enter") khi cửa sổ đang mở. Nếu một dòng không hợp lệ hoặc cùng host xuất hiện hai lần trong bảng, CAMS báo dòng lỗi để sửa trước khi thêm.
 
 Nếu host đã tồn tại trong inventory, backend bỏ qua host đó và thông báo số lượng được thêm/bỏ qua. Kiểm tra kết quả thay vì chỉ đếm số dòng trước khi submit. Các host mới được lưu ở Waiting. Nếu toàn bộ danh sách đều đã tồn tại, không có thiết bị mới được thêm và cửa sổ giữ thông báo lỗi.
 
 === Import từ Excel hoặc JSON
 
-Dùng *Import file* ở cuối cửa sổ để chọn tệp `.xlsx` hoặc `.json`. Excel dùng hàng đầu làm tiêu đề cột và dữ liệu ở worksheet đầu. JSON có thể là danh sách đối tượng, hoặc một đối tượng chứa danh sách dưới khóa `devices`, `rows` hay `items`.
+Dùng *Import file* ở cuối cửa sổ để chọn tệp #raw(".xlsx") hoặc #raw(".json"). Excel dùng hàng đầu làm tiêu đề cột và dữ liệu ở worksheet đầu. JSON có thể là danh sách đối tượng, hoặc một đối tượng chứa danh sách dưới khóa #raw("devices"), #raw("rows") hay #raw("items").
 
-Các cột thường dùng gồm `host`, `name`, `protocol`, `port`, `os`, `role`, `username` và `password`. Các tên thay thế như `ip`, `device_name`, `user` và `pass` cũng được nhận. Ví dụ JSON tối thiểu, không chứa mật khẩu:
+Các cột thường dùng gồm #raw("host"), #raw("name"), #raw("protocol"), #raw("port"), #raw("os"), #raw("role"), #raw("username") và #raw("password"). Các tên thay thế như #raw("ip"), #raw("device_name"), #raw("user") và #raw("pass") cũng được nhận. Ví dụ JSON tối thiểu, không chứa mật khẩu:
 
 ```json
 [
@@ -175,18 +187,18 @@ Các cột thường dùng gồm `host`, `name`, `protocol`, `port`, `os`, `role
 Host trùng hoặc dòng thiếu Host được bỏ qua; thông báo cho biết số lượng Imported và Skipped. Import không cập nhật thông tin của host đã tồn tại. @fig:ch04-import minh họa TEMP-SW được thêm vào Waiting trong một inventory đang có các trạng thái khác nhau.
 
 #insert-image("figures/gui/chapter-04/18-import-result.png",
-  caption: [TEMP-SW xuất hiện trong inventory sau import.], width: 47%) <fig:ch04-import>
+  caption: [TEMP-SW xuất hiện trong inventory sau import.], width: 47.0%) <fig:ch04-import>
 
 === Sample import file
 
-Nút *Download template* mở hộp chọn nơi lưu với tên gợi ý *Template_CAMS-MultipleDevices.xlsx*. Ở phiên bản được khảo sát, chức năng này có thể báo *Sample file not found* do đường dẫn mẫu chưa khớp tệp được đóng gói. Nếu gặp lỗi, dùng tệp `templates/EXdevices.xlsx` đi kèm bản source, hoặc tạo JSON theo ví dụ trên. Không đổi tên phần mở rộng của một tệp văn bản thành `.xlsx`.
+Nút *Download template* mở hộp chọn nơi lưu với tên gợi ý *Template\_CAMS-MultipleDevices.xlsx*. Ở phiên bản được khảo sát, chức năng này có thể báo *Sample file not found* do đường dẫn mẫu chưa khớp tệp được đóng gói. Nếu gặp lỗi, dùng tệp #raw("templates/EXdevices.xlsx") đi kèm bản source, hoặc tạo JSON theo ví dụ trên. Không đổi tên phần mở rộng của một tệp văn bản thành #raw(".xlsx").
 
 == Tìm kiếm và lọc thiết bị
 
-Ô *Search devices…* tìm theo tên hoặc địa chỉ IP; tìm tên không phân biệt chữ hoa/thường. Nhập `SW` để chỉ giữ SW1 và SW3 như @fig:ch04-search. Xóa từ khóa để trở lại danh sách đầy đủ.
+Ô *Search devices…* tìm theo tên hoặc địa chỉ IP; tìm tên không phân biệt chữ hoa/thường. Nhập #raw("SW") để chỉ giữ SW1 và SW3 như @fig:ch04-search. Xóa từ khóa để trở lại danh sách đầy đủ.
 
 #insert-image("figures/gui/chapter-04/08-search-filter.png",
-  caption: [Tìm SW để giữ lại các switch phù hợp.], width: 47%) <fig:ch04-search>
+  caption: [Tìm SW để giữ lại các switch phù hợp.], width: 47.0%) <fig:ch04-search>
 
 Nút *Filter* mở các nhóm STATUS và DEVICE TYPE. Có thể chọn Connected, Waiting hoặc Disconnected trong STATUS; khi không chọn trạng thái nào, CAMS hiển thị mọi trạng thái. Từ khóa và bộ lọc được áp dụng đồng thời. Nhấn mũi tên của nhóm để mở rộng nếu nhóm đang thu gọn.
 
@@ -194,12 +206,12 @@ Nút *Filter* mở các nhóm STATUS và DEVICE TYPE. Có thể chọn Connected
 
 == Chọn nhiều thiết bị
 
-Chuột phải lên một host rồi chọn *Select multiple* để bắt đầu. Có thể giữ `Ctrl` và nhấn từng dòng để chọn/bỏ chọn; giữ `Shift` và nhấn để chọn một khoảng trong danh sách đang hiển thị. Khi đã bật chọn nhiều, nhấn một dòng sẽ đổi trạng thái chọn, không chuyển tab như chế độ chọn đơn.
+Chuột phải lên một host rồi chọn *Select multiple* để bắt đầu. Có thể giữ #raw("Ctrl") và nhấn từng dòng để chọn/bỏ chọn; giữ #raw("Shift") và nhấn để chọn một khoảng trong danh sách đang hiển thị. Khi đã bật chọn nhiều, nhấn một dòng sẽ đổi trạng thái chọn, không chuyển tab như chế độ chọn đơn.
 
 #insert-image("figures/gui/chapter-04/13-multi-select.png",
-  caption: [Bốn host được chọn với trạng thái hỗn hợp.], width: 47%) <fig:ch04-multi-select>
+  caption: [Bốn host được chọn với trạng thái hỗn hợp.], width: 47.0%) <fig:ch04-multi-select>
 
-Thanh chọn nhiều hiển thị số lượng host đã chọn. *Select all visible hosts* hoặc `Ctrl+A` trong chế độ này chọn các host của danh sách đang được lọc, kể cả host trong nhóm đang thu gọn. *Clear selection and exit*, nút xóa lựa chọn hoặc `Esc` thoát chế độ chọn nhiều. Khi con trỏ đang nhập trong Search, phím theo ngữ cảnh có thể chưa tác động tới danh sách.
+Thanh chọn nhiều hiển thị số lượng host đã chọn. *Select all visible hosts* hoặc #raw("Ctrl+A") trong chế độ này chọn các host của danh sách đang được lọc, kể cả host trong nhóm đang thu gọn. *Clear selection and exit*, nút xóa lựa chọn hoặc #raw("Esc") thoát chế độ chọn nhiều. Khi con trỏ đang nhập trong Search, phím theo ngữ cảnh có thể chưa tác động tới danh sách.
 
 Chuột phải lên host đã chọn giữ nguyên nhóm lựa chọn. Chuột phải lên một host chưa chọn sẽ trở lại ngữ cảnh riêng của host đó. Trước khi chạy lệnh, luôn đọc số host ở đầu menu.
 
@@ -210,22 +222,24 @@ Chuột phải lên host đã chọn giữ nguyên nhóm lựa chọn. Chuột p
 Chuột phải lên dòng host để mở menu. *Select multiple*, *Edit*, *CAMS Terminal* và *Delete Host…* có trong menu chọn đơn. Những mục còn lại phụ thuộc trạng thái như @tab:ch04-context.
 
 #report-table(
-  columns: (1fr, 2.7fr), header: ([Trạng thái], [Lệnh theo trạng thái trong menu chọn đơn]),
+  columns: (1.15fr, 2.85fr),
+  header: ([Trạng thái], [Lệnh theo trạng thái trong menu chọn đơn]),
   rows: (
     ([Waiting], [Connect; Ping vẫn hiện nhưng bị làm mờ.]),
     ([Connected], [Ping; Get running-config; Save configuration; Sync.]),
     ([Disconnected], [Reconnect; Ping vẫn hiện nhưng bị làm mờ.]),
-  ), caption: [Các lệnh thay đổi theo trạng thái host.],
+  ),
+  caption: [Menu ngữ cảnh của thiết bị],
   figure-label: <tab:ch04-context>,
 )
 
 Trong lúc tác vụ liên quan đang chạy, một số lệnh tạm bị vô hiệu hóa. Menu hiện không có Disconnect riêng cho một host; dùng chế độ chọn nhiều ngay cả khi chỉ muốn ngắt một thiết bị.
 
 #insert-image("figures/gui/chapter-04/09-device-context-waiting.png",
-  caption: [Menu của thiết bị Waiting với lệnh Connect.], width: 66%) <fig:ch04-context-waiting>
+  caption: [Menu của thiết bị Waiting với lệnh Connect.], width: 53.6%) <fig:ch04-context-waiting>
 
 #insert-image("figures/gui/chapter-04/11-device-context-connected.png",
-  caption: [Menu của thiết bị Connected.], width: 66%) <fig:ch04-context-connected>
+  caption: [Menu của thiết bị Connected.], width: 53.6%) <fig:ch04-context-connected>
 
 == Kết nối thiết bị
 
@@ -234,7 +248,7 @@ Trong lúc tác vụ liên quan đang chạy, một số lệnh tạm bị vô h
 Với R1 đang Waiting, chuột phải lên R1 và chọn *Connect*. CAMS dùng thông tin đã lưu để mở phiên quản lý, thu thập running-config, lưu bản sao và đồng bộ dữ liệu cấu hình được hỗ trợ vào Workspace. Chờ tác vụ kết thúc, theo dõi Status Bar/thông báo và kiểm tra R1 chuyển sang Connected.
 
 #insert-image("figures/gui/chapter-04/10-device-connected.png",
-  caption: [R1 chuyển sang Connected sau thao tác Connect.], width: 47%) <fig:ch04-connected>
+  caption: [R1 chuyển sang Connected sau thao tác Connect.], width: 47.0%) <fig:ch04-connected>
 
 Nếu Connect thất bại, kiểm tra Host, cổng, giao thức, tài khoản và khả năng truy cập dịch vụ quản lý từ máy chạy CAMS. Sửa thông tin bằng Edit khi cần. Với cảnh báo khóa host SSH, kiểm tra thông tin nhận diện trước khi chấp nhận kết nối.
 
@@ -242,20 +256,20 @@ Trạng thái Connected không bảo đảm mọi bước thu thập, backup ho�
 
 === Reconnect
 
-Với host Disconnected, mở menu như @fig:ch04-context-disconnected và chọn *Reconnect*. Thiết bị chuyển về Waiting. Sau đó chuột phải lần nữa, chọn *Connect* để thực sự mở lại phiên. Phím `Ctrl+Alt+R` thực hiện cùng bước đưa về Waiting.
+Với host Disconnected, mở menu như @fig:ch04-context-disconnected và chọn *Reconnect*. Thiết bị chuyển về Waiting. Sau đó chuột phải lần nữa, chọn *Connect* để thực sự mở lại phiên. Phím #raw("Ctrl+Alt+R") thực hiện cùng bước đưa về Waiting.
 
 #insert-image("figures/gui/chapter-04/12-device-context-disconnected.png",
-  caption: [Lệnh Reconnect của thiết bị Disconnected.], width: 66%) <fig:ch04-context-disconnected>
+  caption: [Lệnh Reconnect của thiết bị Disconnected.], width: 53.6%) <fig:ch04-context-disconnected>
 
 === Disconnect
 
-Chọn *Select multiple*, giữ lại host Connected cần ngắt, rồi dùng *Disconnect connected (N)* hoặc `Ctrl+Shift+D`. Có thể chỉ chọn một host. CAMS đóng phiên quản lý của những host Connected đủ điều kiện và đưa chúng về Waiting; inventory, cấu hình đã lưu và lịch sử backup vẫn được giữ.
+Chọn *Select multiple*, giữ lại host Connected cần ngắt, rồi dùng *Disconnect connected (N)* hoặc #raw("Ctrl+Shift+D"). Có thể chỉ chọn một host. CAMS đóng phiên quản lý của những host Connected đủ điều kiện và đưa chúng về Waiting; inventory, cấu hình đã lưu và lịch sử backup vẫn được giữ.
 
 Muốn kết nối lại sau thao tác này, dùng Connect từ Waiting. Không cần chọn Reconnect. Đóng Device Tab cũng không thay cho lệnh ngắt phiên.
 
 == Kiểm tra kết nối bằng Ping
 
-Khi host Connected, chuột phải rồi chọn *Ping* hoặc dùng `Ctrl+Alt+P` trong ngữ cảnh thiết bị. CAMS yêu cầu kiểm tra khả năng phản hồi của host và đưa kết quả tới thông báo/Status Bar. Nếu cần xem lại, mở khu vực thông báo.
+Khi host Connected, chuột phải rồi chọn *Ping* hoặc dùng #raw("Ctrl+Alt+P") trong ngữ cảnh thiết bị. CAMS yêu cầu kiểm tra khả năng phản hồi của host và đưa kết quả tới thông báo/Status Bar. Nếu cần xem lại, mở khu vực thông báo.
 
 Ping bị làm mờ trong menu Waiting và Disconnected. Kết quả Ping không thay thế kiểm tra đăng nhập hay kết quả đồng bộ cấu hình. Khi không có phản hồi, kiểm tra đường đi mạng và chính sách ICMP của hệ thống trước khi kết luận dịch vụ quản lý không hoạt động.
 
@@ -266,9 +280,11 @@ Ping bị làm mờ trong menu Waiting và Disconnected. Kết quả Ping không
 Mở tab R1, chọn *Information*, rồi xem phần *Snapshot* và *Version*. Chọn phiên bản cần đọc trong danh sách. @fig:ch04-running-config minh họa phần nội dung đã thu thập; cấu hình ngắn giúp nhận diện đúng hostname và địa chỉ, chưa phải bài cấu hình Interface.
 
 #insert-image("figures/gui/chapter-04/17-running-config-result.png",
-  caption: [Một phiên bản running-config trong Information.], width: 100%) <fig:ch04-running-config>
+  caption: [Một phiên bản running-config trong Information.], width: 100.0%) <fig:ch04-running-config>
 
-Mỗi lần thu thập thành công tạo một mốc lịch sử, kể cả khi nội dung chưa đổi. *Compare* dùng để đối chiếu phiên bản. Nếu chưa có dữ liệu hoặc tác vụ thất bại, kiểm tra thông báo và thử lại khi phiên quản lý sẵn sàng. Mốc backup này thuộc riêng thiết bị; snapshot toàn project trong menu File được trình bày ở Chương 2.
+Mỗi lần thu thập thành công tạo một mốc lịch sử, kể cả khi nội dung chưa đổi. *Compare* dùng để đối chiếu phiên bản. Nếu chưa có dữ liệu hoặc tác vụ thất bại, kiểm tra thông báo và thử lại khi phiên quản lý sẵn sàng. Mốc backup này thuộc riêng thiết bị; snapshot toàn project trong menu File được trình bày ở @ch02.
+
+Quy trình đọc thông báo đồng bộ, chọn một cấu hình cũ và so sánh hai mốc bằng Diff được minh họa chi tiết tại @ch12.
 
 == Lưu cấu hình và đồng bộ
 
@@ -287,15 +303,17 @@ Mỗi lần thu thập thành công tạo một mốc lịch sử, kể cả khi
 Sau khi chọn nhiều host, chuột phải lên một dòng đã chọn để mở menu nhóm. Ví dụ @fig:ch04-batch-actions gồm R1 và SW1 Connected, R2 Waiting, SW3 Disconnected. Do đó menu có đúng một host đủ điều kiện Connect và hai host đủ điều kiện Get configs hoặc Disconnect.
 
 #insert-image("figures/gui/chapter-04/14-multi-select-actions.png",
-  caption: [Thao tác hàng loạt với bốn thiết bị được chọn.], width: 95%) <fig:ch04-batch-actions>
+  caption: [Thao tác hàng loạt với bốn thiết bị được chọn.], width: 75.0%) <fig:ch04-batch-actions>
 
 #report-table(
-  columns: (1.6fr, 1.8fr), header: ([Lệnh trong ví dụ], [Host thực sự được xử lý]),
+  columns: (1.15fr, 2.85fr),
+  header: ([Lệnh trong ví dụ], [Host thực sự được xử lý]),
   rows: (
     ([Connect waiting (1)], [R2]),
     ([Get configs from connected (2)], [R1 và SW1]),
     ([Disconnect connected (2)], [R1 và SW1]),
-  ), caption: [Lựa chọn được lọc theo trạng thái trước khi chạy batch.],
+  ),
+  caption: [Thao tác hàng loạt],
   figure-label: <tab:ch04-batch-targets>,
 )
 
@@ -305,10 +323,10 @@ Theo dõi tiến độ và kết quả từng host; lỗi của một host khôn
 
 == Chỉnh sửa thiết bị
 
-Chuột phải lên R1, chọn *Edit*, đổi *Device Name* thành `Core-Router` rồi chọn *Save Changes*. Các trường kết nối và phân loại có thể được chỉnh trong cùng cửa sổ. @fig:ch04-edit minh họa trạng thái ngay trước khi lưu.
+Chuột phải lên R1, chọn *Edit*, đổi *Device Name* thành #raw("Core-Router") rồi chọn *Save Changes*. Các trường kết nối và phân loại có thể được chỉnh trong cùng cửa sổ. @fig:ch04-edit minh họa trạng thái ngay trước khi lưu.
 
 #insert-image("figures/gui/chapter-04/15-edit-device.png",
-  caption: [Đổi tên R1 thành Core-Router trong Edit Device.], width: 75%) <fig:ch04-edit>
+  caption: [Đổi tên R1 thành Core-Router trong Edit Device.], width: 75.0%) <fig:ch04-edit>
 
 *Host* chỉ đọc trong Edit; không sửa IP trực tiếp tại đây. Nếu cần một host mới, thêm bản ghi mới và kiểm tra trước khi quyết định xóa bản ghi cũ. Xóa rồi thêm lại không bảo toàn lịch sử gắn với host cũ.
 
@@ -316,16 +334,14 @@ Lưu chỉnh sửa đóng phiên quản lý hiện có và đưa thiết bị v�
 
 == Xóa thiết bị
 
-Dùng một thiết bị tạm, chẳng hạn TEMP-SW (`192.168.56.99`), để kiểm tra quy trình. Chuột phải lên đúng host, chọn *Delete Host…*. CAMS mở hộp *Permanently delete host?* như @fig:ch04-delete.
+Dùng một thiết bị tạm, chẳng hạn TEMP-SW (#raw("192.168.56.99")), để kiểm tra quy trình. Chuột phải lên đúng host, chọn *Delete Host…*. CAMS mở hộp *Permanently delete host?* như @fig:ch04-delete.
 
-#block(breakable: false)[
-  #report-note[*Cảnh báo xóa vĩnh viễn:* Delete Host xóa thiết bị cùng cấu hình liên quan, dữ liệu đã thu thập, dữ liệu Syslog và lịch sử backup của host trong Workspace. Thao tác này không có Undo. Nếu cần giữ dữ liệu, lưu bản project hoặc snapshot phù hợp trước khi xóa; kiểm tra kỹ địa chỉ trong hộp xác nhận.]
-]
+#report-note[*Cảnh báo xóa vĩnh viễn:* Delete Host xóa thiết bị cùng cấu hình liên quan, dữ liệu đã thu thập, dữ liệu Syslog và lịch sử backup của host trong Workspace. Thao tác này không có Undo. Nếu cần giữ dữ liệu, lưu bản project hoặc snapshot phù hợp trước khi xóa; kiểm tra kỹ địa chỉ trong hộp xác nhận.]
 
 #insert-image("figures/gui/chapter-04/16-delete-device-confirmation.png",
-  caption: [Xác nhận trước khi xóa vĩnh viễn thiết bị tạm.], width: 100%) <fig:ch04-delete>
+  caption: [Xác nhận trước khi xóa vĩnh viễn thiết bị tạm.], width: 100.0%) <fig:ch04-delete>
 
-Để xác nhận, đánh dấu ô đã hiểu hậu quả và nhập chính xác chuỗi mà hộp thoại yêu cầu, ví dụ `DELETE 192.168.56.99`. Chỉ khi cả hai điều kiện đúng, nút *Permanently Delete* mới khả dụng. Chọn *Cancel* để giữ nguyên dữ liệu.
+Để xác nhận, đánh dấu ô đã hiểu hậu quả và nhập chính xác chuỗi mà hộp thoại yêu cầu, ví dụ #raw("DELETE 192.168.56.99"). Chỉ khi cả hai điều kiện đúng, nút *Permanently Delete* mới khả dụng. Chọn *Cancel* để giữ nguyên dữ liệu.
 
 Khi xác nhận, CAMS đóng phiên quản lý của host rồi thực hiện xóa. Kiểm tra thông báo kết quả và danh sách sau đó. Lệnh này xóa dữ liệu quản lý trong project, không phải lệnh xóa cấu hình trên thiết bị mạng. CAMS hiện không có phím Delete để xóa device đang chọn; phải đi qua menu chuột phải và hộp xác nhận.
 
@@ -334,68 +350,41 @@ Khi xác nhận, CAMS đóng phiên quản lý của host rồi thực hiện x�
 Các phím trong @tab:ch04-shortcuts hoạt động theo ngữ cảnh. Đưa focus ra khỏi Search và đóng hộp thoại đang giữ thao tác trước khi dùng phím của Devices Panel. Các lệnh Ping, Connect và Reconnect yêu cầu trạng thái phù hợp, giống lệnh menu.
 
 #report-table(
-  columns: (1.2fr, 2.35fr), header: ([Phím tắt], [Tác dụng]),
+  columns: (1.15fr, 2.85fr),
+  header: ([Phím tắt], [Tác dụng]),
   rows: (
-    ([`Ctrl+N`], [Mở Add New Device.]),
-    ([`Ctrl+Alt+N`], [Mở Add Multiple Devices.]),
-    ([`F2`], [Edit thiết bị đang active trong Sidebar.]),
-    ([`Ctrl+Alt+P`], [Ping thiết bị Connected.]),
-    ([`Ctrl+Alt+C`], [Connect thiết bị Waiting.]),
-    ([`Ctrl+Alt+R`], [Đưa thiết bị Disconnected về Waiting.]),
-    ([`Ctrl+Shift+C`], [Connect các host Waiting đang chọn.]),
-    ([`Ctrl+Shift+R`], [Get running-config các host Connected đang chọn.]),
-    ([`Ctrl+Shift+D`], [Ngắt các host Connected đang chọn; đưa về Waiting.]),
-    ([`Ctrl+A`], [Chọn toàn bộ danh sách đang hiển thị khi chọn nhiều.]),
-    ([`Esc`], [Xóa lựa chọn và thoát chọn nhiều.]),
+    ([#raw("Ctrl+N")], [Mở Add New Device.]),
+    ([#raw("Ctrl+Alt+N")], [Mở Add Multiple Devices.]),
+    ([#raw("F2")], [Edit thiết bị đang active trong Sidebar.]),
+    ([#raw("Ctrl+Alt+P")], [Ping thiết bị Connected.]),
+    ([#raw("Ctrl+Alt+C")], [Connect thiết bị Waiting.]),
+    ([#raw("Ctrl+Alt+R")], [Đưa thiết bị Disconnected về Waiting.]),
+    ([#raw("Ctrl+Shift+C")], [Connect các host Waiting đang chọn.]),
+    ([#raw("Ctrl+Shift+R")], [Get running-config các host Connected đang chọn.]),
+    ([#raw("Ctrl+Shift+D")], [Ngắt các host Connected đang chọn; đưa về Waiting.]),
+    ([#raw("Ctrl+A")], [Chọn toàn bộ danh sách đang hiển thị khi chọn nhiều.]),
+    ([#raw("Esc")], [Xóa lựa chọn và thoát chọn nhiều.]),
     ([#raw("Ctrl+`")], [Mở CAMS Terminal cho thiết bị của tab active.]),
-  ), caption: [Phím tắt quản lý thiết bị trong Workspace.],
+  ),
+  caption: [Phím tắt quản lý thiết bị],
   figure-label: <tab:ch04-shortcuts>,
 )
 
-Trong Add New Device, `Enter` gửi form khi không có hộp phụ đang mở. Trong Batch, `Ctrl+Enter` gửi danh sách. Với Device Tabs, `Ctrl+T` cũng yêu cầu mở form thêm thiết bị khi ngữ cảnh tab khả dụng. Không dùng phím tắt để bỏ qua kiểm tra thông tin trước khi lưu.
+Trong Add New Device, #raw("Enter") gửi form khi không có hộp phụ đang mở. Trong Batch, #raw("Ctrl+Enter") gửi danh sách. Với Device Tabs, #raw("Ctrl+T") cũng yêu cầu mở form thêm thiết bị khi ngữ cảnh tab khả dụng. Không dùng phím tắt để bỏ qua kiểm tra thông tin trước khi lưu.
 
 == Thực hành quản lý một inventory nhỏ
 
 *Mục tiêu:* tạo inventory bốn thiết bị và thực hiện trọn vòng quản lý trên một project lab. Chuẩn bị các thiết bị được phép truy cập, dịch vụ SSH và thông tin xác thực phù hợp; dùng địa chỉ lab của mình nếu khác ví dụ.
 
-1. Mở project lab, dùng Add Device thêm R1 tại `192.168.56.11`, OS cisco_ios, Role rou.
-2. Dùng Add Multiple Devices thêm R2, SW1 và SW3; kiểm tra Role lần lượt rou, sw2, sw3. Không thêm lại R1.
-3. Tìm `SW1` trong Search, kiểm tra địa chỉ; xóa từ khóa khi đã xác định đúng thiết bị.
-4. Quan sát bốn host Waiting và kiểm tra tên/IP trước khi kết nối.
-5. Chuột phải R1 → Connect. Chờ kết quả và xác nhận R1 Connected. Kết nối SW1 để có thêm một host Connected nếu cần thử batch.
-6. Bật Select multiple và chọn cả bốn host. Đọc số lượng trên thanh chọn.
-7. Mở menu nhóm, xác định host đủ điều kiện cho từng lệnh. Chỉ chạy Get configs trên những host Connected đã chuẩn bị.
-8. Thoát chọn nhiều; Edit SW1 và đổi tên thành `Access-SW1`. Kiểm tra host vẫn giữ nguyên và trở về Waiting sau khi lưu.
-9. Mở tab R1 → Information → Snapshot. Nếu chưa có cấu hình, chạy Get running-config và đọc kết quả trước khi xem lại.
-10. Thêm TEMP-SW với một Host tạm chưa tồn tại; mở Delete Host, kiểm tra cảnh báo và xác nhận xóa khi không cần giữ dữ liệu đó. Kiểm tra bốn host chính vẫn còn.
++ Mở project lab, dùng Add Device thêm R1 tại #raw("192.168.56.11"), OS cisco\_ios, Role rou.
++ Dùng Add Multiple Devices thêm R2, SW1 và SW3; kiểm tra Role lần lượt rou, sw2, sw3. Không thêm lại R1.
++ Tìm #raw("SW1") trong Search, kiểm tra địa chỉ; xóa từ khóa khi đã xác định đúng thiết bị.
++ Quan sát bốn host Waiting và kiểm tra tên/IP trước khi kết nối.
++ Chuột phải R1 → Connect. Chờ kết quả và xác nhận R1 Connected. Kết nối SW1 để có thêm một host Connected nếu cần thử batch.
++ Bật Select multiple và chọn cả bốn host. Đọc số lượng trên thanh chọn.
++ Mở menu nhóm, xác định host đủ điều kiện cho từng lệnh. Chỉ chạy Get configs trên những host Connected đã chuẩn bị.
++ Thoát chọn nhiều; Edit SW1 và đổi tên thành #raw("Access-SW1"). Kiểm tra host vẫn giữ nguyên và trở về Waiting sau khi lưu.
++ Mở tab R1 → Information → Snapshot. Nếu chưa có cấu hình, chạy Get running-config và đọc kết quả trước khi xem lại.
++ Thêm TEMP-SW với một Host tạm chưa tồn tại; mở Delete Host, kiểm tra cảnh báo và xác nhận xóa khi không cần giữ dữ liệu đó. Kiểm tra bốn host chính vẫn còn.
 
 Hoàn tất khi tìm được từng thiết bị, giải thích được trạng thái hiện tại, biết host nào được xử lý bởi batch và phân biệt được Save Workspace, Save configuration cùng Get running-config.
-
-== Tóm tắt chương
-
-Thêm hoặc import tạo bản ghi trong inventory ở Waiting. Connect mở phiên và thực hiện thu thập/đồng bộ; các lệnh quản lý tiếp theo cần trạng thái và giao thức phù hợp. Sơ đồ dưới đây tóm tắt đường đi thông thường, trong đó nhóm lệnh ở nút cuối là các lựa chọn theo nhu cầu.
-
-#flow-diagram(
-  [Add / Import], [Inventory\ Waiting], [Connect],
-  [Connected], [Ping / Running-config / Sync],
-  max-per-row: 3, node-width: 43mm, max-node-width: 43mm,
-  node-height: 19mm,
-)
-
-Hai đường quay lại trạng thái chờ cần nhớ:
-
-#flow-diagram(
-  [Connected], [Disconnect], [Waiting],
-  [Connect], [Connected],
-  max-per-row: 3, node-width: 43mm, max-node-width: 43mm,
-  node-height: 16mm,
-)
-
-#flow-diagram(
-  [Disconnected], [Reconnect], [Waiting],
-  [Connect], [Connected],
-  max-per-row: 3, node-width: 43mm, max-node-width: 43mm,
-  node-height: 16mm,
-)
-
-Edit cập nhật thông tin nhưng đóng phiên hiện có; Delete Host xóa vĩnh viễn bản ghi và dữ liệu liên quan. Khi đã quản lý được inventory và phiên thiết bị, người dùng có thể chuyển sang các chương cấu hình chuyên môn.
