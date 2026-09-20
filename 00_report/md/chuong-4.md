@@ -1,0 +1,51 @@
+# CHƯƠNG 4: XÂY DỰNG VÀ HIỆN THỰC HÓA PHẦN MỀM CAMS
+
+#### **4.1. Môi trường phát triển và Tổ chức cấu trúc mã nguồn**
+Phần mềm CAMS được phát triển trên nền tảng ngôn ngữ Python 3.11+ kết hợp với bộ framework giao diện Qt 6 (PyQt6 và Qt Quick/QML), hệ quản trị cơ sở dữ liệu quan hệ nhúng SQLite và công cụ quản lý gói `uv`. Mã nguồn ứng dụng desktop được tổ chức trực tiếp tại root repository theo kiến trúc phân lớp hướng module (Clean Architecture / Feature-driven Architecture) nhằm tuân thủ nghiêm ngặt quy tắc phụ thuộc một chiều (Dependency Rule). Cấu trúc mã nguồn được phân định rạch ròi thành các tầng chức năng:
+* **Lớp Giao diện (`UI/`)**: Chứa các thành phần khai báo đồ họa QML dùng chung (`components/`), các màn hình chức năng chính (`qml/`) và tài nguyên biểu tượng SVG, phông chữ, bảng màu theme sáng/tối.
+* **Lớp Cầu nối & Điều phối Facade (`core/`)**: Chứa đối tượng `DatabaseManager` đóng vai trò Facade trung tâm, các module giám sát tài nguyên `network_monitor.py` và điều phối terminal `terminal_helper.py`.
+* **Lớp Nghiệp vụ theo tính năng (`features/`)**: Chứa logic xử lý nghiệp vụ, kiểm tra ràng buộc và mẫu cấu hình cho từng phân hệ độc lập như `interfaces`, `dhcp`, `routing`, `acl`, `nat`, `switching`, `syslog`, `sftp`, `config_backup` và `config_sync`.
+* **Lớp Hạ tầng kỹ thuật (`infrastructure/`)**: Quản lý lược đồ SQLite (`schemas/`), bộ nạp đường dẫn, bộ quản lý phiên kết nối (`DeviceSessionRegistry`), khóa thiết bị (Host Lock), bộ điều phối song song (`BatchExecutor`) và trình đóng gói dự án (`workspace/`).
+* **Điểm khởi chạy trung tâm (`main.py`)**: Composition Root chịu trách nhiệm khởi tạo và kết nối toàn bộ hệ thống desktop.
+
+#### **4.2. Khởi tạo ứng dụng và Cơ chế Cầu nối QML Bridge**
+Tệp `main.py` đóng vai trò là Composition Root duy nhất khởi chạy ứng dụng desktop. Tiến trình khởi tạo thực hiện cấu hình môi trường Qt, nạp bù shim tương thích đa nền tảng (`Qt6LabsPlatform`), đăng ký các module QML UI và khởi tạo các dịch vụ nền tảng. Khi ứng dụng khởi động, màn hình chào mừng `Welcome.qml` được nạp để người dùng tạo mới hoặc mở một gói dự án (`.ntp`). Khi một dự án được kích hoạt, hệ thống định tuyến đường dẫn cơ sở dữ liệu vào không gian làm việc tạm trước khi nạp giao diện chính `Main.qml`.
+
+Để phân tách trách nhiệm giữa giao diện đồ họa và logic Python backend, CAMS áp dụng cơ chế nạp thuộc tính ngữ cảnh `setContextProperty`. Thông qua cầu nối này, các đối tượng Python kế thừa từ `QObject` được nạp trực tiếp vào QML Engine dưới dạng các Context Property cốt lõi: `dbManager` (CRUD dữ liệu và kích hoạt View & Push), `cli` (điều khiển CLI và lưu `running-config`), `workspaceSaveController` (quản lý lưu và đóng gói `.ntp`), `syslogManager` (điều khiển Syslog Server) và `sftpController` (quản lý truyền tệp SFTP). Giao diện QML có thể gọi trực tiếp các phương thức backend xử lý `@pyqtSlot` và nhận cập nhật dữ liệu tự động thông qua tín hiệu `pyqtSignal`.
+
+#### **4.3. Quản lý Danh mục Thiết bị, Phiên kết nối và Lịch sử Git**
+Phân hệ danh mục thiết bị (Inventory) quản lý thông tin tập trung của các router và switch trong phòng lab (định danh, IP/Host, cổng, giao thức SSH/Telnet, tài khoản, mật khẩu đặc quyền, vai trò `rou`/`sw2`/`sw3`) lưu trữ trong bảng `t01_devices`, hỗ trợ tính năng nhập hàng loạt (Batch Import) từ tệp JSON hoặc bảng tính Excel.
+
+Toàn bộ các phiên kết nối mạng được quản lý độc quyền bởi đối tượng `DeviceSessionRegistry` tại lớp hạ tầng:
+* **Duy trì và Tái sử dụng phiên (Session Keep-alive)**: Mọi thao tác cấu hình tiếp theo đều tái sử dụng phiên SSH/Telnet hiện hành để giảm thiểu độ trễ bắt tay và xác thực.
+* **Cơ chế Khóa theo Thiết bị (Host Lock)**: Mỗi host được gán một đối tượng khóa tuần tự hóa (`operation_lock`), bảo đảm tại một thời điểm chỉ có duy nhất một tiến trình được phép tương tác với kênh CLI của thiết bị đó, loại trừ hoàn toàn hiện tượng xung đột dữ liệu (Race Condition).
+* **Điều phối song song đa thiết bị (`BatchExecutor`)**: Cho phép thực thi đồng thời các tác vụ trên nhiều thiết bị khác nhau với cơ chế cô lập lỗi độc lập.
+* **Sao lưu và Kiểm soát phiên bản bằng Git (Dulwich)**: Mỗi khi đồng bộ hoặc lấy cấu hình `running-config`, phân hệ `config_backup` sử dụng thư viện Dulwich tự động lưu vết bản sao thành một commit Git cục bộ tại `backup/<host>/cfg`, hỗ trợ xem lại lịch sử và so sánh sai khác cấu hình (Unified Diff) trực quan.
+
+#### **4.4. Phân hệ Giao diện Router và Cấp phát IP động (DHCP)**
+* **Phân hệ Giao diện Router**: Định nghĩa và quản lý tham số Lớp 3 cho các cổng vật lý (Ethernet, Serial), cổng ảo Loopback, đường hầm GRE Tunnel và Subinterface 802.1Q (Router-on-a-Stick). Hệ thống áp dụng ràng buộc toàn vẹn nghiêm ngặt: cổng vật lý chỉ được phép chỉnh sửa tham số sau khi đã đồng bộ từ thiết bị thật (cấm tạo mới/xóa cổng vật lý trên cơ sở dữ liệu), trong khi các giao diện logic cho phép khởi tạo hoặc gỡ bỏ linh hoạt. Đối với giao diện WAN có mật khẩu xác thực PPP (PAP/CHAP), cửa sổ xem trước (Preview) tự động che giấu chuỗi mật khẩu để bảo đảm an toàn.
+* **Phân hệ Dịch vụ DHCP**: Quản lý 3 nhóm dữ liệu chính gồm DHCP Pools (`t03_dhcp_pool`), dải địa chỉ loại trừ (`t03_dhcp_excluded_address`) và địa chỉ chuyển tiếp `ip helper-address` trên từng giao diện. Quy trình triển khai áp dụng mô hình quản lý cấu hình theo trạng thái Staged Save: bản ghi mới/chỉnh sửa lưu cờ `success = 0` (Pending Add/Update), bản ghi xóa lưu `success = -1` (Pending Delete). Hộp thoại View & Push thu thập các bản ghi Pending, chuyển qua engine Jinja2 kết xuất thành tập lệnh CLI Cisco IOS để người quản trị kiểm duyệt trước khi đẩy xuống thiết bị.
+
+#### **4.5. Phân hệ Định tuyến Lớp 3 và Tiện ích Routing Group**
+Phân hệ Định tuyến hỗ trợ thiết lập cả hai giải pháp định tuyến tĩnh và định tuyến động phổ biến:
+* **Định tuyến tĩnh và Tuyến mặc định**: Quản lý bảng định tuyến tĩnh (`t04_static_routing`) kèm chỉ số khoảng cách quản trị (Administrative Distance) phục vụ đường truyền dự phòng (Floating Static Route), gán dải mạng đích `0.0.0.0/0` cho tuyến mặc định.
+* **Định tuyến động OSPFv2**: Quản lý hoàn chỉnh mô hình OSPFv2 gồm OSPF Process ID, Router ID, OSPF Area (Standard, Stub, NSSA), dải mạng quảng bá kèm Wildcard Mask, tham số giao diện (cost, priority, hello/dead interval, passive-interface) và chính sách tái phân phối tuyến (Redistribution) từ Static/Connected/EIGRP.
+* **Định tuyến động EIGRP**: Quản lý số hiệu Autonomous System (AS), Router ID, dải mạng quảng bá, passive interface, tóm tắt tuyến `no auto-summary` và xác thực láng giềng MD5.
+* **Tiện ích Routing Group**: Tự động quét danh sách các mạng đang kết nối trực tiếp (Connected Networks) trên nhóm router được chọn, tự động nhân bản chính sách định tuyến và đẩy cấu hình hàng loạt theo cơ chế đa tiến trình, giúp tiết kiệm đáng kể thời gian thiết lập hạ tầng ban đầu.
+
+#### **4.6. Phân hệ Danh sách Kiểm soát Truy cập (ACL) và Biên dịch Địa chỉ (NAT/PAT)**
+* **Phân hệ ACL**: Hỗ trợ đầy đủ các chủng loại ACL gồm Standard ACL, Extended ACL (lọc theo Protocol, IP nguồn/đích, Port, cờ TCP established), Dynamic Lock-and-Key ACL, Reflexive ACL (lọc theo phiên kết nối `reflect`/`evaluate`) và MAC ACL Lớp 2. Phân hệ bảo toàn chính xác thứ tự quy tắc (`sequence_num`) trong CSDL để tự động tái đánh số khi chỉnh sửa, hỗ trợ gán danh sách ACL vào giao diện (`t05_acl_interface_apply`) theo chiều `in` hoặc `out`.
+* **Phân hệ NAT/PAT**: Cung cấp các chế độ biên dịch địa chỉ Static NAT (1-1), Dynamic NAT (Pool) và PAT Overload (dùng chung địa chỉ cổng WAN). Phân hệ thiết lập rõ cờ `ip nat inside`/`outside` trên từng giao diện, hỗ trợ chính sách biên dịch có điều kiện qua NAT ACL/Route-map, đồng thời tiến trình giám sát tự động đọc dữ liệu từ `show ip nat translations` để hiển thị các phiên chuyển đổi địa chỉ thời gian thực.
+
+#### **4.7. Phân hệ Chuyển mạch và Bảo mật Lớp 2**
+Phân hệ Chuyển mạch cung cấp giải pháp toàn diện cho hạ tầng mạng cục bộ trên các thiết bị Switch Cisco (vIOS-L2):
+* **Quản lý VLAN, Trunking và EtherChannel**: Khởi tạo/xóa VLAN trong dải ID 1–4094; phân loại Switchport mode Access hoặc Trunk 802.1Q; gom nhóm cổng vật lý thành cổng logic EtherChannel (Port-channel) hỗ trợ cả hai giao thức LACP (`active`/`passive`) và PAgP (`desirable`/`auto`).
+* **Spanning Tree (STP) và VTP Domain**: Cấu hình các chế độ PVST+, Rapid-PVST (RSTP), MST; điều chỉnh Bridge Priority bầu Root Bridge; kích hoạt PortFast và BPDU Guard; thiết lập VTP Domain (Server, Client, Transparent). Mật khẩu VTP tuyệt đối không lưu trữ dưới dạng văn bản rõ.
+* **Bảo mật Lớp 2 (Layer 2 Security)**: Kích hoạt Port Security (giới hạn số MAC tối đa, `sticky MAC`, hành động vi phạm `shutdown`/`restrict`/`protect`), DHCP Snooping phân loại cổng Trusted/Untrusted và Dynamic ARP Inspection (DAI) chống ARP Spoofing; cùng giao diện ảo SVI (`interface Vlan`) hỗ trợ định tuyến liên VLAN trên Switch Multilayer.
+
+#### **4.8. Phân hệ Tiện ích Hệ thống và Giám sát Vận hành**
+CAMS tích hợp hệ sinh thái tiện ích mở rộng phục vụ công tác vận hành chuyên nghiệp:
+* **Máy chủ Nhật ký Hệ thống (Syslog Server)**: Khởi chạy tiến trình lắng nghe (Listener Thread) trên socket UDP/TCP cổng 514, phân tích bản tin theo chuẩn RFC 3164/5424. Sử dụng cơ chế ghi theo lô (Batch Writer) vào cơ sở dữ liệu để tránh nghẽn I/O SQLite, hỗ trợ bộ lọc theo IP nguồn, Severity (0–7), Mnemonic và bảo toàn Raw Message nguyên gốc.
+* **Máy khách Truyền tệp An toàn (SFTP Client)**: Trình duyệt tệp hai khung nhìn (Dual-pane SFTP Client) hỗ trợ xác thực vân tay máy chủ SHA-256, hàng đợi tải tệp nền bất đồng bộ có thanh tiến trình và mã hóa mật khẩu kết nối bằng Windows DPAPI.
+* **Trình dòng lệnh Nhúng Đồng hành (Terminal Companion)**: Tích hợp ứng dụng terminal nhúng (`cams-terminal`, dựa trên Alacritty) giao tiếp qua socket IPC nội bộ bằng giao thức NTTP/1, phân tách hoàn toàn khỏi phiên tự động hóa Netmiko để tránh tranh chấp luồng.
+* **Đóng gói Dự án và Quản lý Workspace (`.ntp`)**: Đóng gói toàn bộ không gian làm việc thành tệp nén `.ntp` chuẩn Zip (chứa `manifest.json`, mã băm SHA-256, 2 tệp SQLite DB và thư mục sao lưu Git `backup/`), hỗ trợ bảo vệ bằng thuật toán sinh khóa Argon2id kết hợp mã hóa AES-256-GCM và cơ chế tạo điểm khôi phục nhanh (Safety Snapshot).
