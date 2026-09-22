@@ -31,127 +31,127 @@ Quá trình thực nghiệm gồm bốn kịch bản có độ phức tạp tăn
 2. *Đẩy cấu hình bất đồng bộ:* Worker nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua SSH.
 3. *Xác minh trạng thái:* Người quản trị đối chiếu phản hồi của hệ thống, kiểm tra trực tiếp bằng terminal Alacritty tích hợp và đánh giá lưu lượng thực tế.
 
-=== Kịch bản 1: Cấu hình hạ tầng chuyển mạch và bảo mật Lớp 2 (Switching & L2 Security)
+// === Kịch bản 1: Cấu hình hạ tầng chuyển mạch và bảo mật Lớp 2 (Switching & L2 Security)
 
-==== Mục tiêu và quy hoạch
+// ==== Mục tiêu và quy hoạch
 
-Kịch bản 1 thiết lập hạ tầng chuyển mạch đa tầng trên môi trường lab, gồm khởi tạo VLAN, đồng bộ qua VTP, gom kênh EtherChannel bằng LACP và triển khai các cơ chế bảo vệ Lớp 2 gồm DHCP Snooping, Dynamic ARP Inspection và Port Security.
+// Kịch bản 1 thiết lập hạ tầng chuyển mạch đa tầng trên môi trường lab, gồm khởi tạo VLAN, đồng bộ qua VTP, gom kênh EtherChannel bằng LACP và triển khai các cơ chế bảo vệ Lớp 2 gồm DHCP Snooping, Dynamic ARP Inspection và Port Security.
 
-#figure(
-  image("/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg", width: 90%),
-  caption: [Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2],
-) <fig-topo-scenario-1>
+// #figure(
+//   image("/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg", width: 90%),
+//   caption: [Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2],
+// ) <fig-topo-scenario-1>
 
-==== Quy trình triển khai trên phần mềm CAMS
+// ==== Quy trình triển khai trên phần mềm CAMS
 
-Căn cứ vào sơ đồ mạng của kịch bản 1, tám thiết bị gồm hai router và sáu switch được nạp vào không gian làm việc `LAB_KICH_BAN_1`. Các thiết bị sử dụng dải IP quản trị từ `192.168.122.101` đến `192.168.122.108` và hiển thị trạng thái kết nối *CONNECTED* trên thanh bên.
+// Căn cứ vào sơ đồ mạng của kịch bản 1, tám thiết bị gồm hai router và sáu switch được nạp vào không gian làm việc `LAB_KICH_BAN_1`. Các thiết bị sử dụng dải IP quản trị từ `192.168.122.101` đến `192.168.122.108` và hiển thị trạng thái kết nối *CONNECTED* trên thanh bên.
 
-Quá trình cấu hình hạ tầng Lớp 2 được thực hiện qua sáu bước sau.
+// Quá trình cấu hình hạ tầng Lớp 2 được thực hiện qua sáu bước sau.
 
-*Bước 1. Thiết lập nhóm VTP và đồng bộ miền VTP trên toàn mạng*
+// *Bước 1. Thiết lập nhóm VTP và đồng bộ miền VTP trên toàn mạng*
 
-Người dùng mở phân hệ *Switching*, chọn thẻ *VTP* và sử dụng chức năng *VTP Group*. Miền `PTIT_LAB`, phiên bản VTP 2, được áp dụng đồng thời cho năm thiết bị từ `SW1` đến `SW5`; `SW1` giữ vai trò VTP Server, còn các switch khác hoạt động ở chế độ VTP Client.
+// Người dùng mở phân hệ *Switching*, chọn thẻ *VTP* và sử dụng chức năng *VTP Group*. Miền `PTIT_LAB`, phiên bản VTP 2, được áp dụng đồng thời cho năm thiết bị từ `SW1` đến `SW5`; `SW1` giữ vai trò VTP Server, còn các switch khác hoạt động ở chế độ VTP Client.
 
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_16.png", width: 85%),
-  caption: [Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB],
-) <fig-k1-vtp-group>
-@fig-k1-vtp-group thể hiện sáu switch đang kết nối, năm thiết bị được chọn và miền VTP đã lưu. Sau khi kiểm tra danh sách, quản trị viên sử dụng *Save & Push* để áp dụng cấu hình theo nhóm.
+// #figure(
+//   image("/00_book/figures/report/diagrams/switching-lab/1_16.png", width: 85%),
+//   caption: [Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB],
+// ) <fig-k1-vtp-group>
+// @fig-k1-vtp-group thể hiện sáu switch đang kết nối, năm thiết bị được chọn và miền VTP đã lưu. Sau khi kiểm tra danh sách, quản trị viên sử dụng *Save & Push* để áp dụng cấu hình theo nhóm.
 
-*Bước 2. Khởi tạo VLAN và kiểm duyệt tập lệnh*
+// *Bước 2. Khởi tạo VLAN và kiểm duyệt tập lệnh*
 
-Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùng chuyển sang thẻ *VLAN* để khởi tạo các phân vùng mạng nghiệp vụ: `VLAN 10` (Tên: `IT_VLAN`) và `VLAN 20` (Tên: `HR_VLAN`). Sau khi lưu vào trạng thái mong muốn (`Desired State`), người dùng nhấn nút *View & Push* để mở cửa sổ duyệt trước mã lệnh.
+// Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùng chuyển sang thẻ *VLAN* để khởi tạo các phân vùng mạng nghiệp vụ: `VLAN 10` (Tên: `IT_VLAN`) và `VLAN 20` (Tên: `HR_VLAN`). Sau khi lưu vào trạng thái mong muốn (`Desired State`), người dùng nhấn nút *View & Push* để mở cửa sổ duyệt trước mã lệnh.
 
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_20.png", width: 80%),
-  caption: [Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1],
-) <fig-k1-vlan-push>
-@fig-k1-vlan-push cho thấy khối lệnh Cisco IOS được sinh từ dữ liệu trên giao diện, gồm các lệnh tạo VLAN và đặt tên tương ứng. Người dùng kiểm tra từng dòng trước khi nhấn *Push* để gửi cấu hình qua SSH.
+// #figure(
+//   image("/00_book/figures/report/diagrams/switching-lab/1_20.png", width: 80%),
+//   caption: [Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1],
+// ) <fig-k1-vlan-push>
+// @fig-k1-vlan-push cho thấy khối lệnh Cisco IOS được sinh từ dữ liệu trên giao diện, gồm các lệnh tạo VLAN và đặt tên tương ứng. Người dùng kiểm tra từng dòng trước khi nhấn *Push* để gửi cấu hình qua SSH.
 
-*Bước 3. Cấu hình gom kênh EtherChannel bằng LACP*
+// *Bước 3. Cấu hình gom kênh EtherChannel bằng LACP*
 
-Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truyền Trunk giữa `SW1` và `SW3`, người dùng truy cập thẻ *EtherChannel* trên tab `SW1`. Tại đây, người dùng gom 2 cổng vật lý `GigabitEthernet1/0` và `GigabitEthernet1/1` vào nhóm logic `Port-channel1` với giao thức LACP (`mode active`) và gán nhãn mô tả `Link_To_SW3`.
+// Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truyền Trunk giữa `SW1` và `SW3`, người dùng truy cập thẻ *EtherChannel* trên tab `SW1`. Tại đây, người dùng gom 2 cổng vật lý `GigabitEthernet1/0` và `GigabitEthernet1/1` vào nhóm logic `Port-channel1` với giao thức LACP (`mode active`) và gán nhãn mô tả `Link_To_SW3`.
 
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_3.png", width: 80%),
-  caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
-) <fig-k1-etherchannel-push>
-@fig-k1-etherchannel-push thể hiện cấu hình cho từng giao diện thành phần và giao diện logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
+// #figure(
+//   image("/00_book/figures/report/diagrams/switching-lab/1_3.png", width: 80%),
+//   caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
+// ) <fig-k1-etherchannel-push>
+// @fig-k1-etherchannel-push thể hiện cấu hình cho từng giao diện thành phần và giao diện logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
 
-*Bước 4. Thiết lập DHCP Snooping và Dynamic ARP Inspection*
+// *Bước 4. Thiết lập DHCP Snooping và Dynamic ARP Inspection*
 
-Để ngăn chặn các cuộc tấn công mạng Lớp 2 (DHCP Rogue Server, Man-in-the-Middle và ARP Spoofing), người dùng chuyển sang phân hệ *Security* $arrow$ thẻ *L2 Security*.
+// Để ngăn chặn các cuộc tấn công mạng Lớp 2 (DHCP Rogue Server, Man-in-the-Middle và ARP Spoofing), người dùng chuyển sang phân hệ *Security* $arrow$ thẻ *L2 Security*.
 
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_21.png", width: 85%),
-  caption: [Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection],
-) <fig-k1-l2-security>
-@fig-k1-l2-security thể hiện chính sách bảo vệ cho VLAN 1, 10, 20 và 99. Quản trị viên bật DHCP Snooping, DAI và chỉ định các đường trunk làm *Trusted Uplinks* để tiếp nhận lưu lượng DHCP và ARP hợp lệ.
+// #figure(
+//   image("/00_book/figures/report/diagrams/switching-lab/1_21.png", width: 85%),
+//   caption: [Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection],
+// ) <fig-k1-l2-security>
+// @fig-k1-l2-security thể hiện chính sách bảo vệ cho VLAN 1, 10, 20 và 99. Quản trị viên bật DHCP Snooping, DAI và chỉ định các đường trunk làm *Trusted Uplinks* để tiếp nhận lưu lượng DHCP và ARP hợp lệ.
 
-*Bước 5. Cấu hình Port Security trên switch truy cập SW5*
+// *Bước 5. Cấu hình Port Security trên switch truy cập SW5*
 
-Trên switch truy cập `SW5` (IP: `192.168.122.105`), người dùng chuyển sang thẻ *Port Security* để bảo vệ các cổng kết nối đến người dùng cuối. Với cổng `GigabitEthernet0/2`, người dùng thiết lập số lượng địa chỉ MAC tối đa là `4`, kích hoạt học địa chỉ tự động (`mac-address sticky`), thời gian lưu vết `5 phút` và cơ chế xử lý vi phạm là ngắt cổng tức thì (`violation shutdown`).
+// Trên switch truy cập `SW5` (IP: `192.168.122.105`), người dùng chuyển sang thẻ *Port Security* để bảo vệ các cổng kết nối đến người dùng cuối. Với cổng `GigabitEthernet0/2`, người dùng thiết lập số lượng địa chỉ MAC tối đa là `4`, kích hoạt học địa chỉ tự động (`mac-address sticky`), thời gian lưu vết `5 phút` và cơ chế xử lý vi phạm là ngắt cổng tức thì (`violation shutdown`).
 
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_25.png", width: 80%),
-  caption: [Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5],
-) <fig-k1-port-security-push>
-#block[
-  #set par(justify: false)
-  @fig-k1-port-security-push thể hiện khối lệnh Port Security để quản trị viên kiểm tra trước khi đẩy xuống thiết bị:
-]
+// #figure(
+//   image("/00_book/figures/report/diagrams/switching-lab/1_25.png", width: 80%),
+//   caption: [Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5],
+// ) <fig-k1-port-security-push>
+// #block[
+//   #set par(justify: false)
+//   @fig-k1-port-security-push thể hiện khối lệnh Port Security để quản trị viên kiểm tra trước khi đẩy xuống thiết bị:
+// ]
 
-```text
-switchport mode access
-switchport port-security
-switchport port-security maximum 4
-switchport port-security violation shutdown
-switchport port-security mac-address sticky
-switchport port-security aging time 5
-```
+// ```text
+// switchport mode access
+// switchport port-security
+// switchport port-security maximum 4
+// switchport port-security violation shutdown
+// switchport port-security mac-address sticky
+// switchport port-security aging time 5
+// ```
 
-*Bước 6. Xác minh cấu hình qua terminal Alacritty tích hợp*
+// *Bước 6. Xác minh cấu hình qua terminal Alacritty tích hợp*
 
-Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng Terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
+// Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng Terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
 
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_30.png", width: 85%),
-  caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp],
-) <fig-k1-terminal-verify>
-Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
+// #figure(
+//   image("/00_book/figures/report/diagrams/switching-lab/1_30.png", width: 85%),
+//   caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp],
+// ) <fig-k1-terminal-verify>
+// Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
 
-Ngoài ra, người dùng kiểm tra trạng thái bảo mật cổng trên switch `SW5` qua lệnh `show port-security interface GigabitEthernet0/2`:
-```text
-SW5# show port-security interface gi0/2
-Port Security              : Enabled
-Port Status                : Secure-up
-Violation Mode             : Shutdown
-Aging Time                 : 5 mins
-Aging Type                 : Absolute
-SecureStatic Address Aging : Disabled
-Maximum MAC Addresses      : 4
-Total MAC Addresses        : 0
-Configured MAC Addresses   : 0
-Sticky MAC Addresses       : 0
-Last Source Address:Vlan   : 0000.0000.0000:0
-Security Violation Count   : 0
-```
+// Ngoài ra, người dùng kiểm tra trạng thái bảo mật cổng trên switch `SW5` qua lệnh `show port-security interface GigabitEthernet0/2`:
+// ```text
+// SW5# show port-security interface gi0/2
+// Port Security              : Enabled
+// Port Status                : Secure-up
+// Violation Mode             : Shutdown
+// Aging Time                 : 5 mins
+// Aging Type                 : Absolute
+// SecureStatic Address Aging : Disabled
+// Maximum MAC Addresses      : 4
+// Total MAC Addresses        : 0
+// Configured MAC Addresses   : 0
+// Sticky MAC Addresses       : 0
+// Last Source Address:Vlan   : 0000.0000.0000:0
+// Security Violation Count   : 0
+// ```
 
-==== Đánh giá kết quả
+// ==== Đánh giá kết quả
 
-Các cấu hình VLAN, VTP, EtherChannel LACP, DHCP Snooping, DAI và Port Security được áp dụng đúng trên hệ thống switch của phòng lab. Kết quả kiểm tra trực tiếp trên thiết bị phù hợp với cấu hình đã thiết lập trên CAMS; các hạng mục của kịch bản 1 đều hoàn thành.
+// Các cấu hình VLAN, VTP, EtherChannel LACP, DHCP Snooping, DAI và Port Security được áp dụng đúng trên hệ thống switch của phòng lab. Kết quả kiểm tra trực tiếp trên thiết bị phù hợp với cấu hình đã thiết lập trên CAMS; các hạng mục của kịch bản 1 đều hoàn thành.
 
 
 
-=== Kịch bản 2: Định tuyến động đa vùng và tái phân phối tuyến liên chi nhánh (OSPF Group & Route Redistribution)
+=== Kịch bản 1: Định tuyến động đa vùng và tái phân phối tuyến liên chi nhánh (OSPF Group & Route Redistribution)
 
 ==== Mục tiêu và quy hoạch địa chỉ IP
 
-Kịch bản 2 thiết lập OSPFv2 đa vùng để kết nối Chi nhánh A và Chi nhánh B qua mạng đường trục ISP thuộc Backbone Area 0. Tính năng *Routing Group - OSPF* được sử dụng để cấu hình theo nhóm trên sáu router `R1`, `R2`, `R3`, `ISP1`, `ISP2` và `R6`. Cơ chế tái phân phối tuyến quảng bá các mạng LAN cục bộ vào miền OSPF.
+Kịch bản 1 thiết lập OSPFv2 đa vùng để kết nối Chi nhánh A và Chi nhánh B qua mạng đường trục ISP thuộc Backbone Area 0. Tính năng *Routing Group - OSPF* được sử dụng để cấu hình theo nhóm trên sáu router `R1`, `R2`, `R3`, `ISP1`, `ISP2` và `R6`. Cơ chế tái phân phối tuyến quảng bá các mạng LAN cục bộ vào miền OSPF.
 
 #figure(
   image("/00_book/figures/report/diagrams/LAB_2-report.png", width: 95%),
-  caption: [Sơ đồ Topo Kịch bản 2: Định tuyến OSPF đa vùng giữa hai chi nhánh],
+  caption: [Sơ đồ Topo Kịch bản 1: Định tuyến OSPF đa vùng giữa hai chi nhánh],
 ) <fig-topo-scenario-2>
 
 Mô hình được chia thành các phân vùng định tuyến và dải địa chỉ như trình bày trong bảng quy hoạch dưới đây.
@@ -173,7 +173,7 @@ Mô hình được chia thành các phân vùng định tuyến và dải địa
     ([Chi nhánh B], [VPC15 (B2_VLAN)], [192.168.40.10/24], [Gateway: 192.168.40.1 (R6 Gi0/1)]),
     ([Mạng Quản trị], [Toàn bộ Router/SW], [192.168.122.101 -- 109/24], [Kênh Out-of-Band kết nối CAMS]),
   ),
-  caption: [Bảng quy hoạch địa chỉ IP và phân vùng OSPF cho Kịch bản 2],
+  caption: [Bảng quy hoạch địa chỉ IP và phân vùng OSPF cho Kịch bản 1],
 ) <tab-ip-planning-lab2>
 
 ==== Quy trình triển khai trên phần mềm CAMS
@@ -325,15 +325,15 @@ Mô hình OSPFv2 đa vùng và cơ chế tái phân phối tuyến được tri�
 
 
 
-=== Kịch bản 3: Tích hợp cổng dự phòng GLBP, cấp phát DHCP và chuyển đổi địa chỉ NAT/PAT
+=== Kịch bản 2: Tích hợp cổng dự phòng GLBP, cấp phát DHCP và chuyển đổi địa chỉ NAT/PAT
 
 ==== Mục tiêu và quy hoạch thiết bị
 
-Kịch bản 3 xây dựng mạng LAN có khả năng cấp phát địa chỉ IP tự động, sử dụng GLBP để cung cấp cổng mặc định dự phòng và cân bằng tải, đồng thời triển khai NAT/PAT cho lưu lượng đi ra mạng ngoài. Mục tiêu chính là kiểm tra khả năng phối hợp nhiều chức năng Lớp 3 trong cùng một quy trình cấu hình và xác minh trên CAMS.
+Kịch bản 2 xây dựng mạng LAN có khả năng cấp phát địa chỉ IP tự động, sử dụng GLBP để cung cấp cổng mặc định dự phòng và cân bằng tải, đồng thời triển khai NAT/PAT cho lưu lượng đi ra mạng ngoài. Mục tiêu chính là kiểm tra khả năng phối hợp nhiều chức năng Lớp 3 trong cùng một quy trình cấu hình và xác minh trên CAMS.
 
 #figure(
   image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png", width: 95%),
-  caption: [Sơ đồ Topo Kịch bản 3: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN],
+  caption: [Sơ đồ Topo Kịch bản 2: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN],
 ) <fig-topo-scenario-3>
 
 Địa chỉ và vai trò của từng thiết bị được trình bày trong bảng quy hoạch dưới đây.
@@ -352,7 +352,7 @@ Kịch bản 3 xây dựng mạng LAN có khả năng cấp phát địa chỉ I
     ([NAT], [#table-code("Gi0/2 - 10.0.10.2/24")], [NAT Outside], [Kết nối tới mạng ISP / upstream]),
     ([PC1], [DHCP], [Máy trạm kiểm thử], [Nhận IP động và sử dụng gateway `192.168.4.1`]),
   ),
-  caption: [Bảng quy hoạch địa chỉ và vai trò thiết bị trong Kịch bản 3],
+  caption: [Bảng quy hoạch địa chỉ và vai trò thiết bị trong Kịch bản 2],
 ) <tab-ip-planning-lab3>
 
 ==== Quy trình triển khai trên phần mềm CAMS
@@ -511,15 +511,15 @@ Kết quả `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận hop đầu tiê
 CAMS đã triển khai chuỗi chức năng DHCP, GLBP và NAT/PAT trên nhiều thiết bị. Máy trạm nhận địa chỉ `192.168.4.4/24` và cổng mặc định ảo `192.168.4.1`; `R1` và `R2` cùng tham gia GLBP Group 113; router NAT nhận đúng vai trò Inside/Outside, ACL và cấu hình PAT Overload. Kết quả truy vết xác nhận lưu lượng đi từ LAN qua `R1`, router NAT và tới gateway upstream `10.0.10.1`.
 
 
-=== Kịch bản 4: Thu thập, giám sát và phân tích nhật ký tập trung bằng Syslog Server
+=== Kịch bản 3: Thu thập, giám sát và phân tích nhật ký tập trung bằng Syslog Server
 
 ==== Mục tiêu và quy hoạch nguồn gửi Syslog
 
-Kịch bản 4 kiểm tra khả năng cấu hình Syslog theo nhóm trên nhiều thiết bị Cisco, đồng thời đánh giá việc tiếp nhận, phân tích và hiển thị nhật ký thời gian thực trong CAMS. Ba router `R1`, `R2`, `R3` và switch `SW1` cùng gửi log về máy chủ `192.168.122.1` qua cổng `5514/UDP`. Nội dung kiểm tra gồm cấu hình trên thiết bị và khả năng phân tách bản tin theo Host, Source IP, Facility/Severity, Mnemonic và Raw Message.
+Kịch bản 3 kiểm tra khả năng cấu hình Syslog theo nhóm trên nhiều thiết bị Cisco, đồng thời đánh giá việc tiếp nhận, phân tích và hiển thị nhật ký thời gian thực trong CAMS. Ba router `R1`, `R2`, `R3` và switch `SW1` cùng gửi log về máy chủ `192.168.122.1` qua cổng `5514/UDP`. Nội dung kiểm tra gồm cấu hình trên thiết bị và khả năng phân tách bản tin theo Host, Source IP, Facility/Severity, Mnemonic và Raw Message.
 
 #figure(
   image("/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png", width: 92%),
-  caption: [Sơ đồ Topo Kịch bản 4: Thu thập Syslog tập trung],
+  caption: [Sơ đồ Topo Kịch bản 3: Thu thập Syslog tập trung],
 ) <fig-topo-scenario-4>
 
 Nguồn gửi và chính sách Syslog được trình bày trong bảng quy hoạch dưới đây.
@@ -535,7 +535,7 @@ Nguồn gửi và chính sách Syslog được trình bày trong bảng quy ho�
     ([R3], [#table-code("192.168.122.103")], [#table-code("GigabitEthernet0/0")], [#table-code("192.168.122.1:5514/UDP"), mức #table-code("notifications")]),
     ([SW1], [#table-code("192.168.122.104")], [#table-code("Vlan1")], [#table-code("192.168.122.1:5514/UDP"), mức #table-code("notifications")]),
   ),
-  caption: [Bảng quy hoạch nguồn gửi Syslog trong Kịch bản 4],
+  caption: [Bảng quy hoạch nguồn gửi Syslog trong Kịch bản 3],
 ) <tab-syslog-planning-lab4>
 
 ==== Quy trình triển khai trên phần mềm CAMS
@@ -713,4 +713,4 @@ CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử d
 
 == Tổng kết chương
 
-Chương 5 đã đánh giá CAMS qua bốn kịch bản thực nghiệm trên phòng lab EVE-NG. Kết quả cho thấy phần mềm có thể cấu hình và xác minh các nghiệp vụ chuyển mạch, định tuyến, DHCP, GLBP, NAT/PAT và Syslog theo một quy trình thống nhất. Những hạn chế về phạm vi thiết bị, quản lý thông tin xác thực và rollback tự động là cơ sở cho các hướng phát triển tiếp theo.
+Chương 5 đã đánh giá CAMS qua ba kịch bản thực nghiệm trên phòng lab EVE-NG. Kết quả cho thấy phần mềm có thể cấu hình và xác minh các nghiệp vụ chuyển mạch, định tuyến, DHCP, GLBP, NAT/PAT và Syslog theo một quy trình thống nhất. Những hạn chế về phạm vi thiết bị, quản lý thông tin xác thực và rollback tự động là cơ sở cho các hướng phát triển tiếp theo.
