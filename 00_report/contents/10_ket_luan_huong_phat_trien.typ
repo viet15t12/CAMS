@@ -78,6 +78,3 @@ Nhằm mở rộng tính năng và nâng cao độ tin cậy của CAMS, nhóm n
 + *Mở rộng giao thức quản trị hiện đại:* tích hợp NETCONF/RESTCONF dựa trên mô hình dữ liệu YANG (IETF/OpenConfig).
 + *Tích hợp phân tích thông minh và cảnh báo:* phát triển công cụ phân tích lưu lượng dựa trên Syslog, tự động phát hiện bất thường an ninh mạng và gửi cảnh báo qua Webhook/Email.
 
-== Tổng kết
-
-Đề tài "Nghiên cứu và xây dựng hệ thống quản lý tập trung, tự động hóa cấu hình và giám sát an ninh mạng" đã hoàn thành các mục tiêu đặt ra, tạo nên hệ thống CAMS ổn định, trực quan và hiệu quả. Sản phẩm mang ý nghĩa thực tiễn trong việc hỗ trợ công tác học tập, giảng dạy tại Học viện Công nghệ Bưu chính Viễn thông, đồng thời là tiền đề cho các nghiên cứu chuyên sâu tiếp theo trong lĩnh vực Tự động hóa mạng và quản trị hạ tầng thông minh.
