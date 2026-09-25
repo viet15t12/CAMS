@@ -91,7 +91,7 @@ def render_vtp(payload: dict[str, Any]) -> list[str]:
         return []
     first = rows[0]
     if first.get("success") == "pending_delete":
-        return ["no vtp domain"]
+        return ["no vtp mode"]
     commands = [f"vtp domain {first['domain_name']}", f"vtp version {first['version']}"]
     vlan_mode = next((row["mode"] for row in rows if row["database_type"] == "vlan"), None)
     if vlan_mode:
