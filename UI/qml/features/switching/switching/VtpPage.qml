@@ -63,15 +63,50 @@ Rectangle {
         hostOptions = result && result.hosts ? result.hosts : []
     }
 
+    function selectGroupByHost(targetHost) {
+        if (!targetHost)
+            return -1
+        for (let i = 0; i < groupModel.count; i++) {
+            const members = groupModel.get(i).members || []
+            for (let j = 0; j < listCount(members); j++) {
+                if (String(listItem(members, j).host || "") === targetHost)
+                    return i
+            }
+        }
+        return -1
+    }
+
     function loadGroups() {
+        const previousSelectedDomain = (selectedGroupIndex >= 0 && selectedGroupIndex < groupModel.count)
+            ? String(groupModel.get(selectedGroupIndex).domain_name || "")
+            : ""
         groupModel.clear()
         const result = dbManager.getVtpGroups()
         const rows = result && result.groups ? result.groups : []
         for (let i = 0; i < rows.length; i++)
             groupModel.append(normalizedGroup(rows[i]))
-        if (selectedGroupIndex >= groupModel.count)
+        if (result && result.pending_hosts !== undefined && result.pending_hosts !== null)
+            pendingPushHosts = result.pending_hosts
+        else
+            refreshPendingPushHosts()
+
+        let nextIndex = -1
+        if (previousSelectedDomain !== "") {
+            for (let i = 0; i < groupModel.count; i++) {
+                if (groupModel.get(i).domain_name === previousSelectedDomain) {
+                    nextIndex = i
+                    break
+                }
+            }
+        }
+        if (nextIndex === -1 && root.host !== "") {
+            nextIndex = selectGroupByHost(root.host)
+        }
+        if (nextIndex >= 0) {
+            loadGroup(nextIndex)
+        } else {
             selectedGroupIndex = -1
-        refreshPendingPushHosts()
+        }
         dataRevision++
     }
 
@@ -155,11 +190,14 @@ Rectangle {
 
     function groupPendingDelete(members) {
         members = members || []
-        for (let i = 0; i < listCount(members); i++) {
-            if (String(listItem(members, i).success || "") === "pending_delete")
-                return true
+        const count = listCount(members)
+        if (count === 0)
+            return false
+        for (let i = 0; i < count; i++) {
+            if (String(listItem(members, i).success || "") !== "pending_delete")
+                return false
         }
-        return false
+        return true
     }
 
     function selectedGroupPendingDelete() {
@@ -222,6 +260,22 @@ Rectangle {
         errorText = ""
     }
 
+    function currentDeviceName() {
+        for (let i = 0; i < hostOptions.length; i++) {
+            if (hostOptions[i].host === root.host)
+                return hostOptions[i].device_name || hostOptions[i].host
+        }
+        return root.host || "Switch"
+    }
+
+    function detachSwitch(targetHost, pushAfter) {
+        const index = findMemberIndex(targetHost)
+        if (index >= 0) {
+            memberModel.remove(index)
+            saveGroup(pushAfter)
+        }
+    }
+
     function saveGroup(pushAfterSave) {
         errorText = ""
         if (memberModel.count < 2) {
@@ -252,14 +306,17 @@ Rectangle {
             batchDialog.openPreview(result.successful || [], "vtp")
     }
 
-    function deleteGroup() {
+    function deleteGroup(pushAfterDelete) {
         if (selectedGroupIndex < 0 || selectedGroupIndex >= groupModel.count)
             return
         const domainId = Number(groupModel.get(selectedGroupIndex).vtp_domain_id || 0)
         const result = dbManager.deleteVtpGroup(domainId)
         notify(String(result.message || ""), result.ok ? "success" : "error")
-        if (result.ok)
+        if (result.ok) {
             loadGroups()
+            if (pushAfterDelete && result.hosts && result.hosts.length > 0)
+                batchDialog.openPreview(result.hosts, "vtp")
+        }
     }
 
     function cancelGroupDelete() {
@@ -273,6 +330,14 @@ Rectangle {
     }
 
     Component.onCompleted: reloadData("initial")
+
+    onHostChanged: {
+        const autoIdx = selectGroupByHost(root.host)
+        if (autoIdx >= 0)
+            loadGroup(autoIdx)
+        else
+            resetDraft()
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -543,6 +608,16 @@ Rectangle {
                                         onToggled: memberModel.setProperty(
                                                        memberCard.index, "pruning", checked)
                                     }
+                                    StandardButton {
+                                        text: "Detach"
+                                        icon.source: AppAssets.actionDelete
+                                        type: "Text"
+                                        enabled: memberModel.count > 2
+                                        tooltip: memberModel.count > 2
+                                                 ? "Detach " + memberCard.host + " from this group (sets to transparent mode upon Save & Push)"
+                                                 : "Cannot detach: VTP Group requires at least two switches"
+                                        onClicked: root.toggleHost(memberCard.host, false)
+                                    }
                                 }
                             }
                         }
@@ -568,19 +643,63 @@ Rectangle {
                             onClicked: root.resetDraft()
                         }
                         StandardButton {
+                            objectName: "vtpDetachCurrentButton"
+                            text: "Detach " + root.currentDeviceName() + " & Push"
+                            icon.source: AppAssets.actionRemove
+                            type: "Secondary"
+                            visible: root.selectedGroupIndex >= 0
+                                     && !root.selectedGroupPendingDelete()
+                                     && root.findMemberIndex(root.host) >= 0
+                                     && memberModel.count > 2
+                            tooltip: "Detach " + root.currentDeviceName() + " (switch to transparent mode) while keeping the rest of the VTP group active"
+                            onClicked: root.detachSwitch(root.host, true)
+                        }
+                        StandardButton {
                             objectName: "vtpDeleteButton"
-                            text: "Delete"
+                            text: "Delete Group"
                             icon.source: AppAssets.actionDelete
                             type: "Danger"
                             visible: root.selectedGroupIndex >= 0
                                      && !root.selectedGroupPendingDelete()
-                            onClicked: root.deleteGroup()
+                            tooltip: "Delete this entire VTP group and set ALL member switches to transparent mode"
+                            onClicked: root.deleteGroup(false)
+                        }
+                        StandardButton {
+                            objectName: "vtpDeletePushButton"
+                            text: "Delete Group & Push"
+                            icon.source: AppAssets.actionPush
+                            type: "Danger"
+                            visible: root.selectedGroupIndex >= 0
+                                     && !root.selectedGroupPendingDelete()
+                            tooltip: "Delete this entire VTP group and immediately push transparent mode to ALL member switches"
+                            onClicked: root.deleteGroup(true)
+                        }
+                        StandardButton {
+                            objectName: "vtpPushDeleteButton"
+                            text: "Push Delete Group"
+                            icon.source: AppAssets.actionPush
+                            type: "Danger"
+                            visible: root.selectedGroupPendingDelete()
+                            tooltip: "Push transparent mode to all switches to finalize group deletion"
+                            onClicked: {
+                                if (root.selectedGroupIndex < 0 || root.selectedGroupIndex >= groupModel.count)
+                                    return
+                                const members = groupModel.get(root.selectedGroupIndex).members || []
+                                const hosts = []
+                                for (let i = 0; i < root.listCount(members); i++) {
+                                    const h = String(root.listItem(members, i).host || "").trim()
+                                    if (h !== "") hosts.push(h)
+                                }
+                                if (hosts.length > 0)
+                                    batchDialog.openPreview(hosts, "vtp")
+                            }
                         }
                         StandardButton {
                             objectName: "vtpCancelDeleteButton"
-                            text: "Cancel Delete"
+                            text: "Cancel Delete Group"
                             type: "Text"
                             visible: root.selectedGroupPendingDelete()
+                            tooltip: "Cancel group deletion and restore all switches to active status"
                             onClicked: root.cancelGroupDelete()
                         }
                         StandardButton {

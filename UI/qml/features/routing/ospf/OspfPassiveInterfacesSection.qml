@@ -9,6 +9,10 @@ Rectangle {
 
     required property var form
 
+    readonly property var interfaceOptions: root.form && root.form.availableInterfaces
+                                             ? root.form.availableInterfaces
+                                             : []
+
     visible: String(form.currentHostIp || "").trim() !== ""
         && form.activeRoutingSection === "Passive iface"
         && form.processCount > 0
@@ -29,7 +33,7 @@ Rectangle {
 
         SectionTitle {
             text: "OSPF PASSIVE INTERFACES"
-            helpText: "Interface: exact IOS interface name, for example GigabitEthernet0/0.\n\n" +
+            helpText: "Interface: select or enter exact IOS interface name, for example GigabitEthernet0/0.\n\n" +
                       "Passive: stops OSPF hello packets and neighbor formation on the interface while still advertising its connected network. Clear it to override a passive-default policy."
         }
 
@@ -39,16 +43,37 @@ Rectangle {
             columnSpacing: Theme.spacing12
             rowSpacing: Theme.spacing8
 
-            RoutingProcessComboBox { form: root.form; protocol: "OSPF" }
-            StandardTextField { id: ifaceField; Layout.fillWidth: true; labelText: "Interface"; placeholderText: "GigabitEthernet0/0" }
-            StandardCheckBox { id: passiveCheck; text: "Passive"; checked: true; Layout.alignment: Qt.AlignBottom }
+            RoutingProcessComboBox {
+                Layout.fillWidth: true
+                form: root.form
+                protocol: "OSPF"
+            }
+
+            StandardComboBox {
+                id: ifaceCombo
+                Layout.fillWidth: true
+                labelText: "Interface"
+                model: root.interfaceOptions
+                emptyText: "No interfaces found"
+            }
+
+            StandardCheckBox {
+                id: passiveCheck
+                text: "Passive"
+                checked: true
+                Layout.alignment: Qt.AlignBottom
+            }
+
             StandardButton {
                 text: "+ Add"
                 type: "Primary"
                 Layout.alignment: Qt.AlignBottom
+                enabled: ifaceCombo.currentValue !== ""
                 onClicked: {
-                    if (root.form.addPassiveInterfaceToSelectedProcess(ifaceField.text, passiveCheck.checked))
-                        ifaceField.clear()
+                    if (root.form.addPassiveInterfaceToSelectedProcess(ifaceCombo.currentValue, passiveCheck.checked)) {
+                        if (ifaceCombo.currentIndex + 1 < ifaceCombo.count)
+                            ifaceCombo.currentIndex = ifaceCombo.currentIndex + 1
+                    }
                 }
             }
         }

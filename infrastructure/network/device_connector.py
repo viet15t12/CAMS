@@ -212,6 +212,7 @@ class DeviceConnector:
             "interfaces_trunk": "show interfaces trunk",
             "etherchannel_summary": "show etherchannel summary",
             "vtp_status": "show vtp status",
+            "dhcp_snooping": "show ip dhcp snooping",
         }
         requested = tuple(commands) if state_keys is None else tuple(state_keys)
         unsupported = [key for key in requested if key not in commands]
@@ -226,12 +227,16 @@ class DeviceConnector:
             command = commands[key]
             value = self.send_command(command)
             if value is None:
+                if key == "dhcp_snooping":
+                    continue
                 return {
                     "ok": False,
                     "message": f"Switch state collection failed while running: {command}",
                     "outputs": outputs,
                 }
             if self._is_invalid_command_output(value):
+                if key == "dhcp_snooping":
+                    continue
                 return {
                     "ok": False,
                     "message": f"Switch does not support state command: {command}",

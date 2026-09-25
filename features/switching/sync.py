@@ -118,6 +118,129 @@ def parse_vtp_status(output: str) -> dict[str, Any] | None:
     }
 
 
+def _parse_vlan_list(text: str) -> set[int]:
+    """Parse comma/hyphen separated VLAN strings into a set of integers."""
+    vlans: set[int] = set()
+    cleaned = str(text or "").strip()
+    if not cleaned or cleaned.lower() == "none":
+        return vlans
+    for token in re.findall(r"\d+(?:-\d+)?", cleaned):
+        if "-" in token:
+            parts = token.split("-", 1)
+            try:
+                start, end = int(parts[0]), int(parts[1])
+                if 1 <= start <= end <= 4094:
+                    vlans.update(range(start, end + 1))
+            except ValueError:
+                continue
+        else:
+            try:
+                vlan_id = int(token)
+                if 1 <= vlan_id <= 4094:
+                    vlans.add(vlan_id)
+            except ValueError:
+                continue
+    return vlans
+
+
+def parse_dhcp_snooping(output: str) -> dict[str, Any]:
+    """Parse Cisco IOS `show ip dhcp snooping` output."""
+    text = str(output or "")
+    dhcp_vlans: set[int] = set()
+    trust_ports: set[str] = set()
+
+    oper_match = re.search(
+        r"(?ims)DHCP snooping is operational on following VLANs:\s*([0-9,\-\s]+)",
+        text,
+    )
+    conf_match = re.search(
+        r"(?ims)DHCP snooping is configured on following VLANs:\s*([0-9,\-\s]+)",
+        text,
+    )
+    if oper_match and oper_match.group(1).strip().lower() != "none":
+        dhcp_vlans.update(_parse_vlan_list(oper_match.group(1)))
+    elif conf_match and conf_match.group(1).strip().lower() != "none":
+        if not re.search(r"Switch DHCP snooping is disabled", text, re.IGNORECASE):
+            dhcp_vlans.update(_parse_vlan_list(conf_match.group(1)))
+
+    trust_section = re.search(
+        r"(?ims)(?:following Interfaces:|Interface\s+Trusted)\s*\n.*?-{5,}\s*\n(.*?)(?=\n\n|\Z)",
+        text,
+    )
+    search_target = trust_section.group(1) if trust_section else text
+    for line in search_target.splitlines():
+        line = line.strip()
+        match = re.match(
+            rf"^({INTERFACE_NAME_PATTERN})\s+(yes|no)\b",
+            line,
+            re.IGNORECASE,
+        )
+        if match and match.group(2).lower() == "yes":
+            trust_ports.add(normalize_interface_name(match.group(1)))
+
+    return {"dhcp_vlans": dhcp_vlans, "trust_ports": trust_ports}
+
+
+def parse_running_config_security(config_text: str) -> dict[str, Any]:
+    """Parse L2 security commands from Cisco IOS running configuration."""
+    text = str(config_text or "")
+    dhcp_vlans: set[int] = set()
+    dai_vlans: set[int] = set()
+    trust_ports: set[str] = set()
+
+    for match in re.finditer(
+        r"(?im)^\s*ip\s+dhcp\s+snooping\s+vlan\s+([0-9,\-\s]+)", text
+    ):
+        dhcp_vlans.update(_parse_vlan_list(match.group(1)))
+
+    for match in re.finditer(
+        r"(?im)^\s*ip\s+arp\s+inspection\s+vlan\s+([0-9,\-\s]+)", text
+    ):
+        dai_vlans.update(_parse_vlan_list(match.group(1)))
+
+    iface_blocks = re.finditer(
+        rf"(?ms)^\s*interface\s+({INTERFACE_NAME_PATTERN})\s*\n(.*?)(?=^\s*interface\b|^\s*!\s*$|\Z)",
+        text,
+    )
+    for match in iface_blocks:
+        if_name = normalize_interface_name(match.group(1))
+        block = match.group(2)
+        if re.search(r"(?im)^\s*ip\s+dhcp\s+snooping\s+trust\b", block) or re.search(
+            r"(?im)^\s*ip\s+arp\s+inspection\s+trust\b", block
+        ):
+            trust_ports.add(if_name)
+
+    return {
+        "dhcp_vlans": dhcp_vlans,
+        "dai_vlans": dai_vlans,
+        "trust_ports": trust_ports,
+    }
+
+
+def parse_l2_security(snapshot: dict[str, str]) -> dict[str, Any]:
+    """Combine L2 security operational state from show commands and running config."""
+    dhcp_vlans: set[int] = set()
+    dai_vlans: set[int] = set()
+    trust_ports: set[str] = set()
+
+    if "dhcp_snooping" in snapshot and snapshot["dhcp_snooping"]:
+        cmd_result = parse_dhcp_snooping(snapshot["dhcp_snooping"])
+        dhcp_vlans.update(cmd_result["dhcp_vlans"])
+        trust_ports.update(cmd_result["trust_ports"])
+
+    if "running_config" in snapshot and snapshot["running_config"]:
+        cfg_result = parse_running_config_security(snapshot["running_config"])
+        dhcp_vlans.update(cfg_result["dhcp_vlans"])
+        dai_vlans.update(cfg_result["dai_vlans"])
+        trust_ports.update(cfg_result["trust_ports"])
+
+    return {
+        "dhcp_vlans": dhcp_vlans,
+        "dai_vlans": dai_vlans,
+        "trust_ports": trust_ports,
+    }
+
+
 @dataclass
 class _Database:
     db_path: str
@@ -130,16 +253,29 @@ class _Database:
 
 
 def _module_has_local_state(conn: sqlite3.Connection, host: str, module: str) -> bool:
+    if module == "security":
+        return conn.execute(
+            """
+            SELECT 1 FROM t06_security_l2 WHERE host = ?
+            UNION ALL
+            SELECT 1 FROM t06_dhcp_trust_ports WHERE host = ?
+            LIMIT 1;
+            """,
+            (host, host),
+        ).fetchone() is not None
     table = {"vlan": "t06_vlan_db", "interfaces": "t06_interface_l2", "vtp": "t09_vtp_switches"}[module]
     return conn.execute(f"SELECT 1 FROM {table} WHERE host = ? LIMIT 1", (host,)).fetchone() is not None
 
 
 def _module_is_pending(db: _Database, host: str, module: str) -> bool:
-    tables = {
-        "vlan": ("t06_vlan_db",),
-        "interfaces": ("t06_interface_l2", "t06_etherchannel"),
-        "vtp": ("t09_vtp_switches",),
-    }[module]
+    if module == "security":
+        tables = ("t06_security_l2", "t06_dhcp_trust_ports")
+    else:
+        tables = {
+            "vlan": ("t06_vlan_db",),
+            "interfaces": ("t06_interface_l2", "t06_etherchannel"),
+            "vtp": ("t09_vtp_switches",),
+        }[module]
     with closing(db._connect()) as conn:
         return any(
             conn.execute(
@@ -319,6 +455,92 @@ def _sync_vtp(conn: sqlite3.Connection, host: str, output: str) -> int:
     return 1
 
 
+def _sync_security(
+    conn: sqlite3.Connection,
+    host: str,
+    security_data: dict[str, Any],
+    mode: str = "safe",
+) -> dict[str, int]:
+    dhcp_vlans = set(security_data.get("dhcp_vlans") or ())
+    dai_vlans = set(security_data.get("dai_vlans") or ())
+    trust_ports = set(security_data.get("trust_ports") or ())
+    protected_vlans = dhcp_vlans | dai_vlans
+    force = mode == "force_device_state"
+
+    # 1. Sync t06_security_l2
+    clause = "" if force else "AND success = 'synchronized'"
+    if protected_vlans:
+        placeholders = ",".join("?" for _ in protected_vlans)
+        conn.execute(
+            f"""
+            DELETE FROM t06_security_l2
+            WHERE host = ? {clause}
+              AND vlan_id NOT IN ({placeholders});
+            """,
+            (host, *sorted(protected_vlans)),
+        )
+    else:
+        conn.execute(
+            f"""
+            DELETE FROM t06_security_l2
+            WHERE host = ? {clause};
+            """,
+            (host,),
+        )
+
+    for vlan_id in sorted(protected_vlans):
+        conn.execute(
+            """
+            INSERT INTO t06_security_l2(
+                host, vlan_id, dhcp_snooping, dai_enabled, success
+            ) VALUES (?, ?, ?, ?, 'synchronized')
+            ON CONFLICT(host, vlan_id) DO UPDATE SET
+                dhcp_snooping = excluded.dhcp_snooping,
+                dai_enabled = excluded.dai_enabled,
+                success = 'synchronized';
+            """,
+            (
+                host,
+                vlan_id,
+                1 if vlan_id in dhcp_vlans else 0,
+                1 if vlan_id in dai_vlans else 0,
+            ),
+        )
+
+    # 2. Sync t06_dhcp_trust_ports
+    if trust_ports:
+        placeholders = ",".join("?" for _ in trust_ports)
+        conn.execute(
+            f"""
+            DELETE FROM t06_dhcp_trust_ports
+            WHERE host = ? {clause}
+              AND if_name NOT IN ({placeholders});
+            """,
+            (host, *sorted(trust_ports)),
+        )
+    else:
+        conn.execute(
+            f"""
+            DELETE FROM t06_dhcp_trust_ports
+            WHERE host = ? {clause};
+            """,
+            (host,),
+        )
+
+    for if_name in sorted(trust_ports):
+        conn.execute(
+            """
+            INSERT INTO t06_dhcp_trust_ports(host, if_name, success)
+            VALUES (?, ?, 'synchronized')
+            ON CONFLICT(host, if_name) DO UPDATE SET
+                success = 'synchronized';
+            """,
+            (host, if_name),
+        )
+
+    return {"security_vlans": len(protected_vlans), "trust_ports": len(trust_ports)}
+
+
 def sync_switch_state(
     db_path: str | Path,
     host: str,
@@ -330,12 +552,24 @@ def sync_switch_state(
     from .schema import ensure_switch_schema
 
     ensure_switch_schema(db)
+    device_role = ""
+    with db._connect() as conn:
+        role_row = conn.execute(
+            "SELECT role FROM t01_devices WHERE host = ? LIMIT 1", (host,)
+        ).fetchone()
+        if role_row:
+            device_role = str(role_row[0] or "").lower()
+
     parsed_fhrp = parse_running_config_sections(snapshot.get("running_config", ""))
+    parsed_security = parse_l2_security(snapshot)
+    has_security_snapshot = "dhcp_snooping" in snapshot or "running_config" in snapshot
+
     modules = {
         "vlan": bool(parse_vlan_brief(snapshot.get("vlan_brief", ""))),
         "interfaces": bool(parse_interface_status(snapshot.get("interfaces_status", ""))),
         "vtp": parse_vtp_status(snapshot.get("vtp_status", "")) is not None,
-        "fhrp": "running_config" in snapshot,
+        "fhrp": ("running_config" in snapshot) and (device_role == "sw3" if device_role else True),
+        "security": has_security_snapshot,
     }
     conflicts: list[str] = []
     with db._connect() as conn:
@@ -362,7 +596,14 @@ def sync_switch_state(
     if mode == "preview":
         return {"conflicts": conflicts, "available": [key for key, value in modules.items() if value]}
 
-    counts = {"vlans": 0, "interfaces": 0, "vtp": 0, "fhrp_members": 0}
+    counts = {
+        "vlans": 0,
+        "interfaces": 0,
+        "vtp": 0,
+        "fhrp_members": 0,
+        "security_vlans": 0,
+        "trust_ports": 0,
+    }
     applied: list[str] = []
     with db._connect() as conn, conn:
         if modules["vlan"] and (mode == "force_device_state" or "vlan" not in conflicts):
@@ -379,4 +620,9 @@ def sync_switch_state(
             insert_fhrp_members(conn, host, parsed_fhrp.fhrp_members)
             counts["fhrp_members"] = len(parsed_fhrp.fhrp_members)
             applied.append("fhrp")
+        if modules["security"] and (mode == "force_device_state" or "security" not in conflicts):
+            sec_counts = _sync_security(conn, host, parsed_security, mode=mode)
+            counts["security_vlans"] = sec_counts["security_vlans"]
+            counts["trust_ports"] = sec_counts["trust_ports"]
+            applied.append("security")
     return {**counts, "conflicts": conflicts, "applied": applied}

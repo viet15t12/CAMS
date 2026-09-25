@@ -168,11 +168,18 @@ def add_l2_trust_port(db: Any, host: str, if_name: Any) -> dict[str, Any]:
                 cursor = conn.execute(
                     """
                     INSERT INTO t06_dhcp_trust_ports(host, if_name, success)
-                    VALUES (?, ?, 'pending_apply');
+                    VALUES (?, ?, 'pending_apply')
+                    ON CONFLICT(host, if_name) DO UPDATE SET
+                        success = 'pending_apply';
                     """,
                     (target, interface),
                 )
-        return ok("Trusted uplink added", id=int(cursor.lastrowid))
+                row = conn.execute(
+                    "SELECT id FROM t06_dhcp_trust_ports WHERE host = ? AND if_name = ?;",
+                    (target, interface),
+                ).fetchone()
+                row_id = int(row["id"]) if row else int(cursor.lastrowid or 0)
+        return ok("Trusted uplink added", id=row_id)
     except (sqlite3.Error, ValueError) as exc:
         return failed(str(exc))
 

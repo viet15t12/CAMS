@@ -9,6 +9,10 @@ Rectangle {
 
     required property var form
 
+    readonly property var interfaceOptions: root.form && root.form.availableInterfaces
+                                             ? root.form.availableInterfaces
+                                             : []
+
     visible: String(form.currentHostIp || "").trim() !== ""
         && form.activeRoutingSection === "Interfaces"
         && form.processCount > 0
@@ -30,7 +34,7 @@ Rectangle {
         SectionTitle {
             text: "OSPF INTERFACE SETTINGS"
             helpText: "Process: OSPF process to update.\n\n" +
-                      "Interface: exact IOS interface name.\n\n" +
+                      "Interface: select or enter exact IOS interface name.\n\n" +
                       "Area: area assigned directly to this interface. Direct interface settings take precedence over broad network matching."
         }
 
@@ -49,9 +53,26 @@ Rectangle {
             columnSpacing: Theme.spacing12
             rowSpacing: Theme.spacing8
 
-            RoutingProcessComboBox { form: root.form; protocol: "OSPF" }
-            StandardTextField { id: nameField; Layout.fillWidth: true; labelText: "Interface"; placeholderText: "GigabitEthernet0/0" }
-            StandardTextField { id: areaField; Layout.fillWidth: true; labelText: "Area"; placeholderText: "0" }
+            RoutingProcessComboBox {
+                Layout.fillWidth: true
+                form: root.form
+                protocol: "OSPF"
+            }
+
+            StandardComboBox {
+                id: nameCombo
+                Layout.fillWidth: true
+                labelText: "Interface"
+                model: root.interfaceOptions
+                emptyText: "No interfaces found"
+            }
+
+            StandardTextField {
+                id: areaField
+                Layout.fillWidth: true
+                labelText: "Area"
+                placeholderText: "0"
+            }
         }
 
         SectionTitle {
@@ -106,12 +127,18 @@ Rectangle {
             StandardButton {
                 text: "+ Add Interface Setting"
                 type: "Primary"
-                onClicked: root.form.addInterfaceSettingToSelectedProcess(
-                               nameField.text, areaField.text, costField.text,
-                               priorityField.text, helloField.text, deadField.text,
-                               mtuCheck.checked, bfdCheck.checked,
-                               networkTypeCombo.currentText,
-                               authTypeCombo.currentValue, authKeyField.text)
+                enabled: nameCombo.currentValue !== "" && String(areaField.text || "").trim() !== ""
+                onClicked: {
+                    if (root.form.addInterfaceSettingToSelectedProcess(
+                                   nameCombo.currentValue, areaField.text, costField.text,
+                                   priorityField.text, helloField.text, deadField.text,
+                                   mtuCheck.checked, bfdCheck.checked,
+                                   networkTypeCombo.currentText,
+                                   authTypeCombo.currentValue, authKeyField.text)) {
+                        if (nameCombo.currentIndex + 1 < nameCombo.count)
+                            nameCombo.currentIndex = nameCombo.currentIndex + 1
+                    }
+                }
             }
             Item { Layout.fillWidth: true }
         }

@@ -23,6 +23,7 @@ ColumnLayout {
 
     // ── Alias xuống ComboBox bên trong ──
     property alias model: combo.model
+    property alias count: combo.count
     property alias currentIndex: combo.currentIndex
     property alias currentText: combo.currentText
     property alias displayText: combo.displayText

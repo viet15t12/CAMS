@@ -165,23 +165,24 @@ def ensure_switch_schema(db: Any) -> None:
                 )
             # Bang trang thai module cua project cu (neu co) khong con duoc
             # tao/ghi/doc; trang thai push SWL2 nam tren cot success tung row.
-            duplicate = conn.execute(
-                """
-                SELECT host, vlan_id
-                FROM t06_svi_interface
-                GROUP BY host, vlan_id
-                HAVING COUNT(*) > 1
-                LIMIT 1;
-                """
-            ).fetchone()
-            if duplicate is not None:
-                raise sqlite3.IntegrityError(
-                    "Cannot enforce unique SVI host/VLAN values while duplicate rows exist"
+            if table_exists("t06_svi_interface"):
+                duplicate = conn.execute(
+                    """
+                    SELECT host, vlan_id
+                    FROM t06_svi_interface
+                    GROUP BY host, vlan_id
+                    HAVING COUNT(*) > 1
+                    LIMIT 1;
+                    """
+                ).fetchone()
+                if duplicate is not None:
+                    raise sqlite3.IntegrityError(
+                        "Cannot enforce unique SVI host/VLAN values while duplicate rows exist"
+                    )
+                conn.execute(
+                    "CREATE UNIQUE INDEX IF NOT EXISTS ux_t06_svi_host_vlan "
+                    "ON t06_svi_interface(host, vlan_id);"
                 )
-            conn.execute(
-                "CREATE UNIQUE INDEX IF NOT EXISTS ux_t06_svi_host_vlan "
-                "ON t06_svi_interface(host, vlan_id);"
-            )
     if marker and all_success_tables_present:
         try:
             setattr(db, "_switch_success_schema_ready", marker)

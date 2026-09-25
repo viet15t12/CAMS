@@ -50,7 +50,7 @@ class VtpGroupRepository:
             result: list[dict[str, Any]] = []
             for domain in domains:
                 item = dict(domain)
-                item["members"] = [
+                all_members = [
                     dict(row)
                     for row in conn.execute(
                         """
@@ -66,8 +66,31 @@ class VtpGroupRepository:
                         (domain["vtp_domain_id"],),
                     ).fetchall()
                 ]
+                has_active = any(
+                    str(m.get("success") or "") != "pending_delete"
+                    for m in all_members
+                )
+                if has_active:
+                    item["members"] = [
+                        m for m in all_members
+                        if str(m.get("success") or "") != "pending_delete"
+                    ]
+                else:
+                    item["members"] = all_members
                 result.append(item)
         return result
+
+    def pending_hosts(self) -> list[str]:
+        with closing(self.db._connect()) as conn:
+            rows = conn.execute(
+                """
+                SELECT DISTINCT host
+                FROM t09_vtp_switches
+                WHERE success IN ('pending_apply', 'pending_delete')
+                ORDER BY host COLLATE NOCASE;
+                """
+            ).fetchall()
+            return [str(row["host"]) for row in rows]
 
     def save_group(
         self, domain: dict[str, Any], members: list[dict[str, Any]]
@@ -86,6 +109,30 @@ class VtpGroupRepository:
                 eligible_members.append(member)
 
         domain_id = self._save_domain(domain) if eligible_members else 0
+        if domain_id > 0:
+            with closing(self.db._connect()) as conn:
+                existing_rows = conn.execute(
+                    "SELECT host FROM t09_vtp_switches WHERE vtp_domain_id = ?;",
+                    (domain_id,),
+                ).fetchall()
+                existing_hosts = {str(r["host"]) for r in existing_rows}
+            new_hosts = {str(m["host"]) for m in eligible_members}
+            removed_hosts = existing_hosts - new_hosts
+            if removed_hosts:
+                with closing(self.db._connect()) as conn:
+                    with conn:
+                        placeholders = ",".join("?" for _ in removed_hosts)
+                        conn.execute(
+                            f"""
+                            UPDATE t09_vtp_switches
+                            SET sync_status = 'pending_delete',
+                                success = 'pending_delete'
+                            WHERE vtp_domain_id = ? AND host IN ({placeholders});
+                            """,
+                            (domain_id, *sorted(removed_hosts)),
+                        )
+                successful.extend(sorted(removed_hosts))
+
         for member in eligible_members:
             host = str(member["host"])
             try:
@@ -322,7 +369,11 @@ class VtpGroupService:
         return {"ok": True, "hosts": self.repository.connected_switches()}
 
     def groups(self) -> dict[str, Any]:
-        return {"ok": True, "groups": self.repository.list_groups()}
+        return {
+            "ok": True,
+            "groups": self.repository.list_groups(),
+            "pending_hosts": self.repository.pending_hosts(),
+        }
 
     def save(self, payload: dict[str, Any]) -> dict[str, Any]:
         try:

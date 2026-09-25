@@ -4,13 +4,17 @@ import unittest
 from pathlib import Path
 
 from features.switching.sync import (
+    parse_dhcp_snooping,
     parse_etherchannels,
     parse_interface_status,
+    parse_l2_security,
+    parse_running_config_security,
     parse_trunks,
     parse_vlan_brief,
     parse_vtp_status,
     sync_switch_state,
 )
+from features.switching.security_repository import get_l2_security
 from scripts.build_databases import build_database
 from infrastructure.database.paths import DEVICE_NETWORK_SCHEMA_DIR
 
@@ -70,6 +74,59 @@ Po1         10,20,30
         trunks = parse_trunks(output)
 
         self.assertEqual(trunks["Port-channel1"]["allowed_vlans"], "10,20,30-35")
+
+    def test_parses_dhcp_snooping_operational_output(self):
+        output = """Switch DHCP snooping is enabled
+DHCP snooping is configured on following VLANs:
+10,20
+DHCP snooping is operational on following VLANs:
+10,20
+DHCP snooping database/file transfer is not configured.
+Authentication is disabled.
+Operational option 82 support is disabled.
+Filtering on untrusted mobile nodes is disabled.
+Command-line option 82 insertion is enabled.
+Option 82 on untrusted port is not allowed.
+Verification of hwaddr: return false
+Verification of giaddr: return false
+DHCP snooping trust/rate is configured on the following Interfaces:
+
+Interface                  Trusted    Allow option    Rate limit (pps)
+-----------------------    -------    ------------    ----------------
+GigabitEthernet0/1         yes        yes             unlimited
+GigabitEthernet0/2         yes        yes             unlimited
+Port-channel1              yes        yes             unlimited
+"""
+        parsed = parse_dhcp_snooping(output)
+        self.assertEqual(parsed["dhcp_vlans"], {10, 20})
+        self.assertEqual(
+            parsed["trust_ports"],
+            {"GigabitEthernet0/1", "GigabitEthernet0/2", "Port-channel1"},
+        )
+
+    def test_parses_running_config_security(self):
+        config = """
+ip dhcp snooping vlan 10,20
+ip dhcp snooping
+ip arp inspection vlan 10,20
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ ip dhcp snooping trust
+ ip arp inspection trust
+!
+interface Port-channel1
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+"""
+        parsed = parse_running_config_security(config)
+        self.assertEqual(parsed["dhcp_vlans"], {10, 20})
+        self.assertEqual(parsed["dai_vlans"], {10, 20})
+        self.assertEqual(
+            parsed["trust_ports"],
+            {"GigabitEthernet0/1", "Port-channel1"},
+        )
 
 
 class SwitchSyncPersistenceTests(unittest.TestCase):
@@ -299,6 +356,128 @@ Port-channel1 10,20
                 ("192.0.2.20",),
             ).fetchone()[0]
         self.assertEqual(remaining, 0)
+
+    def test_switch_sync_imports_l2_security_and_trust_ports(self):
+        snapshot = {
+            "vlan_brief": "1 default active Gi0/1\n10 SALES active\n20 USERS active\n",
+            "dhcp_snooping": """Switch DHCP snooping is enabled
+DHCP snooping is configured on following VLANs:
+10,20
+DHCP snooping is operational on following VLANs:
+10,20
+DHCP snooping database/file transfer is not configured.
+Authentication is disabled.
+Operational option 82 support is disabled.
+Filtering on untrusted mobile nodes is disabled.
+Command-line option 82 insertion is enabled.
+Option 82 on untrusted port is not allowed.
+Verification of hwaddr: return false
+Verification of giaddr: return false
+DHCP snooping trust/rate is configured on the following Interfaces:
+
+Interface                  Trusted    Allow option    Rate limit (pps)
+-----------------------    -------    ------------    ----------------
+GigabitEthernet0/1         yes        yes             unlimited
+GigabitEthernet0/2         yes        yes             unlimited
+Port-channel1              yes        yes             unlimited
+""",
+        }
+        result = sync_switch_state(
+            self.db_path, "192.0.2.20", snapshot, mode="force_device_state"
+        )
+        self.assertEqual(result["security_vlans"], 2)
+        self.assertEqual(result["trust_ports"], 3)
+        self.assertIn("security", result["applied"])
+
+        with sqlite3.connect(self.db_path) as conn:
+            sec_rows = conn.execute(
+                "SELECT vlan_id, dhcp_snooping, dai_enabled, success "
+                "FROM t06_security_l2 WHERE host = '192.0.2.20' ORDER BY vlan_id;"
+            ).fetchall()
+            trust_rows = conn.execute(
+                "SELECT if_name, success FROM t06_dhcp_trust_ports "
+                "WHERE host = '192.0.2.20' ORDER BY if_name;"
+            ).fetchall()
+
+        self.assertEqual(
+            sec_rows,
+            [(10, 1, 0, "synchronized"), (20, 1, 0, "synchronized")],
+        )
+        self.assertEqual(
+            trust_rows,
+            [
+                ("GigabitEthernet0/1", "synchronized"),
+                ("GigabitEthernet0/2", "synchronized"),
+                ("Port-channel1", "synchronized"),
+            ],
+        )
+
+        class DB:
+            def __init__(self, path):
+                self.path = path
+            def _connect(self):
+                conn = sqlite3.connect(self.path)
+                conn.row_factory = sqlite3.Row
+                return conn
+
+        summary = get_l2_security(DB(self.db_path), "192.0.2.20")
+        self.assertEqual(len(summary["trust_ports"]), 3)
+        self.assertEqual(
+            [p["if_name"] for p in summary["trust_ports"]],
+            ["GigabitEthernet0/1", "GigabitEthernet0/2", "Port-channel1"],
+        )
+        snoop_vlans = [v["vlan_id"] for v in summary["vlans"] if v["dhcp_snooping"]]
+        self.assertEqual(snoop_vlans, [10, 20])
+
+    def test_switch_sync_preserves_pending_security_in_safe_mode(self):
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                "INSERT INTO t06_dhcp_trust_ports(host, if_name, success) "
+                "VALUES ('192.0.2.20', 'GigabitEthernet0/3', 'pending_apply');"
+            )
+
+        snapshot = {
+            "dhcp_snooping": """Switch DHCP snooping is enabled
+DHCP snooping is operational on following VLANs:
+10
+DHCP snooping trust/rate is configured on the following Interfaces:
+
+Interface                  Trusted    Allow option    Rate limit (pps)
+-----------------------    -------    ------------    ----------------
+GigabitEthernet0/1         yes        yes             unlimited
+""",
+        }
+
+        preview = sync_switch_state(
+            self.db_path, "192.0.2.20", snapshot, mode="preview"
+        )
+        self.assertIn("security", preview["conflicts"])
+
+        safe_result = sync_switch_state(
+            self.db_path, "192.0.2.20", snapshot, mode="safe"
+        )
+        self.assertNotIn("security", safe_result["applied"])
+        with sqlite3.connect(self.db_path) as conn:
+            ports = [
+                row[0]
+                for row in conn.execute(
+                    "SELECT if_name FROM t06_dhcp_trust_ports WHERE host = '192.0.2.20';"
+                ).fetchall()
+            ]
+        self.assertEqual(ports, ["GigabitEthernet0/3"])
+
+        force_result = sync_switch_state(
+            self.db_path, "192.0.2.20", snapshot, mode="force_device_state"
+        )
+        self.assertIn("security", force_result["applied"])
+        with sqlite3.connect(self.db_path) as conn:
+            ports = [
+                row[0]
+                for row in conn.execute(
+                    "SELECT if_name FROM t06_dhcp_trust_ports WHERE host = '192.0.2.20';"
+                ).fetchall()
+            ]
+        self.assertEqual(ports, ["GigabitEthernet0/1"])
 
 
 if __name__ == "__main__":

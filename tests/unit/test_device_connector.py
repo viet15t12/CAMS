@@ -138,6 +138,7 @@ class DeviceConnectorTests(unittest.TestCase):
                 "show interfaces trunk",
                 "show etherchannel summary",
                 "show vtp status",
+                "show ip dhcp snooping",
             ],
         )
         self.assertNotIn("show vtp password", commands)

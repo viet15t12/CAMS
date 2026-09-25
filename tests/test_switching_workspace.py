@@ -510,6 +510,11 @@ class SwitchingWorkspaceTests(unittest.TestCase):
             self.db, "sw2.local", "GigabitEthernet0/9"
         )
         self.assertTrue(trusted["ok"], trusted)
+        re_added = add_l2_trust_port(
+            self.db, "sw2.local", "GigabitEthernet0/9"
+        )
+        self.assertTrue(re_added["ok"], re_added)
+        self.assertEqual(re_added["id"], trusted["id"])
         binding = save_static_mac(
             self.db,
             "sw2.local",
@@ -1256,6 +1261,75 @@ class SwitchingWorkspaceTests(unittest.TestCase):
                 """
             ).fetchone()
         self.assertEqual(tuple(counts), (1, 2, 2))
+
+    def test_vtp_group_save_stages_removed_members_for_deletion(self) -> None:
+        with closing(self.db._connect()) as connection:
+            connection.execute(
+                "UPDATE t01_devices SET connection_status = 'connected';"
+            )
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO t01_devices(host, device_name, role, connection_status)
+                VALUES ('sw4.local', 'sw4', 'sw2', 'connected');
+                """
+            )
+            connection.commit()
+        service = VtpGroupService(self.db)
+        three = service.save(
+            {
+                "domain_name": "TRIM-GROUP",
+                "version": 2,
+                "members": [
+                    {"host": "sw2.local", "mode": "server"},
+                    {"host": "sw3.local", "mode": "client"},
+                    {"host": "sw4.local", "mode": "client"},
+                ],
+            }
+        )
+        self.assertTrue(three["ok"], three)
+
+        trimmed = service.save(
+            {
+                "domain_name": "TRIM-GROUP",
+                "version": 2,
+                "members": [
+                    {"host": "sw2.local", "mode": "server"},
+                    {"host": "sw3.local", "mode": "client"},
+                ],
+            }
+        )
+        self.assertTrue(trimmed["ok"], trimmed)
+        self.assertIn("sw4.local", trimmed["successful"])
+
+        with closing(self.db._connect()) as connection:
+            sw4_row = connection.execute(
+                "SELECT vtp_switch_id, sync_status, success FROM t09_vtp_switches WHERE host = 'sw4.local';"
+            ).fetchone()
+        self.assertIsNotNone(sw4_row)
+        sw4_id = int(sw4_row["vtp_switch_id"])
+        self.assertEqual((sw4_row["sync_status"], sw4_row["success"]), ("pending_delete", "pending_delete"))
+
+        groups_res = service.groups()
+        self.assertTrue(groups_res["ok"])
+        self.assertIn("sw4.local", groups_res["pending_hosts"])
+        group = next(g for g in groups_res["groups"] if g["domain_name"] == "TRIM-GROUP")
+        member_hosts = [m["host"] for m in group["members"]]
+        self.assertEqual(member_hosts, ["sw2.local", "sw3.local"])
+        self.assertNotIn("sw4.local", member_hosts)
+
+        sw4_commands = render_commands("vtp", collect_desired_state(self.db, "sw4.local", "vtp"))
+        self.assertEqual(sw4_commands, ["vtp mode transparent"])
+
+        from features.switching.success_repository import mark_task_success
+        mark_task_success(self.db, {"success_rows": [{"kind": "vtp", "id": sw4_id, "action": "delete"}]})
+
+        with closing(self.db._connect()) as connection:
+            sw4_exists = connection.execute("SELECT 1 FROM t09_vtp_switches WHERE host = 'sw4.local';").fetchone()
+            domain_exists = connection.execute("SELECT 1 FROM t09_vtp_domains WHERE domain_name = 'TRIM-GROUP';").fetchone()
+            active_count = connection.execute("SELECT COUNT(*) FROM t09_vtp_switches WHERE vtp_domain_id = ?;", (group["vtp_domain_id"],)).fetchone()[0]
+        self.assertIsNone(sw4_exists)
+        self.assertIsNotNone(domain_exists)
+        self.assertEqual(active_count, 2)
 
     def test_vtp_group_reports_partial_member_failures_and_limits_batch_size(self) -> None:
         with closing(self.db._connect()) as connection:

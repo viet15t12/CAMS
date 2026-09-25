@@ -136,7 +136,7 @@ def collect_vtp_state(conn: Any, host: str) -> dict[str, Any]:
         SELECT d.domain_name, d.version, d.password_type, d.password_value,
                s.pruning, s.success, m.database_type, m.mode, m.primary_server
         FROM t09_vtp_switches AS s
-        JOIN t09_vtp_domains AS d ON d.vtp_domain_id = s.vtp_domain_id
+        LEFT JOIN t09_vtp_domains AS d ON d.vtp_domain_id = s.vtp_domain_id
         LEFT JOIN t09_vtp_database_modes AS m ON m.vtp_switch_id = s.vtp_switch_id
         WHERE s.host = ?
         ORDER BY m.database_type;

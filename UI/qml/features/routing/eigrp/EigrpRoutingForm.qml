@@ -30,6 +30,7 @@ FormLayout {
     property int processCount: processModel.count
     property var processOptions: []
     property var processPayloadByUid: ({})
+    property var availableInterfaces: []
     property int viewPushRevision: 0
 
     ListModel { id: processModel }
@@ -139,8 +140,80 @@ FormLayout {
         rebuildProcessOptions()
     }
 
+    function loadAvailableInterfaces() {
+        const options = []
+        const seen = ({})
+        const host = String(currentHostIp || "").trim()
+
+        function addIface(name) {
+            const trimmed = String(name || "").trim()
+            if (trimmed !== "") {
+                const key = trimmed.toLowerCase()
+                if (!seen[key]) {
+                    seen[key] = true
+                    options.push(trimmed)
+                }
+            }
+        }
+
+        if (host !== "" && typeof dbManager !== "undefined" && dbManager !== null) {
+            if (typeof dbManager.getRouterInterfaces === "function") {
+                const rows = dbManager.getRouterInterfaces(host) || []
+                for (let i = 0; i < rows.length; ++i) {
+                    addIface(rows[i].interface_name)
+                }
+            }
+            if (typeof dbManager.getSwitchInterfaces === "function") {
+                const rows = dbManager.getSwitchInterfaces(host) || []
+                for (let i = 0; i < rows.length; ++i) {
+                    addIface(rows[i].if_name)
+                }
+            }
+            if (typeof dbManager.getSwitchSvis === "function") {
+                const rows = dbManager.getSwitchSvis(host) || []
+                for (let i = 0; i < rows.length; ++i) {
+                    const vlanId = Number(rows[i].vlan_id || 0)
+                    if (vlanId > 0)
+                        addIface("Vlan" + vlanId)
+                }
+            }
+            if (typeof dbManager.getSwitchEtherChannels === "function") {
+                const rows = dbManager.getSwitchEtherChannels(host) || []
+                for (let i = 0; i < rows.length; ++i) {
+                    const channel = Number(rows[i].po_number || 0)
+                    if (channel > 0)
+                        addIface("Port-channel" + channel)
+                }
+            }
+        }
+
+        const items = processItems()
+        for (let i = 0; i < items.length; ++i) {
+            const item = items[i]
+            if (item.passiveInterfaces) {
+                for (let j = 0; j < item.passiveInterfaces.count; ++j) {
+                    addIface(item.passiveInterfaces.get(j).interface_name)
+                }
+            }
+            if (item.interfaceSettings) {
+                for (let j = 0; j < item.interfaceSettings.count; ++j) {
+                    addIface(item.interfaceSettings.get(j).interface_name)
+                }
+            }
+        }
+
+        options.sort(function(a, b) {
+            return a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
+        })
+
+        availableInterfaces = options
+    }
+
     function selectRoutingSection(sectionName) {
         activeRoutingSection = sectionName
+        if (sectionName === "Passive iface" || sectionName === "Interfaces") {
+            loadAvailableInterfaces()
+        }
     }
 
     function addNetworkToSelectedProcess(network, wildcard, interfaceName) {
@@ -212,8 +285,17 @@ FormLayout {
             notify("Process and interface name are required.", "warning")
             return false
         }
+        for (let i = 0; i < item.passiveInterfaces.count; i++) {
+            if (String(item.passiveInterfaces.get(i).interface_name || "").toLowerCase() === iface.toLowerCase()) {
+                item.passiveInterfaces.setProperty(i, "mode", mode || "passive")
+                handleCardChanged()
+                notify("Updated EIGRP passive-interface entry for " + iface + ".", "info")
+                return true
+            }
+        }
         item.passiveInterfaces.append({ interface_name: iface, mode: mode || "passive" })
         handleCardChanged()
+        notify("Added EIGRP passive-interface entry for " + iface + ".", "info")
         return true
     }
 
@@ -427,7 +509,10 @@ FormLayout {
         for (let i = 0; i < processes.length; i++)
             appendProcess(processes[i])
 
+        loadAvailableInterfaces()
+
         Qt.callLater(function() {
+            eigrpRoutingForm.loadAvailableInterfaces()
             eigrpRoutingForm.loadedProcessesSignature = eigrpRoutingForm.currentProcessesSignature()
             eigrpRoutingForm.hasPendingLocalChanges = false
             eigrpRoutingForm.isLoading = false

@@ -8,6 +8,10 @@ Rectangle {
     id: root
     required property var form
 
+    readonly property var interfaceOptions: root.form && root.form.availableInterfaces
+                                             ? root.form.availableInterfaces
+                                             : []
+
     visible: String(form.currentHostIp || "").trim() !== ""
         && form.activeRoutingSection === "Passive iface"
         && form.processCount > 0
@@ -28,7 +32,7 @@ Rectangle {
 
         SectionTitle {
             text: "EIGRP PASSIVE INTERFACES"
-            helpText: "Interface: exact IOS interface name.\n\n" +
+            helpText: "Interface: select or enter exact IOS interface name.\n\n" +
                       "Passive: suppresses EIGRP hellos and prevents neighbors while still advertising the connected network.\n\n" +
                       "No passive: explicitly permits neighbors, typically used to override Passive Default."
         }
@@ -38,10 +42,41 @@ Rectangle {
             columns: width < 760 ? 2 : 4
             columnSpacing: Theme.spacing12
             rowSpacing: Theme.spacing8
-            RoutingProcessComboBox { form: root.form; protocol: "EIGRP" }
-            StandardTextField { id: ifaceField; Layout.fillWidth: true; labelText: "Interface"; placeholderText: "GigabitEthernet0/0" }
-            StandardComboBox { id: modeCombo; Layout.fillWidth: true; labelText: "Mode"; model: ["Passive", "No passive"]; valueModel: ["passive", "no-passive"] }
-            StandardButton { text: "+ Add"; type: "Primary"; Layout.alignment: Qt.AlignBottom; onClicked: if (root.form.addPassiveInterfaceToSelectedProcess(ifaceField.text, modeCombo.currentValue)) ifaceField.clear() }
+
+            RoutingProcessComboBox {
+                Layout.fillWidth: true
+                form: root.form
+                protocol: "EIGRP"
+            }
+
+            StandardComboBox {
+                id: ifaceCombo
+                Layout.fillWidth: true
+                labelText: "Interface"
+                model: root.interfaceOptions
+                emptyText: "No interfaces found"
+            }
+
+            StandardComboBox {
+                id: modeCombo
+                Layout.fillWidth: true
+                labelText: "Mode"
+                model: ["Passive", "No passive"]
+                valueModel: ["passive", "no-passive"]
+            }
+
+            StandardButton {
+                text: "+ Add"
+                type: "Primary"
+                Layout.alignment: Qt.AlignBottom
+                enabled: ifaceCombo.currentValue !== ""
+                onClicked: {
+                    if (root.form.addPassiveInterfaceToSelectedProcess(ifaceCombo.currentValue, modeCombo.currentValue)) {
+                        if (ifaceCombo.currentIndex + 1 < ifaceCombo.count)
+                            ifaceCombo.currentIndex = ifaceCombo.currentIndex + 1
+                    }
+                }
+            }
         }
 
         Repeater {

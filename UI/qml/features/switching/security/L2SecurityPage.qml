@@ -637,7 +637,9 @@ Item {
                         Layout.alignment: Qt.AlignRight
                         text: "Add Trust Port"
                         type: "Primary"
-                        enabled: trustInterfaceCombo.count > 0 && !root.saving
+                        enabled: (trustInterfaceCombo.count > 0 || trustInterfaceCombo.hasOptions)
+                                 && trustInterfaceCombo.currentValue !== ""
+                                 && !root.saving
                         onClicked: root.addTrustPort(trustInterfaceCombo.currentValue)
                     }
                 }

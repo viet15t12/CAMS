@@ -87,8 +87,8 @@ class ConfigSyncService:
                 }
             try:
                 switch_snapshot = dict(switch_state)
-                if role == "sw3":
-                    switch_snapshot["running_config"] = str(running_config or "")
+                if running_config:
+                    switch_snapshot["running_config"] = str(running_config)
                 summary = self._switch_synchronizer(
                     self.db_path,
                     normalized_host,

@@ -54,6 +54,11 @@ class _OspfBridge(QObject, ConversionMixin):
     def hasPendingViewPush(self, _controller: str, _host: str, _module: str) -> bool:
         return False
 
+    @pyqtSlot(str, result="QVariant")
+    def getRouterInterfaces(self, host: str) -> list[dict[str, Any]]:
+        from features.interfaces.repository import get_router_interfaces
+        return get_router_interfaces(self, host)
+
 
 class OspfQmlDatabaseBridgeTests(unittest.TestCase):
     @classmethod
@@ -323,6 +328,28 @@ class OspfQmlDatabaseBridgeTests(unittest.TestCase):
         self.assertEqual(
             form.property("errorMessage"), "OSPF database service is unavailable."
         )
+        self.assertEqual(self.warnings, [])
+
+    def test_available_interfaces_populated_and_passive_interface_flow(self) -> None:
+        form = self._create_form()
+        available = list(form.property("availableInterfaces").toVariant() or [])
+        self.assertIn("GigabitEthernet0/0", available)
+
+        # Switch to Passive iface section
+        form.setProperty("activeRoutingSection", "Passive iface")
+        form.selectRoutingSection("Passive iface")
+        self.app.processEvents()
+
+        # Add a passive interface to the selected process
+        ok = form.addPassiveInterfaceToSelectedProcess("GigabitEthernet0/0", True)
+        self.assertTrue(ok)
+        self.app.processEvents()
+
+        # Update it to no-passive (passive: false)
+        ok_update = form.addPassiveInterfaceToSelectedProcess("GigabitEthernet0/0", False)
+        self.assertTrue(ok_update)
+        self.app.processEvents()
+
         self.assertEqual(self.warnings, [])
 
 
