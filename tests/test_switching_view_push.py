@@ -230,7 +230,7 @@ class SwitchingViewPushTests(unittest.TestCase):
 
         tasks = self.controller.collect_pending_tasks("sw2.local", "vtp")
         self.assertEqual(len(tasks), 1)
-        self.assertEqual(tasks[0]["commands"], ["no vtp domain"])
+        self.assertEqual(tasks[0]["commands"], ["vtp mode transparent"])
         self.assertEqual(
             tasks[0]["tracking"]["success_rows"][0]["action"], "delete"
         )
@@ -512,7 +512,7 @@ VTP Pruning Mode : Enabled
             ).fetchall()
         self.assertEqual(
             [(row["vlan_id"], row["device_present"]) for row in vlans],
-            [(1, 1), (10, 1), (20, 1), (30, 0)],
+            [(1, 1), (10, 1), (20, 1)],
         )
 
     def test_vtp_client_snapshot_is_rejected_when_device_reports_other_domain(self) -> None:

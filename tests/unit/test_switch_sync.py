@@ -276,6 +276,30 @@ Port-channel1 10,20
             ).fetchone()[0]
         self.assertEqual(remaining, 0)
 
+    def test_vlan_sync_removes_absent_synchronized_vlan(self):
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                """
+                INSERT INTO t06_vlan_db(
+                    host, vlan_id, vlan_name, state, success, device_present
+                ) VALUES (?, 20, 'USERS', 'active', 'synchronized', 1);
+                """,
+                ("192.0.2.20",),
+            )
+
+        snapshot = {
+            "vlan_brief": "VLAN Name Status Ports\n1 default active Gi0/1\n",
+        }
+        sync_switch_state(
+            self.db_path, "192.0.2.20", snapshot, mode="force_device_state"
+        )
+        with sqlite3.connect(self.db_path) as conn:
+            remaining = conn.execute(
+                "SELECT COUNT(*) FROM t06_vlan_db WHERE host = ? AND vlan_id = 20;",
+                ("192.0.2.20",),
+            ).fetchone()[0]
+        self.assertEqual(remaining, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

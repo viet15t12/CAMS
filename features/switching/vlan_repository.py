@@ -76,10 +76,25 @@ def save_vlan(db: Any, host: str, payload: dict[str, Any]) -> dict[str, Any]:
                     saved_id = row_id
                 else:
                     cursor = conn.execute(
-                        "INSERT INTO t06_vlan_db(host, vlan_id, vlan_name, state) VALUES (?, ?, ?, ?);",
+                        """
+                        INSERT INTO t06_vlan_db(
+                            host, vlan_id, vlan_name, state, success, device_present
+                        )
+                        VALUES (?, ?, ?, ?, 'pending_apply', 0)
+                        ON CONFLICT(host, vlan_id) DO UPDATE SET
+                            vlan_name = excluded.vlan_name,
+                            state = excluded.state,
+                            success = 'pending_apply';
+                        """,
                         (target, vlan_id, name, state),
                     )
-                    saved_id = int(cursor.lastrowid)
+                    saved_id = int(cursor.lastrowid or 0)
+                    if saved_id == 0:
+                        existing = conn.execute(
+                            "SELECT id FROM t06_vlan_db WHERE host = ? AND vlan_id = ?",
+                            (target, vlan_id),
+                        ).fetchone()
+                        saved_id = int(existing[0]) if existing else 0
         return ok("VLAN saved to the local workspace", id=saved_id)
     except (sqlite3.Error, ValueError) as exc:
         return failed(str(exc))

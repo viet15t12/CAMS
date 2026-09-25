@@ -156,17 +156,25 @@ def _module_is_pending(db: _Database, host: str, module: str) -> bool:
 
 
 def _sync_vlans(conn: sqlite3.Connection, host: str, rows: list[dict[str, Any]]) -> int:
-    # A collected VLAN table is authoritative for device presence. Keep rows
-    # that may still be referenced by local policy, but make absent VLANs
-    # invisible as device state until a later snapshot advertises them again.
-    conn.execute(
-        """
-        UPDATE t06_vlan_db
-        SET success = 'synchronized', device_present = 0
-        WHERE host = ?;
-        """,
-        (host,),
-    )
+    observed_ids = [row["vlan_id"] for row in rows]
+    if observed_ids:
+        placeholders = ",".join("?" for _ in observed_ids)
+        conn.execute(
+            f"""
+            DELETE FROM t06_vlan_db
+            WHERE host = ? AND success = 'synchronized'
+              AND vlan_id NOT IN ({placeholders});
+            """,
+            (host, *sorted(observed_ids)),
+        )
+    else:
+        conn.execute(
+            """
+            DELETE FROM t06_vlan_db
+            WHERE host = ? AND success = 'synchronized';
+            """,
+            (host,),
+        )
     for row in rows:
         conn.execute(
             """
@@ -176,7 +184,7 @@ def _sync_vlans(conn: sqlite3.Connection, host: str, rows: list[dict[str, Any]])
             VALUES (?, ?, ?, ?, 'synchronized', 1)
             ON CONFLICT(host, vlan_id) DO UPDATE SET
                 vlan_name = excluded.vlan_name, state = excluded.state,
-                success = 'synchronized', device_present = 1
+                success = 'synchronized', device_present = 1;
             """,
             (host, row["vlan_id"], row["vlan_name"], row["state"]),
         )
