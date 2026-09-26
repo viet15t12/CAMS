@@ -163,6 +163,15 @@
     radius: 4pt,
   )
 
+  // Viền đen mảnh bao quanh toàn bộ hình ảnh trong báo cáo.
+  show image: it => block(width: 100%)[
+    #align(center, box(
+      stroke: 0.4pt + black,
+      inset: 0pt,
+      it,
+    ))
+  ]
+
   set heading(numbering: report-heading-numbering)
   set outline(indent: 0.46cm)
   set math.equation(
