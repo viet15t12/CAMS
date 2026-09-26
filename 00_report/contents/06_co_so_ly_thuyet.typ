@@ -9,27 +9,27 @@ Quản lý tập trung hợp nhất danh mục thiết bị, thông số kết n
 
 Tự động hóa cấu hình chuyển các thao tác lặp lại thành chuỗi xử lý phần mềm: nhận tham số, kiểm tra dữ liệu, sinh lệnh, kết nối, triển khai và ghi nhận kết quả. Việc phê duyệt thay đổi vẫn thuộc về người quản trị. Cách tiếp cận này giúp thống nhất cú pháp, nhưng một mẫu lệnh sai cũng có thể ảnh hưởng nhiều thiết bị, nên bước xem trước và theo dõi lỗi theo từng thiết bị là cần thiết.
 
-Mô hình quản lý theo trạng thái phân biệt *trạng thái mong muốn* (Desired State), do người dùng thiết lập, với *trạng thái quan sát* (Observed State), được thu thập từ thiết bị tại một thời điểm. Dữ liệu mới lưu trong ứng dụng chưa chứng minh thiết bị đã thay đổi. CAMS sử dụng luồng View & Push để chuyển cấu hình chờ thành lệnh, cho phép kiểm duyệt trước khi thực thi và cập nhật kết quả sau khi nhận phản hồi.
+Mô hình quản lý theo trạng thái phân biệt *trạng thái mong muốn*, do người dùng thiết lập, với *trạng thái quan sát*, được thu thập từ thiết bị tại một thời điểm. Dữ liệu mới lưu trong ứng dụng chưa chứng minh thiết bị đã thay đổi. CAMS sử dụng luồng View & Push để chuyển cấu hình chờ thành lệnh, cho phép kiểm duyệt trước khi thực thi và cập nhật kết quả sau khi nhận phản hồi.
 
 Lưu bản sao cấu hình giúp truy vết thay đổi và so sánh phiên bản. Khôi phục dữ liệu dự án hoặc xem một bản cấu hình cũ không tự động đưa thiết bị mạng về trạng thái cũ; khôi phục cấu hình thiết bị cần có thao tác triển khai và xác minh riêng.
 
 == CLI và giao thức quản trị từ xa
 
-CLI Cisco IOS tổ chức lệnh theo ngữ cảnh, chẳng hạn chế độ EXEC đặc quyền, cấu hình toàn cục và cấu hình cổng (interface configuration). Công cụ tự động hóa cần nhận diện dấu nhắc, chuyển đúng chế độ và xử lý phản hồi. Dữ liệu từ các lệnh như `show running-config` hoặc `show ip route` thường là văn bản, cần được phân tích thành các trường có cấu trúc để lưu trữ và hiển thị.
+CLI Cisco IOS tổ chức lệnh theo các trạng thái, ví dụ như chế độ đặc quyền `#`, cấu hình `(config)#` và cấu hình cổng `(config-if)#`. Công cụ tự động hóa cần nhận diện dấu nhắc, chuyển đúng chế độ và xử lý phản hồi. Dữ liệu từ các lệnh như `show running-config` hoặc `show ip route` thường là văn bản, cần được phân tích thành các trường có cấu trúc để lưu trữ và hiển thị.
 
 SSH cung cấp kênh quản trị có mã hóa và cơ chế xác thực theo kiến trúc mô tả trong @rfc4251. Telnet truyền dữ liệu dạng rõ nên chỉ phù hợp với tình huống thử nghiệm được kiểm soát khi cần tương thích thiết bị. CAMS có thể hỗ trợ cả hai phương thức, nhưng ưu tiên SSH cho các tác vụ quản trị.
 
-Phiên kết nối có thể được tái sử dụng để giảm số lần bắt tay và xác thực. Vì mỗi phiên CLI duy trì ngữ cảnh lệnh, các tác vụ dùng chung phiên cần được tuần tự hóa. Đồng thời, phần mềm phải xử lý phiên mất kết nối, hết thời gian chờ hoặc thiết bị trả lỗi thay vì suy ra thành công chỉ từ việc gửi được dữ liệu.
+Phiên kết nối có thể được tái sử dụng để giảm số lần bắt tay và xác thực. Vì mỗi phiên CLI duy trì trạng thái khác nhau, các tác vụ dùng chung phiên cần được tuần tự hóa. Đồng thời, phần mềm phải xử lý phiên mất kết nối, hết thời gian chờ hoặc thiết bị trả lỗi thay vì suy ra thành công chỉ từ việc gửi được dữ liệu.
 
 == Nghiệp vụ mạng phục vụ tự động hóa
 
 === Dịch vụ và định tuyến Lớp 3
 
-Địa chỉ IPv4 và thông số cổng (interface) là cơ sở để các thiết bị liên lạc. Ngoài cổng vật lý, các cổng logic như Loopback, Subinterface, Tunnel và SVI phục vụ định danh, phân chia lưu lượng hoặc định tuyến giữa các mạng. Khi sinh cấu hình, cần kiểm tra địa chỉ, mặt nạ và mối liên hệ giữa cổng với dịch vụ sử dụng nó.
+Địa chỉ IPv4 cùng các thông số cổng chính là nền tảng để các thiết bị mạng có thể nhận diện và liên lạc với nhau. Bên cạnh các cổng vật lý, hệ thống còn sử dụng các cổng logic như Loopback, Subinterface, Tunnel và SVI nhằm phục vụ việc định danh thiết bị, phân chia lưu lượng theo từng phân đoạn mạng, cũng như hỗ trợ định tuyến giữa các mạng khác nhau. Trong quá trình sinh cấu hình, cần đặc biệt chú ý kiểm tra tính chính xác của địa chỉ IP, subnet mask, cũng như mối liên hệ logic giữa từng cổng với dịch vụ tương ứng đang sử dụng cổng đó.
 
-DHCP cung cấp tham số IP cho máy trạm; chuỗi trao đổi cấp phát điển hình gồm Discover, Offer, Request và Acknowledge. DHCP Relay chuyển tiếp yêu cầu giữa các miền quảng bá. Các dữ liệu cần quản lý gồm mạng cấp phát, gateway, DNS, thời gian thuê và dải địa chỉ loại trừ @rfc2131.
+DHCP cung cấp địa chỉ IP cho thuyết bị có cấu hình IP động; chuỗi trao đổi cấp phát điển hình gồm Discover, Offer, Request và Acknowledge. DHCP Relay chuyển tiếp yêu cầu giữa các miền quảng bá. Các dữ liệu cần quản lý gồm mạng cấp phát, gateway, DNS, thời gian thuê và dải địa chỉ loại trừ @rfc2131.
 
-Định tuyến tĩnh khai báo mạng đích và đường đi do người quản trị lựa chọn. OSPFv2 trao đổi thông tin trạng thái liên kết và tính đường đi theo chi phí; EIGRP sử dụng cơ chế định tuyến vector khoảng cách nâng cao. Các tham số mạng quảng bá, định danh tiến trình, vùng hoặc hệ tự trị cần được cấu hình nhất quán giữa các thiết bị tham gia @rfc2328 @rfc7868.
+Định tuyến tĩnh cho phép người quản trị chủ động khai báo mạng đích cùng đường đi cụ thể theo lựa chọn của mình. Bên cạnh đó, các giao thức định tuyến động cũng được sử dụng nhằm tự động hóa quá trình này: OSPFv2 hoạt động dựa trên cơ chế trạng thái liên kết (link-state), trao đổi thông tin giữa các router và tính toán đường đi tối ưu theo chi phí; trong khi đó, EIGRP sử dụng cơ chế định tuyến vector khoảng cách nâng cao để xác định tuyến đường phù hợp. Dù áp dụng giao thức nào, các tham số như mạng được quảng bá, mã định danh tiến trình, vùng mạng hay hệ tự trị (autonomous system) đều cần được cấu hình thống nhất giữa các thiết bị tham gia, nhằm đảm bảo quá trình trao đổi thông tin định tuyến diễn ra chính xác @rfc2328 @rfc7868.
 
 NAT thực hiện ánh xạ địa chỉ; PAT cho phép nhiều luồng dùng chung một địa chỉ thông qua thông tin cổng. Việc triển khai cần xác định đúng phía trong, phía ngoài và điều kiện áp dụng. NAT phục vụ chuyển đổi địa chỉ, không thay thế chính sách kiểm soát truy cập @rfc3022. Các giao thức dự phòng gateway như HSRP, VRRP và GLBP phục vụ duy trì đường ra cho mạng nội bộ khi gateway thay đổi trạng thái.
 
@@ -49,9 +49,9 @@ Port Security giới hạn địa chỉ MAC được sử dụng trên cổng. D
 
 Giám sát sử dụng hai nguồn dữ liệu bổ sung cho nhau: trạng thái lấy bằng lệnh truy vấn và sự kiện do thiết bị gửi về qua Syslog. Trạng thái phản ánh kết quả tại thời điểm thu thập, trong khi nhật ký ghi nhận diễn biến như thay đổi trạng thái cổng (interface up/down), thay đổi cấu hình hoặc vi phạm chính sách. Cả hai cần được gắn với thiết bị nguồn và thời điểm để phục vụ đối chiếu.
 
-Một luồng Syslog tập trung gồm thiết bị phát log, bộ nhận, bộ phân tích, nơi lưu trữ và giao diện truy vấn. CAMS giữ các trường đã phân tích và bản tin gốc để có thể kiểm tra lại khi dữ liệu thiếu hoặc không đúng định dạng. Địa chỉ đích, cổng và giao thức trên thiết bị phải khớp cấu hình của bộ nhận.
+Một luồng Syslog tập trung bao gồm thiết bị phát log, bộ nhận, bộ phân tích, nơi lưu trữ và giao diện truy vấn. CAMS giữ các trường đã phân tích và bản tin gốc để có thể kiểm tra lại khi dữ liệu thiếu hoặc không đúng định dạng. Địa chỉ đích, cổng và giao thức trên thiết bị phải khớp cấu hình của bộ nhận.
 
-Syslog sử dụng tám mức severity từ 0 đến 7; số nhỏ hơn biểu thị mức nghiêm trọng cao hơn. Tên mức lần lượt là Emergency, Alert, Critical, Error, Warning, Notice, Informational và Debug. Severity giúp sắp xếp ưu tiên xem xét, nhưng riêng mức độ này chưa đủ để kết luận có tấn công. Cần kết hợp nguồn, mã sự kiện, nội dung và bối cảnh vận hành.
+Syslog sử dụng tám mức severity từ 0 đến 7(theo cisco); số nhỏ hơn biểu thị mức nghiêm trọng cao hơn. Tên mức lần lượt là Emergency, Alert, Critical, Error, Warning, Notice, Informational và Debug. Severity giúp sắp xếp ưu tiên xem xét, nhưng riêng mức độ này chưa đủ để kết luận có tấn công. Cần kết hợp nguồn, mã sự kiện, nội dung và bối cảnh vận hành.
 
 Phát hiện vi phạm trên thiết bị, chuyển log về CAMS và hiển thị kết quả lọc là ba bước riêng biệt. Nếu thiết bị không phát sinh hoặc không gửi bản tin tương ứng, bộ nhận không thể suy ra đầy đủ sự kiện. Trong phạm vi đề tài, phân tích cảnh báo dựa trên nhật ký tập trung; tương quan nhiều sự kiện và gửi thông báo chủ động là các khả năng cần đánh giá riêng trước khi khẳng định đã hỗ trợ.
 

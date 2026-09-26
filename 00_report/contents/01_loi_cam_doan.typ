@@ -2,7 +2,7 @@
 
 #front-heading[LỜI CAM ĐOAN]
 
-Chúng tôi cam đoan báo cáo nghiên cứu khoa học với ĐỀ TÀI: NGHIÊN CỨU VÀ XÂY DỰNG HỆ THỐNG QUẢN LÝ TẬP TRUNG, TỰ ĐỘNG HÓA CẤU HÌNH VÀ GIÁM SÁT AN NINH MẠNG viết tắt là CAMS là công trình do nhóm tác giả thực hiện dưới sự hướng dẫn khoa học của ThS. Phan Thanh Toản, Bộ môn Mạng Viễn thông, Học viện Công nghệ Bưu chính Viễn thông cơ sở tại TP. Hồ Chí Minh.
+Chúng tôi cam đoan báo cáo nghiên cứu khoa học với đề tài: nghiên cứu và xây dựng hệ thống quản lý tập trung, tự động hóa cấu hình và giám sát an ninh mạng là công trình do nhóm tác giả thực hiện dưới sự hướng dẫn khoa học của ThS. Phan Thanh Toản, Bộ môn Mạng Viễn thông, Học viện Công nghệ Bưu chính Viễn thông cơ sở tại TP. Hồ Chí Minh.
 
 Kết quả trình bày trong báo cáo là trung thực, do nhóm tự thực hiện và chưa từng được công bố trong bất kỳ công trình nào khác. Mã nguồn tự xây dựng, thư viện mã nguồn mở và tài liệu tham khảo sử dụng trong quá trình phát triển đều được trích dẫn đầy đủ theo đúng quy định.
 

@@ -5,7 +5,7 @@
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng desktop phát triển bằng Python 3.11+, sử dụng Qt Quick/QML và PyQt6 cho giao diện, SQLite cho lưu trữ, Jinja2 cho mẫu cấu hình, Netmiko/Paramiko cho giao tiếp và Dulwich cho lịch sử cấu hình. Công cụ `uv` quản lý môi trường và các phụ thuộc của dự án.
+CAMS là ứng dụng desktop phát triển bằng Python 3.11+, sử dụng Qt Quick/QML và PyQt6 cho giao diện, SQLite cho lưu trữ, Jinja2 cho mẫu cấu hình, Netmiko/Paramiko cho giao tiếp và Dulwich cho lịch sử cấu hình. Công cụ `uv` quản lý môi trường và các gói phụ thuộc của dự án.
 
 Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và thành phần dùng chung; `core/` chứa các đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và workspace. Tệp `main.py` khởi tạo ứng dụng và kết nối các thành phần. Cấu trúc chi tiết được dành cho phụ lục để chương này tập trung vào cách hiện thực chức năng.
 
@@ -24,7 +24,7 @@ Các bộ điều khiển dữ liệu, Syslog, SFTP và workspace xử lý chứ
 
 === Danh mục thiết bị và phiên kết nối
 
-Phân hệ Inventory lưu định danh, địa chỉ quản trị, tham số kết nối và vai trò router, switch L2 hoặc switch L3. Người dùng có thể thêm từng thiết bị hoặc nhập danh sách từ JSON/Excel, tìm kiếm và chọn các thiết bị cần thao tác. Danh mục là điểm liên kết giữa phiên làm việc, dữ liệu cấu hình và thông tin thu thập.
+Giao diện Inventory lưu mã địn danh, địa chỉ quản trị, tham số kết nối và vai trò router, switch L2 hoặc switch L3. Người dùng có thể thêm từng thiết bị hoặc nhập danh sách từ JSON/Excel, tìm kiếm và chọn các thiết bị cần thao tác. Danh mục là điểm liên kết giữa phiên làm việc, dữ liệu cấu hình và thông tin thu thập.
 
 `DeviceSessionRegistry` quản lý các phiên kết nối và cho phép tái sử dụng phiên đang hoạt động. Khóa `operation_lock` điều phối những tác vụ cùng truy cập phiên; `BatchExecutor` hỗ trợ thực hiện trên nhiều thiết bị với kết quả tách riêng. Cách tổ chức này hạn chế việc gửi lệnh đan xen trên một kênh CLI và giúp xác định thiết bị gặp lỗi trong tác vụ hàng loạt.
 
