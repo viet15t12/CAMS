@@ -18,6 +18,13 @@ class SyslogGroupService:
         self.repository = repository
         self.group_repository = SyslogGroupRepository(repository)
 
+    def max_hosts(self) -> int:
+        try:
+            count = len(self.group_repository.configuration_hosts())
+            return max(count, 2)
+        except Exception:
+            return self.MAX_HOSTS
+
     def options(self) -> dict[str, Any]:
         return {"ok": True, "hosts": self.group_repository.configuration_hosts()}
 
@@ -31,9 +38,10 @@ class SyslogGroupService:
         ]
         if len(normalized) < 2:
             return self._error("Syslog Group requires at least two hosts")
-        if len(normalized) > self.MAX_HOSTS:
+        max_limit = self.max_hosts()
+        if len(normalized) > max_limit:
             return self._error(
-                f"Syslog Group supports at most {self.MAX_HOSTS} hosts"
+                f"Syslog Group supports at most {max_limit} hosts"
             )
         hosts = [str(target.get("host") or "").strip() for target in normalized]
         if len(hosts) != len(set(hosts)):

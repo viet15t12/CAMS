@@ -38,7 +38,7 @@
   [SFTP], [SSH File Transfer Protocol], [Giao thức truyền tệp an toàn qua SSH],
   [SSH], [Secure Shell], [Giao thức truy cập từ xa mã hóa bảo mật],
   [STP], [Spanning Tree Protocol], [Giao thức cây bao trùm chống vòng lặp L2],
-  [SVI], [Switch Virtual Interface], [Giao diện ảo Lớp 3 trên thiết bị Switch],
+  [SVI], [Switch Virtual Interface], [Cổng ảo Lớp 3 trên thiết bị Switch],
   [VLAN], [Virtual Local Area Network], [Mạng cục bộ ảo Lớp 2],
   [VTP], [VLAN Trunking Protocol], [Giao thức đồng bộ cấu hình VLAN],
 )

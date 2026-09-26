@@ -196,7 +196,7 @@ bên trái và các tên chức năng theo loại thiết bị ở bên phải.
 
 Ba biểu tượng chính lần lượt là **Information**, **CAMS Terminal** và
 **Interface**. Information mở màn hình thông tin cấu hình đã lưu của
-host; Interface mở khu vực giao diện mạng tương ứng với loại thiết bị.
+host; Interface mở khu vực quản lý cổng (Interface) tương ứng với loại thiết bị.
 Đưa con trỏ lên biểu tượng để đọc tên trước khi chọn.
 
 **Ghi chú:** Biểu tượng Terminal mở hoặc đưa cửa sổ **CAMS Terminal**

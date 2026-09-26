@@ -1365,7 +1365,7 @@ class SwitchingWorkspaceTests(unittest.TestCase):
             }
         )
         self.assertFalse(too_many["ok"])
-        self.assertIn("at most 5", too_many["message"])
+        self.assertIn(f"at most {service.max_hosts()}", too_many["message"])
 
         unsafe = service.save(
             {

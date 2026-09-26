@@ -4,7 +4,7 @@
 
 ### 2.1.1. Quản lý thiết bị mạng
 
-Trong hệ thống mạng máy tính, router và switch là các thành phần trực tiếp tham gia vào quá trình chuyển tiếp lưu lượng, phân chia miền mạng, định tuyến gói tin và áp dụng các chính sách truy cập. Để mạng hoạt động ổn định, người quản trị phải thường xuyên thực hiện nhiều nhóm công việc như khai báo địa chỉ IP, cấu hình giao diện, thiết lập định tuyến, cấp phát địa chỉ động, kiểm soát truy cập, chuyển đổi địa chỉ mạng, sao lưu cấu hình và theo dõi trạng thái thiết bị. Các nội dung này tạo thành phần nghiệp vụ chính của một hệ thống quản lý cấu hình mạng [1].
+Trong hệ thống mạng máy tính, router và switch là các thành phần trực tiếp tham gia vào quá trình chuyển tiếp lưu lượng, phân chia miền mạng, định tuyến gói tin và áp dụng các chính sách truy cập. Để mạng hoạt động ổn định, người quản trị phải thường xuyên thực hiện nhiều nhóm công việc như khai báo địa chỉ IP, cấu hình cổng (interface), thiết lập định tuyến, cấp phát địa chỉ động, kiểm soát truy cập, chuyển đổi địa chỉ mạng, sao lưu cấu hình và theo dõi trạng thái thiết bị. Các nội dung này tạo thành phần nghiệp vụ chính của một hệ thống quản lý cấu hình mạng [1].
 
 Trong cách quản trị truyền thống, kỹ sư mạng thường truy cập từng thiết bị bằng giao diện dòng lệnh CLI. Phương pháp này cho phép kiểm soát chi tiết nhưng phụ thuộc nhiều vào kiến thức câu lệnh và trạng thái của phiên làm việc. Khi số lượng thiết bị tăng, cùng một chuỗi cấu hình có thể phải lặp lại trên nhiều router hoặc switch. Quá trình lặp làm tăng thời gian triển khai và khả năng xảy ra sai sót như nhập nhầm địa chỉ, thiếu câu lệnh, chọn sai interface hoặc thao tác trên nhầm thiết bị.
 
@@ -235,7 +235,7 @@ First Hop Redundancy Protocol (FHRP) là nhóm cơ chế cung cấp dự phòng 
        R1           R2
 ```
 
-Trong switching, VLAN chia hạ tầng Layer 2 thành các miền broadcast logic. Access port thường thuộc một VLAN, trunk có thể mang nhiều VLAN qua tagging 802.1Q, còn SVI cung cấp giao diện Layer 3 cho VLAN trên multilayer switch. FHRP và switching được trình bày ở mức nền tảng vì chúng mở rộng phạm vi CAMS sang bài toán đa thiết bị và quản lý Layer 2/Layer 3.
+Trong switching, VLAN chia hạ tầng Layer 2 thành các miền broadcast logic. Access port thường thuộc một VLAN, trunk có thể mang nhiều VLAN qua tagging 802.1Q, còn SVI cung cấp cổng Layer 3 ảo (Switch Virtual Interface) cho VLAN trên multilayer switch. FHRP và switching được trình bày ở mức nền tảng vì chúng mở rộng phạm vi CAMS sang bài toán đa thiết bị và quản lý Layer 2/Layer 3.
 
 ## 2.4. Cơ sở dữ liệu và SQLite
 

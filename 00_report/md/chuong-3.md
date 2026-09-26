@@ -25,7 +25,7 @@ Mọi thao tác quản trị trên CAMS được điều phối qua 3 luồng d�
 
 ## 3.5. Thiết kế Cơ sở Dữ liệu Quan hệ
 Cơ sở dữ liệu SQLite nhúng của CAMS được phân hoạch thành 2 tệp độc lập nhằm tách biệt cấu hình định nghĩa với dữ liệu giám sát quan sát được [136]:
-- **Tệp `device_network.db` (73 bảng)**: Lưu trữ trạng thái mong muốn (Desired State) do người dùng thiết lập, bao gồm danh mục thiết bị (`t01_*`), thông số giao diện L3/WAN (`t02_*`), dịch vụ DHCP (`t03_*`), định tuyến L3 (`t04_*`), ACL & NAT (`t05_*`), chuyển mạch L2 (`t06_*`), dự phòng FHRP (`t08_*`) và VTP Domain (`t09_*`) [137, 138, 139].
+- **Tệp `device_network.db` (73 bảng)**: Lưu trữ trạng thái mong muốn (Desired State) do người dùng thiết lập, bao gồm danh mục thiết bị (`t01_*`), thông số cổng (interface) L3/WAN (`t02_*`), dịch vụ DHCP (`t03_*`), định tuyến L3 (`t04_*`), ACL & NAT (`t05_*`), chuyển mạch L2 (`t06_*`), dự phòng FHRP (`t08_*`) và VTP Domain (`t09_*`) [137, 138, 139].
 - **Tệp `info_collected.db` (20 bảng)**: Lưu trữ dữ liệu chỉ đọc (Observed State) được thu thập tự động từ thiết bị, gồm bảng định tuyến thực tế (`t08_info_*`), trạng thái cấp phát DHCP (`t09_info_*`), thống kê ACL (`t10_info_*`), bảng phiên NAT (`t11_info_*`) và nhật ký Syslog (`t12_syslog_*`) [139, 140].
 
 Trường cờ `success` trong các bảng nghiệp vụ đóng vai trò quyết định vòng đời dữ liệu: `0` đại diện cho trạng thái chờ xử lý (Pending), `1` thể hiện dữ liệu đã đồng bộ thành công (Applied), và `-1` đánh dấu bản ghi chờ gỡ bỏ (Pending Delete) [140, 141].

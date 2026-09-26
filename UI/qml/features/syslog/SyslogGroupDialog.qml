@@ -13,7 +13,7 @@ StandardDialog {
     property var ownerForm: null
     property int stepIndex: 0
     property int selectedCount: 0
-    readonly property int maxHosts: 5
+    readonly property int maxHosts: targetModel.count > 0 ? targetModel.count : 5
     property string errorText: ""
     property string serverIp: ""
     property string transport: "udp"

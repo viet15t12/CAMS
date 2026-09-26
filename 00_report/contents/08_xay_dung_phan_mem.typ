@@ -47,24 +47,24 @@ Các phân hệ thực hiện cùng một quy trình: kiểm tra dữ liệu bi�
 
 #figure(
   image("/00_book/figures/gui/chapter-05/07-view-push-preview.png", width: 100%),
-  caption: [Kiểm duyệt lệnh cấu hình giao diện trước khi triển khai],
+  caption: [Kiểm duyệt lệnh cấu hình cổng (interface) trước khi triển khai],
 ) <fig-cams-view-push>
 
 @fig-cams-view-push cho thấy bước kiểm duyệt giữa lưu dữ liệu và tác động lên thiết bị. Quy trình này được sử dụng lại cho các nhóm nghiệp vụ, giúp thống nhất thao tác và cách trình bày trạng thái. Khi thực thi lỗi, người dùng cần xem phản hồi và đồng bộ lại trước khi quyết định gửi lại lệnh.
 
-=== Giao diện mạng, DHCP và định tuyến
+=== Quản lý cổng (Interfaces), DHCP và định tuyến
 
-Phân hệ giao diện quản lý IPv4, mô tả và trạng thái cổng; hỗ trợ các giao diện logic như Loopback, Subinterface và GRE Tunnel. Cổng vật lý được lấy từ thiết bị để chỉnh sửa thông số; các giao diện logic được tạo hoặc gỡ theo nghiệp vụ tương ứng.
+Phân hệ quản lý cổng (Interfaces) quản lý IPv4, mô tả và trạng thái cổng; hỗ trợ các cổng logic như Loopback, Subinterface và GRE Tunnel. Cổng vật lý được lấy từ thiết bị để chỉnh sửa thông số; các cổng logic được tạo hoặc gỡ theo nghiệp vụ tương ứng.
 
-DHCP quản lý pool, dải địa chỉ loại trừ và relay. Định tuyến cung cấp tuyến tĩnh, tuyến mặc định, OSPFv2 và EIGRP. Các nhóm biểu mẫu phản ánh quan hệ giữa tiến trình, mạng quảng bá và tham số giao diện. Routing Group hỗ trợ chuẩn bị cấu hình cho nhóm router, giảm việc nhập lặp; kết quả vẫn cần kiểm tra trên từng thiết bị.
+DHCP quản lý pool, dải địa chỉ loại trừ và relay. Định tuyến cung cấp tuyến tĩnh, tuyến mặc định, OSPFv2 và EIGRP. Các nhóm biểu mẫu phản ánh quan hệ giữa tiến trình, mạng quảng bá và tham số cổng (interface). Routing Group hỗ trợ chuẩn bị cấu hình cho nhóm router, giảm việc nhập lặp; kết quả vẫn cần kiểm tra trên từng thiết bị.
 
 Các biểu mẫu FHRP hỗ trợ khai báo gateway dự phòng và tham số thành viên cho HSRP, VRRP, GLBP. Việc đánh giá chuyển đổi gateway thuộc kịch bản thực nghiệm, không được suy ra chỉ từ việc sinh đúng lệnh cấu hình.
 
 === ACL và NAT/PAT
 
-Phân hệ ACL cung cấp biểu mẫu cho Standard, Extended, Dynamic, Reflexive và MAC ACL theo khả năng của loại thiết bị. Quy tắc được quản lý theo thứ tự, kèm giao diện và chiều áp dụng. Điểm cần kiểm soát là thứ tự khớp luật và chính sách cho phép/từ chối; sau triển khai phải thử cả lưu lượng được phép và lưu lượng bị chặn.
+Phân hệ ACL cung cấp biểu mẫu cho Standard, Extended, Dynamic, Reflexive và MAC ACL theo khả năng của loại thiết bị. Quy tắc được quản lý theo thứ tự, kèm cổng áp dụng và chiều áp dụng. Điểm cần kiểm soát là thứ tự khớp luật và chính sách cho phép/từ chối; sau triển khai phải thử cả lưu lượng được phép và lưu lượng bị chặn.
 
-NAT/PAT quản lý ánh xạ tĩnh, pool động và overload, cùng vai trò inside/outside của giao diện và điều kiện chọn lưu lượng. Dữ liệu từ bảng chuyển đổi địa chỉ giúp đối chiếu cấu hình với phiên thực tế. Báo cáo tách chức năng chuyển đổi địa chỉ khỏi chức năng bảo mật để không đồng nhất NAT với cơ chế lọc truy cập.
+NAT/PAT quản lý ánh xạ tĩnh, pool động và overload, cùng vai trò inside/outside của cổng và điều kiện chọn lưu lượng. Dữ liệu từ bảng chuyển đổi địa chỉ giúp đối chiếu cấu hình với phiên thực tế. Báo cáo tách chức năng chuyển đổi địa chỉ khỏi chức năng bảo mật để không đồng nhất NAT với cơ chế lọc truy cập.
 
 === Chuyển mạch và cập nhật chính sách Lớp 2
 

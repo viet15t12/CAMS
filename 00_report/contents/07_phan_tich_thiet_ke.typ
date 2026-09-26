@@ -82,13 +82,13 @@ CAMS sử dụng hai tệp SQLite để tách dữ liệu cấu hình với dữ
   columns: (33%, 67%),
   header: ([Kho dữ liệu], [Nội dung chính]),
   rows: (
-    ([`device_network.db`], [Danh mục thiết bị; cấu hình giao diện, DHCP, định tuyến, ACL, NAT, chuyển mạch và các chính sách liên quan.]),
+    ([`device_network.db`], [Danh mục thiết bị; cấu hình cổng (interface), DHCP, định tuyến, ACL, NAT, chuyển mạch và các chính sách liên quan.]),
     ([`info_collected.db`], [Thông tin thu thập như bảng định tuyến, DHCP binding, thống kê ACL, phiên NAT và nhật ký Syslog.]),
   ),
   caption: [Phân tách dữ liệu cấu hình và dữ liệu quan sát],
 ) <tab-database-schema-config>
 
-Thiết bị là đối tượng liên kết với nhiều giao diện và nhiều bản ghi nghiệp vụ. Khóa chính định danh bản ghi; khóa ngoại liên kết bản ghi với thiết bị hoặc đối tượng liên quan. Các kiểm tra địa chỉ, dải giá trị và quan hệ phụ thuộc được thực hiện ở tầng nghiệp vụ trước khi lưu hoặc sinh lệnh.
+Thiết bị là đối tượng liên kết với nhiều cổng (interfaces) và nhiều bản ghi nghiệp vụ. Khóa chính định danh bản ghi; khóa ngoại liên kết bản ghi với thiết bị hoặc đối tượng liên quan. Các kiểm tra địa chỉ, dải giá trị và quan hệ phụ thuộc được thực hiện ở tầng nghiệp vụ trước khi lưu hoặc sinh lệnh.
 
 Trong các bảng áp dụng cơ chế cấu hình chờ, trường `success` thể hiện ba trạng thái: `0` là chờ thêm hoặc cập nhật, `1` là đã đồng bộ/áp dụng, `-1` là chờ xóa. Đây là cờ quản lý quy trình, không phải chỉ số chứng minh thiết bị luôn khớp cấu hình, vì trạng thái thực tế có thể thay đổi sau lần đồng bộ gần nhất.
 

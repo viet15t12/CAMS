@@ -16,7 +16,7 @@ Rectangle {
     property int selectedGroupIndex: -1
     property var pendingPushHosts: []
     property int dataRevision: 0
-    readonly property int maxHosts: 5
+    readonly property int maxHosts: root.hostOptions && root.hostOptions.length > 0 ? root.hostOptions.length : 5
     readonly property bool isViewLoading: false
     readonly property bool compactLayout: width < Theme.dataWorkspaceBreakpoint
     readonly property bool readyToSave: memberModel.count >= 2

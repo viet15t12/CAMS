@@ -138,7 +138,7 @@ class SyslogGroupTests(unittest.TestCase):
         self.assertFalse(result["partial"])
         self.assertEqual(self.repository.device_configurations("192.0.2.1"), [])
 
-    def test_group_rejects_more_than_five_hosts(self) -> None:
+    def test_group_rejects_more_than_connected_hosts(self) -> None:
         result = self.service.save(
             [
                 {"host": f"192.0.2.{index}", "source_interface": "Loopback0"}
@@ -148,7 +148,10 @@ class SyslogGroupTests(unittest.TestCase):
         )
 
         self.assertFalse(result["ok"])
-        self.assertEqual(result["message"], "Syslog Group supports at most 5 hosts")
+        self.assertEqual(
+            result["message"],
+            f"Syslog Group supports at most {self.service.max_hosts()} hosts",
+        )
 
 
 if __name__ == "__main__":

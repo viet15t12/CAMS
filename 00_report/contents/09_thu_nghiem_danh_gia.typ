@@ -76,7 +76,7 @@ Quá trình thực nghiệm gồm bốn kịch bản có độ phức tạp tăn
 //   image("/00_book/figures/report/diagrams/switching-lab/1_3.png", width: 80%),
 //   caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
 // ) <fig-k1-etherchannel-push>
-// @fig-k1-etherchannel-push thể hiện cấu hình cho từng giao diện thành phần và giao diện logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
+// @fig-k1-etherchannel-push thể hiện cấu hình cho từng cổng thành phần và cổng logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
 
 // *Bước 4. Thiết lập DHCP Snooping và Dynamic ARP Inspection*
 
@@ -184,7 +184,7 @@ Trước khi triển khai định tuyến, quản trị viên sử dụng phân 
 
 #figure(
   image("/00_book/figures/report/diagrams/routing-ospf-lab/1.png", width: 85%),
-  caption: [Giao diện cấu hình interfaces quản lý và cấu hình tham số Lớp 3 cho các cổng Router],
+  caption: [Giao diện quản lý và cấu hình tham số Lớp 3 cho các cổng (Interfaces) Router],
 ) <fig-k2-interfaces>
 @fig-k2-interfaces thể hiện trạng thái IP của các cổng trên `R1`. Ngăn thuộc tính cho phép khai báo địa chỉ IP, subnet mask, mô tả và trạng thái hoạt động của từng cổng.
 

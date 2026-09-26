@@ -365,6 +365,13 @@ class VtpGroupService:
         ensure_switch_schema(db)
         self.repository = VtpGroupRepository(db)
 
+    def max_hosts(self) -> int:
+        try:
+            count = len(self.repository.connected_switches())
+            return max(count, 2)
+        except Exception:
+            return self.MAX_HOSTS
+
     def options(self) -> dict[str, Any]:
         return {"ok": True, "hosts": self.repository.connected_switches()}
 
@@ -442,9 +449,10 @@ class VtpGroupService:
         ]
         if len(raw_members) < 2:
             raise ValueError("VTP Group requires at least two selected switches.")
-        if len(raw_members) > self.MAX_HOSTS:
+        max_limit = self.max_hosts()
+        if len(raw_members) > max_limit:
             raise ValueError(
-                f"VTP Group supports at most {self.MAX_HOSTS} selected switches."
+                f"VTP Group supports at most {max_limit} selected switches."
             )
         seen: set[str] = set()
         members: list[dict[str, Any]] = []

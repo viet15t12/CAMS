@@ -96,7 +96,7 @@ Feature Bar nằm ngay dưới Device Tabs. Thanh này xác định chức năng
 
 === Các chức năng chính
 
-Ba biểu tượng chính lần lượt là *Information*, *CAMS Terminal* và *Interface*. Information mở màn hình thông tin cấu hình đã lưu của host; Interface mở khu vực giao diện mạng tương ứng với loại thiết bị. Đưa con trỏ lên biểu tượng để đọc tên trước khi chọn.
+Ba biểu tượng chính lần lượt là *Information*, *CAMS Terminal* và *Interface*. Information mở màn hình thông tin cấu hình đã lưu của host; Interface mở khu vực quản lý cổng (Interface) tương ứng với loại thiết bị. Đưa con trỏ lên biểu tượng để đọc tên trước khi chọn.
 
 #report-note[*Ghi chú:* Biểu tượng Terminal mở hoặc đưa cửa sổ *CAMS Terminal* riêng lên phía trước, thay vì đổi Content Area như Information hoặc Interface. Các thao tác mở Terminal theo ngữ cảnh thiết bị được giới thiệu tại @ch04.]
 

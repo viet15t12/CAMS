@@ -15,7 +15,7 @@ Lưu bản sao cấu hình giúp truy vết thay đổi và so sánh phiên bả
 
 == CLI và giao thức quản trị từ xa
 
-CLI Cisco IOS tổ chức lệnh theo ngữ cảnh, chẳng hạn chế độ EXEC đặc quyền, cấu hình toàn cục và cấu hình giao diện. Công cụ tự động hóa cần nhận diện dấu nhắc, chuyển đúng chế độ và xử lý phản hồi. Dữ liệu từ các lệnh như `show running-config` hoặc `show ip route` thường là văn bản, cần được phân tích thành các trường có cấu trúc để lưu trữ và hiển thị.
+CLI Cisco IOS tổ chức lệnh theo ngữ cảnh, chẳng hạn chế độ EXEC đặc quyền, cấu hình toàn cục và cấu hình cổng (interface configuration). Công cụ tự động hóa cần nhận diện dấu nhắc, chuyển đúng chế độ và xử lý phản hồi. Dữ liệu từ các lệnh như `show running-config` hoặc `show ip route` thường là văn bản, cần được phân tích thành các trường có cấu trúc để lưu trữ và hiển thị.
 
 SSH cung cấp kênh quản trị có mã hóa và cơ chế xác thực theo kiến trúc mô tả trong @rfc4251. Telnet truyền dữ liệu dạng rõ nên chỉ phù hợp với tình huống thử nghiệm được kiểm soát khi cần tương thích thiết bị. CAMS có thể hỗ trợ cả hai phương thức, nhưng ưu tiên SSH cho các tác vụ quản trị.
 
@@ -25,7 +25,7 @@ Phiên kết nối có thể được tái sử dụng để giảm số lần b
 
 === Dịch vụ và định tuyến Lớp 3
 
-Địa chỉ IPv4 và thông số giao diện là cơ sở để các thiết bị liên lạc. Ngoài cổng vật lý, các giao diện logic như Loopback, Subinterface, Tunnel và SVI phục vụ định danh, phân chia lưu lượng hoặc định tuyến giữa các mạng. Khi sinh cấu hình, cần kiểm tra địa chỉ, mặt nạ và mối liên hệ giữa giao diện với dịch vụ sử dụng nó.
+Địa chỉ IPv4 và thông số cổng (interface) là cơ sở để các thiết bị liên lạc. Ngoài cổng vật lý, các cổng logic như Loopback, Subinterface, Tunnel và SVI phục vụ định danh, phân chia lưu lượng hoặc định tuyến giữa các mạng. Khi sinh cấu hình, cần kiểm tra địa chỉ, mặt nạ và mối liên hệ giữa cổng với dịch vụ sử dụng nó.
 
 DHCP cung cấp tham số IP cho máy trạm; chuỗi trao đổi cấp phát điển hình gồm Discover, Offer, Request và Acknowledge. DHCP Relay chuyển tiếp yêu cầu giữa các miền quảng bá. Các dữ liệu cần quản lý gồm mạng cấp phát, gateway, DNS, thời gian thuê và dải địa chỉ loại trừ @rfc2131.
 
@@ -41,13 +41,13 @@ Trong tự động hóa, các tham số này có quan hệ phụ thuộc. Ví d�
 
 === Chính sách kiểm soát truy cập và bảo vệ Lớp 2
 
-ACL quyết định cho phép hoặc từ chối lưu lượng dựa trên các điều kiện và thứ tự quy tắc. Phần mềm cần giữ đúng thứ tự, hướng áp dụng và giao diện đích. Một ACL có cú pháp hợp lệ vẫn có thể chặn nhầm lưu lượng nếu đặt sai vị trí hoặc thiếu quy tắc cho phép cần thiết.
+ACL quyết định cho phép hoặc từ chối lưu lượng dựa trên các điều kiện và thứ tự quy tắc. Phần mềm cần giữ đúng thứ tự, hướng áp dụng và cổng áp dụng (interface). Một ACL có cú pháp hợp lệ vẫn có thể chặn nhầm lưu lượng nếu đặt sai vị trí hoặc thiếu quy tắc cho phép cần thiết.
 
 Port Security giới hạn địa chỉ MAC được sử dụng trên cổng. DHCP Snooping kiểm tra luồng DHCP theo vai trò cổng tin cậy; Dynamic ARP Inspection hỗ trợ kiểm tra bản tin ARP dựa trên dữ liệu liên kết hoặc chính sách được cấu hình. Hiệu quả của các cơ chế này phụ thuộc topology, dữ liệu kiểm tra và khả năng của thiết bị. CAMS cung cấp phương tiện cấu hình và theo dõi; việc thực thi chính sách diễn ra trên router hoặc switch.
 
 == Giám sát tập trung và khai thác cảnh báo
 
-Giám sát sử dụng hai nguồn dữ liệu bổ sung cho nhau: trạng thái lấy bằng lệnh truy vấn và sự kiện do thiết bị gửi về qua Syslog. Trạng thái phản ánh kết quả tại thời điểm thu thập, trong khi nhật ký ghi nhận diễn biến như thay đổi giao diện, thay đổi cấu hình hoặc vi phạm chính sách. Cả hai cần được gắn với thiết bị nguồn và thời điểm để phục vụ đối chiếu.
+Giám sát sử dụng hai nguồn dữ liệu bổ sung cho nhau: trạng thái lấy bằng lệnh truy vấn và sự kiện do thiết bị gửi về qua Syslog. Trạng thái phản ánh kết quả tại thời điểm thu thập, trong khi nhật ký ghi nhận diễn biến như thay đổi trạng thái cổng (interface up/down), thay đổi cấu hình hoặc vi phạm chính sách. Cả hai cần được gắn với thiết bị nguồn và thời điểm để phục vụ đối chiếu.
 
 Một luồng Syslog tập trung gồm thiết bị phát log, bộ nhận, bộ phân tích, nơi lưu trữ và giao diện truy vấn. CAMS giữ các trường đã phân tích và bản tin gốc để có thể kiểm tra lại khi dữ liệu thiếu hoặc không đúng định dạng. Địa chỉ đích, cổng và giao thức trên thiết bị phải khớp cấu hình của bộ nhận.
 
@@ -57,7 +57,7 @@ Phát hiện vi phạm trên thiết bị, chuyển log về CAMS và hiển th�
 
 == Công nghệ lưu trữ và xây dựng giao diện
 
-SQLite là cơ sở dữ liệu nhúng phù hợp với ứng dụng desktop: dữ liệu được lưu trong tệp và truy cập trực tiếp từ chương trình. CAMS tách dữ liệu cấu hình và dữ liệu thu thập thành hai cơ sở dữ liệu, sử dụng quan hệ giữa thiết bị với giao diện, dịch vụ và chính sách. Ràng buộc dữ liệu cần kết hợp với kiểm tra nghiệp vụ, vì đúng kiểu chuỗi chưa có nghĩa là đúng địa chỉ IP.
+SQLite là cơ sở dữ liệu nhúng phù hợp với ứng dụng desktop: dữ liệu được lưu trong tệp và truy cập trực tiếp từ chương trình. CAMS tách dữ liệu cấu hình và dữ liệu thu thập thành hai cơ sở dữ liệu, sử dụng quan hệ giữa thiết bị với cổng (interface), dịch vụ và chính sách. Ràng buộc dữ liệu cần kết hợp với kiểm tra nghiệp vụ, vì đúng kiểu chuỗi chưa có nghĩa là đúng địa chỉ IP.
 
 Các thao tác ghi cần giữ giao dịch ngắn để hạn chế tranh chấp. Với log, ghi theo lô giảm số lần ghi riêng lẻ; tuy nhiên, khả năng tiếp nhận vẫn phụ thuộc hàng đợi và tài nguyên. Giao dịch SQLite bảo vệ tính nhất quán dữ liệu cục bộ, không tạo ra giao dịch nguyên tử trên thiết bị mạng ở xa.
 
