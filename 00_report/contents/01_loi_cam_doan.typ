@@ -1,4 +1,4 @@
-#import "../config/commands.typ": front-heading
+#import "../config/commands.typ": front-heading, standalone-title
 
 #front-heading[LỜI CAM ĐOAN]
 
@@ -6,7 +6,7 @@ Chúng tôi cam đoan báo cáo nghiên cứu khoa học với đề tài: nghi�
 
 Kết quả trình bày trong báo cáo là trung thực, do nhóm tự thực hiện và chưa từng được công bố trong bất kỳ công trình nào khác. Mã nguồn tự xây dựng, thư viện mã nguồn mở và tài liệu tham khảo sử dụng trong quá trình phát triển đều được trích dẫn đầy đủ theo đúng quy định.
 
-*Phạm vi đóng góp của từng thành viên*
+#standalone-title[Phạm vi đóng góp của từng thành viên]
 
 #table(
   columns: (1.4fr, 0.9fr, 2.4fr),
@@ -27,7 +27,7 @@ Kết quả trình bày trong báo cáo là trung thực, do nhóm tự thực h
 
   [*Nguyễn Phan Kiên*],
   [N24DCVT046],
-  [Nền tảng backend, logic nghiệp vụ cho các phân hệ mạng, mẫu cấu hình Jinja2, đồng bộ running-config, kiểm thử tích hợp],
+  [Nền tảng phía sau, logic nghiệp vụ cho các chức năng mạng, mẫu cấu hình Jinja2, đồng bộ running-config, kiểm thử tích hợp],
 
   [*Nguyễn Trần Đạt Phú*],
   [N24DCVT072],

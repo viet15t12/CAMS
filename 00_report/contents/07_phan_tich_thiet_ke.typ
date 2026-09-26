@@ -14,22 +14,22 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
   header: ([Nhóm], [Yêu cầu], [Dữ liệu hoặc kết quả]),
   rows: (
     ([Quản lý], [Thêm, sửa, xóa và nhập danh mục; quản lý phiên; đồng bộ và lưu lịch sử cấu hình.], [Danh mục, trạng thái kết nối, bản sao cấu hình.]),
-    ([Tự động hóa], [Kiểm tra dữ liệu; tạo lệnh theo phân hệ; xem trước, áp dụng và trả kết quả riêng từng thiết bị.], [Cấu hình chờ, lệnh dự kiến, phản hồi thực thi.]),
+    ([Tự động hóa], [Kiểm tra dữ liệu; tạo lệnh theo từng chức năng; xem trước, áp dụng và trả kết quả riêng từng thiết bị.], [Cấu hình chờ, lệnh dự kiến, phản hồi thực thi.]),
     ([Giám sát], [Thu thập thông tin vận hành; nhận, lưu, lọc và xuất Syslog.], [Trạng thái quan sát, nhật ký có nguồn và thời gian.]),
-    ([Bảo mật], [Triển khai ACL, Port Security, DHCP Snooping, DAI; hỗ trợ xem các sự kiện cảnh báo liên quan.], [Chính sách đã gửi, trạng thái và log để đối chiếu.]),
+    ([Bảo mật], [Triển khai ACL, Port Security, DHCP Snooping, DAI; hỗ trợ xem các sự kiện cảnh báo liên quan.], [Chính sách đã gửi, trạng thái và nhật ký để đối chiếu.]),
   ),
   caption: [Yêu cầu chức năng theo phạm vi đề tài],
 )
 
-SFTP, terminal và đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Phần phát hiện/cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp như đã xác định tại Chương 1.
+SFTP, terminal và đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
 
 == Yêu cầu phi chức năng
 
 - *Khả năng phản hồi:* các tác vụ mạng chạy nền; giao diện hiển thị tiến trình và kết quả thay vì chờ đồng bộ trên luồng chính.
 - *Nhất quán dữ liệu:* kiểm tra tham số trước khi lưu và sinh lệnh; phân biệt dữ liệu chờ với dữ liệu đã áp dụng và dữ liệu mới thu thập.
 - *Kiểm soát thực thi:* tuần tự hóa thao tác dùng chung phiên thiết bị, quản lý thời gian chờ và báo lỗi theo từng tác vụ.
-- *Bảo vệ dữ liệu:* hạn chế lộ thông tin xác thực trong log và giao diện xem trước; hỗ trợ bảo vệ gói dự án khi lưu trữ hoặc trao đổi.
-- *Khả năng truy vết:* giữ lịch sử cấu hình, thiết bị nguồn, thời gian nhận log và bản tin gốc để đối chiếu khi có sự cố.
+- *Bảo vệ dữ liệu:* hạn chế lộ thông tin xác thực trong nhật ký và giao diện xem trước; hỗ trợ bảo vệ gói dự án khi lưu trữ hoặc trao đổi.
+- *Khả năng truy vết:* giữ lịch sử cấu hình, thiết bị nguồn, thời gian nhận nhật ký và bản tin gốc để đối chiếu khi có sự cố.
 - *Khả năng bảo trì:* tách giao diện, nghiệp vụ, lưu trữ và giao tiếp mạng để có thể kiểm thử từng thành phần.
 
 Các yêu cầu này là tiêu chí thiết kế và đánh giá. Mức đáp ứng cần được kiểm tra bằng các kịch bản ở Chương 5, không suy ra chỉ từ việc lựa chọn thư viện hoặc mô hình kiến trúc.
@@ -43,17 +43,17 @@ CAMS tổ chức trách nhiệm thành bốn lớp như @fig-layer-architecture.
   caption: [Kiến trúc phân lớp của CAMS],
 ) <fig-layer-architecture>
 
-Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và workspace đảm nhiệm chức năng tương ứng. Cách tổ chức này giảm việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
+Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
 
 == Luồng quản lý và tự động hóa cấu hình
 
 === Đồng bộ trạng thái cơ sở
 
-Người dùng chọn thiết bị trong danh mục và mở kết nối. Bộ quản lý phiên thiết lập phiên SSH hoặc Telnet theo cấu hình. Tác vụ nền thu thập `running-config`, lưu bản sao và phân tích các phần được hỗ trợ thành dữ liệu cơ sở. Nếu kết nối hoặc phân tích thất bại, giao diện thông báo rõ để người dùng không hiểu dữ liệu cũ là trạng thái vừa cập nhật.
+Người dùng chọn thiết bị trong danh mục và mở kết nối. Bộ quản lý phiên thiết lập phiên SSH hoặc Telnet theo cấu hình. Tác vụ nền thu thập `running-config`, lưu bản sao và phân tích các phần được hỗ trợ để cập nhật cơ sở dữ liệu. Nếu kết nối hoặc phân tích thất bại, giao diện phải thông báo rõ để người dùng không nhầm dữ liệu cũ với trạng thái vừa được thu thập.
 
 === Chuẩn bị cấu hình mong muốn
 
-Người dùng nhập tham số trên biểu mẫu của từng phân hệ. Sau kiểm tra định dạng và quan hệ dữ liệu, ứng dụng lưu thay đổi ở trạng thái chờ. Việc lưu biểu mẫu chưa gửi lệnh tới thiết bị. Các bản ghi chờ thêm/sửa và chờ xóa được phân biệt để bộ tạo mẫu sinh đúng lệnh cấu hình hoặc lệnh gỡ bỏ.
+Người dùng nhập tham số trên biểu mẫu của từng chức năng. Sau kiểm tra định dạng và quan hệ dữ liệu, ứng dụng lưu thay đổi ở trạng thái chờ. Việc lưu biểu mẫu chưa gửi lệnh tới thiết bị. Các bản ghi chờ thêm/sửa và chờ xóa được phân biệt để bộ tạo mẫu sinh đúng lệnh cấu hình hoặc lệnh gỡ bỏ.
 
 === Xem trước và thực thi
 
@@ -68,29 +68,17 @@ Với thao tác thành công, ứng dụng cập nhật trạng thái bản ghi;
 
 == Luồng giám sát và khai thác cảnh báo
 
-Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn và tiếp nhận Syslog do thiết bị gửi. Luồng Syslog gồm cấu hình IP đích nhận log trên thiết bị, khởi động bộ thu nhận log tại CAMS, phân tích và lưu bản tin vào database, sau đó hiển thị kết quả truy vấn ở giao diện.
+Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn và tiếp nhận Syslog do thiết bị gửi. Luồng Syslog gồm cấu hình địa chỉ đích trên thiết bị, khởi động bộ thu nhận tại CAMS, phân tích và lưu bản tin vào cơ sở dữ liệu, sau đó hiển thị kết quả trên giao diện.
 
-Mỗi bản tin cần giữ nguồn gửi, thời gian nhận, mức severity, mã sự kiện nếu phân tích được và nội dung gốc. Giao diện hỗ trợ lọc theo thiết bị, thời gian, mức độ và từ khóa; qua đó người quản trị khoanh vùng các sự kiện như thay đổi kết nối hoặc vi phạm chính sách. Khi thời gian trên thiết bị chưa đồng bộ, phải phân biệt thời gian do thiết bị ghi với thời gian CAMS nhận bản tin.
+Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiêm trọng, mã sự kiện nếu phân tích được và nội dung gốc. Giao diện hỗ trợ lọc theo thiết bị, thời gian, mức độ và từ khóa, qua đó giúp người quản trị khoanh vùng các sự kiện như thay đổi kết nối hoặc vi phạm chính sách. Khi đồng hồ trên thiết bị chưa được đồng bộ, hệ thống phải phân biệt thời gian do thiết bị ghi với thời gian CAMS nhận bản tin.
 
 // Chuỗi kiểm chứng cho một sự kiện bảo mật là: chính sách đã được triển khai trên thiết bị, tình huống thử kích hoạt cơ chế tương ứng, thiết bị tạo log, CAMS nhận được log và người dùng truy vấn thấy đúng nguồn, nội dung. Thiếu một mắt xích trong chuỗi này không đủ cơ sở để kết luận chức năng cảnh báo đã đạt yêu cầu.
 
 == Thiết kế cơ sở dữ liệu
 
-CAMS sử dụng hai tệp SQLite để tách dữ liệu cấu hình với dữ liệu quan sát. Số bảng phụ thuộc phiên bản lược đồ; báo cáo tập trung vào vai trò và quan hệ dữ liệu.
+CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị và cấu hình của các chức năng Interfaces, DHCP, định tuyến, ACL, NAT, chuyển mạch và Syslog; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, DHCP binding, thống kê ACL, phiên NAT và bản tin Syslog. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
 
-#report-table(
-  columns: (33%, 67%),
-  header: ([Kho dữ liệu], [Nội dung chính]),
-  rows: (
-    ([`device_network.db`], [Danh mục thiết bị; Các cấu hình interface, DHCP, định tuyến, ACL, NAT, switch và các chính sách liên quan.]),
-    ([`info_collected.db`], [Thông tin thu thập như bảng định tuyến, DHCP binding, thống kê ACL, phiên NAT .v.v và  Syslog.]),
-  ),
-  caption: [Phân tách dữ liệu cấu hình và dữ liệu quan sát],
-) <tab-database-schema-config>
-
-Thiết bị là đối tượng liên kết với nhiều cổng và nhiều bản ghi nghiệp vụ. Khóa chính định danh bản ghi; khóa ngoại liên kết bản ghi với thiết bị hoặc đối tượng liên quan. Các kiểm tra địa chỉ, dải giá trị và quan hệ phụ thuộc được thực hiện ở tầng nghiệp vụ trước khi lưu hoặc sinh lệnh.
-
-Trong các bảng áp dụng cơ chế cấu hình chờ, trường `success` thể hiện ba trạng thái: `0` là chờ thêm hoặc cập nhật, `1` là đã đồng bộ/áp dụng, `-1` là chờ xóa. Đây là cờ quản lý quy trình, không phải chỉ số chứng minh thiết bị luôn khớp cấu hình, vì trạng thái thực tế có thể thay đổi sau lần đồng bộ gần nhất.
+Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã thiết bị. Trước khi ghi dữ liệu, tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và các quan hệ phụ thuộc. Những bản ghi tham gia luồng View \& Push còn có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại để xác nhận cấu hình thực tế trên thiết bị.
 
 == Thiết kế giao diện và xử lý lỗi
 

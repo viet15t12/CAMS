@@ -43,6 +43,14 @@
   body,
 )
 
+// Nhãn cấu trúc đứng riêng không phải đoạn văn nên không thụt đầu dòng.
+#let standalone-title(body) = block(width: 100%)[
+  #set par(first-line-indent: 0pt, spacing: 0pt)
+  #strong(body)
+]
+
+#let step-title(body) = standalone-title(body)
+
 #let todo(body) = block(
   width: 100%,
   inset: 8pt,

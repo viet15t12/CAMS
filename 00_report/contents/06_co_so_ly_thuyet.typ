@@ -5,7 +5,7 @@
 
 == Quản lý tập trung và tự động hóa cấu hình
 
-Quản lý tập trung hợp nhất danh mục thiết bị, thông số kết nối, dữ liệu cấu hình và lịch sử vận hành tại một điểm quản trị. Người dùng có thể tra cứu và thực hiện tác vụ trên nhiều thiết bị theo một quy trình thống nhất. Trong CAMS, điểm quản trị là ứng dụng desktop và không gian làm việc cục bộ; khái niệm tập trung ở đây không đồng nghĩa với kiến trúc máy chủ phục vụ đồng thời nhiều người dùng.
+Quản lý tập trung hợp nhất danh mục thiết bị, thông số kết nối, dữ liệu cấu hình và lịch sử vận hành tại một điểm quản trị. Người dùng có thể tra cứu và thực hiện tác vụ trên nhiều thiết bị theo một quy trình thống nhất. Trong CAMS, điểm quản trị là ứng dụng máy tính để bàn và không gian làm việc cục bộ; khái niệm tập trung ở đây không đồng nghĩa với kiến trúc máy chủ phục vụ đồng thời nhiều người dùng.
 
 Tự động hóa cấu hình chuyển các thao tác lặp lại thành chuỗi xử lý phần mềm: nhận tham số, kiểm tra dữ liệu, sinh lệnh, kết nối, triển khai và ghi nhận kết quả. Việc phê duyệt thay đổi vẫn thuộc về người quản trị. Cách tiếp cận này giúp thống nhất cú pháp, nhưng một mẫu lệnh sai cũng có thể ảnh hưởng nhiều thiết bị, nên bước xem trước và theo dõi lỗi theo từng thiết bị là cần thiết.
 
@@ -25,9 +25,9 @@ Phiên kết nối có thể được tái sử dụng để giảm số lần b
 
 === Dịch vụ và định tuyến Lớp 3
 
-Địa chỉ IPv4 cùng các thông số cổng chính là nền tảng để các thiết bị mạng có thể nhận diện và liên lạc với nhau. Bên cạnh các cổng vật lý, hệ thống còn sử dụng các cổng logic như Loopback, Subinterface, Tunnel và SVI nhằm phục vụ việc định danh thiết bị, phân chia lưu lượng theo từng phân đoạn mạng, cũng như hỗ trợ định tuyến giữa các mạng khác nhau. Trong quá trình sinh cấu hình, cần đặc biệt chú ý kiểm tra tính chính xác của địa chỉ IP, subnet mask, cũng như mối liên hệ logic giữa từng cổng với dịch vụ tương ứng đang sử dụng cổng đó.
+Địa chỉ IPv4 và các tham số cổng là nền tảng để thiết bị mạng nhận diện và liên lạc với nhau. Ngoài cổng vật lý, hệ thống còn sử dụng các cổng logic như Loopback, Subinterface, Tunnel và SVI để định danh thiết bị, phân chia lưu lượng và hỗ trợ định tuyến giữa các mạng. Khi sinh cấu hình, phần mềm cần kiểm tra địa chỉ IP, subnet mask và quan hệ giữa từng cổng với dịch vụ sử dụng cổng đó.
 
-DHCP cung cấp địa chỉ IP cho thuyết bị có cấu hình IP động; chuỗi trao đổi cấp phát điển hình gồm Discover, Offer, Request và Acknowledge. DHCP Relay chuyển tiếp yêu cầu giữa các miền quảng bá. Các dữ liệu cần quản lý gồm mạng cấp phát, gateway, DNS, thời gian thuê và dải địa chỉ loại trừ @rfc2131.
+DHCP cung cấp địa chỉ IP cho thiết bị sử dụng cấu hình động; chuỗi trao đổi cấp phát điển hình gồm Discover, Offer, Request và Acknowledge. DHCP Relay chuyển tiếp yêu cầu giữa các miền quảng bá. Dữ liệu cần quản lý gồm mạng cấp phát, gateway, DNS, thời gian thuê và dải địa chỉ loại trừ @rfc2131.
 
 Định tuyến tĩnh cho phép người quản trị chủ động khai báo mạng đích cùng đường đi cụ thể theo lựa chọn của mình. Bên cạnh đó, các giao thức định tuyến động cũng được sử dụng nhằm tự động hóa quá trình này: OSPFv2 hoạt động dựa trên cơ chế trạng thái liên kết (link-state), trao đổi thông tin giữa các router và tính toán đường đi tối ưu theo chi phí; trong khi đó, EIGRP sử dụng cơ chế định tuyến vector khoảng cách nâng cao để xác định tuyến đường phù hợp. Dù áp dụng giao thức nào, các tham số như mạng được quảng bá, mã định danh tiến trình, vùng mạng hay hệ tự trị (autonomous system) đều cần được cấu hình thống nhất giữa các thiết bị tham gia, nhằm đảm bảo quá trình trao đổi thông tin định tuyến diễn ra chính xác @rfc2328 @rfc7868.
 
@@ -49,17 +49,17 @@ Port Security giới hạn địa chỉ MAC được sử dụng trên cổng. D
 
 Giám sát sử dụng hai nguồn dữ liệu bổ sung cho nhau: trạng thái lấy bằng lệnh truy vấn và sự kiện do thiết bị gửi về qua Syslog. Trạng thái phản ánh kết quả tại thời điểm thu thập, trong khi nhật ký ghi nhận diễn biến như thay đổi trạng thái cổng (interface up/down), thay đổi cấu hình hoặc vi phạm chính sách. Cả hai cần được gắn với thiết bị nguồn và thời điểm để phục vụ đối chiếu.
 
-Một luồng Syslog tập trung bao gồm thiết bị phát log, bộ nhận, bộ phân tích, nơi lưu trữ và giao diện truy vấn. CAMS giữ các trường đã phân tích và bản tin gốc để có thể kiểm tra lại khi dữ liệu thiếu hoặc không đúng định dạng. Địa chỉ đích, cổng và giao thức trên thiết bị phải khớp cấu hình của bộ nhận.
+Một luồng Syslog tập trung bao gồm thiết bị phát nhật ký, bộ nhận, bộ phân tích, nơi lưu trữ và giao diện truy vấn. CAMS giữ các trường đã phân tích cùng bản tin gốc để kiểm tra lại khi dữ liệu thiếu hoặc không đúng định dạng. Địa chỉ đích, cổng và giao thức trên thiết bị phải khớp với cấu hình của bộ nhận.
 
-Syslog sử dụng tám mức severity từ 0 đến 7(theo cisco); số nhỏ hơn biểu thị mức nghiêm trọng cao hơn. Tên mức lần lượt là Emergency, Alert, Critical, Error, Warning, Notice, Informational và Debug. Severity giúp sắp xếp ưu tiên xem xét, nhưng riêng mức độ này chưa đủ để kết luận có tấn công. Cần kết hợp nguồn, mã sự kiện, nội dung và bối cảnh vận hành.
+Theo quy ước của Cisco, Syslog sử dụng tám mức độ nghiêm trọng từ 0 đến 7; số càng nhỏ thì mức độ càng nghiêm trọng. Tên các mức lần lượt là Emergency, Alert, Critical, Error, Warning, Notice, Informational và Debug. Mức độ nghiêm trọng giúp ưu tiên việc xem xét, nhưng chưa đủ để kết luận có tấn công. Người quản trị cần kết hợp nguồn, mã sự kiện, nội dung và bối cảnh vận hành.
 
-Phát hiện vi phạm trên thiết bị, chuyển log về CAMS và hiển thị kết quả lọc là ba bước riêng biệt. Nếu thiết bị không phát sinh hoặc không gửi bản tin tương ứng, bộ nhận không thể suy ra đầy đủ sự kiện. Trong phạm vi đề tài, phân tích cảnh báo dựa trên nhật ký tập trung; tương quan nhiều sự kiện và gửi thông báo chủ động là các khả năng cần đánh giá riêng trước khi khẳng định đã hỗ trợ.
+Phát hiện vi phạm trên thiết bị, chuyển nhật ký về CAMS và hiển thị kết quả lọc là ba bước riêng biệt. Nếu thiết bị không phát sinh hoặc không gửi bản tin tương ứng, bộ nhận không thể suy ra đầy đủ sự kiện. Trong phạm vi đề tài, việc phân tích cảnh báo dựa trên nhật ký tập trung; tương quan nhiều sự kiện và gửi thông báo chủ động là các khả năng cần được đánh giá riêng.
 
 == Công nghệ lưu trữ và xây dựng giao diện
 
-SQLite là cơ sở dữ liệu nhúng phù hợp với ứng dụng desktop: dữ liệu được lưu trong tệp và truy cập trực tiếp từ chương trình. CAMS tách dữ liệu cấu hình và dữ liệu thu thập thành hai cơ sở dữ liệu, sử dụng quan hệ giữa thiết bị với cổng (interface), dịch vụ và chính sách. Ràng buộc dữ liệu cần kết hợp với kiểm tra nghiệp vụ, vì đúng kiểu chuỗi chưa có nghĩa là đúng địa chỉ IP.
+SQLite là cơ sở dữ liệu nhúng phù hợp với ứng dụng máy tính để bàn vì dữ liệu được lưu trong tệp và truy cập trực tiếp từ chương trình. CAMS tách dữ liệu cấu hình khỏi dữ liệu thu thập, đồng thời duy trì quan hệ giữa thiết bị với cổng, dịch vụ và chính sách. Ràng buộc trong cơ sở dữ liệu cần kết hợp với kiểm tra nghiệp vụ, vì một giá trị đúng kiểu chuỗi chưa chắc là địa chỉ IP hợp lệ.
 
-Các thao tác ghi cần giữ giao dịch ngắn để hạn chế tranh chấp. Với log, ghi theo lô giảm số lần ghi riêng lẻ; tuy nhiên, khả năng tiếp nhận vẫn phụ thuộc hàng đợi và tài nguyên. Giao dịch SQLite bảo vệ tính nhất quán dữ liệu cục bộ, không tạo ra giao dịch nguyên tử trên thiết bị mạng ở xa.
+Các thao tác ghi cần giữ giao dịch ngắn để hạn chế tranh chấp. Đối với nhật ký, ghi theo lô làm giảm số lần truy cập riêng lẻ; tuy nhiên, khả năng tiếp nhận vẫn phụ thuộc vào hàng đợi và tài nguyên hệ thống. Giao dịch SQLite bảo vệ tính nhất quán của dữ liệu cục bộ nhưng không tạo ra giao dịch nguyên tử trên thiết bị mạng ở xa.
 
 Qt Quick/QML mô tả giao diện theo thành phần và thuộc tính. PyQt6 kết nối giao diện với logic Python qua đối tượng `QObject`, các phương thức gọi và tín hiệu cập nhật. Giao diện tiếp nhận thao tác và trình bày kết quả; nghiệp vụ kiểm tra dữ liệu, truy cập cơ sở dữ liệu và kết nối mạng được xử lý ở các lớp phía sau.
 

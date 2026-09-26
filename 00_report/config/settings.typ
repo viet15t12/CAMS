@@ -107,7 +107,7 @@
 
   set par(
     justify: true,
-    first-line-indent: 0pt,
+    first-line-indent: (amount: 1.27cm, all: true),
     leading: 1.05em,
     spacing: 16pt,
   )
@@ -151,7 +151,7 @@
 
   show raw.where(block: false): set text(font: "Cascadia Code", size: 11pt, weight: "light", features: ("zero",))
   show raw.where(block: false): box.with(
-    inset: (x: 4pt, y: 0pt),
+    inset: (x: 0pt, y: 0pt),
     outset: (y: 3pt),
   )
 

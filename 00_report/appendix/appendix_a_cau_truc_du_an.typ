@@ -11,17 +11,17 @@
 
 #appendix-section[A.1.][Sơ đồ cấu trúc thư mục mã nguồn runtime ứng dụng desktop]
 
-Toàn bộ mã nguồn ứng dụng desktop CAMS được tổ chức trực tiếp ở root repository theo kiến trúc Clean Architecture. Sơ đồ dưới đây thể hiện các lớp chính, nhóm module và trách nhiệm tương ứng:
+Mã nguồn ứng dụng desktop CAMS được tổ chức tại thư mục gốc của kho mã nguồn theo kiến trúc phân lớp. Sơ đồ dưới đây thể hiện các lớp chính, nhóm mô-đun và trách nhiệm tương ứng.
 
 #figure(
   image("/00_book/figures/report/appendix/project-structure.svg", width: 90%),
-  caption: [Sơ đồ cấu trúc thư mục mã nguồn ứng dụng desktop CAMS ở root repository],
+  caption: [Cấu trúc thư mục mã nguồn ứng dụng desktop CAMS],
 ) <fig-appendix-project-structure>
 
 #pagebreak(weak: true)
 #appendix-section[A.2.][Bảng ánh xạ luồng thành phần toàn hệ thống]
 
-Bảng dưới đây mô tả chi tiết chuỗi liên kết từ thành phần giao diện đồ họa (QML UI), qua lớp cầu nối (PyQt6 Bridge / Facade), đến tầng lưu trữ cơ sở dữ liệu (SQLite Table) và các mẫu cấu hình / tiến trình thực thi mạng (Worker / Jinja2 Template):
+Bảng dưới đây mô tả chuỗi liên kết từ thành phần giao diện QML, qua lớp cầu nối PyQt6, đến tầng lưu trữ SQLite và các tác vụ hoặc mẫu Jinja2 dùng để thực thi cấu hình mạng.
 
 #report-table(
   columns: (18%, 17%, 21%, 18%, 26%),
@@ -45,5 +45,5 @@ Bảng dưới đây mô tả chi tiết chuỗi liên kết từ thành phần 
     ([#table-code("TerminalHost.qml")], [#table-code("cli")], [#table-code("TerminalManager")], [Socket IPC NTTP/1], [#table-code("cams-terminal")]),
     ([#table-code("DatabaseBrowser.qml")], [#table-code("dbManager")], [#table-code("DatabaseBrowserService")], [Tất cả 93 bảng], [#table-code("sqlite3 query engine")]),
   ),
-  caption: [Bảng ánh xạ luồng thành phần từ Giao diện QML đến Cơ sở dữ liệu và Worker],
+  caption: [Ánh xạ thành phần từ giao diện QML đến cơ sở dữ liệu và tác vụ thực thi],
 ) <tab-system-component-mapping>

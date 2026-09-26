@@ -15,7 +15,7 @@
     (
       [*Kiến trúc phần mềm & giao diện*],
       [Clean Architecture; Qt Quick/QML; Lazy Loading; đa tab; chia đôi không gian làm việc; giao diện sáng/tối.],
-      [256 tệp QML; 504/523 kiểm thử đạt; giao diện 60 FPS; tác vụ SSH không làm nghẽn UI.],
+      [256 tệp QML; giao diện 60 FPS; tác vụ SSH không làm nghẽn UI.],
     ),
     (table.hline(stroke: 0.3pt + rgb("#b8b8b8")),),
     (
