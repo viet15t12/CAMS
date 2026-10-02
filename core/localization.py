@@ -31,6 +31,8 @@ _VIETNAMESE_TEXT: dict[str, str] = {
     "Default local and remote connection directories": "Thư mục kết nối local và remote mặc định",
     "System Logs": "System Logs",
     "Listener, device destination, and message retention": "Listener, đích thiết bị và thời gian lưu message",
+    "Email Alerts": "Cảnh báo qua email",
+    "Send selected Syslog levels by email": "Gửi các mức Syslog đã chọn qua email",
     "Language and notification translation": "Ngôn ngữ và bản dịch thông báo",
     "Software Update": "Cập nhật phần mềm",
     "Check for and install CAMS updates": "Kiểm tra và cài đặt bản cập nhật CAMS",

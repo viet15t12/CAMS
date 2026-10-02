@@ -310,7 +310,7 @@ def main() -> int:
     # NOTE: chuc nang chua phat trien xong, khong tam quan tam nieu viet bao cao
     sftp_controller = SftpController(device_login_service=device_login_service)
     # Syslog owns its own threads/database boundary.
-    syslog_manager = SyslogManager()
+    syslog_manager = SyslogManager(language_getter=lambda: language_settings.language)
     shutdown_complete = False
 
     def route_active_workspace() -> None:
@@ -405,6 +405,7 @@ def main() -> int:
     context.setContextProperty("sftpController", sftp_controller)
     context.setContextProperty("syslogManager", syslog_manager)
     context.setContextProperty("syslogSettings", syslog_manager.settings)
+    context.setContextProperty("emailAlertManager", syslog_manager.email_alerts)
     context.setContextProperty("nqvEasterEggEnabled", brand_easter_egg == "nqv")
     context.setContextProperty("ptitEasterEggEnabled", brand_easter_egg == "ptit")
 

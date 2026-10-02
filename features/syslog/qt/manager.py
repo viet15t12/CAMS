@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 import threading
 from typing import Any
@@ -17,6 +18,7 @@ from ..export import export_logs_xlsx, file_url_to_path
 from ..group_service import SyslogGroupService
 from ..native import NativeSyslogCollector
 from ..smart_filter import SmartFilterError, build_log_filters
+from .alerts import EmailAlertManager
 from .settings import SyslogSettings
 
 
@@ -59,9 +61,18 @@ class SyslogManager(QObject):
     sourceInterfaceRequired = pyqtSignal(str, str)
     errorOccurred = pyqtSignal(str)
 
-    def __init__(self, parent: QObject | None = None) -> None:
+    def __init__(
+        self,
+        parent: QObject | None = None,
+        *,
+        language_getter: Callable[[], str] | None = None,
+    ) -> None:
         super().__init__(parent)
         self.settings = SyslogSettings(self)
+        self.email_alerts = EmailAlertManager(
+            self, language_getter=language_getter
+        )
+        self.email_alerts.alertError.connect(self._error)
         self.service = SyslogServerService(
             INFO_COLLECTED_DB, DEVICE_NETWORK_DB,
             self._messages_stored, self._error, self._receiver_error,
@@ -179,6 +190,7 @@ class SyslogManager(QObject):
     def _messages_stored(self, rows: list[dict[str, Any]]) -> None:
         with self._count_lock:
             self._received_count += len(rows)
+        self.email_alerts.submit(rows)
         self.messagesInserted.emit(rows)
         self.stateChanged.emit()
 
@@ -438,6 +450,7 @@ class SyslogManager(QObject):
         self._shutdown = True
         self.native.stop()
         self.service.stop(receiver_timeout=0.5, writer_timeout=1.0)
+        self.email_alerts.shutdown()
         self.executor.shutdown(wait=True, cancel_futures=True)
 
 

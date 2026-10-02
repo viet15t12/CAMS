@@ -24,6 +24,7 @@ Rectangle {
     readonly property bool isExternalToolsSetting: activeSettingKey === "external_tools"
                                                    || activeSettingKey === "tool_catalog"
     readonly property bool isSyslogSetting: activeSettingKey === "syslog_server"
+    readonly property bool isEmailAlertSetting: activeSettingKey === "email_alerts"
     readonly property bool isSftpSetting: activeSettingKey === "sftp"
     readonly property bool isSoftwareUpdateSetting: activeSettingKey === "software_update"
 
@@ -1129,6 +1130,7 @@ Rectangle {
                  && !settingsView.isLanguageSetting
                  && !settingsView.isExternalToolsSetting
                  && !settingsView.isSyslogSetting
+                 && !settingsView.isEmailAlertSetting
                  && !settingsView.isSftpSetting
                  && !settingsView.isSoftwareUpdateSetting
 
@@ -1149,6 +1151,11 @@ Rectangle {
     SyslogServerSettings {
         anchors.fill: parent
         visible: settingsView.isSyslogSetting
+    }
+
+    EmailAlertSettings {
+        anchors.fill: parent
+        visible: settingsView.isEmailAlertSetting
     }
 
     SftpSettings {

@@ -153,6 +153,7 @@ SyslogLogRow 1.0 qml/features/syslog/SyslogLogRow.qml
 SyslogMessageDetails 1.0 qml/features/syslog/SyslogMessageDetails.qml
 SyslogMultiSelectFilter 1.0 qml/features/syslog/SyslogMultiSelectFilter.qml
 SyslogServerSettings 1.0 qml/features/syslog/SyslogServerSettings.qml
+EmailAlertSettings 1.0 qml/features/syslog/EmailAlertSettings.qml
 SyslogSmartFilterBuilder 1.0 qml/features/syslog/SyslogSmartFilterBuilder.qml
 SyslogDeviceConfigPage 1.0 qml/features/syslog/SyslogDeviceConfigPage.qml
 SyslogGroupDialog 1.0 qml/features/syslog/SyslogGroupDialog.qml
