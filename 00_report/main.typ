@@ -12,6 +12,11 @@
 #show: report-style
 
 // ----------------------------------------------------------
+// TRANG BÌA
+// ----------------------------------------------------------
+#include "cover/cover.typ"
+
+// ----------------------------------------------------------
 // PHẦN ĐẦU
 // ----------------------------------------------------------
 #set page(numbering: "i")
@@ -23,7 +28,7 @@
 #include "contents/04_danh_muc_tu_viet_tat.typ"
 
 #pagebreak()
-#outline(title: upper[Mục lục], depth: 4)
+#outline(title: upper[Mục lục], depth: 3)
 
 #pagebreak()
 #{
@@ -63,7 +68,7 @@
 #pagebreak()
 #bibliography(
   "bibliography/networktools_references.bib",
-  title: [Tài liệu tham khảo],
+  title: upper[Tài liệu tham khảo],
   style: "ieee",
 )
 

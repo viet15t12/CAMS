@@ -43,7 +43,7 @@ Trong tự động hóa, các tham số này có quan hệ phụ thuộc. Ví d�
 
 ACL quyết định cho phép hoặc từ chối lưu lượng dựa trên các điều kiện và thứ tự quy tắc. Phần mềm cần giữ đúng thứ tự, hướng áp dụng và cổng áp dụng (interface). Một ACL có cú pháp hợp lệ vẫn có thể chặn nhầm lưu lượng nếu đặt sai vị trí hoặc thiếu quy tắc cho phép cần thiết.
 
-Port Security giới hạn địa chỉ MAC được sử dụng trên cổng. DHCP Snooping kiểm tra luồng DHCP theo vai trò cổng tin cậy; Dynamic ARP Inspection hỗ trợ kiểm tra bản tin ARP dựa trên dữ liệu liên kết hoặc chính sách được cấu hình. Hiệu quả của các cơ chế này phụ thuộc topology, dữ liệu kiểm tra và khả năng của thiết bị. CAMS cung cấp phương tiện cấu hình và theo dõi; việc thực thi chính sách diễn ra trên router hoặc switch.
+Port Security giới hạn địa chỉ MAC được sử dụng trên cổng. DHCP Snooping kiểm tra luồng DHCP theo vai trò cổng tin cậy; Dynamic ARP Inspection (DAI) đối chiếu cặp IP–MAC trong gói ARP với bảng DHCP Snooping binding hoặc ARP ACL, chỉ áp dụng trên các cổng không tin cậy để chặn ARP giả mạo. Hiệu quả của các cơ chế này phụ thuộc topology, dữ liệu kiểm tra và khả năng của thiết bị. CAMS cung cấp phương tiện cấu hình và theo dõi; việc thực thi chính sách diễn ra trên router hoặc switch.
 
 == Giám sát tập trung và khai thác cảnh báo
 
@@ -51,7 +51,25 @@ Giám sát sử dụng hai nguồn dữ liệu bổ sung cho nhau: trạng thái
 
 Một luồng Syslog tập trung bao gồm thiết bị phát nhật ký, bộ nhận, bộ phân tích, nơi lưu trữ và giao diện truy vấn. CAMS giữ các trường đã phân tích cùng bản tin gốc để kiểm tra lại khi dữ liệu thiếu hoặc không đúng định dạng. Địa chỉ đích, cổng và giao thức trên thiết bị phải khớp với cấu hình của bộ nhận.
 
-Theo quy ước của Cisco, Syslog sử dụng tám mức độ nghiêm trọng từ 0 đến 7; số càng nhỏ thì mức độ càng nghiêm trọng. Tên các mức lần lượt là Emergency, Alert, Critical, Error, Warning, Notice, Informational và Debug. Mức độ nghiêm trọng giúp ưu tiên việc xem xét, nhưng chưa đủ để kết luận có tấn công. Người quản trị cần kết hợp nguồn, mã sự kiện, nội dung và bối cảnh vận hành.
+Syslog phân cấp bản tin theo tám mức độ nghiêm trọng từ 0 đến 7; số càng nhỏ thì mức độ càng nghiêm trọng. Hai hệ tên thường gặp cần phân biệt: tên theo RFC 5424 dùng trong tài liệu chuẩn, và từ khóa Cisco IOS dùng trực tiếp trong lệnh cấu hình như `logging trap`.
+
+#report-table(
+  columns: (10%, 32%, 33%, 25%),
+  header: ([Mức], [Tên RFC 5424], [Từ khóa Cisco IOS], [Ý nghĩa]),
+  rows: (
+    ([0], [Emergency], [`emergencies`], [Hệ thống không thể sử dụng]),
+    ([1], [Alert], [`alerts`], [Cần hành động ngay]),
+    ([2], [Critical], [`critical`], [Điều kiện tới hạn]),
+    ([3], [Error], [`errors`], [Lỗi xảy ra]),
+    ([4], [Warning], [`warnings`], [Cảnh báo]),
+    ([5], [Notice], [`notifications`], [Thông báo thông thường nhưng đáng chú ý]),
+    ([6], [Informational], [`informational`], [Thông tin vận hành]),
+    ([7], [Debug], [`debugging`], [Thông tin gỡ lỗi chi tiết]),
+  ),
+  caption: [Các mức Syslog: tên theo RFC 5424 @rfc5424 và từ khóa Cisco IOS],
+)
+
+Mức độ nghiêm trọng giúp ưu tiên việc xem xét, nhưng chưa đủ để kết luận có tấn công. Người quản trị cần kết hợp nguồn, mã sự kiện, nội dung và bối cảnh vận hành.
 
 Phát hiện vi phạm trên thiết bị, chuyển nhật ký về CAMS và hiển thị kết quả lọc là ba bước riêng biệt. Nếu thiết bị không phát sinh hoặc không gửi bản tin tương ứng, bộ nhận không thể suy ra đầy đủ sự kiện. Trong phạm vi đề tài, việc phân tích cảnh báo dựa trên nhật ký tập trung; tương quan nhiều sự kiện và gửi thông báo chủ động là các khả năng cần được đánh giá riêng.
 

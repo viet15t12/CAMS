@@ -598,7 +598,7 @@ Cấu hình `logging source-interface` tạo địa chỉ nguồn ổn định c
 
 #step-title[Bước 4. Khai báo chính sách Syslog dùng chung]
 
-Tại bước *Policy*, quản trị viên nhập địa chỉ máy chủ `192.168.122.1`, chọn giao thức `UDP`, cổng `5514` và đặt *Trap severity* là `5 - Notifications`. Hai tùy chọn *Include millisecond log timestamps* và *Include sequence numbers* được bật để hỗ trợ sắp xếp và đối chiếu sự kiện chính xác hơn.
+Tại bước *Policy*, quản trị viên nhập địa chỉ máy chủ `192.168.122.1`, chọn giao thức `UDP`, cổng `5514` và đặt *Trap severity* là `5 - Notifications`. Hai tùy chọn *Include millisecond log timestamps* và *Include sequence numbers* được bật để hỗ trợ sắp xếp và đối chiếu sự kiện chính xác hơn. CAMS sử dụng cổng `5514` thay vì cổng Syslog chuẩn `514/UDP` vì trên Linux, các cổng dưới 1024 yêu cầu quyền root để lắng nghe; cổng 5514 cho phép dịch vụ chạy ở quyền người dùng thông thường mà không cần cấu hình đặc biệt.
 
 #figure(
   image("/00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png", width: 78%),

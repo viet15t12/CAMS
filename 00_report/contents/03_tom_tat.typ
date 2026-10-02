@@ -8,4 +8,4 @@ CAMS được thiết kế theo kiến trúc phân lớp, kết hợp giao diệ
 
 Phạm vi của CAMS bao gồm chuyển mạch Lớp 2, định tuyến và các dịch vụ Lớp 3. Hệ thống còn tích hợp bộ thu nhận Syslog theo thời gian thực, máy khách SFTP và terminal nhúng phục vụ thao tác dòng lệnh. Kết quả thử nghiệm trên EVE-NG cho thấy CAMS có thể triển khai đồng bộ cấu hình trên nhiều thiết bị, lưu lại kết quả và hỗ trợ đối chiếu trạng thái sau khi thực thi.
 
-// *Từ khóa:* Tự động hóa mạng, Quản lý tập trung, CAMS, Cisco IOS, Qt Quick/QML, PyQt6, SQLite, Jinja2, View & Push.
+*Từ khóa:* Tự động hóa mạng, Quản lý tập trung, CAMS, Cisco IOS, Qt Quick/QML, PyQt6, SQLite, Jinja2, View & Push.
