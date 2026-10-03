@@ -16,6 +16,34 @@ from .models import (
 )
 from .rules import ALL_RULES
 
+_REDACT_PATTERNS = [
+    # enable secret / enable password
+    (re.compile(r"^(enable\s+(?:secret|password))(?:\s+\d+)?\s+\S+", re.IGNORECASE), r"\1 [REDACTED]"),
+    # username <name> (secret|password)
+    (re.compile(r"^(username\s+\S+\s+(?:secret|password))(?:\s+\d+)?\s+\S+", re.IGNORECASE), r"\1 [REDACTED]"),
+    # password <secret>
+    (re.compile(r"^(password)(?:\s+\d+)?\s+\S+", re.IGNORECASE), r"\1 [REDACTED]"),
+    # snmp-server community <string> [RO|RW] ...
+    (re.compile(r"^(snmp-server\s+community)\s+\S+(\s+.*)?$", re.IGNORECASE), r"\1 [REDACTED]\2"),
+    # standby ... authentication
+    (re.compile(r"^(standby\s+\S+\s+authentication(?:\s+text|\s+md5\s+key-string)?)\s+\S+", re.IGNORECASE), r"\1 [REDACTED]"),
+    # key-string
+    (re.compile(r"^(key-string)(?:\s+\d+)?\s+\S+", re.IGNORECASE), r"\1 [REDACTED]"),
+]
+
+
+def redact_sensitive_config_line(line: str) -> str:
+    """Mask credentials, secrets, hashes, and community strings in config lines."""
+    result = str(line or "")
+    for pattern, replacement in _REDACT_PATTERNS:
+        result = pattern.sub(replacement, result)
+    return result
+
+
+def redact_sensitive_lines(lines: list[str]) -> list[str]:
+    """Return a list of config lines with all sensitive secrets redacted."""
+    return [redact_sensitive_config_line(line) for line in lines]
+
 
 class ParsedConfig:
     """Structured decomposition of a Cisco IOS running-config text."""
@@ -144,6 +172,10 @@ class CiscoConfigAuditor:
                     status=AuditStatus.NOT_APPLICABLE.value,
                     details="Quy tắc chưa có bộ kiểm tra.",
                 )
+
+            # Redact sensitive lines (passwords, secrets, hashes, community strings) before storing
+            if result.matched_lines:
+                result.matched_lines = redact_sensitive_lines(result.matched_lines)
 
             results.append(result)
 

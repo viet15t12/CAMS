@@ -146,8 +146,8 @@ def _build_inventory(db_path: str, tasks: list[dict[str, Any]]) -> tuple[str | N
                 errors.append({"target": ip, "status": "failed", "message": "Device credentials were not found in the database."})
                 continue
             name, user, password, enable_password, os_name, port, method = row
-            password = decrypt_credential(password)
-            enable_password = decrypt_credential(enable_password)
+            password = decrypt_credential(password, context=f"{ip}:password")
+            enable_password = decrypt_credential(enable_password, context=f"{ip}:enable_password")
             method = str(method or "SSH").upper()
             if method == "RESTCONF":
                 errors.append({"target": ip, "status": "failed", "message": "NAT push over RESTCONF is not supported by the imported backend; use an SSH or Telnet device session."})

@@ -9,7 +9,7 @@ from pathlib import Path
 import sqlite3
 from typing import Any, Callable
 
-from .engine import CiscoConfigAuditor
+from .engine import CiscoConfigAuditor, redact_sensitive_config_line
 from .models import DeviceAuditReport, NetworkAuditSummary, RuleResult
 
 
@@ -218,10 +218,10 @@ class SecurityComplianceService:
                 lines.append(f"- **Danh mục:** {item.category_title}")
                 lines.append(f"- **Mô tả hiện trạng:** {item.details}")
                 if item.matched_lines:
-                    lines.append("- **Dòng cấu hình liên quan:**")
+                    lines.append("- **Dòng cấu hình liên quan (đã lược bỏ bí mật):**")
                     lines.append("```text")
                     for m in item.matched_lines:
-                        lines.append(f"  {m}")
+                        lines.append(f"  {redact_sensitive_config_line(m)}")
                     lines.append("```")
                 if item.remediation:
                     lines.append("- **Câu lệnh Cisco IOS khắc phục khuyến nghị:**")

@@ -703,6 +703,20 @@ StatefulWindow {
         function onTaskFinished(ok, message) { root.handleTaskFinished("db", ok, message) }
     }
 
+    Connections {
+        target: root.welcomeBackend
+        function onActiveWorkspaceChanged() {
+            if (root.welcomeBackend && !root.welcomeBackend.activeProjectEncrypted) {
+                statusBar.showMessage(
+                    LanguageState.isVietnamese
+                        ? "Dự án chưa đặt mật khẩu: Mật khẩu thiết bị chỉ được làm rối, chưa được bảo vệ mạnh chống trích xuất."
+                        : "Project is unencrypted: Device credentials are only obfuscated, not protected against package extraction.",
+                    "warning"
+                )
+            }
+        }
+    }
+
     // =====================================================================
     // 3. MAIN UI LAYOUT
     // =====================================================================

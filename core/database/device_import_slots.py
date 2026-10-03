@@ -159,8 +159,9 @@ class DeviceImportSlotsMixin:
                 if not row["host"]:
                     skipped += 1
                     continue
-                enc_pwd = encrypt_credential(row["password"]) if row["password"] else None
-                enc_epwd = encrypt_credential(row["enable_password"]) if row["enable_password"] else ""
+                h = str(row["host"] or "").strip()
+                enc_pwd = encrypt_credential(row["password"], context=f"{h}:password") if row["password"] else None
+                enc_epwd = encrypt_credential(row["enable_password"], context=f"{h}:enable_password") if row["enable_password"] else ""
                 cursor = conn.execute(
                     """
                     INSERT OR IGNORE INTO t01_devices

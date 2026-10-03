@@ -53,12 +53,17 @@ class DeviceRepository:
         if row is None:
             return None
         payload = dict(row)
+        target_host = (host or "").strip()
         try:
-            payload["password"] = decrypt_credential(payload.get("password") or "")
+            payload["password"] = decrypt_credential(
+                payload.get("password") or "", context=f"{target_host}:password"
+            )
         except Exception:
             payload["password"] = payload.get("password") or ""
         try:
-            payload["enable_password"] = decrypt_credential(payload.get("enable_password") or "")
+            payload["enable_password"] = decrypt_credential(
+                payload.get("enable_password") or "", context=f"{target_host}:enable_password"
+            )
         except Exception:
             payload["enable_password"] = payload.get("enable_password") or ""
         return payload

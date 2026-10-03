@@ -146,8 +146,10 @@ Window {
             hostInput.text  = editDeviceData.ip || ""
             portInput.text  = editDeviceData.port || "22"
             userField.text  = editDeviceData.user || ""
-            passField.text  = editDeviceData.pass || ""
-            enablePassField.text = editDeviceData.enable_pass || ""
+            passField.text  = ""
+            enablePassField.text = ""
+            passField.placeholderText = LanguageState.isVietnamese ? "(Để trống để giữ nguyên mật khẩu cũ)" : "(Leave blank to keep current password)"
+            enablePassField.placeholderText = LanguageState.isVietnamese ? "(Để trống để giữ nguyên mật khẩu enable cũ)" : "(Leave blank to keep current enable password)"
             osCombo.currentIndex = comboIndex(osOptions, editDeviceData.os || "cisco_ios", 0)
             roleCombo.currentIndex = comboIndex(roleOptions, editDeviceData.role || "rou", 0)
 
@@ -168,6 +170,8 @@ Window {
             userField.text = ""
             passField.text = ""
             enablePassField.text = ""
+            passField.placeholderText = "••••••••"
+            enablePassField.placeholderText = LanguageState.isVietnamese ? "(Tùy chọn, mặc định = Password)" : "(Optional, default = Password)"
             protocolCombo.currentIndex = 0
             osCombo.currentIndex = 0
             roleCombo.currentIndex = 0

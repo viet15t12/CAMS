@@ -5,6 +5,8 @@ from .credential_cipher import (
     CredentialCipher,
     ENV_CREDENTIAL_KEY,
     PREFIX,
+    PREFIX_V1,
+    PREFIX_V2,
     TRANSIENT_KEY_FILE,
     bind_session_credentials,
     clear_session_credentials,
@@ -12,6 +14,7 @@ from .credential_cipher import (
     encrypt_credential,
     ensure_database_credential_cipher,
     get_active_cipher,
+    make_aad,
     migrate_database_passwords,
     set_active_cipher,
 )
@@ -21,6 +24,8 @@ __all__ = [
     "CredentialCipher",
     "ENV_CREDENTIAL_KEY",
     "PREFIX",
+    "PREFIX_V1",
+    "PREFIX_V2",
     "TRANSIENT_KEY_FILE",
     "bind_session_credentials",
     "clear_session_credentials",
@@ -28,6 +33,7 @@ __all__ = [
     "encrypt_credential",
     "ensure_database_credential_cipher",
     "get_active_cipher",
+    "make_aad",
     "migrate_database_passwords",
     "set_active_cipher",
 ]

@@ -10,12 +10,16 @@ from cryptography.exceptions import InvalidTag
 
 from infrastructure.security.credential_cipher import (
     CredentialCipher,
+    LEGACY_ASSOCIATED_DATA,
     PREFIX,
+    PREFIX_V1,
+    PREFIX_V2,
     bind_session_credentials,
     clear_session_credentials,
     decrypt_credential,
     encrypt_credential,
     get_active_cipher,
+    make_aad,
     migrate_database_passwords,
     set_active_cipher,
 )
@@ -124,17 +128,23 @@ class TestCredentialCipher(unittest.TestCase):
         migrated = migrate_database_passwords(conn)
         self.assertEqual(migrated, 4)  # 2 in R1, 1 in R2, 1 in SW1
 
-        # Check that DB values now start with ENC$v1$
+        # Check that DB values now start with ENC$v2$ and decrypt with record context
         rows = conn.execute("SELECT host, password, enable_password FROM t01_devices;").fetchall()
         for host, pw, epw in rows:
             if pw:
-                self.assertTrue(pw.startswith(PREFIX))
-                self.assertTrue(decrypt_credential(pw).startswith("plain_pw"))
+                self.assertTrue(pw.startswith(PREFIX_V2))
+                self.assertTrue(decrypt_credential(pw, context=f"{host}:password").startswith("plain_pw"))
+                # Swapped context must fail
+                with self.assertRaises(InvalidTag):
+                    decrypt_credential(pw, context="wrong_host:password")
             if epw:
-                self.assertTrue(epw.startswith(PREFIX))
-                self.assertTrue(decrypt_credential(epw).startswith("plain_enable"))
+                self.assertTrue(epw.startswith(PREFIX_V2))
+                self.assertTrue(decrypt_credential(epw, context=f"{host}:enable_password").startswith("plain_enable"))
+                # Swapped column context must fail
+                with self.assertRaises(InvalidTag):
+                    decrypt_credential(epw, context=f"{host}:password")
 
-        # Second migration does nothing (already encrypted)
+        # Second migration does nothing (already encrypted with ENC$v2$)
         second_migrated = migrate_database_passwords(conn)
         self.assertEqual(second_migrated, 0)
         conn.close()
@@ -232,18 +242,40 @@ class TestCredentialCipher(unittest.TestCase):
             self.assertTrue(added)
 
             # Direct SQLite check: passwords in DB must start with ENC$v1$
+            # Direct SQLite check: passwords in DB must start with ENC$v2$ and decrypt with host context
             conn = sqlite3.connect(db_path)
             raw = conn.execute("SELECT password, enable_password FROM t01_devices WHERE host = '10.10.10.1';").fetchone()
             conn.close()
-            self.assertTrue(raw[0].startswith(PREFIX))
-            self.assertTrue(raw[1].startswith(PREFIX))
+            self.assertTrue(raw[0].startswith(PREFIX_V2))
+            self.assertTrue(raw[1].startswith(PREFIX_V2))
+            self.assertEqual(decrypt_credential(raw[0], context="10.10.10.1:password"), "MyDevicePassword@999")
+            self.assertEqual(decrypt_credential(raw[1], context="10.10.10.1:enable_password"), "MyEnableSecret@888")
 
-            # getDeviceByHost must return decrypted plaintext for UI binding
+            # getDeviceByHost must NOT leak plaintext passwords to QML (masked/empty for security)
             dev_info = backend.getDeviceByHost("10.10.10.1")
-            self.assertEqual(dev_info["pass"], "MyDevicePassword@999")
-            self.assertEqual(dev_info["enable_pass"], "MyEnableSecret@888")
+            self.assertEqual(dev_info["pass"], "")
+            self.assertEqual(dev_info["enable_pass"], "")
+            self.assertTrue(dev_info["has_password"])
+            self.assertTrue(dev_info["has_enable_password"])
 
-            # Update device
+            # Test updating device leaving passwords blank -> preserves existing credentials!
+            preserved = backend.updateDevice(
+                host="10.10.10.1",
+                device_name="Switch1-Preserved",
+                method="SSH",
+                port_text="22",
+                username="netadmin",
+                password="",
+                enable_password="",
+            )
+            self.assertTrue(preserved)
+            conn = sqlite3.connect(db_path)
+            raw_preserved = conn.execute("SELECT password, enable_password FROM t01_devices WHERE host = '10.10.10.1';").fetchone()
+            conn.close()
+            self.assertEqual(raw_preserved[0], raw[0])
+            self.assertEqual(raw_preserved[1], raw[1])
+
+            # Update device with new passwords
             updated = backend.updateDevice(
                 host="10.10.10.1",
                 device_name="Switch1-Updated",
@@ -255,17 +287,14 @@ class TestCredentialCipher(unittest.TestCase):
             )
             self.assertTrue(updated)
 
-            # Direct DB check again
+            # Direct DB check again: new values encrypted with host context
             conn = sqlite3.connect(db_path)
             raw_updated = conn.execute("SELECT password, enable_password FROM t01_devices WHERE host = '10.10.10.1';").fetchone()
             conn.close()
-            self.assertTrue(raw_updated[0].startswith(PREFIX))
-            self.assertTrue(raw_updated[1].startswith(PREFIX))
-
-            # getDeviceByHost verifies updated credentials decrypted
-            updated_info = backend.getDeviceByHost("10.10.10.1")
-            self.assertEqual(updated_info["pass"], "NewPassword#321")
-            self.assertEqual(updated_info["enable_pass"], "NewSecret#654")
+            self.assertTrue(raw_updated[0].startswith(PREFIX_V2))
+            self.assertTrue(raw_updated[1].startswith(PREFIX_V2))
+            self.assertEqual(decrypt_credential(raw_updated[0], context="10.10.10.1:password"), "NewPassword#321")
+            self.assertEqual(decrypt_credential(raw_updated[1], context="10.10.10.1:enable_password"), "NewSecret#654")
 
     def test_subprocess_resolves_key_from_manifest_or_marker(self) -> None:
         """Simulate separate process (like interactive_ssh) loading credentials from workspace dir."""
@@ -343,6 +372,130 @@ class TestCredentialCipher(unittest.TestCase):
             ensure_database_credential_cipher(db_path)
             decrypted_val = decrypt_credential(encrypted_val)
             self.assertEqual(decrypted_val, "protected_router_secret")
+
+    def test_record_bound_aad_prevents_ciphertext_swapping(self) -> None:
+        """Verify that record-bound AAD (ENC$v2$) strictly prevents ciphertext swapping."""
+        cipher = CredentialCipher()
+
+        # Host A password
+        host_a_pass = "HostA_SecretPassword#123"
+        enc_a = cipher.encrypt(host_a_pass, context="10.0.0.1:password")
+        self.assertTrue(enc_a.startswith(PREFIX_V2))
+
+        # Decrypt with correct context succeeds
+        self.assertEqual(cipher.decrypt(enc_a, context="10.0.0.1:password"), host_a_pass)
+
+        # Attack 1: Ciphertext swapped to Host B -> InvalidTag
+        with self.assertRaises(InvalidTag):
+            cipher.decrypt(enc_a, context="10.0.0.2:password")
+
+        # Attack 2: Ciphertext swapped from password to enable_password on Host A -> InvalidTag
+        with self.assertRaises(InvalidTag):
+            cipher.decrypt(enc_a, context="10.0.0.1:enable_password")
+
+        # Attack 3: Ciphertext decrypted without context -> InvalidTag
+        with self.assertRaises(InvalidTag):
+            cipher.decrypt(enc_a, context="")
+
+    def test_backward_compatibility_v1_envelope(self) -> None:
+        """Verify that legacy ENC$v1$ ciphertexts decrypt transparently using legacy AAD."""
+        import base64
+        import secrets
+        from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+        cipher = CredentialCipher()
+        legacy_plaintext = "LegacyV1RouterPassword"
+
+        # Manually construct ENC$v1$ using legacy AAD
+        nonce = secrets.token_bytes(12)
+        aesgcm = AESGCM(bytes(cipher._key))
+        ct_and_tag = aesgcm.encrypt(nonce, legacy_plaintext.encode("utf-8"), LEGACY_ASSOCIATED_DATA)
+        v1_ciphertext = PREFIX_V1 + base64.b64encode(nonce + ct_and_tag).decode("ascii")
+
+        # Decrypting with context still succeeds because V1 falls back to LEGACY_ASSOCIATED_DATA
+        self.assertEqual(cipher.decrypt(v1_ciphertext, context="10.0.0.1:password"), legacy_plaintext)
+        self.assertEqual(cipher.decrypt(v1_ciphertext, context=""), legacy_plaintext)
+
+    def test_syslog_alert_settings_encrypts_smtp_password(self) -> None:
+        """Verify AlertSettingsStore encrypts sender_app_password on disk and masks in public_values."""
+        import json
+        import tempfile
+        from pathlib import Path
+        from features.syslog.alerts.settings import AlertSettingsStore
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            settings_path = Path(tmpdir) / "alerts.json"
+            store = AlertSettingsStore(settings_path)
+
+            # Save configuration with plaintext SMTP app password
+            store.save({
+                "enabled": True,
+                "smtp_host": "smtp.example.com",
+                "smtp_port": 587,
+                "sender_email": "alerts@example.com",
+                "sender_app_password": "super-secret-smtp-token",
+                "recipients": ["admin@example.com"],
+                "levels": [0, 1, 2],
+            })
+
+            # Check raw file on disk: must be encrypted with ENC$v2$
+            raw_json = json.loads(settings_path.read_text(encoding="utf-8"))
+            self.assertTrue(
+                raw_json["sender_app_password"].startswith(PREFIX_V2),
+                f"Password on disk is not ENC$v2$: {raw_json['sender_app_password']}"
+            )
+
+            # Public values for UI must never leak the password
+            public = store.public_values()
+            self.assertTrue(public["has_password"])
+            self.assertEqual(public["sender_app_password"], "")
+
+            # Reloading store decrypts password in memory for email sending
+            reloaded_store = AlertSettingsStore(settings_path)
+            self.assertEqual(reloaded_store.configuration().sender_app_password, "super-secret-smtp-token")
+
+    def test_compliance_audit_redacts_sensitive_lines(self) -> None:
+        """Verify that compliance audit and markdown export mask secrets and hashes."""
+        from features.compliance.engine import CiscoConfigAuditor, redact_sensitive_config_line
+        from features.compliance.service import SecurityComplianceService
+
+        # Test line-level redaction
+        self.assertEqual(
+            redact_sensitive_config_line("enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0"),
+            "enable secret [REDACTED]"
+        )
+        self.assertEqual(
+            redact_sensitive_config_line("enable password 7 0822455B10100919"),
+            "enable password [REDACTED]"
+        )
+        self.assertEqual(
+            redact_sensitive_config_line("username admin secret 5 $1$foobar"),
+            "username admin secret [REDACTED]"
+        )
+        self.assertEqual(
+            redact_sensitive_config_line("snmp-server community private RW"),
+            "snmp-server community [REDACTED] RW"
+        )
+
+        # Test audit engine redaction on matched_lines
+        config_text = """
+hostname Core-R1
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+enable password 7 0822455B10100919
+username admin secret 5 $1$foobar
+snmp-server community mysecretcommunity RO
+line vty 0 4
+ transport input ssh
+"""
+        auditor = CiscoConfigAuditor()
+        report = auditor.audit(config_text, host="192.168.1.1", device_name="Core-R1", role="rou")
+
+        # Check all matched_lines in the report
+        for res in report.results:
+            for line in res.matched_lines:
+                self.assertNotIn("$1$mERr$", line)
+                self.assertNotIn("0822455B10100919", line)
+                self.assertNotIn("mysecretcommunity", line)
 
 
 if __name__ == "__main__":

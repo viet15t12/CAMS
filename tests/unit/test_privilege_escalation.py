@@ -138,6 +138,38 @@ class PrivilegeEscalationTests(unittest.TestCase):
         ensure_initial_privilege(conn, secret="correct_secret", username="Kien")
         conn.enable.assert_called_once_with(cmd="enable 15", check_state=False)
 
+    def test_initial_privilege_fail_closed_on_unparsable_verify_output(self) -> None:
+        """If verify output is corrupted/unparsable after enable, fail-closed and reject."""
+        from infrastructure.network.privilege import ensure_initial_privilege
+
+        conn = MagicMock()
+        conn.device_type = "cisco_ios"
+        conn.check_enable_mode.return_value = True
+        conn.send_command.side_effect = [
+            "Current privilege level is 5\n",
+            "% Unknown error / truncated response\n",
+        ]
+
+        with self.assertRaises(PermissionError) as ctx:
+            ensure_initial_privilege(conn, secret="some_secret", username="Kien")
+        self.assertIn("Connection dropped", str(ctx.exception))
+        self.assertIn("strict fail-closed", str(ctx.exception))
+
+    def test_ensure_enable_privilege_fail_closed_on_unparsable_output(self) -> None:
+        """ensure_privileged_mode must raise RuntimeError if verify output is unparsable."""
+        conn = MagicMock()
+        conn.device_type = "cisco_ios"
+        conn.check_config_mode.return_value = False
+        conn.check_enable_mode.return_value = True
+        conn.send_command.side_effect = [
+            "Current privilege level is 5\n",
+            "Garbled output without privilege level\n",
+        ]
+
+        with self.assertRaises(RuntimeError) as ctx:
+            ensure_privileged_mode(conn)
+        self.assertIn("strict fail-closed", str(ctx.exception))
+
 
 class CredentialFlowTests(unittest.TestCase):
     def setUp(self) -> None:

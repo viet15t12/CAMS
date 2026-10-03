@@ -52,9 +52,10 @@ class AlertSettingsTests(unittest.TestCase):
             public = store.public_values()
             stored = json.loads(path.read_text(encoding="utf-8"))
             self.assertTrue(public["has_password"])
-            self.assertEqual(public["sender_app_password"], "")
             self.assertNotIn("abcdefghijklmnop", json.dumps(public))
-            self.assertEqual(stored["sender_app_password"], "abcdefghijklmnop")
+            self.assertTrue(stored["sender_app_password"].startswith("ENC$v2$"))
+            self.assertNotIn("abcdefghijklmnop", json.dumps(stored))
+            self.assertEqual(store.configuration().sender_app_password, "abcdefghijklmnop")
             if os.name != "nt":
                 self.assertEqual(path.stat().st_mode & 0o777, 0o600)
 

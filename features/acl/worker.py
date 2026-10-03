@@ -152,8 +152,8 @@ def _build_inventory(
                 errors.append({"target": ip, "status": "failed", "message": "Device credentials were not found."})
                 continue
             name, user, password, enable_password, os_name, port, method = row
-            password = decrypt_credential(password)
-            enable_password = decrypt_credential(enable_password)
+            password = decrypt_credential(password, context=f"{ip}:password")
+            enable_password = decrypt_credential(enable_password, context=f"{ip}:enable_password")
             method = str(method or "SSH").upper()
             if method == "RESTCONF":
                 errors.append({

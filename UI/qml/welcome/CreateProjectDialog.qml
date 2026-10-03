@@ -135,9 +135,13 @@ StandardDialog {
         InlineMessage {
             Layout.fillWidth: true
             message: protectProjectCheck.checked
-                     ? "The complete .ntp package will be protected with AES-256. The password is not stored or recoverable."
-                     : "Creates a standard ZIP-compatible .ntp project at the location you choose."
-            severity: "info"
+                     ? (LanguageState.isVietnamese
+                        ? "Toàn bộ gói .ntp và mật khẩu thiết bị sẽ được mã hóa mạnh bằng Argon2id + AES-256-GCM. Mật khẩu không thể khôi phục nếu quên."
+                        : "The complete .ntp package and credentials will be strongly protected with Argon2id + AES-256-GCM. The password is not stored or recoverable.")
+                     : (LanguageState.isVietnamese
+                        ? "Cảnh báo: Dự án chưa đặt mật khẩu. Mật khẩu thiết bị chỉ được làm rối kỹ thuật, không thể chống lại việc trích xuất file .ntp. Khuyến nghị nên đặt mật khẩu."
+                        : "Warning: Project is unencrypted. Device credentials are only obfuscated and not protected against .ntp extraction. Setting a password is strongly recommended.")
+            severity: protectProjectCheck.checked ? "info" : "warning"
         }
 
         Item { Layout.fillHeight: true }

@@ -215,8 +215,8 @@ class DeviceSlotsMixin:
             return False
         role = normalize_device_role(role, device_type) or "rou"
         device_type = device_type_for_role(role)
-        enc_password = encrypt_credential(password) if password else None
-        enc_enable_password = encrypt_credential(enable_password) if enable_password else ""
+        enc_password = encrypt_credential(password, context=f"{host}:password") if password else None
+        enc_enable_password = encrypt_credential(enable_password, context=f"{host}:enable_password") if enable_password else ""
         try:
             with self._connect() as conn:
                 conn.execute(
@@ -304,8 +304,9 @@ class DeviceSlotsMixin:
         try:
             with self._connect() as conn:
                 for row in rows:
-                    enc_pwd = encrypt_credential(row["password"]) if row["password"] else None
-                    enc_epwd = encrypt_credential(row["enable_password"]) if row["enable_password"] else ""
+                    h = str(row["host"] or "").strip()
+                    enc_pwd = encrypt_credential(row["password"], context=f"{h}:password") if row["password"] else None
+                    enc_epwd = encrypt_credential(row["enable_password"], context=f"{h}:enable_password") if row["enable_password"] else ""
                     cursor = conn.execute(
                         """
                         INSERT OR IGNORE INTO t01_devices
@@ -568,14 +569,23 @@ class DeviceSlotsMixin:
         try:
             with self._connect() as conn:
                 row = conn.execute(
-                    "SELECT host FROM t01_devices WHERE host = ?;",
+                    "SELECT host, password, enable_password FROM t01_devices WHERE host = ?;",
                     (target_host,),
                 ).fetchone()
                 if row is None:
                     return False
 
-                enc_password = encrypt_credential(password) if password else None
-                enc_enable_password = encrypt_credential(enable_password) if enable_password else ""
+                # Preserve existing credentials if left blank on edit; encrypt with record-bound AAD if provided
+                if password:
+                    enc_password = encrypt_credential(password, context=f"{target_host}:password")
+                else:
+                    enc_password = row["password"]
+
+                if enable_password:
+                    enc_enable_password = encrypt_credential(enable_password, context=f"{target_host}:enable_password")
+                else:
+                    enc_enable_password = row["enable_password"]
+
                 cursor = conn.execute(
                     """
                     UPDATE t01_devices
@@ -606,7 +616,7 @@ class DeviceSlotsMixin:
 
     @pyqtSlot(str, result="QVariant")
     def getDeviceByHost(self, host: str) -> dict[str, Any]:
-        """Đọc chi tiết một thiết bị từ DB để trả về cho QML."""
+        """Đọc chi tiết một thiết bị từ DB để trả về cho QML (mật khẩu được ẩn/che dấu)."""
         try:
             with self._connect() as conn:
                 row = conn.execute(
@@ -619,22 +629,16 @@ class DeviceSlotsMixin:
                 ).fetchone()
             if row is None:
                 return {}
-            try:
-                dev_pass = decrypt_credential(row["password"] or "")
-            except Exception:
-                dev_pass = ""
-            try:
-                dev_epass = decrypt_credential(row["enable_password"] or "")
-            except Exception:
-                dev_epass = ""
             return {
                 "ip": row["host"],
                 "name": _clean_display_text(row["device_name"]),
                 "protocol": row["method"] or "SSH",
                 "port": "" if row["portnumber"] is None else str(row["portnumber"]),
                 "user": row["username"] or "",
-                "pass": dev_pass,
-                "enable_pass": dev_epass,
+                "pass": "",  # Masked: never expose decrypted credentials over the UI bridge
+                "enable_pass": "",
+                "has_password": bool(row["password"]),
+                "has_enable_password": bool(row["enable_password"]),
                 "os": row["os"] or "cisco_ios",
                 "role": row["role"] or "",
                 "type": device_type_for_role(row["role"]),

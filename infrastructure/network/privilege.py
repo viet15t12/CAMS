@@ -51,9 +51,11 @@ def ensure_privileged_mode(connection: Any) -> bool:
                     # Verify privilege elevation
                     verify_output = connection.send_command("show privilege")
                     verify_match = PRIVILEGE_LEVEL_RE.search(str(verify_output or ""))
-                    if verify_match and int(verify_match.group(1)) < 15:
+                    if not verify_match or int(verify_match.group(1)) < 15:
+                        lvl = verify_match.group(1) if verify_match else "unknown"
                         raise RuntimeError(
-                            f"Failed to elevate to privilege 15. Current level: {verify_match.group(1)}"
+                            f"Failed to elevate to privilege 15 (strict fail-closed verification). "
+                            f"Current level: {lvl}, output: {verify_output!r}"
                         )
         except Exception as exc:
             if "Failed to elevate" in str(exc) or "enable" in str(exc).lower() or "secret" in str(exc).lower():
@@ -144,16 +146,20 @@ def ensure_initial_privilege(connection: Any, secret: str = "", username: str = 
             f"Privilege elevation failed: Invalid Enable Secret ({exc}). Connection dropped."
         ) from exc
 
-    # Verify that session actually reached Privilege 15
+    # Verify that session actually reached Privilege 15 (strict fail-closed)
     if is_cisco and hasattr(connection, "send_command"):
         try:
             verify_output = connection.send_command("show privilege")
             match = PRIVILEGE_LEVEL_RE.search(str(verify_output or ""))
-            if match and int(match.group(1)) < 15:
+            if not match or int(match.group(1)) < 15:
+                current_lvl = match.group(1) if match else "unknown"
                 raise PermissionError(
-                    f"Privilege elevation rejected: Router stayed at level {match.group(1)} (< 15). Connection dropped."
+                    f"Privilege elevation rejected (strict fail-closed verification): "
+                    f"Router remained at level {current_lvl} (< 15). Connection dropped."
                 )
         except PermissionError:
             raise
-        except Exception:
-            pass
+        except Exception as exc:
+            raise PermissionError(
+                f"Privilege elevation verification failed ({exc}). Connection dropped."
+            ) from exc

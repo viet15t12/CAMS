@@ -11,6 +11,8 @@ import re
 import threading
 from typing import Any
 
+from infrastructure.security import decrypt_credential, encrypt_credential
+
 
 DEFAULT_VALUES: dict[str, Any] = {
     "enabled": False,
@@ -186,6 +188,14 @@ class AlertSettingsStore:
                 stored = json.loads(self.path.read_text(encoding="utf-8"))
                 if isinstance(stored, dict):
                     values.update({key: stored[key] for key in values if key in stored})
+                    raw_pw = str(stored.get("sender_app_password") or "")
+                    if raw_pw:
+                        try:
+                            values["sender_app_password"] = decrypt_credential(
+                                raw_pw, context="smtp:sender_app_password"
+                            )
+                        except Exception:
+                            values["sender_app_password"] = raw_pw
             except (OSError, json.JSONDecodeError):
                 pass
         try:
@@ -200,9 +210,15 @@ class AlertSettingsStore:
 
     def _write(self, values: dict[str, Any]) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        persisted = dict(values)
+        raw_pw = str(persisted.get("sender_app_password") or "")
+        if raw_pw:
+            persisted["sender_app_password"] = encrypt_credential(
+                raw_pw, context="smtp:sender_app_password"
+            )
         temporary = self.path.with_suffix(self.path.suffix + ".tmp")
         temporary.write_text(
-            json.dumps(values, indent=2, ensure_ascii=False) + "\n",
+            json.dumps(persisted, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
         try:

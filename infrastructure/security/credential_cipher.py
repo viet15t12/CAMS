@@ -29,14 +29,24 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.argon2 import Argon2id
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
-PREFIX = "ENC$v1$"
+PREFIX_V2 = "ENC$v2$"
+PREFIX_V1 = "ENC$v1$"
+PREFIX = PREFIX_V2
 NONCE_SIZE = 12
 TAG_SIZE = 16
 MIN_PAYLOAD_SIZE = NONCE_SIZE + TAG_SIZE
-ASSOCIATED_DATA = b"CAMS_DEVICE_CREDENTIAL_V1"
+LEGACY_ASSOCIATED_DATA = b"CAMS_DEVICE_CREDENTIAL_V1"
+ASSOCIATED_DATA = LEGACY_ASSOCIATED_DATA
 DEFAULT_SALT = b"CAMS_DEFAULT_PROJECT_CREDENTIAL_SALT_V1"
 ENV_CREDENTIAL_KEY = "CAMS_CREDENTIAL_KEY"
 TRANSIENT_KEY_FILE = ".credential_key"
+
+
+def make_aad(context: str = "") -> bytes:
+    """Generate Associated Authenticated Data (AAD) for AES-GCM record-binding."""
+    if context:
+        return f"CAMS_CRED_V2:{context}".encode("utf-8")
+    return b"CAMS_DEVICE_CREDENTIAL_V2"
 
 
 def _zero_memory(target: bytearray) -> None:
@@ -83,24 +93,45 @@ class CredentialCipher:
 
     @classmethod
     def derive_from_passphrase(
-        cls, passphrase: str, project_id: str = ""
+        cls, passphrase: str, project_id: str = "", salt: bytes | None = None
     ) -> "CredentialCipher":
-        """Derive a 256-bit AES key from the user-provided workspace passphrase using Argon2id."""
+        """Derive a 256-bit AES key from the user-provided workspace passphrase using Argon2id (RFC 9106)."""
         if not passphrase:
             return cls.derive_from_project_id(project_id)
-        salt_seed = f"CAMS_PASSPHRASE:{project_id or 'default'}".encode("utf-8")
-        salt = hashlib.sha256(salt_seed).digest()[:16]
+
+        # RFC 9106 recommended parameters: 64 MiB memory, 3 iterations, 4 lanes
+        if salt is None or len(salt) < 16:
+            salt_seed = f"CAMS_PASSPHRASE_V2:{project_id or 'default'}".encode("utf-8")
+            actual_salt = hashlib.sha256(salt_seed).digest()[:16]
+        else:
+            actual_salt = salt[:16]
+
         derived = Argon2id(
-            salt=salt,
+            salt=actual_salt,
+            length=32,
+            iterations=3,
+            lanes=4,
+            memory_cost=64 * 1024,
+        ).derive(passphrase.encode("utf-8"))
+        cipher = cls(key=derived)
+
+        # Add fallback candidate keys:
+        # 1. Legacy Argon2id key (V1: 32 MiB, t=2, p=2 with legacy salt)
+        legacy_salt = hashlib.sha256(f"CAMS_PASSPHRASE:{project_id or 'default'}".encode("utf-8")).digest()[:16]
+        legacy_key = Argon2id(
+            salt=legacy_salt,
             length=32,
             iterations=2,
             lanes=2,
             memory_cost=32 * 1024,
         ).derive(passphrase.encode("utf-8"))
-        cipher = cls(key=derived)
-        # Register project_id and default as fallbacks
+        cipher.add_fallback_key(legacy_key)
+
+        # 2. Project_id HKDF key
         if project_id:
             cipher.add_fallback_key(cls.derive_from_project_id(project_id)._key)
+
+        # 3. Default fallback key
         cipher.add_fallback_key(_derive_default_key())
         return cipher
 
@@ -118,42 +149,43 @@ class CredentialCipher:
         cipher.add_fallback_key(_derive_default_key())
         return cipher
 
-    def encrypt(self, plaintext: str | None) -> str:
-        """Encrypt plaintext password using AES-256-GCM.
+    def encrypt(self, plaintext: str | None, context: str = "") -> str:
+        """Encrypt plaintext password using AES-256-GCM with record-bound AAD.
         
-        Returns ENC$v1$<base64_payload>.
+        Returns ENC$v2$<base64_payload>.
         If plaintext is empty or None, returns ''.
-        If plaintext is already encrypted with ENC$v1$, returns it directly (idempotent).
+        If plaintext is already encrypted with ENC$v2$, returns it directly (idempotent).
         """
         if not plaintext:
             return ""
-        if plaintext.startswith(PREFIX):
+        if plaintext.startswith(PREFIX_V2):
             return plaintext
 
         with self._lock:
             nonce = secrets.token_bytes(NONCE_SIZE)
             aesgcm = AESGCM(bytes(self._key))
-            ciphertext_and_tag = aesgcm.encrypt(
-                nonce, plaintext.encode("utf-8"), ASSOCIATED_DATA
-            )
+            aad = make_aad(context)
+            ciphertext_and_tag = aesgcm.encrypt(nonce, plaintext.encode("utf-8"), aad)
             payload = nonce + ciphertext_and_tag
-            return PREFIX + base64.b64encode(payload).decode("ascii")
+            return PREFIX_V2 + base64.b64encode(payload).decode("ascii")
 
-    def decrypt(self, ciphertext: str | None) -> str:
+    def decrypt(self, ciphertext: str | None, context: str = "") -> str:
         """Decrypt AES-256-GCM ciphertext back to plaintext.
         
         If ciphertext is empty or None, returns ''.
-        If ciphertext does NOT start with ENC$v1$, returns ciphertext as-is (backward compatible).
+        If ciphertext does NOT start with ENC$v1$ or ENC$v2$, returns ciphertext as-is (backward compatible).
         Tries primary key first, then candidate fallback keys if available.
-        Raises InvalidTag on tampering or invalid key.
+        Raises InvalidTag on tampering, invalid key, or swapped ciphertext (AAD mismatch).
         """
         if not ciphertext:
             return ""
-        if not ciphertext.startswith(PREFIX):
+        if not (ciphertext.startswith(PREFIX_V2) or ciphertext.startswith(PREFIX_V1)):
             return ciphertext
 
         with self._lock:
-            raw_b64 = ciphertext[len(PREFIX):]
+            is_v2 = ciphertext.startswith(PREFIX_V2)
+            prefix = PREFIX_V2 if is_v2 else PREFIX_V1
+            raw_b64 = ciphertext[len(prefix):]
             try:
                 raw = base64.b64decode(raw_b64, validate=True)
             except Exception as exc:
@@ -165,6 +197,8 @@ class CredentialCipher:
             nonce = raw[:NONCE_SIZE]
             ct_and_tag = raw[NONCE_SIZE:]
 
+            aad = make_aad(context) if is_v2 else LEGACY_ASSOCIATED_DATA
+
             # Try primary key first, then fallback candidate keys
             keys_to_try = [bytes(self._key)] + [bytes(k) for k in self._fallback_keys]
             last_exc: InvalidTag | None = None
@@ -172,7 +206,7 @@ class CredentialCipher:
             for candidate in keys_to_try:
                 try:
                     aesgcm = AESGCM(candidate)
-                    decrypted_bytes = aesgcm.decrypt(nonce, ct_and_tag, ASSOCIATED_DATA)
+                    decrypted_bytes = aesgcm.decrypt(nonce, ct_and_tag, aad)
                     # If a fallback key succeeded, promote it to primary key
                     if candidate != bytes(self._key):
                         self._key = bytearray(candidate)
@@ -186,8 +220,8 @@ class CredentialCipher:
             raise ValueError("Decryption failed with no valid candidate keys.")
 
     def is_encrypted(self, value: str | None) -> bool:
-        """Return True if value has the ENC$v1$ prefix."""
-        return bool(value and value.startswith(PREFIX))
+        """Return True if value has an ENC$v1$ or ENC$v2$ prefix."""
+        return bool(value and (value.startswith(PREFIX_V2) or value.startswith(PREFIX_V1)))
 
     def clear(self) -> None:
         """Zero out key memory."""
@@ -345,20 +379,20 @@ def ensure_database_credential_cipher(db_path: str | Path | None) -> CredentialC
     return cipher
 
 
-def encrypt_credential(plaintext: str | None) -> str:
+def encrypt_credential(plaintext: str | None, context: str = "") -> str:
     """Encrypt a credential string using the currently active cipher."""
-    return get_active_cipher().encrypt(plaintext)
+    return get_active_cipher().encrypt(plaintext, context=context)
 
 
-def decrypt_credential(ciphertext: str | None) -> str:
+def decrypt_credential(ciphertext: str | None, context: str = "") -> str:
     """Decrypt a credential string using the currently active cipher."""
-    return get_active_cipher().decrypt(ciphertext)
+    return get_active_cipher().decrypt(ciphertext, context=context)
 
 
 def migrate_database_passwords(conn: sqlite3.Connection, cipher: CredentialCipher | None = None) -> int:
-    """Scan t01_devices for plaintext passwords and encrypt them in place.
+    """Scan t01_devices for plaintext or legacy ENC$v1$ passwords and re-encrypt to ENC$v2$ with record-bound AAD.
     
-    Returns the number of credential fields encrypted.
+    Returns the number of credential fields encrypted or upgraded.
     """
     active_cipher = cipher or get_active_cipher()
     cursor = conn.cursor()
@@ -378,19 +412,25 @@ def migrate_database_passwords(conn: sqlite3.Connection, cipher: CredentialCiphe
     migrated_count = 0
 
     for row in rows:
-        host = row[0]
+        host = str(row[0] or "").strip()
         pw = row[1] or ""
         epw = (row[2] or "") if has_enable else ""
 
         updates = []
         params = []
-        if pw and not active_cipher.is_encrypted(pw):
+        # If password is non-empty and not already ENC$v2$, migrate to ENC$v2$
+        if pw and not pw.startswith(PREFIX_V2):
+            decrypted_pw = active_cipher.decrypt(pw)  # Plaintext or ENC$v1$
+            new_pw = active_cipher.encrypt(decrypted_pw, context=f"{host}:password")
             updates.append("password = ?")
-            params.append(active_cipher.encrypt(pw))
+            params.append(new_pw)
             migrated_count += 1
-        if has_enable and epw and not active_cipher.is_encrypted(epw):
+        # If enable_password is non-empty and not already ENC$v2$, migrate to ENC$v2$
+        if has_enable and epw and not epw.startswith(PREFIX_V2):
+            decrypted_epw = active_cipher.decrypt(epw)  # Plaintext or ENC$v1$
+            new_epw = active_cipher.encrypt(decrypted_epw, context=f"{host}:enable_password")
             updates.append("enable_password = ?")
-            params.append(active_cipher.encrypt(epw))
+            params.append(new_epw)
             migrated_count += 1
 
         if updates:
@@ -406,8 +446,12 @@ def migrate_database_passwords(conn: sqlite3.Connection, cipher: CredentialCiphe
 __all__ = [
     "ASSOCIATED_DATA",
     "CredentialCipher",
+    "DEFAULT_SALT",
     "ENV_CREDENTIAL_KEY",
+    "LEGACY_ASSOCIATED_DATA",
     "PREFIX",
+    "PREFIX_V1",
+    "PREFIX_V2",
     "TRANSIENT_KEY_FILE",
     "bind_session_credentials",
     "clear_session_credentials",
@@ -415,6 +459,7 @@ __all__ = [
     "encrypt_credential",
     "ensure_database_credential_cipher",
     "get_active_cipher",
+    "make_aad",
     "migrate_database_passwords",
     "set_active_cipher",
 ]

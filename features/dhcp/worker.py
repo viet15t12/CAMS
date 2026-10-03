@@ -170,8 +170,8 @@ def build_dhcp_inventory(db_path, task_list):
             row = cursor.fetchone()
             if row:
                 dev_name, db_user, db_pass, db_enable_pass, db_os, db_port, db_method = row
-                db_pass = decrypt_credential(db_pass)
-                db_enable_pass = decrypt_credential(db_enable_pass)
+                db_pass = decrypt_credential(db_pass, context=f"{ip}:password")
+                db_enable_pass = decrypt_credential(db_enable_pass, context=f"{ip}:enable_password")
                 
                 # --- CHUẨN HÓA PLATFORM VÀ PORT CHO NETMIKO ---
                 platform_final = "cisco_ios" # Mặc định là SSH

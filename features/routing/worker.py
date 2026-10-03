@@ -337,8 +337,8 @@ def build_worker_inventory(db_path, task_list):
             row = cursor.fetchone()
             if row:
                 dev_name, db_user, db_pass, db_enable_pass, db_os, db_port, db_method = row
-                db_pass = decrypt_credential(db_pass)
-                db_enable_pass = decrypt_credential(db_enable_pass)
+                db_pass = decrypt_credential(db_pass, context=f"{ip}:password")
+                db_enable_pass = decrypt_credential(db_enable_pass, context=f"{ip}:enable_password")
                 method = (db_method or "SSH").upper()
                 platform = (
                     "cisco_ios_telnet"
