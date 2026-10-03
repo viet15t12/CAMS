@@ -33,8 +33,8 @@ Mục tiêu tổng quát là xây dựng hệ thống hỗ trợ quản lý hạ
   header: ([Nhóm chức năng], [Nội dung triển khai], [Đầu ra cần kiểm chứng]),
   rows: (
     ([Quản lý], [Tập trung danh mục thiết bị, phiên kết nối, cấu hình và lịch sử sao lưu.], [Tra cứu thiết bị và đồng bộ thành công cấu hình (running-config).]),
-    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách.], [Lệnh sinh đúng với dữ liệu nhập (tỷ lệ 100%); thời gian triển khai OSPF/VLAN cho 6 thiết bị $le$ 30 giây.]),
-    ([Giám sát], [Thu thập trạng thái vận hành và tiếp nhận Syslog tập trung.], [Nhận diện nguồn, thời gian, mức độ; tỷ lệ phân tích bản tin Syslog thành công $ge$ 99%.]),
+    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách.], [Lệnh sinh đúng với dữ liệu nhập (tỷ lệ 100%); thời gian triển khai OSPF/VLAN cho 6 thiết bị $<= 30$ giây.]),
+    ([Giám sát], [Thu thập trạng thái vận hành và tiếp nhận Syslog tập trung.], [Nhận diện nguồn, thời gian, mức độ; tỷ lệ phân tích bản tin Syslog thành công $>= 99\%$.]),
     ([Bảo mật], [Cấu hình ACL, bảo vệ Lớp 2 và khai thác cảnh báo do thiết bị gửi về.], [Kiểm tra chính sách chặn lưu lượng và phản hồi sự kiện trên Syslog.]),
   ),
   caption: [Mục tiêu phát triển],

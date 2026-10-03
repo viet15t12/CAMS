@@ -6,7 +6,7 @@
 
 == Mục tiêu và môi trường thử nghiệm
 
-Chương này đánh giá CAMS qua ba kịch bản triển khai mạng trên EVE-NG. Các kịch bản tập trung xác minh quy trình cấu hình, phản hồi của thiết bị và dữ liệu giám sát trong điều kiện phòng lab.
+Chương này đánh giá CAMS qua bốn kịch bản triển khai mạng trên EVE-NG. Các kịch bản tập trung xác minh quy trình cấu hình, phản hồi của thiết bị và dữ liệu giám sát trong môi trường thử nghiệm.
 
 === Môi trường thử nghiệm phần mềm và phần cứng
 
@@ -25,7 +25,7 @@ Quá trình đo đạc, kiểm thử và thực nghiệm được tiến hành t
 
 == Kịch bản kiểm thử thực nghiệm trong phòng lab
 
-Phần thực nghiệm gồm ba kịch bản: định tuyến OSPF đa vùng, phối hợp GLBP–DHCP–NAT/PAT và thu thập Syslog tập trung. Mỗi kịch bản được thực hiện theo ba giai đoạn:
+Phần thực nghiệm gồm bốn kịch bản: chuyển mạch và bảo mật Lớp 2, định tuyến OSPF đa vùng, phối hợp GLBP–DHCP–NAT/PAT, cùng thu thập Syslog tập trung và cảnh báo qua email. Mỗi kịch bản được thực hiện theo ba giai đoạn:
 
 1. *Thiết lập và xem trước trên giao diện:* người dùng nhập tham số trên biểu mẫu nghiệp vụ. Dữ liệu được lưu ở trạng thái mong muốn (Desired State) và chuyển thành tập lệnh CLI để kiểm tra trong cửa sổ *View & Push*.
 2. *Đẩy cấu hình bất đồng bộ:* tác vụ nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua SSH.
@@ -518,11 +518,11 @@ CAMS đã triển khai chuỗi chức năng DHCP, GLBP và NAT/PAT trên nhiều
 
 ==== Mục tiêu và quy hoạch nguồn gửi Syslog
 
-Kịch bản 3 kiểm tra khả năng cấu hình Syslog theo nhóm trên nhiều thiết bị Cisco, đồng thời đánh giá việc tiếp nhận, phân tích và hiển thị nhật ký theo thời gian thực trong CAMS. Ba router `R1`, `R2`, `R3` và switch `SW1` cùng gửi log về máy chủ `192.168.122.1` qua cổng `5514/UDP`. Nội dung kiểm tra gồm cấu hình trên thiết bị và khả năng phân tách nguồn gửi, địa chỉ IP nguồn, facility, severity, mnemonic và nội dung gốc của bản tin.
+Kịch bản 4 kiểm tra khả năng cấu hình Syslog theo nhóm trên nhiều thiết bị Cisco, đồng thời đánh giá việc tiếp nhận, phân tích, hiển thị và gửi cảnh báo qua email trong CAMS. Ba router `R1`, `R2`, `R3` và switch `SW1` cùng gửi log về máy chủ `192.168.122.1` qua cổng `5514/UDP`. Nội dung kiểm tra gồm cấu hình trên thiết bị; khả năng phân tách nguồn gửi, địa chỉ IP nguồn, facility, severity, mnemonic và nội dung gốc; cùng khả năng chuyển hai mức cảnh báo đã chọn qua SMTP.
 
 #figure(
   image("/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png", width: 92%),
-  caption: [Sơ đồ Kịch bản 3: Thu thập Syslog tập trung],
+  caption: [Sơ đồ Kịch bản 4: Thu thập Syslog tập trung],
 ) <fig-topo-scenario-4>
 
 Nguồn gửi và chính sách Syslog được trình bày trong bảng quy hoạch dưới đây.
@@ -558,7 +558,7 @@ Nguồn gửi và chính sách Syslog được trình bày trong bảng quy ho�
       [#table-code("192.168.122.1:5514/UDP"), mức #table-code("notifications")],
     ),
   ),
-  caption: [Bảng quy hoạch nguồn gửi Syslog trong Kịch bản 3],
+  caption: [Bảng quy hoạch nguồn gửi Syslog trong Kịch bản 4],
 ) <tab-syslog-planning-lab4>
 
 ==== Quy trình triển khai trên phần mềm CAMS
@@ -714,9 +714,44 @@ Việc lưu đồng thời các trường đã chuẩn hóa và nội dung gốc
 
 Từ @fig-k4-r1-device-logs đến @fig-k4-sw1-device-logs trình bày chuỗi sự kiện ghi nhận trên bốn thiết bị. Khi thực hiện `shutdown` hoặc `no shutdown`, Cisco IOS phát sinh thông báo về trạng thái liên kết và giao thức đường truyền; các bản tin `USERLOG_*` đánh dấu từng chu kỳ thử nghiệm. Những sự kiện tương ứng xuất hiện trên *System Logs* và được gắn đúng nguồn gửi.
 
+#step-title[Bước 10. Cấu hình cảnh báo Syslog qua email]
+
+Quản trị viên mở *Settings → Email Alerts* và bật tùy chọn gửi cảnh báo. Cấu hình thử nghiệm sử dụng máy chủ `smtp.gmail.com`, cổng `465`, tài khoản gửi `cams.syslog.alert@gmail.com` và địa chỉ nhận `nguyenquocviet15t12@gmail.com`. Các mức từ `0` đến `4` được chọn để bao phủ nhóm khẩn cấp, nghiêm trọng, lỗi và cảnh báo. Khoảng chống gửi trùng được đặt là `300` giây; cửa sổ gom bản tin là `10` giây.
+
+#figure(
+  image("/00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png", width: 96%),
+  caption: [Cấu hình mức cảnh báo, tài khoản SMTP và người nhận trên Email Alerts],
+) <fig-k4-email-settings>
+
+@fig-k4-email-settings cho thấy App Password chỉ xuất hiện dưới dạng ký tự che khuất. CAMS lưu giá trị này ở dạng mã hóa và không trả nội dung bí mật về giao diện. Nút *Send test email* cho phép kiểm tra cấu hình trước khi bật luồng cảnh báo thực tế.
+
+#step-title[Bước 11. Gửi và kiểm tra hai email cảnh báo mẫu]
+
+Phép thử dùng chương trình `demo_send_mail/main.py` để tạo hai bản ghi có cấu trúc giống dữ liệu Syslog đã phân tích. Lệnh dưới đây gửi riêng một thư mức `2 - Critical` và một thư mức `4 - Warning`; App Password được nhập qua lời nhắc ẩn của terminal và không xuất hiện trong tham số lệnh hoặc báo cáo.
+
+```text
+python3 demo_send_mail/main.py --levels 2,4
+```
+
+Chương trình dựng mỗi thư ở hai định dạng văn bản thuần và HTML, đăng nhập `smtp.gmail.com:465` bằng `SMTP_SSL`, sau đó gọi `send_message`. Hai lần gửi hoàn tất mà không phát sinh lỗi xác thực, kết nối hoặc SMTP. Nội dung thư mức Critical được trình bày tại @fig-k4-email-critical.
+
+#figure(
+  image("/00_book/figures/report/diagrams/syslog-lab/18-email-critical.png", width: 72%),
+  caption: [Email cảnh báo mức Critical cho sự kiện `%SYS-2-MALLOCFAIL`],
+) <fig-k4-email-critical>
+
+Thư mức Warning tại @fig-k4-email-warning giữ cùng cấu trúc nhưng thay đổi màu, nhãn, khuyến nghị xử lý và dữ liệu thiết bị theo severity. Mỗi thư chứa tên thiết bị, địa chỉ nguồn, thời điểm, số thứ tự, mã Cisco, giao thức, PRI/facility, nội dung đã phân tích và bản tin gốc.
+
+#figure(
+  image("/00_book/figures/report/diagrams/syslog-lab/19-email-warning.png", width: 72%),
+  caption: [Email cảnh báo mức Warning cho sự kiện `%PM-4-ERR_DISABLE`],
+) <fig-k4-email-warning>
+
+Kết quả đầu ra của chương trình ghi nhận `2` thư đã được chuyển tới máy chủ SMTP để gửi đến địa chỉ nhận đã cấu hình. Phép thử xác nhận đường gửi SMTP và định dạng thư cho hai mức cảnh báo; việc đánh giá độ trễ, giới hạn lưu lượng hoặc tỷ lệ chuyển thư ở quy mô lớn chưa thuộc phạm vi kịch bản này.
+
 ==== Đánh giá kết quả
 
-CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được facility, severity và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*.
+CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được facility, severity và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*. Phần cảnh báo email cho phép chọn mức cần gửi, bảo vệ App Password và tách thao tác SMTP khỏi bộ nhận. Trong phép thử SMTP, cả hai lần gửi Critical và Warning đều hoàn tất không lỗi.
 
 
 == Đánh giá tổng hợp
@@ -726,7 +761,7 @@ CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử d
 - *Giao diện quản lý tập trung:* CAMS cung cấp một không gian làm việc thống nhất cho các chức năng mạng Lớp 2 và Lớp 3, qua đó giảm số thao tác CLI trực tiếp trên từng thiết bị.
 - *Quy trình kiểm duyệt trước khi thực thi:* Mô hình Staged Save tách trạng thái mong muốn (`Desired State`) khỏi trạng thái đã áp dụng (`Applied`). Cửa sổ *View & Push* cho phép kiểm tra tập lệnh trước khi gửi xuống thiết bị.
 - *Khả năng xử lý nhiều thiết bị:* `Host Lock` tuần tự hóa các lệnh trên cùng một thiết bị, trong khi `BatchExecutor` cho phép xử lý song song các thiết bị độc lập.
-- *Các tiện ích hỗ trợ vận hành:* Hệ thống tích hợp sao lưu phiên bản bằng Dulwich, Syslog Server, SFTP và terminal Alacritty.
+- *Các tiện ích hỗ trợ vận hành:* Hệ thống tích hợp sao lưu phiên bản bằng Dulwich, Syslog Server, cảnh báo Syslog qua email, SFTP và terminal Alacritty.
 
 === Hạn chế thực tế cần cải tiến
 

@@ -85,6 +85,10 @@ Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi d�
 
 Giao diện tại @fig-cams-system-logs hỗ trợ lọc theo thiết bị, mức độ nghiêm trọng, giao thức, khoảng thời gian và nội dung. Smart Filter kết hợp điều kiện theo facility, mnemonic và từ khóa; cửa sổ chi tiết cho phép đối chiếu thời gian nhận với thời gian trên thiết bị và đọc bản tin gốc. Chức năng Export Excel xuất các dòng sau khi lọc để phục vụ phân tích.
 
+Sau khi lưu bản tin, `SyslogManager` đồng thời chuyển bản ghi tới `EmailAlertService`. Dịch vụ chỉ tiếp nhận các mức độ nghiêm trọng đã chọn, loại bản tin trùng theo cặp thiết bị–mã Cisco trong khoảng chống gửi lặp và có thể gom nhiều bản tin trong một cửa sổ thời gian. Hàng đợi cùng một luồng gửi riêng tách thao tác SMTP khỏi luồng nhận Syslog, nhờ đó thời gian kết nối máy chủ thư không chặn bộ thu nhận nhật ký.
+
+Màn hình *Email Alerts* cho phép khai báo máy chủ và cổng SMTP, tài khoản gửi, danh sách người nhận, các mức Syslog cần cảnh báo, thời gian chống gửi trùng và thời gian gom bản tin. Mỗi thư gồm cả nội dung văn bản thuần và HTML; màu, tiêu đề cùng khuyến nghị xử lý thay đổi theo severity. Với Gmail, CAMS dùng kết nối SMTP qua TLS ngầm định trên cổng `465` và App Password. Giá trị bí mật được mã hóa khi lưu, không được trả về QML và chỉ hiển thị dưới dạng che khuất trên giao diện.
+
 Ngoài nhật ký, dữ liệu quan sát như bảng định tuyến, DHCP binding, thống kê ACL, phiên NAT, bộ đếm cổng và bảng MAC hỗ trợ kiểm tra hoạt động của các chức năng. Các giá trị này chỉ phản ánh thời điểm thu thập; muốn kết luận về trạng thái hiện tại, người dùng phải cập nhật dữ liệu trước khi đối chiếu.
 
 == Hiện thực hỗ trợ bảo mật và khai thác cảnh báo
@@ -111,7 +115,7 @@ System Logs cho phép tập trung các sự kiện cần chú ý bằng cách ch
 
 Ngưỡng gửi trên thiết bị và bộ lọc hiển thị có ý nghĩa khác nhau: ngưỡng gửi thường bao gồm mức đã chọn cùng các mức nghiêm trọng hơn, còn bộ lọc trong CAMS chọn các mức cụ thể. Khi điều tra, người dùng cần đọc nội dung, nguồn và chuỗi thời gian thay vì kết luận chỉ dựa trên màu hoặc severity.
 
-Trong phạm vi hiện tại, CAMS hỗ trợ phân tích dấu hiệu bất thường qua nhật ký và kiểm tra chính sách. Hệ thống chưa hoàn thiện bộ tương quan sự kiện, khả năng phát hiện xâm nhập bằng phân tích gói tin hoặc cảnh báo tự động qua email/SMS.
+Trong phạm vi hiện tại, CAMS hỗ trợ phân tích dấu hiệu bất thường qua nhật ký, kiểm tra chính sách và gửi cảnh báo Syslog qua email. Hệ thống chưa hoàn thiện bộ tương quan sự kiện, khả năng phát hiện xâm nhập bằng phân tích gói tin hoặc cảnh báo qua SMS.
 
 == Tiện ích vận hành và bảo vệ dự án
 
