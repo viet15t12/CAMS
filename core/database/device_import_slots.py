@@ -66,6 +66,7 @@ class DeviceImportSlotsMixin:
             "port": self._int_or_none(row.get("portnumber")) or default_port,
             "username": str(row.get("username") or "").strip(),
             "password": str(row.get("password") or "").strip(),
+            "enable_password": str(row.get("enable_password") or row.get("enable_pass") or row.get("secret") or "").strip(),
             "os": str(row.get("os") or "cisco_ios").strip() or "cisco_ios",
             "role": role,
             "type": device_type,
@@ -160,8 +161,8 @@ class DeviceImportSlotsMixin:
                 cursor = conn.execute(
                     """
                     INSERT OR IGNORE INTO t01_devices
-                        (host, device_name, method, portnumber, username, password, os, role, connection_status, dev, device_type)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'waiting', 0, ?);
+                        (host, device_name, method, portnumber, username, password, enable_password, os, role, connection_status, dev, device_type)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'waiting', 0, ?);
                     """,
                     (
                         row["host"],
@@ -170,6 +171,7 @@ class DeviceImportSlotsMixin:
                         row["port"],
                         row["username"] or None,
                         row["password"] or None,
+                        row["enable_password"] or "",
                         row["os"] or None,
                         row["role"] or None,
                         row["type"] or "unknown",

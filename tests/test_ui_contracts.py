@@ -301,7 +301,7 @@ class SvgResourceContractTests(unittest.TestCase):
             source,
         )
 
-        self.assertEqual(len(paths), 124)
+        self.assertEqual(len(paths), 125)
         self.assertEqual(len(paths), len(set(paths)))
         for path in paths:
             with self.subTest(asset=path):

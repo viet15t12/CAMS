@@ -43,6 +43,13 @@ class DeviceSlotsMixin:
         conn.row_factory = sqlite3.Row
         conn.execute("PRAGMA foreign_keys = ON;")
         conn.execute("PRAGMA busy_timeout = 10000;")
+        if self._table_exists(conn, "t01_devices"):
+            self._ensure_column(
+                conn,
+                "t01_devices",
+                "enable_password",
+                "ALTER TABLE t01_devices ADD COLUMN enable_password TEXT DEFAULT '';",
+            )
         return conn
 
     def _ensure_column(self, conn: sqlite3.Connection, table: str, column: str, ddl: str) -> None:
@@ -122,6 +129,7 @@ class DeviceSlotsMixin:
             port=target.get("port") or 22,
             username=target.get("user") or "",
             password=target.get("pass") or "",
+            secret=target.get("enable_pass") or target.get("secret") or "",
             device_type=target.get("os") or "cisco_ios",
             db_path=self.db_path,
         )
@@ -180,6 +188,7 @@ class DeviceSlotsMixin:
 
     @pyqtSlot(str, str, str, str, str, str, result=bool)
     @pyqtSlot(str, str, str, str, str, str, str, str, str, result=bool)
+    @pyqtSlot(str, str, str, str, str, str, str, str, str, str, result=bool)
     def addDevice(
         self,
         host: str,
@@ -191,6 +200,7 @@ class DeviceSlotsMixin:
         os_name: str = "",
         role: str = "",
         device_type: str = "",
+        enable_password: str = "",
     ) -> bool:
         """Thêm một thiết bị mới từ UI vào bảng t01_devices."""
         host = (host or "").strip()
@@ -209,8 +219,8 @@ class DeviceSlotsMixin:
                 conn.execute(
                     """
                     INSERT INTO t01_devices
-                        (host, device_name, method, portnumber, username, password, os, role, connection_status, dev, device_type)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'waiting', 0, ?);
+                        (host, device_name, method, portnumber, username, password, enable_password, os, role, connection_status, dev, device_type)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'waiting', 0, ?);
                     """,
                     (
                         host,
@@ -219,6 +229,7 @@ class DeviceSlotsMixin:
                         port,
                         username or None,
                         password or None,
+                        enable_password or "",
                         os_name or None,
                         role,
                         device_type,
@@ -278,6 +289,7 @@ class DeviceSlotsMixin:
                     "port": port,
                     "username": str(row.get("username") or row.get("user") or "").strip(),
                     "password": str(row.get("password") or row.get("pass") or "").strip(),
+                    "enable_password": str(row.get("enable_password") or row.get("enable_pass") or row.get("secret") or "").strip(),
                     "os": str(row.get("os") or "cisco_ios").strip() or "cisco_ios",
                     "role": role,
                     "type": device_type_for_role(role),
@@ -292,13 +304,14 @@ class DeviceSlotsMixin:
                     cursor = conn.execute(
                         """
                         INSERT OR IGNORE INTO t01_devices
-                            (host, device_name, method, portnumber, username, password,
+                            (host, device_name, method, portnumber, username, password, enable_password,
                              os, role, connection_status, dev, device_type)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'waiting', 0, ?);
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'waiting', 0, ?);
                         """,
                         (
                             row["host"], row["name"] or None, row["method"] or None,
                             row["port"], row["username"] or None, row["password"] or None,
+                            row["enable_password"] or "",
                             row["os"] or None, row["role"], row["type"],
                         ),
                     )
@@ -308,6 +321,7 @@ class DeviceSlotsMixin:
                                 "ip": row["host"], "name": row["name"],
                                 "protocol": row["method"], "port": str(row["port"]),
                                 "user": row["username"], "pass": row["password"],
+                                "enable_pass": row["enable_password"],
                                 "os": row["os"], "role": row["role"],
                                 "status": "waiting", "type": row["type"],
                             }
@@ -520,6 +534,7 @@ class DeviceSlotsMixin:
 
     @pyqtSlot(str, str, str, str, str, str, result=bool)
     @pyqtSlot(str, str, str, str, str, str, str, str, str, result=bool)
+    @pyqtSlot(str, str, str, str, str, str, str, str, str, str, result=bool)
     def updateDevice(
         self,
         host: str,
@@ -531,6 +546,7 @@ class DeviceSlotsMixin:
         os_name: str = "",
         role: str = "",
         device_type: str = "",
+        enable_password: str = "",
     ) -> bool:
         """Cập nhật thông tin kết nối và phân loại thiết bị trong DB."""
         target_host = (host or "").strip()
@@ -556,7 +572,7 @@ class DeviceSlotsMixin:
                 cursor = conn.execute(
                     """
                     UPDATE t01_devices
-                    SET device_name = ?, method = ?, portnumber = ?, username = ?, password = ?,
+                    SET device_name = ?, method = ?, portnumber = ?, username = ?, password = ?, enable_password = ?,
                         os = ?, role = ?, device_type = ?
                     WHERE host = ?;
                     """,
@@ -566,6 +582,7 @@ class DeviceSlotsMixin:
                         port,
                         username or None,
                         password or None,
+                        enable_password or "",
                         os_name or None,
                         role,
                         device_type,
@@ -587,7 +604,7 @@ class DeviceSlotsMixin:
             with self._connect() as conn:
                 row = conn.execute(
                     """
-                    SELECT host, device_name, method, portnumber, username, password, os, role, device_type, dev
+                    SELECT host, device_name, method, portnumber, username, password, enable_password, os, role, device_type, dev
                     FROM t01_devices
                     WHERE host = ?;
                     """,
@@ -602,6 +619,7 @@ class DeviceSlotsMixin:
                 "port": "" if row["portnumber"] is None else str(row["portnumber"]),
                 "user": row["username"] or "",
                 "pass": row["password"] or "",
+                "enable_pass": row["enable_password"] or "",
                 "os": row["os"] or "cisco_ios",
                 "role": row["role"] or "",
                 "type": device_type_for_role(row["role"]),

@@ -331,10 +331,10 @@ def build_worker_inventory(db_path, task_list):
         cursor = conn_db.cursor()
         for ip, payload in task_map.items():
             # Dùng f-string gọi biến bảng
-            cursor.execute(f'SELECT device_name, username, password, os, portnumber, method FROM {T_DEVICES} WHERE host = ?', (ip,))
+            cursor.execute(f'SELECT device_name, username, password, enable_password, os, portnumber, method FROM {T_DEVICES} WHERE host = ?', (ip,))
             row = cursor.fetchone()
             if row:
-                dev_name, db_user, db_pass, db_os, db_port, db_method = row
+                dev_name, db_user, db_pass, db_enable_pass, db_os, db_port, db_method = row
                 method = (db_method or "SSH").upper()
                 platform = (
                     "cisco_ios_telnet"
@@ -357,6 +357,7 @@ def build_worker_inventory(db_path, task_list):
                     connection_options={
                         "cams_netmiko": ConnectionOptions(
                             extras={
+                                "secret": db_enable_pass or db_pass,
                                 "conn_timeout": NETWORK_TIMEOUT,
                                 "banner_timeout": NETWORK_TIMEOUT,
                                 "auth_timeout": NETWORK_TIMEOUT,

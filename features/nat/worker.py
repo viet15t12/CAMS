@@ -137,13 +137,13 @@ def _build_inventory(db_path: str, tasks: list[dict[str, Any]]) -> tuple[str | N
     with closing(sqlite3.connect(db_path)) as conn:
         for ip, payload in task_by_ip.items():
             row = conn.execute(
-                f"SELECT device_name, username, password, os, portnumber, method FROM {T_DEVICES} WHERE host=?",
+                f"SELECT device_name, username, password, enable_password, os, portnumber, method FROM {T_DEVICES} WHERE host=?",
                 (ip,),
             ).fetchone()
             if not row:
                 errors.append({"target": ip, "status": "failed", "message": "Device credentials were not found in the database."})
                 continue
-            name, user, password, os_name, port, method = row
+            name, user, password, enable_password, os_name, port, method = row
             method = str(method or "SSH").upper()
             if method == "RESTCONF":
                 errors.append({"target": ip, "status": "failed", "message": "NAT push over RESTCONF is not supported by the imported backend; use an SSH or Telnet device session."})
@@ -153,6 +153,7 @@ def _build_inventory(db_path: str, tasks: list[dict[str, Any]]) -> tuple[str | N
                 "hostname": ip, "username": user, "password": password,
                 "port": int(port or (23 if method == "TELNET" else 22)), "platform": platform,
                 "connection_options": {"cams_netmiko": {"extras": {
+                    "secret": enable_password or password,
                     "banner_timeout": 30,
                     "auth_timeout": 30,
                     "session_timeout": 60,

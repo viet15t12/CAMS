@@ -59,6 +59,10 @@ Rectangle {
         return activityBar.selectItem(4, "syslog")
     }
 
+    function activateCompliance() {
+        return activityBar.selectItem(5, "compliance")
+    }
+
     function activateSettings() {
         return activityBar.selectItem(2, "settings")
     }
@@ -158,6 +162,17 @@ Rectangle {
             opacity: 1.0
 
             onClicked: activityBar.activateSystemLogs()
+        }
+
+        ActivityBarItem {
+            objectName: "complianceActivityItem"
+            iconSource: AppAssets.navigationAudit
+            tooltipText: "Security Audit (Ctrl+Alt+A)"
+            enabled: true
+            isActive: activityBar.appMode === "compliance"
+            opacity: 1.0
+
+            onClicked: activityBar.activateCompliance()
         }
 
     }

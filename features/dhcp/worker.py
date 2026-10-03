@@ -164,10 +164,10 @@ def build_dhcp_inventory(db_path, task_list):
         conn_db = sqlite3.connect(db_path)
         cursor = conn_db.cursor()
         for ip, payload in task_map.items():
-            cursor.execute(f'SELECT device_name, username, password, os, portnumber, method FROM {T_DEVICES} WHERE host = ?', (ip,))
+            cursor.execute(f'SELECT device_name, username, password, enable_password, os, portnumber, method FROM {T_DEVICES} WHERE host = ?', (ip,))
             row = cursor.fetchone()
             if row:
-                dev_name, db_user, db_pass, db_os, db_port, db_method = row
+                dev_name, db_user, db_pass, db_enable_pass, db_os, db_port, db_method = row
                 
                 # --- CHUẨN HÓA PLATFORM VÀ PORT CHO NETMIKO ---
                 platform_final = "cisco_ios" # Mặc định là SSH
@@ -192,6 +192,7 @@ def build_dhcp_inventory(db_path, task_list):
                     "connection_options": {
                         "cams_netmiko": {
                             "extras": {
+                                "secret": db_enable_pass or db_pass,
                                 "banner_timeout": 30, 
                                 "auth_timeout": 30, 
                                 "session_timeout": 60, 

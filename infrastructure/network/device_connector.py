@@ -35,6 +35,7 @@ class DeviceConnector:
         start_config_mode=False,
         db_path=None,
         timeout=DEFAULT_NETWORK_TIMEOUT,
+        secret='',
     ):
         """Initialize device connector parameters"""
         self.host = host
@@ -42,6 +43,7 @@ class DeviceConnector:
         self.port = int(port)
         self.username = username if username else ''
         self.password = password if password else ''
+        self.secret = secret if secret else ''
         self.device_type = device_type
         self.start_config_mode = start_config_mode
         self.db_path = db_path or load_default_db_path()
@@ -57,13 +59,14 @@ class DeviceConnector:
         self.last_error = ""
         try:
             # Prepare device parameters
+            effective_secret = self.secret if self.secret else self.password
             device_params = {
                 'device_type': self.device_type,
                 'host': self.host,
                 'port': self.port,
                 'username': self.username,
                 'password': self.password,
-                'secret': self.password,
+                'secret': effective_secret,
                 'conn_timeout': self.timeout,
                 'auth_timeout': self.timeout,
                 'banner_timeout': self.timeout,

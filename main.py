@@ -176,6 +176,7 @@ from features.config_sync import ConfigSyncService
 from features.devices import DeviceLoginService, DeviceRepository, DeviceService
 from features.sftp import SftpController
 from features.syslog import SyslogManager
+from features.compliance import SecurityAuditController, SecurityComplianceService
 from infrastructure.network.session_registry import DeviceSessionRegistry
 from infrastructure.database.paths import BACKUP_DIR, DEVICE_NETWORK_DB, INFO_COLLECTED_DB
 from infrastructure.system.runtime_tmp import cleanup_runtime_tmp
@@ -311,6 +312,11 @@ def main() -> int:
     sftp_controller = SftpController(device_login_service=device_login_service)
     # Syslog owns its own threads/database boundary.
     syslog_manager = SyslogManager(language_getter=lambda: language_settings.language)
+    security_audit_service = SecurityComplianceService(
+        db_path_getter=lambda: device_repository.db_path,
+        backup_service_getter=lambda: config_backup_service,
+    )
+    security_audit_controller = SecurityAuditController(security_audit_service)
     shutdown_complete = False
 
     def route_active_workspace() -> None:
@@ -374,6 +380,7 @@ def main() -> int:
             except Exception as exc:
                 print(f"Failed to reset connected devices during shutdown: {exc}", file=sys.stderr)
             syslog_manager.shutdown()
+            security_audit_controller.shutdown()
             sftp_controller.shutdown()
             workspace_save_controller.shutdown()
             welcome_controller.shutdown()
@@ -406,6 +413,7 @@ def main() -> int:
     context.setContextProperty("syslogManager", syslog_manager)
     context.setContextProperty("syslogSettings", syslog_manager.settings)
     context.setContextProperty("emailAlertManager", syslog_manager.email_alerts)
+    context.setContextProperty("securityAuditController", security_audit_controller)
     context.setContextProperty("nqvEasterEggEnabled", brand_easter_egg == "nqv")
     context.setContextProperty("ptitEasterEggEnabled", brand_easter_egg == "ptit")
 

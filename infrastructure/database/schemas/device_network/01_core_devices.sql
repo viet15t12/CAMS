@@ -10,6 +10,7 @@ CREATE TABLE t01_devices (
     portnumber  INTEGER,
     username    TEXT,
     password    TEXT,
+    enable_password TEXT DEFAULT '',
     os          TEXT,
     role        TEXT, -- rou sw2 sw3
     device_type TEXT DEFAULT 'unknown',

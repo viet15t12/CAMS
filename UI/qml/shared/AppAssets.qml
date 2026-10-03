@@ -163,6 +163,7 @@ QtObject {
     readonly property url navigationSettings: resource("resources/navigation/settings.svg")
     readonly property url navigationSftp: resource("resources/navigation/sftp.svg")
     readonly property url navigationSyslog: resource("resources/navigation/syslog.svg")
+    readonly property url navigationAudit: resource("resources/navigation/audit.svg")
     readonly property url navigationTerminal: resource("resources/navigation/terminal.svg")
     readonly property url navigationTopology: resource("resources/navigation/topology.svg")
 

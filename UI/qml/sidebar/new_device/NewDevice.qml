@@ -9,9 +9,9 @@ import UI
 
 Window {
     id: addDeviceWindow
-    width: 480; height: 620
+    width: 480; height: 670
     minimumWidth: 480; maximumWidth: 480
-    minimumHeight: 620; maximumHeight: 620
+    minimumHeight: 670; maximumHeight: 670
     color: "transparent"
     modality: Qt.ApplicationModal
     flags: Qt.Dialog | Qt.FramelessWindowHint
@@ -147,6 +147,7 @@ Window {
             portInput.text  = editDeviceData.port || "22"
             userField.text  = editDeviceData.user || ""
             passField.text  = editDeviceData.pass || ""
+            enablePassField.text = editDeviceData.enable_pass || ""
             osCombo.currentIndex = comboIndex(osOptions, editDeviceData.os || "cisco_ios", 0)
             roleCombo.currentIndex = comboIndex(roleOptions, editDeviceData.role || "rou", 0)
 
@@ -166,6 +167,7 @@ Window {
             portInput.text = "22"
             userField.text = ""
             passField.text = ""
+            enablePassField.text = ""
             protocolCombo.currentIndex = 0
             osCombo.currentIndex = 0
             roleCombo.currentIndex = 0
@@ -245,13 +247,15 @@ Window {
                 hostInput.text.trim(), nameInput.text,
                 protocolCombo.currentText, portInput.text,
                 userField.text, passField.text,
-                osCombo.currentText, roleCombo.currentText, deviceTypeForRole(roleCombo.currentText)
+                osCombo.currentText, roleCombo.currentText, deviceTypeForRole(roleCombo.currentText),
+                enablePassField.text
             )
             : dbManager.addDevice(
                 hostInput.text.trim(), nameInput.text,
                 protocolCombo.currentText, portInput.text,
                 userField.text, passField.text,
-                osCombo.currentText, roleCombo.currentText, deviceTypeForRole(roleCombo.currentText)
+                osCombo.currentText, roleCombo.currentText, deviceTypeForRole(roleCombo.currentText),
+                enablePassField.text
             )
         if (ok) {
             const sshResult = dbManager.saveSshAlgorithmSettings(
@@ -270,16 +274,17 @@ Window {
             }
             const foldersOk = true
             const newDeviceObj = {
-                ip:       hostInput.text.trim(),
-                name:     nameInput.text,
-                protocol: protocolCombo.currentText,
-                port:     portInput.text,
-                user:     userField.text,
-                pass:     passField.text,
-                os:       osCombo.currentText,
-                role:     roleCombo.currentText,
-                status:   "disconnected",
-                type:     deviceTypeForRole(roleCombo.currentText)
+                ip:          hostInput.text.trim(),
+                name:        nameInput.text,
+                protocol:    protocolCombo.currentText,
+                port:        portInput.text,
+                user:        userField.text,
+                pass:        passField.text,
+                enable_pass: enablePassField.text,
+                os:          osCombo.currentText,
+                role:        roleCombo.currentText,
+                status:      "disconnected",
+                type:        deviceTypeForRole(roleCombo.currentText)
             }
 
             if (isEditMode)
@@ -436,6 +441,13 @@ Window {
                 id: passField
                 labelText: "Password:"
                 placeholderText: "••••••••"
+                validator: RegularExpressionValidator { regularExpression: /^[^\s]+$/ }
+            }
+
+            StandardPasswordField {
+                id: enablePassField
+                labelText: "Enable Secret:"
+                placeholderText: LanguageState.isVietnamese ? "(Tùy chọn, mặc định = Password)" : "(Optional, default = Password)"
                 validator: RegularExpressionValidator { regularExpression: /^[^\s]+$/ }
             }
 

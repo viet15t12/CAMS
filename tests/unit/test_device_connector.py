@@ -161,3 +161,29 @@ class DeviceConnectorTests(unittest.TestCase):
             [call[0] for call in connection.calls],
             ["show interfaces status", "show interfaces trunk"],
         )
+
+    def test_connect_passes_custom_enable_secret(self) -> None:
+        DeviceConnector = _load_device_connector()
+        connector = DeviceConnector(
+            "192.0.2.1",
+            "ssh",
+            22,
+            "admin",
+            "login_pass",
+            secret="custom_enable_secret",
+            db_path=":memory:",
+        )
+        captured_params = {}
+
+        def mock_connect(params, _db_path):
+            captured_params.update(params)
+            return _Connection()
+
+        with patch.dict(
+            DeviceConnector.connect.__globals__,
+            {"connect_device": mock_connect},
+        ):
+            self.assertTrue(connector.connect())
+
+        self.assertEqual(captured_params.get("password"), "login_pass")
+        self.assertEqual(captured_params.get("secret"), "custom_enable_secret")

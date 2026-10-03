@@ -220,6 +220,8 @@ StatefulWindow {
     readonly property bool isDeviceMode: activityBar.appMode === "devices"
     readonly property bool isSftpMode: activityBar.appMode === "sftp"
     readonly property bool isSyslogMode: activityBar.appMode === "syslog"
+    readonly property bool isComplianceMode: activityBar.appMode === "compliance"
+    property bool complianceWorkspaceLoaded: false
     readonly property bool isIndependentMode: false
     readonly property int visibleStatusBarHeight: StatusBarState.isVisible ? Theme.statusBarHeight : 0
     readonly property bool textInputHasFocus: root.activeFocusItem !== null
@@ -229,6 +231,13 @@ StatefulWindow {
     onIsSyslogModeChanged: {
         if (root.isSyslogMode)
             root.syslogWorkspaceLoaded = true
+    }
+
+    onIsComplianceModeChanged: {
+        if (root.isComplianceMode) {
+            root.complianceWorkspaceLoaded = true
+            root.sidebarVisible = false
+        }
     }
 
     function attachPersistentSettingsBackends() {
@@ -1003,7 +1012,7 @@ StatefulWindow {
                         objectName: "mainContentArea"
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        visible: !root.isSyslogMode && !root.isSftpMode
+                        visible: !root.isSyslogMode && !root.isSftpMode && !root.isComplianceMode
 
                         tabCount: deviceTabs.tabCount
                         activeMainFeature: deviceTabs.currentFMain
@@ -1048,6 +1057,18 @@ StatefulWindow {
                                 backend: typeof sftpController !== "undefined"
                                          ? sftpController : null
                             }
+                        }
+                    }
+
+                    Loader {
+                        id: complianceWorkspaceLoader
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        active: root.complianceWorkspaceLoaded
+                        asynchronous: true
+                        visible: root.isComplianceMode
+                        sourceComponent: Component {
+                            ComplianceWorkspace {}
                         }
                     }
                 }

@@ -158,6 +158,7 @@ SyslogSmartFilterBuilder 1.0 qml/features/syslog/SyslogSmartFilterBuilder.qml
 SyslogDeviceConfigPage 1.0 qml/features/syslog/SyslogDeviceConfigPage.qml
 SyslogGroupDialog 1.0 qml/features/syslog/SyslogGroupDialog.qml
 SyslogSmartFilterHelp 1.0 qml/features/syslog/SyslogSmartFilterHelp.qml
+ComplianceWorkspace 1.0 qml/features/compliance/ComplianceWorkspace.qml
 
 SwitchWorkspace 1.0 qml/features/switching/SwitchWorkspace.qml
 CrudFormActions 1.0 qml/features/switching/components/CrudFormActions.qml

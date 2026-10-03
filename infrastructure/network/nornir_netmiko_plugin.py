@@ -28,6 +28,8 @@ class CAMSNetmiko:
             "port": port,
         }
         extras = dict(extras or {})
+        secret = extras.pop("secret", None) or password
+        parameters["secret"] = secret
         db_path = extras.pop("ssh_algorithm_db_path", None)
         try:
             parameters["ssh_config_file"] = configuration.ssh.config_file
