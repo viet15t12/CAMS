@@ -16,6 +16,7 @@ from PyQt6.QtCore import pyqtSlot
 
 from .conversion import _clean_display_text
 from features.devices.classification import device_type_for_role, normalize_device_role
+from infrastructure.security import encrypt_credential
 
 
 class DeviceImportSlotsMixin:
@@ -158,6 +159,8 @@ class DeviceImportSlotsMixin:
                 if not row["host"]:
                     skipped += 1
                     continue
+                enc_pwd = encrypt_credential(row["password"]) if row["password"] else None
+                enc_epwd = encrypt_credential(row["enable_password"]) if row["enable_password"] else ""
                 cursor = conn.execute(
                     """
                     INSERT OR IGNORE INTO t01_devices
@@ -170,8 +173,8 @@ class DeviceImportSlotsMixin:
                         row["method"] or None,
                         row["port"],
                         row["username"] or None,
-                        row["password"] or None,
-                        row["enable_password"] or "",
+                        enc_pwd,
+                        enc_epwd,
                         row["os"] or None,
                         row["role"] or None,
                         row["type"] or "unknown",

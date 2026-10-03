@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from typing import Any
 from uuid import uuid4
 
@@ -82,6 +83,8 @@ class ManagedTerminalManager(QObject):
 
         try:
             device = self._load_device(host)
+            if not device:
+                return self._fail_open(host, f"Device {host} was not found in active workspace.")
             ipc_path = self._ipc.start()
             session_id = str(uuid4())
             device_id = str(device.get("device_id") or host)
@@ -92,6 +95,12 @@ class ManagedTerminalManager(QObject):
                 ipc_path=ipc_path,
             )
             process = self._launcher.create_process(self)
+            if hasattr(process, "setProcessEnvironment"):
+                from PyQt6.QtCore import QProcessEnvironment
+                proc_env = QProcessEnvironment.systemEnvironment()
+                if "CAMS_CREDENTIAL_KEY" in os.environ:
+                    proc_env.insert("CAMS_CREDENTIAL_KEY", os.environ["CAMS_CREDENTIAL_KEY"])
+                process.setProcessEnvironment(proc_env)
             device_name = sanitize_display_text(
                 device.get("device_name"), fallback=host, limit=80
             )
@@ -105,22 +114,21 @@ class ManagedTerminalManager(QObject):
                 title=spec.title,
                 process=process,
             )
-        except (RuntimeError, TerminalLaunchError, OSError) as exc:
+            self.sessions_by_id[session_id] = session
+            self.device_session[host] = session_id
+            self._ipc.register_session(session_id)
+            self._connect_process(session)
+            self._set_state(session, "starting", force=True)
+            process.start(spec.program, list(spec.arguments))
+            return self._result(
+                True,
+                "success",
+                f"Starting CAMS Terminal for {device_name}.",
+                state="starting",
+                sessionId=session_id,
+            )
+        except Exception as exc:
             return self._fail_open(host, str(exc))
-
-        self.sessions_by_id[session_id] = session
-        self.device_session[host] = session_id
-        self._ipc.register_session(session_id)
-        self._connect_process(session)
-        self._set_state(session, "starting", force=True)
-        process.start(spec.program, list(spec.arguments))
-        return self._result(
-            True,
-            "success",
-            f"Starting CAMS Terminal for {device_name}.",
-            state="starting",
-            sessionId=session_id,
-        )
 
     def focus(self, host: str) -> dict[str, Any]:
         """Ask an existing managed terminal to request window activation."""

@@ -179,6 +179,7 @@ from features.syslog import SyslogManager
 from features.compliance import SecurityAuditController, SecurityComplianceService
 from infrastructure.network.session_registry import DeviceSessionRegistry
 from infrastructure.database.paths import BACKUP_DIR, DEVICE_NETWORK_DB, INFO_COLLECTED_DB
+from infrastructure.security import bind_session_credentials, clear_session_credentials
 from infrastructure.system.runtime_tmp import cleanup_runtime_tmp
 
 
@@ -325,6 +326,7 @@ def main() -> int:
             return
         session = welcome_controller.active_session()
         if session is None:
+            clear_session_credentials()
             # closeProject() emits this signal before removing its extracted
             # directory. Drop every database reference first so Windows does
             # not retain locks that prevent temporary-workspace cleanup.
@@ -341,6 +343,7 @@ def main() -> int:
                 INFO_COLLECTED_DB, DEVICE_NETWORK_DB
             )
             return
+        bind_session_credentials(session)
         if not db_manager.set_workspace_databases(
             session.device_network_db, session.info_collected_db
         ):
@@ -385,6 +388,7 @@ def main() -> int:
             workspace_save_controller.shutdown()
             welcome_controller.shutdown()
             update_manager.shutdown()
+            clear_session_credentials()
         finally:
             for cleanup_error in cleanup_runtime_tmp():
                 print(

@@ -245,32 +245,68 @@ class TerminalHelper(QObject):
     @pyqtSlot(str, result="QVariant")
     def openDeviceTerminal(self, host: str) -> dict[str, Any]:
         """Open or focus the external CAMS Terminal for one host."""
-        return self._terminal_manager.open(host)
+        try:
+            return self._terminal_manager.open(host)
+        except Exception as exc:
+            return {
+                "ok": False,
+                "severity": "error",
+                "message": f"Failed to open terminal: {exc}",
+                "state": "error",
+            }
 
     @pyqtSlot(str, result="QVariant")
     def focusDeviceTerminal(self, host: str) -> dict[str, Any]:
         """Request activation of a managed terminal window."""
-        return self._terminal_manager.focus(host)
+        try:
+            return self._terminal_manager.focus(host)
+        except Exception as exc:
+            return {
+                "ok": False,
+                "severity": "error",
+                "message": f"Failed to focus terminal: {exc}",
+            }
 
     @pyqtSlot(str, result="QVariant")
     def closeDeviceTerminal(self, host: str) -> dict[str, Any]:
         """Request a graceful close with a bounded process fallback."""
-        return self._terminal_manager.close(host)
+        try:
+            return self._terminal_manager.close(host)
+        except Exception as exc:
+            return {
+                "ok": False,
+                "severity": "error",
+                "message": f"Failed to close terminal: {exc}",
+            }
 
     @pyqtSlot(str, result="QVariant")
     def restartDeviceTerminal(self, host: str) -> dict[str, Any]:
         """Replace an existing managed terminal with a fresh session."""
-        return self._terminal_manager.restart(host)
+        try:
+            return self._terminal_manager.restart(host)
+        except Exception as exc:
+            return {
+                "ok": False,
+                "severity": "error",
+                "message": f"Failed to restart terminal: {exc}",
+                "state": "error",
+            }
 
     @pyqtSlot(str, result=bool)
     def isDeviceTerminalOpen(self, host: str) -> bool:
         """Return whether a managed terminal process is active."""
-        return self._terminal_manager.is_running(host)
+        try:
+            return self._terminal_manager.is_running(host)
+        except Exception:
+            return False
 
     @pyqtSlot(str, result=str)
     def deviceTerminalState(self, host: str) -> str:
         """Return the aggregate terminal state exposed to QML."""
-        return self._terminal_manager.state_for_device(host)
+        try:
+            return self._terminal_manager.state_for_device(host)
+        except Exception:
+            return "closed"
 
     @pyqtSlot(str, result="QVariant")
     def pingHost(self, ip: str) -> dict[str, Any]:

@@ -151,7 +151,7 @@ class ManagedTerminalManagerTests(unittest.TestCase):
         self.assertTrue(result["ok"])
         self.assertEqual(len(self.processes), 1)
         process = self.processes[0]
-        self.assertEqual(process.program, "/usr/bin/true")
+        self.assertIn(process.program, ("/bin/true", "/usr/bin/true"))
         self.assertIn("--nt-managed", process.arguments)
         self.assertIn("--nt-session-id", process.arguments)
         self.assertIn("--nt-device-id", process.arguments)

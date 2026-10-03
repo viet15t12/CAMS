@@ -2043,7 +2043,7 @@ class PasswordFieldContractTests(unittest.TestCase):
 
     def test_every_current_password_input_uses_shared_component(self) -> None:
         expected_consumers = {
-            "qml/sidebar/new_device/NewDevice.qml": 1,
+            "qml/sidebar/new_device/NewDevice.qml": 2,
             "qml/sidebar/new_device/BatchNewDevice.qml": 2,
             "qml/features/interfaces/InterfaceView.qml": 1,
             "qml/sftp/SftpConnectionBar.qml": 1,

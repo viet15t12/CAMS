@@ -34,6 +34,7 @@ if FEATURES_ROOT not in sys.path:
 # GỌI CÁC THAM SỐ TỪ TRẠM KIỂM SOÁT
 from infrastructure.network.config import TMP_DIR, ROUTING_TEMPLATE_DIR, DB_TABLES
 from infrastructure.network.nornir_netmiko_plugin import register_cams_netmiko
+from infrastructure.security import decrypt_credential, ensure_database_credential_cipher
 
 def render_routing_config(platform, sub_type, config_data, mode):
     # Dùng ROUTING_TEMPLATE_DIR quy hoạch sẵn trong config.py
@@ -327,6 +328,7 @@ def build_worker_inventory(db_path, task_list):
     T_DEVICES = DB_TABLES["device_info"]["main"]
     
     try:
+        ensure_database_credential_cipher(db_path)
         conn_db = sqlite3.connect(db_path)
         cursor = conn_db.cursor()
         for ip, payload in task_map.items():
@@ -335,6 +337,8 @@ def build_worker_inventory(db_path, task_list):
             row = cursor.fetchone()
             if row:
                 dev_name, db_user, db_pass, db_enable_pass, db_os, db_port, db_method = row
+                db_pass = decrypt_credential(db_pass)
+                db_enable_pass = decrypt_credential(db_enable_pass)
                 method = (db_method or "SSH").upper()
                 platform = (
                     "cisco_ios_telnet"

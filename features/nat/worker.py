@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader
 
 from infrastructure.network.config import DB_TABLES, NAT_TEMPLATE_DIR, TMP_DIR
 from infrastructure.network.nornir_netmiko_plugin import register_cams_netmiko
+from infrastructure.security import decrypt_credential, ensure_database_credential_cipher
 
 
 T_DEVICES = DB_TABLES["device_info"]["main"]
@@ -134,6 +135,7 @@ def _build_inventory(db_path: str, tasks: list[dict[str, Any]]) -> tuple[str | N
     task_by_ip = {task["target"]["ip"]: task for task in tasks}
     hosts: dict[str, Any] = {}
     errors: list[dict[str, Any]] = []
+    ensure_database_credential_cipher(db_path)
     with closing(sqlite3.connect(db_path)) as conn:
         for ip, payload in task_by_ip.items():
             row = conn.execute(
@@ -144,6 +146,8 @@ def _build_inventory(db_path: str, tasks: list[dict[str, Any]]) -> tuple[str | N
                 errors.append({"target": ip, "status": "failed", "message": "Device credentials were not found in the database."})
                 continue
             name, user, password, enable_password, os_name, port, method = row
+            password = decrypt_credential(password)
+            enable_password = decrypt_credential(enable_password)
             method = str(method or "SSH").upper()
             if method == "RESTCONF":
                 errors.append({"target": ip, "status": "failed", "message": "NAT push over RESTCONF is not supported by the imported backend; use an SSH or Telnet device session."})

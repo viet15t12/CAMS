@@ -9,6 +9,7 @@ from typing import Any
 
 from domain.status import ConnectionStatus, connection_status
 from infrastructure.database.paths import DEVICE_NETWORK_DB, require_database
+from infrastructure.security import decrypt_credential, migrate_database_passwords
 
 
 class DeviceRepository:
@@ -33,6 +34,8 @@ class DeviceRepository:
         own a live session yet, even when that value was persisted in its package.
         """
         self.db_path = Path(db_path)
+        with closing(self._connect()) as connection:
+            migrate_database_passwords(connection)
         return self.reset_connected_to_waiting()
 
     def get_login(self, host: str) -> dict[str, Any] | None:
@@ -47,7 +50,18 @@ class DeviceRepository:
                 """,
                 ((host or "").strip(),),
             ).fetchone()
-        return dict(row) if row is not None else None
+        if row is None:
+            return None
+        payload = dict(row)
+        try:
+            payload["password"] = decrypt_credential(payload.get("password") or "")
+        except Exception:
+            payload["password"] = payload.get("password") or ""
+        try:
+            payload["enable_password"] = decrypt_credential(payload.get("enable_password") or "")
+        except Exception:
+            payload["enable_password"] = payload.get("enable_password") or ""
+        return payload
 
     def get_role(self, host: str) -> str | None:
         """Return the normalized inventory role for one device."""

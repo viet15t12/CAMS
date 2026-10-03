@@ -10,6 +10,7 @@ from PyQt6.QtCore import pyqtSlot
 
 from domain.status import ConnectionStatus, connection_status
 from infrastructure.database.paths import require_database
+from infrastructure.security import decrypt_credential, encrypt_credential
 from features.devices.classification import device_type_for_role, normalize_device_role
 from features.devices.ssh_algorithm_repository import (
     clear_ssh_algorithm_override,
@@ -214,6 +215,8 @@ class DeviceSlotsMixin:
             return False
         role = normalize_device_role(role, device_type) or "rou"
         device_type = device_type_for_role(role)
+        enc_password = encrypt_credential(password) if password else None
+        enc_enable_password = encrypt_credential(enable_password) if enable_password else ""
         try:
             with self._connect() as conn:
                 conn.execute(
@@ -228,8 +231,8 @@ class DeviceSlotsMixin:
                         method or None,
                         port,
                         username or None,
-                        password or None,
-                        enable_password or "",
+                        enc_password,
+                        enc_enable_password,
                         os_name or None,
                         role,
                         device_type,
@@ -301,6 +304,8 @@ class DeviceSlotsMixin:
         try:
             with self._connect() as conn:
                 for row in rows:
+                    enc_pwd = encrypt_credential(row["password"]) if row["password"] else None
+                    enc_epwd = encrypt_credential(row["enable_password"]) if row["enable_password"] else ""
                     cursor = conn.execute(
                         """
                         INSERT OR IGNORE INTO t01_devices
@@ -310,8 +315,8 @@ class DeviceSlotsMixin:
                         """,
                         (
                             row["host"], row["name"] or None, row["method"] or None,
-                            row["port"], row["username"] or None, row["password"] or None,
-                            row["enable_password"] or "",
+                            row["port"], row["username"] or None, enc_pwd,
+                            enc_epwd,
                             row["os"] or None, row["role"], row["type"],
                         ),
                     )
@@ -569,6 +574,8 @@ class DeviceSlotsMixin:
                 if row is None:
                     return False
 
+                enc_password = encrypt_credential(password) if password else None
+                enc_enable_password = encrypt_credential(enable_password) if enable_password else ""
                 cursor = conn.execute(
                     """
                     UPDATE t01_devices
@@ -581,8 +588,8 @@ class DeviceSlotsMixin:
                         method or None,
                         port,
                         username or None,
-                        password or None,
-                        enable_password or "",
+                        enc_password,
+                        enc_enable_password,
                         os_name or None,
                         role,
                         device_type,
@@ -612,20 +619,28 @@ class DeviceSlotsMixin:
                 ).fetchone()
             if row is None:
                 return {}
+            try:
+                dev_pass = decrypt_credential(row["password"] or "")
+            except Exception:
+                dev_pass = ""
+            try:
+                dev_epass = decrypt_credential(row["enable_password"] or "")
+            except Exception:
+                dev_epass = ""
             return {
                 "ip": row["host"],
                 "name": _clean_display_text(row["device_name"]),
                 "protocol": row["method"] or "SSH",
                 "port": "" if row["portnumber"] is None else str(row["portnumber"]),
                 "user": row["username"] or "",
-                "pass": row["password"] or "",
-                "enable_pass": row["enable_password"] or "",
+                "pass": dev_pass,
+                "enable_pass": dev_epass,
                 "os": row["os"] or "cisco_ios",
                 "role": row["role"] or "",
                 "type": device_type_for_role(row["role"]),
                 "dev": row["dev"] if row["dev"] is not None else 0,
             }
-        except sqlite3.Error as exc:
+        except Exception as exc:
             print(f"[db] getDeviceByHost failed: {exc}", file=sys.stderr)
             return {}
 

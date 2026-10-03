@@ -23,6 +23,7 @@ if str(APP_ROOT) not in sys.path:
 from features.devices import DeviceLoginService, DeviceRepository
 from features.devices.ssh_algorithm_repository import get_ssh_algorithm_override
 from infrastructure.network.ssh_algorithms import make_transport_factory
+from infrastructure.security import ensure_database_credential_cipher
 
 
 KNOWN_HOSTS_PATH = Path.home() / ".ssh" / "known_hosts"
@@ -37,6 +38,7 @@ def _terminal_size() -> tuple[int, int]:
 
 
 def _connect(db_path: Path, host: str) -> tuple[paramiko.SSHClient, paramiko.Channel]:
+    ensure_database_credential_cipher(db_path)
     device = DeviceLoginService(DeviceRepository(db_path)).load(host)
     if device is None:
         raise RuntimeError("Device is no longer available in the active workspace.")
@@ -218,7 +220,7 @@ def main() -> int:
     try:
         client, channel = _connect_with_host_key_confirmation(args.db, args.host)
         return _relay(channel)
-    except (OSError, paramiko.SSHException, RuntimeError) as exc:
+    except Exception as exc:
         print(f"CAMS SSH failed: {exc}", file=sys.stderr)
         return 1
     finally:

@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader
 
 from infrastructure.network.config import ACL_TEMPLATE_DIR, DB_TABLES, TMP_DIR
 from infrastructure.network.nornir_netmiko_plugin import register_cams_netmiko
+from infrastructure.security import decrypt_credential
 
 
 T_DEVICES = DB_TABLES["device_info"]["main"]
@@ -151,6 +152,8 @@ def _build_inventory(
                 errors.append({"target": ip, "status": "failed", "message": "Device credentials were not found."})
                 continue
             name, user, password, enable_password, os_name, port, method = row
+            password = decrypt_credential(password)
+            enable_password = decrypt_credential(enable_password)
             method = str(method or "SSH").upper()
             if method == "RESTCONF":
                 errors.append({
