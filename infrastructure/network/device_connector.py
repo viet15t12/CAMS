@@ -59,14 +59,13 @@ class DeviceConnector:
         self.last_error = ""
         try:
             # Prepare device parameters
-            effective_secret = self.secret if self.secret else self.password
             device_params = {
                 'device_type': self.device_type,
                 'host': self.host,
                 'port': self.port,
                 'username': self.username,
                 'password': self.password,
-                'secret': effective_secret,
+                'secret': self.secret,
                 'conn_timeout': self.timeout,
                 'auth_timeout': self.timeout,
                 'banner_timeout': self.timeout,
@@ -84,6 +83,11 @@ class DeviceConnector:
                 {**device_params, "method": self.method},
                 self.db_path,
             )
+
+            # Strict 2-step Privilege 15 validation
+            from .privilege import ensure_initial_privilege
+            ensure_initial_privilege(self.connection, self.secret, self.username)
+
             self.connected = True
             print(f"[SUCCESS] Successfully connected to {self.host}\n")
             if self.start_config_mode:
@@ -101,6 +105,12 @@ class DeviceConnector:
         except NetmikoAuthenticationException:
             self.last_error = "authentication failed (invalid credentials)"
             print(f"\n[ERROR] Authentication failed for {self.host} (invalid credentials)\n")
+            self.disconnect()
+            return False
+        except PermissionError as exc:
+            self.last_error = str(exc)
+            print(f"\n[ERROR] Privilege error for {self.host}: {exc}\n")
+            self.disconnect()
             return False
         except ConnectionException as e:
             self.last_error = f"{classify_ssh_error(e)}: {e}"
@@ -118,8 +128,9 @@ class DeviceConnector:
             return False
 
         try:
-            if hasattr(self.connection, "check_enable_mode") and not self.connection.check_enable_mode():
-                self.connection.enable()
+            from .privilege import ensure_privileged_mode
+
+            ensure_privileged_mode(self.connection)
 
             if not self.connection.check_config_mode():
                 self.connection.config_mode()

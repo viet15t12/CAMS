@@ -22,7 +22,8 @@ def netmiko_send_config(
     if task.is_dry_run(dry_run):
         raise ValueError("netmiko_send_config does not support dry_run")
     if enable:
-        connection.enable()
+        from .privilege import ensure_privileged_mode
+        ensure_privileged_mode(connection)
     if config_commands:
         output = connection.send_config_set(config_commands=config_commands, **kwargs)
     elif config_file:
@@ -41,6 +42,7 @@ def netmiko_send_command(
 ) -> Result:
     connection = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
     if enable:
-        connection.enable()
+        from .privilege import ensure_privileged_mode
+        ensure_privileged_mode(connection)
     sender = connection.send_command_timing if use_timing else connection.send_command
     return Result(host=task.host, result=sender(command_string, **kwargs))

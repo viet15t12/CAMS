@@ -60,10 +60,9 @@ class DeviceSessionRegistry:
         connection = getattr(connector, "connection", None)
         if connection is None:
             raise RuntimeError("Network connection was not created")
-        if callable(getattr(connection, "check_enable_mode", None)) and not connection.check_enable_mode():
-            connection.enable()
-        if callable(getattr(connection, "check_config_mode", None)) and connection.check_config_mode():
-            connection.exit_config_mode()
+        from .privilege import ensure_privileged_mode
+
+        ensure_privileged_mode(connection)
 
     def open(self, host: str) -> dict[str, Any]:
         host = (host or "").strip()

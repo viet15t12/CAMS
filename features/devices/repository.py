@@ -41,7 +41,7 @@ class DeviceRepository:
             row = connection.execute(
                 """
                 SELECT host, device_name, method, portnumber, username, password,
-                       os, role, dev
+                       COALESCE(enable_password, '') AS enable_password, os, role, dev
                 FROM t01_devices
                 WHERE host = ?;
                 """,

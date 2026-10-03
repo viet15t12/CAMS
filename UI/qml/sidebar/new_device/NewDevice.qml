@@ -446,7 +446,7 @@ Window {
 
             StandardPasswordField {
                 id: enablePassField
-                labelText: "Enable Secret:"
+                labelText: "Enable Password / Secret:"
                 placeholderText: LanguageState.isVietnamese ? "(Tùy chọn, mặc định = Password)" : "(Optional, default = Password)"
                 validator: RegularExpressionValidator { regularExpression: /^[^\s]+$/ }
             }

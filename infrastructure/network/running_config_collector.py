@@ -33,16 +33,16 @@ class RunningConfigCollector:
         collect_command = f"{prefix}show running-config"
         self._send_and_wait_for_prompt(paging_command, prompt)
         output = self._send_and_wait_for_prompt(collect_command, prompt)
+        if "% Invalid input detected" in output or "% Authorization failed" in output:
+            raise RuntimeError(f"Cisco rejected show running-config: {output.strip()}")
         return self._clean_output(output, collect_command, prompt)
 
     def _ensure_privileged_prompt(self) -> str:
         """Use the current privileged mode without forcing configuration mode."""
+        from .privilege import ensure_privileged_mode
+
+        ensure_privileged_mode(self.connection)
         prompt = self._clean_prompt(self.connection.find_prompt())
-        if PRIVILEGED_PROMPT_RE.fullmatch(prompt):
-            return prompt
-        if hasattr(self.connection, "check_enable_mode") and not self.connection.check_enable_mode():
-            self.connection.enable()
-            prompt = self._clean_prompt(self.connection.find_prompt())
         if not PRIVILEGED_PROMPT_RE.fullmatch(prompt):
             raise RuntimeError(
                 f"Expected a privileged Cisco prompt, received: {prompt or '<empty>'}"

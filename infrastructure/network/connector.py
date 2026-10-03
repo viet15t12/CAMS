@@ -18,6 +18,7 @@ def create_connector(device: dict[str, Any]) -> Any:
         device["port"],
         device["username"],
         device["password"],
+        secret=device.get("secret") or device.get("enable_password") or "",
         device_type=device["device_type"],
         start_config_mode=False,
         db_path=device.get("db_path"),
