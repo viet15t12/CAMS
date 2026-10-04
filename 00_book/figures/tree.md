@@ -9,21 +9,6 @@
 │   │   ├── 04-syslog-group-interfaces.png
 │   │   ├── 05-syslog-group-policy.png
 │   │   └── 06-syslog-view-push.png
-│   ├── chapter-11
-│   │   ├── 01-quick-pat-setup.png
-│   │   ├── 02-interfaces-form-zoom.png
-│   │   ├── 03-interfaces-overview.png
-│   │   ├── 04-acl-form-zoom.png
-│   │   ├── 05-acl-overview.png
-│   │   ├── 06-static-form-zoom.png
-│   │   ├── 07-static-overview.png
-│   │   ├── 08-dynamic-form-zoom.png
-│   │   ├── 09-dynamic-overview.png
-│   │   ├── 10-pat-form-zoom.png
-│   │   ├── 11-pat-overview.png
-│   │   ├── 12-route-map-form-zoom.png
-│   │   ├── 13-route-map-overview.png
-│   │   └── 14-nat-view-push.png
 │   ├── chapter-12
 │   │   ├── 01-sftp-connection-form.png
 │   │   ├── 02-sftp-workspace-overview.png
@@ -439,5 +424,24 @@ B06B canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png
 - documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png
 - documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B06C canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/routing/nat/quick-pat-setup.png
+- documentation_assets/ui/legacy/routing/nat/interfaces-form-detail.png
+- documentation_assets/ui/legacy/routing/nat/interfaces-overview.png
+- documentation_assets/ui/legacy/routing/nat/acl-form-detail.png
+- documentation_assets/ui/legacy/routing/nat/acl-overview.png
+- documentation_assets/ui/legacy/routing/nat/static-form-detail.png
+- documentation_assets/ui/legacy/routing/nat/static-overview.png
+- documentation_assets/ui/legacy/routing/nat/dynamic-form-detail.png
+- documentation_assets/ui/legacy/routing/nat/dynamic-overview.png
+- documentation_assets/ui/legacy/routing/nat/pat-form-detail.png
+- documentation_assets/ui/legacy/routing/nat/pat-overview.png
+- documentation_assets/ui/legacy/routing/nat/route-map-form-detail.png
+- documentation_assets/ui/legacy/routing/nat/route-map-overview.png
+- documentation_assets/ui/legacy/routing/nat/view-push.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

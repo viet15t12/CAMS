@@ -13,7 +13,7 @@ Một cấu hình NAT thông thường đi theo thứ tự: *Interfaces → ACL 
 
 Nếu mục tiêu là cho nhiều máy trong LAN dùng chung địa chỉ của interface Internet, chọn *Quick setup* để mở form tại @fig:ch11-01-quick-pat-setup. CAMS sẽ tạo đồng thời vai trò Inside/Outside, NAT ACL và PAT overload.
 
-#insert-image("figures/gui/chapter-11/01-quick-pat-setup.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/quick-pat-setup.png",
   caption: [Quick PAT Setup với hai interface và mạng LAN cần dịch địa chỉ.], width: 78.0%) <fig:ch11-01-quick-pat-setup>
 
 #report-table(
@@ -36,7 +36,7 @@ Chọn *Create PAT policy* khi đã kiểm tra đúng hai interface. Quick setup
 
 Mỗi đường dịch NAT cần ít nhất một interface *Inside* và một interface *Outside*.
 
-#insert-image("figures/gui/chapter-11/02-interfaces-form-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/interfaces-form-detail.png",
   caption: [Form gán interface LAN vào vai trò Inside.], width: 62.0%) <fig:ch11-02-interfaces-form-zoom>
 
 - *Interface Name*: chọn interface routed đã có trên router.
@@ -48,7 +48,7 @@ Chọn *Add Locally* cho từng interface, sau đó kiểm tra danh sách tổng
 
 NAT ACL xác định địa chỉ nguồn nào được phép đi vào quy trình dịch địa chỉ.
 
-#insert-image("figures/gui/chapter-11/04-acl-form-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/acl-form-detail.png",
   caption: [Form NAT ACL cho mạng 192.168.10.0/24.], width: 62.0%) <fig:ch11-04-acl-form-zoom>
 
 #report-table(
@@ -72,7 +72,7 @@ Rule ACL được xét theo thứ tự. Nên tạo rule cụ thể trước rule
 
 Static NAT ánh xạ cố định một địa chỉ Inside Local sang một địa chỉ Inside Global. Có thể chọn TCP/UDP để chỉ ánh xạ một port.
 
-#insert-image("figures/gui/chapter-11/06-static-form-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/static-form-detail.png",
   caption: [Form Static NAT ánh xạ TCP/443 nội bộ sang TCP/8443 bên ngoài.], width: 62.0%) <fig:ch11-06-static-form-zoom>
 
 #report-table(
@@ -92,7 +92,7 @@ Static NAT ánh xạ cố định một địa chỉ Inside Local sang một đ�
 
 Dynamic NAT lấy một địa chỉ từ public pool cho mỗi translation đang hoạt động. Số địa chỉ trong pool phải đáp ứng số phiên cần dùng đồng thời.
 
-#insert-image("figures/gui/chapter-11/08-dynamic-form-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/dynamic-form-detail.png",
   caption: [Form Dynamic NAT Pool và ACL được liên kết.], width: 62.0%) <fig:ch11-08-dynamic-form-zoom>
 
 #report-table(
@@ -112,7 +112,7 @@ Dynamic NAT lấy một địa chỉ từ public pool cho mỗi translation đan
 
 PAT cho nhiều inside host dùng chung một địa chỉ public bằng cách phân biệt port. Đây là kiểu thường dùng cho truy cập Internet từ LAN.
 
-#insert-image("figures/gui/chapter-11/10-pat-form-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/pat-form-detail.png",
   caption: [Form PAT dùng địa chỉ của Outside Interface.], width: 62.0%) <fig:ch11-10-pat-form-zoom>
 
 #report-table(
@@ -131,7 +131,7 @@ PAT cho nhiều inside host dùng chung một địa chỉ public bằng cách p
 
 Route Map là phần tùy chọn, dùng khi cần policy NAT có nhiều sequence hoặc cần liên kết điều kiện ACL rõ ràng hơn.
 
-#insert-image("figures/gui/chapter-11/12-route-map-form-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/route-map-form-detail.png",
   caption: [Form Route Map Entry với sequence 10 và NAT ACL.], width: 62.0%) <fig:ch11-12-route-map-form-zoom>
 
 #report-table(
@@ -152,7 +152,7 @@ Route Map là phần tùy chọn, dùng khi cần policy NAT có nhiều sequenc
 
 #report-note[*Add Locally* hoặc *Apply Edit* chỉ đưa thay đổi vào danh sách tạm trên tab. Chọn *Save* ở cuối màn hình để lưu desired state. Sau đó mở *View & Push*; NAT có cửa sổ push riêng, không trộn với ACL, DHCP, FHRP hay Syslog.]
 
-#insert-image("figures/gui/chapter-11/14-nat-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/routing/nat/view-push.png",
   caption: [View & Push NAT tổng hợp interface role, ACL, Static, Dynamic, PAT và Route Map.], width: 78.0%) <fig:ch11-14-nat-view-push>
 
 Trước khi Push, kiểm tra đúng host và đọc lệnh theo thứ tự: #raw("ip nat inside/outside"), ACL, public pool, Static NAT, PAT overload và route-map. Đặc biệt kiểm tra địa chỉ public không trùng interface hoặc thiết bị khác, ACL không chọn nhầm mạng và Inside/Outside không bị đảo. Sau Push, kiểm tra bảng translation và thử kết nối từ cả phía trong lẫn phía ngoài theo đúng mục tiêu cấu hình.

@@ -15,7 +15,7 @@ chọn **Quick setup**. CAMS sẽ tạo đồng thời vai trò Inside/Outside, 
 PAT overload.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/01-quick-pat-setup.png"
+<p><img src="../assets/ui/legacy/routing/nat/quick-pat-setup.png"
 style="width:78.0%" /></p>
 <figcaption><p>Quick PAT Setup với hai interface và mạng LAN cần dịch địa chỉ.</p></figcaption>
 </figure>
@@ -38,7 +38,7 @@ Mỗi đường dịch NAT cần ít nhất một interface **Inside** và một
 **Outside**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/02-interfaces-form-zoom.png"
+<p><img src="../assets/ui/legacy/routing/nat/interfaces-form-detail.png"
 style="width:62.0%" /></p>
 <figcaption><p>Form gán interface LAN vào vai trò Inside.</p></figcaption>
 </figure>
@@ -49,7 +49,7 @@ style="width:62.0%" /></p>
 Chọn **Add Locally** cho từng interface, sau đó kiểm tra danh sách tổng thể.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/03-interfaces-overview.png"
+<p><img src="../assets/ui/legacy/routing/nat/interfaces-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể hai interface NAT: G0/0 Inside và G0/1 Outside.</p></figcaption>
 </figure>
@@ -59,7 +59,7 @@ style="width:100.0%" /></p>
 NAT ACL xác định địa chỉ nguồn nào được phép đi vào quy trình dịch địa chỉ.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/04-acl-form-zoom.png"
+<p><img src="../assets/ui/legacy/routing/nat/acl-form-detail.png"
 style="width:62.0%" /></p>
 <figcaption><p>Form NAT ACL cho mạng 192.168.10.0/24.</p></figcaption>
 </figure>
@@ -77,7 +77,7 @@ Rule ACL được xét theo thứ tự. Nên tạo rule cụ thể trước rule
 Permit/Deny trước khi Save.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/05-acl-overview.png"
+<p><img src="../assets/ui/legacy/routing/nat/acl-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể form và NAT ACL Entry đã thêm cục bộ.</p></figcaption>
 </figure>
@@ -88,7 +88,7 @@ Static NAT ánh xạ cố định một địa chỉ Inside Local sang một đ�
 Global. Có thể chọn TCP/UDP để chỉ ánh xạ một port.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/06-static-form-zoom.png"
+<p><img src="../assets/ui/legacy/routing/nat/static-form-detail.png"
 style="width:62.0%" /></p>
 <figcaption><p>Form Static NAT ánh xạ TCP/443 nội bộ sang TCP/8443 bên ngoài.</p></figcaption>
 </figure>
@@ -100,7 +100,7 @@ style="width:62.0%" /></p>
   ra ngoài. Hai trường chỉ xuất hiện khi chọn TCP hoặc UDP.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/07-static-overview.png"
+<p><img src="../assets/ui/legacy/routing/nat/static-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể Static NAT Entry đang chờ Save và Push.</p></figcaption>
 </figure>
@@ -111,7 +111,7 @@ Dynamic NAT lấy một địa chỉ từ public pool cho mỗi translation đan
 Số địa chỉ trong pool phải đáp ứng số phiên cần dùng đồng thời.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/08-dynamic-form-zoom.png"
+<p><img src="../assets/ui/legacy/routing/nat/dynamic-form-detail.png"
 style="width:62.0%" /></p>
 <figcaption><p>Form Dynamic NAT Pool và ACL được liên kết.</p></figcaption>
 </figure>
@@ -122,7 +122,7 @@ style="width:62.0%" /></p>
 - **NAT ACL Name**: ACL xác định các inside host được sử dụng pool.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/09-dynamic-overview.png"
+<p><img src="../assets/ui/legacy/routing/nat/dynamic-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể Dynamic NAT Pool từ 203.0.113.8 đến 203.0.113.12.</p></figcaption>
 </figure>
@@ -133,7 +133,7 @@ PAT cho nhiều inside host dùng chung một địa chỉ public bằng cách p
 Đây là kiểu thường dùng cho truy cập Internet từ LAN.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/10-pat-form-zoom.png"
+<p><img src="../assets/ui/legacy/routing/nat/pat-form-detail.png"
 style="width:62.0%" /></p>
 <figcaption><p>Form PAT dùng địa chỉ của Outside Interface.</p></figcaption>
 </figure>
@@ -145,7 +145,7 @@ style="width:62.0%" /></p>
   Type. Form chỉ liệt kê interface Outside hoặc pool đã Save.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/11-pat-overview.png"
+<p><img src="../assets/ui/legacy/routing/nat/pat-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể PAT rule dùng NAT_INSIDE và GigabitEthernet0/1.</p></figcaption>
 </figure>
@@ -156,7 +156,7 @@ Route Map là phần tùy chọn, dùng khi cần policy NAT có nhiều sequenc
 liên kết điều kiện ACL rõ ràng hơn.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/12-route-map-form-zoom.png"
+<p><img src="../assets/ui/legacy/routing/nat/route-map-form-detail.png"
 style="width:62.0%" /></p>
 <figcaption><p>Form Route Map Entry với sequence 10 và NAT ACL.</p></figcaption>
 </figure>
@@ -170,7 +170,7 @@ style="width:62.0%" /></p>
 | **NAT ACL Name** | ACL làm điều kiện match; chọn No ACL nếu sequence không cần ACL. |
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/13-route-map-overview.png"
+<p><img src="../assets/ui/legacy/routing/nat/route-map-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể Route Map NAT_POLICY sau khi thêm entry.</p></figcaption>
 </figure>
@@ -182,7 +182,7 @@ Chọn **Save** ở cuối màn hình để lưu desired state. Sau đó mở **
 NAT có cửa sổ push riêng, không trộn với ACL, DHCP, FHRP hay Syslog.
 
 <figure>
-<p><img src="../../figures/gui/chapter-11/14-nat-view-push.png"
+<p><img src="../assets/ui/legacy/routing/nat/view-push.png"
 style="width:78.0%" /></p>
 <figcaption><p>View & Push NAT tổng hợp interface role, ACL, Static, Dynamic, PAT và Route Map.</p></figcaption>
 </figure>

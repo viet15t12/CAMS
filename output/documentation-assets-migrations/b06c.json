@@ -1,0 +1,934 @@
+{
+  "batch": "B06C",
+  "starting_commit": "2cdbd8eafa32d4d02e646b6465e55b5ea8fccac8",
+  "status": "PASS cheap gate; cumulative build/fresh gate deferred",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 14,
+    "dimensions_nonzero": true,
+    "chapter_context_agrees": true,
+    "terminal_or_evidence_or_runtime": false,
+    "target_collisions": false,
+    "provenance": "unknown retained; no reconstruction or new generator"
+  },
+  "assets": [
+    {
+      "asset_id": "ui.routing.nat.quick-pat-setup",
+      "old_path": "00_book/figures/gui/chapter-11/01-quick-pat-setup.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/quick-pat-setup.png",
+      "source_git_blob_sha": "d1e7dd528035fd50fb6fd2c9e4d943f34171a7c2739460a4871f0f75ad80d4f6",
+      "canonical_filesystem_sha": "d1e7dd528035fd50fb6fd2c9e4d943f34171a7c2739460a4871f0f75ad80d4f6",
+      "canonical_index_blob_sha": "d1e7dd528035fd50fb6fd2c9e4d943f34171a7c2739460a4871f0f75ad80d4f6",
+      "manifest_sha": "d1e7dd528035fd50fb6fd2c9e4d943f34171a7c2739460a4871f0f75ad80d4f6",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/quick-pat-setup.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 18,
+          "referenced_path": "../assets/ui/legacy/routing/nat/quick-pat-setup.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 16,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/quick-pat-setup.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.interfaces-form-detail",
+      "old_path": "00_book/figures/gui/chapter-11/02-interfaces-form-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/interfaces-form-detail.png",
+      "source_git_blob_sha": "f068814327b2112861b4e120b9c00764778ea84d756f4f3e8f2d900a2ab81c28",
+      "canonical_filesystem_sha": "f068814327b2112861b4e120b9c00764778ea84d756f4f3e8f2d900a2ab81c28",
+      "canonical_index_blob_sha": "f068814327b2112861b4e120b9c00764778ea84d756f4f3e8f2d900a2ab81c28",
+      "manifest_sha": "f068814327b2112861b4e120b9c00764778ea84d756f4f3e8f2d900a2ab81c28",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/interfaces-form-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 41,
+          "referenced_path": "../assets/ui/legacy/routing/nat/interfaces-form-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 39,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/interfaces-form-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.interfaces-overview",
+      "old_path": "00_book/figures/gui/chapter-11/03-interfaces-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/interfaces-overview.png",
+      "source_git_blob_sha": "ff19688ef94f420a22c5692797fdb645f8e367ca12a9a6a31fd62aa4b2ffe14b",
+      "canonical_filesystem_sha": "ff19688ef94f420a22c5692797fdb645f8e367ca12a9a6a31fd62aa4b2ffe14b",
+      "canonical_index_blob_sha": "ff19688ef94f420a22c5692797fdb645f8e367ca12a9a6a31fd62aa4b2ffe14b",
+      "manifest_sha": "ff19688ef94f420a22c5692797fdb645f8e367ca12a9a6a31fd62aa4b2ffe14b",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/interfaces-overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 52,
+          "referenced_path": "../assets/ui/legacy/routing/nat/interfaces-overview.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.acl-form-detail",
+      "old_path": "00_book/figures/gui/chapter-11/04-acl-form-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/acl-form-detail.png",
+      "source_git_blob_sha": "a870d8f3d240e09774fbe92cd3e5f81018d5fd3dd9858160eff2d6780769f38a",
+      "canonical_filesystem_sha": "a870d8f3d240e09774fbe92cd3e5f81018d5fd3dd9858160eff2d6780769f38a",
+      "canonical_index_blob_sha": "a870d8f3d240e09774fbe92cd3e5f81018d5fd3dd9858160eff2d6780769f38a",
+      "manifest_sha": "a870d8f3d240e09774fbe92cd3e5f81018d5fd3dd9858160eff2d6780769f38a",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/acl-form-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 62,
+          "referenced_path": "../assets/ui/legacy/routing/nat/acl-form-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 51,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/acl-form-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.acl-overview",
+      "old_path": "00_book/figures/gui/chapter-11/05-acl-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/acl-overview.png",
+      "source_git_blob_sha": "5cbc8c70b69506a473a3bd2efb4664217b06efc7b3c404ee7e129e96fafbb147",
+      "canonical_filesystem_sha": "5cbc8c70b69506a473a3bd2efb4664217b06efc7b3c404ee7e129e96fafbb147",
+      "canonical_index_blob_sha": "5cbc8c70b69506a473a3bd2efb4664217b06efc7b3c404ee7e129e96fafbb147",
+      "manifest_sha": "5cbc8c70b69506a473a3bd2efb4664217b06efc7b3c404ee7e129e96fafbb147",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/acl-overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 80,
+          "referenced_path": "../assets/ui/legacy/routing/nat/acl-overview.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.static-form-detail",
+      "old_path": "00_book/figures/gui/chapter-11/06-static-form-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/static-form-detail.png",
+      "source_git_blob_sha": "387c743d956abfe4dcd2068bc379ae6688fe6dedffe1306d74cc5f8275c08fdf",
+      "canonical_filesystem_sha": "387c743d956abfe4dcd2068bc379ae6688fe6dedffe1306d74cc5f8275c08fdf",
+      "canonical_index_blob_sha": "387c743d956abfe4dcd2068bc379ae6688fe6dedffe1306d74cc5f8275c08fdf",
+      "manifest_sha": "387c743d956abfe4dcd2068bc379ae6688fe6dedffe1306d74cc5f8275c08fdf",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/static-form-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 91,
+          "referenced_path": "../assets/ui/legacy/routing/nat/static-form-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 75,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/static-form-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.static-overview",
+      "old_path": "00_book/figures/gui/chapter-11/07-static-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/static-overview.png",
+      "source_git_blob_sha": "afbbf4040acf7726a3cce1ccf7573e9fd7115bc946e499862652291608565cfd",
+      "canonical_filesystem_sha": "afbbf4040acf7726a3cce1ccf7573e9fd7115bc946e499862652291608565cfd",
+      "canonical_index_blob_sha": "afbbf4040acf7726a3cce1ccf7573e9fd7115bc946e499862652291608565cfd",
+      "manifest_sha": "afbbf4040acf7726a3cce1ccf7573e9fd7115bc946e499862652291608565cfd",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/static-overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 103,
+          "referenced_path": "../assets/ui/legacy/routing/nat/static-overview.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.dynamic-form-detail",
+      "old_path": "00_book/figures/gui/chapter-11/08-dynamic-form-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/dynamic-form-detail.png",
+      "source_git_blob_sha": "4fa8ec7d804919528c22686e658d88d485bbf9c08f69fff1af533513a640c015",
+      "canonical_filesystem_sha": "4fa8ec7d804919528c22686e658d88d485bbf9c08f69fff1af533513a640c015",
+      "canonical_index_blob_sha": "4fa8ec7d804919528c22686e658d88d485bbf9c08f69fff1af533513a640c015",
+      "manifest_sha": "4fa8ec7d804919528c22686e658d88d485bbf9c08f69fff1af533513a640c015",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/dynamic-form-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 114,
+          "referenced_path": "../assets/ui/legacy/routing/nat/dynamic-form-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 95,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/dynamic-form-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.dynamic-overview",
+      "old_path": "00_book/figures/gui/chapter-11/09-dynamic-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/dynamic-overview.png",
+      "source_git_blob_sha": "298846c0cf9ae1b5d3611816be42aa6efe968b84d0538ad8cf6382e0fdc7b307",
+      "canonical_filesystem_sha": "298846c0cf9ae1b5d3611816be42aa6efe968b84d0538ad8cf6382e0fdc7b307",
+      "canonical_index_blob_sha": "298846c0cf9ae1b5d3611816be42aa6efe968b84d0538ad8cf6382e0fdc7b307",
+      "manifest_sha": "298846c0cf9ae1b5d3611816be42aa6efe968b84d0538ad8cf6382e0fdc7b307",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/dynamic-overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 125,
+          "referenced_path": "../assets/ui/legacy/routing/nat/dynamic-overview.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.pat-form-detail",
+      "old_path": "00_book/figures/gui/chapter-11/10-pat-form-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/pat-form-detail.png",
+      "source_git_blob_sha": "bd481f22f7e411405e42f1b7a1764695a28a88637b558a2a018096301f99a8be",
+      "canonical_filesystem_sha": "bd481f22f7e411405e42f1b7a1764695a28a88637b558a2a018096301f99a8be",
+      "canonical_index_blob_sha": "bd481f22f7e411405e42f1b7a1764695a28a88637b558a2a018096301f99a8be",
+      "manifest_sha": "bd481f22f7e411405e42f1b7a1764695a28a88637b558a2a018096301f99a8be",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/pat-form-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 136,
+          "referenced_path": "../assets/ui/legacy/routing/nat/pat-form-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 115,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/pat-form-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.pat-overview",
+      "old_path": "00_book/figures/gui/chapter-11/11-pat-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/pat-overview.png",
+      "source_git_blob_sha": "e9ba0d5f0021205bd12246116b822a49e42b14f5f9c25d6aeeb808cae9c1da56",
+      "canonical_filesystem_sha": "e9ba0d5f0021205bd12246116b822a49e42b14f5f9c25d6aeeb808cae9c1da56",
+      "canonical_index_blob_sha": "e9ba0d5f0021205bd12246116b822a49e42b14f5f9c25d6aeeb808cae9c1da56",
+      "manifest_sha": "e9ba0d5f0021205bd12246116b822a49e42b14f5f9c25d6aeeb808cae9c1da56",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/pat-overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 148,
+          "referenced_path": "../assets/ui/legacy/routing/nat/pat-overview.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.route-map-form-detail",
+      "old_path": "00_book/figures/gui/chapter-11/12-route-map-form-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/route-map-form-detail.png",
+      "source_git_blob_sha": "baefad2af9bdfa0f8d3d83dedd98b87254af4d9170bc0c62b28203b9ebc46a78",
+      "canonical_filesystem_sha": "baefad2af9bdfa0f8d3d83dedd98b87254af4d9170bc0c62b28203b9ebc46a78",
+      "canonical_index_blob_sha": "baefad2af9bdfa0f8d3d83dedd98b87254af4d9170bc0c62b28203b9ebc46a78",
+      "manifest_sha": "baefad2af9bdfa0f8d3d83dedd98b87254af4d9170bc0c62b28203b9ebc46a78",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/route-map-form-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 159,
+          "referenced_path": "../assets/ui/legacy/routing/nat/route-map-form-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 134,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/route-map-form-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.route-map-overview",
+      "old_path": "00_book/figures/gui/chapter-11/13-route-map-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/route-map-overview.png",
+      "source_git_blob_sha": "7aa79faf4142dcff3f7678962d0ce1eb7a5b76d975df986e64cc5c800f64bf9e",
+      "canonical_filesystem_sha": "7aa79faf4142dcff3f7678962d0ce1eb7a5b76d975df986e64cc5c800f64bf9e",
+      "canonical_index_blob_sha": "7aa79faf4142dcff3f7678962d0ce1eb7a5b76d975df986e64cc5c800f64bf9e",
+      "manifest_sha": "7aa79faf4142dcff3f7678962d0ce1eb7a5b76d975df986e64cc5c800f64bf9e",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/route-map-overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 173,
+          "referenced_path": "../assets/ui/legacy/routing/nat/route-map-overview.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.nat.view-push",
+      "old_path": "00_book/figures/gui/chapter-11/14-nat-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/nat/view-push.png",
+      "source_git_blob_sha": "57f7a4bb6177eb716b63d0bd15861bb750d484ede52ff99041c5ce435c5433b7",
+      "canonical_filesystem_sha": "57f7a4bb6177eb716b63d0bd15861bb750d484ede52ff99041c5ce435c5433b7",
+      "canonical_index_blob_sha": "57f7a4bb6177eb716b63d0bd15861bb750d484ede52ff99041c5ce435c5433b7",
+      "manifest_sha": "57f7a4bb6177eb716b63d0bd15861bb750d484ede52ff99041c5ce435c5433b7",
+      "staging_path": "00_book/assets/ui/legacy/routing/nat/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+          "line": 185,
+          "referenced_path": "../assets/ui/legacy/routing/nat/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+          "line": 155,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/nat/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.routing.nat.quick-pat-setup",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 18,
+      "before": "../../figures/gui/chapter-11/01-quick-pat-setup.png",
+      "after": "../assets/ui/legacy/routing/nat/quick-pat-setup.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.interfaces-form-detail",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 41,
+      "before": "../../figures/gui/chapter-11/02-interfaces-form-zoom.png",
+      "after": "../assets/ui/legacy/routing/nat/interfaces-form-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.interfaces-overview",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 52,
+      "before": "../../figures/gui/chapter-11/03-interfaces-overview.png",
+      "after": "../assets/ui/legacy/routing/nat/interfaces-overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.acl-form-detail",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 62,
+      "before": "../../figures/gui/chapter-11/04-acl-form-zoom.png",
+      "after": "../assets/ui/legacy/routing/nat/acl-form-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.acl-overview",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 80,
+      "before": "../../figures/gui/chapter-11/05-acl-overview.png",
+      "after": "../assets/ui/legacy/routing/nat/acl-overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.static-form-detail",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 91,
+      "before": "../../figures/gui/chapter-11/06-static-form-zoom.png",
+      "after": "../assets/ui/legacy/routing/nat/static-form-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.static-overview",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 103,
+      "before": "../../figures/gui/chapter-11/07-static-overview.png",
+      "after": "../assets/ui/legacy/routing/nat/static-overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.dynamic-form-detail",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 114,
+      "before": "../../figures/gui/chapter-11/08-dynamic-form-zoom.png",
+      "after": "../assets/ui/legacy/routing/nat/dynamic-form-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.dynamic-overview",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 125,
+      "before": "../../figures/gui/chapter-11/09-dynamic-overview.png",
+      "after": "../assets/ui/legacy/routing/nat/dynamic-overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.pat-form-detail",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 136,
+      "before": "../../figures/gui/chapter-11/10-pat-form-zoom.png",
+      "after": "../assets/ui/legacy/routing/nat/pat-form-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.pat-overview",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 148,
+      "before": "../../figures/gui/chapter-11/11-pat-overview.png",
+      "after": "../assets/ui/legacy/routing/nat/pat-overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.route-map-form-detail",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 159,
+      "before": "../../figures/gui/chapter-11/12-route-map-form-zoom.png",
+      "after": "../assets/ui/legacy/routing/nat/route-map-form-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.route-map-overview",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 173,
+      "before": "../../figures/gui/chapter-11/13-route-map-overview.png",
+      "after": "../assets/ui/legacy/routing/nat/route-map-overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.view-push",
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "line": 185,
+      "before": "../../figures/gui/chapter-11/14-nat-view-push.png",
+      "after": "../assets/ui/legacy/routing/nat/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.nat.quick-pat-setup",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 16,
+      "before": "figures/gui/chapter-11/01-quick-pat-setup.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/quick-pat-setup.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.nat.interfaces-form-detail",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 39,
+      "before": "figures/gui/chapter-11/02-interfaces-form-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/interfaces-form-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.nat.acl-form-detail",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 51,
+      "before": "figures/gui/chapter-11/04-acl-form-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/acl-form-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.nat.static-form-detail",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 75,
+      "before": "figures/gui/chapter-11/06-static-form-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/static-form-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.nat.dynamic-form-detail",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 95,
+      "before": "figures/gui/chapter-11/08-dynamic-form-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/dynamic-form-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.nat.pat-form-detail",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 115,
+      "before": "figures/gui/chapter-11/10-pat-form-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/pat-form-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.nat.route-map-form-detail",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 134,
+      "before": "figures/gui/chapter-11/12-route-map-form-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/route-map-form-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.nat.view-push",
+      "source_document": "00_book/contents/11_cau_hinh_nat.typ",
+      "line": 155,
+      "before": "figures/gui/chapter-11/14-nat-view-push.png",
+      "after": "/documentation_assets/ui/legacy/routing/nat/view-push.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 22,
+  "baseline": {
+    "before": 80,
+    "resolved": 14,
+    "after": 66,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/01-quick-pat-setup.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/01-quick-pat-setup.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/02-interfaces-form-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/02-interfaces-form-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/03-interfaces-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/03-interfaces-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/04-acl-form-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/04-acl-form-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/05-acl-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/05-acl-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/06-static-form-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/06-static-form-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/07-static-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/07-static-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/08-dynamic-form-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/08-dynamic-form-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/09-dynamic-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/09-dynamic-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/10-pat-form-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/10-pat-form-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/11-pat-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/11-pat-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/12-route-map-form-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/12-route-map-form-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/13-route-map-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/13-route-map-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+        "referenced_path": "../../figures/gui/chapter-11/14-nat-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-11/14-nat-view-push.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 160,
+    "pending": 185,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 160,
+      "pending": 185,
+      "frozen": 62
+    },
+    "b06_migrated": 38,
+    "b06_old_paths_absent": 38,
+    "b06_canonical_paths_present": 38,
+    "other_records_unchanged": 369,
+    "reference_edges_exact_current_lines": 64,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 66,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [],
+    "full_build_gate": "DEFERRED until cumulative B06R"
+  },
+  "typst": [],
+  "png_sanity": [
+    {
+      "asset_id": "ui.routing.nat.quick-pat-setup",
+      "width": 1336,
+      "height": 908,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.interfaces-form-detail",
+      "width": 1080,
+      "height": 1480,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.interfaces-overview",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.acl-form-detail",
+      "width": 1080,
+      "height": 1480,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.acl-overview",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.static-form-detail",
+      "width": 1080,
+      "height": 1480,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.static-overview",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.dynamic-form-detail",
+      "width": 1080,
+      "height": 1480,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.dynamic-overview",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.pat-form-detail",
+      "width": 1080,
+      "height": 1480,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.pat-overview",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.route-map-form-detail",
+      "width": 1080,
+      "height": 1480,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.route-map-overview",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.nat.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ]
+}
