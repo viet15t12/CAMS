@@ -11,14 +11,14 @@ from unittest.mock import patch
 from docshots.cli import APP_DIR, build_parser, main
 
 class Chapter04DocshotTests(unittest.TestCase):
-    def test_cli_destination(self):
-        self.assertEqual(build_parser().parse_args(['chapter-04']).shot, 'chapter-04')
-        expected = APP_DIR / 'book/figures/gui/chapter-04'
-        with patch('docshots.cli.ensure_output_directory', return_value=expected) as mkdir, \
-             patch('docshots.chapter04.render_chapter_04_workflow', return_value=()) as render:
-            self.assertEqual(main(['chapter-04','--output-dir','/unused']), 0)
-        mkdir.assert_called_once_with(expected)
-        self.assertEqual(render.call_args.args[0].output_dir, expected)
+    def test_cli_destination_and_temporary_override(self):
+        from docshots.cli import DEFAULT_OUTPUT_DIR, resolve_output_directory
+        self.assertEqual(build_parser().parse_args(["chapter-04"]).shot, "chapter-04")
+        self.assertEqual(resolve_output_directory("chapter-04"), DEFAULT_OUTPUT_DIR / "devices")
+        with tempfile.TemporaryDirectory() as temporary:
+            destination = Path(temporary) / "capture"
+            self.assertEqual(resolve_output_directory("chapter-04", destination), destination)
+            self.assertFalse(destination.exists())  # resolution never writes
 
     def test_production_workflow_twice_offline(self):
         code = '''

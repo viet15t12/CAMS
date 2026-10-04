@@ -213,3 +213,6 @@ UI/.qmlls.ini
 *.ntp
 
 /tmp/*
+
+# Generated MkDocs copies and ownership ledger; canonical metadata is tracked.
+/00_book/assets/

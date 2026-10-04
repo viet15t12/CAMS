@@ -42,7 +42,7 @@ class DocshotCliTests(unittest.TestCase):
         self.assertEqual(defaults.height, 1000)
         self.assertEqual(defaults.scale, 2.0)
         self.assertEqual(defaults.theme, "light")
-        self.assertEqual(defaults.output_dir, DEFAULT_OUTPUT_DIR)
+        self.assertIsNone(defaults.output_dir)
 
         custom = build_parser().parse_args(
             ["workspace", "--width", "1200", "--height", "750", "--scale", "1.5", "--theme", "dark"]
@@ -194,11 +194,11 @@ class DocshotHeadlessTests(unittest.TestCase):
             self.assertEqual(completed.returncode, 0, completed.stderr)
             self.assertIn("Created VLAN documentation screenshots:", completed.stdout)
             self.assertEqual(
-                tuple(path.name for path in sorted((output / "vlan").glob("*.png"))),
+                tuple(path.name for path in sorted(output.glob("*.png"))),
                 VLAN_WORKFLOW_FILENAMES,
             )
             for filename in VLAN_WORKFLOW_FILENAMES:
-                path = output / "vlan" / filename
+                path = output / filename
                 self.assertGreater(path.stat().st_size, 0)
                 reader = QImageReader(str(path), b"PNG")
                 self.assertTrue(reader.canRead(), reader.errorString())

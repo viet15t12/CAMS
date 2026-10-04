@@ -1,0 +1,119 @@
+{
+  "phase": 3,
+  "branch": "docs/pictures-sort",
+  "baseline_commit": "ab9a407",
+  "planning_authority": "output/documentation-assets-plan",
+  "counts": {
+    "total": 407,
+    "pending_nonterminal": 345,
+    "frozen_terminal": 62,
+    "migrated": 0,
+    "staged_nonterminal": 178,
+    "known_broken_html_references": 178,
+    "infrastructure_tests_passed": 19,
+    "docshot_tests_passed": 14,
+    "docshot_tests_failed": 1
+  },
+  "integrity": {
+    "original_asset_paths_and_sha_unchanged": 407,
+    "frozen_assets_unchanged": 62,
+    "asset_transfers": 0,
+    "canonical_image_files": 0,
+    "terminal_reference_contract": "pass",
+    "production_or_report_source_changes": false,
+    "repeat_sync": "179 generated files: bytes and mtimes unchanged",
+    "cwd_independence": "check passed from /tmp"
+  },
+  "tests": [
+    {
+      "command": "python scripts/validate_documentation_assets.py --check-staging",
+      "exit_code": 0,
+      "status": "pass",
+      "log": "manifest-and-staging.log"
+    },
+    {
+      "command": "python scripts/sync_documentation_assets.py --check",
+      "exit_code": 0,
+      "status": "pass",
+      "log": "staging-check.log"
+    },
+    {
+      "command": "python scripts/validate_documentation_assets.py --strict-references",
+      "exit_code": 1,
+      "status": "known-baseline-failure",
+      "log": "strict-references.log"
+    },
+    {
+      "command": "python -m unittest tests.test_documentation_assets tests.test_docshot_destinations -v",
+      "exit_code": 0,
+      "status": "pass",
+      "log": "infrastructure-tests.log"
+    },
+    {
+      "command": "uv run python -m unittest tests.test_docshots -v",
+      "exit_code": 0,
+      "status": "pass",
+      "log": "docshots.log"
+    },
+    {
+      "command": "uv run python -m unittest tests.test_docshots_chapter03 -v",
+      "exit_code": 1,
+      "status": "known-baseline-failure",
+      "log": "docshots-chapter03.log"
+    },
+    {
+      "command": "uv run python -m unittest tests.test_docshots_chapter04 -v",
+      "exit_code": 0,
+      "status": "pass",
+      "log": "docshots-chapter04.log"
+    },
+    {
+      "command": "mkdocs build --strict",
+      "exit_code": 0,
+      "status": "pass",
+      "log": "mkdocs.log"
+    },
+    {
+      "command": "uv run python scripts/validate_structure.py",
+      "exit_code": 1,
+      "status": "known-baseline-failure",
+      "log": "structure.log"
+    },
+    {
+      "command": "typst compile --root . 00_book/main.typ output/documentation-assets-foundation/00_book-baseline.pdf",
+      "status": "unavailable",
+      "exit_code": null,
+      "reason": "No typst executable; repository does not provision Typst. No installation attempted."
+    },
+    {
+      "command": "typst compile --root . 00_report/main.typ output/documentation-assets-foundation/00_report-baseline.pdf",
+      "status": "unavailable",
+      "exit_code": null,
+      "reason": "No typst executable; repository does not provision Typst. No installation attempted."
+    }
+  ],
+  "environment": {
+    "python": "3.14.7",
+    "docs_environment": "/tmp/cams-phase3-docs",
+    "application_environment": "/tmp/cams-phase3-app",
+    "application_contract": "uv sync --locked --python /usr/bin/python3, using repository uv.lock; uv run --locked --offline --python /usr/bin/python3",
+    "docshot_isolation": "XDG_CONFIG_HOME/XDG_CACHE_HOME/XDG_DATA_HOME under /tmp; leak-check suite TMPDIR isolated",
+    "mkdocs": "1.6.1",
+    "material": "9.7.7",
+    "typst": "unavailable"
+  },
+  "b02": {
+    "infrastructure_ready": true,
+    "unconditional_transfer_ready": false,
+    "records": 39,
+    "review_required": 34,
+    "blockers": [
+      "Approve/resolve the 34 affected review-required records per existing plan before transfer.",
+      "Reconcile existing B02 estimated count 39 with stale description/cap 37; Phase 3 does not change planning authority."
+    ],
+    "validation_limits": [
+      "Typst unavailable; book/report compilation not verified.",
+      "Two feature README files and chapter-03 training fixture builder missing; unrelated checks remain non-green."
+    ]
+  }
+}

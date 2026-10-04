@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import replace
 import sys
 from pathlib import Path
 from typing import Sequence
@@ -17,8 +18,23 @@ from .shots import (
 
 
 APP_DIR = Path(__file__).resolve().parents[1]
-REPOSITORY_ROOT = APP_DIR.parent
-DEFAULT_OUTPUT_DIR = REPOSITORY_ROOT / "docs" / "research" / "book" / "figures" / "gui"
+REPOSITORY_ROOT = APP_DIR
+DEFAULT_OUTPUT_DIR = REPOSITORY_ROOT / "documentation_assets" / "ui" / "docshot"
+DEFAULT_DOMAINS = {
+    "welcome": "core", "workspace": "project", "devices": "devices",
+    "chapter-03": "core", "chapter-04": "devices",
+    "vlan": "switching/vlan", "dialogs": "core/dialogs", "all": "",
+}
+
+
+def resolve_output_directory(shot: str, override: Path | None = None) -> Path:
+    """Overrides are exact destinations; defaults are contained in this checkout."""
+    if override is not None:
+        return override.expanduser().resolve()
+    destination = (DEFAULT_OUTPUT_DIR / DEFAULT_DOMAINS[shot]).resolve()
+    if not destination.is_relative_to(REPOSITORY_ROOT.resolve()):
+        raise ValueError("Default docshot output escapes repository (check symlinks)")
+    return destination
 
 
 def _positive_int(value: str) -> int:
@@ -51,8 +67,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=DEFAULT_OUTPUT_DIR,
-        help=f"PNG destination (default: {DEFAULT_OUTPUT_DIR})",
+        default=None,
+        help=f"exact PNG destination override (default: workflow domain under {DEFAULT_OUTPUT_DIR})",
     )
     return parser
 
@@ -65,6 +81,11 @@ def ensure_output_directory(path: Path) -> Path:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    try:
+        output_dir = resolve_output_directory(args.shot, args.output_dir)
+    except ValueError as exc:
+        print(f"docshots: {exc}", file=sys.stderr)
+        return 1
     configure_qt_environment()
 
     # Qt and main.py must only be imported after the headless/DPI variables exist.
@@ -76,12 +97,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         render_vlan_workflow,
     )
 
-    # Chapter 3 always belongs to the current book, independent of CWD and
-    # the legacy default/override used by older workflows.
-    output_dir = ensure_output_directory(
-        APP_DIR / "book" / "figures" / "gui" / args.shot
-        if args.shot in {"chapter-03", "chapter-04"} else args.output_dir
-    )
     request = RenderRequest(
         width=args.width,
         height=args.height,
@@ -106,7 +121,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 height=request.height,
                 scale=request.scale,
                 theme=request.theme,
-                output_dir=output_dir / "vlan",
+                output_dir=output_dir,
                 timeout_ms=request.timeout_ms,
             )
             results = render_vlan_workflow(workflow_request)
@@ -123,7 +138,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 print(f"{filename}: {result.path} ({result.width}x{result.height})")
             return 0
         for shot in resolve_shots(args.shot):
-            result = render_shot(shot, request)
+            shot_request = replace(request, output_dir=resolve_output_directory(shot.name)) if args.output_dir is None else request
+            result = render_shot(shot, shot_request)
             print(f"{shot.name}: {result.path} ({result.width}x{result.height})")
     except (DocshotError, OSError, ValueError) as exc:
         print(f"docshots: {exc}", file=sys.stderr)
@@ -138,4 +154,5 @@ __all__ = [
     "build_parser",
     "ensure_output_directory",
     "main",
+    "resolve_output_directory",
 ]

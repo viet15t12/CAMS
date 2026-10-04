@@ -14,14 +14,14 @@ from docshots.shots import CHAPTER_03_FILENAMES
 
 
 class Chapter03DocshotTests(unittest.TestCase):
-    def test_cli_ignores_legacy_destination_for_chapter_03(self):
+    def test_cli_destination_and_temporary_override(self):
+        from docshots.cli import DEFAULT_OUTPUT_DIR, resolve_output_directory
         self.assertEqual(build_parser().parse_args(["chapter-03"]).shot, "chapter-03")
-        expected = APP_DIR / "book" / "figures" / "gui" / "chapter-03"
-        with patch("docshots.cli.ensure_output_directory", return_value=expected) as mkdir, \
-             patch("docshots.chapter03.render_chapter_03_workflow", return_value=()) as render:
-            self.assertEqual(main(["chapter-03", "--output-dir", "/unused/legacy"]), 0)
-        mkdir.assert_called_once_with(expected)
-        self.assertEqual(render.call_args.args[0].output_dir, expected)
+        self.assertEqual(resolve_output_directory("chapter-03"), DEFAULT_OUTPUT_DIR / "core")
+        with tempfile.TemporaryDirectory() as temporary:
+            destination = Path(temporary) / "capture"
+            self.assertEqual(resolve_output_directory("chapter-03", destination), destination)
+            self.assertFalse(destination.exists())  # resolution never writes
 
     def test_workflow_is_repeatable_and_keeps_backends_isolated(self):
         # Separate processes reproduce the normal CLI lifecycle. The renderer
@@ -56,7 +56,7 @@ from pathlib import Path
 from unittest.mock import patch
 from PyQt6.QtCore import pyqtSlot
 from docshots import runtime as rt
-spec = importlib.util.spec_from_file_location("training", "book/fixtures/chapter-03/build_fixture.py")
+spec = importlib.util.spec_from_file_location("training", "00_book/fixtures/chapter-03/build_fixture.py")
 training = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(training)
 root = Path(sys.argv[1])

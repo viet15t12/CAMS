@@ -1,0 +1,467 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "evidence.fhrp-nat-dhcp.nat-interface-verify",
+      "path": "00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png",
+      "sha256": "0720dcfcc7a8e5b6c994d3531d90099d6d10684754df006bd25065e31de4b7df"
+    },
+    {
+      "id": "evidence.fhrp-nat-dhcp.nat-config-verify",
+      "path": "00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png",
+      "sha256": "5e8e630d1e29980bb5e517108e14486bbe83734bd9aa03704b5276aceefeb6eb"
+    },
+    {
+      "id": "evidence.fhrp-nat-dhcp.dhcp-glbp-r1-verify",
+      "path": "00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png",
+      "sha256": "0d664b402e1c4404aa4454792942d9e4ad8140bc30f3535644bc45ac5b709d7c"
+    },
+    {
+      "id": "evidence.fhrp-nat-dhcp.glbp-r2-verify",
+      "path": "00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png",
+      "sha256": "40ce025beda153157589bf0d6d8086a212b5db3c5f100dfc78be7a25ece0c805"
+    },
+    {
+      "id": "evidence.fhrp-nat-dhcp.client-connectivity-test",
+      "path": "00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png",
+      "sha256": "7717d1dd21db8ed67104f75e6978ef928018c87699fe6bc2de19199bf6a0f3c0"
+    },
+    {
+      "id": "evidence.routing-ospf.multi-router-ospf-running-config",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/12.png",
+      "sha256": "b272ce9f5c1a3ec87febcfc2414f2fc7eb7578eb674ce5e877e852dd5360be4e"
+    },
+    {
+      "id": "evidence.routing-ospf.r1-ospf-routing-verification",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/17.png",
+      "sha256": "5740dd739ba8407f8346d490a777b2ff8e53dfef5734ecb549a0b72c5bb2deeb"
+    },
+    {
+      "id": "evidence.routing-ospf.r2-ospf-routing-verification",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/18.png",
+      "sha256": "83aecc39dce6a550f5163fdd43d394ae2f97d3874e324bf771552d939a312e28"
+    },
+    {
+      "id": "evidence.routing-ospf.r3-ospf-routing-verification",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/19.png",
+      "sha256": "107a14881202c7369470e01d2f6b8bd6016a4712c5f8758ac18a93cf6cb58cfe"
+    },
+    {
+      "id": "evidence.routing-ospf.r6-ospf-routing-verification",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/20.png",
+      "sha256": "97434d4df89d72e95f691186de48b5b906de4aa0a26b9c89296b22f29deb72ec"
+    },
+    {
+      "id": "evidence.routing-ospf.vpc11-ip-configuration",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/21.png",
+      "sha256": "d9042a3b90c9d6a95837e60061ecc573f27571e5989e2d84474d3e1615a72826"
+    },
+    {
+      "id": "evidence.routing-ospf.vpc12-ip-configuration",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/22.png",
+      "sha256": "b7c9b4ede430cfd8c4feb2df0852578666d8722692fff048d7181f94d4b4d364"
+    },
+    {
+      "id": "evidence.routing-ospf.vpc14-ip-configuration",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/23.png",
+      "sha256": "ea865b77d3e98ce51a790e052ae144ba0db641fc6dd44de30c7993a4f5dc194f"
+    },
+    {
+      "id": "evidence.routing-ospf.vpc13-ip-configuration",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/24.png",
+      "sha256": "4c0fa44c496407b5ae45c92c912cdbc02faf7f0680f01ed6f7c1eb560acbc0f0"
+    },
+    {
+      "id": "evidence.routing-ospf.vpc11-ping-verification",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/25.png",
+      "sha256": "b02fb1c18aa7fc90487beb819f396cc6730105736db55f1869d30ebdaeef576f"
+    },
+    {
+      "id": "evidence.routing-ospf.vpc13-ping-verification",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/26.png",
+      "sha256": "a412334fc16be88e9703b6bfd4d23963609c59b3ace60b9d315566a73ddb38e1"
+    },
+    {
+      "id": "evidence.routing-ospf.vpc15-ping-verification",
+      "path": "00_book/figures/report/diagrams/routing-ospf-lab/27.png",
+      "sha256": "99b8ade3d63eab26aeb7a9db47c0147f5b40ba5d6a5c6732969af4f81fe2b587"
+    },
+    {
+      "id": "evidence.switching.sw1-vtp-status",
+      "path": "00_book/figures/report/diagrams/switching-lab/1_27.png",
+      "sha256": "1f79031317db8da9f975d4a0a998c21ffda69b94c268413d87bc80837ec8cb90"
+    },
+    {
+      "id": "evidence.switching.sw2-vtp-status",
+      "path": "00_book/figures/report/diagrams/switching-lab/1_28.png",
+      "sha256": "463ed3e658fe587992fe294d4916b7d9d3f8c0e78341c0009733b1d9bf878b66"
+    },
+    {
+      "id": "evidence.switching.sw2-vtp-trunk-verification",
+      "path": "00_book/figures/report/diagrams/switching-lab/1_29.png",
+      "sha256": "591d4f7cfae450a62e8be1a282982243b92d5253590df9ea41a61bb79a1054a7"
+    },
+    {
+      "id": "evidence.switching.multi-switch-etherchannel-verification",
+      "path": "00_book/figures/report/diagrams/switching-lab/1_30.png",
+      "sha256": "45d6530be20d713fb6799e9d88774fa1c994b27b3a1fbe6be10b72832c7f7819"
+    },
+    {
+      "id": "evidence.switching.sw2-vtp-trunk-alternate-capture",
+      "path": "00_book/figures/report/diagrams/switching-lab/1_31.png",
+      "sha256": "1787137221051cd6e779ab1ec538d5cb41dd38c4f130273ad5b8dfeae335f523"
+    },
+    {
+      "id": "evidence.switching.sw5-port-security-verification",
+      "path": "00_book/figures/report/diagrams/switching-lab/1_33.png",
+      "sha256": "82ab183bf8cdc3a9d10a5182bbbd731d33be8d1621f4d8ecdce504f186a72226"
+    },
+    {
+      "id": "evidence.syslog.r1-verify",
+      "path": "00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png",
+      "sha256": "e464fb805a52d0dff05099a045e896136ab1c49e58cd35f315996c08dc2ec795"
+    },
+    {
+      "id": "evidence.syslog.r2-verify",
+      "path": "00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png",
+      "sha256": "475b3a652fd8f872d89b053e40122b032d6aad4c2b6633432aca27b544feb44f"
+    },
+    {
+      "id": "evidence.syslog.r3-verify",
+      "path": "00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png",
+      "sha256": "50dc89bb8e87624ab477e260cfe93c4ff445208ebb04979818d51827fd854250"
+    },
+    {
+      "id": "evidence.syslog.sw1-verify",
+      "path": "00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png",
+      "sha256": "bd0e98a6c516845e809b04173228114abc6450ed48dc7c5ef775739cf494311f"
+    },
+    {
+      "id": "evidence.syslog.r1-device-logs",
+      "path": "00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png",
+      "sha256": "e675147f607b1798c993af00025e8655f3822035d7f02c7bb085fbdb4e7a8acf"
+    },
+    {
+      "id": "evidence.syslog.r2-device-logs",
+      "path": "00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png",
+      "sha256": "3f37e39c36cc4be8fc0c0b48a99a5e33a6e67243d6d6fada5bb416bcc527e572"
+    },
+    {
+      "id": "evidence.syslog.r3-device-logs",
+      "path": "00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png",
+      "sha256": "7cdb3559149de2d91bd8a0392834a42a109a002a29433c79eedebb36d19f5ea4"
+    },
+    {
+      "id": "evidence.syslog.sw1-device-logs",
+      "path": "00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png",
+      "sha256": "b95109940a7f52aa47823daf57eb5b60c086c420ae83cb2ee6fd4c422c6d4e16"
+    },
+    {
+      "id": "evidence.project-format.project-package-json-inspection",
+      "path": "00_book/figures/report/misc/cams-screenshot-2026-09-13-18-17-17.png",
+      "sha256": "6959c9797d52630233fec989d45ddfe8f119e65b855675f6e8c6f50974163061"
+    },
+    {
+      "id": "evidence.project-format.encrypted-package-hex-header",
+      "path": "00_book/figures/report/misc/xxd-ntp.png",
+      "sha256": "c373623ed7f3f94e1896f6fe79885bb2b08a8d1bf8d9e4f834d42a849fa575b8"
+    },
+    {
+      "id": "evidence.lab1.r2-interface-ip-configuration",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 10.png",
+      "sha256": "d55b18190588ee09255251eedc63a7e1a99baf3021b0baa6846df8978b002376"
+    },
+    {
+      "id": "evidence.lab1.r2-interface-status",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 12.png",
+      "sha256": "ab8aded7672c08b97c0643bdd1791c26ed3fa64b01feb03a4ae3cc1c8a86371b"
+    },
+    {
+      "id": "evidence.lab1.r1-interface-ip-configuration",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 9.png",
+      "sha256": "3171f3d24cd65e8f1cade8d7e6710be77c4c158d2c395cb1e112ff8bc29bbb94"
+    },
+    {
+      "id": "terminal.capture.dhcp-snooping-lab.r2-dhcp-interface-status",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r2_dhcp_success.png",
+      "sha256": "ab8aded7672c08b97c0643bdd1791c26ed3fa64b01feb03a4ae3cc1c8a86371b"
+    },
+    {
+      "id": "terminal.current.nat-config",
+      "path": "00_book/figures/report/terminal-generated/nat-config.png",
+      "sha256": "a13d450801edf31bcd155f56bd320059e0bf605aa5abb5be21a69d62171ba380"
+    },
+    {
+      "id": "terminal.current.nat-interfaces",
+      "path": "00_book/figures/report/terminal-generated/nat-interfaces.png",
+      "sha256": "12b43b7024fa4b6f6d3418a3cbf6c6ceba3978db7ad15d12709d93253cf1c407"
+    },
+    {
+      "id": "terminal.current.ospf-isp1",
+      "path": "00_book/figures/report/terminal-generated/ospf-isp1.png",
+      "sha256": "9e9e157e803a17dc3eb36bdd17d36f896a26a144a661a1346e39955f1e4af5d3"
+    },
+    {
+      "id": "terminal.current.ospf-isp2",
+      "path": "00_book/figures/report/terminal-generated/ospf-isp2.png",
+      "sha256": "1494b2197db662992c8c879178cee59d9c42523902345df410dfe6816ef59178"
+    },
+    {
+      "id": "terminal.current.ospf-r1",
+      "path": "00_book/figures/report/terminal-generated/ospf-r1.png",
+      "sha256": "2c1d830c0e2ab8478dad2a180cbb36a47a9fceb25e28091c2be11c2cca2fca74"
+    },
+    {
+      "id": "terminal.current.ospf-r2",
+      "path": "00_book/figures/report/terminal-generated/ospf-r2.png",
+      "sha256": "74202a8deac4961582963679c258ad3f7567439588183b9bdfbc0d83f2551f6f"
+    },
+    {
+      "id": "terminal.current.ospf-r3",
+      "path": "00_book/figures/report/terminal-generated/ospf-r3.png",
+      "sha256": "69406be04fe0f5b50214ddcb39d8dde215036ef4fc3a5f779c464a7882213212"
+    },
+    {
+      "id": "terminal.current.ospf-r6",
+      "path": "00_book/figures/report/terminal-generated/ospf-r6.png",
+      "sha256": "d0fe903fdc240b557fe79be6b09c4c2ee28587f7dac05a90bc973cdd3ff43a0f"
+    },
+    {
+      "id": "terminal.current.ospf-six-routers",
+      "path": "00_book/figures/report/terminal-generated/ospf-six-routers.png",
+      "sha256": "42fb3867b4f214c92b82e19a51df9324f350b9993928f3618fb2ede4b7b0741b"
+    },
+    {
+      "id": "terminal.current.pc1-dhcp-trace",
+      "path": "00_book/figures/report/terminal-generated/pc1-dhcp-trace.png",
+      "sha256": "57fc4eb2497c0fcd984985b64080393c2743b4a29a959bbd9bcea2f058516dd0"
+    },
+    {
+      "id": "terminal.current.r1-dhcp-glbp",
+      "path": "00_book/figures/report/terminal-generated/r1-dhcp-glbp.png",
+      "sha256": "275b42dedb6fc9ef37f87afb2da413b87c8f532f93f24de7ecd8b211c05eefec"
+    },
+    {
+      "id": "terminal.current.r1-ospf-routes",
+      "path": "00_book/figures/report/terminal-generated/r1-ospf-routes.png",
+      "sha256": "90e7a3f6abe6f839dcff3ff1eb31f971caafc16393f9b302765373e68df0c90f"
+    },
+    {
+      "id": "terminal.current.r2-glbp",
+      "path": "00_book/figures/report/terminal-generated/r2-glbp.png",
+      "sha256": "d05c8699071a0c38a2268c60bae7329c5d1690ebbed6ea1182a75a7c071172a0"
+    },
+    {
+      "id": "terminal.current.sw3-vlan-vtp",
+      "path": "00_book/figures/report/terminal-generated/sw3-vlan-vtp.png",
+      "sha256": "71bd38a834bafec6943fa851dc47f89dc26f024348fcde61f6b262d40b43a81c"
+    },
+    {
+      "id": "terminal.current.vpc11-ping",
+      "path": "00_book/figures/report/terminal-generated/vpc11-ping.png",
+      "sha256": "1dc5fb1ebed6c02cbcb26670704a0fa9cf645b2bc04993110958e36e3571a57d"
+    },
+    {
+      "id": "terminal.capture.lab5.r1-acl-applied-verification",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/1.png",
+      "sha256": "d50a6b64f3b38501fe5080e3e29d2f9bf736cc3c91ebf6e9150b32b534865746"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc8-icmp-permitted",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/10.png",
+      "sha256": "4cf6bd4b6ba0652860a334afdb86a80086a01fa874d3616f52a3e2d386b18d41"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc9-http-permitted",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/11.png",
+      "sha256": "c0626558fd6a7a3093439411674db515d2ae2f753ed86724446610df70fe7929"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc7-icmp-positive-control",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/3.png",
+      "sha256": "09e0dc4b339d66a9aa2ac5e320810ba87b0a7099bde57eff385b3f9e72dc3a08"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc7-http-positive-control",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/4.png",
+      "sha256": "cb4e00364e00c1e99a73466ece0db0c8fb3d407d24639eb013b48d5fc554cd86"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc7-telnet-denied",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/5.png",
+      "sha256": "70a2318309ed4689a02270c4e74e3b58fce7426cea8cd65569a9b784edbaa09e"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc8-http-denied",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/6.png",
+      "sha256": "98ba94ce8a2883ca019cd9d718bc7d94183553cd99939fe77b612d9dbe922532"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc9-icmp-denied",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/7.png",
+      "sha256": "ade7928fcaec2e1a212cffcaf522cd16c4f9069775f93c0baa495a7592b7482f"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc8-telnet-permitted",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/8.png",
+      "sha256": "9c00d35eb5b27a6b1c612ae13037c946a878fe72826520e4eb43a7ac0934fade"
+    },
+    {
+      "id": "terminal.capture.lab5.vpc9-telnet-permitted",
+      "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/9.png",
+      "sha256": "1f54d3fa9c74a6b8e3c0075a3a30e33a61b28b945e86d691aa7243ab1685e5b0"
+    }
+  ],
+  "references": [
+    {
+      "source_document": "00_report/contents/08_xay_dung_phan_mem.typ",
+      "referenced_path": "/00_book/figures/report/misc/xxd-ntp.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/1.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/3.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/4.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/5.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/6.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/7.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/nat-config.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/nat-interfaces.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/ospf-six-routers.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/pc1-dhcp-trace.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/r1-dhcp-glbp.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/r1-ospf-routes.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/r2-glbp.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/sw3-vlan-vtp.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_book/figures/report/terminal-generated/vpc11-ping.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/1.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/3.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/4.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/5.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/6.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/7.png",
+      "count": 1
+    }
+  ]
+}

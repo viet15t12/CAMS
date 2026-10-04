@@ -6,6 +6,8 @@ MkDocs lấy nội dung từ `00_book` và tạo website tĩnh trong `site`. Cá
 
 ```bash
 python -m pip install -r requirements-docs.txt
+python scripts/validate_documentation_assets.py
+python scripts/sync_documentation_assets.py
 mkdocs serve
 ```
 
@@ -14,6 +16,9 @@ Mở địa chỉ được MkDocs hiển thị, mặc định là <http://127.0.
 Kiểm tra bản build giống GitHub Actions:
 
 ```bash
+python scripts/validate_documentation_assets.py
+python scripts/sync_documentation_assets.py
+python scripts/sync_documentation_assets.py --check
 mkdocs build --strict
 ```
 
@@ -40,3 +45,9 @@ nav:
 ## Publish bằng GitHub Pages
 
 Workflow `.github/workflows/docs.yml` tự build và publish khi nội dung tài liệu được đẩy lên nhánh `main`. Trong repository GitHub, vào **Settings → Pages** và chọn **Source: GitHub Actions** một lần. Sau đó có thể chạy workflow thủ công từ tab **Actions** hoặc push thay đổi mới.
+
+## Canonical assets và staging transitional
+
+`documentation_assets/manifest.yaml` quản lý current legacy path và planned canonical path. `00_book/assets/` là generated + gitignored, sync lossless theo SHA; không chỉnh tay và không commit binary copies/ledger. Bootstrap hiện stage 178 assets từ legacy sources, chưa migrate ảnh hoặc rewrite references. Terminal assets là frozen external, không stage.
+
+178 HTML image references đang broken được ghi riêng trong `documentation_assets/reference-baseline.json`; MkDocs strict có thể build thành công dù raw HTML image URLs hỏng. Static validator chặn lỗi mới; `--strict-references` vẫn fail với baseline này. Future migration batch sửa từng reference và xóa exception tương ứng, không mass rewrite trong infrastructure phase. Typst dùng canonical root sau migration với `--root .`; report tuyệt đối không dùng staging copies.

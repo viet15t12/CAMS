@@ -1,0 +1,1253 @@
+{
+  "version": 1,
+  "source_commit": "ab9a407",
+  "description": "Pre-existing image reference exceptions from Phase 3 bootstrap; remove individual entries as batches fix references. Never automatically refresh this baseline to hide new failures.",
+  "broken_images": [
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/01-welcome-window.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/01-welcome-window.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/02-create-project.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/02-create-project.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/03-project-details.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/03-project-details.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/04-workspace-opened.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/04-workspace-opened.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/05-open-project-choice.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/05-open-project-choice.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/06-open-existing-project.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/06-open-existing-project.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/07-recent-projects.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/07-recent-projects.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/08-save-project.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/08-save-project.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/09-snapshot-history.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/09-snapshot-history.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "referenced_path": "../../figures/gui/chapter-02/10-ready-workspace.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-02/10-ready-workspace.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/01-workspace-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/01-workspace-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/02-menu-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/02-menu-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/03-activity-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/03-activity-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/04-devices-sidebar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/04-devices-sidebar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/05-device-tabs.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/05-device-tabs.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/06-feature-bar-router.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/06-feature-bar-router.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/07-feature-bar-switch.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/07-feature-bar-switch.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/08-content-area.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/08-content-area.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/09-status-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/09-status-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/09-status-details.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/09-status-details.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/10-sidebar-collapsed.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/10-sidebar-collapsed.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/01-devices-inventory.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/01-devices-inventory.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/02-add-device-empty.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/02-add-device-empty.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/03-add-device-filled.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/03-add-device-filled.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/04-device-added-waiting.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/04-device-added-waiting.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/05-ssh-compatibility.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/05-ssh-compatibility.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/06-add-multiple-devices.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/06-add-multiple-devices.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/07-batch-devices-filled.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/07-batch-devices-filled.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/08-search-filter.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/08-search-filter.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/09-device-context-waiting.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/09-device-context-waiting.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/10-device-connected.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/10-device-connected.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/11-device-context-connected.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/11-device-context-connected.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/12-device-context-disconnected.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/12-device-context-disconnected.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/13-multi-select.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/13-multi-select.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/14-multi-select-actions.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/14-multi-select-actions.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/15-edit-device.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/15-edit-device.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/16-delete-device-confirmation.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/16-delete-device-confirmation.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/17-running-config-result.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/17-running-config-result.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/18-import-result.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/18-import-result.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+      "referenced_path": "../../figures/gui/chapter-04/19-batch-table-detail.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/19-batch-table-detail.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
+      "referenced_path": "../../figures/gui/chapter-05/01-router-interface-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-05/01-router-interface-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
+      "referenced_path": "../../figures/gui/chapter-05/02-edit-physical-interface.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-05/02-edit-physical-interface.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
+      "referenced_path": "../../figures/gui/chapter-05/03-physical-interface-configured.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-05/03-physical-interface-configured.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
+      "referenced_path": "../../figures/gui/chapter-05/04-loopback-interface.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-05/04-loopback-interface.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
+      "referenced_path": "../../figures/gui/chapter-05/05-tunnel-interface.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-05/05-tunnel-interface.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
+      "referenced_path": "../../figures/gui/chapter-05/06-subinterface.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-05/06-subinterface.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
+      "referenced_path": "../../figures/gui/chapter-05/07-view-push-preview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-05/07-view-push-preview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/01-static-routes.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/01-static-routes.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/02-default-routes.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/02-default-routes.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/03-ospf-process.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/03-ospf-process.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/04-ospf-networks.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/04-ospf-networks.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/05-ospf-areas.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/05-ospf-areas.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/06-ospf-distance.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/06-ospf-distance.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/07-ospf-redistribute.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/07-ospf-redistribute.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/08-ospf-interfaces.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/08-ospf-interfaces.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/09-ospf-passive-interface.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/09-ospf-passive-interface.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/10-ospf-tuning.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/10-ospf-tuning.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/11-eigrp-process.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/11-eigrp-process.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/12-eigrp-networks.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/12-eigrp-networks.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/13-eigrp-interfaces.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/13-eigrp-interfaces.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/14-eigrp-passive-interface.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/14-eigrp-passive-interface.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/15-eigrp-redistribute.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/15-eigrp-redistribute.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/16-eigrp-distribute-list.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/16-eigrp-distribute-list.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/17-eigrp-offset-list.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/17-eigrp-offset-list.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/18-eigrp-key-chains.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/18-eigrp-key-chains.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/19-routing-group-hosts.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/19-routing-group-hosts.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/20-routing-group-identity.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/20-routing-group-identity.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/21-routing-group-common.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/21-routing-group-common.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/22-routing-group-networks.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/22-routing-group-networks.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/23-static-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/23-static-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/24-ospf-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/24-ospf-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/25-eigrp-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/25-eigrp-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
+      "referenced_path": "../../figures/gui/chapter-06/26-routing-group-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-06/26-routing-group-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "referenced_path": "../../figures/gui/chapter-07/01-dhcp-pools.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-07/01-dhcp-pools.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "referenced_path": "../../figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "referenced_path": "../../figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "referenced_path": "../../figures/gui/chapter-07/04-dhcp-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-07/04-dhcp-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "referenced_path": "../../figures/gui/chapter-08/01-acl-standard.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-08/01-acl-standard.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "referenced_path": "../../figures/gui/chapter-08/02-acl-extended.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-08/02-acl-extended.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "referenced_path": "../../figures/gui/chapter-08/03-acl-dynamic.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-08/03-acl-dynamic.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "referenced_path": "../../figures/gui/chapter-08/04-acl-reflexive.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-08/04-acl-reflexive.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "referenced_path": "../../figures/gui/chapter-08/05-acl-mac.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-08/05-acl-mac.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "referenced_path": "../../figures/gui/chapter-08/06-acl-bindings.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-08/06-acl-bindings.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "referenced_path": "../../figures/gui/chapter-08/07-acl-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-08/07-acl-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/01-hsrp-gateway-members.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/01-hsrp-gateway-members.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/03-hsrp-member-policy.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/03-hsrp-member-policy.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/04-vrrp-configuration.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/04-vrrp-configuration.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/05-glbp-configuration.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/05-glbp-configuration.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/06-hsrp-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/06-hsrp-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/07-vrrp-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/07-vrrp-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/08-glbp-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/08-glbp-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "referenced_path": "../../figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "referenced_path": "../../figures/gui/chapter-10/01-syslog-destinations.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-10/01-syslog-destinations.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "referenced_path": "../../figures/gui/chapter-10/02-syslog-server-editor.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-10/02-syslog-server-editor.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "referenced_path": "../../figures/gui/chapter-10/03-syslog-group-hosts.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-10/03-syslog-group-hosts.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "referenced_path": "../../figures/gui/chapter-10/04-syslog-group-interfaces.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-10/04-syslog-group-interfaces.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "referenced_path": "../../figures/gui/chapter-10/05-syslog-group-policy.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-10/05-syslog-group-policy.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "referenced_path": "../../figures/gui/chapter-10/06-syslog-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-10/06-syslog-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/01-quick-pat-setup.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/01-quick-pat-setup.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/02-interfaces-form-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/02-interfaces-form-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/03-interfaces-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/03-interfaces-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/04-acl-form-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/04-acl-form-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/05-acl-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/05-acl-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/06-static-form-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/06-static-form-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/07-static-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/07-static-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/08-dynamic-form-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/08-dynamic-form-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/09-dynamic-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/09-dynamic-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/10-pat-form-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/10-pat-form-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/11-pat-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/11-pat-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/12-route-map-form-zoom.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/12-route-map-form-zoom.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/13-route-map-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/13-route-map-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/11_cau_hinh_nat.md",
+      "referenced_path": "../../figures/gui/chapter-11/14-nat-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-11/14-nat-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-04/11-device-context-connected.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-04/11-device-context-connected.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/01-sftp-connection-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/01-sftp-connection-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/02-sftp-workspace-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/02-sftp-workspace-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/03-sftp-connection-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/03-sftp-connection-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/04-sftp-local-files.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/04-sftp-local-files.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/05-sftp-remote-files.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/05-sftp-remote-files.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/06-sftp-transfer-queue.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/06-sftp-transfer-queue.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/08-sftp-connection-paths.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/08-sftp-connection-paths.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/09-scp-workspace.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/09-scp-workspace.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/10-sync-notifications.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/10-sync-notifications.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/11-running-config-history.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/11-running-config-history.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+      "referenced_path": "../../figures/gui/chapter-12/12-running-config-diff.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-12/12-running-config-diff.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/13_xem_system_logs.md",
+      "referenced_path": "../../figures/gui/chapter-13/01-system-logs-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-13/01-system-logs-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/13_xem_system_logs.md",
+      "referenced_path": "../../figures/gui/chapter-13/02-listener-status.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-13/02-listener-status.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/13_xem_system_logs.md",
+      "referenced_path": "../../figures/gui/chapter-13/03-log-filter-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-13/03-log-filter-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/13_xem_system_logs.md",
+      "referenced_path": "../../figures/gui/chapter-13/04-severity-levels.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-13/04-severity-levels.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/13_xem_system_logs.md",
+      "referenced_path": "../../figures/gui/chapter-13/05-critical-filter-result.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-13/05-critical-filter-result.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/13_xem_system_logs.md",
+      "referenced_path": "../../figures/gui/chapter-13/06-smart-filter-builder.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-13/06-smart-filter-builder.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/13_xem_system_logs.md",
+      "referenced_path": "../../figures/gui/chapter-13/07-log-message-details.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-13/07-log-message-details.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-14/01-switch-ports-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-14/01-switch-ports-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-14/02-access-port-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-14/02-access-port-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-14/03-access-loop-protection.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-14/03-access-loop-protection.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-14/04-trunk-port-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-14/04-trunk-port-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-14/05-trunk-loop-protection.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-14/05-trunk-loop-protection.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-14/06-interfaces-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-14/06-interfaces-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/01-vlan-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/01-vlan-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/02-vlan-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/02-vlan-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/03-vlan-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/03-vlan-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/04-etherchannel-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/04-etherchannel-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/05-quick-etherchannel.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/05-quick-etherchannel.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/06-etherchannel-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/06-etherchannel-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/07-stp-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/07-stp-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/08-stp-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/08-stp-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/09-vtp-group-top.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/09-vtp-group-top.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/10-vtp-member-policy.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/10-vtp-member-policy.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/11-vtp-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/11-vtp-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "referenced_path": "../../figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-16/01-vlan-protection.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-16/01-vlan-protection.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-16/02-trusted-uplinks.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-16/02-trusted-uplinks.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-16/03-static-mac-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-16/03-static-mac-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-16/04-l2-security-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-16/04-l2-security-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-16/05-port-security-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-16/05-port-security-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-16/07-port-security-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-16/07-port-security-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-17/01-port-counters.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-17/01-port-counters.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+      "referenced_path": "../../figures/gui/chapter-17/02-mac-address-table.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-17/02-mac-address-table.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/18_interface_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-18/01-routed-port-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-18/01-routed-port-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/18_interface_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-18/02-routed-ports-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-18/02-routed-ports-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/18_interface_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-18/03-interfaces-view-push-routed.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-18/03-interfaces-view-push-routed.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/18_interface_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-18/04-svi-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-18/04-svi-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/18_interface_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-18/05-svi-overview-ip-routing.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-18/05-svi-overview-ip-routing.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/18_interface_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-18/06-svi-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-18/06-svi-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/01-dhcp-pool-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/01-dhcp-pool-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/02-dhcp-server-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/02-dhcp-server-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/03-dhcp-server-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/03-dhcp-server-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/04-dhcp-relay-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/04-dhcp-relay-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/05-dhcp-relay-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/05-dhcp-relay-view-push.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/06-acl-extended-form.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/06-acl-extended-form.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/07-acl-bindings.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/07-acl-bindings.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+      "referenced_path": "../../figures/gui/chapter-19/08-acl-view-push.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-19/08-acl-view-push.png",
+      "count": 1
+    }
+  ]
+}

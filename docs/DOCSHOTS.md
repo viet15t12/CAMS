@@ -29,20 +29,12 @@ Options:
 The default destination is resolved from the repository location, not the current working directory:
 
 ```text
-<repo-root>/docs/research/book/figures/gui/
-├── welcome.png
-├── workspace.png
-├── devices.png
-└── vlan/
-    ├── 01-select-switch.png
-    ├── 02-open-vlan.png
-    ├── 03-add-vlan.png
-    ├── 04-vlan-id.png
-    ├── 05-vlan-name.png
-    ├── 06-vlan-state.png
-    ├── 07-ready-to-save.png
-    ├── 08-vlan-created.png
-    └── 09-view-preview.png
+<repo-root>/documentation_assets/ui/docshot/
+├── core/             welcome.png + chapter-03 workflow
+├── project/          workspace.png
+├── devices/          devices.png + chapter-04 workflow
+├── switching/vlan/   VLAN workflow
+└── core/dialogs/     dialog regression workflow
 ```
 
 Existing files are replaced atomically and filenames never contain timestamps.
@@ -65,7 +57,7 @@ The workflow renders the production `Main`, `SwitchWorkspace`, `VlanPage`, and
 View & Push preview QML into:
 
 ```text
-<repo-root>/docs/research/book/figures/gui/vlan/
+<repo-root>/documentation_assets/ui/docshot/switching/vlan/
 ```
 
 It opens the documentation fixture `SW1` at `192.0.2.11` (Cisco IOS, role
@@ -96,7 +88,7 @@ The renderer waits for QML loading, asynchronous incubation, fixed logical geome
 
 Qt Quick framebuffer capture cannot include native Open/Save/Folder dialogs or external terminal processes. Those windows are intentionally out of scope; no OS screenshot dependency is added. The environment must provide a functional PyQt6 offscreen/software Qt Quick backend and the fonts used by the application.
 
-`add-device` is not registered yet because the current form is a separate top-level QML window rather than an item inside the main window framebuffer. A future shot can capture that `QQuickWindow` directly, but it must not pretend that the main window's framebuffer contains it.
+`add-device` is not a separate registered CLI token; use the existing `chapter-04` workflow for its fixture-driven device forms/actions. Native OS dialogs remain outside Qt framebuffer capture.
 
 Verification commands:
 
@@ -105,3 +97,26 @@ uv run python scripts/validate_structure.py
 uv run python -m compileall .
 uv run python -m unittest discover -s tests -v
 ```
+
+## Destination transition and overrides
+
+Chapter workflows are registered:
+
+```sh
+uv run python scripts/docshots.py chapter-03
+uv run python scripts/docshots.py chapter-04
+uv run python scripts/docshots.py dialogs
+uv run python scripts/docshots.py chapter-03 --output-dir /tmp/cams-chapter03-check
+```
+
+`--output-dir` is an **exact destination**, for every shot/workflow, including VLAN and chapters. Default `all` dispatches welcome/workspace/devices to their individual domains; an override keeps all three directly in that chosen directory. Defaults are checkout-relative, independent of CWD, and reject symlink escape; explicit one-off output may be outside the checkout. No command is forced back into canonical storage when an override is given.
+
+This infrastructure change does not move/regenerate any existing screenshot. Renderer filenames/order stay unchanged until the later semantic output-map/asset batch; chapter numbers remain CLI workflow names, not proposed long-term asset taxonomy. Temporary test captures are isolated, never written over repository images. `00_book/assets/` is solely generated staging via `scripts/sync_documentation_assets.py`, never a docshot default. Terminal images and the terminal renderer are frozen external assets, outside docshot destination migration.
+
+Run destination contracts without application runtime imports:
+
+```sh
+python -m unittest tests.test_docshot_destinations -v
+```
+
+Full Qt/workflow repeatability tests require the project environment (`uv run ...`). The chapter-03 offline training-package test additionally requires `00_book/fixtures/chapter-03/build_fixture.py`. That builder is absent in the current checkout; this existing test prerequisite is reported rather than invented by the asset infrastructure phase.

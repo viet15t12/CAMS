@@ -1,0 +1,23 @@
+ M .github/workflows/docs.yml
+ M .gitignore
+ M 00_book/config/images.typ
+ M MKDOCS.md
+ M docs/DOCSHOTS.md
+ M docshots/cli.py
+ M requirements-docs.txt
+ M scripts/README.md
+ M tests/test_docshots.py
+ M tests/test_docshots_chapter03.py
+ M tests/test_docshots_chapter04.py
+?? documentation_assets/README.md
+?? documentation_assets/manifest.yaml
+?? documentation_assets/reference-baseline.json
+?? documentation_assets/terminal-freeze.json
+?? output/documentation-assets-foundation/README.md
+?? output/documentation-assets-foundation/changed-files.txt
+?? output/documentation-assets-foundation/validation-results.json
+?? scripts/documentation_assets.py
+?? scripts/sync_documentation_assets.py
+?? scripts/validate_documentation_assets.py
+?? tests/test_docshot_destinations.py
+?? tests/test_documentation_assets.py
