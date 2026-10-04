@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from ..domain.models import SyslogMessage
+from ..security import annotate_security, security_filter_clause
 from .connections import info_connection
 from .schema import ensure_schema
 
@@ -44,7 +45,7 @@ class MessageRepository:
         for offset, row in enumerate(rows):
             item = row.to_dict()
             item["id"] = first_id + offset if first_id else 0
-            result.append(item)
+            result.append(self._public_row(item))
         return result
 
     def query_messages(
@@ -62,6 +63,10 @@ class MessageRepository:
         per_host = max(0, min(int(filters.get("per_host") or 0), 500))
         severities = self._valid_severities(filters.get("severities", []))
         protocols = self._valid_protocols(filters.get("protocols", []))
+        security_clause, security_params = security_filter_clause(filters.get("security"))
+        if security_clause:
+            clauses.append(security_clause)
+            params.extend(security_params)
         if hosts:
             clauses.append(f"device_host IN ({','.join('?' for _ in hosts)})")
             params.extend(hosts)
@@ -202,7 +207,7 @@ class MessageRepository:
         row["facility"] = row.get("cisco_facility") or (
             str(row["syslog_facility"]) if row.get("syslog_facility") is not None else row.get("facility")
         )
-        return row
+        return annotate_security(row)
 
     @staticmethod
     def _escape_like(value: str) -> str:

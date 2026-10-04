@@ -693,6 +693,22 @@ class SwitchingWorkspaceTests(unittest.TestCase):
         self.assertEqual(tuple(vlan_success), ("pending_apply", 0))
         self.assertEqual(svi_presence, 0)
 
+    def test_silent_port_security_mode_is_rejected_without_mutating_interface(self) -> None:
+        created = save_switch_interface(self.db, "sw2.local", {
+            "if_name": "GigabitEthernet0/1", "mode": "access", "access_vlan": 10,
+        })
+        self.assertTrue(created["ok"], created)
+        rejected = save_switch_interface(self.db, "sw2.local", {
+            "id": created["id"], "if_name": "GigabitEthernet0/1",
+            "mode": "access", "access_vlan": 1,
+            "port_security_enabled": True, "violation": "protect",
+        })
+        self.assertFalse(rejected["ok"])
+        self.assertIn("without Syslog", rejected["message"])
+        row = get_switch_interfaces(self.db, "sw2.local")[0]
+        self.assertEqual(row["access_vlan"], 10)
+        self.assertEqual(row["port_security_enabled"], 0)
+
     def test_vlan_and_interface_mode_change_are_transactional(self) -> None:
         vlan_result = save_vlan(
             self.db,
@@ -1189,6 +1205,14 @@ class SwitchingWorkspaceTests(unittest.TestCase):
             security_commands,
         )
 
+    def test_vtp_parser_reads_running_version_and_empty_domain_correctly(self) -> None:
+        from features.switching.sync import parse_vtp_status
+        old = "VTP Version : 2\nVTP V2 Mode : Disabled\nVTP Domain Name : LAB\nVTP Operating Mode : Server\n"
+        self.assertEqual(parse_vtp_status(old)["version"], 1)
+        self.assertEqual(parse_vtp_status(old.replace("Disabled", "Enabled"))["version"], 2)
+        self.assertEqual(parse_vtp_status("VTP version running : 3\n" + old)["version"], 3)
+        self.assertIsNone(parse_vtp_status("VTP Domain Name : \nVTP Operating Mode : Transparent\n"))
+
     def test_vtp_group_stages_each_switch_and_renders_per_member_policy(self) -> None:
         with closing(self.db._connect()) as connection:
             connection.execute(
@@ -1238,7 +1262,8 @@ class SwitchingWorkspaceTests(unittest.TestCase):
         self.assertIn("vtp mode server", sw2_commands)
         self.assertIn("vtp pruning", sw2_commands)
         self.assertIn("vtp mode client", sw3_commands)
-        self.assertIn("no vtp pruning", sw3_commands)
+        self.assertNotIn("no vtp pruning", sw3_commands)
+        self.assertNotIn("vtp pruning", sw3_commands)
 
         retried = service.save(
             {

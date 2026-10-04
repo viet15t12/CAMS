@@ -103,15 +103,24 @@ def parse_trunks(output: str) -> dict[str, dict[str, Any]]:
 
 def parse_vtp_status(output: str) -> dict[str, Any] | None:
     text = str(output or "")
-    domain = re.search(r"VTP Domain Name\s*:\s*(\S+)", text, re.IGNORECASE)
+    domain = re.search(r"VTP Domain Name[ \t]*:[ \t]*(\S+)", text, re.IGNORECASE)
     if not domain or domain.group(1).lower() in {"null", "none", "(none)"}:
         return None
     version = re.search(r"VTP version running\s*:\s*(\d+)", text, re.IGNORECASE)
+    running_version = int(version.group(1)) if version else None
+    if version is None:
+        version = re.search(r"VTP Version[ \t]*:[ \t]*(?:running VTP)?(\d+)", text, re.IGNORECASE)
+    v2_mode = re.search(r"VTP V2 Mode[ \t]*:[ \t]*(enabled|disabled)", text, re.IGNORECASE)
+    if running_version is None:
+        if v2_mode:
+            running_version = 2 if v2_mode.group(1).lower() == "enabled" else 1
+        else:
+            running_version = int(version.group(1)) if version else 2
     mode = re.search(r"VTP Operating Mode\s*:\s*(\w+)", text, re.IGNORECASE)
     pruning = re.search(r"VTP Pruning Mode\s*:\s*(\w+)", text, re.IGNORECASE)
     return {
         "domain_name": domain.group(1).strip(),
-        "version": int(version.group(1)) if version else 2,
+        "version": running_version,
         "mode": mode.group(1).lower() if mode else "transparent",
         "pruning": int(bool(pruning and pruning.group(1).lower() == "enabled")),
         "primary_server": int(bool(re.search(r"VTP Primary Server\s*:\s*local", text, re.IGNORECASE))),
@@ -417,6 +426,12 @@ def _sync_interfaces(conn: sqlite3.Connection, host: str, snapshot: dict[str, st
 def _sync_vtp(conn: sqlite3.Connection, host: str, output: str) -> int:
     row = parse_vtp_status(output)
     if row is None:
+        return 0
+    # A detached IOS switch retains its domain in transparent mode. Do not
+    # rediscover it as a managed group member after a successful deletion.
+    if row["mode"] in {"transparent", "off"} and conn.execute(
+        "SELECT 1 FROM t09_vtp_switches WHERE host = ?", (host,)
+    ).fetchone() is None:
         return 0
     conn.execute(
         """

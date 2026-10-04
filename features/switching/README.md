@@ -41,12 +41,26 @@ STP, L2 Security và Port Security. Trang EtherChannel tạo/cập nhật trực
 bảng `t06_etherchannel` cũ. Trang STP quản lý mode toàn cục và root policy theo
 VLAN. Trang L2 Security quản lý DHCP Snooping, DAI, trusted uplink và static
 MAC; các bảng desired state cũ được giữ nguyên và được bổ sung cột `success`.
+Global Settings lưu DHCP Option 82 vào `t06_security_global` và tạo task riêng
+trong View & Push của L2 Security, kể cả khi không đổi VLAN/trusted uplink.
+Save chỉ lưu cấu hình chờ áp dụng; Push thành công mới đánh dấu synchronized.
+Task VLAN, trusted uplink, static MAC và Port Security không tự đổi Option 82.
+Ba chế độ cấu hình đầy đủ cả insertion và allow-untrusted để chuyển chế độ
+không giữ lại trạng thái cũ. Chọn Disable Option 82 sẽ sinh
+`no ip dhcp snooping information option`; sau Push có thể kiểm tra bằng
+`show ip dhcp snooping` (Insertion of option 82 is disabled).
+Tham khảo [Cisco DHCP Snooping commands](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr/command/ipaddr-cr-book/ipaddr-i2.html).
 Trang VTP Group dùng `MultiHostViewPushDialog`: Save ghi desired state ở trạng
 thái `pending_apply`, sau đó Preview/Push song song tối đa 5 switch và chỉ push
 những member đã lưu thành công.
 View & Push của mỗi tab chỉ thu thập row thay đổi thuộc tab đó. Chế độ `all` chỉ
 dùng cho thao tác tổng hợp có chủ ý. SVI, routed port và IP routing trên switch
 SW3 đã được đưa vào Preview/Push; QoS và storm-control không thuộc tích hợp này.
+
+VTP được xác minh bằng `show vtp status` trước khi acknowledge. Sau Push trên
+server, CAMS chờ VLAN thực tế trên client khớp server và phát tín hiệu cập nhật
+UI. Detach dùng transparent, xác minh trước khi xóa membership và không tự
+tạo lại group từ domain còn lưu trên switch. Xem [luồng VTP](../../docs/VTP_GROUP.md).
 
 Schema nằm ở `infrastructure/database/schemas/device_network/06_l2_switching.sql`
 và `09_vtp.sql`. `ensure_switch_schema()` chỉ bổ sung các cột lifecycle còn

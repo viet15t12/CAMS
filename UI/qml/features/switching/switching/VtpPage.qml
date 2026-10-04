@@ -76,7 +76,7 @@ Rectangle {
         return -1
     }
 
-    function loadGroups() {
+    function loadGroups(preserveDraft) {
         const previousSelectedDomain = (selectedGroupIndex >= 0 && selectedGroupIndex < groupModel.count)
             ? String(groupModel.get(selectedGroupIndex).domain_name || "")
             : ""
@@ -99,11 +99,14 @@ Rectangle {
                 }
             }
         }
-        if (nextIndex === -1 && root.host !== "") {
+        if (nextIndex === -1 && root.host !== "" && preserveDraft !== true) {
             nextIndex = selectGroupByHost(root.host)
         }
         if (nextIndex >= 0) {
-            loadGroup(nextIndex)
+            if (preserveDraft === true)
+                selectedGroupIndex = nextIndex
+            else
+                loadGroup(nextIndex)
         } else {
             selectedGroupIndex = -1
         }
@@ -330,6 +333,13 @@ Rectangle {
     }
 
     Component.onCompleted: reloadData("initial")
+
+    Connections {
+        target: typeof dbManager !== "undefined" ? dbManager : null
+        function onRunningConfigUpdated(updatedHost) {
+            root.loadGroups(true)
+        }
+    }
 
     onHostChanged: {
         const autoIdx = selectGroupByHost(root.host)
@@ -604,6 +614,7 @@ Rectangle {
                                     }
                                     StandardCheckBox {
                                         text: "Pruning"
+                                        enabled: memberCard.vtpMode === "server"
                                         checked: memberCard.pruning
                                         onToggled: memberModel.setProperty(
                                                        memberCard.index, "pruning", checked)

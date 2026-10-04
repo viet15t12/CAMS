@@ -19,6 +19,7 @@ from features.switching import (  # noqa: E402
     delete_stp_config,
     delete_vlan,
     save_vlan,
+    save_l2_security_global,
 )
 from scripts.build_databases import combine_sql  # noqa: E402
 
@@ -27,11 +28,26 @@ class FakeConnection:
     def __init__(self) -> None:
         self.commands: list[str] = []
         self.config_calls = 0
+        self.vtp_status = {"domain": "LAB", "version": "2", "mode": "server", "pruning": "Enabled"}
 
     def send_config_set(self, commands, **_kwargs):
         self.config_calls += 1
         self.commands.extend(commands)
+        for command in commands:
+            if command in {"vtp pruning", "no vtp pruning"}:
+                self.vtp_status["pruning"] = "Enabled" if command == "vtp pruning" else "Disabled"
+            for field in ("domain", "version", "mode"):
+                if command.startswith(f"vtp {field} "):
+                    self.vtp_status[field] = command.split()[-1]
         return "configuration accepted"
+
+    def send_command(self, command, **_kwargs):
+        if command == "show vtp status":
+            return (f"VTP version running : {self.vtp_status['version']}\n"
+                    f"VTP Domain Name : {self.vtp_status['domain']}\n"
+                    f"VTP Operating Mode : {self.vtp_status['mode']}\n"
+                    f"VTP Pruning Mode : {self.vtp_status['pruning']}\n")
+        return ""
 
 
 class FakeConnector:
@@ -247,6 +263,74 @@ class SwitchingViewPushTests(unittest.TestCase):
             ).fetchone()
         self.assertEqual(tuple(counts), (0, 0))
 
+    def test_detach_reconciliation_does_not_recreate_transparent_member(self) -> None:
+        from features.switching.sync import sync_switch_state
+        with closing(self.db._connect()) as conn:
+            conn.execute("UPDATE t09_vtp_switches SET success='pending_delete', sync_status='pending_delete'")
+            conn.commit()
+        tasks = self.controller.collect_pending_tasks("sw2.local", "vtp")
+        self.assertTrue(self.controller.push_tasks("sw2.local", "vtp", tasks)["ok"])
+        snapshot = {"vtp_status": self.connector.connection.send_command("show vtp status")}
+        sync_switch_state(self.db_path, "sw2.local", snapshot, mode="force_device_state")
+        with closing(self.db._connect()) as conn:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM t09_vtp_switches").fetchone()[0], 0)
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM t09_vtp_domains").fetchone()[0], 0)
+
+    def test_detach_keeps_pending_member_when_mode_did_not_change(self) -> None:
+        with closing(self.db._connect()) as conn:
+            conn.execute("UPDATE t09_vtp_switches SET success='pending_delete', sync_status='pending_delete'")
+            conn.commit()
+        self.connector.connection.send_command = lambda *_args, **_kwargs: "VTP Domain Name : LAB\nVTP Operating Mode : Server\n"
+        tasks = self.controller.collect_pending_tasks("sw2.local", "vtp")
+        self.assertFalse(self.controller.push_tasks("sw2.local", "vtp", tasks)["ok"])
+        with closing(self.db._connect()) as conn:
+            self.assertEqual(conn.execute("SELECT success FROM t09_vtp_switches").fetchone()[0], "pending_delete")
+
+    def test_vtp_configuration_mismatch_does_not_acknowledge_member(self) -> None:
+        self.connector.connection.send_command = lambda *_args, **_kwargs: "VTP Domain Name : OTHER\nVTP Operating Mode : Client\n"
+        tasks = self.controller.collect_pending_tasks("sw2.local", "vtp")
+        self.assertFalse(self.controller.push_tasks("sw2.local", "vtp", tasks)["ok"])
+        self.assertTrue(self.controller.has_pending("sw2.local", "vtp"))
+
+    def test_all_push_configures_vtp_role_before_vlan_commands(self) -> None:
+        tasks = self.controller.collect_pending_tasks("sw2.local", "all")
+        commands = [command for task in tasks for command in task["commands"]]
+        self.assertLess(commands.index("vtp mode server"), commands.index("vlan 10"))
+
+    def test_client_convergence_retries_and_does_not_store_stale_snapshot(self) -> None:
+        with closing(self.db._connect()) as conn:
+            conn.execute("UPDATE t06_vlan_db SET success='synchronized', device_present=1")
+            conn.commit()
+        status = "VTP version running : 2\nVTP Domain Name : LAB\nVTP Operating Mode : Client\n"
+        stale = {"ok": True, "outputs": {"vtp_status": status, "vlan_brief": "1 default active\n10 old active\n"}}
+        fresh = {"ok": True, "outputs": {"vtp_status": status, "vlan_brief": "1 default active\n10 users active\n"}}
+        client = FakeConnector()
+        calls = []
+        snapshots = iter((stale, fresh))
+        def collect(_keys):
+            calls.append(1)
+            return next(snapshots)
+        client.collect_switch_state = collect
+        self.controller.vtp_sync_delay = 0
+        summary = self.controller._sync_vtp_client("sw2.local", "LAB", client, {1: ("default", "active"), 10: ("users", "active")})
+        self.assertEqual(len(calls), 2)
+        self.assertTrue(summary["snapshotUpdated"])
+        with closing(self.db._connect()) as conn:
+            before = [tuple(row) for row in conn.execute("SELECT vlan_id, vlan_name FROM t06_vlan_db ORDER BY vlan_id")]
+        client.collect_switch_state = lambda _keys: stale
+        self.controller.vtp_sync_attempts = 2
+        with self.assertRaisesRegex(ValueError, "has not converged"):
+            self.controller._sync_vtp_client("sw2.local", "LAB", client, {1: ("default", "active"), 10: ("users", "active")})
+        with closing(self.db._connect()) as conn:
+            self.assertEqual([tuple(row) for row in conn.execute("SELECT vlan_id, vlan_name FROM t06_vlan_db ORDER BY vlan_id")], before)
+        self.assertEqual(client.connection.commands, [])
+        with closing(self.db._connect()) as conn:
+            conn.execute("UPDATE t06_vlan_db SET success='pending_apply' WHERE vlan_id=10")
+            conn.commit()
+        client.collect_switch_state = lambda _keys: fresh
+        with self.assertRaisesRegex(ValueError, "pending local VLAN changes"):
+            self.controller._sync_vtp_client("sw2.local", "LAB", client, {1: ("default", "active"), 10: ("users", "active")})
+
     def test_post_push_restores_full_operational_pull_for_every_switch_tab(self) -> None:
         for module in (
             "all",
@@ -428,6 +512,12 @@ class SwitchingViewPushTests(unittest.TestCase):
         self.assertIn("VTP client", deleted["message"])
 
     def test_vlan_push_reconciles_server_before_clients_in_same_vtp_domain(self) -> None:
+        self._check_server_before_client_reconciliation("vlan")
+
+    def test_vtp_group_push_also_refreshes_client_vlan_inventory(self) -> None:
+        self._check_server_before_client_reconciliation("vtp")
+
+    def _check_server_before_client_reconciliation(self, module: str) -> None:
         events = []
         client = FakeSwitchStateConnector(
             {
@@ -479,6 +569,11 @@ VTP Pruning Mode : Enabled
             self.assertEqual(host, "sw2.local")
             self.assertIs(connector, self.connector)
             events.append("server")
+            with closing(self.db._connect()) as conn:
+                conn.execute("UPDATE t06_vlan_db SET device_present=1, success='synchronized' WHERE host=?", (host,))
+                conn.execute("INSERT INTO t06_vlan_db(host, vlan_id, vlan_name, state, success, device_present) VALUES (?, 20, 'voice', 'active', 'synchronized', 1)", (host,))
+                conn.execute("UPDATE t09_vtp_switches SET success='synchronized', sync_status='synchronized'")
+                conn.commit()
             return {"ok": True, "message": "server synchronized"}
 
         self.db.reconcileViewPushSnapshot = reconcile_server
@@ -487,10 +582,10 @@ VTP Pruning Mode : Enabled
             self.connector,
             {"sw3.local": client},
         )
-        tasks = controller.collect_pending_tasks("sw2.local", "vlan")
+        tasks = controller.collect_pending_tasks("sw2.local", module)
 
         result = controller._push_and_reconcile(
-            "sw2.local", "vlan", tasks, self.connector
+            "sw2.local", module, tasks, self.connector
         )
 
         self.assertTrue(result["ok"], result)
@@ -719,6 +814,67 @@ VTP Pruning Mode : Disabled
                 "SELECT enabled, sync_status, success FROM t06_iface_port_security;"
             ).fetchone()
         self.assertEqual(tuple(row), (0, "synchronized", "synchronized"))
+
+    def test_option_82_global_save_preview_push_and_acknowledgement(self) -> None:
+        result = save_l2_security_global(self.db, "sw2.local", {"dhcp_option_82": "disable"})
+        self.assertTrue(result["ok"], result)
+        tasks = self.controller.collect_pending_tasks("sw2.local", "l2_security")
+        global_tasks = [task for task in tasks if task["entity_key"] == "global:dhcp_option_82"]
+        self.assertEqual(len(global_tasks), 1)
+        self.assertIn("no ip dhcp snooping information option", global_tasks[0]["commands"])
+        for task in tasks:
+            if task not in global_tasks:
+                self.assertFalse(any("information option" in cmd for cmd in task["commands"]))
+        preview = self.controller.preview("sw2.local", "l2_security")
+        self.assertIn("no ip dhcp snooping information option", preview["commands"])
+        self.assertFalse(any(task["entity_key"] == "global:dhcp_option_82" for task in self.controller.collect_pending_tasks("sw2.local", "port_security")))
+        pushed = self.controller.push_tasks("sw2.local", "l2_security", global_tasks)
+        self.assertTrue(pushed["ok"], pushed)
+        self.assertIn("no ip dhcp snooping information option", self.connector.connection.commands)
+        with closing(self.db._connect()) as conn:
+            row = conn.execute("SELECT dhcp_option_82, success FROM t06_security_global WHERE host='sw2.local'").fetchone()
+        self.assertEqual(tuple(row), ("disable", "synchronized"))
+        self.assertFalse(any(task["entity_key"] == "global:dhcp_option_82" for task in self.controller.collect_pending_tasks("sw2.local", "l2_security")))
+
+    def test_option_82_change_alone_creates_a_pending_l2_task(self) -> None:
+        with closing(self.db._connect()) as conn:
+            with conn:
+                conn.execute("UPDATE t06_security_l2 SET success='synchronized'")
+                conn.execute("UPDATE t06_dhcp_trust_ports SET success='synchronized'")
+                conn.execute("UPDATE t06_iface_mac_table SET success='synchronized'")
+        self.assertEqual(self.controller.collect_pending_tasks("sw2.local", "l2_security"), [])
+        self.assertTrue(save_l2_security_global(self.db, "sw2.local", {"dhcp_option_82": "disable"})["ok"])
+        tasks = self.controller.collect_pending_tasks("sw2.local", "l2_security")
+        self.assertEqual(len(tasks), 1)
+        self.assertEqual(tasks[0]["entity_key"], "global:dhcp_option_82")
+        self.assertTrue(self.controller.pending_state("sw2.local", "l2_security")["ok"])
+
+    def test_failed_option_82_push_remains_pending(self) -> None:
+        self.assertTrue(save_l2_security_global(self.db, "sw2.local", {"dhcp_option_82": "disable"})["ok"])
+        tasks = [task for task in self.controller.collect_pending_tasks("sw2.local", "l2_security") if task["entity_key"] == "global:dhcp_option_82"]
+        self.connector.connection.send_config_set = lambda *_args, **_kwargs: "% Invalid input detected at '^' marker."
+        self.assertFalse(self.controller.push_tasks("sw2.local", "l2_security", tasks)["ok"])
+        with closing(self.db._connect()) as conn:
+            row = conn.execute("SELECT success FROM t06_security_global WHERE host='sw2.local'").fetchone()
+        self.assertEqual(row["success"], "pending_apply")
+
+    def test_option_82_modes_and_host_scope(self) -> None:
+        from features.switching.commands import render_security
+        base = {"vlans": [], "trust_ports": [], "ports": [], "static_macs": []}
+        for mode in ("insert", "allow-untrusted", "disable"):
+            commands = render_security({**base, "global_config": {"dhcp_option_82": mode}})
+            self.assertIn("no ip dhcp snooping information option" if mode == "disable" else "ip dhcp snooping information option", commands)
+            self.assertIn("ip dhcp snooping information option allow-untrusted" if mode == "allow-untrusted" else "no ip dhcp snooping information option allow-untrusted", commands)
+        self.assertEqual(render_security(base), [])
+        with self.assertRaises(ValueError):
+            render_security({**base, "global_config": {"dhcp_option_82": "invalid"}})
+        self.assertFalse(save_l2_security_global(self.db, "sw2.local", {"dhcp_option_82": "invalid"})["ok"])
+        with closing(self.db._connect()) as conn:
+            self.assertIsNone(conn.execute("SELECT host FROM t06_security_global").fetchone())
+            conn.execute("INSERT INTO t01_devices(host, os, method) VALUES ('other.local', 'cisco_ios', 'SSH')")
+            conn.commit()
+        self.assertTrue(save_l2_security_global(self.db, "other.local", {"dhcp_option_82": "disable"})["ok"])
+        self.assertFalse(any(task["entity_key"] == "global:dhcp_option_82" for task in self.controller.collect_pending_tasks("sw2.local", "all")))
 
     def test_failed_device_output_does_not_mark_payload(self) -> None:
         self.connector.connection.send_config_set = (

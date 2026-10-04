@@ -390,6 +390,13 @@ StandardDialog {
                         currentIndex: dialog.trapSeverity
                         onActivated: index => dialog.trapSeverity = index
                     }
+                    InlineMessage {
+                        Layout.fillWidth: true
+                        visible: dialog.trapSeverity < 6
+                        wrapText: true
+                        severity: "warning"
+                        message: "ACL logs use level 6. Choose Informational or Debugging to receive all supported security events."
+                    }
                     StandardCheckBox {
                         text: "Include millisecond log timestamps"
                         checked: dialog.timestamps

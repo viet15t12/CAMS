@@ -11,6 +11,8 @@ ERROR_MARKERS = (
     "% ambiguous command",
     "% authorization failed",
     "command rejected",
+    "vtp vlan configuration not allowed",
+    "cannot configure pruning",
 )
 
 

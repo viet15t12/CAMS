@@ -19,5 +19,7 @@ no {{ rule.seq }}
 {{ rule.seq }} {{ rule.action }} {{ rule.protocol }} {{ rule.src }}{% if rule.src_mask %} {{ rule.src_mask }}{% endif %}{% if rule.src_port %} {{ rule.src_port }}{% endif %} {{ rule.dst }}{% if rule.dst_mask %} {{ rule.dst_mask }}{% endif %}{% if rule.dst_port %} {{ rule.dst_port }}{% endif %} log
 {% endif %}
 {% endfor %}
+no 2147483647
+2147483647 deny ip any any log
 exit
 {% endif %}

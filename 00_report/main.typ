@@ -66,11 +66,14 @@
 // TÀI LIỆU THAM KHẢO
 // ----------------------------------------------------------
 #pagebreak()
+#[
+#set text(lang: "en")
 #bibliography(
   "bibliography/networktools_references.bib",
   title: upper[Tài liệu tham khảo],
   style: "ieee",
 )
+]
 
 // ----------------------------------------------------------
 // PHỤ LỤC

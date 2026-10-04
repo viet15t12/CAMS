@@ -242,6 +242,7 @@ class SecurityEventDetector:
     """Thread-safe sliding-window detector producing synthetic alert rows."""
 
     _MAX_KEYS = 4096
+    _MAX_EVENTS_PER_KEY = 1024
 
     def __init__(
         self,
@@ -253,6 +254,11 @@ class SecurityEventDetector:
         self._clock = clock
         self._lock = threading.Lock()
         self._windows: dict[tuple[str, str, str], _Window] = {}
+
+    def reset(self) -> None:
+        """Do not carry offender counters or cooldowns into another workspace."""
+        with self._lock:
+            self._windows.clear()
 
     def process(self, rows: Iterable[dict[str, Any]]) -> list[SyslogMessage]:
         alerts: list[SyslogMessage] = []
@@ -275,7 +281,14 @@ class SecurityEventDetector:
         self, row: dict[str, Any], event: SecurityEvent, rule: DetectionRule, now: float,
     ) -> SyslogMessage | None:
         device = str(row.get("device_host") or row.get("source_ip") or "")
-        window = self._windows.setdefault((device.casefold(), rule.name, event.key), _Window())
+        key = (device.casefold(), rule.name, event.key)
+        if key not in self._windows:
+            if len(self._windows) >= self._MAX_KEYS:
+                self._prune(now)
+            if len(self._windows) >= self._MAX_KEYS:
+                self._windows.pop(next(iter(self._windows)))
+            self._windows[key] = _Window(hits=deque(maxlen=self._MAX_EVENTS_PER_KEY))
+        window = self._windows[key]
         window.prune(now, rule.window_seconds)
         window.hits.append((now, event.packets, event.target, event.detail))
         events = len(window.hits)

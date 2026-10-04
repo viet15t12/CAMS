@@ -754,138 +754,135 @@ Hai hình minh họa cho thấy email cảnh báo giữ được mối liên h�
 CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được Syslog facility, severity, mã phân hệ Cisco và mnemonic, đồng thời giữ nguyên nội dung gốc theo cấu trúc Syslog @rfc5424. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*. Phần cảnh báo email cho phép chọn mức cần gửi, bảo vệ App Password và tách thao tác SMTP khỏi bộ nhận. Hai email Error và Warning được chọn làm ví dụ minh họa, sử dụng dữ liệu liên kết trực tiếp với các sự kiện của bài lab; cách lưu và rà soát này phù hợp với nguyên tắc quản lý nhật ký tập trung @nistSp80092.
 
 
-=== Kịch bản 5: Kiểm thử cơ chế an ninh phân quyền và bảo mật dữ liệu lưu trữ (Security & Privilege Verification)
+=== Kịch bản 5: Kiểm chứng chính sách ACL và nhật ký an ninh tập trung
 
-==== Mục tiêu và nội dung kiểm thử
+==== Mục tiêu và phạm vi
 
-Kịch bản 5 tập trung kiểm chứng ba lớp phòng thủ chiều sâu (Defense-in-Depth) trong kiến trúc an ninh của CAMS, bao gồm:
-1. *Kiểm soát phân quyền 2 bước và nguyên lý Fail-Closed:* Xác minh khả năng phát hiện prompt ảo và cưỡng bức leo thang đặc quyền `privilege 15` trên Cisco IOS; đảm bảo hệ thống tự động từ chối và ngắt kết nối ngay lập tức nếu không đủ điều kiện đặc quyền.
-2. *Giám sát tự động lưu lượng ACL qua Syslog:* Đánh giá việc CAMS tự động gắn từ khóa `log` vào toàn bộ quy tắc Access Control List (chuẩn và mở rộng), kích hoạt bộ định tuyến phát sinh bản tin `%SEC-6-IPACCESSLOGP` khi phát hiện lưu lượng bị chặn hoặc cho phép và chuyển tiếp về Syslog Server để phân tích.
-3. *Đánh giá an toàn mật mã dữ liệu lưu trữ (At-Rest Encryption):* Đo đạc hiệu năng hàm dẫn xuất khóa Argon2id theo chuẩn RFC 9106, thuật toán mã hóa đối xứng AES-256-GCM, và kiểm thử cơ chế chống tấn công hoán đổi bản mã (Ciphertext Swapping) nhờ dữ liệu xác thực gắn kết bản ghi (Record-Bound AAD).
+Kịch bản 5 kiểm chứng chuỗi xử lý từ chính sách đến bằng chứng vận hành: CAMS tạo ACL có ghi nhật ký, triển khai ACL lên đúng cổng vào của VLAN, thiết bị cho phép hoặc từ chối lưu lượng theo từng luật, sau đó gửi sự kiện về System Logs. Kịch bản tập trung vào ba chính sách cụ thể: chặn Telnet từ VLAN 10 đến địa chỉ `192.168.12.2`, chặn HTTP từ VLAN 20 đến máy chủ `203.162.4.1`, và chặn ICMP từ VLAN 30 đến máy chủ này. Các lưu lượng không khớp luật từ chối phải tiếp tục được chuyển tiếp.
 
-==== Kiểm thử kiểm soát leo thang đặc quyền trên môi trường EVE-NG
+Phép thử được thiết kế theo cặp đối chứng. Mỗi chính sách có một lưu lượng cần bị chặn và một lưu lượng khác cần được phép. Cách kiểm tra này phân biệt trường hợp ACL hoạt động đúng với trường hợp mất kết nối do định tuyến, máy chủ hoặc cấu hình nền chưa hoàn tất.
 
-Trong môi trường quản trị mạng thực tế, thiết bị Cisco IOS thường cấu hình tài khoản cục bộ ở các mức đặc quyền khác nhau. Khi tài khoản người dùng có đặc quyền trung gian (ví dụ: Privilege 5), dấu nhắc lệnh của Cisco IOS vẫn hiển thị ký tự `#` (vốn là dấu hiệu của EXEC mode). Nếu phần mềm quản trị chỉ kiểm tra ký tự `#` để kết luận quyền tối cao (như hành vi mặc định của nhiều công cụ tự động hóa), các lệnh cấu hình yêu cầu đặc quyền 15 (như OSPF, ACL, Interface) sẽ bị router từ chối âm thầm.
+==== Mô hình và quy hoạch địa chỉ
 
-CAMS triển khai thuật toán kiểm soát 2 bước (`ensure_initial_privilege` và `ensure_privileged_mode` trong module `infrastructure/network/privilege.py`):
-- *Bước 1 (Prompt Verification):* Kiểm tra dấu nhắc lệnh ban đầu.
-- *Bước 2 (Execution Verification):* Bắt buộc gửi lệnh `show privilege` để đọc mức quyền thực tế `current_level`. Nếu `current_level < 15`:
-  - Nếu người dùng *không cung cấp* mật khẩu Enable Secret hoặc cung cấp sai: hệ thống thực thi nguyên lý *Fail-Closed*, kích hoạt ngoại lệ `PermissionError` hoặc `RuntimeError`, lập tức đóng phiên kết nối (DROP connection) và ghi log cảnh báo.
-  - Nếu người dùng *có cung cấp* mật khẩu Enable Secret: hệ thống gửi lệnh `enable 15` để leo thang, sau đó gửi lại lệnh `show privilege` để xác nhận `current_level == 15` trước khi cấp phép thực thi bất kỳ tác vụ nào.
+@fig-k5-topology trình bày mô hình thực nghiệm. `R1` thực hiện định tuyến giữa VLAN theo mô hình router-on-a-stick trên `GigabitEthernet0/1`; `R2` là bộ định tuyến biên thực hiện NAT; `R3` đóng vai trò ISP và cung cấp dịch vụ HTTP trên `Loopback0`. Ba máy trạm `VPC7`, `VPC8` và `VPC9` lần lượt thuộc VLAN 10, VLAN 20 và VLAN 30. Các liên kết kép giữa ba bộ chuyển mạch được gom kênh; nội dung này tạo hạ tầng kết nối nhưng không phải đối tượng đánh giá của kịch bản ACL.
 
-Ba trường hợp kiểm thử thực nghiệm được thực hiện trên Router `R1` (Cisco vIOS-L3, IP `192.168.122.101`) trong môi trường EVE-NG:
+#figure(
+  image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png", width: 92%),
+  caption: [Mô hình kiểm chứng ACL với R1 định tuyến liên VLAN, R2 làm NAT và R3 làm ISP],
+) <fig-k5-topology>
 
 #report-table(
-  columns: (16%, 22%, 26%, 36%),
-  text-size: 9.5pt,
-  cell-inset: (x: 4pt, y: 4.5pt),
-  header: ([Trường hợp], [Tài khoản Cisco IOS], [Cấu hình trên CAMS], [Kết quả kiểm thử & Phản hồi hệ thống]),
+  columns: (29%, 35%, 36%),
+  header: ([Thành phần], [Địa chỉ], [Vai trò trong phép thử]),
   rows: (
-    (
-      [TH 1: Direct Privilege 15],
-      [#table-code("admin"), mức 15\ #table-code("secret cisco15")],
-      [User: #table-code("admin")\ Pass: #table-code("cisco15")\ Enable Secret: để trống],
-      [Thành công. Lệnh #table-code("show privilege") trả về 15. Kết nối được chấp thuận trực tiếp mà không cần lệnh leo thang.],
-    ),
-    (
-      [TH 2: Privilege 5 + Secret],
-      [#table-code("operator"), mức 5\ #table-code("enable secret cisco15")],
-      [User: #table-code("operator")\ Pass: #table-code("cisco5")\ Enable Secret: #table-code("cisco15")],
-      [Thành công. CAMS phát hiện prompt #table-code("#") nhưng quyền thực tế là 5, tự động gửi #table-code("enable 15"), xác minh lại đạt cấp 15 và cho phép phiên làm việc.],
-    ),
-    (
-      [TH 3: Privilege 5 (Fail-Closed)],
-      [#table-code("operator"), mức 5\ #table-code("enable secret cisco15")],
-      [User: #table-code("operator")\ Pass: #table-code("cisco5")\ Enable Secret: sai hoặc trống],
-      [Từ chối an toàn (Fail-Closed). CAMS ngắt kết nối ngay lập tức: #table-code("PermissionError: Device initial privilege is 5... Connection rejected.")],
-    ),
+    ([R1 `Gi0/1.10`], [`192.168.10.254/24`], [Cổng mặc định VLAN 10; nhận lưu lượng từ VPC7.]),
+    ([R1 `Gi0/1.20`], [`192.168.20.254/24`], [Cổng mặc định VLAN 20; nhận lưu lượng từ VPC8.]),
+    ([R1 `Gi0/1.30`], [`192.168.30.254/24`], [Cổng mặc định VLAN 30; nhận lưu lượng từ VPC9.]),
+    ([R1 `Gi0/2` - R2 `Gi0/2`], [`192.168.12.2/24` - `192.168.12.1/24`], [Liên kết từ mạng doanh nghiệp đến bộ định tuyến biên.]),
+    ([R2 `Gi0/3` - R3 `Gi0/3`], [`203.162.2.1/30` - `203.162.2.2/30`], [Liên kết đến ISP.]),
+    ([R3 `Loopback0`], [`203.162.4.1/32`], [Đích ICMP và máy chủ HTTP thử nghiệm.]),
+    ([Mạng quản trị], [`192.168.122.0/24`], [CAMS kết nối đến thiết bị; R1 dùng `192.168.122.104` trong lần thử.]),
   ),
-  caption: [Kết quả kiểm thử thực nghiệm cơ chế phân quyền 2 bước trên Cisco IOS],
-) <tab-k5-privilege-test>
+  caption: [Quy hoạch địa chỉ liên quan đến Kịch bản 5],
+) <tab-k5-address-plan>
 
-Kết quả trong @tab-k5-privilege-test chứng minh CAMS loại trừ hoàn toàn nguy cơ thực thi lệnh trong trạng thái thiếu quyền hoặc lỗi ngầm, bảo vệ an toàn tính toàn vẹn của thiết bị mạng.
+Địa chỉ quản trị chỉ phục vụ kết nối CAMS và vận chuyển Syslog, không tham gia điều kiện khớp ACL. Vì vậy, việc R1 mang địa chỉ quản trị `192.168.122.104` trong lần thử không làm thay đổi các chính sách trên các mạng dữ liệu.
 
-==== Giám sát lưu lượng và phát hiện vi phạm chính sách qua ACL Syslog
+==== Chính sách ACL và vị trí áp dụng
 
-Khi cấu hình Access Control List (ACL) để bảo vệ mạng nội bộ hoặc lọc lưu lượng trên cổng giao tiếp, quản trị viên mạng cần nắm bắt kịp thời các gói tin bị từ chối (`deny`) hoặc cho phép (`permit`). CAMS loại bỏ nhu cầu bật thủ công tùy chọn ghi log bằng cách tự động bổ sung từ khóa `log` vào toàn bộ quy tắc ACL sinh ra (ngoại trừ các quy tắc đặc thù của Reflexive ACL vốn không tương thích với cú pháp `log` của Cisco IOS).
+Hai ACL mở rộng được cấu hình trên R1. ACL thứ nhất được gắn chiều vào trên `GigabitEthernet0/1.10`. Luật số 10 từ chối TCP từ VLAN 10 đến địa chỉ `192.168.12.2`, cổng đích 23; luật số 20 cho phép các lưu lượng IP còn lại. Tên `ACL_V10_NO_TELNET_R2` được giữ theo dữ liệu thử nghiệm, nhưng đích `192.168.12.2` thuộc cổng `Gi0/2` của R1 trong quy hoạch hiện tại. Do đó, kết quả được diễn giải theo địa chỉ và giao thức thực tế, không suy luận thiết bị đích từ tên ACL.
 
-#step-title[Bước 1. Sinh tập lệnh cấu hình ACL tự động kèm từ khóa log]
+ACL thứ hai được gắn chiều vào trên `GigabitEthernet0/1.20` và `GigabitEthernet0/1.30`. Luật số 10 từ chối TCP/80 từ VLAN 20 đến máy chủ `203.162.4.1`; luật số 20 từ chối ICMP từ VLAN 30 đến cùng máy chủ; luật số 30 cho phép các lưu lượng IP còn lại. Mỗi luật do CAMS sinh đều có từ khóa `log`, nên Cisco IOS tạo sự kiện `%SEC-6-IPACCESSLOGP` hoặc `%SEC-6-IPACCESSLOGDP` khi có lưu lượng khớp.
 
-Khi người dùng cấu hình một danh sách truy cập Standard hoặc Extended trên giao diện ACL của CAMS (ví dụ: cấm mạng `192.168.10.0/24` truy cập Web Server nội bộ), mẫu Jinja2 sinh tập lệnh như sau:
+#report-table(
+  columns: (15%, 18%, 29%, 21%, 17%),
+  text-size: 9.5pt,
+  header: ([ACL / luật], [Nguồn], [Đích và dịch vụ], [Hành động], [Vị trí]),
+  rows: (
+    ([V10 / 10], [`192.168.10.0/24`], [`192.168.12.2`, TCP/23], [Từ chối, ghi log], [`Gi0/1.10` in]),
+    ([V10 / 20], [`any`], [`any`, IP], [Cho phép, ghi log], [`Gi0/1.10` in]),
+    ([V20-V30 / 10], [`192.168.20.0/24`], [`203.162.4.1`, TCP/80], [Từ chối, ghi log], [`Gi0/1.20` in]),
+    ([V20-V30 / 20], [`192.168.30.0/24`], [`203.162.4.1`, ICMP], [Từ chối, ghi log], [`Gi0/1.30` in]),
+    ([V20-V30 / 30], [`any`], [`any`, IP], [Cho phép, ghi log], [`Gi0/1.20`, `.30` in]),
+  ),
+  caption: [Ma trận chính sách ACL được kiểm chứng],
+) <tab-k5-acl-policy>
 
-```text
-ip access-list extended SEC_FILTER
- remark Block unauthorized HTTP access to Internal Server
- 10 deny tcp 192.168.10.0 0.0.0.255 host 10.0.10.50 eq 80 log
- 20 permit ip any any log
-exit
-interface GigabitEthernet0/1
- ip access-group SEC_FILTER in
-exit
-```
+@fig-k5-acl-applied là bằng chứng cấu hình sau triển khai. Kết quả `show ip interface` xác nhận ACL đã được gắn chiều vào trên ba subinterface. Kết quả `show access-lists` xác nhận đúng địa chỉ nguồn, đích, giao thức, cổng dịch vụ và từ khóa `log`. Hình này thay cho chuỗi ảnh nhập biểu mẫu và thao tác Push vì mục tiêu của thực nghiệm là chứng minh cấu hình cuối trên thiết bị.
 
-#step-title[Bước 2. Kiểm chứng tiếp nhận bản tin cảnh báo tại Syslog Server]
+#figure(
+  image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/1.png", width: 96%),
+  caption: [ACL và vị trí áp dụng trên R1 sau khi triển khai bằng CAMS],
+) <fig-k5-acl-applied>
 
-Khi trạm kiểm thử gửi các gói tin HTTP (TCP port 80) từ phân mạng `192.168.10.0/24` tới `10.0.10.50`, router Cisco IOS ghi nhận vi phạm ACL, ngắt kết nối gói tin và ngay lập tức gửi một bản tin Syslog qua giao thức UDP về máy chủ CAMS:
+==== Phép thử đối chứng và lưu lượng bị chặn
 
-```text
-%SEC-6-IPACCESSLOGP: list SEC_FILTER denied tcp 192.168.10.15(49152) -> 10.0.10.50(80), 1 packet
-```
+Trước khi tạo lưu lượng vi phạm, nhóm thử nghiệm dùng VPC7 thuộc VLAN 10 kiểm tra đường truyền tới `203.162.4.1`. ICMP nhận đủ năm phản hồi, còn phép thử TCP/80 hoàn tất các bước kết nối, gửi dữ liệu và đóng kết nối. Hai kết quả trong @fig-k5-positive-control xác nhận định tuyến, NAT và dịch vụ đích đang hoạt động; vì vậy, các kết quả bị chặn ở bước tiếp theo có thể được quy cho ACL tương ứng.
 
-Syslog Listener của CAMS tiếp nhận bản tin, phân tích tự động các trường:
-- *Facility:* `SEC` (Security architecture)
-- *Severity:* `6` (Informational)
-- *Mnemonic:* `IPACCESSLOGP` (IP Access List Logging Packet)
-- *Message:* Trích xuất tên danh sách truy cập `SEC_FILTER`, hành động `denied`, địa chỉ nguồn `192.168.10.15:49152` và địa chỉ đích `10.0.10.50:80`.
+#figure(
+  grid(
+    columns: (1fr, 1fr),
+    gutter: 8pt,
+    image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/3.png", width: 100%),
+    image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/4.png", width: 100%),
+  ),
+  caption: [Phép thử đối chứng từ VLAN 10: ICMP và TCP/80 đến máy chủ ISP đều được phép],
+) <fig-k5-positive-control>
 
-Sự kiện được lập chỉ mục và hiển thị tức thời trên giao diện *System Logs*, đồng thời sẵn sàng kích hoạt quy tắc gửi thư cảnh báo (Email Alert) nếu quản trị viên thiết lập ngưỡng cảnh báo cho mã `IPACCESSLOGP`.
+Ba phép thử âm được thực hiện từ đúng VLAN nguồn của từng luật. VPC7 gửi TCP đến `192.168.12.2:23`; VPC8 gửi TCP đến `203.162.4.1:80`; VPC9 gửi ICMP đến `203.162.4.1`. Trong cả ba trường hợp, cổng mặc định trên R1 trả về ICMP Type 3 Code 13, *Communication administratively prohibited*. Phản hồi này cho biết bộ định tuyến đã chủ động từ chối lưu lượng theo chính sách, thay vì gói tin hết thời gian chờ do mất đường truyền.
 
-==== Đánh giá an toàn mật mã dữ liệu lưu trữ (At-Rest Database Encryption)
+#figure(
+  grid(
+    columns: (1fr, 1fr),
+    gutter: 8pt,
+    image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/5.png", width: 100%),
+    image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/6.png", width: 100%),
+  ),
+  caption: [R1 từ chối Telnet từ VLAN 10 và HTTP từ VLAN 20 theo hai luật ACL],
+) <fig-k5-denied-tcp>
 
-Để bảo vệ thông tin đăng nhập thiết bị lưu trong cơ sở dữ liệu SQLite (`device_network.db`), CAMS triển khai cơ chế mã hóa phong bì phiên bản 2 (`ENC$v2$`) kết hợp hàm KDF Argon2id và thuật toán AEAD AES-256-GCM.
+#figure(
+  image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/7.png", width: 88%),
+  caption: [R1 từ chối ICMP từ VLAN 30 đến máy chủ `203.162.4.1`],
+) <fig-k5-denied-icmp>
 
-#step-title[1. Đo đạc hiệu năng dẫn xuất khóa Argon2id (RFC 9106)]
+Để kiểm tra ACL không chặn quá phạm vi, VPC8 vẫn nhận phản hồi ICMP từ máy chủ ISP và VPC9 vẫn thiết lập được phiên TCP/80. Đồng thời, VPC8 và VPC9 vẫn kết nối được TCP/23 đến `192.168.12.2` vì luật chặn dịch vụ này chỉ áp dụng cho VLAN 10. Các phép thử này xác nhận thứ tự luật và câu lệnh `permit ip any any` hoạt động như dự kiến.
 
-Khóa dẫn xuất (Key Derivation) sử dụng thuật toán Argon2id với các tham số đạt chuẩn khuyến nghị của RFC 9106: bộ nhớ $m = 64\ "MiB"$ (65,536 KiB), số vòng lặp $t = 3$, và mức song song $p = 4$.
+==== Đối chiếu sự kiện trên System Logs
 
-Các phép đo được thực hiện 100 lần trên máy trạm thử nghiệm (CPU AMD Ryzen 7, RAM 16 GB). Kết quả ghi nhận:
-- Thời gian dẫn xuất khóa trung bình: *65.5 ms* (độ lệch chuẩn $sigma = 2.1\ "ms"$).
-- Dung lượng bộ nhớ RAM sử dụng: đúng $64\ "MiB"$ trong quá trình tính toán.
+R1 gửi Syslog về CAMS qua mạng quản trị. Chính sách gửi phải bao gồm mức `6 - Informational` vì bản tin ACL trong phép thử mang severity 6. Tại thời điểm chụp @fig-k5-acl-syslog, bộ thu C++ đang lắng nghe trên `0.0.0.0:5514/UDP+TCP` và đã nhận 272 bản tin. Các dòng bằng chứng quan trọng gồm:
 
-Khoảng thời gian xấp xỉ 65 ms là hoàn toàn trong suốt đối với người dùng khi mở một dự án làm việc, nhưng tạo nên rào cản chi phí tính toán cực lớn đối với kẻ tấn công ngoại tuyến (offline brute-force) ngay cả khi sử dụng các dàn máy tính chuyên dụng có hỗ trợ GPU/ASIC.
+- `ACL_V10_NO_TELNET_R2 denied tcp 192.168.10.1(...) -> 192.168.12.2(23)`;
+- `ACL_V20_V30_OUT denied tcp 192.168.20.1(...) -> 203.162.4.1(80)`;
+- `ACL_V20_V30_OUT denied icmp 192.168.30.1 -> 203.162.4.1`;
+- các dòng `permitted` tương ứng với những phép thử đối chứng không thuộc điều kiện từ chối.
 
-#step-title[2. Đo đạc tốc độ mã hóa và giải mã AES-256-GCM]
+#figure(
+  image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/12.png", width: 100%),
+  caption: [System Logs ghi nhận các sự kiện ACL được phép và bị từ chối từ R1],
+) <fig-k5-acl-syslog>
 
-Sau khi khóa mã hóa dữ liệu (DEK - Data Encryption Key) 256-bit được dẫn xuất vào bộ nhớ RAM, mỗi trường mật khẩu thiết bị được mã hóa bằng AES-256-GCM với nonce 96-bit ngẫu nhiên sinh mới cho từng lần ghi:
-- Thời gian mã hóa trung bình mỗi trường mật khẩu: *0.42 µs*.
-- Thời gian giải mã và xác thực tính toàn vẹn: *0.39 µs*.
-
-Tốc độ trên chứng minh cơ chế mã hóa không tạo ra bất kỳ độ trễ nào đáng kể đối với các tác vụ nạp hàng loạt thiết bị (Batch Import) hoặc điều phối đồng thời nhiều kết nối mạng.
-
-#step-title[3. Kiểm thử phòng thủ chống tráo đổi bản mã (Ciphertext Swapping Test)]
-
-Trong cấu trúc `ENC$v2$`, dữ liệu bổ sung cần xác thực (AAD - Additional Authenticated Data) được tính toán theo định dạng định danh bản ghi:
-$ "AAD" = "CAMS_CRED_V2:" + "host" + ":" + "column" $
-
-Thực nghiệm tấn công hoán đổi bản mã được thiết kế như sau:
-1. Trích xuất chuỗi mật khẩu đã mã hóa của thiết bị `192.168.122.101` từ cơ sở dữ liệu:
-   `ENC$v2$c2Fsd...$bm9u...$Y2lwa...$dGFn...`
-2. Sử dụng câu lệnh SQL trực tiếp sửa bản ghi của thiết bị `192.168.122.102`, thay trường `password` bằng chuỗi bản mã trích xuất ở bước 1.
-3. Trên CAMS, kích hoạt tác vụ kết nối tới `192.168.122.102`.
-
-*Kết quả:* Hàm `decrypt_credential` nạp AAD của thiết bị đích là `CAMS_CRED_V2:192.168.122.102:password`. Do giá trị AAD này sai khác với AAD ban đầu khi mã hóa (`192.168.122.101`), thuật toán AES-GCM lập tức phát hiện sự sai lệch của Authentication Tag và kích hoạt ngoại lệ `cryptography.exceptions.InvalidTag`. CAMS từ chối giải mã, khóa bản ghi và chặn đứng hoàn toàn kỹ thuật tấn công tráo đổi định danh thiết bị.
+Trường `SEC` trong bảng là mã phân hệ Cisco IOS; Syslog facility được tách từ PRI. Với PRI bằng 190 trong các bản tin minh họa, Syslog facility bằng 23 (`local7`) và severity bằng 6. Việc tách hai trường giúp tránh gọi nhầm `SEC` là facility theo chuẩn Syslog.
 
 ==== Đánh giá kết quả
 
-Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng bộ và chặt chẽ trong kiến trúc an ninh nhiều lớp:
-- Cơ chế kiểm soát Privilege 15 theo nguyên lý Fail-Closed loại trừ hoàn toàn nguy cơ thực thi thiếu quyền trên Cisco IOS.
-- Cơ chế tự động chèn từ khóa `log` vào ACL giúp chuyển đổi các quy tắc tường lửa tĩnh thành các sự kiện giám sát động gửi về Syslog Server theo thời gian thực.
-- Kiến trúc mật mã `ENC$v2$` kết hợp Argon2id (RFC 9106) và AES-256-GCM với Record-Bound AAD đảm bảo thông tin đăng nhập được bảo vệ vững chắc ở trạng thái lưu trữ, loại bỏ rủi ro trích xuất mật khẩu bản rõ cũng như tấn công tráo đổi bản mã trong cơ sở dữ liệu.
-<<<<<<< HEAD
-=======
+#report-table(
+  columns: (16%, 32%, 20%, 32%),
+  header: ([Ca thử], [Lưu lượng], [Kết quả], [Bằng chứng]),
+  rows: (
+    ([ACL-01], [VLAN 10 đến `192.168.12.2`, TCP/23], [Bị từ chối], [ICMP Type 3 Code 13 và log `denied tcp`.]),
+    ([ACL-02], [VLAN 20 đến `203.162.4.1`, TCP/80], [Bị từ chối], [ICMP Type 3 Code 13 và log `denied tcp`.]),
+    ([ACL-03], [VLAN 30 đến `203.162.4.1`, ICMP], [Bị từ chối], [Năm phản hồi administratively prohibited và log `denied icmp`.]),
+    ([ACL-04], [VLAN 10 đến `203.162.4.1`, ICMP và TCP/80], [Được phép], [Năm phản hồi ICMP và năm chu kỳ kết nối TCP/80.]),
+    ([ACL-05], [VLAN 20/30 với lưu lượng không khớp deny], [Được phép], [ICMP, TCP/23 hoặc TCP/80 hoàn tất; System Logs có dòng `permitted`.]),
+  ),
+  caption: [Kết quả kiểm chứng chính sách ACL trong Kịch bản 5],
+) <tab-k5-acl-results>
+
+Kết quả cho thấy hai ACL được áp dụng đúng chiều trên ba subinterface của R1. Ba lưu lượng khớp luật từ chối đều bị R1 chặn và tạo bản tin Syslog; các lưu lượng đối chứng vẫn được chuyển tiếp. CAMS tiếp nhận, phân tích và hiển thị đúng thiết bị nguồn `192.168.122.104`, mã phân hệ `SEC`, severity 6, mnemonic cùng thông tin địa chỉ và dịch vụ. Phạm vi kết luận giới hạn ở các địa chỉ, giao thức và số lần thử nêu trong bảng; kịch bản chưa đo thông lượng ghi log hoặc tỷ lệ mất bản tin khi tải cao.
 
 
->>>>>>> a7480ee (FUCK FUCK)
+
 == Đánh giá tổng hợp
 
 === Ưu điểm nổi bật

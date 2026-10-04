@@ -15,6 +15,7 @@ Item {
     property bool dirty: false
     property bool saving: false
     property bool deletePending: false
+    property bool pendingDeviceRefresh: false
     property int pendingDeleteId: 0
     property int pendingDeleteVlanId: 0
     property var draftData: ({})
@@ -174,6 +175,24 @@ Item {
 
     Component.onCompleted: load()
     onHostChanged: load()
+    function applyPendingDeviceRefresh() {
+        if (pendingDeviceRefresh && formMode === 0 && !deletePending) {
+            pendingDeviceRefresh = false
+            load("device-sync")
+        }
+    }
+    onFormModeChanged: Qt.callLater(root.applyPendingDeviceRefresh)
+    onDeletePendingChanged: Qt.callLater(root.applyPendingDeviceRefresh)
+
+    Connections {
+        target: typeof dbManager !== "undefined" ? dbManager : null
+        function onRunningConfigUpdated(updatedHost) {
+            if (String(updatedHost) === root.host) {
+                root.pendingDeviceRefresh = true
+                root.applyPendingDeviceRefresh()
+            }
+        }
+    }
 
     ColumnLayout {
         anchors.fill: parent

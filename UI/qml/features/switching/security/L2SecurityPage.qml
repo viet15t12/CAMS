@@ -512,7 +512,7 @@ Item {
                     SwitchInspectorSection {
                         Layout.fillWidth: true
                         title: "Dynamic ARP Inspection"
-                        helpText: "DAI validates ARP packets against DHCP Snooping or static bindings to prevent spoofing. DHCP Snooping must be enabled for dynamically learned clients, and uplinks toward legitimate infrastructure must be trusted."
+                        helpText: "DAI validates ARP packets against DHCP Snooping or static bindings to prevent spoofing. CAMS enables logging for denied ARP packets. Configure the Syslog destination separately for this device. DHCP Snooping must be enabled for dynamically learned clients, and uplinks toward legitimate infrastructure must be trusted."
                         description: "Validate ARP packets against trusted bindings on untrusted access ports."
                         showDivider: false
                         StandardToggleButton {

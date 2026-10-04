@@ -82,6 +82,25 @@ class ViewPushSlotsMixin:
                     updated_host = str(item.get("host") or "").strip()
                     if updated_host:
                         self.runningConfigUpdated.emit(updated_host)
+        completed = (
+            result.get("results", [])
+            if operation in {"batch", "post-push-batch"} and isinstance(result, dict)
+            else [result]
+        )
+        refreshed_clients: set[str] = set()
+        for completion in completed:
+            if not isinstance(completion, dict):
+                continue
+            clients = completion.get("vtpClientReconciliation") or {}
+            for client in clients.get("results", []):
+                updated_host = str(client.get("host") or "").strip()
+                if (
+                    client.get("ok")
+                    and (client.get("summary") or {}).get("snapshotUpdated")
+                    and updated_host and updated_host not in refreshed_clients
+                ):
+                    self.runningConfigUpdated.emit(updated_host)
+                    refreshed_clients.add(updated_host)
         self.taskFinished.emit(ok, message)
         if (
             operation == "push"

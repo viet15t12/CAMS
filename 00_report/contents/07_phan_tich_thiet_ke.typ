@@ -23,6 +23,9 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
 
 SFTP, terminal và đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
 
+Các ca sử dụng chính được xác định trong ranh giới CAMS. Người quản trị khởi tạo các thao tác; thiết bị mạng tham gia thực thi và phát nhật ký; máy chủ SFTP và SMTP cung cấp dịch vụ bên ngoài. Ca sử dụng triển khai cấu hình bao gồm kiểm tra tham số và xem trước lệnh.
+
+
 == Yêu cầu phi chức năng
 
 - *Khả năng phản hồi:* các tác vụ mạng chạy nền; giao diện hiển thị tiến trình và kết quả thay vì chờ đồng bộ trên luồng chính.
@@ -42,6 +45,8 @@ CAMS tổ chức trách nhiệm thành bốn lớp như @fig-layer-architecture.
   image("/00_book/figures/report/diagrams/22_architecture_overview.svg", width: 74%),
   caption: [Kiến trúc phân lớp của CAMS],
 ) <fig-layer-architecture>
+
+Bộ thu Syslog C++ và terminal Alacritty là các tiến trình đồng hành ngoài luồng giao diện. Syslog trao đổi sự kiện JSON Lines với Python; NTTP/1 phục vụ terminal. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
 
 Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
 
@@ -66,39 +71,48 @@ Luồng View & Push được mô tả tại @fig-state-flow. Bộ điều khiể
 
 Với thao tác thành công, ứng dụng cập nhật trạng thái bản ghi; với lỗi, thông tin phải được giữ để người dùng kiểm tra và xử lý tiếp. Thành công ở bước gửi lệnh chưa chứng minh dịch vụ hoạt động đúng. Cần truy vấn trạng thái hoặc thử lưu lượng phù hợp để xác minh, nhất là khi một khối lệnh có thể đã được áp dụng một phần trước khi lỗi xuất hiện.
 
+Luồng View & Push xác định thứ tự tương tác giữa người dùng, giao diện, nghiệp vụ, dữ liệu và thiết bị. Khóa phiên chỉ tuần tự hóa truy cập cùng thiết bị; không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
+
+
+
 == Luồng giám sát và khai thác cảnh báo
 
 Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn và tiếp nhận Syslog do thiết bị gửi. Luồng Syslog gồm cấu hình địa chỉ đích trên thiết bị, khởi động bộ thu nhận tại CAMS, phân tích và lưu bản tin vào cơ sở dữ liệu, sau đó hiển thị kết quả trên giao diện.
 
 Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiêm trọng, mã sự kiện nếu phân tích được và nội dung gốc. Giao diện hỗ trợ lọc theo thiết bị, thời gian, mức độ và từ khóa, qua đó giúp người quản trị khoanh vùng các sự kiện như thay đổi kết nối hoặc vi phạm chính sách. Khi đồng hồ trên thiết bị chưa được đồng bộ, hệ thống phải phân biệt thời gian do thiết bị ghi với thời gian CAMS nhận bản tin.
 
-// Chuỗi kiểm chứng cho một sự kiện bảo mật là: chính sách đã được triển khai trên thiết bị, tình huống thử kích hoạt cơ chế tương ứng, thiết bị tạo log, CAMS nhận được log và người dùng truy vấn thấy đúng nguồn, nội dung. Thiếu một mắt xích trong chuỗi này không đủ cơ sở để kết luận chức năng cảnh báo đã đạt yêu cầu.
+@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau lưu trữ, bộ phát hiện theo ngưỡng và dịch vụ email xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
+
+#figure(
+  image("/00_book/figures/report/diagrams/review-syslog-sequence.svg", width: 100%),
+  caption: [Sơ đồ tuần tự thu nhận, lưu trữ và khai thác Syslog],
+) <fig-syslog-sequence>
 
 == Thiết kế cơ chế an ninh phân quyền và bảo mật dữ liệu
 
-Nhằm đảm bảo an toàn tuyệt đối cho hệ thống và ngăn ngừa rủi ro lộ lọt cấu hình, CAMS tích hợp các cơ chế bảo mật chuyên sâu ở hai mức độ: bảo vệ kết nối thiết bị mạng và bảo vệ dữ liệu lưu trữ tĩnh (At-Rest).
+CAMS kiểm soát quyền thực thi trên thiết bị và bảo vệ dữ liệu xác thực khi lưu trữ. Hai cơ chế này có phạm vi khác nhau: quyền thiết bị do Cisco IOS quyết định, còn mã hóa cục bộ phụ thuộc vào khóa của phiên dự án.
 
-=== Luồng xác thực 2 bước Privilege 15 và nguyên lý Fail-Closed
-Hệ thống mạng yêu cầu các thao tác cấu hình phải được thực thi ở đặc quyền cao nhất (Privilege 15). CAMS triển khai cơ chế kiểm soát phân quyền 2 bước:
+=== Kiểm tra đặc quyền và xử lý lỗi xác thực
+CAMS lựa chọn mức đặc quyền 15 cho các luồng quản trị Cisco IOS hiện có. Đây là chính sách của ứng dụng, không phải yêu cầu mọi lệnh Cisco IOS đều cần mức 15. Quy trình kiểm tra gồm:
 - *Bước 1 (Prompt Level):* Nhận diện dấu nhắc lệnh ban đầu của thiết bị để xác định sơ bộ chế độ hoạt động (User EXEC hoặc Privileged EXEC).
-- *Bước 2 (Execution Level):* Buộc gửi lệnh `show privilege` để lấy mức quyền thực tế. Nếu quyền `< 15`, hệ thống đánh giá theo nguyên lý *Fail-Closed*:
-  - Nếu thiếu hoặc sai mật khẩu đặc quyền (Enable Secret), lập tức ngắt kết nối và từ chối mọi tác vụ tiếp theo.
-  - Nếu có mật khẩu đặc quyền, CAMS cưỡng bức leo thang bằng `enable 15`, sau đó tái xác minh. Mọi sai lệch đều dẫn đến việc đóng phiên an toàn.
+- *Bước 2:* Với thiết bị Cisco, gửi `show privilege` để đọc mức quyền. Khi xác định mức quyền dưới 15, thiếu mật khẩu đặc quyền gây lỗi; nếu có mật khẩu, ứng dụng gọi `enable` hoặc `enable 15` rồi kiểm tra lại. Nhánh xác minh sau nâng quyền từ chối khi không xác nhận được mức quyền yêu cầu.
+
+Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` khi lần kiểm tra ban đầu không đọc được mức quyền. Vì dấu nhắc này cũng có thể xuất hiện ở mức quyền trung gian, chưa thể mô tả toàn bộ cơ chế là từ chối mặc định (fail-closed) trong mọi tình huống. Đây là giới hạn cần kiểm thử và hoàn thiện.
 
 === Vòng đời khóa phiên Argon2id và mã hóa AES-256-GCM (ENC\$v2\$)
 Để chống lại các nỗ lực vét cạn ngoại tuyến (Offline Brute-force) và hoán đổi bản mã (Ciphertext Swapping), CAMS áp dụng kiến trúc mã hóa có xác thực:
-- Khóa phiên (DEK) được dẫn xuất từ mật khẩu dự án thông qua thuật toán Argon2id (RFC 9106) với cấu hình bộ nhớ và số vòng lặp tạo độ trễ tính toán an toàn.
-- Dữ liệu mật khẩu lưu trữ trong SQLite được mã hóa theo chuẩn `ENC\$v2\$` bằng AES-256-GCM.
-- Chuỗi xác thực (AAD) được gắn chặt với định danh thiết bị và tên cột (Record-Bound AAD). Bất kỳ sự hoán đổi dữ liệu nào giữa các thiết bị hoặc giữa các trường thông tin đều sẽ bị phát hiện (`InvalidTag`) và chặn đứng.
-- Khóa trong bộ nhớ (RAM) được tổ chức bằng cấu trúc mảng byte động, cho phép hệ thống chủ động ghi đè (`zero-wiping`) và hủy khóa ngay khi kết thúc phiên.
+- Khi dự án có mật khẩu, khóa mã hóa dữ liệu (Data Encryption Key – DEK) được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn song song @rfc9106.
+- Các trường mật khẩu được mã hóa bằng AES-256-GCM và lưu theo định dạng nội bộ `ENC$v2$`. Đây là phiên bản phong bì dữ liệu của CAMS, không phải tên một tiêu chuẩn mật mã @nistSp80038d.
+- Dữ liệu xác thực bổ sung (Additional Authenticated Data – AAD) chứa ngữ cảnh `host:column`. Với bản ghi phiên bản 2 và đúng ngữ cảnh, việc đổi bản mã sang thiết bị hoặc cột khác làm xác minh thẻ thất bại (`InvalidTag`).
+- Khóa do đối tượng mã hóa quản lý được giữ trong mảng byte để ghi đè khi hủy. Cơ chế này không xóa được mọi bản sao do môi trường chạy tạo ra. Dự án không có mật khẩu sử dụng khóa dẫn xuất từ dữ liệu cục bộ, nên không có cùng mức bảo vệ với khóa dựa trên bí mật người dùng.
 
 #report-table(
   columns: (22%, 35%, 43%),
   header: ([Tính năng], [Công nghệ & Thuật toán], [Cơ chế hoạt động]),
   rows: (
-    ([Enable Secret & Fail-Closed], [Regex kiểm tra quyền, Netmiko `enable`], [Kiểm tra đặc quyền thực tế bằng `show privilege`. Ngắt kết nối ngay nếu sai mật khẩu (Fail-Closed). Cưỡng bức leo thang nếu có Secret.]),
+    ([Kiểm tra đặc quyền], [Phân tích mức quyền, Netmiko `enable`], [Đọc mức quyền, nâng quyền khi cần và kiểm tra lại; còn nhánh dự phòng dấu nhắc ở lần kiểm tra ban đầu.]),
     ([Mã hóa At-Rest (`ENC\$v2\$`)], [Argon2id (RFC 9106), AES-256-GCM], [Lưu bản mã cấu trúc `ENC\$v2\$...`. Sử dụng Record-Bound AAD để chống tráo đổi. Ghi đè bộ nhớ khi hủy khóa.]),
-    ([Tự động Giám sát ACL Syslog], [Jinja2, Cisco IOS Logging], [Tự động chèn từ khóa `log` vào quy tắc ACL. Gửi bản tin vi phạm về Syslog Collector để cảnh báo theo thời gian thực.]),
+    ([Nhật ký ACL], [Jinja2, Cisco IOS logging], [Sinh tùy chọn ghi nhật ký cho các quy tắc hỗ trợ; thiết bị phải có đích Syslog và ngưỡng gửi phù hợp.]),
   ),
   caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
 ) <tab-security-architecture>
@@ -123,23 +137,32 @@ Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã th
     ([#table-code("t06_syslog_events")], [PK: #table-code("id")], [Nằm trong `info_collected.db`: Lưu trữ bản tin Syslog gốc, phân loại RFC 5424]),
   ),
   caption: [Lược đồ thực thể - quan hệ (ERD) các bảng nghiệp vụ cốt lõi của CAMS],
-) <tab-core-erd>
+) <tab-core-erd-summary>
 
-Để hệ thống hóa cấu trúc dữ liệu, hệ thống bao gồm 93 bảng nghiệp vụ khác nhau. Dưới đây là lược đồ các bảng chính yếu đại diện cho các phân hệ cốt lõi:
+Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/database/schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
 
 #report-table(
-  columns: (25%, 35%, 40%),
-  header: ([Tên bảng (Table)], [Khóa chính / Khóa ngoại], [Vai trò và dữ liệu lưu trữ]),
+  columns: (34%, 29%, 37%),
+  header: ([Bảng], [Khóa chính / khóa ngoại], [Vai trò]),
   rows: (
-    ([#table-code("t01_devices")], [PK: #table-code("host")], [Lưu định danh, thông tin kết nối, OS và `enable_password` (ENC\$v2\$)]),
-    ([#table-code("t02_interfaces")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý cấu hình cổng L3, L2, trạng thái UP/DOWN và mô tả]),
-    ([#table-code("t03_routing_ospf")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu thông tin tiến trình OSPF, vùng Area, Router ID]),
-    ([#table-code("t04_acl_rules")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu danh sách kiểm soát truy cập, thứ tự, hành động và từ khóa `log`]),
-    ([#table-code("t05_nat_pat")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý danh sách ánh xạ địa chỉ biên (NAT/PAT), Inside/Outside]),
-    ([#table-code("t06_syslog_events")], [PK: #table-code("id")], [Nằm trong `info_collected.db`: Lưu trữ bản tin Syslog gốc, phân loại RFC 5424]),
+    ([#table-code("t01_devices")], [PK: #table-code("host")], [Danh mục và thông tin kết nối thiết bị.]),
+    ([#table-code("t02_interface_name")], [PK: #table-code("iface_id"); FK: #table-code("host")], [Cổng mạng và trạng thái cấu hình.]),
+    ([#table-code("t04_ospf_processes")], [PK: #table-code("ospf_id"); FK: #table-code("host")], [Tiến trình OSPF và Router ID.]),
+    ([#table-code("t04_ospf_networks")], [PK: #table-code("id"); FK: #table-code("ospf_id")], [Mạng, wildcard và vùng OSPF.]),
+    ([#table-code("t05_ACL_DB")], [PK: #table-code("Acl_id"); FK: #table-code("host")], [Tên, loại ACL và trạng thái cấu hình.]),
+    ([#table-code("t05_extended_acl_rules")], [PK: #table-code("id"); FK: #table-code("acl_id")], [Thứ tự, hành động và điều kiện khớp luật.]),
+    ([#table-code("t05_NAT_DB")], [PK: #table-code("nat_id"); FK: #table-code("host")], [Cấu hình NAT và loại chuyển đổi.]),
+    ([#table-code("t12_syslog_messages")], [PK: #table-code("id"); #table-code("device_host") là trường liên kết logic], [Thuộc cơ sở dữ liệu quan sát; lưu nguồn, PRI, mức độ, mã Cisco và bản tin gốc.]),
   ),
-  caption: [Lược đồ thực thể - quan hệ (ERD) các bảng nghiệp vụ cốt lõi của CAMS],
+  caption: [Các bảng và khóa đại diện trong lược đồ dữ liệu CAMS],
 ) <tab-core-erd>
+
+@fig-core-erd thể hiện các quan hệ một–nhiều. Đường liền là khóa ngoại trong cùng cơ sở dữ liệu; đường đứt là đối chiếu logic giữa hai tệp SQLite. Bảng Syslog không khai báo khóa ngoại sang danh mục thiết bị, nên không được mô tả như quan hệ toàn vẹn tham chiếu do SQLite tự bảo đảm.
+
+#figure(
+  image("/00_book/figures/report/diagrams/review-core-erd.svg", width: 100%),
+  caption: [Lược đồ quan hệ đại diện giữa thiết bị, cấu hình và nhật ký],
+) <fig-core-erd>
 
 == Thiết kế giao diện và xử lý lỗi
 

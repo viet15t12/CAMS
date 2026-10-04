@@ -255,7 +255,7 @@ class VtpGroupRepository:
                     """
                     UPDATE t09_vtp_switches
                     SET sync_status = 'pending_apply', success = 'pending_apply'
-                    WHERE vtp_domain_id = ?;
+                    WHERE vtp_domain_id = ? AND success <> 'pending_delete';
                     """,
                     (domain_id,),
                 )
@@ -368,7 +368,7 @@ class VtpGroupService:
     def max_hosts(self) -> int:
         try:
             count = len(self.repository.connected_switches())
-            return max(count, 2)
+            return min(self.MAX_HOSTS, max(count, 2))
         except Exception:
             return self.MAX_HOSTS
 

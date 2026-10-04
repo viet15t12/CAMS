@@ -13,7 +13,7 @@ Rectangle {
     property var activeFilters: ({
         "host": "", "hosts": [], "search": "", "severities": [], "protocols": [],
         "from_time": "", "to_time": "", "per_host": 0,
-        "facility": "", "mnemonic": "", "smart_query": ""
+        "facility": "", "mnemonic": "", "smart_query": "", "security": ""
     })
     property var availableHosts: []
     property bool hasMore: false
@@ -65,6 +65,13 @@ Rectangle {
         const protocols = activeFilters.protocols || []
         if (protocols.length > 0
                 && protocols.indexOf(String(row.protocol || "").toLowerCase()) < 0)
+            return false
+
+        const security = String(activeFilters.security || "")
+        const rowSecurity = String(row.security_feature || "")
+        if (security === "all" && rowSecurity === "")
+            return false
+        if (security !== "" && security !== "all" && security !== rowSecurity)
             return false
 
         const received = Date.parse(String(row.received_at || ""))
@@ -167,7 +174,9 @@ Rectangle {
             message: String(row.message || ""),
             raw_message: String(row.raw_message || ""),
             protocol: String(row.protocol || "").toLowerCase(),
-            parse_status: String(row.parse_status || "raw")
+            parse_status: String(row.parse_status || "raw"),
+            security_feature: String(row.security_feature || ""),
+            security_label: String(row.security_label || "")
         }
     }
 
@@ -209,7 +218,7 @@ Rectangle {
             Layout.fillWidth: true
             title: "System Logs"
             subtitle: String(root.activeFilters.host || "") === ""
-                      ? "Receive, filter, and inspect Syslog messages from connected devices."
+                      ? "Monitor device logs and security events: ACL, DHCP Snooping, Port Security, DAI, and authentication."
                       : "Showing messages for " + root.activeFilters.host
         }
 

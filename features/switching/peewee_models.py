@@ -24,6 +24,7 @@ class SwitchingModels:
     etherchannel: type[Model]
     stp: type[Model]
     l2_vlan: type[Model]
+    security_global: type[Model]
     trust_port: type[Model]
     static_mac: type[Model]
     port_security: type[Model]
@@ -101,6 +102,13 @@ def build_switching_models(database: SqliteDatabase) -> SwitchingModels:
         class Meta:
             table_name = "t06_security_l2"
 
+    class SecurityGlobal(SwitchingModel):
+        host = TextField(primary_key=True)
+        success = TextField()
+
+        class Meta:
+            table_name = "t06_security_global"
+
     class TrustPort(SwitchingModel):
         id = AutoField()
         host = TextField()
@@ -143,6 +151,7 @@ def build_switching_models(database: SqliteDatabase) -> SwitchingModels:
         etherchannel=Etherchannel,
         stp=Stp,
         l2_vlan=L2VlanSecurity,
+        security_global=SecurityGlobal,
         trust_port=TrustPort,
         static_mac=StaticMac,
         port_security=PortSecurity,

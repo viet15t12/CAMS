@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#334155" stroke-width="1.5"/></marker><style>text{font-family:'Liberation Sans',sans-serif;fill:#172033}.title{font-size:22px;font-weight:700}.small{font-size:17px}.box{fill:#eef3f7;stroke:#526579;stroke-width:1.5}.rel{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}.logic{stroke:#334155;stroke-width:1.5;fill:none;stroke-dasharray:7 5;marker-end:url(#a)}</style></defs>
+  <rect width="1200" height="720" fill="white"/>
+  <g>
+    <rect class="box" x="430" y="25" width="340" height="80" rx="8"/><text class="title" x="600" y="58" text-anchor="middle">t01_devices</text><text class="small" x="600" y="85" text-anchor="middle">PK host</text>
+    <rect class="box" x="40" y="190" width="300" height="80" rx="8"/><text class="title" x="190" y="223" text-anchor="middle">t02_interface_name</text><text class="small" x="190" y="250" text-anchor="middle">PK iface_id · FK host</text>
+    <rect class="box" x="450" y="190" width="300" height="80" rx="8"/><text class="title" x="600" y="223" text-anchor="middle">t04_ospf_processes</text><text class="small" x="600" y="250" text-anchor="middle">PK ospf_id · FK host</text>
+    <rect class="box" x="860" y="190" width="300" height="80" rx="8"/><text class="title" x="1010" y="223" text-anchor="middle">t05_ACL_DB</text><text class="small" x="1010" y="250" text-anchor="middle">PK Acl_id · FK host</text>
+    <rect class="box" x="450" y="350" width="300" height="80" rx="8"/><text class="title" x="600" y="383" text-anchor="middle">t04_ospf_networks</text><text class="small" x="600" y="410" text-anchor="middle">PK id · FK ospf_id</text>
+    <rect class="box" x="860" y="350" width="300" height="80" rx="8"/><text class="title" x="1010" y="383" text-anchor="middle">t05_extended_acl_rules</text><text class="small" x="1010" y="410" text-anchor="middle">PK id · FK acl_id</text>
+    <rect class="box" x="40" y="350" width="300" height="80" rx="8"/><text class="title" x="190" y="383" text-anchor="middle">t05_NAT_DB</text><text class="small" x="190" y="410" text-anchor="middle">PK nat_id · FK host</text>
+    <path class="rel" d="M520 105L230 190"/><path class="rel" d="M600 105V190"/><path class="rel" d="M680 105L970 190"/><path class="rel" d="M470 105L190 350"/>
+    <path class="rel" d="M600 270V350"/><path class="rel" d="M1010 270V350"/>
+    <text class="small" x="330" y="146">1 → 0..n</text><text class="small" x="612" y="151">1 → 0..n</text><text class="small" x="842" y="146">1 → 0..n</text>
+    <path d="M30 495H1170" stroke="#526579" stroke-dasharray="8 5"/><text class="small" x="45" y="483">device_network.db</text><text class="small" x="45" y="525">info_collected.db</text>
+    <rect class="box" x="430" y="555" width="340" height="95" rx="8"/><text class="title" x="600" y="588" text-anchor="middle">t12_syslog_messages</text><text class="small" x="600" y="615" text-anchor="middle">PK id · device_host (liên kết logic)</text><text class="small" x="600" y="640" text-anchor="middle">PRI · severity · bản tin gốc</text>
+    <path class="logic" d="M770 65H1165V603H770"/><text class="small" x="990" y="586">đối chiếu host</text>
+    <text class="small" x="600" y="695" text-anchor="middle">Đường liền: khóa ngoại trong một cơ sở dữ liệu · Đường đứt: liên kết logic giữa hai tệp</text>
+  </g>
+</svg>

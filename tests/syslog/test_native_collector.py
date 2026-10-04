@@ -17,6 +17,7 @@ from PyQt6.QtWidgets import QApplication
 
 from features.syslog.native import NativeSyslogCollector
 from features.syslog.qt.manager import SyslogManager
+from features.syslog.persistence.message_repository import MessageRepository
 from infrastructure.database.paths import DEVICE_NETWORK_DB, INFO_COLLECTED_DB
 
 
@@ -48,7 +49,13 @@ class NativeCollectorTests(unittest.TestCase):
             info_db = root / "info.db"
             device_db = root / "device.db"
             shutil.copy2(INFO_COLLECTED_DB, info_db)
-            shutil.copy2(DEVICE_NETWORK_DB, device_db)
+            with closing(sqlite3.connect(device_db)) as connection:
+                connection.executescript(
+                    "CREATE TABLE t01_devices(host TEXT);"
+                    "CREATE TABLE t06_svi(host TEXT, ip_address TEXT, sync_status TEXT);"
+                    "INSERT INTO t01_devices VALUES ('192.0.2.254');"
+                    "INSERT INTO t06_svi VALUES ('192.0.2.254', '127.0.0.1', 'synchronized');"
+                )
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
                 probe.bind(("127.0.0.1", 0))
                 port = int(probe.getsockname()[1])
@@ -85,6 +92,15 @@ class NativeCollectorTests(unittest.TestCase):
                     tcp.sendall(b"<37>Aug 23 04:29:21.000: %SYS-5-CONFIG_I: Native TCP\n")
                 tcp_event = self._event(process)
                 self.assertEqual(tcp_event["row"]["protocol"], "tcp")
+                self.assertEqual(tcp_event["row"]["device_host"], "192.0.2.254")
+
+                with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
+                    udp.sendto(b"%SW_DAI-4-DHCP_SNOOPING_DENY: Invalid ARP on Gi1/1", ("127.0.0.1", port))
+                security_event = self._event(process)
+                self.assertEqual(security_event["row"]["device_host"], "192.0.2.254")
+                stored_security = MessageRepository(info_db).query_messages({"host": "192.0.2.254", "security": "dai"})
+                self.assertEqual(len(stored_security), 1)
+                self.assertEqual(stored_security[0]["security_label"], "Dynamic ARP Inspection")
 
                 with closing(sqlite3.connect(info_db)) as connection:
                     rows = connection.execute(
@@ -176,7 +192,7 @@ class NativeCollectorTests(unittest.TestCase):
                 self.assertEqual(manager.listenerState, "listening")
                 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
                     udp.sendto(
-                        b"<36>Aug 23 04:29:23.000: %SYS-5-CONFIG_I: Manager signal",
+                        b"<36>Aug 23 04:29:23.000: %SW_DAI-4-DHCP_SNOOPING_DENY: Manager signal",
                         ("127.0.0.1", port),
                     )
                 deadline = time.monotonic() + 3
@@ -184,6 +200,7 @@ class NativeCollectorTests(unittest.TestCase):
                     self.app.processEvents()
                     time.sleep(0.01)
                 self.assertEqual(rows[0]["message"], "Manager signal")
+                self.assertEqual(rows[0]["security_feature"], "dai")
                 self.assertEqual(manager.receivedCount, 1)
             finally:
                 manager.shutdown()
