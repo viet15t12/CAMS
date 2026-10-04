@@ -193,7 +193,7 @@ trong panel SFTP/SCP. Chọn thiết bị đang **Connected**, nhấn chuột ph
 một snapshot theo host rồi đồng bộ những phần cấu hình được hỗ trợ vào database.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/11-device-context-connected.png"
+<p><img src="../assets/ui/docshot/devices/context-connected.png"
 style="width:55.0%" /></p>
 <figcaption><p>Lệnh Get running-config trong menu của thiết bị Connected.</p></figcaption>
 </figure>

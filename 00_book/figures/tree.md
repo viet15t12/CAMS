@@ -11,26 +11,6 @@
 │   │   ├── 08-save-project.png
 │   │   ├── 09-snapshot-history.png
 │   │   └── 10-ready-workspace.png
-│   ├── chapter-04
-│   │   ├── 01-devices-inventory.png
-│   │   ├── 02-add-device-empty.png
-│   │   ├── 03-add-device-filled.png
-│   │   ├── 04-device-added-waiting.png
-│   │   ├── 05-ssh-compatibility.png
-│   │   ├── 06-add-multiple-devices.png
-│   │   ├── 07-batch-devices-filled.png
-│   │   ├── 08-search-filter.png
-│   │   ├── 09-device-context-waiting.png
-│   │   ├── 10-device-connected.png
-│   │   ├── 11-device-context-connected.png
-│   │   ├── 12-device-context-disconnected.png
-│   │   ├── 13-multi-select.png
-│   │   ├── 14-multi-select-actions.png
-│   │   ├── 15-edit-device.png
-│   │   ├── 16-delete-device-confirmation.png
-│   │   ├── 17-running-config-result.png
-│   │   ├── 18-import-result.png
-│   │   └── 19-batch-table-detail.png
 │   ├── chapter-05
 │   │   ├── 01-router-interface-overview.png
 │   │   ├── 02-edit-physical-interface.png
@@ -184,7 +164,6 @@
 │   │   ├── 06-acl-extended-form.png
 │   │   ├── 07-acl-bindings.png
 │   │   └── 08-acl-view-push.png
-│   ├── devices.png
 │   ├── vlan
 │   │   ├── 01-select-switch.png
 │   │   ├── 02-open-vlan.png
@@ -406,5 +385,30 @@ B03A canonical docshot assets (outside this figures tree):
 - documentation_assets/ui/docshot/core/sidebar-collapsed.png
 - documentation_assets/ui/docshot/core/welcome-recent-projects.png
 - documentation_assets/ui/docshot/core/workspace-empty.png
+
+Original approved PNG bytes preserved. MkDocs uses generated staging only for manifest-selected assets; generator-only assets gain no document placement.
+
+B03B canonical docshot assets (outside this figures tree):
+
+- documentation_assets/ui/docshot/devices/inventory-waiting.png
+- documentation_assets/ui/docshot/devices/create-empty.png
+- documentation_assets/ui/docshot/devices/create-filled.png
+- documentation_assets/ui/docshot/devices/created-waiting.png
+- documentation_assets/ui/docshot/devices/ssh-compatibility.png
+- documentation_assets/ui/docshot/devices/batch-create-empty.png
+- documentation_assets/ui/docshot/devices/batch-create-filled.png
+- documentation_assets/ui/docshot/devices/search-switches.png
+- documentation_assets/ui/docshot/devices/context-waiting.png
+- documentation_assets/ui/docshot/devices/connected.png
+- documentation_assets/ui/docshot/devices/context-connected.png
+- documentation_assets/ui/docshot/devices/context-disconnected.png
+- documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
+- documentation_assets/ui/docshot/devices/multi-select-actions.png
+- documentation_assets/ui/docshot/devices/edit.png
+- documentation_assets/ui/docshot/devices/delete-confirmation.png
+- documentation_assets/ui/docshot/devices/running-config-snapshot.png
+- documentation_assets/ui/docshot/devices/import-result.png
+- documentation_assets/ui/docshot/devices/batch-host-name-detail.png
+- documentation_assets/ui/docshot/devices/inventory-router-selected.png
 
 Original approved PNG bytes preserved. MkDocs uses generated staging only for manifest-selected assets; generator-only assets gain no document placement.

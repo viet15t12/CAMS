@@ -1158,14 +1158,14 @@ assets:
   domain: devices
   subject: inventory-waiting
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/01-devices-inventory.png
-  path: 00_book/figures/gui/chapter-04/01-devices-inventory.png
+  current_path: documentation_assets/ui/docshot/devices/inventory-waiting.png
+  path: documentation_assets/ui/docshot/devices/inventory-waiting.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/inventory-waiting.png
   legacy_path: 00_book/figures/gui/chapter-04/01-devices-inventory.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 5795b95a2f9da1116c2b884f6aa751855938d18da9ab7696a7632ce80728bf18
   provenance:
     assessment: docshot-confirmed
@@ -1183,19 +1183,20 @@ assets:
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 23
-    referenced_path: ../../figures/gui/chapter-04/01-devices-inventory.png
+    referenced_path: ../assets/ui/docshot/devices/inventory-waiting.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 16
-    referenced_path: figures/gui/chapter-04/01-devices-inventory.png
+    referenced_path: /documentation_assets/ui/docshot/devices/inventory-waiting.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 22
-    referenced_path: 01-devices-inventory.png
+  - source_document: docshots/outputs.py
+    line: 44
+    referenced_path: documentation_assets/ui/docshot/devices/inventory-waiting.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/inventory-waiting.png
   status: active
@@ -1211,14 +1212,14 @@ assets:
   domain: devices
   subject: create-empty
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/02-add-device-empty.png
-  path: 00_book/figures/gui/chapter-04/02-add-device-empty.png
+  current_path: documentation_assets/ui/docshot/devices/create-empty.png
+  path: documentation_assets/ui/docshot/devices/create-empty.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/create-empty.png
   legacy_path: 00_book/figures/gui/chapter-04/02-add-device-empty.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0b2ecd621e3a7ad55dc496f8b16a72a7690daeed3b0d3f7e229f661d1793e7b2
   provenance:
     assessment: docshot-confirmed
@@ -1236,19 +1237,20 @@ assets:
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 70
-    referenced_path: ../../figures/gui/chapter-04/02-add-device-empty.png
+    referenced_path: ../assets/ui/docshot/devices/create-empty.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 47
-    referenced_path: figures/gui/chapter-04/02-add-device-empty.png
+    referenced_path: /documentation_assets/ui/docshot/devices/create-empty.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 22
-    referenced_path: 02-add-device-empty.png
+  - source_document: docshots/outputs.py
+    line: 46
+    referenced_path: documentation_assets/ui/docshot/devices/create-empty.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/create-empty.png
   status: active
@@ -1264,14 +1266,14 @@ assets:
   domain: devices
   subject: create-filled
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/03-add-device-filled.png
-  path: 00_book/figures/gui/chapter-04/03-add-device-filled.png
+  current_path: documentation_assets/ui/docshot/devices/create-filled.png
+  path: documentation_assets/ui/docshot/devices/create-filled.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/create-filled.png
   legacy_path: 00_book/figures/gui/chapter-04/03-add-device-filled.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: a02d9891d0f55e0241144c01817c22ed190a5e43adfefbfcdd2e8bc4f1074c33
   provenance:
     assessment: docshot-confirmed
@@ -1289,19 +1291,20 @@ assets:
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 145
-    referenced_path: ../../figures/gui/chapter-04/03-add-device-filled.png
+    referenced_path: ../assets/ui/docshot/devices/create-filled.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 113
-    referenced_path: figures/gui/chapter-04/03-add-device-filled.png
+    referenced_path: /documentation_assets/ui/docshot/devices/create-filled.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 22
-    referenced_path: 03-add-device-filled.png
+  - source_document: docshots/outputs.py
+    line: 48
+    referenced_path: documentation_assets/ui/docshot/devices/create-filled.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/create-filled.png
   status: active
@@ -1317,14 +1320,14 @@ assets:
   domain: devices
   subject: created-waiting
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/04-device-added-waiting.png
-  path: 00_book/figures/gui/chapter-04/04-device-added-waiting.png
+  current_path: documentation_assets/ui/docshot/devices/created-waiting.png
+  path: documentation_assets/ui/docshot/devices/created-waiting.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/created-waiting.png
   legacy_path: 00_book/figures/gui/chapter-04/04-device-added-waiting.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 6d8c206c275cfc57390585b17d678ebb76ce7f5f59e2ef88486d8bcb103aa7f1
   provenance:
     assessment: docshot-confirmed
@@ -1341,20 +1344,25 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 195
+    referenced_path: ../assets/ui/docshot/devices/created-waiting.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 196
-    referenced_path: ../../figures/gui/chapter-04/04-device-added-waiting.png
+    referenced_path: ../assets/ui/docshot/devices/created-waiting.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 135
-    referenced_path: figures/gui/chapter-04/04-device-added-waiting.png
+    referenced_path: /documentation_assets/ui/docshot/devices/created-waiting.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 23
-    referenced_path: 04-device-added-waiting.png
+  - source_document: docshots/outputs.py
+    line: 50
+    referenced_path: documentation_assets/ui/docshot/devices/created-waiting.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/created-waiting.png
   status: active
@@ -1370,14 +1378,14 @@ assets:
   domain: devices
   subject: ssh-compatibility
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/05-ssh-compatibility.png
-  path: 00_book/figures/gui/chapter-04/05-ssh-compatibility.png
+  current_path: documentation_assets/ui/docshot/devices/ssh-compatibility.png
+  path: documentation_assets/ui/docshot/devices/ssh-compatibility.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/ssh-compatibility.png
   legacy_path: 00_book/figures/gui/chapter-04/05-ssh-compatibility.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d24d229804c949a53ff34b3a69f6002d5245878d168afdc5425dfed8116aff1b
   provenance:
     assessment: docshot-confirmed
@@ -1394,20 +1402,25 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 159
+    referenced_path: ../assets/ui/docshot/devices/ssh-compatibility.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 160
-    referenced_path: ../../figures/gui/chapter-04/05-ssh-compatibility.png
+    referenced_path: ../assets/ui/docshot/devices/ssh-compatibility.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 120
-    referenced_path: figures/gui/chapter-04/05-ssh-compatibility.png
+    referenced_path: /documentation_assets/ui/docshot/devices/ssh-compatibility.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 23
-    referenced_path: 05-ssh-compatibility.png
+  - source_document: docshots/outputs.py
+    line: 52
+    referenced_path: documentation_assets/ui/docshot/devices/ssh-compatibility.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/ssh-compatibility.png
   status: active
@@ -1423,14 +1436,14 @@ assets:
   domain: devices
   subject: batch-create-empty
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/06-add-multiple-devices.png
-  path: 00_book/figures/gui/chapter-04/06-add-multiple-devices.png
+  current_path: documentation_assets/ui/docshot/devices/batch-create-empty.png
+  path: documentation_assets/ui/docshot/devices/batch-create-empty.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/batch-create-empty.png
   legacy_path: 00_book/figures/gui/chapter-04/06-add-multiple-devices.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0779ab2f5ab0eb2af296e2d0e75aefd86c30874d0c6c24aa8d2c9e7980b9cfbe
   provenance:
     assessment: docshot-confirmed
@@ -1447,20 +1460,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 210
+    referenced_path: ../assets/ui/docshot/devices/batch-create-empty.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 213
-    referenced_path: ../../figures/gui/chapter-04/06-add-multiple-devices.png
+    referenced_path: ../assets/ui/docshot/devices/batch-create-empty.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 144
-    referenced_path: figures/gui/chapter-04/06-add-multiple-devices.png
+    referenced_path: /documentation_assets/ui/docshot/devices/batch-create-empty.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 23
-    referenced_path: 06-add-multiple-devices.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 145
+    referenced_path: /documentation_assets/ui/docshot/devices/batch-create-empty.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 54
+    referenced_path: documentation_assets/ui/docshot/devices/batch-create-empty.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/batch-create-empty.png
   status: active
@@ -1476,14 +1498,14 @@ assets:
   domain: devices
   subject: batch-create-filled
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/07-batch-devices-filled.png
-  path: 00_book/figures/gui/chapter-04/07-batch-devices-filled.png
+  current_path: documentation_assets/ui/docshot/devices/batch-create-filled.png
+  path: documentation_assets/ui/docshot/devices/batch-create-filled.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/batch-create-filled.png
   legacy_path: 00_book/figures/gui/chapter-04/07-batch-devices-filled.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7b8c019d6ea70f79f715b97664655b88e17e87ebf8344fd44e750a32bb72afdb
   provenance:
     assessment: docshot-confirmed
@@ -1500,20 +1522,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 238
+    referenced_path: ../assets/ui/docshot/devices/batch-create-filled.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 241
-    referenced_path: ../../figures/gui/chapter-04/07-batch-devices-filled.png
+    referenced_path: ../assets/ui/docshot/devices/batch-create-filled.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 157
-    referenced_path: figures/gui/chapter-04/07-batch-devices-filled.png
+    referenced_path: /documentation_assets/ui/docshot/devices/batch-create-filled.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 24
-    referenced_path: 07-batch-devices-filled.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 158
+    referenced_path: /documentation_assets/ui/docshot/devices/batch-create-filled.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 56
+    referenced_path: documentation_assets/ui/docshot/devices/batch-create-filled.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/batch-create-filled.png
   status: active
@@ -1529,14 +1560,14 @@ assets:
   domain: devices
   subject: search-switches
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/08-search-filter.png
-  path: 00_book/figures/gui/chapter-04/08-search-filter.png
+  current_path: documentation_assets/ui/docshot/devices/search-switches.png
+  path: documentation_assets/ui/docshot/devices/search-switches.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/search-switches.png
   legacy_path: 00_book/figures/gui/chapter-04/08-search-filter.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d0b036bc1c80f8e2ff602e0ac0dbbce0b022ebae313088637c8efb3d8ddde2f0
   provenance:
     assessment: docshot-confirmed
@@ -1553,20 +1584,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 329
+    referenced_path: ../assets/ui/docshot/devices/search-switches.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 332
-    referenced_path: ../../figures/gui/chapter-04/08-search-filter.png
+    referenced_path: ../assets/ui/docshot/devices/search-switches.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 200
-    referenced_path: figures/gui/chapter-04/08-search-filter.png
+    referenced_path: /documentation_assets/ui/docshot/devices/search-switches.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 24
-    referenced_path: 08-search-filter.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 201
+    referenced_path: /documentation_assets/ui/docshot/devices/search-switches.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 58
+    referenced_path: documentation_assets/ui/docshot/devices/search-switches.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/search-switches.png
   status: active
@@ -1582,14 +1622,14 @@ assets:
   domain: devices
   subject: context-waiting
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/09-device-context-waiting.png
-  path: 00_book/figures/gui/chapter-04/09-device-context-waiting.png
+  current_path: documentation_assets/ui/docshot/devices/context-waiting.png
+  path: documentation_assets/ui/docshot/devices/context-waiting.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/context-waiting.png
   legacy_path: 00_book/figures/gui/chapter-04/09-device-context-waiting.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1876fde72c06f6d519d550e495e5131f3b61073a3e4b04e67d105f721c13ba3b
   provenance:
     assessment: docshot-confirmed
@@ -1606,20 +1646,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 397
+    referenced_path: ../assets/ui/docshot/devices/context-waiting.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 400
-    referenced_path: ../../figures/gui/chapter-04/09-device-context-waiting.png
+    referenced_path: ../assets/ui/docshot/devices/context-waiting.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 238
-    referenced_path: figures/gui/chapter-04/09-device-context-waiting.png
+    referenced_path: /documentation_assets/ui/docshot/devices/context-waiting.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 24
-    referenced_path: 09-device-context-waiting.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 239
+    referenced_path: /documentation_assets/ui/docshot/devices/context-waiting.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 60
+    referenced_path: documentation_assets/ui/docshot/devices/context-waiting.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/context-waiting.png
   status: active
@@ -1635,14 +1684,14 @@ assets:
   domain: devices
   subject: connected
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/10-device-connected.png
-  path: 00_book/figures/gui/chapter-04/10-device-connected.png
+  current_path: documentation_assets/ui/docshot/devices/connected.png
+  path: documentation_assets/ui/docshot/devices/connected.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/connected.png
   legacy_path: 00_book/figures/gui/chapter-04/10-device-connected.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 832f211649abc08ec638aaeeb901393e142597beb27df3b2fa45b3e213ec2eaa
   provenance:
     assessment: docshot-confirmed
@@ -1659,20 +1708,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 423
+    referenced_path: ../assets/ui/docshot/devices/connected.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 427
-    referenced_path: ../../figures/gui/chapter-04/10-device-connected.png
+    referenced_path: ../assets/ui/docshot/devices/connected.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 250
-    referenced_path: figures/gui/chapter-04/10-device-connected.png
+    referenced_path: /documentation_assets/ui/docshot/devices/connected.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 25
-    referenced_path: 10-device-connected.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 251
+    referenced_path: /documentation_assets/ui/docshot/devices/connected.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 62
+    referenced_path: documentation_assets/ui/docshot/devices/connected.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/connected.png
   status: active
@@ -1688,14 +1746,14 @@ assets:
   domain: devices
   subject: context-connected
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/11-device-context-connected.png
-  path: 00_book/figures/gui/chapter-04/11-device-context-connected.png
+  current_path: documentation_assets/ui/docshot/devices/context-connected.png
+  path: documentation_assets/ui/docshot/devices/context-connected.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/context-connected.png
   legacy_path: 00_book/figures/gui/chapter-04/11-device-context-connected.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0fc0c956706debe4d7b88d7ea8aa6ee37e1c59975589ce779052247c2e1a55c5
   provenance:
     assessment: docshot-confirmed
@@ -1712,28 +1770,37 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 406
+    referenced_path: ../assets/ui/docshot/devices/context-connected.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 409
-    referenced_path: ../../figures/gui/chapter-04/11-device-context-connected.png
+    referenced_path: ../assets/ui/docshot/devices/context-connected.png
     target_type: book-mkdocs
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 196
-    referenced_path: ../../figures/gui/chapter-04/11-device-context-connected.png
+    referenced_path: ../assets/ui/docshot/devices/context-connected.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 241
-    referenced_path: figures/gui/chapter-04/11-device-context-connected.png
+    referenced_path: /documentation_assets/ui/docshot/devices/context-connected.png
+    target_type: book-typst
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 242
+    referenced_path: /documentation_assets/ui/docshot/devices/context-connected.png
     target_type: book-typst
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 133
-    referenced_path: figures/gui/chapter-04/11-device-context-connected.png
+    referenced_path: /documentation_assets/ui/docshot/devices/context-connected.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 25
-    referenced_path: 11-device-context-connected.png
+  - source_document: docshots/outputs.py
+    line: 64
+    referenced_path: documentation_assets/ui/docshot/devices/context-connected.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/context-connected.png
   status: active
@@ -1749,14 +1816,14 @@ assets:
   domain: devices
   subject: context-disconnected
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/12-device-context-disconnected.png
-  path: 00_book/figures/gui/chapter-04/12-device-context-disconnected.png
+  current_path: documentation_assets/ui/docshot/devices/context-disconnected.png
+  path: documentation_assets/ui/docshot/devices/context-disconnected.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/context-disconnected.png
   legacy_path: 00_book/figures/gui/chapter-04/12-device-context-disconnected.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 048ab16d3967320faf63ffbed1adf19c047915239eea20768e8adc197b701d60
   provenance:
     assessment: docshot-confirmed
@@ -1773,20 +1840,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 450
+    referenced_path: ../assets/ui/docshot/devices/context-disconnected.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 454
-    referenced_path: ../../figures/gui/chapter-04/12-device-context-disconnected.png
+    referenced_path: ../assets/ui/docshot/devices/context-disconnected.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 261
-    referenced_path: figures/gui/chapter-04/12-device-context-disconnected.png
+    referenced_path: /documentation_assets/ui/docshot/devices/context-disconnected.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 25
-    referenced_path: 12-device-context-disconnected.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 262
+    referenced_path: /documentation_assets/ui/docshot/devices/context-disconnected.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 66
+    referenced_path: documentation_assets/ui/docshot/devices/context-disconnected.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/context-disconnected.png
   status: active
@@ -1802,14 +1878,14 @@ assets:
   domain: devices
   subject: multi-select-mixed-status
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/13-multi-select.png
-  path: 00_book/figures/gui/chapter-04/13-multi-select.png
+  current_path: documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
+  path: documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
   legacy_path: 00_book/figures/gui/chapter-04/13-multi-select.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: aaff71c875a43f65edb1c23ce437995dc8fcbab863d742c4fd3a6c991973d921
   provenance:
     assessment: docshot-confirmed
@@ -1826,20 +1902,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 354
+    referenced_path: ../assets/ui/docshot/devices/multi-select-mixed-status.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 358
-    referenced_path: ../../figures/gui/chapter-04/13-multi-select.png
+    referenced_path: ../assets/ui/docshot/devices/multi-select-mixed-status.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 211
-    referenced_path: figures/gui/chapter-04/13-multi-select.png
+    referenced_path: /documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 26
-    referenced_path: 13-multi-select.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 212
+    referenced_path: /documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 68
+    referenced_path: documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/multi-select-mixed-status.png
   status: active
@@ -1855,14 +1940,14 @@ assets:
   domain: devices
   subject: multi-select-actions
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/14-multi-select-actions.png
-  path: 00_book/figures/gui/chapter-04/14-multi-select-actions.png
+  current_path: documentation_assets/ui/docshot/devices/multi-select-actions.png
+  path: documentation_assets/ui/docshot/devices/multi-select-actions.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/multi-select-actions.png
   legacy_path: 00_book/figures/gui/chapter-04/14-multi-select-actions.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 32addcf16e0806130c076ad7e61bcc28e8d617b324c3c374712b86b8388695ac
   provenance:
     assessment: docshot-confirmed
@@ -1879,20 +1964,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 548
+    referenced_path: ../assets/ui/docshot/devices/multi-select-actions.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 552
-    referenced_path: ../../figures/gui/chapter-04/14-multi-select-actions.png
+    referenced_path: ../assets/ui/docshot/devices/multi-select-actions.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 305
-    referenced_path: figures/gui/chapter-04/14-multi-select-actions.png
+    referenced_path: /documentation_assets/ui/docshot/devices/multi-select-actions.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 26
-    referenced_path: 14-multi-select-actions.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 308
+    referenced_path: /documentation_assets/ui/docshot/devices/multi-select-actions.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 70
+    referenced_path: documentation_assets/ui/docshot/devices/multi-select-actions.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/multi-select-actions.png
   status: active
@@ -1908,14 +2002,14 @@ assets:
   domain: devices
   subject: edit
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/15-edit-device.png
-  path: 00_book/figures/gui/chapter-04/15-edit-device.png
+  current_path: documentation_assets/ui/docshot/devices/edit.png
+  path: documentation_assets/ui/docshot/devices/edit.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/edit.png
   legacy_path: 00_book/figures/gui/chapter-04/15-edit-device.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 21540dd91bb9f77961735a68c1533306bcba8e6a34ee0a1c1e07594dfe8ba7c5
   provenance:
     assessment: docshot-confirmed
@@ -1932,20 +2026,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 581
+    referenced_path: ../assets/ui/docshot/devices/edit.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 585
-    referenced_path: ../../figures/gui/chapter-04/15-edit-device.png
+    referenced_path: ../assets/ui/docshot/devices/edit.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 328
-    referenced_path: figures/gui/chapter-04/15-edit-device.png
+    referenced_path: /documentation_assets/ui/docshot/devices/edit.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 26
-    referenced_path: 15-edit-device.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 331
+    referenced_path: /documentation_assets/ui/docshot/devices/edit.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 72
+    referenced_path: documentation_assets/ui/docshot/devices/edit.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/edit.png
   status: active
@@ -1961,14 +2064,14 @@ assets:
   domain: devices
   subject: delete-confirmation
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/16-delete-device-confirmation.png
-  path: 00_book/figures/gui/chapter-04/16-delete-device-confirmation.png
+  current_path: documentation_assets/ui/docshot/devices/delete-confirmation.png
+  path: documentation_assets/ui/docshot/devices/delete-confirmation.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/delete-confirmation.png
   legacy_path: 00_book/figures/gui/chapter-04/16-delete-device-confirmation.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 6c28db6616155d08164b74e1de8925438487ecdc886b109afcca24739151553e
   provenance:
     assessment: docshot-confirmed
@@ -1985,20 +2088,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 613
+    referenced_path: ../assets/ui/docshot/devices/delete-confirmation.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 619
-    referenced_path: ../../figures/gui/chapter-04/16-delete-device-confirmation.png
+    referenced_path: ../assets/ui/docshot/devices/delete-confirmation.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 341
-    referenced_path: figures/gui/chapter-04/16-delete-device-confirmation.png
+    referenced_path: /documentation_assets/ui/docshot/devices/delete-confirmation.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 27
-    referenced_path: 16-delete-device-confirmation.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 344
+    referenced_path: /documentation_assets/ui/docshot/devices/delete-confirmation.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 74
+    referenced_path: documentation_assets/ui/docshot/devices/delete-confirmation.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/delete-confirmation.png
   status: active
@@ -2014,14 +2126,14 @@ assets:
   domain: devices
   subject: running-config-snapshot
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/17-running-config-result.png
-  path: 00_book/figures/gui/chapter-04/17-running-config-result.png
+  current_path: documentation_assets/ui/docshot/devices/running-config-snapshot.png
+  path: documentation_assets/ui/docshot/devices/running-config-snapshot.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/running-config-snapshot.png
   legacy_path: 00_book/figures/gui/chapter-04/17-running-config-result.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: caf4b73617c7a435f81787d343ea829370e779cc8eca30f89b8c38b5956db633
   provenance:
     assessment: docshot-confirmed
@@ -2038,20 +2150,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 495
+    referenced_path: ../assets/ui/docshot/devices/running-config-snapshot.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 499
-    referenced_path: ../../figures/gui/chapter-04/17-running-config-result.png
+    referenced_path: ../assets/ui/docshot/devices/running-config-snapshot.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 282
-    referenced_path: figures/gui/chapter-04/17-running-config-result.png
+    referenced_path: /documentation_assets/ui/docshot/devices/running-config-snapshot.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 27
-    referenced_path: 17-running-config-result.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 285
+    referenced_path: /documentation_assets/ui/docshot/devices/running-config-snapshot.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 76
+    referenced_path: documentation_assets/ui/docshot/devices/running-config-snapshot.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/running-config-snapshot.png
   status: active
@@ -2067,14 +2188,14 @@ assets:
   domain: devices
   subject: import-result
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/18-import-result.png
-  path: 00_book/figures/gui/chapter-04/18-import-result.png
+  current_path: documentation_assets/ui/docshot/devices/import-result.png
+  path: documentation_assets/ui/docshot/devices/import-result.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/import-result.png
   legacy_path: 00_book/figures/gui/chapter-04/18-import-result.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1f17db3fe7e4305d9d22fbae22ecd678ea0293797be613db7229682f3d6db4c9
   provenance:
     assessment: docshot-confirmed
@@ -2091,20 +2212,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 303
+    referenced_path: ../assets/ui/docshot/devices/import-result.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 307
-    referenced_path: ../../figures/gui/chapter-04/18-import-result.png
+    referenced_path: ../assets/ui/docshot/devices/import-result.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 189
-    referenced_path: figures/gui/chapter-04/18-import-result.png
+    referenced_path: /documentation_assets/ui/docshot/devices/import-result.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 28
-    referenced_path: 18-import-result.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 190
+    referenced_path: /documentation_assets/ui/docshot/devices/import-result.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 78
+    referenced_path: documentation_assets/ui/docshot/devices/import-result.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/import-result.png
   status: active
@@ -2120,14 +2250,14 @@ assets:
   domain: devices
   subject: batch-host-name-detail
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-04/19-batch-table-detail.png
-  path: 00_book/figures/gui/chapter-04/19-batch-table-detail.png
+  current_path: documentation_assets/ui/docshot/devices/batch-host-name-detail.png
+  path: documentation_assets/ui/docshot/devices/batch-host-name-detail.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/batch-host-name-detail.png
   legacy_path: 00_book/figures/gui/chapter-04/19-batch-table-detail.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0f0e63db4ad0c0970dff47b8ccfcf5f89c62fb7681c8df1b068fc05e3e506374
   provenance:
     assessment: docshot-confirmed
@@ -2144,20 +2274,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
+    line: 250
+    referenced_path: ../assets/ui/docshot/devices/batch-host-name-detail.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 254
-    referenced_path: ../../figures/gui/chapter-04/19-batch-table-detail.png
+    referenced_path: ../assets/ui/docshot/devices/batch-host-name-detail.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
     line: 162
-    referenced_path: figures/gui/chapter-04/19-batch-table-detail.png
+    referenced_path: /documentation_assets/ui/docshot/devices/batch-host-name-detail.png
     target_type: book-typst
-  - source_document: docshots/chapter04.py
-    line: 28
-    referenced_path: 19-batch-table-detail.png
+  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
+    line: 163
+    referenced_path: /documentation_assets/ui/docshot/devices/batch-host-name-detail.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 80
+    referenced_path: documentation_assets/ui/docshot/devices/batch-host-name-detail.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/batch-host-name-detail.png
   status: active
@@ -8805,14 +8944,14 @@ assets:
   domain: devices
   subject: inventory-router-selected
   source_kind: docshot
-  current_path: 00_book/figures/gui/devices.png
-  path: 00_book/figures/gui/devices.png
+  current_path: documentation_assets/ui/docshot/devices/inventory-router-selected.png
+  path: documentation_assets/ui/docshot/devices/inventory-router-selected.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/inventory-router-selected.png
   legacy_path: 00_book/figures/gui/devices.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 9758acbbd2cc2d88226208f379aee912bb2cdf3e0b4df38654260aab660a994b
   provenance:
     assessment: docshot-confirmed
@@ -8828,11 +8967,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 1
-    referenced_path: devices.png
+  - source_document: docshots/outputs.py
+    line: 82
+    referenced_path: documentation_assets/ui/docshot/devices/inventory-router-selected.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active

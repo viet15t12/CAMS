@@ -20,7 +20,7 @@ của mình khi thực hành. Kiểm tra đúng project trước khi thay đổi
 sách.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/01-devices-inventory.png"
+<p><img src="../assets/ui/docshot/devices/inventory-waiting.png"
 style="width:47.0%" /></p>
 <figcaption><p>Inventory gồm bốn thiết bị vừa được khai
 báo.</p></figcaption>
@@ -67,7 +67,7 @@ Trong Dashboard, chọn nút thêm một thiết bị ở đầu DEVICES hoặc 
 riêng; dùng **Cancel** hoặc nút đóng nếu chưa muốn lưu.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/02-add-device-empty.png"
+<p><img src="../assets/ui/docshot/devices/create-empty.png"
 style="width:75.0%" /></p>
 <figcaption><p>Cửa sổ khai báo một thiết bị mới.</p></figcaption>
 </figure>
@@ -142,7 +142,7 @@ ngang. Password không được chứa khoảng trắng. Giữ mật khẩu ở 
 khi trình chiếu hoặc chụp ảnh.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/03-add-device-filled.png"
+<p><img src="../assets/ui/docshot/devices/create-filled.png"
 style="width:75.0%" /></p>
 <figcaption><p>Thông tin của R1 đã được điền, mật khẩu được
 che.</p></figcaption>
@@ -157,7 +157,7 @@ Protocol là SSH. Đây là thiết lập nâng cao cho từng thiết bị, dà
 trường hợp đã xác định thiết bị cũ cần thuật toán tương thích riêng.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/05-ssh-compatibility.png"
+<p><img src="../assets/ui/docshot/devices/ssh-compatibility.png"
 style="width:66.0%" /></p>
 <figcaption><p>Các trường tương thích SSH riêng cho một thiết
 bị.</p></figcaption>
@@ -193,7 +193,7 @@ xuất hiện trong Waiting như
 chưa tự kết nối tới thiết bị.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/04-device-added-waiting.png"
+<p><img src="../assets/ui/docshot/devices/created-waiting.png"
 style="width:47.0%" /></p>
 <figcaption><p>R1 xuất hiện trong Waiting sau khi được
 thêm.</p></figcaption>
@@ -210,7 +210,7 @@ Multiple Devices** có phần thiết lập chung, bảng nhập từng host và
 nút ở cuối cửa sổ.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/06-add-multiple-devices.png"
+<p><img src="../assets/ui/docshot/devices/batch-create-empty.png"
 style="width:100.0%" /></p>
 <figcaption><p>Cửa sổ thêm nhiều thiết bị và các nút nhập danh
 sách.</p></figcaption>
@@ -238,7 +238,7 @@ còn lại. Nút xóa ở cuối dòng bỏ dòng nhập đó; **Clear** đưa b
 dòng trống, không xóa các thiết bị đã lưu trong inventory.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/07-batch-devices-filled.png"
+<p><img src="../assets/ui/docshot/devices/batch-create-filled.png"
 style="width:100.0%" /></p>
 <figcaption><p>Ba thiết bị bổ sung với Role riêng trên từng
 dòng.</p></figcaption>
@@ -251,7 +251,7 @@ và Name để dễ đối chiếu. Mỗi host chỉ xuất hiện một lần t
 nhập.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/19-batch-table-detail.png"
+<p><img src="../assets/ui/docshot/devices/batch-host-name-detail.png"
 style="width:85.0%" /></p>
 <figcaption><p>Chi tiết Host và Name của ba dòng nhập.</p></figcaption>
 </figure>
@@ -304,7 +304,7 @@ tại. <a href="#fig" class="ref">[fig]</a>:ch04-import minh họa TEMP-SW
 nhau.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/18-import-result.png"
+<p><img src="../assets/ui/docshot/devices/import-result.png"
 style="width:47.0%" /></p>
 <figcaption><p>TEMP-SW xuất hiện trong inventory sau
 import.</p></figcaption>
@@ -329,7 +329,7 @@ biệt chữ hoa/thường. Nhập `SW` để chỉ giữ SW1 và SW3 như
 danh sách đầy đủ.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/08-search-filter.png"
+<p><img src="../assets/ui/docshot/devices/search-switches.png"
 style="width:47.0%" /></p>
 <figcaption><p>Tìm SW để giữ lại các switch phù hợp.</p></figcaption>
 </figure>
@@ -355,7 +355,7 @@ nhấn một dòng sẽ đổi trạng thái chọn, không chuyển tab như ch
 đơn.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/13-multi-select.png"
+<p><img src="../assets/ui/docshot/devices/multi-select-mixed-status.png"
 style="width:47.0%" /></p>
 <figcaption><p>Bốn host được chọn với trạng thái hỗn
 hợp.</p></figcaption>
@@ -397,7 +397,7 @@ Menu hiện không có Disconnect riêng cho một host; dùng chế độ chọ
 ngay cả khi chỉ muốn ngắt một thiết bị.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/09-device-context-waiting.png"
+<p><img src="../assets/ui/docshot/devices/context-waiting.png"
 style="width:66.0%" /></p>
 <figcaption><p>Menu của thiết bị Waiting với lệnh
 Connect.</p></figcaption>
@@ -406,7 +406,7 @@ Connect.</p></figcaption>
 \<fig:ch04-context-waiting\>
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/11-device-context-connected.png"
+<p><img src="../assets/ui/docshot/devices/context-connected.png"
 style="width:66.0%" /></p>
 <figcaption><p>Menu của thiết bị Connected.</p></figcaption>
 </figure>
@@ -424,7 +424,7 @@ kết thúc, theo dõi Status Bar/thông báo và kiểm tra R1 chuyển sang
 Connected.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/10-device-connected.png"
+<p><img src="../assets/ui/docshot/devices/connected.png"
 style="width:47.0%" /></p>
 <figcaption><p>R1 chuyển sang Connected sau thao tác
 Connect.</p></figcaption>
@@ -451,7 +451,7 @@ chọn **Connect** để thực sự mở lại phiên. Phím `Ctrl+Alt+R` thự
 cùng bước đưa về Waiting.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/12-device-context-disconnected.png"
+<p><img src="../assets/ui/docshot/devices/context-disconnected.png"
 style="width:66.0%" /></p>
 <figcaption><p>Lệnh Reconnect của thiết bị
 Disconnected.</p></figcaption>
@@ -496,7 +496,7 @@ nội dung đã thu thập; cấu hình ngắn giúp nhận diện đúng hostna
 chỉ, chưa phải bài cấu hình Interface.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/17-running-config-result.png"
+<p><img src="../assets/ui/docshot/devices/running-config-snapshot.png"
 style="width:100.0%" /></p>
 <figcaption><p>Một phiên bản running-config trong
 Information.</p></figcaption>
@@ -549,7 +549,7 @@ một host đủ điều kiện Connect và hai host đủ điều kiện Get co
 Disconnect.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/14-multi-select-actions.png"
+<p><img src="../assets/ui/docshot/devices/multi-select-actions.png"
 style="width:95.0%" /></p>
 <figcaption><p>Thao tác hàng loạt với bốn thiết bị được
 chọn.</p></figcaption>
@@ -582,7 +582,7 @@ có thể được chỉnh trong cùng cửa sổ.
 trước khi lưu.
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/15-edit-device.png"
+<p><img src="../assets/ui/docshot/devices/edit.png"
 style="width:75.0%" /></p>
 <figcaption><p>Đổi tên R1 thành Core-Router trong Edit
 Device.</p></figcaption>
@@ -616,7 +616,7 @@ trong hộp xác nhận.
 </div>
 
 <figure>
-<p><img src="../../figures/gui/chapter-04/16-delete-device-confirmation.png"
+<p><img src="../assets/ui/docshot/devices/delete-confirmation.png"
 style="width:100.0%" /></p>
 <figcaption><p>Xác nhận trước khi xóa vĩnh viễn thiết bị
 tạm.</p></figcaption>

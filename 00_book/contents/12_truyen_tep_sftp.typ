@@ -130,7 +130,7 @@ Không ngắt mạng hoặc đóng CAMS khi hàng đợi vẫn còn tác vụ đ
 
 Lấy running-config là chức năng quản lý thiết bị, không phải thao tác Download trong panel SFTP/SCP. Chọn thiết bị đang *Connected*, nhấn chuột phải và chọn *Get running-config*. CAMS thu thập cấu hình đang chạy qua phiên quản lý, lưu một snapshot theo host rồi đồng bộ những phần cấu hình được hỗ trợ vào database.
 
-#insert-image("figures/gui/chapter-04/11-device-context-connected.png",
+#insert-image("/documentation_assets/ui/docshot/devices/context-connected.png",
   caption: [Lệnh Get running-config trong menu của thiết bị Connected.], width: 53.6%) <fig:ch12-11-device-context-connected>
 
 Khi tác vụ chạy, theo dõi Status Bar và Notification Center. Không chạy lại liên tục chỉ vì chưa thấy dữ liệu mới; quá trình thu thập, lưu snapshot và đồng bộ có thể hoàn tất ở các thời điểm khác nhau.
