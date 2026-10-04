@@ -5,62 +5,6 @@
   "broken_images": [
     {
       "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/03-ospf-process.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/03-ospf-process.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/04-ospf-networks.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/04-ospf-networks.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/05-ospf-areas.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/05-ospf-areas.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/06-ospf-distance.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/06-ospf-distance.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/07-ospf-redistribute.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/07-ospf-redistribute.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/08-ospf-interfaces.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/08-ospf-interfaces.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/09-ospf-passive-interface.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/09-ospf-passive-interface.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/10-ospf-tuning.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/10-ospf-tuning.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
       "referenced_path": "../../figures/gui/chapter-06/11-eigrp-process.png",
       "reference_kind": "html-img",
       "resolved_path": "figures/gui/chapter-06/11-eigrp-process.png",
@@ -117,51 +61,9 @@
     },
     {
       "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/19-routing-group-hosts.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/19-routing-group-hosts.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/20-routing-group-identity.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/20-routing-group-identity.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/21-routing-group-common.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/21-routing-group-common.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/22-routing-group-networks.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/22-routing-group-networks.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/24-ospf-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/24-ospf-view-push.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
       "referenced_path": "../../figures/gui/chapter-06/25-eigrp-view-push.png",
       "reference_kind": "html-img",
       "resolved_path": "figures/gui/chapter-06/25-eigrp-view-push.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/26-routing-group-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/26-routing-group-view-push.png",
       "count": 1
     },
     {

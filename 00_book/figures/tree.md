@@ -1,14 +1,6 @@
 .
 ├── gui
 │   ├── chapter-06
-│   │   ├── 03-ospf-process.png
-│   │   ├── 04-ospf-networks.png
-│   │   ├── 05-ospf-areas.png
-│   │   ├── 06-ospf-distance.png
-│   │   ├── 07-ospf-redistribute.png
-│   │   ├── 08-ospf-interfaces.png
-│   │   ├── 09-ospf-passive-interface.png
-│   │   ├── 10-ospf-tuning.png
 │   │   ├── 11-eigrp-process.png
 │   │   ├── 12-eigrp-networks.png
 │   │   ├── 13-eigrp-interfaces.png
@@ -17,13 +9,7 @@
 │   │   ├── 16-eigrp-distribute-list.png
 │   │   ├── 17-eigrp-offset-list.png
 │   │   ├── 18-eigrp-key-chains.png
-│   │   ├── 19-routing-group-hosts.png
-│   │   ├── 20-routing-group-identity.png
-│   │   ├── 21-routing-group-common.png
-│   │   ├── 22-routing-group-networks.png
-│   │   ├── 24-ospf-view-push.png
 │   │   ├── 25-eigrp-view-push.png
-│   │   └── 26-routing-group-view-push.png
 │   ├── chapter-07
 │   │   ├── 01-dhcp-pools.png
 │   │   ├── 02-dhcp-excluded-addresses.png
@@ -422,5 +408,24 @@ B05A canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/routing/static/routes.png
 - documentation_assets/ui/legacy/routing/static/default-routes.png
 - documentation_assets/ui/legacy/routing/static/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B05B canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/routing/ospf/process.png
+- documentation_assets/ui/legacy/routing/ospf/networks.png
+- documentation_assets/ui/legacy/routing/ospf/areas.png
+- documentation_assets/ui/legacy/routing/ospf/distance.png
+- documentation_assets/ui/legacy/routing/ospf/redistribute.png
+- documentation_assets/ui/legacy/routing/ospf/interfaces.png
+- documentation_assets/ui/legacy/routing/ospf/passive-interfaces.png
+- documentation_assets/ui/legacy/routing/ospf/tuning.png
+- documentation_assets/ui/legacy/routing/ospf/routing-group-hosts.png
+- documentation_assets/ui/legacy/routing/ospf/routing-group-identity.png
+- documentation_assets/ui/legacy/routing/ospf/routing-group-common.png
+- documentation_assets/ui/legacy/routing/ospf/routing-group-networks.png
+- documentation_assets/ui/legacy/routing/ospf/view-push.png
+- documentation_assets/ui/legacy/routing/ospf/routing-group-view-push.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

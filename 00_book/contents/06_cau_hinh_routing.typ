@@ -49,7 +49,7 @@ Tab *OSPF* có hàng thống kê Process, Networks, Host và State. Màn hình P
 
 *Process* quản lý Process ID, Router ID, Reference Bandwidth, Passive Default, Default Originate và AuthenticationCFG.
 
-#insert-image("figures/gui/chapter-06/03-ospf-process.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/process.png",
   caption: [OSPF process 10 với Router ID 1.1.1.1.], width: 100.0%) <fig:ch06-03-ospf-process>
 
 - Process ID có phạm vi 1–65535 và chỉ có ý nghĩa cục bộ trên router.
@@ -62,7 +62,7 @@ Tab *OSPF* có hàng thống kê Process, Networks, Host và State. Màn hình P
 
 *Networks* gắn các interface phù hợp với process và area bằng network cùng wildcard mask.
 
-#insert-image("figures/gui/chapter-06/04-ospf-networks.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/networks.png",
   caption: [Các network statement thuộc area 0 và area 10.], width: 100.0%) <fig:ch06-04-ospf-networks>
 
 Chọn process, nhập Network, Wildcard và Area rồi chọn *+ Add Network*. Wildcard là mask đảo, ví dụ mạng #raw("/24") dùng #raw("0.0.0.255"). Một network statement quá rộng có thể kích hoạt OSPF trên interface ngoài dự kiến.
@@ -71,7 +71,7 @@ Chọn process, nhập Network, Wildcard và Area rồi chọn *+ Add Network*. 
 
 *Areas* tạo area normal, stub hoặc NSSA, cấu hình authentication, no-summary và area range.
 
-#insert-image("figures/gui/chapter-06/05-ospf-areas.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/areas.png",
   caption: [Area 0 và stub area 10 cùng một summary range.], width: 100.0%) <fig:ch06-05-ospf-areas>
 
 Các router trong cùng area phải dùng loại area tương thích. *No summary* chỉ phù hợp với stub/NSSA. Area range dùng IP và mask để tổng hợp route; Cost là giá trị tùy chọn và *Advertise* quyết định summary có được công bố hay không.
@@ -86,7 +86,7 @@ Giá trị hợp lệ là 1–255; Cisco IOS thường dùng 110. Chỉ đổi d
 
 *Redistribute* nhập route từ static, connected hoặc protocol khác vào OSPF.
 
-#insert-image("figures/gui/chapter-06/07-ospf-redistribute.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/redistribute.png",
   caption: [Redistribute static có route-map và metric mẫu.], width: 100.0%) <fig:ch06-07-ospf-redistribute>
 
 Route Map giới hạn route được nhập; *Subnets* cho phép đưa cả subnet vào OSPF. Metric Type 1 cộng internal cost dọc đường, còn Type 2 thường giữ external metric và chỉ dùng internal cost để phá hòa. Redistribution có thể tạo loop nên cần policy rõ ràng.
@@ -95,7 +95,7 @@ Route Map giới hạn route được nhập; *Subnets* cho phép đưa cả sub
 
 *Interfaces* cấu hình hành vi OSPF trên một interface cụ thể.
 
-#insert-image("figures/gui/chapter-06/08-ospf-interfaces.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/interfaces.png",
   caption: [Cost, timer, network type, BFD và authentication trên interface.], width: 100.0%) <fig:ch06-08-ospf-interfaces>
 
 Tên interface phải khớp IOS. Cost, priority, hello/dead timer, network type và authentication cần tương thích với neighbor. *MTU Ignore* chỉ nên dùng khi đã đánh giá chênh lệch MTU. Khóa authentication phải được cấu hình đồng nhất ở hai đầu; preview che dữ liệu nhạy cảm khi backend hỗ trợ redaction.
@@ -174,14 +174,14 @@ Nút *Routing Group* mở workflow bốn bước để tạo cấu hình OSPF đ
 
 Chọn các router tham gia nhóm. Chỉ những router được đánh dấu mới được lưu và đưa vào cửa sổ View & Push nhiều thiết bị.
 
-#insert-image("figures/gui/chapter-06/19-routing-group-hosts.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/routing-group-hosts.png",
   caption: [Chọn hai router R1 và R2 cho Routing Group OSPF.], width: 78.0%) <fig:ch06-19-routing-group-hosts>
 
 === Bước 2 — Identity
 
 Nhập *Process ID* và *Router ID* riêng cho từng host. Process ID có thể khác nhau giữa các router, còn Router ID phải duy nhất trong miền OSPF.
 
-#insert-image("figures/gui/chapter-06/20-routing-group-identity.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/routing-group-identity.png",
   caption: [Process ID và Router ID riêng của từng router.], width: 78.0%) <fig:ch06-20-routing-group-identity>
 
 === Bước 3 — Common
@@ -192,7 +192,7 @@ Khai báo tham số dùng chung như Reference Bandwidth và Passive Default. D�
 
 CAMS liệt kê các connected network theo từng host và kèm interface đã phát hiện. Chọn network cần chạy OSPF, gán Area rồi dùng *Save* hoặc *Save & Push*.
 
-#insert-image("figures/gui/chapter-06/22-routing-group-networks.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/routing-group-networks.png",
   caption: [Chọn network và area độc lập cho R1 và R2.], width: 78.0%) <fig:ch06-22-routing-group-networks>
 
 Toàn bộ quy trình gồm:
@@ -202,7 +202,7 @@ Toàn bộ quy trình gồm:
 + *Common*: nhập tham số OSPF dùng chung.
 + *Networks*: chọn connected network và area của từng host.
 
-#insert-image("figures/gui/chapter-06/26-routing-group-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/routing-group-view-push.png",
   caption: [View & Push OSPF tổng hợp lệnh riêng cho hai thiết bị.], width: 75.0%) <fig:ch06-26-routing-group-view-push>
 
 Backend kiểm tra network thuộc đúng host trước khi lưu. Kết quả được ghi riêng từng thiết bị; một host lỗi không làm dữ liệu của host khác bị nhập nhầm. Đọc kết quả partial trước khi tiếp tục Push. Trong preview nhiều thiết bị, kiểm tra từng khối #raw("Device") để tránh áp cùng Router ID, sai Process ID hoặc sai network.
@@ -226,7 +226,7 @@ Các nút có vai trò khác nhau:
 
 Static và Default dùng chung preview của module STATIC. OSPF và EIGRP có preview riêng để người vận hành đọc đúng process, network, interface, policy và các lệnh xóa đang chờ của từng giao thức.
 
-#insert-image("figures/gui/chapter-06/24-ospf-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/routing/ospf/view-push.png",
   caption: [View & Push OSPF với toàn bộ lệnh của process đang chờ.], width: 75.0%) <fig:ch06-24-ospf-view-push>
 
 #report-note[Trong preview, kiểm tra host, module, destination, mask, next hop, AD, process, area/AS và mọi lệnh xóa. *Refresh* dựng lại preview sau khi dữ liệu thay đổi. Chỉ chọn *Push* khi session SSH/Telnet sẵn sàng và đã sao lưu running-config. Sau Push, lấy running-config hoặc routing table mới để xác minh; CAMS chưa cung cấp rollback tự động đầy đủ cho mọi tình huống.]

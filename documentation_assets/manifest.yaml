@@ -2572,14 +2572,14 @@ assets:
   domain: routing/ospf
   subject: process
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/03-ospf-process.png
-  path: 00_book/figures/gui/chapter-06/03-ospf-process.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/process.png
+  path: documentation_assets/ui/legacy/routing/ospf/process.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/process.png
   legacy_path: 00_book/figures/gui/chapter-06/03-ospf-process.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: dcb1e8b9fc31989a85d6889824d0c22996ed7690d2a6f299a8426c0f445c7d37
   provenance:
     assessment: unknown
@@ -2597,11 +2597,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 68
-    referenced_path: ../../figures/gui/chapter-06/03-ospf-process.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/process.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 52
-    referenced_path: figures/gui/chapter-06/03-ospf-process.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/process.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2621,14 +2621,14 @@ assets:
   domain: routing/ospf
   subject: networks
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/04-ospf-networks.png
-  path: 00_book/figures/gui/chapter-06/04-ospf-networks.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/networks.png
+  path: documentation_assets/ui/legacy/routing/ospf/networks.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/networks.png
   legacy_path: 00_book/figures/gui/chapter-06/04-ospf-networks.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 8f2cd52023ee1d9c90e84af2d07be0b2703ddbe26096d28edae3aea7c0796631
   provenance:
     assessment: unknown
@@ -2646,11 +2646,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 87
-    referenced_path: ../../figures/gui/chapter-06/04-ospf-networks.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/networks.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 65
-    referenced_path: figures/gui/chapter-06/04-ospf-networks.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/networks.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2670,14 +2670,14 @@ assets:
   domain: routing/ospf
   subject: areas
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/05-ospf-areas.png
-  path: 00_book/figures/gui/chapter-06/05-ospf-areas.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/areas.png
+  path: documentation_assets/ui/legacy/routing/ospf/areas.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/areas.png
   legacy_path: 00_book/figures/gui/chapter-06/05-ospf-areas.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d98b0a6400604bf5740b7925ea4c8992fa166a739f5420451bab4ac9d765daf0
   provenance:
     assessment: unknown
@@ -2695,11 +2695,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 102
-    referenced_path: ../../figures/gui/chapter-06/05-ospf-areas.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/areas.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 74
-    referenced_path: figures/gui/chapter-06/05-ospf-areas.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/areas.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2719,14 +2719,14 @@ assets:
   domain: routing/ospf
   subject: distance
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/06-ospf-distance.png
-  path: 00_book/figures/gui/chapter-06/06-ospf-distance.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/distance.png
+  path: documentation_assets/ui/legacy/routing/ospf/distance.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/distance.png
   legacy_path: 00_book/figures/gui/chapter-06/06-ospf-distance.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d2c895afc92441dd85e26ddb95ca24c18f3c5f3924203ead8e12f919acd3b502
   provenance:
     assessment: unknown
@@ -2744,7 +2744,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 117
-    referenced_path: ../../figures/gui/chapter-06/06-ospf-distance.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/distance.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -2763,14 +2763,14 @@ assets:
   domain: routing/ospf
   subject: redistribute
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/07-ospf-redistribute.png
-  path: 00_book/figures/gui/chapter-06/07-ospf-redistribute.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/redistribute.png
+  path: documentation_assets/ui/legacy/routing/ospf/redistribute.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/redistribute.png
   legacy_path: 00_book/figures/gui/chapter-06/07-ospf-redistribute.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: c6528011fc08509e1bde849a15bdd78c16398a0b66e8effdab05ebd983385b03
   provenance:
     assessment: unknown
@@ -2788,11 +2788,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 130
-    referenced_path: ../../figures/gui/chapter-06/07-ospf-redistribute.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/redistribute.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 89
-    referenced_path: figures/gui/chapter-06/07-ospf-redistribute.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/redistribute.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2812,14 +2812,14 @@ assets:
   domain: routing/ospf
   subject: interfaces
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/08-ospf-interfaces.png
-  path: 00_book/figures/gui/chapter-06/08-ospf-interfaces.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/interfaces.png
+  path: documentation_assets/ui/legacy/routing/ospf/interfaces.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/interfaces.png
   legacy_path: 00_book/figures/gui/chapter-06/08-ospf-interfaces.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0d6d274a335dfe031d49342c140c46f3d37bee40d7436fd5e16bf2e691d5363d
   provenance:
     assessment: unknown
@@ -2837,11 +2837,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 145
-    referenced_path: ../../figures/gui/chapter-06/08-ospf-interfaces.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/interfaces.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 98
-    referenced_path: figures/gui/chapter-06/08-ospf-interfaces.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/interfaces.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2861,14 +2861,14 @@ assets:
   domain: routing/ospf
   subject: passive-interfaces
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/09-ospf-passive-interface.png
-  path: 00_book/figures/gui/chapter-06/09-ospf-passive-interface.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/passive-interfaces.png
+  path: documentation_assets/ui/legacy/routing/ospf/passive-interfaces.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/passive-interfaces.png
   legacy_path: 00_book/figures/gui/chapter-06/09-ospf-passive-interface.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 11f4713e1924d4813cb8a70acfed6dcc57904a25cb6f64ac853341308dd7f988
   provenance:
     assessment: unknown
@@ -2886,7 +2886,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 161
-    referenced_path: ../../figures/gui/chapter-06/09-ospf-passive-interface.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/passive-interfaces.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -2905,14 +2905,14 @@ assets:
   domain: routing/ospf
   subject: tuning
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/10-ospf-tuning.png
-  path: 00_book/figures/gui/chapter-06/10-ospf-tuning.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/tuning.png
+  path: documentation_assets/ui/legacy/routing/ospf/tuning.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/tuning.png
   legacy_path: 00_book/figures/gui/chapter-06/10-ospf-tuning.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e422f2cbc42a6e3125031c7015ab7d403f4acd45244b343d99e50114fbd0e35d
   provenance:
     assessment: unknown
@@ -2930,7 +2930,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 171
-    referenced_path: ../../figures/gui/chapter-06/10-ospf-tuning.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/tuning.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -3321,14 +3321,14 @@ assets:
   domain: routing/ospf
   subject: routing-group-hosts
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/19-routing-group-hosts.png
-  path: 00_book/figures/gui/chapter-06/19-routing-group-hosts.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/routing-group-hosts.png
+  path: documentation_assets/ui/legacy/routing/ospf/routing-group-hosts.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/routing-group-hosts.png
   legacy_path: 00_book/figures/gui/chapter-06/19-routing-group-hosts.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: cd88574c5e2f83895cfd1edfefbefc56fdf36fde12242e8df561c258c0c3a057
   provenance:
     assessment: unknown
@@ -3346,11 +3346,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 301
-    referenced_path: ../../figures/gui/chapter-06/19-routing-group-hosts.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/routing-group-hosts.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 177
-    referenced_path: figures/gui/chapter-06/19-routing-group-hosts.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/routing-group-hosts.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3370,14 +3370,14 @@ assets:
   domain: routing/ospf
   subject: routing-group-identity
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/20-routing-group-identity.png
-  path: 00_book/figures/gui/chapter-06/20-routing-group-identity.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/routing-group-identity.png
+  path: documentation_assets/ui/legacy/routing/ospf/routing-group-identity.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/routing-group-identity.png
   legacy_path: 00_book/figures/gui/chapter-06/20-routing-group-identity.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 56b95e5d7ca78612b0e2c3e7e34db36d3f11d53c95e7c4e364d58b9e59c8d977
   provenance:
     assessment: unknown
@@ -3395,11 +3395,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 312
-    referenced_path: ../../figures/gui/chapter-06/20-routing-group-identity.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/routing-group-identity.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 184
-    referenced_path: figures/gui/chapter-06/20-routing-group-identity.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/routing-group-identity.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3419,14 +3419,14 @@ assets:
   domain: routing/ospf
   subject: routing-group-common
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/21-routing-group-common.png
-  path: 00_book/figures/gui/chapter-06/21-routing-group-common.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/routing-group-common.png
+  path: documentation_assets/ui/legacy/routing/ospf/routing-group-common.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/routing-group-common.png
   legacy_path: 00_book/figures/gui/chapter-06/21-routing-group-common.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: c5a620d0f5f17d0977925e0724ee39197290c6c07dfdc40889f7b6eddb3acdb3
   provenance:
     assessment: unknown
@@ -3444,7 +3444,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 323
-    referenced_path: ../../figures/gui/chapter-06/21-routing-group-common.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/routing-group-common.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -3463,14 +3463,14 @@ assets:
   domain: routing/ospf
   subject: routing-group-networks
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/22-routing-group-networks.png
-  path: 00_book/figures/gui/chapter-06/22-routing-group-networks.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/routing-group-networks.png
+  path: documentation_assets/ui/legacy/routing/ospf/routing-group-networks.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/routing-group-networks.png
   legacy_path: 00_book/figures/gui/chapter-06/22-routing-group-networks.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 9e7a2523e922bb35fc2790a27c4f2b137e5726a6d9a8092593658bd2c9835163
   provenance:
     assessment: unknown
@@ -3488,11 +3488,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 334
-    referenced_path: ../../figures/gui/chapter-06/22-routing-group-networks.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/routing-group-networks.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 195
-    referenced_path: figures/gui/chapter-06/22-routing-group-networks.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/routing-group-networks.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3556,14 +3556,14 @@ assets:
   domain: routing/ospf
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/24-ospf-view-push.png
-  path: 00_book/figures/gui/chapter-06/24-ospf-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/view-push.png
+  path: documentation_assets/ui/legacy/routing/ospf/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/view-push.png
   legacy_path: 00_book/figures/gui/chapter-06/24-ospf-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3eea7873d6d76b25b029ba03b89852528243e1b9821f76e635bde326498fb558
   provenance:
     assessment: unknown
@@ -3581,11 +3581,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 379
-    referenced_path: ../../figures/gui/chapter-06/24-ospf-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 229
-    referenced_path: figures/gui/chapter-06/24-ospf-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3649,14 +3649,14 @@ assets:
   domain: routing/ospf
   subject: routing-group-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/26-routing-group-view-push.png
-  path: 00_book/figures/gui/chapter-06/26-routing-group-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/ospf/routing-group-view-push.png
+  path: documentation_assets/ui/legacy/routing/ospf/routing-group-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/ospf/routing-group-view-push.png
   legacy_path: 00_book/figures/gui/chapter-06/26-routing-group-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 281941875e99da4bdb57544a4c425e7046f8587d25285b125a71a06ca155609f
   provenance:
     assessment: unknown
@@ -3674,11 +3674,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 347
-    referenced_path: ../../figures/gui/chapter-06/26-routing-group-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/ospf/routing-group-view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 205
-    referenced_path: figures/gui/chapter-06/26-routing-group-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/routing/ospf/routing-group-view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs

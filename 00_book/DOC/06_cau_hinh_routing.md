@@ -65,7 +65,7 @@ Hàng nút bên dưới chuyển giữa tám nhóm cấu hình.
 Default Originate và AuthenticationCFG.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/03-ospf-process.png"
+<p><img src="../assets/ui/legacy/routing/ospf/process.png"
 style="width:100.0%" /></p>
 <figcaption><p>OSPF process 10 với Router ID 1.1.1.1.</p></figcaption>
 </figure>
@@ -84,7 +84,7 @@ style="width:100.0%" /></p>
 wildcard mask.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/04-ospf-networks.png"
+<p><img src="../assets/ui/legacy/routing/ospf/networks.png"
 style="width:100.0%" /></p>
 <figcaption><p>Các network statement thuộc area 0 và area 10.</p></figcaption>
 </figure>
@@ -99,7 +99,7 @@ có thể kích hoạt OSPF trên interface ngoài dự kiến.
 area range.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/05-ospf-areas.png"
+<p><img src="../assets/ui/legacy/routing/ospf/areas.png"
 style="width:100.0%" /></p>
 <figcaption><p>Area 0 và stub area 10 cùng một summary range.</p></figcaption>
 </figure>
@@ -114,7 +114,7 @@ trị tùy chọn và **Advertise** quyết định summary có được công b
 inter-area.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/06-ospf-distance.png"
+<p><img src="../assets/ui/legacy/routing/ospf/distance.png"
 style="width:100.0%" /></p>
 <figcaption><p>Các giá trị OSPF distance của process 10.</p></figcaption>
 </figure>
@@ -127,7 +127,7 @@ kế cần điều chỉnh ưu tiên giữa nhiều nguồn route.
 **Redistribute** nhập route từ static, connected hoặc protocol khác vào OSPF.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/07-ospf-redistribute.png"
+<p><img src="../assets/ui/legacy/routing/ospf/redistribute.png"
 style="width:100.0%" /></p>
 <figcaption><p>Redistribute static có route-map và metric mẫu.</p></figcaption>
 </figure>
@@ -142,7 +142,7 @@ policy rõ ràng.
 **Interfaces** cấu hình hành vi OSPF trên một interface cụ thể.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/08-ospf-interfaces.png"
+<p><img src="../assets/ui/legacy/routing/ospf/interfaces.png"
 style="width:100.0%" /></p>
 <figcaption><p>Cost, timer, network type, BFD và authentication trên interface.</p></figcaption>
 </figure>
@@ -158,7 +158,7 @@ authentication cần tương thích với neighbor. **MTU Ignore** chỉ nên d�
 network. Chế độ non-passive dùng để ghi đè Passive Default.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/09-ospf-passive-interface.png"
+<p><img src="../assets/ui/legacy/routing/ospf/passive-interfaces.png"
 style="width:100.0%" /></p>
 <figcaption><p>Danh sách passive và non-passive interface.</p></figcaption>
 </figure>
@@ -168,7 +168,7 @@ style="width:100.0%" /></p>
 **Tuning** gồm Maximum Paths, Max LSA và các timer SPF/LSA throttle.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/10-ospf-tuning.png"
+<p><img src="../assets/ui/legacy/routing/ospf/tuning.png"
 style="width:100.0%" /></p>
 <figcaption><p>Các tham số tuning của OSPF process 10.</p></figcaption>
 </figure>
@@ -298,7 +298,7 @@ Chọn các router tham gia nhóm. Chỉ những router được đánh dấu m�
 đưa vào cửa sổ View & Push nhiều thiết bị.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/19-routing-group-hosts.png"
+<p><img src="../assets/ui/legacy/routing/ospf/routing-group-hosts.png"
 style="width:78.0%" /></p>
 <figcaption><p>Chọn hai router R1 và R2 cho Routing Group OSPF.</p></figcaption>
 </figure>
@@ -309,7 +309,7 @@ Nhập **Process ID** và **Router ID** riêng cho từng host. Process ID có t
 nhau giữa các router, còn Router ID phải duy nhất trong miền OSPF.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/20-routing-group-identity.png"
+<p><img src="../assets/ui/legacy/routing/ospf/routing-group-identity.png"
 style="width:78.0%" /></p>
 <figcaption><p>Process ID và Router ID riêng của từng router.</p></figcaption>
 </figure>
@@ -320,7 +320,7 @@ Khai báo tham số dùng chung như Reference Bandwidth và Passive Default. D�
 cùng Reference Bandwidth trên toàn miền để phép tính OSPF cost nhất quán.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/21-routing-group-common.png"
+<p><img src="../assets/ui/legacy/routing/ospf/routing-group-common.png"
 style="width:78.0%" /></p>
 <figcaption><p>Các tham số OSPF dùng chung cho cả nhóm.</p></figcaption>
 </figure>
@@ -331,7 +331,7 @@ CAMS liệt kê các connected network theo từng host và kèm interface đã 
 Chọn network cần chạy OSPF, gán Area rồi dùng **Save** hoặc **Save & Push**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/22-routing-group-networks.png"
+<p><img src="../assets/ui/legacy/routing/ospf/routing-group-networks.png"
 style="width:78.0%" /></p>
 <figcaption><p>Chọn network và area độc lập cho R1 và R2.</p></figcaption>
 </figure>
@@ -344,7 +344,7 @@ Toàn bộ quy trình gồm:
 4. **Networks**: chọn connected network và area của từng host.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/26-routing-group-view-push.png"
+<p><img src="../assets/ui/legacy/routing/ospf/routing-group-view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>View & Push OSPF tổng hợp lệnh riêng cho hai thiết bị.</p></figcaption>
 </figure>
@@ -376,7 +376,7 @@ riêng để người vận hành đọc đúng process, network, interface, pol
 xóa đang chờ của từng giao thức.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/24-ospf-view-push.png"
+<p><img src="../assets/ui/legacy/routing/ospf/view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>View & Push OSPF với toàn bộ lệnh của process đang chờ.</p></figcaption>
 </figure>
