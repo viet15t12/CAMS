@@ -32,7 +32,7 @@
     (table.hline(stroke: 0.3pt + rgb("#b8b8b8")),),
     (
       [*Hệ sinh thái tiện ích mở rộng*],
-      [Syslog Server thời gian thực; SFTP hai khung nhìn; Terminal Alacritty giao tiếp IPC (NTTP/1).],
+      [Syslog Server thời gian thực; SFTP hai khung nhìn; terminal nhúng giao tiếp IPC (NTTP/1).],
       [Lọc nhật ký theo Severity; truyền tệp nền an toàn; mở phiên CLI độc lập, không xung đột.],
     ),
     (table.hline(stroke: 0.3pt + rgb("#b8b8b8")),),

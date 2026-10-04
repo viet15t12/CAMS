@@ -29,7 +29,7 @@ Phần thực nghiệm gồm năm kịch bản: hạ tầng chuyển mạch và 
 
 1. *Thiết lập và xem trước trên giao diện:* người dùng nhập tham số trên biểu mẫu nghiệp vụ. Dữ liệu được lưu ở trạng thái mong muốn (Desired State) và chuyển thành tập lệnh CLI để kiểm tra trong cửa sổ *View & Push*.
 2. *Đẩy cấu hình bất đồng bộ:* tác vụ nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua SSH.
-3. *Xác minh trạng thái:* người quản trị đối chiếu phản hồi của hệ thống, kiểm tra trực tiếp bằng terminal Alacritty tích hợp và đánh giá lưu lượng thực tế.
+3. *Xác minh trạng thái:* người quản trị đối chiếu phản hồi của hệ thống, kiểm tra trực tiếp bằng terminal tích hợp và đánh giá lưu lượng thực tế.
 
 === Kịch bản 1: Cấu hình hạ tầng chuyển mạch và bảo mật Lớp 2 (Switching & L2 Security)
 
@@ -110,13 +110,13 @@ switchport port-security mac-address sticky
 switchport port-security aging time 5
 ```
 
-*Bước 6. Xác minh cấu hình qua terminal Alacritty tích hợp*
+*Bước 6. Xác minh cấu hình qua terminal tích hợp*
 
-Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng Terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
+Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
 
 #figure(
   image("/00_book/figures/report/terminal-generated/sw3-vlan-vtp.png", width: 80%),
-  caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp],
+  caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua terminal tích hợp],
 ) <fig-k1-terminal-verify>
 Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
 
@@ -888,7 +888,7 @@ Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng b�
 - *Giao diện quản lý tập trung:* CAMS cung cấp một không gian làm việc thống nhất cho các chức năng mạng Lớp 2 và Lớp 3, qua đó giảm số thao tác CLI trực tiếp trên từng thiết bị.
 - *Quy trình kiểm duyệt trước khi thực thi:* Mô hình Staged Save tách trạng thái mong muốn (`Desired State`) khỏi trạng thái đã áp dụng (`Applied`). Cửa sổ *View & Push* cho phép kiểm tra tập lệnh trước khi gửi xuống thiết bị.
 - *Khả năng xử lý nhiều thiết bị:* `Host Lock` tuần tự hóa các lệnh trên cùng một thiết bị, trong khi `BatchExecutor` cho phép xử lý song song các thiết bị độc lập.
-- *Các tiện ích hỗ trợ vận hành:* Hệ thống tích hợp sao lưu phiên bản bằng Dulwich, Syslog Server, cảnh báo Syslog qua email, SFTP và terminal Alacritty.
+- *Các tiện ích hỗ trợ vận hành:* Hệ thống tích hợp sao lưu phiên bản bằng Dulwich, Syslog Server, cảnh báo Syslog qua email, SFTP và terminal nhúng.
 
 === Hạn chế thực tế cần cải tiến
 

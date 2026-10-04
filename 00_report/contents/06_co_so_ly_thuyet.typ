@@ -207,7 +207,7 @@ Mỗi tác vụ phải có thời gian chờ và kết quả gắn với thiết
 
 === Các thành phần hỗ trợ vận hành
 
-Bên cạnh các thư viện Python, CAMS sử dụng bộ thu nhận Syslog viết bằng C++ để tách luồng tiếp nhận nhật ký khỏi tiến trình giao diện. Thiết bị đầu cuối Alacritty được nhúng dưới dạng tiến trình đồng hành, phục vụ thao tác CLI trực tiếp khi người quản trị cần kiểm tra ngoài luồng tự động. Giao thức nội bộ NTTP/1 trao đổi thông điệp điều khiển giữa ứng dụng và tiến trình đầu cuối; đây là giao thức riêng của đề tài, không phải một giao thức quản trị mạng chuẩn.
+Bên cạnh các thư viện Python, CAMS sử dụng bộ thu nhận Syslog viết bằng C++ để tách luồng tiếp nhận nhật ký khỏi tiến trình giao diện. Terminal nhúng được triển khai dưới dạng tiến trình đồng hành, phục vụ thao tác CLI trực tiếp khi người quản trị cần kiểm tra ngoài luồng tự động. Giao thức nội bộ NTTP/1 trao đổi thông điệp điều khiển giữa ứng dụng và tiến trình đầu cuối; đây là giao thức riêng của đề tài, không phải một giao thức quản trị mạng chuẩn.
 
 == Bảo mật và mã hóa
 
