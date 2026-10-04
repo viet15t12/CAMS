@@ -21,6 +21,7 @@ Item {
     property bool refreshingReferences: false
     property var policyDraft: ({})
     property var staticDraft: ({})
+    property var globalConfig: ({})
     property var interfaceOptions: []
     property var vlanOptions: []
     property string message: ""
@@ -101,6 +102,8 @@ Item {
             trustPortModel.append({
                 id: Number(rows[i].id || 0),
                 if_name: String(rows[i].if_name || ""),
+                trust_dhcp: Boolean(rows[i].trust_dhcp),
+                trust_arp: Boolean(rows[i].trust_arp),
                 success: String(rows[i].success || "pending_apply")
             })
         }
@@ -118,7 +121,10 @@ Item {
             let alreadyTrusted = false
             for (let j = 0; j < trustPortModel.count; j++) {
                 if (trustPortModel.get(j).if_name === candidate) {
-                    alreadyTrusted = true
+                    const row = trustPortModel.get(j)
+                    if (row.trust_dhcp && row.trust_arp) {
+                        alreadyTrusted = true
+                    }
                     break
                 }
             }
@@ -161,6 +167,8 @@ Item {
         const vlans = result && result.vlans ? result.vlans : []
         const ports = result && result.trust_ports ? result.trust_ports : []
         const macs = result && result.static_macs ? result.static_macs : []
+        const globalData = result && result.global_config ? result.global_config : ({})
+        globalConfig = clone(globalData)
         const interfaces = result && result.interfaces ? result.interfaces : []
         vlanPolicyModel.clear()
         staticMacModel.clear()
@@ -206,6 +214,8 @@ Item {
         if (refreshingReferences) return
         refreshingReferences = true
         const result = dbManager.getSwitchL2Security(host)
+        const globalData = result && result.global_config ? result.global_config : ({})
+        globalConfig = clone(globalData)
         const interfaces = result && result.interfaces ? result.interfaces : []
         const vlans = result && result.vlans ? result.vlans : []
         const ports = result && result.trust_ports ? result.trust_ports : []
@@ -254,13 +264,22 @@ Item {
         messageError = !result.ok
         if (result.ok) load()
     }
+    function saveGlobalConfig(option) {
+        saving = true
+        globalConfig.dhcp_option_82 = option
+        const result = dbManager.saveSwitchL2Global(host, globalConfig)
+        saving = false
+        message = String(result.message || "")
+        messageError = !result.ok
+        if (result.ok) load()
+    }
     function cancelPolicy() {
         policyDraft = policyAt(selectedPolicyIndex)
                       ? clone(policyAt(selectedPolicyIndex)) : ({})
         policyDirty = false
     }
-    function addTrustPort(ifName) {
-        const result = dbManager.addSwitchL2TrustPort(host, ifName)
+    function addTrustPort(ifName, trustDhcp, trustArp) {
+        const result = dbManager.addSwitchL2TrustPort(host, ifName, trustDhcp, trustArp)
         message = String(result.message || "")
         messageError = !result.ok
         if (result.ok) load()
@@ -383,6 +402,7 @@ Item {
             spacing: Theme.spacing8
             SegmentTab { label: "VLAN Protection"; selected: root.section === "vlans"; onClicked: root.section = "vlans" }
             SegmentTab { label: "Trusted Uplinks"; selected: root.section === "trust"; onClicked: root.section = "trust" }
+            SegmentTab { label: "Global Settings"; selected: root.section === "global"; onClicked: root.section = "global" }
             SegmentTab { label: "Static MAC"; selected: root.section === "staticMac"; onClicked: root.section = "staticMac" }
             Item { Layout.fillWidth: true }
             Text {
@@ -580,7 +600,16 @@ Item {
                             RowLayout {
                                 anchors.fill: parent
                                 DataTableCell { Layout.fillWidth: true; primary: true; text: model.if_name }
-                                DataTableCell { Layout.preferredWidth: 180; text: "DHCP + ARP trust"; color: Theme.alertSuccess }
+                                DataTableCell {
+                                    Layout.preferredWidth: 180
+                                    text: {
+                                        if (model.trust_dhcp && model.trust_arp) return "DHCP + ARP trust"
+                                        if (model.trust_dhcp) return "DHCP trust"
+                                        if (model.trust_arp) return "ARP trust"
+                                        return "No trust"
+                                    }
+                                    color: (model.trust_dhcp || model.trust_arp) ? Theme.alertSuccess : Theme.textSecondary
+                                }
                                 IconButton {
                                     Layout.preferredWidth: 48
                                     buttonSize: 28
@@ -633,6 +662,18 @@ Item {
                                    : "No Layer 2 interfaces available"
                         emptyWarningText: "No usable Layer 2 interface is available. Complete or synchronize the Interfaces tab, then return here or select Reload UI."
                     }
+                    StandardCheckBox {
+                        id: trustDhcpCheck
+                        Layout.fillWidth: true
+                        text: "Trust DHCP Snooping"
+                        checked: true
+                    }
+                    StandardCheckBox {
+                        id: trustArpCheck
+                        Layout.fillWidth: true
+                        text: "Trust ARP Inspection"
+                        checked: true
+                    }
                     StandardButton {
                         Layout.alignment: Qt.AlignRight
                         text: "Add Trust Port"
@@ -640,14 +681,13 @@ Item {
                         enabled: (trustInterfaceCombo.count > 0 || trustInterfaceCombo.hasOptions)
                                  && trustInterfaceCombo.currentValue !== ""
                                  && !root.saving
-                        onClicked: root.addTrustPort(trustInterfaceCombo.currentValue)
+                        onClicked: root.addTrustPort(trustInterfaceCombo.currentValue, trustDhcpCheck.checked, trustArpCheck.checked)
                     }
                 }
             }
 
             SplitView {
                 id: staticMacSplit
-                anchors.fill: parent
                 visible: root.section === "staticMac"
                 orientation: root.compactLayout ? Qt.Vertical : Qt.Horizontal
                 handle: StandardSplitHandle { orientation: staticMacSplit.orientation }
@@ -761,6 +801,35 @@ Item {
                             model: root.interfaceNames()
                             currentIndex: root.comboIndex(model, String(root.staticDraft.if_name || ""))
                             onActivated: index => root.updateStatic("if_name", model[index])
+                        }
+                    }
+                }
+            }
+
+            ScrollView {
+                anchors.fill: parent
+                visible: root.section === "global"
+                clip: true
+
+                ColumnLayout {
+                    width: Math.min(parent.width, 600)
+                    spacing: Theme.spacing16
+
+                    SwitchInspectorSection {
+                        Layout.fillWidth: true
+                        title: "DHCP Option 82 Handling"
+                        helpText: "Select how the switch handles DHCP packets containing Option 82. By default, Cisco inserts Option 82 and drops incoming requests that already have it on untrusted ports."
+                        description: "Configure global Option 82 behavior for DHCP Snooping."
+
+                        StandardComboBox {
+                            Layout.fillWidth: true
+                            labelText: "Option 82 Mode"
+                            model: ["Insert and Drop (Default)", "Allow Untrusted", "Disable Option 82"]
+                            currentIndex: root.globalConfig.dhcp_option_82 === "allow-untrusted" ? 1 : root.globalConfig.dhcp_option_82 === "disable" ? 2 : 0
+                            onActivated: index => {
+                                const val = index === 1 ? "allow-untrusted" : index === 2 ? "disable" : "insert";
+                                root.saveGlobalConfig(val)
+                            }
                         }
                     }
                 }

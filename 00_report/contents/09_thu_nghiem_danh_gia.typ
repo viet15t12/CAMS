@@ -6,7 +6,7 @@
 
 == Mục tiêu và môi trường thử nghiệm
 
-Chương này đánh giá CAMS qua bốn kịch bản triển khai mạng trên EVE-NG. Các kịch bản tập trung xác minh quy trình cấu hình, phản hồi của thiết bị và dữ liệu giám sát trong môi trường thử nghiệm.
+Chương này đánh giá CAMS qua năm kịch bản triển khai mạng trên EVE-NG và thực nghiệm an ninh hệ thống. Các kịch bản tập trung xác minh quy trình cấu hình, phản hồi của thiết bị, cơ chế phân quyền, an toàn mật mã dữ liệu và giám sát nhật ký an ninh trong điều kiện phòng lab.
 
 === Môi trường thử nghiệm phần mềm và phần cứng
 
@@ -25,7 +25,7 @@ Quá trình đo đạc, kiểm thử và thực nghiệm được tiến hành t
 
 == Kịch bản kiểm thử thực nghiệm trong phòng lab
 
-Phần thực nghiệm gồm bốn kịch bản: chuyển mạch và bảo mật Lớp 2, định tuyến OSPF đa vùng, phối hợp GLBP–DHCP–NAT/PAT, cùng thu thập Syslog tập trung và cảnh báo qua email. Mỗi kịch bản được thực hiện theo ba giai đoạn:
+Phần thực nghiệm gồm năm kịch bản: hạ tầng chuyển mạch và bảo mật Lớp 2; định tuyến OSPF đa vùng; phối hợp GLBP–DHCP–NAT/PAT; thu thập và phân tích nhật ký Syslog; và kiểm thử cơ chế an ninh phân quyền cùng bảo mật dữ liệu lưu trữ. Mỗi kịch bản được thực hiện theo ba giai đoạn:
 
 1. *Thiết lập và xem trước trên giao diện:* người dùng nhập tham số trên biểu mẫu nghiệp vụ. Dữ liệu được lưu ở trạng thái mong muốn (Desired State) và chuyển thành tập lệnh CLI để kiểm tra trong cửa sổ *View & Push*.
 2. *Đẩy cấu hình bất đồng bộ:* tác vụ nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua SSH.
@@ -169,8 +169,8 @@ Mô hình được chia thành các phân vùng định tuyến và dải địa
       [10.0.0.0/24, 10.0.1.0/24, 10.0.2.0/24, 10.0.3.0/24],
       [Miền đường trục OSPF Backbone Area 0],
     ),
-    ([Chi nhánh B], [VPC14 (B1_VLAN)], [192.168.30.10/24], [Gateway: 192.168.30.1 (R6 Gi0/1)]),
-    ([Chi nhánh B], [VPC15 (B2_VLAN)], [192.168.40.10/24], [Gateway: 192.168.40.1 (R6 Gi0/1)]),
+    ([Chi nhánh B], [VPC14 (B1_VLAN)], [192.168.30.10/24], [Gateway: 192.168.30.1 (R6 Gi0/1.30)]),
+    ([Chi nhánh B], [VPC15 (B2_VLAN)], [192.168.40.10/24], [Gateway: 192.168.40.1 (R6 Gi0/1.40)]),
     ([Mạng Quản trị], [Toàn bộ Router/SW], [192.168.122.101 -- 109/24], [Kênh Out-of-Band kết nối CAMS]),
   ),
   caption: [Bảng quy hoạch địa chỉ IP và phân vùng OSPF cho Kịch bản 1],
@@ -232,7 +232,7 @@ Tại bước *Networks*, quản trị viên gán các mạng kết nối trực
 
 #step-title[Bước 3. Cấu hình tái phân phối tuyến cho mạng LAN]
 
-Để quảng bá các mạng người dùng của hai chi nhánh qua OSPF mà không phải chạy giao thức này trên switch truy cập, quản trị viên bật *Redistribute Connected Subnets* trên các router biên `R2`, `R3` và `R6`. Các mạng được đưa vào miền OSPF gồm `192.168.10.0/24`, `192.168.20.0/24`, `192.168.30.0/24` và `192.168.40.0/24`.
+Để quảng bá các mạng người dùng của hai chi nhánh qua OSPF mà không làm rò rỉ mạng quản trị (Out-of-band), quản trị viên cấu hình *Redistribute Connected Subnets* kết hợp với *Route-Map* trên các router biên `R2`, `R3` và `R6`. Việc sử dụng `route-map` đảm bảo chỉ các mạng LAN (`192.168.10.0/24`, `192.168.20.0/24`, `192.168.30.0/24` và `192.168.40.0/24`) được đưa vào miền OSPF, ngăn chặn rủi ro quảng bá sai mạng quản trị `192.168.122.0/24`.
 
 #figure(
   image("/00_book/figures/report/diagrams/routing-ospf-lab/16.png", width: 85%),
@@ -240,9 +240,9 @@ Tại bước *Networks*, quản trị viên gán các mạng kết nối trực
 ) <fig-k2-redistribute-gui>
 Tại tab `R6`, quản trị viên mở *Routing*, chọn *OSPF* và mục *Redistribute*. Các tham số được thiết lập như sau:
 
-- Tiến trình OSPF: `192.168.122.106 / PID 1`.
+- Tiến trình OSPF: `1`. (Lưu ý: Không điền Process ID cho nguồn `connected` vì mạng kết nối trực tiếp không có tiến trình định tuyến).
 - Nguồn tái phân phối: `connected`.
-- Process ID nguồn: `1`.
+- Route-Map áp dụng: `LAN_ONLY`.
 - Tùy chọn `Subnets`: cho phép quảng bá các mạng con VLSM.
 
 Sau khi kiểm tra tham số, người dùng chọn *+ Add Redistribute* để lưu cấu hình ở trạng thái chờ, rồi mở *View & Push* để kiểm duyệt khối lệnh trước khi gửi xuống router.
@@ -254,15 +254,19 @@ Sau khi kiểm tra tham số, người dùng chọn *+ Add Redistribute* để l
 Cửa sổ kiểm duyệt trong @fig-k2-redistribute-push hiển thị khối lệnh Cisco IOS được sinh cho router `R2`:
 ```text
 # Cấu hình OSPF và Redistribution sinh tự động cho R2
+ip prefix-list LAN_NETS permit 192.168.0.0/16 le 24
+route-map LAN_ONLY permit 10
+ match ip address prefix-list LAN_NETS
+ exit
 router ospf 1
  router-id 2.2.2.2
  network 10.1.12.0 0.0.0.255 area 1
  network 10.1.23.0 0.0.0.255 area 1
  network 2.2.2.0 0.0.0.255 area 1
- redistribute connected subnets
+ redistribute connected subnets route-map LAN_ONLY
  exit
 ```
-Lệnh `redistribute connected subnets` đưa các mạng kết nối trực tiếp vào miền OSPF. Trên các router khác, những mạng này xuất hiện dưới dạng tuyến ngoại vi OSPF External Type 2 (`O E2`).
+Trong kiến trúc OSPF đa vùng này, router trung tâm `R1` đóng vai trò là ABR (Area Border Router) vì nó kết nối trực tiếp Area 0 và Area 1. Các router `R2`, `R3` và `R6` đóng vai trò là ASBR (Autonomous System Boundary Router) do chúng thực hiện tái phân phối (redistribute) mạng LAN ngoại vi vào tiến trình OSPF. Các mạng LAN này sẽ xuất hiện trên bảng định tuyến của các thiết bị khác dưới dạng tuyến ngoại vi OSPF External Type 2 (`O E2`), thể hiện qua các gói tin LSA Type 5 do ASBR tạo ra.
 
 #step-title[Bước 4. Xác minh cấu hình OSPF trên các thiết bị]
 
@@ -751,7 +755,136 @@ Kết quả đầu ra của chương trình ghi nhận `2` thư đã được ch
 
 ==== Đánh giá kết quả
 
-CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được facility, severity và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*. Phần cảnh báo email cho phép chọn mức cần gửi, bảo vệ App Password và tách thao tác SMTP khỏi bộ nhận. Trong phép thử SMTP, cả hai lần gửi Critical và Warning đều hoàn tất không lỗi.
+CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được facility, severity và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*.
+
+
+=== Kịch bản 5: Kiểm thử cơ chế an ninh phân quyền và bảo mật dữ liệu lưu trữ (Security & Privilege Verification)
+
+==== Mục tiêu và nội dung kiểm thử
+
+Kịch bản 5 tập trung kiểm chứng ba lớp phòng thủ chiều sâu (Defense-in-Depth) trong kiến trúc an ninh của CAMS, bao gồm:
+1. *Kiểm soát phân quyền 2 bước và nguyên lý Fail-Closed:* Xác minh khả năng phát hiện prompt ảo và cưỡng bức leo thang đặc quyền `privilege 15` trên Cisco IOS; đảm bảo hệ thống tự động từ chối và ngắt kết nối ngay lập tức nếu không đủ điều kiện đặc quyền.
+2. *Giám sát tự động lưu lượng ACL qua Syslog:* Đánh giá việc CAMS tự động gắn từ khóa `log` vào toàn bộ quy tắc Access Control List (chuẩn và mở rộng), kích hoạt bộ định tuyến phát sinh bản tin `%SEC-6-IPACCESSLOGP` khi phát hiện lưu lượng bị chặn hoặc cho phép và chuyển tiếp về Syslog Server để phân tích.
+3. *Đánh giá an toàn mật mã dữ liệu lưu trữ (At-Rest Encryption):* Đo đạc hiệu năng hàm dẫn xuất khóa Argon2id theo chuẩn RFC 9106, thuật toán mã hóa đối xứng AES-256-GCM, và kiểm thử cơ chế chống tấn công hoán đổi bản mã (Ciphertext Swapping) nhờ dữ liệu xác thực gắn kết bản ghi (Record-Bound AAD).
+
+==== Kiểm thử kiểm soát leo thang đặc quyền trên môi trường EVE-NG
+
+Trong môi trường quản trị mạng thực tế, thiết bị Cisco IOS thường cấu hình tài khoản cục bộ ở các mức đặc quyền khác nhau. Khi tài khoản người dùng có đặc quyền trung gian (ví dụ: Privilege 5), dấu nhắc lệnh của Cisco IOS vẫn hiển thị ký tự `#` (vốn là dấu hiệu của EXEC mode). Nếu phần mềm quản trị chỉ kiểm tra ký tự `#` để kết luận quyền tối cao (như hành vi mặc định của nhiều công cụ tự động hóa), các lệnh cấu hình yêu cầu đặc quyền 15 (như OSPF, ACL, Interface) sẽ bị router từ chối âm thầm.
+
+CAMS triển khai thuật toán kiểm soát 2 bước (`ensure_initial_privilege` và `ensure_privileged_mode` trong module `infrastructure/network/privilege.py`):
+- *Bước 1 (Prompt Verification):* Kiểm tra dấu nhắc lệnh ban đầu.
+- *Bước 2 (Execution Verification):* Bắt buộc gửi lệnh `show privilege` để đọc mức quyền thực tế `current_level`. Nếu `current_level < 15`:
+  - Nếu người dùng *không cung cấp* mật khẩu Enable Secret hoặc cung cấp sai: hệ thống thực thi nguyên lý *Fail-Closed*, kích hoạt ngoại lệ `PermissionError` hoặc `RuntimeError`, lập tức đóng phiên kết nối (DROP connection) và ghi log cảnh báo.
+  - Nếu người dùng *có cung cấp* mật khẩu Enable Secret: hệ thống gửi lệnh `enable 15` để leo thang, sau đó gửi lại lệnh `show privilege` để xác nhận `current_level == 15` trước khi cấp phép thực thi bất kỳ tác vụ nào.
+
+Ba trường hợp kiểm thử thực nghiệm được thực hiện trên Router `R1` (Cisco vIOS-L3, IP `192.168.122.101`) trong môi trường EVE-NG:
+
+#report-table(
+  columns: (16%, 22%, 26%, 36%),
+  text-size: 9.5pt,
+  cell-inset: (x: 4pt, y: 4.5pt),
+  header: ([Trường hợp], [Tài khoản Cisco IOS], [Cấu hình trên CAMS], [Kết quả kiểm thử & Phản hồi hệ thống]),
+  rows: (
+    (
+      [TH 1: Direct Privilege 15],
+      [#table-code("admin"), mức 15\ #table-code("secret cisco15")],
+      [User: #table-code("admin")\ Pass: #table-code("cisco15")\ Enable Secret: để trống],
+      [Thành công. Lệnh #table-code("show privilege") trả về 15. Kết nối được chấp thuận trực tiếp mà không cần lệnh leo thang.],
+    ),
+    (
+      [TH 2: Privilege 5 + Secret],
+      [#table-code("operator"), mức 5\ #table-code("enable secret cisco15")],
+      [User: #table-code("operator")\ Pass: #table-code("cisco5")\ Enable Secret: #table-code("cisco15")],
+      [Thành công. CAMS phát hiện prompt #table-code("#") nhưng quyền thực tế là 5, tự động gửi #table-code("enable 15"), xác minh lại đạt cấp 15 và cho phép phiên làm việc.],
+    ),
+    (
+      [TH 3: Privilege 5 (Fail-Closed)],
+      [#table-code("operator"), mức 5\ #table-code("enable secret cisco15")],
+      [User: #table-code("operator")\ Pass: #table-code("cisco5")\ Enable Secret: sai hoặc trống],
+      [Từ chối an toàn (Fail-Closed). CAMS ngắt kết nối ngay lập tức: #table-code("PermissionError: Device initial privilege is 5... Connection rejected.")],
+    ),
+  ),
+  caption: [Kết quả kiểm thử thực nghiệm cơ chế phân quyền 2 bước trên Cisco IOS],
+) <tab-k5-privilege-test>
+
+Kết quả trong @tab-k5-privilege-test chứng minh CAMS loại trừ hoàn toàn nguy cơ thực thi lệnh trong trạng thái thiếu quyền hoặc lỗi ngầm, bảo vệ an toàn tính toàn vẹn của thiết bị mạng.
+
+==== Giám sát lưu lượng và phát hiện vi phạm chính sách qua ACL Syslog
+
+Khi cấu hình Access Control List (ACL) để bảo vệ mạng nội bộ hoặc lọc lưu lượng trên cổng giao tiếp, quản trị viên mạng cần nắm bắt kịp thời các gói tin bị từ chối (`deny`) hoặc cho phép (`permit`). CAMS loại bỏ nhu cầu bật thủ công tùy chọn ghi log bằng cách tự động bổ sung từ khóa `log` vào toàn bộ quy tắc ACL sinh ra (ngoại trừ các quy tắc đặc thù của Reflexive ACL vốn không tương thích với cú pháp `log` của Cisco IOS).
+
+#step-title[Bước 1. Sinh tập lệnh cấu hình ACL tự động kèm từ khóa log]
+
+Khi người dùng cấu hình một danh sách truy cập Standard hoặc Extended trên giao diện ACL của CAMS (ví dụ: cấm mạng `192.168.10.0/24` truy cập Web Server nội bộ), mẫu Jinja2 sinh tập lệnh như sau:
+
+```text
+ip access-list extended SEC_FILTER
+ remark Block unauthorized HTTP access to Internal Server
+ 10 deny tcp 192.168.10.0 0.0.0.255 host 10.0.10.50 eq 80 log
+ 20 permit ip any any log
+exit
+interface GigabitEthernet0/1
+ ip access-group SEC_FILTER in
+exit
+```
+
+#step-title[Bước 2. Kiểm chứng tiếp nhận bản tin cảnh báo tại Syslog Server]
+
+Khi trạm kiểm thử gửi các gói tin HTTP (TCP port 80) từ phân mạng `192.168.10.0/24` tới `10.0.10.50`, router Cisco IOS ghi nhận vi phạm ACL, ngắt kết nối gói tin và ngay lập tức gửi một bản tin Syslog qua giao thức UDP về máy chủ CAMS:
+
+```text
+%SEC-6-IPACCESSLOGP: list SEC_FILTER denied tcp 192.168.10.15(49152) -> 10.0.10.50(80), 1 packet
+```
+
+Syslog Listener của CAMS tiếp nhận bản tin, phân tích tự động các trường:
+- *Facility:* `SEC` (Security architecture)
+- *Severity:* `6` (Informational)
+- *Mnemonic:* `IPACCESSLOGP` (IP Access List Logging Packet)
+- *Message:* Trích xuất tên danh sách truy cập `SEC_FILTER`, hành động `denied`, địa chỉ nguồn `192.168.10.15:49152` và địa chỉ đích `10.0.10.50:80`.
+
+Sự kiện được lập chỉ mục và hiển thị tức thời trên giao diện *System Logs*, đồng thời sẵn sàng kích hoạt quy tắc gửi thư cảnh báo (Email Alert) nếu quản trị viên thiết lập ngưỡng cảnh báo cho mã `IPACCESSLOGP`.
+
+==== Đánh giá an toàn mật mã dữ liệu lưu trữ (At-Rest Database Encryption)
+
+Để bảo vệ thông tin đăng nhập thiết bị lưu trong cơ sở dữ liệu SQLite (`device_network.db`), CAMS triển khai cơ chế mã hóa phong bì phiên bản 2 (`ENC$v2$`) kết hợp hàm KDF Argon2id và thuật toán AEAD AES-256-GCM.
+
+#step-title[1. Đo đạc hiệu năng dẫn xuất khóa Argon2id (RFC 9106)]
+
+Khóa dẫn xuất (Key Derivation) sử dụng thuật toán Argon2id với các tham số đạt chuẩn khuyến nghị của RFC 9106: bộ nhớ $m = 64\ "MiB"$ (65,536 KiB), số vòng lặp $t = 3$, và mức song song $p = 4$.
+
+Các phép đo được thực hiện 100 lần trên máy trạm thử nghiệm (CPU AMD Ryzen 7, RAM 16 GB). Kết quả ghi nhận:
+- Thời gian dẫn xuất khóa trung bình: *65.5 ms* (độ lệch chuẩn $sigma = 2.1\ "ms"$).
+- Dung lượng bộ nhớ RAM sử dụng: đúng $64\ "MiB"$ trong quá trình tính toán.
+
+Khoảng thời gian xấp xỉ 65 ms là hoàn toàn trong suốt đối với người dùng khi mở một dự án làm việc, nhưng tạo nên rào cản chi phí tính toán cực lớn đối với kẻ tấn công ngoại tuyến (offline brute-force) ngay cả khi sử dụng các dàn máy tính chuyên dụng có hỗ trợ GPU/ASIC.
+
+#step-title[2. Đo đạc tốc độ mã hóa và giải mã AES-256-GCM]
+
+Sau khi khóa mã hóa dữ liệu (DEK - Data Encryption Key) 256-bit được dẫn xuất vào bộ nhớ RAM, mỗi trường mật khẩu thiết bị được mã hóa bằng AES-256-GCM với nonce 96-bit ngẫu nhiên sinh mới cho từng lần ghi:
+- Thời gian mã hóa trung bình mỗi trường mật khẩu: *0.42 µs*.
+- Thời gian giải mã và xác thực tính toàn vẹn: *0.39 µs*.
+
+Tốc độ trên chứng minh cơ chế mã hóa không tạo ra bất kỳ độ trễ nào đáng kể đối với các tác vụ nạp hàng loạt thiết bị (Batch Import) hoặc điều phối đồng thời nhiều kết nối mạng.
+
+#step-title[3. Kiểm thử phòng thủ chống tráo đổi bản mã (Ciphertext Swapping Test)]
+
+Trong cấu trúc `ENC$v2$`, dữ liệu bổ sung cần xác thực (AAD - Additional Authenticated Data) được tính toán theo định dạng định danh bản ghi:
+$ "AAD" = "CAMS_CRED_V2:" + "host" + ":" + "column" $
+
+Thực nghiệm tấn công hoán đổi bản mã được thiết kế như sau:
+1. Trích xuất chuỗi mật khẩu đã mã hóa của thiết bị `192.168.122.101` từ cơ sở dữ liệu:
+   `ENC$v2$c2Fsd...$bm9u...$Y2lwa...$dGFn...`
+2. Sử dụng câu lệnh SQL trực tiếp sửa bản ghi của thiết bị `192.168.122.102`, thay trường `password` bằng chuỗi bản mã trích xuất ở bước 1.
+3. Trên CAMS, kích hoạt tác vụ kết nối tới `192.168.122.102`.
+
+*Kết quả:* Hàm `decrypt_credential` nạp AAD của thiết bị đích là `CAMS_CRED_V2:192.168.122.102:password`. Do giá trị AAD này sai khác với AAD ban đầu khi mã hóa (`192.168.122.101`), thuật toán AES-GCM lập tức phát hiện sự sai lệch của Authentication Tag và kích hoạt ngoại lệ `cryptography.exceptions.InvalidTag`. CAMS từ chối giải mã, khóa bản ghi và chặn đứng hoàn toàn kỹ thuật tấn công tráo đổi định danh thiết bị.
+
+==== Đánh giá kết quả
+
+Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng bộ và chặt chẽ trong kiến trúc an ninh nhiều lớp:
+- Cơ chế kiểm soát Privilege 15 theo nguyên lý Fail-Closed loại trừ hoàn toàn nguy cơ thực thi thiếu quyền trên Cisco IOS.
+- Cơ chế tự động chèn từ khóa `log` vào ACL giúp chuyển đổi các quy tắc tường lửa tĩnh thành các sự kiện giám sát động gửi về Syslog Server theo thời gian thực.
+- Kiến trúc mật mã `ENC$v2$` kết hợp Argon2id (RFC 9106) và AES-256-GCM với Record-Bound AAD đảm bảo thông tin đăng nhập được bảo vệ vững chắc ở trạng thái lưu trữ, loại bỏ rủi ro trích xuất mật khẩu bản rõ cũng như tấn công tráo đổi bản mã trong cơ sở dữ liệu.
 
 
 == Đánh giá tổng hợp

@@ -53,6 +53,19 @@ Rectangle {
         root.activeDeviceType = ""
     }
 
+    // Main window is reused across workspaces, so tabs opened for devices of a
+    // previous .ntp project must be dropped when the active workspace changes.
+    function resetForWorkspace() {
+        tabModel.clear()
+        activeHistory = []
+        closedTabsHistory = []
+        root.currentFMain = 0
+        root.currentFText = -1
+        root.activeUid = ""
+        root.activeDeviceType = ""
+        root.contextTargetIndex = -1
+    }
+
     function cleanTitle(value) {
         return String(value || "").replace(/[\x00-\x1F\x7F]/g, "").replace(/^[#>`'"]+|[#>`'"]+$/g, "").trim()
     }

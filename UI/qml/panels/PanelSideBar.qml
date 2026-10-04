@@ -43,6 +43,7 @@ Rectangle {
     function openNewDeviceWindow() { devicesPanel.openNewDeviceWindow() }
     function openBatchDeviceWindow() { devicesPanel.openBatchDeviceWindow() }
     function reloadDevices() { devicesPanel.reloadDevices() }
+    function clearDevices() { devicesPanel.clearDevices() }
     function selectSyslogHost(host) { syslogPanel.selectedHost = String(host || "") }
     function selectSetting(key) { return settingsPanel.selectSetting(key) }
 

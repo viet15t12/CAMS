@@ -186,29 +186,20 @@ Việc tách giao diện khỏi logic giúp kiểm thử nghiệp vụ mà khôn
 
 == Thư viện và cơ chế thực thi
 
-=== Thư viện mạng và quản lý phiên bản
-
-*Netmiko.* Netmiko là thư viện Python chuyên xử lý phiên CLI của thiết bị mạng. Thư viện cung cấp trình điều khiển theo từng hệ điều hành mạng, nhận diện dấu nhắc, chuyển sang chế độ đặc quyền, gửi lệnh kiểm tra bằng `send_command` và gửi nhóm lệnh cấu hình bằng `send_config_set`. Lớp trừu tượng này giúp mã nghiệp vụ không phải tự xử lý toàn bộ khác biệt về dấu nhắc, ký tự xuống dòng và thời gian chờ của từng thiết bị @netmikoDocs.
-
-Trong CAMS, Netmiko là thành phần thực hiện chính cho các luồng Cisco IOS qua SSH hoặc Telnet. Hệ thống tạo kết nối bằng `ConnectHandler`, kiểm tra quyền đặc quyền trước khi gửi cấu hình và chuyển phản hồi về tác vụ gọi. CAMS vẫn phải tự xử lý lỗi xác thực, hết thời gian chờ và thuật toán SSH không tương thích; Netmiko không tự xác nhận rằng chính sách mạng sau cấu hình đã hoạt động đúng.
-
-*Paramiko.* Paramiko hiện thực giao thức SSHv2 cho Python, gồm lớp truyền tải, kênh lệnh và máy khách SFTP. CAMS dùng Paramiko cho đầu cuối SSH tương tác, truyền tệp và kiểm soát một số tham số thuật toán SSH ở mức thấp hơn Netmiko. Khi sử dụng thư viện, hệ thống phải kiểm tra khóa máy chủ, quản lý thời gian chờ và đóng phiên đúng cách để hạn chế kết nối treo hoặc chấp nhận nhầm máy chủ @paramikoDocs.
-
-*Nornir.* Nornir là khung tự động hóa thuần Python, tổ chức thiết bị thành danh mục, đóng gói thao tác thành tác vụ và giao việc cho bộ chạy. Nornir không tự định nghĩa giao thức kết nối thiết bị; chức năng đó được cung cấp bởi phần bổ trợ như `nornir-netmiko`. Cách phân tách này cho phép cùng một tác vụ nhận dữ liệu theo từng thiết bị và trả kết quả riêng mà không cần tạo các tệp tác vụ bên ngoài @nornirDocs.
-
-CAMS đăng ký phần bổ trợ kết nối Netmiko riêng cho Nornir, sau đó dùng bộ chạy để triển khai cùng một nhóm lệnh trên nhiều thiết bị. Kết quả của từng máy được giữ độc lập để giao diện có thể hiển thị thiết bị thành công hoặc thất bại. Nornir cung cấp cơ chế điều phối; quy tắc tuần tự hóa tác vụ trên cùng thiết bị vẫn do Host Lock của CAMS bảo đảm.
-
-*Dulwich.* Dulwich là thư viện Python hiện thực mô hình đối tượng và kho lưu trữ Git mà không cần gọi chương trình Git bên ngoài. CAMS tạo kho cục bộ cho từng thiết bị, lưu `running-config.txt` thành đối tượng Git và tạo bản ghi lịch sử sau mỗi lần sao lưu. Dữ liệu này hỗ trợ xem phiên bản và so sánh sai khác giữa các lần thu thập @dulwichDocs.
-
-Kho Dulwich chỉ lưu dấu vết của cấu hình đã thu thập. Việc chọn một phiên bản cũ không tự động hoàn tác thiết bị; muốn khôi phục, hệ thống phải chuyển phần khác biệt thành lệnh phù hợp, triển khai qua phiên CLI và xác minh lại trạng thái thực tế.
-
-=== Tạo mẫu lệnh
-
-*Jinja2.* Jinja2 là bộ máy tạo mẫu văn bản cho Python. Mẫu có thể chứa biến, điều kiện, vòng lặp và bộ lọc để chuyển dữ liệu cấu hình có cấu trúc thành lệnh Cisco IOS. CAMS nạp mẫu từ tệp, truyền các trường đã kiểm tra và kết xuất lệnh cho từng thiết bị; một số phân hệ dùng chế độ `StrictUndefined` để dừng quá trình nếu mẫu tham chiếu đến biến chưa được cung cấp @jinja2Docs.
-
-Việc tách mẫu lệnh khỏi mã giao diện giúp tái sử dụng cùng một quy tắc sinh lệnh và thuận tiện rà soát cú pháp. Tuy nhiên, dữ liệu phải được kiểm tra trước khi kết xuất; mẫu phải giữ đúng thứ tự phụ thuộc, chẳng hạn tạo VLAN trước khi gán cổng hoặc tạo ACL trước khi áp dụng vào cổng. Kết xuất thành công chỉ tạo được văn bản, không chứng minh thiết bị đã chấp nhận lệnh hay chính sách mạng đã hoạt động.
-
-=== Cơ chế thực thi bất đồng bộ
+#report-table(
+  columns: (29%, 71%),
+  header: ([Thành phần], [Vai trò trong CAMS]),
+  rows: (
+    ([Netmiko, Paramiko], [Kết nối thiết bị qua SSH, xử lý phiên CLI và hỗ trợ truyền tệp.]),
+    ([Jinja2], [Kết xuất dữ liệu đã kiểm tra thành mẫu lệnh Cisco IOS.]),
+    ([Dulwich], [Lưu phiên bản cấu hình trong kho Git cục bộ, hỗ trợ lịch sử và so sánh.]),
+    ([Argon2id, AES-256-GCM], [Dẫn xuất khóa từ mật khẩu và mã hóa có xác thực cho gói dự án khi bật bảo vệ.]),
+    ([C++ / Asio], [Xây dựng bộ thu nhận Syslog hiệu năng cao, xử lý lượng lớn bản tin mạng UDP/TCP đồng thời.]),
+    ([Alacritty], [Terminal giả lập nhúng trực tiếp, hỗ trợ thao tác dòng lệnh nhanh qua SSH/Telnet.]),
+    ([IPC NTTP/1], [Giao thức truyền thông liên tiến trình, đồng bộ hóa dữ liệu thời gian thực giữa bộ thu C++ và giao diện Python.]),
+  ),
+  caption: [Các thành phần công nghệ phục vụ quy trình quản trị],
+)
 
 Tác vụ mạng được chuyển sang luồng nền để vòng lặp giao diện tiếp tục xử lý thao tác người dùng. *Khóa theo thiết bị* (Host Lock) tuần tự hóa các tác vụ cùng sử dụng một phiên CLI; *bộ thực thi theo lô* (Batch Executor) cho phép xử lý đồng thời trên các thiết bị độc lập. Cách tổ chức này hạn chế lệnh bị xen kẽ trên cùng một phiên mà vẫn tận dụng khả năng xử lý song song @pythonThreadingDocs.
 

@@ -29,7 +29,7 @@ class InterfaceSlotsMixin:
 
     @pyqtSlot("QVariant", result="QVariant")
     def saveRouterInterfaceResult(self, payload: Any) -> dict[str, Any]:
-        """Validate and save one interface with a structured QML result."""
+        print("DEBUG PAYLOAD RECEIVED FROM QML:", payload)
         return InterfaceService(self).save(payload)
 
     @pyqtSlot(str, result="QVariant")

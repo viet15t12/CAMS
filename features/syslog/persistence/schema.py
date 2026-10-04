@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS t10_syslog_servers (
     protocol          TEXT NOT NULL CHECK (protocol IN ('udp', 'tcp')),
     port              INTEGER NOT NULL CHECK (port BETWEEN 1 AND 65535),
     source_interface  TEXT,
-    trap_severity     INTEGER NOT NULL DEFAULT 5 CHECK (trap_severity BETWEEN 0 AND 7),
+    trap_severity     INTEGER NOT NULL DEFAULT 6 CHECK (trap_severity BETWEEN 0 AND 7),
     timestamps        INTEGER NOT NULL DEFAULT 0 CHECK (timestamps IN (0, 1)),
     sequence_numbers  INTEGER NOT NULL DEFAULT 0 CHECK (sequence_numbers IN (0, 1)),
     configured        INTEGER NOT NULL DEFAULT 0 CHECK (configured IN (0, 1)),
@@ -77,7 +77,7 @@ MESSAGE_COLUMNS = {
 
 DEVICE_CONFIG_COLUMNS = {
     "source_interface": "TEXT",
-    "trap_severity": "INTEGER NOT NULL DEFAULT 5 CHECK (trap_severity BETWEEN 0 AND 7)",
+    "trap_severity": "INTEGER NOT NULL DEFAULT 6 CHECK (trap_severity BETWEEN 0 AND 7)",
     "timestamps": "INTEGER NOT NULL DEFAULT 0 CHECK (timestamps IN (0, 1))",
     "sequence_numbers": "INTEGER NOT NULL DEFAULT 0 CHECK (sequence_numbers IN (0, 1))",
     "configured": "INTEGER NOT NULL DEFAULT 0 CHECK (configured IN (0, 1))",

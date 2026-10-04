@@ -86,9 +86,6 @@
   if caption == none {
     table-content
   } else {
-    set figure.caption(position: top)
-    show figure: set block(breakable: false)
-
     figure(
       table-content,
       kind: table,

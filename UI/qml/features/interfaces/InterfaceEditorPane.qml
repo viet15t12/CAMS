@@ -309,8 +309,8 @@ SplitFormPane {
             columns: 2
             columnSpacing: Theme.spacing12
             rowSpacing: Theme.spacing12
-            StandardNetworkField { id: ipField; Layout.fillWidth: true; inputKind: "ipv4"; labelText: "IPv4 address"; placeholderText: "192.168.1.1" }
-            StandardNetworkField { id: maskField; Layout.fillWidth: true; inputKind: "subnet"; labelText: "Subnet mask"; placeholderText: "255.255.255.0 or /24" }
+            StandardNetworkField { id: ipField; Layout.fillWidth: true; Layout.columnSpan: (ipField.text || "").trim().toLowerCase() === "dhcp" ? 2 : 1; inputKind: "ipv4"; labelText: "IPv4 address"; placeholderText: "192.168.1.1" }
+            StandardNetworkField { id: maskField; visible: (ipField.text || "").trim().toLowerCase() !== "dhcp"; Layout.fillWidth: true; inputKind: "subnet"; labelText: "Subnet mask"; placeholderText: "255.255.255.0 or /24" }
             StandardTextField { id: descriptionField; Layout.fillWidth: true; Layout.columnSpan: 2; labelText: "Description"; placeholderText: "Link purpose or peer" }
         }
 

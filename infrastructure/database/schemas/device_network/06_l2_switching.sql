@@ -146,6 +146,8 @@ CREATE TABLE IF NOT EXISTS t06_dhcp_trust_ports (
     if_name  TEXT    NOT NULL,
     success  TEXT    NOT NULL DEFAULT 'pending_apply'
                      CHECK(success IN ('pending_apply','pending_delete','synchronized','skipped')),
+    trust_dhcp INTEGER NOT NULL DEFAULT 1 CHECK(trust_dhcp IN (0,1)),
+    trust_arp  INTEGER NOT NULL DEFAULT 1 CHECK(trust_arp IN (0,1)),
     UNIQUE(host, if_name)
 );
 

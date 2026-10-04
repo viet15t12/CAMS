@@ -15,7 +15,7 @@ from .policy_delete_repository import (
 from .schema import ensure_switch_schema
 from .security_repository import (
     add_l2_trust_port,
-    get_l2_security,
+    get_l2_security, save_l2_security_global,
     save_l2_vlan_security,
     save_static_mac,
 )

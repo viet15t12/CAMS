@@ -40,6 +40,8 @@ def validate_ipv4_pair(address: Any, mask: Any) -> tuple[str | None, str | None]
     mask_text = text(mask)
     if not ip_text and not mask_text:
         return None, None
+    if ip_text.lower() == "dhcp":
+        return "dhcp", None
     if not ip_text or not mask_text:
         raise ValueError("IP address and subnet mask must be provided together")
     try:

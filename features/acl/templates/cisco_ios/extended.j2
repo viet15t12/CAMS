@@ -10,13 +10,13 @@ no {{ rule.seq }}
 {% endfor %}
 {% for rule in rules_add %}
 {% if acl_type == 'dynamic' and rule.dyn_name %}
-{{ rule.seq }} dynamic {{ rule.dyn_name }}{% if rule.timeout %} timeout {{ rule.timeout }}{% endif %} {{ rule.action }} {{ rule.protocol }} {{ rule.src }}{% if rule.src_mask %} {{ rule.src_mask }}{% endif %}{% if rule.src_port %} {{ rule.src_port }}{% endif %} {{ rule.dst }}{% if rule.dst_mask %} {{ rule.dst_mask }}{% endif %}{% if rule.dst_port %} {{ rule.dst_port }}{% endif %}
+{{ rule.seq }} dynamic {{ rule.dyn_name }}{% if rule.timeout %} timeout {{ rule.timeout }}{% endif %} {{ rule.action }} {{ rule.protocol }} {{ rule.src }}{% if rule.src_mask %} {{ rule.src_mask }}{% endif %}{% if rule.src_port %} {{ rule.src_port }}{% endif %} {{ rule.dst }}{% if rule.dst_mask %} {{ rule.dst_mask }}{% endif %}{% if rule.dst_port %} {{ rule.dst_port }}{% endif %} log
 {% elif acl_type == 'reflexive' and rule.action == 'evaluate' %}
 {{ rule.seq }} evaluate {{ rule.reflect_name }}
-{% elif acl_type == 'reflexive' %}
-{{ rule.seq }} {{ rule.action }} {{ rule.protocol }} {{ rule.src }}{% if rule.src_mask %} {{ rule.src_mask }}{% endif %}{% if rule.src_port %} {{ rule.src_port }}{% endif %} {{ rule.dst }}{% if rule.dst_mask %} {{ rule.dst_mask }}{% endif %}{% if rule.dst_port %} {{ rule.dst_port }}{% endif %}{% if rule.reflect_name %} reflect {{ rule.reflect_name }}{% endif %}{% if rule.timeout %} timeout {{ rule.timeout }}{% endif %}
+{% elif acl_type == 'reflexive' and rule.reflect_name %}
+{{ rule.seq }} {{ rule.action }} {{ rule.protocol }} {{ rule.src }}{% if rule.src_mask %} {{ rule.src_mask }}{% endif %}{% if rule.src_port %} {{ rule.src_port }}{% endif %} {{ rule.dst }}{% if rule.dst_mask %} {{ rule.dst_mask }}{% endif %}{% if rule.dst_port %} {{ rule.dst_port }}{% endif %} reflect {{ rule.reflect_name }}{% if rule.timeout %} timeout {{ rule.timeout }}{% endif %}
 {% else %}
-{{ rule.seq }} {{ rule.action }} {{ rule.protocol }} {{ rule.src }}{% if rule.src_mask %} {{ rule.src_mask }}{% endif %}{% if rule.src_port %} {{ rule.src_port }}{% endif %} {{ rule.dst }}{% if rule.dst_mask %} {{ rule.dst_mask }}{% endif %}{% if rule.dst_port %} {{ rule.dst_port }}{% endif %}
+{{ rule.seq }} {{ rule.action }} {{ rule.protocol }} {{ rule.src }}{% if rule.src_mask %} {{ rule.src_mask }}{% endif %}{% if rule.src_port %} {{ rule.src_port }}{% endif %} {{ rule.dst }}{% if rule.dst_mask %} {{ rule.dst_mask }}{% endif %}{% if rule.dst_port %} {{ rule.dst_port }}{% endif %} log
 {% endif %}
 {% endfor %}
 exit

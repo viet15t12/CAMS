@@ -706,6 +706,16 @@ StatefulWindow {
     Connections {
         target: root.welcomeBackend
         function onActiveWorkspaceChanged() {
+            // The Main window is reused between workspaces. Drop every UI
+            // cache that came from the previous project, then reload the
+            // device inventory from the newly active (or no) workspace.
+            deviceTabs.resetForWorkspace()
+            root.selectedSyslogHost = ""
+            if (root.welcomeBackend && root.welcomeBackend.activeProjectPath !== "")
+                panelSideBar.reloadDevices()
+            else
+                panelSideBar.clearDevices()
+
             if (root.welcomeBackend && !root.welcomeBackend.activeProjectEncrypted) {
                 statusBar.showMessage(
                     LanguageState.isVietnamese

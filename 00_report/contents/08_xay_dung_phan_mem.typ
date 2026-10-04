@@ -62,7 +62,9 @@ Các biểu mẫu FHRP hỗ trợ khai báo gateway dự phòng và tham số th
 
 === ACL và NAT/PAT
 
-Chức năng ACL cung cấp biểu mẫu cho Standard, Extended, Dynamic, Reflexive và MAC ACL theo khả năng của loại thiết bị. Quy tắc được quản lý theo thứ tự, kèm cổng áp dụng và chiều áp dụng. Điểm cần kiểm soát là thứ tự khớp luật và chính sách cho phép/từ chối; sau triển khai phải thử cả lưu lượng được phép và lưu lượng bị chặn.
+Chức năng ACL cung cấp biểu mẫu cho Standard, Extended, Dynamic, Reflexive và MAC ACL theo khả năng của loại thiết bị. Quy tắc được quản lý theo thứ tự, kèm cổng áp dụng và chiều áp dụng. 
+
+Để hiện thực hóa cơ chế giám sát an ninh mạng chủ động, các mẫu Jinja2 sinh tập lệnh ACL được cải tiến để tự động gắn từ khóa `log` vào cuối các quy tắc lọc. Khi thiết bị phát hiện lưu lượng khớp với danh sách kiểm soát, bản tin Syslog (ví dụ `%SEC-6-IPACCESSLOGP`) sẽ được sinh ra và đẩy về CAMS Syslog Server, cho phép giám sát trực tiếp mà không cần cấu hình thủ công. Điểm cần kiểm soát là thứ tự khớp luật và chính sách cho phép/từ chối; sau triển khai phải thử cả lưu lượng được phép và lưu lượng bị chặn.
 
 NAT/PAT quản lý ánh xạ tĩnh, pool động, chế độ overload, vai trò inside/outside của cổng và điều kiện chọn lưu lượng. Dữ liệu từ bảng chuyển đổi địa chỉ giúp đối chiếu cấu hình với các phiên thực tế. NAT được xem là chức năng chuyển đổi địa chỉ, không thay thế cơ chế lọc truy cập.
 
@@ -121,7 +123,9 @@ Trong phạm vi hiện tại, CAMS hỗ trợ phân tích dấu hiệu bất th�
 
 SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy chủ và hàng đợi truyền nền. Terminal đồng hành cung cấp phiên CLI phục vụ thao tác trực tiếp. Sau thay đổi thủ công, cần đồng bộ lại để dữ liệu trong CAMS phản ánh cấu hình mới.
 
-Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
+Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. 
+
+Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`), loại trừ hoàn toàn nguy cơ rò rỉ thông tin xác thực trên toàn hệ thống. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),

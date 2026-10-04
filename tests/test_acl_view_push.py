@@ -77,7 +77,7 @@ class AclViewPushTests(unittest.TestCase):
         self.assertEqual(len(tasks), 1)
         commands = render_acl_payload(tasks[0])
         self.assertIn("ip access-list standard EDGE_IN", commands)
-        self.assertIn("10 permit 192.168.1.0 0.0.0.255", commands)
+        self.assertIn("10 permit 192.168.1.0 0.0.0.255 log", commands)
         self.assertIn("ip access-group EDGE_IN in", commands)
 
         report = apply_acl_results(
@@ -138,7 +138,7 @@ class AclViewPushTests(unittest.TestCase):
         tasks = collect_acl_tasks("10.0.0.1", str(self.db_path))
         commands = render_acl_payload(tasks[0])
         self.assertIn("no 10", commands)
-        self.assertIn("20 permit 198.51.100.0 0.0.0.255", commands)
+        self.assertIn("20 permit 198.51.100.0 0.0.0.255 log", commands)
 
     def test_retried_edits_render_each_deleted_sequence_once(self) -> None:
         self._save(0, 10, "192.168.1.0")
@@ -149,7 +149,7 @@ class AclViewPushTests(unittest.TestCase):
         tasks = collect_acl_tasks("10.0.0.1", str(self.db_path))
         commands = render_acl_payload(tasks[0])
         self.assertEqual(commands.count("no 10"), 1)
-        self.assertIn("10 permit 192.168.4.0 0.0.0.255", commands)
+        self.assertIn("10 permit 192.168.4.0 0.0.0.255 log", commands)
         self.assertGreater(len(tasks[0]["tracking"]["rules"]["standard"]["del"]), 1)
 
     def test_legacy_icmp_eq_type_renders_valid_ios_syntax(self) -> None:
@@ -177,5 +177,67 @@ class AclViewPushTests(unittest.TestCase):
         tasks = collect_acl_tasks("10.0.0.1", str(self.db_path))
         commands = render_acl_payload(tasks[0])
         rendered_rule = next(command for command in commands if command.startswith("30 permit"))
-        self.assertTrue(rendered_rule.endswith(" echo"), rendered_rule)
+        self.assertTrue(rendered_rule.endswith(" echo log"), rendered_rule)
         self.assertNotIn("eq echo", rendered_rule)
+
+    def test_acl_automatic_logging_rules(self) -> None:
+        # Standard ACL
+        payload_std = {
+            "acl_name": "TEST_STD",
+            "acl_type": "standard",
+            "rules_add": [{"seq": 10, "action": "deny", "src": "any", "src_mask": None}],
+            "rules_del": [],
+        }
+        cmds_std = render_acl_payload(payload_std)
+        self.assertIn("10 deny any log", cmds_std)
+
+        # Extended ACL
+        payload_ext = {
+            "acl_name": "TEST_EXT",
+            "acl_type": "extended",
+            "rules_add": [{
+                "seq": 20, "action": "permit", "protocol": "tcp",
+                "src": "any", "src_mask": None, "src_port": None,
+                "dst": "host 10.1.1.1", "dst_mask": None, "dst_port": "eq 80",
+            }],
+            "rules_del": [],
+        }
+        cmds_ext = render_acl_payload(payload_ext)
+        self.assertIn("20 permit tcp any host 10.1.1.1 eq 80 log", cmds_ext)
+
+        # Dynamic ACL
+        payload_dyn = {
+            "acl_name": "TEST_DYN",
+            "acl_type": "dynamic",
+            "rules_add": [{
+                "seq": 30, "action": "permit", "protocol": "ip",
+                "src": "any", "src_mask": None, "src_port": None,
+                "dst": "any", "dst_mask": None, "dst_port": None,
+                "dyn_name": "DYN_USER", "timeout": 15,
+            }],
+            "rules_del": [],
+        }
+        cmds_dyn = render_acl_payload(payload_dyn)
+        self.assertIn("30 dynamic DYN_USER timeout 15 permit ip any any log", cmds_dyn)
+
+        # Reflexive ACL (evaluate rule must NOT have log, reflect rule must NOT have log)
+        payload_refl = {
+            "acl_name": "TEST_REFL",
+            "acl_type": "reflexive",
+            "rules_add": [
+                {"seq": 10, "action": "evaluate", "reflect_name": "REFL_TRACK"},
+                {
+                    "seq": 20, "action": "permit", "protocol": "tcp",
+                    "src": "any", "src_mask": None, "src_port": None,
+                    "dst": "any", "dst_mask": None, "dst_port": None,
+                    "reflect_name": "REFL_TRACK", "timeout": 60,
+                },
+            ],
+            "rules_del": [],
+        }
+        cmds_refl = render_acl_payload(payload_refl)
+        self.assertIn("10 evaluate REFL_TRACK", cmds_refl)
+        self.assertNotIn("10 evaluate REFL_TRACK log", cmds_refl)
+        self.assertIn("20 permit tcp any any reflect REFL_TRACK timeout 60", cmds_refl)
+        self.assertNotIn("timeout 60 log", cmds_refl)
+

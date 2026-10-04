@@ -1,5 +1,5 @@
 #pagebreak(weak: true)
-#import "../config/tables.typ": report-table
+#import "../config/tables.typ": report-table, table-code
 
 = Phân tích và thiết kế hệ thống
 
@@ -74,11 +74,56 @@ Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiê
 
 // Chuỗi kiểm chứng cho một sự kiện bảo mật là: chính sách đã được triển khai trên thiết bị, tình huống thử kích hoạt cơ chế tương ứng, thiết bị tạo log, CAMS nhận được log và người dùng truy vấn thấy đúng nguồn, nội dung. Thiếu một mắt xích trong chuỗi này không đủ cơ sở để kết luận chức năng cảnh báo đã đạt yêu cầu.
 
+== Thiết kế cơ chế an ninh phân quyền và bảo mật dữ liệu
+
+Nhằm đảm bảo an toàn tuyệt đối cho hệ thống và ngăn ngừa rủi ro lộ lọt cấu hình, CAMS tích hợp các cơ chế bảo mật chuyên sâu ở hai mức độ: bảo vệ kết nối thiết bị mạng và bảo vệ dữ liệu lưu trữ tĩnh (At-Rest).
+
+=== Luồng xác thực 2 bước Privilege 15 và nguyên lý Fail-Closed
+Hệ thống mạng yêu cầu các thao tác cấu hình phải được thực thi ở đặc quyền cao nhất (Privilege 15). CAMS triển khai cơ chế kiểm soát phân quyền 2 bước:
+- *Bước 1 (Prompt Level):* Nhận diện dấu nhắc lệnh ban đầu của thiết bị để xác định sơ bộ chế độ hoạt động (User EXEC hoặc Privileged EXEC).
+- *Bước 2 (Execution Level):* Buộc gửi lệnh `show privilege` để lấy mức quyền thực tế. Nếu quyền `< 15`, hệ thống đánh giá theo nguyên lý *Fail-Closed*:
+  - Nếu thiếu hoặc sai mật khẩu đặc quyền (Enable Secret), lập tức ngắt kết nối và từ chối mọi tác vụ tiếp theo.
+  - Nếu có mật khẩu đặc quyền, CAMS cưỡng bức leo thang bằng `enable 15`, sau đó tái xác minh. Mọi sai lệch đều dẫn đến việc đóng phiên an toàn.
+
+=== Vòng đời khóa phiên Argon2id và mã hóa AES-256-GCM (ENC\$v2\$)
+Để chống lại các nỗ lực vét cạn ngoại tuyến (Offline Brute-force) và hoán đổi bản mã (Ciphertext Swapping), CAMS áp dụng kiến trúc mã hóa có xác thực:
+- Khóa phiên (DEK) được dẫn xuất từ mật khẩu dự án thông qua thuật toán Argon2id (RFC 9106) với cấu hình bộ nhớ và số vòng lặp tạo độ trễ tính toán an toàn.
+- Dữ liệu mật khẩu lưu trữ trong SQLite được mã hóa theo chuẩn `ENC\$v2\$` bằng AES-256-GCM.
+- Chuỗi xác thực (AAD) được gắn chặt với định danh thiết bị và tên cột (Record-Bound AAD). Bất kỳ sự hoán đổi dữ liệu nào giữa các thiết bị hoặc giữa các trường thông tin đều sẽ bị phát hiện (`InvalidTag`) và chặn đứng.
+- Khóa trong bộ nhớ (RAM) được tổ chức bằng cấu trúc mảng byte động, cho phép hệ thống chủ động ghi đè (`zero-wiping`) và hủy khóa ngay khi kết thúc phiên.
+
+#report-table(
+  columns: (22%, 35%, 43%),
+  header: ([Tính năng], [Công nghệ & Thuật toán], [Cơ chế hoạt động]),
+  rows: (
+    ([Enable Secret & Fail-Closed], [Regex kiểm tra quyền, Netmiko `enable`], [Kiểm tra đặc quyền thực tế bằng `show privilege`. Ngắt kết nối ngay nếu sai mật khẩu (Fail-Closed). Cưỡng bức leo thang nếu có Secret.]),
+    ([Mã hóa At-Rest (`ENC\$v2\$`)], [Argon2id (RFC 9106), AES-256-GCM], [Lưu bản mã cấu trúc `ENC\$v2\$...`. Sử dụng Record-Bound AAD để chống tráo đổi. Ghi đè bộ nhớ khi hủy khóa.]),
+    ([Tự động Giám sát ACL Syslog], [Jinja2, Cisco IOS Logging], [Tự động chèn từ khóa `log` vào quy tắc ACL. Gửi bản tin vi phạm về Syslog Collector để cảnh báo theo thời gian thực.]),
+  ),
+  caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
+) <tab-security-architecture>
+
 == Thiết kế cơ sở dữ liệu
 
 CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị và cấu hình của các chức năng Interfaces, DHCP, định tuyến, ACL, NAT, chuyển mạch và Syslog; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, DHCP binding, thống kê ACL, phiên NAT và bản tin Syslog. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
 
 Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã thiết bị. Trước khi ghi dữ liệu, tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và các quan hệ phụ thuộc. Những bản ghi tham gia luồng View \& Push còn có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại để xác nhận cấu hình thực tế trên thiết bị.
+
+Để hệ thống hóa cấu trúc dữ liệu, hệ thống bao gồm 93 bảng nghiệp vụ khác nhau. Dưới đây là lược đồ các bảng chính yếu đại diện cho các phân hệ cốt lõi:
+
+#report-table(
+  columns: (25%, 35%, 40%),
+  header: ([Tên bảng (Table)], [Khóa chính / Khóa ngoại], [Vai trò và dữ liệu lưu trữ]),
+  rows: (
+    ([#table-code("t01_devices")], [PK: #table-code("host")], [Lưu định danh, thông tin kết nối, OS và `enable_password` (ENC\$v2\$)]),
+    ([#table-code("t02_interfaces")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý cấu hình cổng L3, L2, trạng thái UP/DOWN và mô tả]),
+    ([#table-code("t03_routing_ospf")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu thông tin tiến trình OSPF, vùng Area, Router ID]),
+    ([#table-code("t04_acl_rules")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu danh sách kiểm soát truy cập, thứ tự, hành động và từ khóa `log`]),
+    ([#table-code("t05_nat_pat")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý danh sách ánh xạ địa chỉ biên (NAT/PAT), Inside/Outside]),
+    ([#table-code("t06_syslog_events")], [PK: #table-code("id")], [Nằm trong `info_collected.db`: Lưu trữ bản tin Syslog gốc, phân loại RFC 5424]),
+  ),
+  caption: [Lược đồ thực thể - quan hệ (ERD) các bảng nghiệp vụ cốt lõi của CAMS],
+) <tab-core-erd>
 
 == Thiết kế giao diện và xử lý lỗi
 

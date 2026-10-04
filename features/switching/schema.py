@@ -163,8 +163,28 @@ def ensure_switch_schema(db: Any) -> None:
                     SET success = COALESCE(sync_status, 'pending_apply');
                     """
                 )
+            
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS t06_security_global (
+                    host TEXT PRIMARY KEY REFERENCES t01_devices(host) ON DELETE CASCADE,
+                    dhcp_option_82 TEXT NOT NULL DEFAULT 'insert',
+                    success TEXT NOT NULL DEFAULT 'pending_apply'
+                        CHECK(success IN (
+                            'pending_apply','pending_delete','synchronized','skipped'
+                        ))
+                );
+                """
+            )
+
             # Bang trang thai module cua project cu (neu co) khong con duoc
             # tao/ghi/doc; trang thai push SWL2 nam tren cot success tung row.
+            if table_exists("t06_dhcp_trust_ports"):
+                dhcp_cols = columns("t06_dhcp_trust_ports")
+                if "trust_dhcp" not in dhcp_cols:
+                    conn.execute("ALTER TABLE t06_dhcp_trust_ports ADD COLUMN trust_dhcp INTEGER NOT NULL DEFAULT 1 CHECK(trust_dhcp IN (0,1));")
+                if "trust_arp" not in dhcp_cols:
+                    conn.execute("ALTER TABLE t06_dhcp_trust_ports ADD COLUMN trust_arp INTEGER NOT NULL DEFAULT 1 CHECK(trust_arp IN (0,1));")
             if table_exists("t06_svi_interface"):
                 duplicate = conn.execute(
                     """

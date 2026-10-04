@@ -104,6 +104,11 @@ class SwitchSlotsMixin:
         return get_l2_security(self, host)
 
     @pyqtSlot(str, "QVariant", result="QVariant")
+    def saveSwitchL2Global(self, host: str, payload: Any) -> dict[str, Any]:
+        from features.switching import save_l2_security_global
+        return save_l2_security_global(self, host, self._as_dict(payload))
+
+    @pyqtSlot(str, "QVariant", result="QVariant")
     def saveSwitchL2VlanSecurity(self, host: str, payload: Any) -> dict[str, Any]:
         return save_l2_vlan_security(self, host, self._as_dict(payload))
 
@@ -112,9 +117,9 @@ class SwitchSlotsMixin:
         """Stage removal of DHCP Snooping/DAI policy from one VLAN."""
         return delete_l2_vlan_security(self, host, row_id)
 
-    @pyqtSlot(str, str, result="QVariant")
-    def addSwitchL2TrustPort(self, host: str, if_name: str) -> dict[str, Any]:
-        return add_l2_trust_port(self, host, if_name)
+    @pyqtSlot(str, str, bool, bool, result="QVariant")
+    def addSwitchL2TrustPort(self, host: str, if_name: str, trust_dhcp: bool = True, trust_arp: bool = True) -> dict[str, Any]:
+        return add_l2_trust_port(self, host, if_name, trust_dhcp, trust_arp)
 
     @pyqtSlot(str, int, result="QVariant")
     def deleteSwitchL2TrustPort(self, host: str, row_id: int) -> dict[str, Any]:

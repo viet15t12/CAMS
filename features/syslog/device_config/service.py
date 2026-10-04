@@ -28,7 +28,7 @@ class SyslogConfigurator:
 
     def configure(
         self, host: str, server_ip: str, protocol: str, port: int,
-        source_interface: str = "", trap_severity: int = 5,
+        source_interface: str = "", trap_severity: int = 6,
         timestamps: bool = False, sequence_numbers: bool = False,
     ) -> dict[str, object]:
         validation = self._validate_host(host)

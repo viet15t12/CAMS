@@ -269,7 +269,10 @@ def render_interface_commands(task: dict[str, Any]) -> list[str]:
             f"description {description}" if description else "no description"
         )
     if not selective_l3 or field_is_dirty(action_cfg, "primary_ip"):
-        if interface.get("ip_address") and interface.get("subnet_mask"):
+        ip_text = str(interface.get("ip_address") or "").lower()
+        if ip_text == "dhcp":
+            commands.append("ip address dhcp")
+        elif interface.get("ip_address") and interface.get("subnet_mask"):
             commands.append(
                 f"ip address {interface['ip_address']} {interface['subnet_mask']}"
             )

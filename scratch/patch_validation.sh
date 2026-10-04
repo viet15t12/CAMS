@@ -1,0 +1,1 @@
+sed -i 's/def normalize_ipv4(address: Any, mask: Any) -> tuple\[str | None, str | None\]:/def normalize_ipv4(address: Any, mask: Any) -> tuple[str | None, str | None]:\n    ip_text = str(address or "").strip()\n    if ip_text.lower() == "dhcp":\n        return "dhcp", None/g' /data/Projects/CAMS_2/features/interfaces/validation.py

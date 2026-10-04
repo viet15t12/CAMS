@@ -15,7 +15,7 @@ Hiện nay trên thị trường và trong cộng đồng mã nguồn mở đã 
 - *Công cụ tự động hóa bằng mã lệnh (Ansible, Nornir):* Phù hợp cho việc triển khai quy mô lớn nhờ khả năng tùy biến cao, tuy nhiên đòi hỏi người dùng phải có kiến thức lập trình, kỹ năng viết mã kịch bản (Playbook/Python) và không có giao diện đồ họa.
 - *Hệ thống quản lý nguồn sự thật (NetBox):* Tập trung vào IPAM (Quản lý địa chỉ IP) và DCIM (Quản lý tài sản trung tâm dữ liệu), nhưng không trực tiếp đẩy cấu hình xuống thiết bị mà cần kết hợp với các công cụ khác.
 - *Giải pháp sao lưu (Oxidized, RANCID):* Chuyên biệt cho việc thu thập và lưu trữ lịch sử cấu hình mạng, nhưng thiếu khả năng sinh và cấu hình chủ động.
-- *Nền tảng thương mại (Cisco DNA Center, Catalyst Center, SolarWinds NCM):* Là những hệ thống toàn diện, mạnh mẽ, nhưng có chi phí bản quyền rất cao, đòi hỏi cấu hình máy chủ lớn và khó tiếp cận trong môi trường học thuật.
+- *Nền tảng thương mại (Cisco DNA Center, Catalyst Center, SolarWinds NCM):* Là những hệ thống toàn diện, mạnh mẽ, nhưng có chi phí bản quyền rất cao, đòi hỏi cấu hình máy chủ lớn.
 
 == Tính mới của đề tài
 
@@ -33,8 +33,8 @@ Mục tiêu tổng quát là xây dựng hệ thống hỗ trợ quản lý hạ
   header: ([Nhóm chức năng], [Nội dung triển khai], [Đầu ra cần kiểm chứng]),
   rows: (
     ([Quản lý], [Tập trung danh mục thiết bị, phiên kết nối, cấu hình và lịch sử sao lưu.], [Tra cứu thiết bị và đồng bộ thành công cấu hình (running-config).]),
-    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách.], [Lệnh sinh đúng với dữ liệu nhập (tỷ lệ 100%); thời gian triển khai OSPF/VLAN cho 6 thiết bị $<= 30$ giây.]),
-    ([Giám sát], [Thu thập trạng thái vận hành và tiếp nhận Syslog tập trung.], [Nhận diện nguồn, thời gian, mức độ; tỷ lệ phân tích bản tin Syslog thành công $>= 99\%$.]),
+    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách.], [Lệnh sinh đúng với dữ liệu nhập (tỷ lệ 100%); thời gian triển khai OSPF/VLAN cho 6 thiết bị $<=$ 30 giây.]),
+    ([Giám sát], [Thu thập trạng thái vận hành và tiếp nhận Syslog tập trung.], [Nhận diện nguồn, thời gian, mức độ; tỷ lệ phân tích bản tin Syslog thành công $>=$ 99%.]),
     ([Bảo mật], [Cấu hình ACL, bảo vệ Lớp 2 và khai thác cảnh báo do thiết bị gửi về.], [Kiểm tra chính sách chặn lưu lượng và phản hồi sự kiện trên Syslog.]),
   ),
   caption: [Mục tiêu phát triển],

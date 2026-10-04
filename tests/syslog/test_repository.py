@@ -85,7 +85,7 @@ class SyslogRepositoryTests(unittest.TestCase):
             repository = SyslogRepository(info_db, device_db)
             rows = repository.device_configurations("192.0.2.1")
             self.assertEqual(len(rows), 1)
-            self.assertEqual(rows[0]["trap_severity"], 5)
+            self.assertEqual(rows[0]["trap_severity"], 6)
 
             repository.delete_configuration_record(
                 "192.0.2.1", "192.0.2.100", "udp", 5514
@@ -176,7 +176,7 @@ class SyslogRepositoryTests(unittest.TestCase):
             self.assertTrue(result["ok"], result)
             row = repository.device_configurations("192.0.2.1")[0]
             self.assertEqual(row["port"], 5514)
-            self.assertEqual(row["trap_severity"], 5)
+            self.assertEqual(row["trap_severity"], 6)
 
     def test_editing_applied_destination_stages_old_server_for_removal(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

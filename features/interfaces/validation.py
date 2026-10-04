@@ -41,7 +41,13 @@ def _integer(value: Any, label: str, minimum: int, maximum: int) -> int:
 
 
 def normalize_ipv4(address: Any, mask: Any) -> tuple[str | None, str | None]:
+
     ip_text = str(address or "").strip()
+    mask_text = str(mask or "").strip()
+    print(f"DEBUG: normalize_ipv4 called with address='{address}', mask='{mask}', ip_text='{ip_text}', mask_text='{mask_text}'")
+    if ip_text.lower() == "dhcp":
+        return "dhcp", None
+
     mask_text = str(mask or "").strip()
     if not ip_text and not mask_text:
         return None, None
@@ -57,7 +63,7 @@ def normalize_ipv4(address: Any, mask: Any) -> tuple[str | None, str | None]:
 def validate_payload(payload: dict[str, Any], *, existing: bool = False) -> dict[str, Any]:
     normalized = dict(payload)
     name = canonical_interface_name(normalized.get("interface_name"))
-    if not name or not re.fullmatch(r"[A-Za-z][A-Za-z-]*\d[\d/]*(?:\.\d+)?", name):
+    if not name or not __import__('re').fullmatch(r"[A-Za-z][A-Za-z-]*\d[\d/]*(?:\.\d+)?", name):
         raise InterfaceValidationError("Interface name is invalid")
     normalized["interface_name"] = name
     address, mask = normalize_ipv4(
@@ -87,39 +93,21 @@ def validate_payload(payload: dict[str, Any], *, existing: bool = False) -> dict
             f"{interface_type.value} interface does not support the {requested_kind} profile"
         )
     if interface_type is InterfaceType.TUNNEL:
-        normalized["interface_kind"] = "Tunnel"
-    elif interface_type is InterfaceType.SUBINTERFACE:
-        normalized["interface_kind"] = "Subinterface"
-        parent = canonical_interface_name(
-            normalized.get("parent_interface") or name.rsplit(".", 1)[0]
-        )
-        expected_name = virtual_interface_name(
-            InterfaceType.SUBINTERFACE,
-            {"parent_interface": parent, "number": name.rsplit(".", 1)[1]},
-        )
-        if expected_name != name:
-            raise InterfaceValidationError("Subinterface name does not match its parent")
-        normalized["parent_interface"] = parent
-        normalized["vlan_id"] = _integer(
-            normalized.get("vlan_id") or name.rsplit(".", 1)[1],
-            "VLAN ID",
-            1,
-            4094,
-        )
-    if interface_type is InterfaceType.TUNNEL:
         source = str(normalized.get("tunnel_src") or "").strip()
         destination = str(normalized.get("tunnel_dst") or "").strip()
         if not source or not destination:
             raise InterfaceValidationError("Tunnel source and destination are required")
         try:
+            import ipaddress
             ipaddress.IPv4Address(destination)
         except ValueError as exc:
             raise InterfaceValidationError("Tunnel destination must be a valid IPv4 address") from exc
         normalized_source = canonical_interface_name(source)
         try:
+            import ipaddress
             ipaddress.IPv4Address(normalized_source)
         except ValueError:
-            if not re.fullmatch(r"[A-Za-z][A-Za-z-]*\d[\d/]*(?:\.\d+)?", normalized_source):
+            if not __import__('re').fullmatch(r"[A-Za-z][A-Za-z-]*\d[\d/]*(?:\.\d+)?", normalized_source):
                 raise InterfaceValidationError(
                     "Tunnel source must be a valid IPv4 address or interface name"
                 )

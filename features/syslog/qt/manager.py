@@ -13,6 +13,7 @@ from infrastructure.database.paths import DEVICE_NETWORK_DB, INFO_COLLECTED_DB
 
 from ..application.log_data import SyslogLogDataService
 from ..application.retention import run_retention
+from ..application.security_events import SecurityEventDetector
 from ..application.server_service import SyslogServerService
 from ..export import export_logs_xlsx, file_url_to_path
 from ..group_service import SyslogGroupService
@@ -78,6 +79,7 @@ class SyslogManager(QObject):
             self._messages_stored, self._error, self._receiver_error,
         )
         self.native = NativeSyslogCollector(self)
+        self.security_detector = SecurityEventDetector()
         self.native.messageInserted.connect(self._native_message_stored)
         self.native.collectorError.connect(self._receiver_error)
         self.native.stopped.connect(self._native_stopped)
@@ -193,6 +195,27 @@ class SyslogManager(QObject):
         self.email_alerts.submit(rows)
         self.messagesInserted.emit(rows)
         self.stateChanged.emit()
+        self._publish_security_alerts(rows)
+
+    def _publish_security_alerts(self, rows: list[dict[str, Any]]) -> None:
+        """Store and publish attack alerts derived from repeated security events.
+
+        Derived ``%CAMS-*`` rows never re-enter the detector: they are stored and
+        published directly, and the detector ignores the CAMS facility.
+        """
+        try:
+            alerts = self.security_detector.process(rows)
+            if not alerts:
+                return
+            inserted = self.service.repository.insert_messages(alerts)
+        except Exception as exc:
+            self._error(f"Could not record security alert: {exc}")
+            return
+        with self._count_lock:
+            self._received_count += len(inserted)
+        self.email_alerts.submit(inserted)
+        self.messagesInserted.emit(inserted)
+        self.stateChanged.emit()
 
     def _native_message_stored(self, row: dict[str, Any]) -> None:
         self._messages_stored([dict(row)])
@@ -273,7 +296,7 @@ class SyslogManager(QObject):
                 "server_ip": self.settings.advertisedIp,
                 "protocol": "udp",
                 "port": self.settings.port,
-                "trap_severity": 5,
+                "trap_severity": 6,
                 "timestamps": True,
                 "sequence_numbers": True,
             }

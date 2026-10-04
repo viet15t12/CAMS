@@ -436,16 +436,17 @@ Item {
                         Layout.fillWidth: true
                         visible: root.formMode !== 0
                         labelText: "IP address"
-                        placeholderText: "192.168.10.1"
+                        placeholderText: "192.168.10.1 or dhcp"
                         text: String(root.activeData().ip_address || "")
-                        onTextEdited: value => root.updateField("ip_address", value)
+                        onTextEdited: value => root.updateField("ip_address", value.toLowerCase() === "dhcp" ? "dhcp" : value)
                     }
                     StandardTextField {
                         Layout.fillWidth: true
                         visible: root.formMode !== 0
+                        enabled: String(root.activeData().ip_address || "").toLowerCase() !== "dhcp"
                         labelText: "Subnet mask"
                         placeholderText: "255.255.255.0 or /24"
-                        text: String(root.activeData().subnet_mask || "")
+                        text: String(root.activeData().ip_address || "").toLowerCase() === "dhcp" ? "" : String(root.activeData().subnet_mask || "")
                         onTextEdited: value => root.updateField("subnet_mask", value)
                     }
                 }

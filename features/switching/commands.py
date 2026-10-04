@@ -33,10 +33,13 @@ def render_svi(payload: dict[str, Any]) -> list[str]:
             commands.append(f"no interface Vlan{vlan_id}")
             continue
         commands.append(f"interface Vlan{vlan_id}")
-        if item.get("ip_address") and item.get("subnet_mask"):
-            commands.append(
-                f" ip address {item['ip_address']} {item['subnet_mask']}"
-            )
+        if item.get("ip_address"):
+            if str(item.get("ip_address")).lower() == "dhcp":
+                commands.append(" ip address dhcp")
+            elif item.get("subnet_mask"):
+                commands.append(f" ip address {item['ip_address']} {item['subnet_mask']}")
+            else:
+                commands.append(" no ip address")
         else:
             commands.append(" no ip address")
         commands.append(" shutdown" if item.get("shutdown") else " no shutdown")
@@ -102,6 +105,14 @@ def render_vtp(payload: dict[str, Any]) -> list[str]:
 
 def render_security(payload: dict[str, Any]) -> list[str]:
     commands: list[str] = []
+    global_config = payload.get("global_config", {})
+    option_82 = global_config.get("dhcp_option_82", "insert")
+    if option_82 == "allow-untrusted":
+        commands.append("ip dhcp snooping information option allow-untrusted")
+    elif option_82 == "disable":
+        commands.append("no ip dhcp snooping information option")
+    else:
+        commands.append("ip dhcp snooping information option")
     snooping_vlans = [str(row["vlan_id"]) for row in payload["vlans"] if row["dhcp_snooping"]]
     if snooping_vlans:
         commands.extend(["ip dhcp snooping", f"ip dhcp snooping vlan {','.join(snooping_vlans)}"])
@@ -111,27 +122,33 @@ def render_security(payload: dict[str, Any]) -> list[str]:
     dai_vlans = [str(row["vlan_id"]) for row in payload["vlans"] if row["dai_enabled"]]
     if dai_vlans:
         commands.append(f"ip arp inspection vlan {','.join(dai_vlans)}")
+        commands.append("ip arp inspection log-buffer logs 1024 interval 10")
     for item in payload["vlans"]:
         if not item["dai_enabled"]:
             commands.append(f"no ip arp inspection vlan {item['vlan_id']}")
     for entry in payload["trust_ports"]:
         name = entry.get("if_name") if isinstance(entry, dict) else entry
-        commands.extend(
-            [
-                f"interface {name}",
-                (
-                    " no ip dhcp snooping trust"
-                    if isinstance(entry, dict) and entry.get("action") == "remove"
-                    else " ip dhcp snooping trust"
-                ),
-                (
-                    " no ip arp inspection trust"
-                    if isinstance(entry, dict) and entry.get("action") == "remove"
-                    else " ip arp inspection trust"
-                ),
-                " exit",
-            ]
-        )
+        if isinstance(entry, dict):
+            action = entry.get("action")
+            trust_dhcp = bool(entry.get("trust_dhcp", True))
+            trust_arp = bool(entry.get("trust_arp", True))
+        else:
+            action = None
+            trust_dhcp = True
+            trust_arp = True
+        
+        commands.append(f"interface {name}")
+        
+        if action == "remove":
+            if trust_dhcp:
+                commands.append(" no ip dhcp snooping trust")
+            if trust_arp:
+                commands.append(" no ip arp inspection trust")
+        else:
+            commands.append(" ip dhcp snooping trust" if trust_dhcp else " no ip dhcp snooping trust")
+            commands.append(" ip arp inspection trust" if trust_arp else " no ip arp inspection trust")
+            
+        commands.append(" exit")
     for item in payload["ports"]:
         commands.extend(_interface_header(item["if_name"]))
         if not item["enabled"]:

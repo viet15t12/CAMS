@@ -57,8 +57,8 @@ class DeviceStateRepository:
                     "source_interface" if "source_interface" in columns else "NULL"
                 ),
                 "trap_severity": (
-                    "COALESCE(trap_severity, 5)"
-                    if "trap_severity" in columns else "5"
+                    "COALESCE(trap_severity, 6)"
+                    if "trap_severity" in columns else "6"
                 ),
                 "timestamps": (
                     "COALESCE(timestamps, 0)" if "timestamps" in columns else "0"
@@ -110,7 +110,7 @@ class DeviceStateRepository:
     def save_device_state(
         self, host: str, server_ip: str, protocol: str, port: int,
         interface: str | None, configured: bool, result: str,
-        trap_severity: int = 5, timestamps: bool = False,
+        trap_severity: int = 6, timestamps: bool = False,
         sequence_numbers: bool = False,
     ) -> None:
         with closing(device_connection(self.device_db)) as conn:
@@ -187,7 +187,7 @@ class DeviceStateRepository:
             raise ValueError("Protocol must be UDP or TCP")
         try:
             port = int(payload.get("port", 5514))
-            severity = int(payload.get("trap_severity", 5))
+            severity = int(payload.get("trap_severity", 6))
         except (TypeError, ValueError) as exc:
             raise ValueError("Port and severity must be numbers") from exc
         if not 1 <= port <= 65535:

@@ -107,7 +107,7 @@ StandardDialog {
         transport = String(defaults.protocol || "udp").toLowerCase()
         serverPort = Number(defaults.port || 5514)
         trapSeverity = Number(defaults.trap_severity === undefined
-                              ? 5 : defaults.trap_severity)
+                              ? 6 : defaults.trap_severity)
         timestamps = defaults.timestamps === undefined ? true : Boolean(defaults.timestamps)
         sequenceNumbers = defaults.sequence_numbers === undefined
                           ? true : Boolean(defaults.sequence_numbers)

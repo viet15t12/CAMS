@@ -58,7 +58,7 @@ def get_l2_security(db: Any, host: str) -> dict[str, Any]:
         ).fetchall()
         trust_ports = conn.execute(
             """
-            SELECT id, if_name, success FROM t06_dhcp_trust_ports
+            SELECT id, if_name, success, trust_dhcp, trust_arp FROM t06_dhcp_trust_ports
             WHERE host = ?
               AND COALESCE(success, 'pending_apply') <> 'pending_delete'
             ORDER BY if_name COLLATE NOCASE;
@@ -90,7 +90,12 @@ def get_l2_security(db: Any, host: str) -> dict[str, Any]:
             """,
             (target,),
         ).fetchall()
+        global_config = conn.execute(
+            "SELECT dhcp_option_82 FROM t06_security_global WHERE host = ?;",
+            (target,),
+        ).fetchone()
     return {
+        "global_config": dict(global_config) if global_config else {"dhcp_option_82": "insert"},
         "vlans": [dict(row) for row in vlans],
         "trust_ports": [dict(row) for row in trust_ports],
         "static_macs": [dict(row) for row in static_macs],
@@ -129,7 +134,7 @@ def save_l2_vlan_security(db: Any, host: str, payload: dict[str, Any]) -> dict[s
                     ON CONFLICT(host, vlan_id) DO UPDATE SET
                         dhcp_snooping = excluded.dhcp_snooping,
                         dai_enabled = excluded.dai_enabled,
-                        success = 'pending_apply';
+                        success = 'pending_apply', trust_dhcp = excluded.trust_dhcp, trust_arp = excluded.trust_arp;
                     """,
                     (target, vlan_id, snooping, dai),
                 )
@@ -145,7 +150,7 @@ def save_l2_vlan_security(db: Any, host: str, payload: dict[str, Any]) -> dict[s
         return failed(str(exc))
 
 
-def add_l2_trust_port(db: Any, host: str, if_name: Any) -> dict[str, Any]:
+def add_l2_trust_port(db: Any, host: str, if_name: Any, trust_dhcp: bool = True, trust_arp: bool = True) -> dict[str, Any]:
     """Stage one existing Layer 2 port as the trusted server/uplink path."""
     target = text(host)
     interface = text(if_name)
@@ -167,12 +172,12 @@ def add_l2_trust_port(db: Any, host: str, if_name: Any) -> dict[str, Any]:
                     raise ValueError("Trust port must be an existing Layer 2 interface")
                 cursor = conn.execute(
                     """
-                    INSERT INTO t06_dhcp_trust_ports(host, if_name, success)
-                    VALUES (?, ?, 'pending_apply')
+                    INSERT INTO t06_dhcp_trust_ports(host, if_name, success, trust_dhcp, trust_arp)
+                    VALUES (?, ?, 'pending_apply', ?, ?)
                     ON CONFLICT(host, if_name) DO UPDATE SET
-                        success = 'pending_apply';
+                        success = 'pending_apply', trust_dhcp = excluded.trust_dhcp, trust_arp = excluded.trust_arp;
                     """,
-                    (target, interface),
+                    (target, interface, 1 if trust_dhcp else 0, 1 if trust_arp else 0),
                 )
                 row = conn.execute(
                     "SELECT id FROM t06_dhcp_trust_ports WHERE host = ? AND if_name = ?;",
@@ -258,5 +263,28 @@ def save_static_mac(db: Any, host: str, payload: dict[str, Any]) -> dict[str, An
                     )
                     saved_id = int(cursor.lastrowid)
         return ok("Static MAC binding saved", id=saved_id)
+    except (sqlite3.Error, ValueError, TypeError) as exc:
+        return failed(str(exc))
+
+def save_l2_security_global(db: Any, host: str, payload: dict[str, Any]) -> dict[str, Any]:
+    target = text(host)
+    if not target:
+        return failed("Host is required")
+    try:
+        ensure_switch_schema(db)
+        option_82 = text(payload.get("dhcp_option_82") or "insert")
+        with closing(db._connect()) as conn:
+            with conn:
+                conn.execute(
+                    """
+                    INSERT INTO t06_security_global(host, dhcp_option_82)
+                    VALUES (?, ?)
+                    ON CONFLICT(host) DO UPDATE SET
+                        dhcp_option_82 = excluded.dhcp_option_82,
+                        success = 'pending_apply', trust_dhcp = excluded.trust_dhcp, trust_arp = excluded.trust_arp;
+                    """,
+                    (target, option_82),
+                )
+        return ok("Global security settings saved")
     except (sqlite3.Error, ValueError, TypeError) as exc:
         return failed(str(exc))

@@ -483,6 +483,12 @@ SwitchInspectorPane {
                 onActivated: index => root.fieldChanged("violation", model[index])
             }
         }
+        InlineMessage {
+            Layout.fillWidth: true
+            visible: root.editing && enabled && String(root.value("violation", "shutdown")) === "protect"
+            message: "The 'protect' mode drops packets silently. Port security violation events will not be logged to syslog."
+            severity: "warning"
+        }
         StandardCheckBox {
             visible: root.editing
             enabled: Boolean(root.value("port_security_enabled", 0))

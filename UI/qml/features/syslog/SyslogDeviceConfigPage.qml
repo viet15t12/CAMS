@@ -124,7 +124,7 @@ Item {
             protocol: String(row.protocol || "udp").toLowerCase(),
             port: Number(row.port || 5514),
             source_interface: String(row.source_interface || ""),
-            trap_severity: Number(row.trap_severity === undefined ? 5 : row.trap_severity),
+            trap_severity: Number(row.trap_severity === undefined ? 6 : row.trap_severity),
             timestamps: Boolean(row.timestamps),
             sequence_numbers: Boolean(row.sequence_numbers),
             configured: Boolean(row.configured),
@@ -183,7 +183,7 @@ Item {
     function beginCreate() {
         draftData = {
             server_ip: "", protocol: "udp", port: 5514,
-            source_interface: "", trap_severity: 5,
+            source_interface: "", trap_severity: 6,
             timestamps: true, sequence_numbers: true
         }
         formMode = 1
@@ -499,7 +499,7 @@ Item {
                         visible: root.formMode !== 0
                         labelText: "Trap severity"
                         model: root.severityLabels
-                        currentIndex: Number(root.draftData.trap_severity === undefined ? 5 : root.draftData.trap_severity)
+                        currentIndex: Number(root.draftData.trap_severity === undefined ? 6 : root.draftData.trap_severity)
                         onActivated: index => root.updateField("trap_severity", index)
                     }
                     StandardCheckBox {

@@ -42,7 +42,7 @@ class SyslogViewPushController(BaseViewPushController):
             str(row["protocol"]),
             int(row["port"]),
             str(row.get("source_interface") or ""),
-            int(row.get("trap_severity", 5)),
+            int(row.get("trap_severity", 6)),
             bool(row.get("timestamps")),
             bool(row.get("sequence_numbers")),
         )
@@ -230,7 +230,7 @@ class SyslogViewPushController(BaseViewPushController):
                     interface,
                     True,
                     "Verified in running-config and startup-config.",
-                    int(row.get("trap_severity") or 5),
+                    int(row.get("trap_severity") or 6),
                     bool(row.get("timestamps")),
                     bool(row.get("sequence_numbers")),
                 )

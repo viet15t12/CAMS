@@ -81,6 +81,13 @@ Item {
         devicesPanel.devicesLoaded(devicesPanel.allDevices)
     }
 
+    function clearDevices() {
+        devicesPanel.allDevices = []
+        devicesPanel.clearSelection()
+        devicesPanel.activeHost = ""
+        devicesPanel.applyFilters()
+    }
+
     function openNewDeviceWindow() {
         newDeviceLoader.active = true
         if (UiState.windowLock && !newDeviceLoader.item.visible) UiState.windowLock = false

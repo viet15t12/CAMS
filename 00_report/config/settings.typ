@@ -262,6 +262,8 @@
     supplement: [Bảng],
     numbering: report-table-numbering,
   )
+  show figure.where(kind: table): set figure.caption(position: top)
+
 
   body
 }
