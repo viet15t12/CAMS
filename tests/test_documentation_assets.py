@@ -344,6 +344,28 @@ class DocumentationAssetTests(unittest.TestCase):
             self.assertIsNone(records[asset_id]["derived_from"])
             self.assertIsNone(records[asset_id]["canonical_group_id"])
         reviewed_orphans |= independent_pairs
+        lab_raster = "diagrams.lab-topology.routing-ospf.multi-area-branches-raster"
+        lab_vector = "diagrams.lab-topology.routing-ospf.multi-area-branches-vector"
+        lab_pair = {lab_raster, lab_vector}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02D"}, lab_pair)
+        lab_report = json.loads((root / "output/documentation-assets-migrations/b02d.json").read_text())
+        self.assertEqual({r["asset_id"] for r in lab_report["review"]}, lab_pair)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in lab_report["review"]))
+        relationship = lab_report["relationship_review"]
+        self.assertEqual(relationship["decision"], "SAME_TOPOLOGY_PROVENANCE_UNPROVEN")
+        self.assertEqual((relationship["raster_asset_id"], relationship["svg_asset_id"]), (lab_raster, lab_vector))
+        self.assertTrue(relationship["keep_independent_assets"])
+        self.assertTrue(relationship["no_derivative_relation"])
+        self.assertTrue(relationship["no_deduplication"])
+        for asset_id in lab_pair:
+            asset = records[asset_id]
+            self.assertFalse(asset["preserve_original"])
+            self.assertEqual(asset["migration_state"], "migrated")
+            self.assertFalse((root / asset["legacy_path"]).exists())
+            self.assertIsNone(asset["derived_from"])
+            self.assertIsNone(asset["recreates_evidence_asset"])
+            self.assertIsNone(asset["canonical_group_id"])
+        reviewed_orphans.add(lab_vector)
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.
@@ -367,6 +389,21 @@ class DocumentationAssetTests(unittest.TestCase):
                 self.assertEqual(asset["used_by"], [])
                 self.assertEqual(asset["targets"], [])
                 self.assertFalse(asset["mkdocs_stage"])
+                self.assertEqual(row["review_approved"], "false")  # historical preflight
+            elif row["asset_id"] == lab_raster:
+                self.assertEqual(asset["status"], "active")
+                self.assertEqual(asset["targets"], ["report-typst"])
+                self.assertFalse(asset["mkdocs_stage"])
+                self.assertTrue(asset["review_required"])
+                self.assertEqual(len(asset["used_by"]), 1)
+                use = asset["used_by"][0]
+                self.assertEqual(use["target_type"], "report-typst")
+                self.assertEqual(use["source_document"], "00_report/contents/09_thu_nghiem_danh_gia.typ")
+                self.assertEqual(use["referenced_path"], "/" + asset["current_path"])
+                source = (root / use["source_document"]).read_text()
+                self.assertIn(use["referenced_path"], source.splitlines()[use["line"] - 1])
+                self.assertNotIn("/" + asset["legacy_path"], source)
+                self.assertNotIn("/" + records[lab_vector]["current_path"], source)
                 self.assertEqual(row["review_approved"], "false")  # historical preflight
             elif row["asset_id"] in preserved_active:
                 self.assertEqual(asset["migration_state"], "migrated")

@@ -1,0 +1,602 @@
+{
+  "batch": "B02D",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "de66b95493997e6f12a278ad5d18d8a283e4e7fb",
+  "status": "PASS — both APPROVED; SAME_TOPOLOGY_PROVENANCE_UNPROVEN; local and fresh-checkout validation complete",
+  "review": [
+    {
+      "asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-raster",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "Six routers R1/R2/R3/ISP1/ISP2/R6; R1-R2-R3 triangle on the left and R1-ISP1-ISP2-R6 trunk. R2-SWITCH7-VPC11 and R3-SWITCH8-VPC12 form left LANs; R6-SWITCH9 serves VPC14/VPC15 on the right. Two Management clouds attach management interfaces. Visible data labels include R1/ISP1 Gi0/3, ISP1/ISP2 Gi0/2, ISP2/R6 Gi0/1, R6 LAN Gi0/2, and Gi0/1-4 / eth0 branch connections.",
+      "semantic_name_judgment": "Planned multi-area-branches-raster.png accurately distinguishes this lab topology representation and format; multi-area semantics come from its current report context.",
+      "context_sanity": "The report section at 00_report/contents/09_thu_nghiem_danh_gia.typ:146-174 explicitly identifies this six-router topology as OSPFv2 multi-area branches joined through ISP Backbone Area 0. Neither representation draws area boundaries, area-number labels or IP prefixes. Area/protocol semantics are established by the surrounding lab description, not inferred from device icons. The existing table uses R6 Gi0/1 subinterface notation while the picture labels the LAN-facing port Gi0/2; this inherited port convention is not changed or claimed to match exactly. It does not alter the broad branch/backbone topology.",
+      "usage_status": "active",
+      "used_by": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 153,
+          "referenced_path": "/00_book/figures/report/diagrams/LAB_2-report.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "targets": [
+        "report-typst"
+      ],
+      "visual_inspection": "Original PNG inspected directly; original SVG rendered to temporary /tmp/cams-b02d/vector.png with Inkscape and inspected alongside its XML/text. No replacement generated.",
+      "provenance_note": "Unknown exporter/author lineage remains unchanged. SVG contains editable mxfile data naming app.diagrams.net/EVE_NG_Topology_Parallel; that identifies embedded diagram format, not a proven exporter or PNG-to-SVG relationship.",
+      "exact_duplicate_conflicts": []
+    },
+    {
+      "asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-vector",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "Six routers R1/R2/R3/ISP1/ISP2/R6; R1-R2-R3 triangle on the left and R1-ISP1-ISP2-R6 trunk. R2-SWITCH7-VPC11 and R3-SWITCH8-VPC12 form left LANs; R6-SWITCH9 serves VPC14/VPC15 on the right. Two Management clouds attach management interfaces. Visible data labels include R1/ISP1 Gi0/3, ISP1/ISP2 Gi0/2, ISP2/R6 Gi0/1, R6 LAN Gi0/2, and Gi0/1-4 / eth0 branch connections.",
+      "semantic_name_judgment": "Planned multi-area-branches-vector.svg accurately distinguishes this lab topology representation and format; multi-area semantics come from its current report context.",
+      "context_sanity": "The report section at 00_report/contents/09_thu_nghiem_danh_gia.typ:146-174 explicitly identifies this six-router topology as OSPFv2 multi-area branches joined through ISP Backbone Area 0. Neither representation draws area boundaries, area-number labels or IP prefixes. Area/protocol semantics are established by the surrounding lab description, not inferred from device icons. The existing table uses R6 Gi0/1 subinterface notation while the picture labels the LAN-facing port Gi0/2; this inherited port convention is not changed or claimed to match exactly. It does not alter the broad branch/backbone topology.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "visual_inspection": "Original PNG inspected directly; original SVG rendered to temporary /tmp/cams-b02d/vector.png with Inkscape and inspected alongside its XML/text. No replacement generated.",
+      "provenance_note": "Unknown exporter/author lineage remains unchanged. SVG contains editable mxfile data naming app.diagrams.net/EVE_NG_Topology_Parallel; that identifies embedded diagram format, not a proven exporter or PNG-to-SVG relationship.",
+      "exact_duplicate_conflicts": []
+    }
+  ],
+  "relationship_review": {
+    "decision": "SAME_TOPOLOGY_PROVENANCE_UNPROVEN",
+    "topology_confidence": "high",
+    "derivative_provenance_confidence": "low",
+    "raster_asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-raster",
+    "svg_asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-vector",
+    "evidence": "Six routers R1/R2/R3/ISP1/ISP2/R6; R1-R2-R3 triangle on the left and R1-ISP1-ISP2-R6 trunk. R2-SWITCH7-VPC11 and R3-SWITCH8-VPC12 form left LANs; R6-SWITCH9 serves VPC14/VPC15 on the right. Two Management clouds attach management interfaces. Visible data labels include R1/ISP1 Gi0/3, ISP1/ISP2 Gi0/2, ISP2/R6 Gi0/1, R6 LAN Gi0/2, and Gi0/1-4 / eth0 branch connections.",
+    "limitations": "Matching dimensions (6914x4560), device labels and topology do not prove export lineage. No direct exporter/source provenance for the PNG was found in live repository source/config. Historical audit notes different embedded icon rendering; current Inkscape preview renders icons and agrees on connections. No claim of a proven rendering/export relationship is made.",
+    "keep_independent_assets": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true
+  },
+  "migration": [
+    {
+      "asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-raster",
+      "old_path": "00_book/figures/report/diagrams/LAB_2-report.png",
+      "canonical_path": "documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png",
+      "manifest_sha": "afc05beaf1831559eea82e2289614826202267d50014adc562ba6d4c59230f9b",
+      "source_filesystem_sha": "afc05beaf1831559eea82e2289614826202267d50014adc562ba6d4c59230f9b",
+      "source_git_blob_sha": "afc05beaf1831559eea82e2289614826202267d50014adc562ba6d4c59230f9b",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "afc05beaf1831559eea82e2289614826202267d50014adc562ba6d4c59230f9b",
+      "canonical_index_sha": "afc05beaf1831559eea82e2289614826202267d50014adc562ba6d4c59230f9b"
+    },
+    {
+      "asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-vector",
+      "old_path": "00_book/figures/report/diagrams/LAB_2.svg",
+      "canonical_path": "documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg",
+      "manifest_sha": "b047ac8a8eacd8d4a3495bfb809be60085587cf7cbe86e14909fd9decbc13081",
+      "source_filesystem_sha": "b047ac8a8eacd8d4a3495bfb809be60085587cf7cbe86e14909fd9decbc13081",
+      "source_git_blob_sha": "b047ac8a8eacd8d4a3495bfb809be60085587cf7cbe86e14909fd9decbc13081",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "b047ac8a8eacd8d4a3495bfb809be60085587cf7cbe86e14909fd9decbc13081",
+      "canonical_index_sha": "b047ac8a8eacd8d4a3495bfb809be60085587cf7cbe86e14909fd9decbc13081"
+    }
+  ],
+  "historical_relationship_input": [
+    {
+      "svg_path": "00_book/figures/report/diagrams/LAB_2.svg",
+      "raster_path": "00_book/figures/report/diagrams/LAB_2-report.png",
+      "relationship": "uncertain",
+      "canonical_choice": "keep-independent-sources",
+      "keep_both": "true",
+      "future_paths": "[\"documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg\", \"documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png\"]",
+      "reason": "Same topology/labels by inspection; raster is plausible export, but no exporter/source provenance found and SVG previews differ in embedded icon rendering",
+      "review_required": "true",
+      "svg_asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-vector",
+      "raster_asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-raster",
+      "batch_id": "B02",
+      "current_svg_sha256": "6326172229c7292d4311e33d451c4d8742b114a42461eea014cd86651ccd86e9"
+    }
+  ],
+  "references": [
+    {
+      "old_referenced_path": "/00_book/figures/report/diagrams/LAB_2-report.png",
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "line": 153,
+      "referenced_path": "/documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png",
+      "target_type": "report-typst"
+    }
+  ],
+  "manifest": {
+    "migrated": 31,
+    "pending": 314,
+    "frozen": 62
+  },
+  "authority": {
+    "starting_commit": "de66b95493997e6f12a278ad5d18d8a283e4e7fb",
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 15,
+    "behind": 0
+  },
+  "hash_authority": "Phase 3.3 exact repository-stored bytes. Historical SVG audit hashes remain evidence, not execution authority.",
+  "metadata_policy": "Exactly two current_path/path/migration_state/canonical transitions, plus the active raster used_by refreshed from current reference graph. All other fields and 405 records unchanged; no schema or derivative/group metadata added.",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-1.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-2.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-3.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-4.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-5.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-6.log"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-7.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-8.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-9.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02d/local-10.log"
+    }
+  ],
+  "local_proof": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 314,
+      "migrated": 31,
+      "frozen": 62
+    },
+    "other_records_unchanged": 405,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 2,
+    "canonical_paths_present": 2,
+    "raster_active_reference_resolves": true,
+    "vector_unreferenced": true,
+    "usage_roles_preserved": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_changes": false,
+    "report_change": "Exactly one raster path substitution; all other bytes unchanged",
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02c_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02c_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 31,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2,
+        "B02E1": 3,
+        "B02E2": 3
+      }
+    }
+  },
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02c_baseline": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02c_baseline": true
+    }
+  ],
+  "b02_progress": {
+    "migrated": 31,
+    "total": 39,
+    "complete": false,
+    "remaining": {
+      "B02F": 2,
+      "B02E1": 3,
+      "B02E2": 3
+    }
+  },
+  "scope": {
+    "new_transfers": 2,
+    "svg_blob_content_changes": 0,
+    "raster_recompression": false,
+    "live_reference_rewrites": 1,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "other_batches_migrated": false,
+    "runtime_terminal_docshot_changes": false,
+    "screenshot_renders": 0
+  },
+  "mkdocs": {
+    "status": "PASS",
+    "staged_assets": 178,
+    "b02d_staged_assets": 0,
+    "ownership_ledger_unchanged": true,
+    "generated_assets_tracked": false,
+    "environment": "/tmp/cams-b02b4/docs-venv from unchanged requirements-docs.txt",
+    "mkdocs_version": "1.6.1",
+    "material_version": "9.7.7"
+  },
+  "fresh_checkout": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 314,
+      "migrated": 31,
+      "frozen": 62
+    },
+    "other_records_unchanged": 405,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 2,
+    "canonical_paths_present": 2,
+    "raster_active_reference_resolves": true,
+    "vector_unreferenced": true,
+    "usage_roles_preserved": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_changes": false,
+    "report_change": "Exactly one raster path substitution; all other bytes unchanged",
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02d/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02d/clean-checkout/output/typst/package-cache",
+          "/tmp/cams-b02d/clean-checkout/00_report/main.typ",
+          "/tmp/cams-b02d/clean-checkout/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02c_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02d/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02d/clean-checkout/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/tmp/cams-b02d/clean-checkout/00_book/main.typ",
+          "/tmp/cams-b02d/clean-checkout/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02c_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 31,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2,
+        "B02E1": 3,
+        "B02E2": 3
+      }
+    },
+    "filesystem_blob_manifest_matches": 407,
+    "method": "Separate Linux clone of candidate Git commit, core.autocrlf=false; no generated staging before pre-sync",
+    "candidate_commit": "f973dbc5ddf44f94ea302db03c29934280575bc3",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-5.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-6.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-7.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-9.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02d/clean-10.log"
+      }
+    ]
+  }
+}

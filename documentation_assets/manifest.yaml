@@ -10372,14 +10372,14 @@ assets:
   domain: diagrams/lab-topology/routing-ospf
   subject: multi-area-branches-raster
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/LAB_2-report.png
-  path: 00_book/figures/report/diagrams/LAB_2-report.png
+  current_path: documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png
+  path: documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png
   planned_canonical_path: documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png
   legacy_path: 00_book/figures/report/diagrams/LAB_2-report.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: afc05beaf1831559eea82e2289614826202267d50014adc562ba6d4c59230f9b
   provenance:
     assessment: unknown
@@ -10397,7 +10397,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
     line: 153
-    referenced_path: /00_book/figures/report/diagrams/LAB_2-report.png
+    referenced_path: /documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png
     target_type: report-typst
   targets:
   - report-typst
@@ -10416,14 +10416,14 @@ assets:
   domain: diagrams/lab-topology/routing-ospf
   subject: multi-area-branches-vector
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/LAB_2.svg
-  path: 00_book/figures/report/diagrams/LAB_2.svg
+  current_path: documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg
+  path: documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg
   planned_canonical_path: documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg
   legacy_path: 00_book/figures/report/diagrams/LAB_2.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b047ac8a8eacd8d4a3495bfb809be60085587cf7cbe86e14909fd9decbc13081
   provenance:
     assessment: unknown

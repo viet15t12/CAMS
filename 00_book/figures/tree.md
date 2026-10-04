@@ -236,8 +236,6 @@
 │   │   │   ├── fhrp-nat-dhcp-report.png
 │   │   │   └── fhrp-nat-dhcp.svg
 │   │   ├── jenkins_pipeline_stages.png
-│   │   ├── LAB_2-report.png
-│   │   ├── LAB_2.svg
 │   │   ├── lab_4.svg
 │   │   ├── review-core-erd.svg
 │   │   ├── review-syslog-sequence.svg
@@ -389,3 +387,10 @@ B02C independent diagram pairs (outside this figures tree):
 - documentation_assets/diagrams/workflow/acl-rule-evaluation.svg
 
 All four remain unused/orphan-review. Both OSPF and ACL pairs have different content and remain independent assets; no deduplication or derivative relation. None is selected for MkDocs staging.
+
+B02D independent lab-topology representations (outside this figures tree):
+
+- documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png
+- documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg
+
+Same lab topology; export/derivative provenance unproven. Both are independent canonical assets. The report still uses the raster; the vector remains orphan-review. Neither is selected for MkDocs staging.

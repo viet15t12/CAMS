@@ -150,7 +150,7 @@ Các cấu hình VLAN, VTP, EtherChannel LACP, DHCP Snooping, DAI và Port Secur
 Kịch bản 1 thiết lập OSPFv2 đa vùng để kết nối Chi nhánh A với Chi nhánh B qua đường trục ISP thuộc Backbone Area 0. Tính năng *Routing Group - OSPF* cấu hình đồng thời sáu router `R1`, `R2`, `R3`, `ISP1`, `ISP2` và `R6`; cơ chế tái phân phối đưa các mạng LAN cục bộ vào miền OSPF.
 
 #figure(
-  image("/00_book/figures/report/diagrams/LAB_2-report.png", width: 95%),
+  image("/documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png", width: 95%),
   caption: [Sơ đồ Kịch bản 1: Định tuyến OSPF đa vùng giữa hai chi nhánh],
 ) <fig-topo-scenario-2>
 
