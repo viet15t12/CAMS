@@ -1,0 +1,21 @@
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 20000
+RHOST:PORT  : 127.0.0.1:30000
+MTU         : 1500
+
+PC1> ip dhcp
+DDORA IP 192.168.4.4/24 GW 192.168.4.1
+
+PC1> trace 1.1.1.1
+trace to 1.1.1.1, 8 hops max, press Ctrl+C to stop
+ 1   192.168.4.2    2.344 ms   1.673 ms   3.258 ms
+ 2   192.168.1.2    8.290 ms   3.119 ms   2.675 ms
+ 3   *10.0.10.1     6.591 ms   (ICMP type:3, code:3, Destination port unreachable) *
+
+PC1>

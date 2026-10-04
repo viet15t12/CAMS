@@ -1,0 +1,6 @@
+NAT#show running-config | include ^ip nat|^ip route|^ip access-list|permit
+ip nat inside source list NAT_demo interface GigabitEthernet0/2 overload
+ip route 0.0.0.0 0.0.0.0 10.0.10.1
+ip access-list standard NAT_demo
+ permit 192.168.0.0 0.0.7.255
+NAT#

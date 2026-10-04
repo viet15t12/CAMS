@@ -115,7 +115,7 @@ switchport port-security aging time 5
 Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng Terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
 
 #figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_30.png", width: 85%),
+  image("/00_book/figures/report/terminal-generated/sw3-vlan-vtp.png", width: 80%),
   caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp],
 ) <fig-k1-terminal-verify>
 Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
@@ -273,7 +273,7 @@ Trong kiến trúc OSPF đa vùng này, router trung tâm `R1` đóng vai trò l
 Sau khi đẩy cấu hình, quản trị viên mở các cửa sổ terminal tích hợp để kiểm tra trực tiếp cấu hình đang chạy trên cả sáu router.
 
 #figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/12.png", width: 90%),
+  image("/00_book/figures/report/terminal-generated/ospf-six-routers.png", width: 96%),
   caption: [Xác minh cấu hình OSPF trên sáu router qua terminal nhúng],
 ) <fig-k2-multi-terminal-ospf>
 Kết quả lệnh `show run | section ospf` trong @fig-k2-multi-terminal-ospf xác nhận cả sáu router đã nhận tiến trình OSPF 1, router ID từ `1.1.1.1` đến `6.6.6.6` và các mạng thuộc Area 0 hoặc Area 1 theo quy hoạch.
@@ -283,7 +283,7 @@ Kết quả lệnh `show run | section ospf` trong @fig-k2-multi-terminal-ospf x
 Quản trị viên thực hiện lệnh `show ip route` trên router trung tâm `R1` để kiểm tra khả năng hội tụ của hệ thống định tuyến:
 
 #figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/18.png", width: 85%),
+  image("/00_book/figures/report/terminal-generated/r1-ospf-routes.png", width: 94%),
   caption: [Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2],
 ) <fig-k2-route-table-r1>
 Theo @fig-k2-route-table-r1, bảng định tuyến của `R1` ghi nhận:
@@ -299,7 +299,7 @@ Theo @fig-k2-route-table-r1, bảng định tuyến của `R1` ghi nhận:
 Quản trị viên mở terminal trên các máy trạm VPC và thực hiện ping chéo giữa hai chi nhánh.
 
 #figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/25.png", width: 75%),
+  image("/00_book/figures/report/terminal-generated/vpc11-ping.png", width: 82%),
   caption: [Kết quả ping từ VPC11 sang VPC14 với tỷ lệ thành công 100%],
 ) <fig-k2-ping-vpc11-vpc14>
 Kết quả trong @fig-k2-ping-vpc11-vpc14 cho thấy `VPC11` (`192.168.10.10`) gửi thành công 5/5 gói tin tới `VPC14` (`192.168.30.10`). Độ trễ trung bình là khoảng `6,9 ms`; giá trị `ttl=59` cho thấy gói tin đi qua năm hop định tuyến.
@@ -425,14 +425,14 @@ Lệnh trên cho phép nhiều địa chỉ IPv4 trong mạng nội bộ dùng c
 Sau khi đẩy cấu hình, quản trị viên mở terminal tích hợp để kiểm tra router NAT. Kết quả xác nhận `Gi0/1` và `Gi0/3` đã nhận lệnh `ip nat inside`, còn `Gi0/2` đã nhận lệnh `ip nat outside`.
 
 #figure(
-  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png", width: 72%),
+  image("/00_book/figures/report/terminal-generated/nat-interfaces.png", width: 62%),
   caption: [Xác minh vai trò NAT trên ba cổng của Router NAT bằng lệnh show running-config],
 ) <fig-k3-nat-interface-verify>
 
 Tiếp tục kiểm tra cấu hình tổng thể cho thấy lệnh PAT, ACL `NAT_demo` và tuyến mặc định tới `10.0.10.1` đã tồn tại trong running-config.
 
 #figure(
-  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png", width: 82%),
+  image("/00_book/figures/report/terminal-generated/nat-config.png", width: 90%),
   caption: [Xác minh ACL, PAT Overload và Default Route trên Router NAT],
 ) <fig-k3-nat-config-verify>
 
@@ -491,14 +491,14 @@ Với cấu hình này, máy trạm sử dụng cổng mặc định logic `192.
 Trên `R1`, lệnh `show ip dhcp pool` xác nhận pool `LAN_R1` đã được tạo cho mạng `192.168.4.0/24`. Đồng thời, `show running-config interface g0/0` xác nhận cổng LAN `192.168.4.2/24` đang tham gia GLBP Group `113`, có Virtual IP `192.168.4.1`, Priority `101` và bật `preempt`.
 
 #figure(
-  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png", width: 88%),
+  image("/00_book/figures/report/terminal-generated/r1-dhcp-glbp.png", width: 74%),
   caption: [Xác minh DHCP Pool và cấu hình GLBP trên Router R1],
 ) <fig-k3-r1-verify>
 
 Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, đảm bảo hai router cùng cung cấp dịch vụ gateway cho một mạng LAN.
 
 #figure(
-  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png", width: 82%),
+  image("/00_book/figures/report/terminal-generated/r2-glbp.png", width: 84%),
   caption: [Xác minh cấu hình GLBP Group 113 trên Router R2],
 ) <fig-k3-r2-verify>
 
@@ -507,7 +507,7 @@ Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng
 Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng để yêu cầu cấp phát địa chỉ. Máy trạm nhận thành công địa chỉ `192.168.4.4/24` cùng default gateway `192.168.4.1`.
 
 #figure(
-  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png", width: 82%),
+  image("/00_book/figures/report/terminal-generated/pc1-dhcp-trace.png", width: 84%),
   caption: [Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream],
 ) <fig-k3-client-test>
 

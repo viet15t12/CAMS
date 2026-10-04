@@ -1,0 +1,29 @@
+SW3#show vlan brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/2, Gi0/3, Gi1/2, Gi1/3
+10   IT_VLAN                          active
+20   HR_VLAN                          active
+99   VLAN0099                         active    Gi0/0
+1002 fddi-default                     act/unsup
+1003 trcrf-default                    act/unsup
+1004 fddinet-default                  act/unsup
+1005 trbrf-default                    act/unsup
+
+SW3#show vtp status
+VTP Version capable                  : 1 to 3
+VTP version running                  : 2
+VTP Domain Name                      : PTIT_LAB
+VTP Pruning Mode                     : Disabled
+VTP Traps Generation                 : Disabled
+Device ID                            : 5000.0003.0000
+Configuration last modified by 192.168.122.101 at 8-23-26 08:12:59
+
+Feature VLAN:
+--------------
+VTP Operating Mode                   : Client
+Maximum VLANs supported locally      : 1005
+Number of existing VLANs             : 8
+Configuration Revision               : 12
+SW3#

@@ -1,0 +1,33 @@
+NAT#show running-config interface GigabitEthernet0/1
+Building configuration...
+
+interface GigabitEthernet0/1
+ description Transit_to_R1
+ ip address 192.168.1.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+NAT#show running-config interface GigabitEthernet0/2
+Building configuration...
+
+interface GigabitEthernet0/2
+ description Outside_to_ISP
+ ip address 10.0.10.2 255.255.255.0
+ ip nat outside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+NAT#show running-config interface GigabitEthernet0/3
+Building configuration...
+
+interface GigabitEthernet0/3
+ description Transit_to_R2
+ ip address 192.168.2.2 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+NAT#
