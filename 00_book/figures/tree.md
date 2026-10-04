@@ -217,9 +217,6 @@
 │   │   ├── 07_ospf_area.svg
 │   │   ├── 08_acl_packet_flow.jpg
 │   │   ├── 08_acl_packet_flow.svg
-│   │   ├── 19_testing_flow_a.svg
-│   │   ├── 20_testing_flow_b.svg
-│   │   ├── 21_lab_test_flow.svg
 │   │   ├── dhcp-snooping.jpg
 │   │   ├── dhcp_dora.png
 │   │   ├── Etherchannel.jpg
@@ -246,6 +243,8 @@
 │   │   ├── LAB_2-report.png
 │   │   ├── LAB_2.svg
 │   │   ├── lab_4.svg
+│   │   ├── review-core-erd.svg
+│   │   ├── review-syslog-sequence.svg
 │   │   ├── routing-ospf-lab
 │   │   │   ├── 1.png
 │   │   │   ├── 2.png
@@ -375,3 +374,13 @@ B02B3 canonical orphan diagrams (outside this figures tree):
 - documentation_assets/diagrams/workflow/syslog-processing-pipeline.svg
 
 These five diagrams remain unused/orphan-review and are not selected for MkDocs staging.
+
+B02B4 canonical diagrams (outside this figures tree):
+
+- documentation_assets/diagrams/workflow/service-repository-test.svg
+- documentation_assets/diagrams/workflow/worker-fake-connector-test.svg
+- documentation_assets/diagrams/workflow/network-lab-verification.svg
+- documentation_assets/diagrams/database/core-observed-data-relationships.svg
+- documentation_assets/diagrams/workflow/syslog-processing-sequence.svg
+
+The three testing/lab workflows remain unused/orphan-review. The ERD and Syslog sequence are active report assets; their unchanged legacy sources remain in report/diagrams/ because preserve_original=true. Report references use the canonical copies. None of these five assets is selected for MkDocs staging.

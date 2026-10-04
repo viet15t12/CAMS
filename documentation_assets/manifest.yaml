@@ -10172,14 +10172,14 @@ assets:
   domain: diagrams/workflow
   subject: service-repository-test
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/19_testing_flow_a.svg
-  path: 00_book/figures/report/diagrams/19_testing_flow_a.svg
+  current_path: documentation_assets/diagrams/workflow/service-repository-test.svg
+  path: documentation_assets/diagrams/workflow/service-repository-test.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/service-repository-test.svg
   legacy_path: 00_book/figures/report/diagrams/19_testing_flow_a.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d3bc4c6eaf599d3e339d987697bda945d6cbf78497717fc0fbea78f235aa8bc2
   provenance:
     assessment: unknown
@@ -10211,14 +10211,14 @@ assets:
   domain: diagrams/workflow
   subject: worker-fake-connector-test
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/20_testing_flow_b.svg
-  path: 00_book/figures/report/diagrams/20_testing_flow_b.svg
+  current_path: documentation_assets/diagrams/workflow/worker-fake-connector-test.svg
+  path: documentation_assets/diagrams/workflow/worker-fake-connector-test.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/worker-fake-connector-test.svg
   legacy_path: 00_book/figures/report/diagrams/20_testing_flow_b.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3a8fa203c4095bce53f4522d98459b4eb770fafcd3495323c2a5848398d82768
   provenance:
     assessment: unknown
@@ -10250,14 +10250,14 @@ assets:
   domain: diagrams/workflow
   subject: network-lab-verification
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/21_lab_test_flow.svg
-  path: 00_book/figures/report/diagrams/21_lab_test_flow.svg
+  current_path: documentation_assets/diagrams/workflow/network-lab-verification.svg
+  path: documentation_assets/diagrams/workflow/network-lab-verification.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/network-lab-verification.svg
   legacy_path: 00_book/figures/report/diagrams/21_lab_test_flow.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b8b7702cab219a62c8fdc4ccc82d34f57d93a55cc1bc60a69396173680b1b3ac
   provenance:
     assessment: unknown
@@ -16385,14 +16385,14 @@ assets:
   domain: database
   subject: core-observed-data-relationships
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/review-core-erd.svg
-  path: 00_book/figures/report/diagrams/review-core-erd.svg
+  current_path: documentation_assets/diagrams/database/core-observed-data-relationships.svg
+  path: documentation_assets/diagrams/database/core-observed-data-relationships.svg
   planned_canonical_path: documentation_assets/diagrams/database/core-observed-data-relationships.svg
   legacy_path: 00_book/figures/report/diagrams/review-core-erd.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 19c315bba2f717ac77213382bd8f4d1a6fa4aa2b9d9cc101ed47e9133ac68e1f
   provenance:
     assessment: current-main addition; inspected content and surrounding ACL lab/report
@@ -16411,7 +16411,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/07_phan_tich_thiet_ke.typ
     line: 163
-    referenced_path: /00_book/figures/report/diagrams/review-core-erd.svg
+    referenced_path: /documentation_assets/diagrams/database/core-observed-data-relationships.svg
     target_type: report-typst
   targets:
   - report-typst
@@ -16430,14 +16430,14 @@ assets:
   domain: workflow
   subject: syslog-processing-sequence
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/review-syslog-sequence.svg
-  path: 00_book/figures/report/diagrams/review-syslog-sequence.svg
+  current_path: documentation_assets/diagrams/workflow/syslog-processing-sequence.svg
+  path: documentation_assets/diagrams/workflow/syslog-processing-sequence.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/syslog-processing-sequence.svg
   legacy_path: 00_book/figures/report/diagrams/review-syslog-sequence.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 668ab70e664a325e207e55de89549f2a4d85e63c180fdb63bb099086c02896db
   provenance:
     assessment: current-main addition; inspected content and surrounding ACL lab/report
@@ -16456,7 +16456,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/07_phan_tich_thiet_ke.typ
     line: 87
-    referenced_path: /00_book/figures/report/diagrams/review-syslog-sequence.svg
+    referenced_path: /documentation_assets/diagrams/workflow/syslog-processing-sequence.svg
     target_type: report-typst
   targets:
   - report-typst

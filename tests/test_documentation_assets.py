@@ -316,6 +316,15 @@ class DocumentationAssetTests(unittest.TestCase):
         self.assertEqual({r["asset_id"] for r in review}, third_orphans)
         self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
         reviewed_orphans |= third_orphans
+        fourth_orphans = {"diagrams.workflow.service-repository-test", "diagrams.workflow.worker-fake-connector-test",
+                          "diagrams.workflow.network-lab-verification"}
+        preserved_active = {"diagrams.database.core-observed-data-relationships",
+                            "diagrams.workflow.syslog-processing-sequence"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02B4"}, fourth_orphans | preserved_active)
+        review = json.loads((root / "output/documentation-assets-migrations/b02b4.json").read_text())["review"]
+        self.assertEqual({r["asset_id"] for r in review}, fourth_orphans | preserved_active)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
+        reviewed_orphans |= fourth_orphans
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.
@@ -339,6 +348,25 @@ class DocumentationAssetTests(unittest.TestCase):
                 self.assertEqual(asset["used_by"], [])
                 self.assertEqual(asset["targets"], [])
                 self.assertFalse(asset["mkdocs_stage"])
+                self.assertEqual(row["review_approved"], "false")  # historical preflight
+            elif row["asset_id"] in preserved_active:
+                self.assertEqual(asset["migration_state"], "migrated")
+                self.assertTrue(asset["preserve_original"])
+                self.assertFalse(asset["original_evidence"])
+                self.assertTrue(asset["review_required"])
+                self.assertEqual(asset["status"], "active")
+                self.assertEqual(asset["targets"], ["report-typst"])
+                self.assertFalse(asset["mkdocs_stage"])
+                self.assertEqual((root / asset["legacy_path"]).read_bytes(), (root / asset["current_path"]).read_bytes())
+                self.assertEqual(digest(root / asset["legacy_path"]), asset["sha256"])
+                self.assertEqual(len(asset["used_by"]), 1)
+                use = asset["used_by"][0]
+                self.assertEqual(use["target_type"], "report-typst")
+                self.assertEqual(use["source_document"], "00_report/contents/07_phan_tich_thiet_ke.typ")
+                self.assertEqual(use["referenced_path"], "/" + asset["current_path"])
+                source = (root / use["source_document"]).read_text()
+                self.assertIn(use["referenced_path"], source.splitlines()[use["line"] - 1])
+                self.assertNotIn("/" + asset["legacy_path"], source)
                 self.assertEqual(row["review_approved"], "false")  # historical preflight
             else:
                 self.assertEqual(asset["migration_state"], "pending")

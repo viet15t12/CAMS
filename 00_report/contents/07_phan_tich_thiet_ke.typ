@@ -84,7 +84,7 @@ Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiê
 @fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau lưu trữ, bộ phát hiện theo ngưỡng và dịch vụ email xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
 
 #figure(
-  image("/00_book/figures/report/diagrams/review-syslog-sequence.svg", width: 100%),
+  image("/documentation_assets/diagrams/workflow/syslog-processing-sequence.svg", width: 100%),
   caption: [Sơ đồ tuần tự thu nhận, lưu trữ và khai thác Syslog],
 ) <fig-syslog-sequence>
 
@@ -160,7 +160,7 @@ Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `
 @fig-core-erd thể hiện các quan hệ một–nhiều. Đường liền là khóa ngoại trong cùng cơ sở dữ liệu; đường đứt là đối chiếu logic giữa hai tệp SQLite. Bảng Syslog không khai báo khóa ngoại sang danh mục thiết bị, nên không được mô tả như quan hệ toàn vẹn tham chiếu do SQLite tự bảo đảm.
 
 #figure(
-  image("/00_book/figures/report/diagrams/review-core-erd.svg", width: 100%),
+  image("/documentation_assets/diagrams/database/core-observed-data-relationships.svg", width: 100%),
   caption: [Lược đồ quan hệ đại diện giữa thiết bị, cấu hình và nhật ký],
 ) <fig-core-erd>
 
