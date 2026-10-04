@@ -1,0 +1,574 @@
+old_path,visual_subject,document_context,proposed_path,proposed_name,alternatives,confidence,issue,asset_id
+00_book/figures/gui/chapter-03/07-feature-bar-switch.png,Feature Bar khi làm việc với Router R1.,"00_book/contents/03_giao_dien_dieu_huong.typ:110   caption: [Feature Bar khi làm việc với Router R1.], width: 100.0%) <fig:ch03-feature-router>
+
+#insert-image(""figures/gui/chapter-03/07-feature-bar-switch.png"",
+  caption: [Feature Bar khi làm việc với Switch Layer 2 SW1.], width: 100.0%) <fig:ch03-feature-switch>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Loại thiết bị], [Nhóm chức năng hiển thị và có thể chọn]),
+00_book/DOC/03_giao_dien_dieu_huong.md:223 
+<figure>
+<p><img src=""../../figures/gui/chapter-03/07-feature-bar-switch.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Feature Bar khi làm việc với Switch Layer 2
+SW1.</p></figcaption>
+</figure>
+",documentation_assets/ui/docshot/core/feature-bar-switch.png,feature-bar-switch.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Phase 1 context caption overlaps adjacent figure; use actual screenshot subject, verify caption semantics at rewrite.",ui.core.feature-bar-switch
+00_book/figures/gui/chapter-04/11-device-context-connected.png,Menu của thiết bị Waiting với lệnh Connect.,"00_book/contents/04_quan_ly_thiet_bi.typ:241   caption: [Menu của thiết bị Waiting với lệnh Connect.], width: 53.6%) <fig:ch04-context-waiting>
+
+#insert-image(""figures/gui/chapter-04/11-device-context-connected.png"",
+  caption: [Menu của thiết bị Connected.], width: 53.6%) <fig:ch04-context-connected>
+
+== Kết nối thiết bị
+
+=== Connect
+00_book/contents/12_truyen_tep_sftp.typ:133 Lấy running-config là chức năng quản lý thiết bị, không phải thao tác Download trong panel SFTP/SCP. Chọn thiết bị đang *Connected*, nhấn chuột phải và chọn *Get running-config*. CAMS thu thập cấu hình đang chạy qua phiên quản lý, lưu một snapshot theo host rồi đồng bộ những phần cấu hình được hỗ trợ vào database.
+
+#insert-image(""figures/gui/chapter-04/11-device-context-connected.png"",
+  caption: [Lệnh Get running-config trong menu của thiết bị Connected.], width: 53.6%) <fig:ch12-11-device-context-connected>
+
+Khi tác vụ chạy, theo dõi Status Bar và Notification Center. Không chạy lại liên tục chỉ vì chưa thấy dữ liệu mới; quá trình thu thập, lưu snapshot và đồng bộ có thể hoàn tất ở các thời điểm khác nhau.
+
+#insert-image(""figures/gui/chapter-12/10-sync-notifications.png"",
+00_book/DOC/04_quan_ly_thiet_bi.md:409 
+<figure>
+<p><img src=""../../figures/gui/chapter-04/11-device-context-connected.png""
+style=""width:66.0%"" /></p>
+<figcaption><p>Menu của thiết bị Connected.</p></figcaption>
+</figure>
+
+\<fig:ch04-context-connected\>
+00_book/DOC/12_truyen_tep_sftp.md:196 
+<figure>
+<p><img src=""../../figures/gui/chapter-04/11-device-context-connected.png""
+style=""width:55.0%"" /></p>
+<figcaption><p>Lệnh Get running-config trong menu của thiết bị Connected.</p></figcaption>
+</figure>
+
+Khi tác vụ chạy, theo dõi Status Bar và Notification Center. Không chạy lại liên",documentation_assets/ui/docshot/devices/context-connected.png,context-connected.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Phase 1 context caption overlaps adjacent figure; use actual screenshot subject, verify caption semantics at rewrite.",ui.devices.context-connected
+00_book/figures/gui/chapter-09/02-hsrp-authentication-timers.png,02-hsrp-authentication-timers,No active document context in Phase 1; inspect original/preview.,documentation_assets/ui/legacy/routing/fhrp/hsrp-authentication-timers.png,hsrp-authentication-timers.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,"Historical generator unknown; legacy placement is documentation role, not assertion of manual capture.",ui.routing.fhrp.hsrp-authentication-timers
+00_book/figures/icons/ptit-logo.svg,ptit-logo,No active document context in Phase 1; inspect original/preview.,documentation_assets/branding/logos/ptit.svg,ptit.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,branding.logos.ptit
+00_book/figures/report/diagrams/01_pipeline_automation.svg,01_pipeline_automation,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/configuration-automation.svg,configuration-automation.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.configuration-automation
+00_book/figures/report/diagrams/03_cli_modes.svg,03_cli_modes,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/cisco-cli-modes.svg,cisco-cli-modes.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.cisco-cli-modes
+00_book/figures/report/diagrams/04_ssh_connection.svg,04_ssh_connection,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/architecture/ssh-session-connection.svg,ssh-session-connection.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.architecture.ssh-session-connection
+00_book/figures/report/diagrams/05_session_lifecycle.svg,05_session_lifecycle,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/device-session-lifecycle.svg,device-session-lifecycle.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.device-session-lifecycle
+00_book/figures/report/diagrams/06_dhcp_dora.svg,06_dhcp_dora,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg,dhcp-dora-sequence.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.dhcp-dora-sequence
+00_book/figures/report/diagrams/07_ospf_area.png,07_ospf_area,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/ospf-multi-area-backbone.png,ospf-multi-area-backbone.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.network.ospf-multi-area-backbone
+00_book/figures/report/diagrams/07_ospf_area.svg,07_ospf_area,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/ospf-area-zero-router-chain.svg,ospf-area-zero-router-chain.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Authored SVG describes existing source format; exporter/author identity not established.; Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.network.ospf-area-zero-router-chain
+00_book/figures/report/diagrams/08_acl_packet_flow.jpg,08_acl_packet_flow,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/inbound-acl-tests.jpg,inbound-acl-tests.jpg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.workflow.inbound-acl-tests
+00_book/figures/report/diagrams/08_acl_packet_flow.svg,08_acl_packet_flow,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/acl-rule-evaluation.svg,acl-rule-evaluation.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Authored SVG describes existing source format; exporter/author identity not established.; Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.workflow.acl-rule-evaluation
+00_book/figures/report/diagrams/09_nat_pat.svg,09_nat_pat,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/nat-pat-internet-topology.svg,nat-pat-internet-topology.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.network.nat-pat-internet-topology
+00_book/figures/report/diagrams/10_fhrp_gateway.svg,10_fhrp_gateway,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/fhrp-virtual-gateway.svg,fhrp-virtual-gateway.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.network.fhrp-virtual-gateway
+00_book/figures/report/diagrams/11_db_schema.svg,11_db_schema,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/database/device-entity-relations.svg,device-entity-relations.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.database.device-entity-relations
+00_book/figures/report/diagrams/12_netmiko_stack.svg,12_netmiko_stack,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/architecture/netmiko-ssh-stack.svg,netmiko-ssh-stack.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.architecture.netmiko-ssh-stack
+00_book/figures/report/diagrams/13_qtquick_tree.svg,13_qtquick_tree,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/architecture/qtquick-component-tree.svg,qtquick-component-tree.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.architecture.qtquick-component-tree
+00_book/figures/report/diagrams/14_qml_signal_slot.svg,14_qml_signal_slot,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/architecture/qml-python-signal-flow.svg,qml-python-signal-flow.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.architecture.qml-python-signal-flow
+00_book/figures/report/diagrams/15_ui_thread_workers.svg,15_ui_thread_workers,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/architecture/ui-thread-worker-dispatch.svg,ui-thread-worker-dispatch.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.architecture.ui-thread-worker-dispatch
+00_book/figures/report/diagrams/16_host_lock.svg,16_host_lock,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/architecture/per-host-session-lock.svg,per-host-session-lock.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.architecture.per-host-session-lock
+00_book/figures/report/diagrams/17_serialize_parallel.svg,17_serialize_parallel,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/per-host-serial-cross-host-parallel.svg,per-host-serial-cross-host-parallel.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.per-host-serial-cross-host-parallel
+00_book/figures/report/diagrams/18_syslog_pipeline.svg,18_syslog_pipeline,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/syslog-processing-pipeline.svg,syslog-processing-pipeline.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.syslog-processing-pipeline
+00_book/figures/report/diagrams/19_testing_flow_a.svg,19_testing_flow_a,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/service-repository-test.svg,service-repository-test.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.service-repository-test
+00_book/figures/report/diagrams/20_testing_flow_b.svg,20_testing_flow_b,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/worker-fake-connector-test.svg,worker-fake-connector-test.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.worker-fake-connector-test
+00_book/figures/report/diagrams/21_lab_test_flow.svg,21_lab_test_flow,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/network-lab-verification.svg,network-lab-verification.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Authored SVG describes existing source format; exporter/author identity not established.,diagrams.workflow.network-lab-verification
+00_book/figures/report/diagrams/Etherchannel.jpg,Etherchannel,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/etherchannel-redundant-uplinks.jpg,etherchannel-redundant-uplinks.jpg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,diagrams.network.etherchannel-redundant-uplinks
+00_book/figures/report/diagrams/LAB_2-report.png,Sơ đồ Kịch bản 1: Định tuyến OSPF đa vùng giữa hai chi nhánh,"00_report/contents/09_thu_nghiem_danh_gia.typ:153 
+#figure(
+  image(""/00_book/figures/report/diagrams/LAB_2-report.png"", width: 95%),
+  caption: [Sơ đồ Kịch bản 1: Định tuyến OSPF đa vùng giữa hai chi nhánh],
+) <fig-topo-scenario-2>
+
+Mô hình được chia thành các phân vùng định tuyến và dải địa chỉ như trình bày trong bảng quy hoạch dưới đây.
+",documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png,multi-area-branches-raster.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.lab-topology.routing-ospf.multi-area-branches-raster
+00_book/figures/report/diagrams/LAB_2.svg,LAB_2,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg,multi-area-branches-vector.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Authored SVG describes existing source format; exporter/author identity not established.; Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.lab-topology.routing-ospf.multi-area-branches-vector
+00_book/figures/report/diagrams/STP.jpg,STP,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/stp-root-port-election.jpg,stp-root-port-election.jpg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,diagrams.network.stp-root-port-election
+00_book/figures/report/diagrams/VTP.jpg,VTP,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/vtp-server-clients.jpg,vtp-server-clients.jpg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,diagrams.network.vtp-server-clients
+00_book/figures/report/diagrams/dhcp-snooping.jpg,dhcp-snooping,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/dhcp-snooping-rogue-server.jpg,dhcp-snooping-rogue-server.jpg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,diagrams.network.dhcp-snooping-rogue-server
+00_book/figures/report/diagrams/dhcp_dora.png,dhcp_dora,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/workflow/dhcp-dora-client-server-illustration.png,dhcp-dora-client-server-illustration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,diagrams.workflow.dhcp-dora-client-server-illustration
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png,Giao diện cấu hình cổng NAT Inside/Outside trên Router NAT,"00_report/contents/09_thu_nghiem_danh_gia.typ:372 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png"", width: 90%),
+  caption: [Giao diện cấu hình cổng NAT Inside/Outside trên Router NAT],
+) <fig-k3-nat-interfaces>
+
+@fig-k3-nat-interfaces cho thấy ba cổng đã được lưu ở trạng thái mong muốn: `Gi0/1` và `Gi0/3` có vai trò `Inside`, còn `Gi0/2` có vai trò `Outside`. Thông tin này được kiểm tra trước khi CAMS sinh tập lệnh cấu hình.
+",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/nat-interfaces.png,nat-interfaces.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.nat-interfaces
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png,Khai báo ACL NAT_demo xác định các mạng nội bộ được phép chuyển đổi địa chỉ,"00_report/contents/09_thu_nghiem_danh_gia.typ:383 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png"", width: 90%),
+  caption: [Khai báo ACL NAT_demo xác định các mạng nội bộ được phép chuyển đổi địa chỉ],
+) <fig-k3-nat-acl>
+
+Sau khi lưu các tham số cổng và ACL, người dùng mở cửa sổ *View & Push* để kiểm duyệt tập lệnh trước khi gửi xuống thiết bị.
+",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/nat-acl.png,nat-acl.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.nat-acl
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png,Cửa sổ View & Push sinh cấu hình NAT Interface và ACL cho Router NAT,"00_report/contents/09_thu_nghiem_danh_gia.typ:390 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png"", width: 78%),
+  caption: [Cửa sổ View & Push sinh cấu hình NAT Interface và ACL cho Router NAT],
+) <fig-k3-nat-preview>
+
+@fig-k3-nat-preview cho thấy CAMS sinh các lệnh `ip nat inside`, `ip nat outside` trên từng cổng và khối ACL sau:
+```text",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/nat-config-preview.png,nat-config-preview.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.nat-config-preview
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png,Giao diện cấu hình PAT Overload sử dụng cổng Outside GigabitEthernet0/2,"00_report/contents/09_thu_nghiem_danh_gia.typ:406 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png"", width: 90%),
+  caption: [Giao diện cấu hình PAT Overload sử dụng cổng Outside GigabitEthernet0/2],
+) <fig-k3-pat-gui>
+
+Cửa sổ *View & Push* cho thấy lệnh PAT được sinh tự động:
+",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/nat-pat.png,nat-pat.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.nat-pat
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png,Cửa sổ View & Push kiểm duyệt lệnh PAT Overload trước khi đẩy xuống Router NAT,"00_report/contents/09_thu_nghiem_danh_gia.typ:413 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png"", width: 78%),
+  caption: [Cửa sổ View & Push kiểm duyệt lệnh PAT Overload trước khi đẩy xuống Router NAT],
+) <fig-k3-pat-preview>
+
+```text
+ip nat inside source list NAT_demo interface GigabitEthernet0/2 overload",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/nat-pat-preview.png,nat-pat-preview.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.nat-pat-preview
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png,Xác minh vai trò NAT trên ba cổng của Router NAT bằng lệnh show running-config,"00_report/contents/09_thu_nghiem_danh_gia.typ:428 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png"", width: 72%),
+  caption: [Xác minh vai trò NAT trên ba cổng của Router NAT bằng lệnh show running-config],
+) <fig-k3-nat-interface-verify>
+
+Tiếp tục kiểm tra cấu hình tổng thể cho thấy lệnh PAT, ACL `NAT_demo` và tuyến mặc định tới `10.0.10.1` đã tồn tại trong running-config.
+",documentation_assets/evidence/terminal/original/fhrp-nat-dhcp-lab/nat-interface-verify.png,nat-interface-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.fhrp-nat-dhcp.nat-interface-verify
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png,"Xác minh ACL, PAT Overload và Default Route trên Router NAT","00_report/contents/09_thu_nghiem_danh_gia.typ:435 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png"", width: 82%),
+  caption: [Xác minh ACL, PAT Overload và Default Route trên Router NAT],
+) <fig-k3-nat-config-verify>
+
+#step-title[Bước 5. Thiết lập GLBP làm cổng mặc định dự phòng]
+",documentation_assets/evidence/terminal/original/fhrp-nat-dhcp-lab/nat-config-verify.png,nat-config-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.fhrp-nat-dhcp.nat-config-verify
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png,Giao diện tạo GLBP Group 113 với Virtual IP 192.168.4.1 trên R1 và R2,"00_report/contents/09_thu_nghiem_danh_gia.typ:444 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png"", width: 86%),
+  caption: [Giao diện tạo GLBP Group 113 với Virtual IP 192.168.4.1 trên R1 và R2],
+) <fig-k3-glbp-setup>
+
+Tại phần *Member policy*, CAMS tự động ghép các cổng cùng mạng con với địa chỉ IP ảo. Cổng `Gi0/0` của `R1` (`192.168.4.2/24`) có mức ưu tiên `101`, còn cổng `Gi0/0` của `R2` (`192.168.4.3/24`) có mức ưu tiên `100`. Cả hai đều bật `Preempt`, sử dụng `Maximum Weighting 100` và đặt `Forwarder Preempt Delay` là `30` giây.
+",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/glbp-setup.png,glbp-setup.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.glbp-setup
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png,Thiết lập chính sách thành viên GLBP cho R1 và R2,"00_report/contents/09_thu_nghiem_danh_gia.typ:451 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png"", width: 86%),
+  caption: [Thiết lập chính sách thành viên GLBP cho R1 và R2],
+) <fig-k3-glbp-member-policy>
+
+Trước khi áp dụng, cửa sổ *View & Push FHRP* tổng hợp lệnh cho cả hai thiết bị trong cùng một phiên kiểm duyệt.
+",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/glbp-member-policy.png,glbp-member-policy.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.glbp-member-policy
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png,Cửa sổ View & Push FHRP sinh đồng thời cấu hình GLBP cho R1 và R2,"00_report/contents/09_thu_nghiem_danh_gia.typ:458 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png"", width: 80%),
+  caption: [Cửa sổ View & Push FHRP sinh đồng thời cấu hình GLBP cho R1 và R2],
+) <fig-k3-glbp-preview>
+
+@fig-k3-glbp-preview cho thấy CAMS sinh cấu hình nhóm GLBP 113 trên cả hai router, gồm địa chỉ ảo, chế độ cân bằng tải, trọng số và thời gian chờ preempt. `R1` có mức ưu tiên 101, cao hơn `R2` với mức 100, phù hợp với chính sách đã khai báo.
+",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/glbp-config-preview.png,glbp-config-preview.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.glbp-config-preview
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png,Giao diện tạo DHCP Pool LAN_R1 với Default Gateway là GLBP Virtual IP 192.168.4.1,"00_report/contents/09_thu_nghiem_danh_gia.typ:469 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png"", width: 88%),
+  caption: [Giao diện tạo DHCP Pool LAN_R1 với Default Gateway là GLBP Virtual IP 192.168.4.1],
+) <fig-k3-dhcp-pool>
+
+Cửa sổ kiểm duyệt cho thấy cấu hình DHCP được sinh tương ứng:
+",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/dhcp-pool.png,dhcp-pool.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.dhcp-pool
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png,Cửa sổ View & Push DHCP sinh cấu hình pool LAN_R1 trên R1,"00_report/contents/09_thu_nghiem_danh_gia.typ:476 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png"", width: 78%),
+  caption: [Cửa sổ View & Push DHCP sinh cấu hình pool LAN_R1 trên R1],
+) <fig-k3-dhcp-preview>
+
+```text
+ip dhcp pool LAN_R1",documentation_assets/evidence/ui-capture/original/fhrp-nat-dhcp-lab/dhcp-config-preview.png,dhcp-config-preview.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.fhrp-nat-dhcp.dhcp-config-preview
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png,Xác minh DHCP Pool và cấu hình GLBP trên Router R1,"00_report/contents/09_thu_nghiem_danh_gia.typ:494 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png"", width: 88%),
+  caption: [Xác minh DHCP Pool và cấu hình GLBP trên Router R1],
+) <fig-k3-r1-verify>
+
+Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, đảm bảo hai router cùng cung cấp dịch vụ gateway cho một mạng LAN.
+",documentation_assets/evidence/terminal/original/fhrp-nat-dhcp-lab/dhcp-glbp-r1-verify.png,dhcp-glbp-r1-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.fhrp-nat-dhcp.dhcp-glbp-r1-verify
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png,Xác minh cấu hình GLBP Group 113 trên Router R2,"00_report/contents/09_thu_nghiem_danh_gia.typ:501 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png"", width: 82%),
+  caption: [Xác minh cấu hình GLBP Group 113 trên Router R2],
+) <fig-k3-r2-verify>
+
+#step-title[Bước 8. Kiểm tra cấp phát DHCP và đường đi của lưu lượng]
+",documentation_assets/evidence/terminal/original/fhrp-nat-dhcp-lab/glbp-r2-verify.png,glbp-r2-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.fhrp-nat-dhcp.glbp-r2-verify
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png,Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream,"00_report/contents/09_thu_nghiem_danh_gia.typ:510 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png"", width: 82%),
+  caption: [Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream],
+) <fig-k3-client-test>
+
+Kết quả lệnh `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận chặng đầu tiên là `192.168.4.2` (`R1`), tiếp theo là `192.168.1.2` (router NAT) và `10.0.10.1` (gateway phía ngoài). Thiết bị phía ngoài trả về ICMP `Destination port unreachable`; vì vậy, phép thử chỉ xác minh đường đi từ mạng LAN tới biên ngoài của mô hình lab, không chứng minh kết nối hoàn chỉnh tới `1.1.1.1`.
+",documentation_assets/evidence/connectivity/original/fhrp-nat-dhcp-lab/client-connectivity-test.png,client-connectivity-test.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.fhrp-nat-dhcp.client-connectivity-test
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png,"Sơ đồ Kịch bản 2: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN","00_report/contents/09_thu_nghiem_danh_gia.typ:337 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png"", width: 95%),
+  caption: [Sơ đồ Kịch bản 2: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN],
+) <fig-topo-scenario-3>
+
+Địa chỉ và vai trò của từng thiết bị được trình bày trong bảng quy hoạch dưới đây.
+",documentation_assets/diagrams/lab-topology/fhrp-nat-dhcp/glbp-dhcp-pat-raster.png,glbp-dhcp-pat-raster.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.lab-topology.fhrp-nat-dhcp.glbp-dhcp-pat-raster
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp.svg,fhrp-nat-dhcp,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/lab-topology/fhrp-nat-dhcp/glbp-dhcp-pat-vector.svg,glbp-dhcp-pat-vector.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Authored SVG describes existing source format; exporter/author identity not established.; Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.lab-topology.fhrp-nat-dhcp.glbp-dhcp-pat-vector
+00_book/figures/report/diagrams/jenkins_pipeline_stages.png,jenkins_pipeline_stages,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/external-tools/original/ci/jenkins-pipeline-stages.png,jenkins-pipeline-stages.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Phase 2 taxonomy overlay: Jenkins CI evidence is external tool capture, not device verification.",evidence.ci.jenkins-pipeline-stages
+00_book/figures/report/diagrams/lab_4.svg,lab_4,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/lab-topology/multi-router-branch-routing.svg,multi-router-branch-routing.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Authored SVG describes existing source format; exporter/author identity not established.; Historical lab_4 identifier does not establish scenario purpose; topology name is provisional.,diagrams.lab-topology.multi-router-branch-routing
+00_book/figures/report/diagrams/routing-ospf-lab/1.png,router-interfaces-overview,"00_report/contents/09_thu_nghiem_danh_gia.typ:186 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/1.png"", width: 85%),
+  caption: [Giao diện quản lý và cấu hình tham số Lớp 3 cho các cổng router],
+) <fig-k2-interfaces>
+@fig-k2-interfaces thể hiện trạng thái IP của các cổng trên `R1`. Ngăn thuộc tính cho phép khai báo địa chỉ IP, subnet mask, mô tả và trạng thái hoạt động của từng cổng.
+
+#step-title[Bước 2. Cấu hình OSPF theo nhóm bằng Routing Group]",documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png,router-interfaces-overview.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interfaces-overview
+00_book/figures/report/diagrams/routing-ospf-lab/10.png,ospf-routing-group-hosts,"00_report/contents/09_thu_nghiem_danh_gia.typ:196 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/10.png"", width: 80%),
+  caption: [Cửa sổ Routing Group - OSPF (Bước 1: Chọn sáu router tham gia cấu hình nhóm)],
+) <fig-k2-group-hosts>
+Trong @fig-k2-group-hosts, các router được chọn từ không gian làm việc `LAB_KICH_BAN_2`. CAMS sử dụng thông tin của các cổng và địa chỉ IP của từng thiết bị làm dữ liệu đầu vào cho các bước tiếp theo.
+
+Tại bước *Networks*, quản trị viên gán các mạng kết nối trực tiếp vào vùng định tuyến tương ứng: Area 0 cho các liên kết đường trục ISP và Area 1 cho các liên kết nội bộ của Chi nhánh A.",documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png,routing-group-hosts.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.routing-group-hosts
+00_book/figures/report/diagrams/routing-ospf-lab/11.png,ospf-routing-group-networks,"00_report/contents/09_thu_nghiem_danh_gia.typ:204 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/11.png"", width: 80%),
+  caption: [Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)],
+) <fig-k2-group-networks>
+#block[
+  #set par(justify: false)
+  @fig-k2-group-networks thể hiện các cổng được nhóm theo từng router và ánh xạ mỗi dải mạng vào vùng OSPF tương ứng:",documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png,routing-group-networks.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.routing-group-networks
+00_book/figures/report/diagrams/routing-ospf-lab/12.png,ospf-running-config-multi-router-verification,"00_report/contents/09_thu_nghiem_danh_gia.typ:276 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/12.png"", width: 90%),
+  caption: [Xác minh cấu hình OSPF trên sáu router qua terminal nhúng],
+) <fig-k2-multi-terminal-ospf>
+Kết quả lệnh `show run | section ospf` trong @fig-k2-multi-terminal-ospf xác nhận cả sáu router đã nhận tiến trình OSPF 1, router ID từ `1.1.1.1` đến `6.6.6.6` và các mạng thuộc Area 0 hoặc Area 1 theo quy hoạch.
+
+#step-title[Bước 5. Kiểm tra bảng định tuyến OSPF]",documentation_assets/evidence/terminal/original/routing-ospf-lab/multi-router-ospf-running-config.png,multi-router-ospf-running-config.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.multi-router-ospf-running-config
+00_book/figures/report/diagrams/routing-ospf-lab/13.png,r1-ospf-process-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/r1-process-dark.png,r1-process-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.r1-process-dark
+00_book/figures/report/diagrams/routing-ospf-lab/14.png,ospf-group-view-push-progress,"00_report/contents/09_thu_nghiem_danh_gia.typ:251 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/14.png"", width: 80%),
+  caption: [Cửa sổ View & Push OSPF tự động sinh khối lệnh tái phân phối tuyến cho Router R2],
+) <fig-k2-redistribute-push>
+Cửa sổ kiểm duyệt trong @fig-k2-redistribute-push hiển thị khối lệnh Cisco IOS được sinh cho router `R2`:
+```text
+# Cấu hình OSPF và Redistribution sinh tự động cho R2",documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-push-progress.png,routing-group-push-progress.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.routing-group-push-progress
+00_book/figures/report/diagrams/routing-ospf-lab/15.png,r1-ospf-view-push-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/r1-view-push-dark.png,r1-view-push-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.r1-view-push-dark
+00_book/figures/report/diagrams/routing-ospf-lab/16.png,r2-ospf-process,"00_report/contents/09_thu_nghiem_danh_gia.typ:238 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/16.png"", width: 85%),
+  caption: [Giao diện thiết lập tham số Tái phân phối tuyến (OSPF Redistribute) trên Router biên R6],
+) <fig-k2-redistribute-gui>
+Tại tab `R6`, quản trị viên mở *Routing*, chọn *OSPF* và mục *Redistribute*. Các tham số được thiết lập như sau:
+
+- Tiến trình OSPF: `1`. (Lưu ý: Không điền Process ID cho nguồn `connected` vì mạng kết nối trực tiếp không có tiến trình định tuyến).",documentation_assets/evidence/ui-capture/original/routing-ospf-lab/r2-process.png,r2-process.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.r2-process
+00_book/figures/report/diagrams/routing-ospf-lab/17.png,r1-ospf-routing-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/routing-ospf-lab/r1-ospf-routing-verification.png,r1-ospf-routing-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.r1-ospf-routing-verification
+00_book/figures/report/diagrams/routing-ospf-lab/18.png,r2-ospf-routing-verification,"00_report/contents/09_thu_nghiem_danh_gia.typ:286 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/18.png"", width: 85%),
+  caption: [Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2],
+) <fig-k2-route-table-r1>
+Theo @fig-k2-route-table-r1, bảng định tuyến của `R1` ghi nhận:
+- Các tuyến nội vùng OSPF (`O`): `2.2.2.2/32`, `3.3.3.3/32`, `4.4.4.4/32`, `5.5.5.5/32`, `6.6.6.6/32` và các mạng liên kết `10.0.2.0/24`, `10.0.3.0/24`, `10.1.23.0/24`.
+- Cả bốn mạng LAN của hai chi nhánh được học qua cơ chế tái phân phối tuyến ngoại vi:",documentation_assets/evidence/terminal/original/routing-ospf-lab/r2-ospf-routing-verification.png,r2-ospf-routing-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.r2-ospf-routing-verification
+00_book/figures/report/diagrams/routing-ospf-lab/19.png,r3-ospf-routing-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/routing-ospf-lab/r3-ospf-routing-verification.png,r3-ospf-routing-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.r3-ospf-routing-verification
+00_book/figures/report/diagrams/routing-ospf-lab/2.png,router-interface-editor-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-editor-dark.png,router-interface-editor-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interface-editor-dark
+00_book/figures/report/diagrams/routing-ospf-lab/20.png,r6-ospf-routing-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/routing-ospf-lab/r6-ospf-routing-verification.png,r6-ospf-routing-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.r6-ospf-routing-verification
+00_book/figures/report/diagrams/routing-ospf-lab/21.png,vpc11-ip-configuration,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/routing-ospf-lab/vpc11-ip-configuration.png,vpc11-ip-configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.vpc11-ip-configuration
+00_book/figures/report/diagrams/routing-ospf-lab/22.png,vpc12-ip-configuration,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/routing-ospf-lab/vpc12-ip-configuration.png,vpc12-ip-configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.vpc12-ip-configuration
+00_book/figures/report/diagrams/routing-ospf-lab/23.png,vpc14-ip-configuration,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/routing-ospf-lab/vpc14-ip-configuration.png,vpc14-ip-configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.vpc14-ip-configuration
+00_book/figures/report/diagrams/routing-ospf-lab/24.png,vpc13-ip-configuration,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/routing-ospf-lab/vpc13-ip-configuration.png,vpc13-ip-configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.vpc13-ip-configuration
+00_book/figures/report/diagrams/routing-ospf-lab/25.png,vpc11-ping-verification,"00_report/contents/09_thu_nghiem_danh_gia.typ:302 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/25.png"", width: 75%),
+  caption: [Kết quả ping từ VPC11 sang VPC14 với tỷ lệ thành công 100%],
+) <fig-k2-ping-vpc11-vpc14>
+Kết quả trong @fig-k2-ping-vpc11-vpc14 cho thấy `VPC11` (`192.168.10.10`) gửi thành công 5/5 gói tin tới `VPC14` (`192.168.30.10`). Độ trễ trung bình là khoảng `6,9 ms`; giá trị `ttl=59` cho thấy gói tin đi qua năm hop định tuyến.
+
+Phép thử từ `VPC15` (`192.168.40.10`, thuộc `B2_VLAN` tại Chi nhánh B) đến hai máy trạm ở Chi nhánh A cũng ghi nhận đầy đủ phản hồi:",documentation_assets/evidence/connectivity/original/routing-ospf-lab/vpc11-ping-verification.png,vpc11-ping-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.vpc11-ping-verification
+00_book/figures/report/diagrams/routing-ospf-lab/26.png,vpc13-ping-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/connectivity/original/routing-ospf-lab/vpc13-ping-verification.png,vpc13-ping-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.vpc13-ping-verification
+00_book/figures/report/diagrams/routing-ospf-lab/27.png,vpc15-ping-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/connectivity/original/routing-ospf-lab/vpc15-ping-verification.png,vpc15-ping-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.routing-ospf.vpc15-ping-verification
+00_book/figures/report/diagrams/routing-ospf-lab/3.png,router-interface-addresses-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-addresses-dark.png,router-interface-addresses-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interface-addresses-dark
+00_book/figures/report/diagrams/routing-ospf-lab/4.png,router-interface-policy-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-policy-dark.png,router-interface-policy-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interface-policy-dark
+00_book/figures/report/diagrams/routing-ospf-lab/5.png,router-interfaces-inventory-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-inventory-dark.png,router-interfaces-inventory-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interfaces-inventory-dark
+00_book/figures/report/diagrams/routing-ospf-lab/6.png,router-interfaces-inventory-selected-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-selected-dark.png,router-interfaces-selected-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interfaces-selected-dark
+00_book/figures/report/diagrams/routing-ospf-lab/7.png,router-interface-inventory-edit-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-edit-dark.png,router-interface-edit-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interface-edit-dark
+00_book/figures/report/diagrams/routing-ospf-lab/8.png,router-interface-counters-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-counters-dark.png,router-interface-counters-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-interface-counters-dark
+00_book/figures/report/diagrams/routing-ospf-lab/9.png,router-ospf-process-dark,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-process-overview-dark.png,router-process-overview-dark.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.routing-ospf.router-process-overview-dark
+00_book/figures/report/diagrams/switching-lab/1_1.png,switch-port-inventory-editor-1-1,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw1-vlan-ten-access-assignments.png,sw1-vlan-ten-access-assignments.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw1-vlan-ten-access-assignments
+00_book/figures/report/diagrams/switching-lab/1_10.png,switch-port-inventory-editor-1-10,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw1-trunks-pending-apply.png,sw1-trunks-pending-apply.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw1-trunks-pending-apply
+00_book/figures/report/diagrams/switching-lab/1_11.png,switch-port-inventory-editor-1-11,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw2-trunks-synchronized.png,sw2-trunks-synchronized.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw2-trunks-synchronized
+00_book/figures/report/diagrams/switching-lab/1_12.png,switch-port-inventory-editor-1-12,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw3-trunks-synchronized.png,sw3-trunks-synchronized.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw3-trunks-synchronized
+00_book/figures/report/diagrams/switching-lab/1_13.png,switch-port-inventory-editor-1-13,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw4-trunks-synchronized.png,sw4-trunks-synchronized.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw4-trunks-synchronized
+00_book/figures/report/diagrams/switching-lab/1_14.png,switch-port-inventory-editor-1-14,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw5-trunks-synchronized.png,sw5-trunks-synchronized.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw5-trunks-synchronized
+00_book/figures/report/diagrams/switching-lab/1_15.png,switch-port-inventory-editor-1-15,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw6-trunks-synchronized.png,sw6-trunks-synchronized.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw6-trunks-synchronized
+00_book/figures/report/diagrams/switching-lab/1_16.png,vtp-group-policy-1-16,"00_report/contents/09_thu_nghiem_danh_gia.typ:56 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_16.png"", width: 85%),
+  caption: [Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB],
+) <fig-k1-vtp-group>
+@fig-k1-vtp-group thể hiện sáu switch đang kết nối, năm thiết bị được chọn và miền VTP đã lưu. Sau khi kiểm tra danh sách, quản trị viên sử dụng *Save & Push* để áp dụng cấu hình theo nhóm.
+
+*Bước 2. Khởi tạo VLAN và kiểm duyệt tập lệnh*",documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-identity.png,vtp-group-identity.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.vtp-group-identity
+00_book/figures/report/diagrams/switching-lab/1_17.png,vtp-group-policy-1-17,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-member-policy.png,vtp-group-member-policy.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.vtp-group-member-policy
+00_book/figures/report/diagrams/switching-lab/1_18.png,switch-port-inventory-editor-1-18,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw1-vlan-five-access-assignments.png,sw1-vlan-five-access-assignments.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw1-vlan-five-access-assignments
+00_book/figures/report/diagrams/switching-lab/1_19.png,switch-port-inventory-editor-1-19,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw1-vlan-data-network-selected.png,sw1-vlan-data-network-selected.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw1-vlan-data-network-selected
+00_book/figures/report/diagrams/switching-lab/1_2.png,switch-port-inventory-editor-1-2,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw1-lacp-port-channel-editing.png,sw1-lacp-port-channel-editing.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw1-lacp-port-channel-editing
+00_book/figures/report/diagrams/switching-lab/1_20.png,vlan-view-push-preview-1-20,"00_report/contents/09_thu_nghiem_danh_gia.typ:66 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_20.png"", width: 80%),
+  caption: [Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1],
+) <fig-k1-vlan-push>
+@fig-k1-vlan-push cho thấy khối lệnh Cisco IOS được sinh từ dữ liệu trên giao diện, gồm các lệnh tạo VLAN và đặt tên tương ứng. Người dùng kiểm tra từng dòng trước khi nhấn *Push* để gửi cấu hình qua SSH.
+
+*Bước 3. Cấu hình gom kênh EtherChannel bằng LACP*",documentation_assets/evidence/ui-capture/original/switching-lab/vlan-view-push.png,vlan-view-push.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.vlan-view-push
+00_book/figures/report/diagrams/switching-lab/1_21.png,switch-port-inventory-editor-1-21,"00_report/contents/09_thu_nghiem_danh_gia.typ:86 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_21.png"", width: 85%),
+  caption: [Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection],
+) <fig-k1-l2-security>
+@fig-k1-l2-security thể hiện chính sách bảo vệ cho VLAN 1, 10, 20 và 99. Quản trị viên bật DHCP Snooping, DAI và chỉ định các đường trunk làm *Trusted Uplinks* để tiếp nhận lưu lượng DHCP và ARP hợp lệ.
+
+*Bước 5. Cấu hình Port Security trên switch truy cập SW5*",documentation_assets/evidence/ui-capture/original/switching-lab/vlan-security-policy.png,vlan-security-policy.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.vlan-security-policy
+00_book/figures/report/diagrams/switching-lab/1_22.png,switch-port-inventory-editor-1-22,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/trusted-uplinks.png,trusted-uplinks.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.trusted-uplinks
+00_book/figures/report/diagrams/switching-lab/1_23.png,l2-security-view-push-preview-1-23,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/l2-security-view-push.png,l2-security-view-push.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.l2-security-view-push
+00_book/figures/report/diagrams/switching-lab/1_24.png,switch-port-inventory-editor-1-24,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/port-security-editor.png,port-security-editor.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.port-security-editor
+00_book/figures/report/diagrams/switching-lab/1_25.png,port-security-view-push-preview-1-25,"00_report/contents/09_thu_nghiem_danh_gia.typ:96 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_25.png"", width: 80%),
+  caption: [Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5],
+) <fig-k1-port-security-push>
+#block[
+  #set par(justify: false)
+  @fig-k1-port-security-push thể hiện khối lệnh Port Security để quản trị viên kiểm tra trước khi đẩy xuống thiết bị:",documentation_assets/evidence/ui-capture/original/switching-lab/port-security-view-push.png,port-security-view-push.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.port-security-view-push
+00_book/figures/report/diagrams/switching-lab/1_26.png,switch-port-inventory-editor-1-26,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/port-security-configured.png,port-security-configured.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.port-security-configured
+00_book/figures/report/diagrams/switching-lab/1_27.png,switch-device-cli-verification-1-27,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/switching-lab/sw1-vtp-status.png,sw1-vtp-status.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.; Switching semantic labels use inspected state/device; review against full-resolution original.,evidence.switching.sw1-vtp-status
+00_book/figures/report/diagrams/switching-lab/1_28.png,switch-device-cli-verification-1-28,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/switching-lab/sw2-vtp-status.png,sw2-vtp-status.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.; Switching semantic labels use inspected state/device; review against full-resolution original.,evidence.switching.sw2-vtp-status
+00_book/figures/report/diagrams/switching-lab/1_29.png,switch-device-cli-verification-1-29,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/switching-lab/sw2-vtp-trunk-verification.png,sw2-vtp-trunk-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.; Switching semantic labels use inspected state/device; review against full-resolution original.,evidence.switching.sw2-vtp-trunk-verification
+00_book/figures/report/diagrams/switching-lab/1_3.png,etherchannel-view-push-preview-1-3,"00_report/contents/09_thu_nghiem_danh_gia.typ:76 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_3.png"", width: 80%),
+  caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
+) <fig-k1-etherchannel-push>
+@fig-k1-etherchannel-push thể hiện cấu hình cho từng cổng thành phần và cổng logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
+
+*Bước 4. Thiết lập DHCP Snooping và Dynamic ARP Inspection*",documentation_assets/evidence/ui-capture/original/switching-lab/etherchannel-view-push.png,etherchannel-view-push.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.etherchannel-view-push
+00_book/figures/report/diagrams/switching-lab/1_30.png,switch-device-cli-verification-1-30,"00_report/contents/09_thu_nghiem_danh_gia.typ:118 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_30.png"", width: 85%),
+  caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp],
+) <fig-k1-terminal-verify>
+Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
+
+Ngoài ra, người dùng kiểm tra trạng thái bảo mật cổng trên switch `SW5` qua lệnh `show port-security interface GigabitEthernet0/2`:",documentation_assets/evidence/terminal/original/switching-lab/multi-switch-etherchannel-verification.png,multi-switch-etherchannel-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.; Switching semantic labels use inspected state/device; review against full-resolution original.,evidence.switching.multi-switch-etherchannel-verification
+00_book/figures/report/diagrams/switching-lab/1_31.png,switch-device-cli-verification-1-31,No active document context in Phase 1; inspect original/preview.,,,Hold current source until subject/state distinction is verified.,low,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.; Switching semantic labels use inspected state/device; review against full-resolution original.; No verified semantic state difference from the visually similar capture. Hold filename/path rather than append arbitrary sequence. Resolve pair first; do not move this row.,evidence.switching.sw2-vtp-trunk-alternate-capture
+00_book/figures/report/diagrams/switching-lab/1_32.png,switch-port-inventory-editor-1-32,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/mac-address-table.png,mac-address-table.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.mac-address-table
+00_book/figures/report/diagrams/switching-lab/1_33.png,switch-device-cli-verification-1-33,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/switching-lab/sw5-port-security-verification.png,sw5-port-security-verification.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.; Switching semantic labels use inspected state/device; review against full-resolution original.,evidence.switching.sw5-port-security-verification
+00_book/figures/report/diagrams/switching-lab/1_4.png,switch-port-inventory-editor-1-4,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw3-lacp-inventory-reloaded.png,sw3-lacp-inventory-reloaded.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw3-lacp-inventory-reloaded
+00_book/figures/report/diagrams/switching-lab/1_5.png,switch-port-inventory-editor-1-5,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw1-lacp-inventory-reloaded.png,sw1-lacp-inventory-reloaded.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw1-lacp-inventory-reloaded
+00_book/figures/report/diagrams/switching-lab/1_6.png,switch-port-inventory-editor-1-6,No active document context in Phase 1; inspect original/preview.,,,Hold current source until subject/state distinction is verified.,low,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.; No verified semantic state difference from the visually similar capture. Hold filename/path rather than append arbitrary sequence. Resolve pair first; do not move this row.",evidence.switching.sw3-lacp-later-capture
+00_book/figures/report/diagrams/switching-lab/1_7.png,switch-port-inventory-editor-1-7,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw2-pagp-synchronized.png,sw2-pagp-synchronized.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw2-pagp-synchronized
+00_book/figures/report/diagrams/switching-lab/1_8.png,switch-port-inventory-editor-1-8,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw4-pagp-synchronized.png,sw4-pagp-synchronized.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw4-pagp-synchronized
+00_book/figures/report/diagrams/switching-lab/1_9.png,switch-port-inventory-editor-1-9,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/switching-lab/sw1-port-mode-editing.png,sw1-port-mode-editing.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.; Switching semantic labels use inspected state/device; review against full-resolution original.",evidence.switching.sw1-port-mode-editing
+00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png,Giao diện quản lý Syslog Server trước khi tạo chính sách gửi log,"00_report/contents/09_thu_nghiem_danh_gia.typ:575 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png"", width: 92%),
+  caption: [Giao diện quản lý Syslog Server trước khi tạo chính sách gửi log],
+) <fig-k4-syslog-config>
+
+@fig-k4-syslog-config thể hiện màn hình quản lý đích Syslog. Tại đây, người dùng có thể tạo cấu hình đơn lẻ, kiểm duyệt lệnh bằng *View & Push* hoặc áp dụng chính sách theo nhóm bằng *Syslog Group*.
+",documentation_assets/evidence/ui-capture/original/syslog-lab/configuration.png,configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.configuration
+00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png,Bước Hosts của Syslog Group: chọn 4 thiết bị cùng tham gia chính sách gửi log,"00_report/contents/09_thu_nghiem_danh_gia.typ:586 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png"", width: 78%),
+  caption: [Bước Hosts của Syslog Group: chọn 4 thiết bị cùng tham gia chính sách gửi log],
+) <fig-k4-syslog-hosts>
+
+Việc nhóm nhiều thiết bị trong một quy trình giúp giảm thao tác lặp lại và duy trì thống nhất địa chỉ máy chủ, giao thức vận chuyển cùng mức độ nghiêm trọng cho toàn bộ nhóm.
+",documentation_assets/evidence/ui-capture/original/syslog-lab/select-hosts.png,select-hosts.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.select-hosts
+00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png,Lựa chọn Source Interface cho từng Router và Switch trong Syslog Group,"00_report/contents/09_thu_nghiem_danh_gia.typ:597 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png"", width: 78%),
+  caption: [Lựa chọn Source Interface cho từng Router và Switch trong Syslog Group],
+) <fig-k4-syslog-source>
+
+Cấu hình `logging source-interface` tạo địa chỉ nguồn ổn định cho các bản tin Syslog, nhờ đó CAMS có thể ánh xạ bản tin đến đúng thiết bị trong danh sách quản lý.
+",documentation_assets/evidence/ui-capture/original/syslog-lab/source-interfaces.png,source-interfaces.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.source-interfaces
+00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png,Thiết lập đích Syslog 192.168.122.1:5514/UDP và mức severity Notifications,"00_report/contents/09_thu_nghiem_danh_gia.typ:608 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png"", width: 78%),
+  caption: [Thiết lập đích Syslog 192.168.122.1:5514/UDP và mức severity Notifications],
+) <fig-k4-syslog-policy>
+
+Với mức `notifications`, thiết bị gửi các bản tin có severity từ 0 đến 5 tới máy chủ Syslog. Phạm vi này phù hợp với bài thử vì bao gồm sự kiện thay đổi trạng thái cổng, thông báo cấu hình và các bản tin do người quản trị chủ động tạo.
+",documentation_assets/evidence/ui-capture/original/syslog-lab/policy.png,policy.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.policy
+00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png,Cửa sổ View & Push Syslog Group tổng hợp lệnh cho 4 thiết bị trước khi thực thi,"00_report/contents/09_thu_nghiem_danh_gia.typ:619 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png"", width: 82%),
+  caption: [Cửa sổ View & Push Syslog Group tổng hợp lệnh cho 4 thiết bị trước khi thực thi],
+) <fig-k4-syslog-preview>
+
+Với router, cửa sổ trong @fig-k4-syslog-preview hiển thị các lệnh tiêu biểu:
+```text",documentation_assets/evidence/ui-capture/original/syslog-lab/config-preview.png,config-preview.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.config-preview
+00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png,Xác minh cấu hình Syslog trên Router R1,"00_report/contents/09_thu_nghiem_danh_gia.typ:638 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Router R1],
+) <fig-k4-r1-verify>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png"", width: 88%),",documentation_assets/evidence/terminal/original/syslog-lab/r1-verify.png,r1-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.syslog.r1-verify
+00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png,Xác minh cấu hình Syslog trên Router R2,"00_report/contents/09_thu_nghiem_danh_gia.typ:643 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Router R2],
+) <fig-k4-r2-verify>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png"", width: 88%),",documentation_assets/evidence/terminal/original/syslog-lab/r2-verify.png,r2-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.syslog.r2-verify
+00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png,Xác minh cấu hình Syslog trên Router R3,"00_report/contents/09_thu_nghiem_danh_gia.typ:648 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Router R3],
+) <fig-k4-r3-verify>
+
+Trên switch `SW1`, cấu hình tương tự nhưng sử dụng `Vlan1` làm cổng nguồn.
+",documentation_assets/evidence/terminal/original/syslog-lab/r3-verify.png,r3-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.syslog.r3-verify
+00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png,Xác minh cấu hình Syslog trên Switch SW1 với Source Interface Vlan1,"00_report/contents/09_thu_nghiem_danh_gia.typ:655 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Switch SW1 với Source Interface Vlan1],
+) <fig-k4-sw1-verify>
+
+Kết quả xác minh cho thấy cấu hình trên thiết bị khớp với nội dung đã xem trước. Qua đó, quy trình *Syslog Group $arrow$ View & Push $arrow$ Verify* được xác nhận hoạt động trên cả router và switch.
+",documentation_assets/evidence/terminal/original/syslog-lab/sw1-verify.png,sw1-verify.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.syslog.sw1-verify
+00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png,Màn hình System Logs trước khi khởi động Syslog Listener,"00_report/contents/09_thu_nghiem_danh_gia.typ:666 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png"", width: 94%),
+  caption: [Màn hình System Logs trước khi khởi động Syslog Listener],
+) <fig-k4-listener-before>
+
+Sau khi nhấn *Start Listener*, dịch vụ chuyển sang trạng thái *Listener active* và lắng nghe trên `0.0.0.0:5514/UDP+TCP`. Khi các thiết bị phát sinh sự kiện, các bản tin được đưa trực tiếp vào bảng System Logs theo thời gian thực.
+",documentation_assets/evidence/ui-capture/original/syslog-lab/listener-before-start.png,listener-before-start.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.listener-before-start
+00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png,Syslog Listener đang hoạt động và tiếp nhận bản tin từ các thiết bị mạng,"00_report/contents/09_thu_nghiem_danh_gia.typ:673 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png"", width: 94%),
+  caption: [Syslog Listener đang hoạt động và tiếp nhận bản tin từ các thiết bị mạng],
+) <fig-k4-listener-active>
+
+Tại thời điểm ghi nhận trong @fig-k4-listener-active, hệ thống đã tiếp nhận `245` bản tin. Mỗi bản tin được phân tách thành các trường `Time`, `Host`, `Source IP`, `Facility/Severity`, `Mnemonic` và `Message`. Các sự kiện `LINK`, `LINEPROTO` và `SYS` được phân loại theo nguồn gửi và mã sự kiện.
+",documentation_assets/evidence/ui-capture/original/syslog-lab/listener-receiving.png,listener-receiving.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.listener-receiving
+00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png,Cửa sổ chi tiết một bản tin Syslog sau khi được phân tích,"00_report/contents/09_thu_nghiem_danh_gia.typ:684 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png"", width: 68%),
+  caption: [Cửa sổ chi tiết một bản tin Syslog sau khi được phân tích],
+) <fig-k4-message-detail>
+
+Phần *Raw message* vẫn được giữ nguyên để phục vụ đối chiếu khi cần:
+```text",documentation_assets/evidence/ui-capture/original/syslog-lab/message-detail.png,message-detail.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.message-detail
+00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png,Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R1,"00_report/contents/09_thu_nghiem_danh_gia.typ:700 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R1],
+) <fig-k4-r1-device-logs>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png"", width: 94%),",documentation_assets/evidence/syslog/original/syslog-lab/r1-device-logs.png,r1-device-logs.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,evidence.syslog.r1-device-logs
+00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png,Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R2,"00_report/contents/09_thu_nghiem_danh_gia.typ:705 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R2],
+) <fig-k4-r2-device-logs>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png"", width: 94%),",documentation_assets/evidence/syslog/original/syslog-lab/r2-device-logs.png,r2-device-logs.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,evidence.syslog.r2-device-logs
+00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png,Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R3,"00_report/contents/09_thu_nghiem_danh_gia.typ:710 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R3],
+) <fig-k4-r3-device-logs>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png"", width: 94%),",documentation_assets/evidence/syslog/original/syslog-lab/r3-device-logs.png,r3-device-logs.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,evidence.syslog.r3-device-logs
+00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png,Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Switch SW1,"00_report/contents/09_thu_nghiem_danh_gia.typ:715 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Switch SW1],
+) <fig-k4-sw1-device-logs>
+
+Từ @fig-k4-r1-device-logs đến @fig-k4-sw1-device-logs trình bày chuỗi sự kiện ghi nhận trên bốn thiết bị. Khi thực hiện `shutdown` hoặc `no shutdown`, Cisco IOS phát sinh thông báo về trạng thái liên kết và giao thức đường truyền; các bản tin `USERLOG_*` đánh dấu từng chu kỳ thử nghiệm. Những sự kiện tương ứng xuất hiện trên *System Logs* và được gắn đúng nguồn gửi.
+",documentation_assets/evidence/syslog/original/syslog-lab/sw1-device-logs.png,sw1-device-logs.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,evidence.syslog.sw1-device-logs
+00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png,"Cấu hình mức cảnh báo, tài khoản SMTP và người nhận trên Email Alerts","00_report/contents/09_thu_nghiem_danh_gia.typ:726 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png"", width: 96%),
+  caption: [Cấu hình mức cảnh báo, tài khoản SMTP và người nhận trên Email Alerts],
+) <fig-k4-email-settings>
+
+@fig-k4-email-settings cho thấy App Password chỉ xuất hiện dưới dạng ký tự che khuất. CAMS lưu giá trị này ở dạng mã hóa và không trả nội dung bí mật về giao diện. Nút *Send test email* cho phép kiểm tra cấu hình trước khi bật luồng cảnh báo thực tế.
+",documentation_assets/evidence/ui-capture/original/syslog-lab/email-alert-settings.png,email-alert-settings.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.syslog.email-alert-settings
+00_book/figures/report/diagrams/syslog-lab/18-email-critical.png,Email cảnh báo mức Critical cho sự kiện `%SYS-2-MALLOCFAIL`,"00_report/contents/09_thu_nghiem_danh_gia.typ:743 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/18-email-critical.png"", width: 72%),
+  caption: [Email cảnh báo mức Critical cho sự kiện `%SYS-2-MALLOCFAIL`],
+) <fig-k4-email-critical>
+
+Thư mức Warning tại @fig-k4-email-warning giữ cùng cấu trúc nhưng thay đổi màu, nhãn, khuyến nghị xử lý và dữ liệu thiết bị theo severity. Mỗi thư chứa tên thiết bị, địa chỉ nguồn, thời điểm, số thứ tự, mã Cisco, giao thức, PRI/facility, nội dung đã phân tích và bản tin gốc.
+",documentation_assets/evidence/external-tools/original/syslog-lab/email-critical.png,email-critical.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Phase 2 taxonomy overlay: email evidence belongs to external-tools, not device verification.",evidence.syslog.email-critical
+00_book/figures/report/diagrams/syslog-lab/19-email-warning.png,Email cảnh báo mức Warning cho sự kiện `%PM-4-ERR_DISABLE`,"00_report/contents/09_thu_nghiem_danh_gia.typ:750 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/19-email-warning.png"", width: 72%),
+  caption: [Email cảnh báo mức Warning cho sự kiện `%PM-4-ERR_DISABLE`],
+) <fig-k4-email-warning>
+
+Kết quả đầu ra của chương trình ghi nhận `2` thư đã được chuyển tới máy chủ SMTP để gửi đến địa chỉ nhận đã cấu hình. Phép thử xác nhận đường gửi SMTP và định dạng thư cho hai mức cảnh báo; việc đánh giá độ trễ, giới hạn lưu lượng hoặc tỷ lệ chuyển thư ở quy mô lớn chưa thuộc phạm vi kịch bản này.
+",documentation_assets/evidence/external-tools/original/syslog-lab/email-warning.png,email-warning.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Phase 2 taxonomy overlay: email evidence belongs to external-tools, not device verification.",evidence.syslog.email-warning
+00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png,Sơ đồ Kịch bản 4: Thu thập Syslog tập trung,"00_report/contents/09_thu_nghiem_danh_gia.typ:528 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png"", width: 92%),
+  caption: [Sơ đồ Kịch bản 4: Thu thập Syslog tập trung],
+) <fig-topo-scenario-4>
+
+Nguồn gửi và chính sách Syslog được trình bày trong bảng quy hoạch dưới đây.
+",documentation_assets/diagrams/lab-topology/syslog/centralized-logging-raster.png,centralized-logging-raster.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.lab-topology.syslog.centralized-logging-raster
+00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology.svg,syslog-lab-topology,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/lab-topology/syslog/centralized-logging-vector.svg,centralized-logging-vector.svg,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Authored SVG describes existing source format; exporter/author identity not established.; Vector/raster pair must remain separate; do not establish derivative relationship by name.,diagrams.lab-topology.syslog.centralized-logging-vector
+00_book/figures/report/diagrams/vlan.png,vlan,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/network/vlan-trunk-segmentation.png,vlan-trunk-segmentation.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,diagrams.network.vlan-trunk-segmentation
+00_book/figures/report/misc/cams-screenshot-2026-09-13-18-17-17.png,cams-screenshot-2026-09-13-18-17-17,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/project-format/project-package-json-inspection.png,project-package-json-inspection.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.project-format.project-package-json-inspection
+00_book/figures/report/misc/xxd-ntp.png,"Phần đầu tệp dự án được bảo vệ, quan sát bằng công cụ xxd","00_report/contents/08_xay_dung_phan_mem.typ:131 
+#figure(
+  image(""/00_book/figures/report/misc/xxd-ntp.png"", width: 100%),
+  caption: [Phần đầu tệp dự án được bảo vệ, quan sát bằng công cụ xxd],
+) <fig-cams-encrypted-project>
+
+@fig-cams-encrypted-project cho thấy dấu nhận dạng `NTPAES1` và phần thông tin đầu tệp, gồm thuật toán AES-256-GCM, hàm dẫn xuất khóa Argon2id cùng các tham số liên quan. Phần thông tin này có thể đọc được để phục vụ xử lý tệp; ảnh minh họa cấu trúc lưu trữ, không thay thế kiểm thử mã hóa và giải mã. Chương 5 trình bày các kịch bản kiểm chứng chức năng.",documentation_assets/evidence/terminal/original/project-format/encrypted-package-hex-header.png,encrypted-package-hex-header.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.project-format.encrypted-package-hex-header
+00_report/Tai_lieu_lab/LAB1/1.png,lab-instructions-page-1,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/lab-overview-and-objectives.png,lab-overview-and-objectives.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.lab-overview-and-objectives
+00_report/Tai_lieu_lab/LAB1/10.png,lab-instructions-page-10,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/interface-lifecycle-and-validation.png,interface-lifecycle-and-validation.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.interface-lifecycle-and-validation
+00_report/Tai_lieu_lab/LAB1/11.png,lab-instructions-page-11,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/cli-output-and-result-analysis.png,cli-output-and-result-analysis.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.cli-output-and-result-analysis
+00_report/Tai_lieu_lab/LAB1/12.png,lab-instructions-page-12,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/results-summary.png,results-summary.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.results-summary
+00_report/Tai_lieu_lab/LAB1/2.png,lab-instructions-page-2,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/device-access-and-basic-configuration.png,device-access-and-basic-configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.device-access-and-basic-configuration
+00_report/Tai_lieu_lab/LAB1/3.png,lab-instructions-page-3,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/loopback-and-log-tests.png,loopback-and-log-tests.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.loopback-and-log-tests
+00_report/Tai_lieu_lab/LAB1/4.png,lab-instructions-page-4,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/interface-configuration-procedure.png,interface-configuration-procedure.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.interface-configuration-procedure
+00_report/Tai_lieu_lab/LAB1/5.png,lab-instructions-page-5,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/interface-verification-output.png,interface-verification-output.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.interface-verification-output
+00_report/Tai_lieu_lab/LAB1/6.png,lab-instructions-page-6,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/dhcp-pool-and-acl-procedure.png,dhcp-pool-and-acl-procedure.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.dhcp-pool-and-acl-procedure
+00_report/Tai_lieu_lab/LAB1/7.png,lab-instructions-page-7,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/service-and-system-log-analysis.png,service-and-system-log-analysis.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.service-and-system-log-analysis
+00_report/Tai_lieu_lab/LAB1/8.png,lab-instructions-page-8,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/configuration-checks.png,configuration-checks.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.configuration-checks
+00_report/Tai_lieu_lab/LAB1/9.png,lab-instructions-page-9,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/source-material/lab1/validation-procedure-continuation.png,validation-procedure-continuation.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,low,Raw document-page content label is provisional; verify heading and source order before assigning final name; never treat orphan as garbage.,source-material.lab1.validation-procedure-continuation
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/1.png,lab-router-switch-management-topology,No active document context in Phase 1; inspect original/preview.,documentation_assets/diagrams/lab-topology/lab1/router-switch-management.png,router-switch-management.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,high,Subject/source evidence supports domain and semantic filename; preserves unique logical asset.,diagrams.lab-topology.lab1.router-switch-management
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 10.png,r2-interface-ip-configuration-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/lab1/r2-interface-ip-configuration.png,r2-interface-ip-configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.lab1.r2-interface-ip-configuration
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 11.png,l2-security-static-mac-editor,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/static-mac-editor.png,static-mac-editor.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.static-mac-editor
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 12.png,r2-interface-status-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/lab1/r2-interface-status.png,r2-interface-status.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.lab1.r2-interface-status
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 13.png,system-logs-filtered-messages,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/system-logs-filtered.png,system-logs-filtered.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.system-logs-filtered
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 14.png,l2-security-view-push-dialog,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/l2-security-view-push-dialog.png,l2-security-view-push-dialog.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.l2-security-view-push-dialog
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 2.png,router-interface-editor,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/router-interface-editor.png,router-interface-editor.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.router-interface-editor
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 3.png,dhcp-pool-editor,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/dhcp-pool-editor.png,dhcp-pool-editor.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.dhcp-pool-editor
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 4.png,acl-standard-rule-editor,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/acl-standard-rule-editor.png,acl-standard-rule-editor.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.acl-standard-rule-editor
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 5.png,l2-security-port-security-editor,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/port-security-editor.png,port-security-editor.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.port-security-editor
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 6.png,l2-security-editor-save-result,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/l2-security-save-result.png,l2-security-save-result.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.l2-security-save-result
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 7.png,system-logs-receiving-messages,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/system-logs-receiving.png,system-logs-receiving.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.system-logs-receiving
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 8.png,l2-security-view-push-overlay,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/l2-security-view-push-overlay.png,l2-security-view-push-overlay.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.l2-security-view-push-overlay
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 9.png,r1-interface-ip-configuration-verification,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/terminal/original/lab1/r1-interface-ip-configuration.png,r1-interface-ip-configuration.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,Preserve original experimental/capture bytes; text reconstruction cannot reproduce experiment.,evidence.lab1.r1-interface-ip-configuration
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy.png,router-interface-physical-settings,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/router-physical-interface-settings.png,router-physical-interface-settings.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.router-physical-interface-settings
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image.png,switch-ports-inventory,No active document context in Phase 1; inspect original/preview.,documentation_assets/evidence/ui-capture/original/lab1/switch-port-inventory.png,switch-port-inventory.png,Prefer verified device/state qualifier over sequence suffix; retain proposed extension.,medium,"Lab capture provenance probable, not chain-of-custody confirmed; preserve original regardless of later recreation.",evidence.lab1.switch-port-inventory

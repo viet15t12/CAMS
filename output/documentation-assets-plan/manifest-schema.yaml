@@ -1,0 +1,337 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: CAMS documentation asset manifest — Phase 2 design
+description: JSON Schema serialized as YAML. Contract/sample only; no canonical store
+  exists. Enforce cross-record/path/hash invariants in future validator.
+type: object
+additionalProperties: false
+required:
+- manifest_version
+- assets
+properties:
+  manifest_version:
+    const: 1
+  assets:
+    type: array
+    items:
+      $ref: '#/$defs/asset'
+$defs:
+  asset:
+    type: object
+    additionalProperties: false
+    required:
+    - id
+    - path
+    - media_type
+    - asset_class
+    - domain
+    - subject
+    - source_kind
+    - provenance
+    - provenance_confidence
+    - canonical
+    - original_evidence
+    - derived_from
+    - recreates_evidence_asset
+    - reconstruction_method
+    - reconstruction_confidence
+    - preferred_for_presentation
+    - reproducible
+    - generator
+    - generator_command
+    - used_by
+    - targets
+    - mkdocs_stage
+    - mkdocs_stage_path
+    - sha256
+    - status
+    - notes
+    - planned
+    - legacy_path
+    - preserve_original
+    properties:
+      id:
+        type: string
+        pattern: ^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$
+      path:
+        type: string
+        pattern: ^documentation_assets/(ui|evidence|diagrams|illustrations|branding|misc)/[a-z0-9/.-]+$
+      media_type:
+        enum:
+        - image/png
+        - image/jpeg
+        - image/webp
+        - image/gif
+        - image/svg+xml
+      asset_class:
+        enum:
+        - ui
+        - terminal-evidence
+        - device-verification
+        - syslog-evidence
+        - network-diagram
+        - architecture-diagram
+        - workflow-diagram
+        - database-diagram
+        - illustration
+        - logo-icon
+        - derivative-raster
+        - misc
+        - unknown
+      domain:
+        type: string
+      subject:
+        type: string
+      source_kind:
+        enum:
+        - docshot
+        - manual-cams-screenshot
+        - terminal-capture
+        - external-tool-capture
+        - syslog-capture
+        - generated-svg
+        - authored-svg
+        - raster-derivative
+        - reconstructed-terminal
+        - branding
+        - unknown
+      provenance:
+        type: object
+        required:
+        - assessment
+        - evidence
+        properties:
+          assessment:
+            type: string
+          evidence:
+            type: array
+            items:
+              type: string
+          chain_of_custody_verified:
+            type: boolean
+        additionalProperties: false
+      provenance_confidence:
+        enum:
+        - high
+        - medium
+        - low
+      canonical:
+        type: boolean
+      original_evidence:
+        type: boolean
+      derived_from:
+        type:
+        - string
+        - 'null'
+        pattern: ^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$
+      recreates_evidence_asset:
+        type:
+        - string
+        - 'null'
+        pattern: ^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$
+      reconstruction_method: &id001
+        type:
+        - string
+        - 'null'
+      reconstruction_confidence:
+        enum:
+        - high
+        - medium
+        - low
+        - null
+      preferred_for_presentation:
+        type: boolean
+      reproducible:
+        enum:
+        - reproducible-now
+        - reproducible-with-existing-framework
+        - requires-new-docshot-workflow
+        - likely-not-reproducible
+        - unknown
+      generator:
+        type:
+        - object
+        - 'null'
+        properties:
+          module:
+            type:
+            - string
+            - 'null'
+          registered_workflow:
+            type:
+            - string
+            - 'null'
+          planned_family:
+            type:
+            - string
+            - 'null'
+          destination_contract:
+            type: string
+        required:
+        - module
+        - registered_workflow
+        - planned_family
+        - destination_contract
+        additionalProperties: false
+      generator_command: *id001
+      used_by:
+        type: array
+        items:
+          type: object
+          required:
+          - source_document
+          - line
+          - reference_target
+          properties:
+            source_document:
+              type: string
+            line:
+              type: integer
+              minimum: 1
+            reference_target:
+              enum:
+              - book-typst
+              - book-mkdocs
+              - report-typst
+              - lab-source
+              - code
+              - config
+              - other
+            old_reference:
+              type: string
+            resolution:
+              type: string
+          additionalProperties: false
+      targets:
+        type: array
+        uniqueItems: true
+        items:
+          enum:
+          - book-typst
+          - book-mkdocs
+          - report-typst
+          - lab-source
+          - code
+          - config
+          - other
+      mkdocs_stage:
+        type: boolean
+      mkdocs_stage_path:
+        type:
+        - string
+        - 'null'
+        pattern: ^00_book/assets/[a-z0-9/.-]+$
+      sha256:
+        type:
+        - string
+        - 'null'
+        pattern: ^[0-9a-f]{64}$
+      status:
+        enum:
+        - active
+        - preserve-original
+        - replacement-candidate
+        - superseded
+        - orphan-review
+        - archive-candidate
+        - unresolved
+      notes:
+        type: string
+      planned:
+        type: boolean
+      legacy_path:
+        type:
+        - string
+        - 'null'
+      preserve_original:
+        type: boolean
+    allOf:
+    - if:
+        properties:
+          original_evidence:
+            const: true
+      then:
+        properties:
+          source_kind:
+            enum:
+            - manual-cams-screenshot
+            - terminal-capture
+            - external-tool-capture
+            - syslog-capture
+            - unknown
+          recreates_evidence_asset:
+            type: 'null'
+          reconstruction_method:
+            type: 'null'
+          preserve_original:
+            const: true
+          path:
+            pattern: ^documentation_assets/evidence/
+    - if:
+        properties:
+          source_kind:
+            const: reconstructed-terminal
+      then:
+        properties:
+          derived_from:
+            type: string
+          original_evidence:
+            const: false
+          reconstruction_method:
+            type: string
+            minLength: 1
+          reconstruction_confidence:
+            enum:
+            - high
+            - medium
+            - low
+          path:
+            pattern: ^documentation_assets/evidence/terminal/reconstructed/
+    - if:
+        properties:
+          recreates_evidence_asset:
+            type: string
+      then:
+        properties:
+          source_kind:
+            const: docshot
+          original_evidence:
+            const: false
+          path:
+            pattern: ^documentation_assets/ui/docshot/lab-recreation/
+    - if:
+        properties:
+          mkdocs_stage:
+            const: true
+      then:
+        properties:
+          mkdocs_stage_path:
+            type: string
+    - if:
+        properties:
+          targets:
+            contains:
+              const: book-mkdocs
+      then:
+        properties:
+          mkdocs_stage:
+            const: true
+          mkdocs_stage_path:
+            type: string
+    - if:
+        properties:
+          planned:
+            const: false
+      then:
+        properties:
+          sha256:
+            type: string
+    - if:
+        properties:
+          sha256:
+            type: 'null'
+      then:
+        properties:
+          planned:
+            const: true
+          status:
+            const: unresolved

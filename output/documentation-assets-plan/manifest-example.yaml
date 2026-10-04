@@ -1,0 +1,381 @@
+# DESIGN EXAMPLES ONLY. No asset file is generated or migrated.
+# planned=true includes existing-byte path proposals; null SHA identifies hypothetical assets.
+manifest_version: 1
+assets:
+- id: ui.core.workspace-overview
+  path: documentation_assets/ui/docshot/core/workspace-overview.png
+  media_type: image/png
+  asset_class: ui
+  domain: core
+  subject: workspace-overview
+  source_kind: docshot
+  provenance:
+    assessment: docshot-confirmed
+    evidence:
+    - 'Exact current generator filename: docshots/chapter03.py; docshots/shots.py
+      registry; tests/test_docshots_chapter03.py. Filename confirms supported shot,
+      not byte-for-byte historical generation. CLI destination mismatch: docshots/cli.py:20-21,81-84.'
+    chain_of_custody_verified: false
+  provenance_confidence: high
+  canonical: true
+  original_evidence: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  preferred_for_presentation: true
+  reproducible: reproducible-now
+  generator:
+    module: docshots/chapter03.py
+    registered_workflow: chapter-03
+    planned_family: null
+    destination_contract: future canonical output map; current CLI still uses legacy
+      destinations
+  generator_command: uv run python scripts/docshots.py chapter-03
+  used_by:
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 16
+    reference_target: book-typst
+    old_reference: figures/gui/chapter-03/01-workspace-overview.png
+    resolution: resolved
+  - source_document: 00_report/contents/08_xay_dung_phan_mem.typ
+    line: 19
+    reference_target: report-typst
+    old_reference: /00_book/figures/gui/chapter-03/01-workspace-overview.png
+    resolution: resolved
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 22
+    reference_target: book-mkdocs
+    old_reference: ../../figures/gui/chapter-03/01-workspace-overview.png
+    resolution: broken-local
+  - source_document: 00_report/README.md
+    line: 31
+    reference_target: other
+    old_reference: ../00_book/figures/gui/chapter-03/01-workspace-overview.png
+    resolution: mention-only
+  - source_document: 00_report/README.md
+    line: 58
+    reference_target: other
+    old_reference: /00_book/figures/gui/chapter-03/01-workspace-overview.png
+    resolution: mention-only
+  - source_document: 00_report/config/images.typ
+    line: 3
+    reference_target: report-typst
+    old_reference: /00_book/figures/gui/chapter-03/01-workspace-overview.png
+    resolution: mention-only
+  - source_document: MKDOCS.md
+    line: 27
+    reference_target: other
+    old_reference: ../figures/gui/chapter-03/01-workspace-overview.png
+    resolution: broken-local
+  - source_document: docshots/shots.py
+    line: 55
+    reference_target: code
+    old_reference: 01-workspace-overview.png
+    resolution: generator-output-legacy-destination
+  targets:
+  - book-mkdocs
+  - book-typst
+  - report-typst
+  mkdocs_stage: true
+  mkdocs_stage_path: 00_book/assets/ui/docshot/core/workspace-overview.png
+  sha256: 4c060f15972dc8484bd445882a9a0e07b664e09cc42bd65873af52bc7b1e420f
+  status: active
+  notes: Proposed final record for existing bytes; path does not yet exist. Subject/source
+    evidence supports domain and semantic filename; preserves unique logical asset.
+  planned: true
+  legacy_path: 00_book/figures/gui/chapter-03/01-workspace-overview.png
+  preserve_original: false
+- id: ui.routing.ospf.networks
+  path: documentation_assets/ui/legacy/routing/ospf/networks.png
+  media_type: image/png
+  asset_class: ui
+  domain: routing/ospf
+  subject: networks
+  source_kind: unknown
+  provenance:
+    assessment: unknown
+    evidence:
+    - CAMS UI visibly matches production QML; docs describe subject. No exact registered
+      filename/workflow. Documentation-like styling alone does not establish docshot
+      provenance.
+    chain_of_custody_verified: false
+  provenance_confidence: low
+  canonical: true
+  original_evidence: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  preferred_for_presentation: true
+  reproducible: reproducible-with-existing-framework
+  generator: null
+  generator_command: null
+  used_by:
+  - source_document: 00_book/contents/06_cau_hinh_routing.typ
+    line: 65
+    reference_target: book-typst
+    old_reference: figures/gui/chapter-06/04-ospf-networks.png
+    resolution: resolved
+  - source_document: 00_book/DOC/06_cau_hinh_routing.md
+    line: 87
+    reference_target: book-mkdocs
+    old_reference: ../../figures/gui/chapter-06/04-ospf-networks.png
+    resolution: broken-local
+  targets:
+  - book-mkdocs
+  - book-typst
+  mkdocs_stage: true
+  mkdocs_stage_path: 00_book/assets/ui/legacy/routing/ospf/networks.png
+  sha256: 8f2cd52023ee1d9c90e84af2d07be0b2703ddbe26096d28edae3aea7c0796631
+  status: replacement-candidate
+  notes: Proposed final record for existing bytes; path does not yet exist. Historical
+    generator unknown; legacy placement is documentation role, not assertion of manual
+    capture.
+  planned: true
+  legacy_path: 00_book/figures/gui/chapter-06/04-ospf-networks.png
+  preserve_original: false
+- id: evidence.routing-ospf.routing-group-networks
+  path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png
+  media_type: image/png
+  asset_class: ui
+  domain: routing-ospf-lab
+  subject: routing-group-networks
+  source_kind: manual-cams-screenshot
+  provenance:
+    assessment: manual-screenshot-probable
+    evidence:
+    - Visible OS window decorations/desktop, live lab device state or screenshot crop;
+      report lab captions; no matching registered workflow in docshots/cli.py or shot
+      registry.
+    chain_of_custody_verified: false
+  provenance_confidence: medium
+  canonical: true
+  original_evidence: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  preferred_for_presentation: false
+  reproducible: requires-new-docshot-workflow
+  generator: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
+    line: 204
+    reference_target: report-typst
+    old_reference: /00_book/figures/report/diagrams/routing-ospf-lab/11.png
+    resolution: resolved
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  sha256: 20a3ce2f004c74f6f5abcc65b7467d0ab15de9483ab800926fd3c364c80b3fff
+  status: preserve-original
+  notes: Proposed final record for existing bytes; path does not yet exist. Lab capture
+    provenance probable, not chain-of-custody confirmed; preserve original regardless
+    of later recreation.
+  planned: true
+  legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/11.png
+  preserve_original: true
+- id: ui.lab-recreation.routing-ospf.routing-group-networks
+  path: documentation_assets/ui/docshot/lab-recreation/routing-ospf/routing-group-networks.png
+  media_type: image/png
+  asset_class: ui
+  domain: routing-ospf-lab
+  subject: routing-group-networks
+  source_kind: docshot
+  provenance:
+    assessment: hypothetical presentation recreation; not created and not original
+      evidence
+    evidence:
+    - Phase 2 policy example only
+    chain_of_custody_verified: false
+  provenance_confidence: low
+  canonical: true
+  original_evidence: false
+  derived_from: null
+  recreates_evidence_asset: evidence.routing-ospf.routing-group-networks
+  reconstruction_method: null
+  reconstruction_confidence: null
+  preferred_for_presentation: true
+  reproducible: requires-new-docshot-workflow
+  generator:
+    module: null
+    registered_workflow: null
+    planned_family: lab-recreation/routing-ospf
+    destination_contract: proposed canonical path only; workflow does not exist
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  sha256: null
+  status: unresolved
+  notes: 'HYPOTHETICAL: no file, generator or runtime command. Assign active targets/presentation
+    preference only after state-equivalence approval and successful rendering. preferred_for_presentation=true
+    demonstrates intended future preference, not current use.'
+  planned: true
+  legacy_path: null
+  preserve_original: false
+- id: evidence.routing-ospf.r2-ospf-routing-verification
+  path: documentation_assets/evidence/terminal/original/routing-ospf-lab/r2-ospf-routing-verification.png
+  media_type: image/png
+  asset_class: terminal-evidence
+  domain: routing-ospf-lab
+  subject: r2-ospf-routing-verification
+  source_kind: terminal-capture
+  provenance:
+    assessment: existing source; author/exporter not established
+    evidence:
+    - Visual inspection of full inventory contact sheets; source/caption context cross-checked.
+      Dense output; inspect original at full resolution before reconstruction.
+    chain_of_custody_verified: false
+  provenance_confidence: medium
+  canonical: true
+  original_evidence: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  preferred_for_presentation: true
+  reproducible: unknown
+  generator: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
+    line: 286
+    reference_target: report-typst
+    old_reference: /00_book/figures/report/diagrams/routing-ospf-lab/18.png
+    resolution: resolved
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  sha256: 83aecc39dce6a550f5163fdd43d394ae2f97d3874e324bf771552d939a312e28
+  status: preserve-original
+  notes: Proposed final record for existing bytes; path does not yet exist. Preserve
+    original experimental/capture bytes; text reconstruction cannot reproduce experiment.
+  planned: true
+  legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/18.png
+  preserve_original: true
+- id: reconstruction.routing-ospf.r2-routing-verification
+  path: documentation_assets/evidence/terminal/reconstructed/routing-ospf-lab/r2-ospf-routing-verification.png
+  media_type: image/png
+  asset_class: terminal-evidence
+  domain: routing-ospf-lab
+  subject: r2-ospf-routing-verification
+  source_kind: reconstructed-terminal
+  provenance:
+    assessment: hypothetical text presentation derivative, not an experiment replay
+    evidence:
+    - Phase 2 policy example only
+    chain_of_custody_verified: false
+  provenance_confidence: low
+  canonical: false
+  original_evidence: false
+  derived_from: evidence.routing-ospf.r2-ospf-routing-verification
+  recreates_evidence_asset: null
+  reconstruction_method: Planned verbatim transcription and static terminal rendering;
+    retain commands/data, flag every uncertain glyph; never invent missing output.
+  reconstruction_confidence: low
+  preferred_for_presentation: true
+  reproducible: unknown
+  generator: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  sha256: null
+  status: unresolved
+  notes: 'HYPOTHETICAL: no reconstruction created. Low confidence until original-vs-transcript
+    review; cannot replace original evidence.'
+  planned: true
+  legacy_path: null
+  preserve_original: false
+- id: diagrams.architecture.cams-layered-system
+  path: documentation_assets/diagrams/architecture/cams-layered-system.svg
+  media_type: image/svg+xml
+  asset_class: architecture-diagram
+  domain: diagrams/architecture
+  subject: cams-layered-system
+  source_kind: authored-svg
+  provenance:
+    assessment: existing source; author/exporter not established
+    evidence:
+    - Visual inspection of full inventory contact sheets; source/caption context cross-checked.
+    chain_of_custody_verified: false
+  provenance_confidence: low
+  canonical: true
+  original_evidence: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  preferred_for_presentation: true
+  reproducible: unknown
+  generator: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/07_phan_tich_thiet_ke.typ
+    line: 42
+    reference_target: report-typst
+    old_reference: /00_book/figures/report/diagrams/22_architecture_overview.svg
+    resolution: resolved
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  sha256: d106f9418af8eb1cfbd4f94c49c5a1a473ab0c33191b7983db7e0bb102b3ade8
+  status: active
+  notes: Proposed final record for existing bytes; path does not yet exist. Authored
+    SVG describes existing source format; exporter/author identity not established.
+  planned: true
+  legacy_path: 00_book/figures/report/diagrams/22_architecture_overview.svg
+  preserve_original: false
+- id: branding.logos.cams
+  path: documentation_assets/branding/logos/cams.svg
+  media_type: image/svg+xml
+  asset_class: logo-icon
+  domain: branding/logos
+  subject: cams
+  source_kind: branding
+  provenance:
+    assessment: existing source; author/exporter not established
+    evidence:
+    - Visual inspection of full inventory contact sheets; source/caption context cross-checked.
+    chain_of_custody_verified: false
+  provenance_confidence: low
+  canonical: true
+  original_evidence: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  preferred_for_presentation: true
+  reproducible: unknown
+  generator: null
+  generator_command: null
+  used_by:
+  - source_document: mkdocs.yml
+    line: 48
+    reference_target: config
+    old_reference: figures/icons/logo.svg
+    resolution: resolved
+  - source_document: mkdocs.yml
+    line: 49
+    reference_target: config
+    old_reference: figures/icons/logo.svg
+    resolution: resolved
+  targets:
+  - book-mkdocs
+  mkdocs_stage: true
+  mkdocs_stage_path: 00_book/assets/branding/logos/cams.svg
+  sha256: 682fd9b406a46e6a2f6bf0f5e5fdfd47a16e7bc7768f1f149ea49d5b0c4424b4
+  status: active
+  notes: Proposed final record for existing bytes; path does not yet exist. Subject/source
+    evidence supports domain and semantic filename; preserves unique logical asset.
+  planned: true
+  legacy_path: 00_book/figures/icons/logo.svg
+  preserve_original: false

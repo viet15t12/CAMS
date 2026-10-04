@@ -1,0 +1,119 @@
+{
+  "scope": "Phase 2 design consistency only; no migration, build or rendering performed",
+  "status": "pass",
+  "checks": [
+    {
+      "check": "complete_asset_mapping",
+      "status": "pass",
+      "detail": "356 Phase 1 assets represented exactly once"
+    },
+    {
+      "check": "stable_unique_logical_ids",
+      "status": "pass",
+      "detail": "Unique semantic IDs; no numeric components, slash, chapter or filesystem-root component"
+    },
+    {
+      "check": "canonical_paths_and_names",
+      "status": "pass",
+      "detail": "354 paths unique including casefold; semantic lowercase-kebab-case filenames"
+    },
+    {
+      "check": "unresolved_holds_safe",
+      "status": "pass",
+      "detail": [
+        "00_book/figures/report/diagrams/switching-lab/1_31.png",
+        "00_book/figures/report/diagrams/switching-lab/1_6.png"
+      ]
+    },
+    {
+      "check": "bytes_unchanged_for_all_assets",
+      "status": "pass",
+      "detail": "All 356 current files match Phase 1 SHA-256"
+    },
+    {
+      "check": "lab_ui_preservation",
+      "status": "pass",
+      "detail": "73 original lab captures, never ui/legacy"
+    },
+    {
+      "check": "recreation_paths_separate_unique",
+      "status": "pass",
+      "detail": "72 hypothetical candidate paths separate from existing-byte proposals"
+    },
+    {
+      "check": "staging_selection_suffix_and_hash",
+      "status": "pass",
+      "detail": "178 selected assets, exact canonical suffix preserved; no report-only staging"
+    },
+    {
+      "check": "reference_ledger_complete",
+      "status": "pass",
+      "detail": "All original 674 rows preserved by source, line and literal"
+    },
+    {
+      "check": "relative_web_references",
+      "status": "pass",
+      "detail": "178 Markdown/HTML paths resolve to selected stage destinations from actual source parents"
+    },
+    {
+      "check": "typst_uses_canonical",
+      "status": "pass",
+      "detail": "155 planned Typst references use project-root canonical paths"
+    },
+    {
+      "check": "atomic_batch_accounting",
+      "status": "pass",
+      "detail": "18 batches; 15 transfer batches, 3–42 assets; each asset assigned exactly once"
+    },
+    {
+      "check": "review_ledgers_complete",
+      "status": "pass",
+      "detail": "263 UI transitions, 110 orphan reviews, 41 visual pair reviews"
+    },
+    {
+      "check": "tree_matches_map",
+      "status": "pass",
+      "detail": "Tree includes all 354 proposed leaves and separately lists both holds"
+    },
+    {
+      "check": "manifest_sample_schema_keywords",
+      "status": "pass",
+      "detail": "8 records satisfy every keyword used by schema using an explicit local subset validator; standard Draft 2020-12 validator unavailable (not installed)"
+    },
+    {
+      "check": "manifest_sample_provenance_graph",
+      "status": "pass",
+      "detail": "Hypothetical recreation/reconstruction link to separate original records; all originals preserved"
+    },
+    {
+      "check": "hypothetical_examples_not_claimed_real",
+      "status": "pass",
+      "detail": "Two nonexistent examples clearly marked, null hashes, no fabricated runtime commands"
+    },
+    {
+      "check": "schema_negative_controls",
+      "status": "pass",
+      "detail": "Rejects missing current hash, unpreserved original and unknown source_kind"
+    },
+    {
+      "check": "phase1_inputs_unchanged",
+      "status": "pass",
+      "detail": "All 13 source audit outputs retain initial SHA-256"
+    },
+    {
+      "check": "tracked_file_integrity",
+      "status": "pass",
+      "detail": "All 2018 tracked files unchanged"
+    },
+    {
+      "check": "only_authorized_new_output",
+      "status": "pass",
+      "detail": "Only new plan outputs; no canonical or staging directory created; tracked diff empty"
+    }
+  ],
+  "limits": [
+    "Validation of schema uses all keywords present in this schema, not an installed general Draft 2020-12 validator.",
+    "Future target files/hashes cannot be validated until implementation; schema sample is planned.",
+    "Two unresolved names and 164 review-required records remain intentional execution gates."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "total_assets_mapped": 356,
+  "resolved_path_proposals": 354,
+  "confidence": {
+    "high": 219,
+    "medium": 122,
+    "low": 15
+  },
+  "review_required": 164,
+  "categories": {
+    "ui": 190,
+    "branding": 2,
+    "diagrams": 40,
+    "evidence": 124
+  },
+  "ui_docshot": 42,
+  "ui_legacy": 148,
+  "ui_lab_original": 73,
+  "lab_recreation_candidates": 72,
+  "terminal_original": 32,
+  "connectivity_original": 4,
+  "syslog_original": 4,
+  "external_tool_original": 3,
+  "source_material": 12,
+  "reconstruction_candidates": 32,
+  "mkdocs_stage": 178,
+  "reference_rows": 674,
+  "mapped_reference_rows": 435,
+  "batch_count": 18,
+  "batch_transfer_counts": {
+    "B04": 10,
+    "B03": 42,
+    "B05": 33,
+    "B06": 39,
+    "B10": 13,
+    "B09": 12,
+    "B07": 35,
+    "B08": 6,
+    "B02": 37,
+    "B13": 17,
+    "B16": 3,
+    "B12": 27,
+    "B11": 33,
+    "B14": 21,
+    "B15": 28
+  },
+  "source_commit": "39be1884020c4034aff9a39bd0d54fb2d6d9b7be",
+  "input_sha256": {
+    "README.md": "8df5c71f360f4d8e5b437001c984fd96d39fece92a4484d58030528eb8e78834",
+    "assets.csv": "d6366ff4a75e4f757a958cd210160f1af7ffb36a564b9b7b699d92b0cf5437ff",
+    "assets.json": "fc32fe15cede4d4f0f91f094b67f9728c24e6be5598eee342ef796f7a671ae14",
+    "references.csv": "8a69f8b1d04d85f7e01005d8fabe93db9cf2c767bb1a4940e9a836cdb8071e1a",
+    "duplicates.csv": "422d309649534424d8854f22a021bb676c69f5d273c8a09b770f31e42dd1ea8a",
+    "docshot-coverage.csv": "dfb37fc9ab67c80abe594a88ec4268e2423f285e293dda9ef91f5d1fbe8f7cf6",
+    "orphans.csv": "7466686a66c9289582691691860aaffee77bcf51476a05da660fc6063c1e4334",
+    "migration-proposal.csv": "9eb75bd01117915d049dae67c66ad05c4dc46bb8b8aa0d235df5d14c732bce93",
+    "broken-document-references.csv": "5dcc59d27d4f019aa0d48cf91291b04d704608f43924420187054ae97b76abb3",
+    "mkdocs-staging-requirements.csv": "8f3a9080805b5dc2412be88d78c2a335eb4614103fa3f9d33c7de7338e32cc07",
+    "docshot-infrastructure-findings.csv": "5c16eb4538101c28ec9e50fd68dc10e24b77676e47637ebb66f1e7a7b0c21046",
+    "vector-raster-relationships.csv": "6317b6da959b01b92366fd519508f7c1d16ef15f77e708f6500117f8cd510442",
+    "baseline-builds.json": "4890f6cd553742d4c39d8e26df90aeeee9650b3c2e38ea7d6251b06c3e26b864"
+  }
+}

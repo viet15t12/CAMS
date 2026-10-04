@@ -1,0 +1,438 @@
+GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
+└── documentation_assets/ [354 assets]
+    ├── branding/ [2 assets]
+    │   └── logos/ [2 assets]
+    │       ├── cams.svg
+    │       └── ptit.svg
+    ├── diagrams/ [40 assets]
+    │   ├── architecture/ [8 assets]
+    │   │   ├── application-source-tree.svg
+    │   │   ├── cams-layered-system.svg
+    │   │   ├── netmiko-ssh-stack.svg
+    │   │   ├── per-host-session-lock.svg
+    │   │   ├── qml-python-signal-flow.svg
+    │   │   ├── qtquick-component-tree.svg
+    │   │   ├── ssh-session-connection.svg
+    │   │   └── ui-thread-worker-dispatch.svg
+    │   ├── database/ [1 assets]
+    │   │   └── device-entity-relations.svg
+    │   ├── lab-topology/ [9 assets]
+    │   │   ├── fhrp-nat-dhcp/ [2 assets]
+    │   │   │   ├── glbp-dhcp-pat-raster.png
+    │   │   │   └── glbp-dhcp-pat-vector.svg
+    │   │   ├── lab1/ [1 assets]
+    │   │   │   └── router-switch-management.png
+    │   │   ├── multi-router-branch-routing.svg
+    │   │   ├── routing-ospf/ [2 assets]
+    │   │   │   ├── multi-area-branches-raster.png
+    │   │   │   └── multi-area-branches-vector.svg
+    │   │   ├── switching/ [1 assets]
+    │   │   │   └── layer-two-security.svg
+    │   │   └── syslog/ [2 assets]
+    │   │       ├── centralized-logging-raster.png
+    │   │       └── centralized-logging-vector.svg
+    │   ├── network/ [9 assets]
+    │   │   ├── dhcp-snooping-rogue-server.jpg
+    │   │   ├── etherchannel-redundant-uplinks.jpg
+    │   │   ├── fhrp-virtual-gateway.svg
+    │   │   ├── nat-pat-internet-topology.svg
+    │   │   ├── ospf-area-zero-router-chain.svg
+    │   │   ├── ospf-multi-area-backbone.png
+    │   │   ├── stp-root-port-election.jpg
+    │   │   ├── vlan-trunk-segmentation.png
+    │   │   └── vtp-server-clients.jpg
+    │   └── workflow/ [13 assets]
+    │       ├── acl-rule-evaluation.svg
+    │       ├── cisco-cli-modes.svg
+    │       ├── configuration-automation.svg
+    │       ├── configuration-state-flow.svg
+    │       ├── device-session-lifecycle.svg
+    │       ├── dhcp-dora-client-server-illustration.png
+    │       ├── dhcp-dora-sequence.svg
+    │       ├── inbound-acl-tests.jpg
+    │       ├── network-lab-verification.svg
+    │       ├── per-host-serial-cross-host-parallel.svg
+    │       ├── service-repository-test.svg
+    │       ├── syslog-processing-pipeline.svg
+    │       └── worker-fake-connector-test.svg
+    ├── evidence/ [122 assets]
+    │   ├── connectivity/ [4 assets]
+    │   │   └── original/ [4 assets]
+    │   │       ├── fhrp-nat-dhcp-lab/ [1 assets]
+    │   │       │   └── client-connectivity-test.png
+    │   │       └── routing-ospf-lab/ [3 assets]
+    │   │           ├── vpc11-ping-verification.png
+    │   │           ├── vpc13-ping-verification.png
+    │   │           └── vpc15-ping-verification.png
+    │   ├── external-tools/ [3 assets]
+    │   │   └── original/ [3 assets]
+    │   │       ├── ci/ [1 assets]
+    │   │       │   └── jenkins-pipeline-stages.png
+    │   │       └── syslog-lab/ [2 assets]
+    │   │           ├── email-critical.png
+    │   │           └── email-warning.png
+    │   ├── source-material/ [12 assets]
+    │   │   └── lab1/ [12 assets]
+    │   │       ├── cli-output-and-result-analysis.png
+    │   │       ├── configuration-checks.png
+    │   │       ├── device-access-and-basic-configuration.png
+    │   │       ├── dhcp-pool-and-acl-procedure.png
+    │   │       ├── interface-configuration-procedure.png
+    │   │       ├── interface-lifecycle-and-validation.png
+    │   │       ├── interface-verification-output.png
+    │   │       ├── lab-overview-and-objectives.png
+    │   │       ├── loopback-and-log-tests.png
+    │   │       ├── results-summary.png
+    │   │       ├── service-and-system-log-analysis.png
+    │   │       └── validation-procedure-continuation.png
+    │   ├── syslog/ [4 assets]
+    │   │   └── original/ [4 assets]
+    │   │       └── syslog-lab/ [4 assets]
+    │   │           ├── r1-device-logs.png
+    │   │           ├── r2-device-logs.png
+    │   │           ├── r3-device-logs.png
+    │   │           └── sw1-device-logs.png
+    │   ├── terminal/ [27 assets]
+    │   │   └── original/ [27 assets]
+    │   │       ├── fhrp-nat-dhcp-lab/ [4 assets]
+    │   │       │   ├── dhcp-glbp-r1-verify.png
+    │   │       │   ├── glbp-r2-verify.png
+    │   │       │   ├── nat-config-verify.png
+    │   │       │   └── nat-interface-verify.png
+    │   │       ├── lab1/ [3 assets]
+    │   │       │   ├── r1-interface-ip-configuration.png
+    │   │       │   ├── r2-interface-ip-configuration.png
+    │   │       │   └── r2-interface-status.png
+    │   │       ├── project-format/ [2 assets]
+    │   │       │   ├── encrypted-package-hex-header.png
+    │   │       │   └── project-package-json-inspection.png
+    │   │       ├── routing-ospf-lab/ [9 assets]
+    │   │       │   ├── multi-router-ospf-running-config.png
+    │   │       │   ├── r1-ospf-routing-verification.png
+    │   │       │   ├── r2-ospf-routing-verification.png
+    │   │       │   ├── r3-ospf-routing-verification.png
+    │   │       │   ├── r6-ospf-routing-verification.png
+    │   │       │   ├── vpc11-ip-configuration.png
+    │   │       │   ├── vpc12-ip-configuration.png
+    │   │       │   ├── vpc13-ip-configuration.png
+    │   │       │   └── vpc14-ip-configuration.png
+    │   │       ├── switching-lab/ [5 assets]
+    │   │       │   ├── multi-switch-etherchannel-verification.png
+    │   │       │   ├── sw1-vtp-status.png
+    │   │       │   ├── sw2-vtp-status.png
+    │   │       │   ├── sw2-vtp-trunk-verification.png
+    │   │       │   └── sw5-port-security-verification.png
+    │   │       └── syslog-lab/ [4 assets]
+    │   │           ├── r1-verify.png
+    │   │           ├── r2-verify.png
+    │   │           ├── r3-verify.png
+    │   │           └── sw1-verify.png
+    │   └── ui-capture/ [72 assets]
+    │       └── original/ [72 assets]
+    │           ├── fhrp-nat-dhcp-lab/ [10 assets]
+    │           │   ├── dhcp-config-preview.png
+    │           │   ├── dhcp-pool.png
+    │           │   ├── glbp-config-preview.png
+    │           │   ├── glbp-member-policy.png
+    │           │   ├── glbp-setup.png
+    │           │   ├── nat-acl.png
+    │           │   ├── nat-config-preview.png
+    │           │   ├── nat-interfaces.png
+    │           │   ├── nat-pat-preview.png
+    │           │   └── nat-pat.png
+    │           ├── lab1/ [12 assets]
+    │           │   ├── acl-standard-rule-editor.png
+    │           │   ├── dhcp-pool-editor.png
+    │           │   ├── l2-security-save-result.png
+    │           │   ├── l2-security-view-push-dialog.png
+    │           │   ├── l2-security-view-push-overlay.png
+    │           │   ├── port-security-editor.png
+    │           │   ├── router-interface-editor.png
+    │           │   ├── router-physical-interface-settings.png
+    │           │   ├── static-mac-editor.png
+    │           │   ├── switch-port-inventory.png
+    │           │   ├── system-logs-filtered.png
+    │           │   └── system-logs-receiving.png
+    │           ├── routing-ospf-lab/ [15 assets]
+    │           │   ├── r1-process-dark.png
+    │           │   ├── r1-view-push-dark.png
+    │           │   ├── r2-process.png
+    │           │   ├── router-interface-addresses-dark.png
+    │           │   ├── router-interface-counters-dark.png
+    │           │   ├── router-interface-edit-dark.png
+    │           │   ├── router-interface-editor-dark.png
+    │           │   ├── router-interface-policy-dark.png
+    │           │   ├── router-interfaces-inventory-dark.png
+    │           │   ├── router-interfaces-overview.png
+    │           │   ├── router-interfaces-selected-dark.png
+    │           │   ├── router-process-overview-dark.png
+    │           │   ├── routing-group-hosts.png
+    │           │   ├── routing-group-networks.png
+    │           │   └── routing-group-push-progress.png
+    │           ├── switching-lab/ [26 assets]
+    │           │   ├── etherchannel-view-push.png
+    │           │   ├── l2-security-view-push.png
+    │           │   ├── mac-address-table.png
+    │           │   ├── port-security-configured.png
+    │           │   ├── port-security-editor.png
+    │           │   ├── port-security-view-push.png
+    │           │   ├── sw1-lacp-inventory-reloaded.png
+    │           │   ├── sw1-lacp-port-channel-editing.png
+    │           │   ├── sw1-port-mode-editing.png
+    │           │   ├── sw1-trunks-pending-apply.png
+    │           │   ├── sw1-vlan-data-network-selected.png
+    │           │   ├── sw1-vlan-five-access-assignments.png
+    │           │   ├── sw1-vlan-ten-access-assignments.png
+    │           │   ├── sw2-pagp-synchronized.png
+    │           │   ├── sw2-trunks-synchronized.png
+    │           │   ├── sw3-lacp-inventory-reloaded.png
+    │           │   ├── sw3-trunks-synchronized.png
+    │           │   ├── sw4-pagp-synchronized.png
+    │           │   ├── sw4-trunks-synchronized.png
+    │           │   ├── sw5-trunks-synchronized.png
+    │           │   ├── sw6-trunks-synchronized.png
+    │           │   ├── trusted-uplinks.png
+    │           │   ├── vlan-security-policy.png
+    │           │   ├── vlan-view-push.png
+    │           │   ├── vtp-group-identity.png
+    │           │   └── vtp-group-member-policy.png
+    │           └── syslog-lab/ [9 assets]
+    │               ├── config-preview.png
+    │               ├── configuration.png
+    │               ├── email-alert-settings.png
+    │               ├── listener-before-start.png
+    │               ├── listener-receiving.png
+    │               ├── message-detail.png
+    │               ├── policy.png
+    │               ├── select-hosts.png
+    │               └── source-interfaces.png
+    └── ui/ [190 assets]
+        ├── docshot/ [42 assets]
+        │   ├── core/ [11 assets]
+        │   │   ├── activity-bar.png
+        │   │   ├── feature-bar-router.png
+        │   │   ├── feature-bar-switch.png
+        │   │   ├── information-empty.png
+        │   │   ├── sidebar-collapsed.png
+        │   │   ├── status-bar.png
+        │   │   ├── status-details.png
+        │   │   ├── view-menu.png
+        │   │   ├── welcome-recent-projects.png
+        │   │   ├── workspace-empty.png
+        │   │   └── workspace-overview.png
+        │   ├── devices/ [22 assets]
+        │   │   ├── batch-create-empty.png
+        │   │   ├── batch-create-filled.png
+        │   │   ├── batch-host-name-detail.png
+        │   │   ├── connected.png
+        │   │   ├── context-connected.png
+        │   │   ├── context-disconnected.png
+        │   │   ├── context-waiting.png
+        │   │   ├── create-empty.png
+        │   │   ├── create-filled.png
+        │   │   ├── created-waiting.png
+        │   │   ├── delete-confirmation.png
+        │   │   ├── edit.png
+        │   │   ├── import-result.png
+        │   │   ├── inventory-router-selected.png
+        │   │   ├── inventory-waiting.png
+        │   │   ├── multi-select-actions.png
+        │   │   ├── multi-select-mixed-status.png
+        │   │   ├── running-config-snapshot.png
+        │   │   ├── search-switches.png
+        │   │   ├── sidebar-status-groups.png
+        │   │   ├── ssh-compatibility.png
+        │   │   └── tabs-router-active.png
+        │   └── switching/ [9 assets]
+        │       └── vlan/ [9 assets]
+        │           ├── create-empty.png
+        │           ├── create-id-filled.png
+        │           ├── create-name-filled.png
+        │           ├── create-ready.png
+        │           ├── create-state-selector.png
+        │           ├── created-pending-apply.png
+        │           ├── database.png
+        │           ├── switch-selected.png
+        │           └── view-push-guest.png
+        └── legacy/ [148 assets]
+            ├── core/ [1 assets]
+            │   └── welcome-no-recent-projects.png
+            ├── project/ [9 assets]
+            │   ├── create-empty.png
+            │   ├── create-ready.png
+            │   ├── open-project-choice.png
+            │   ├── recent-projects.png
+            │   ├── save-menu.png
+            │   ├── snapshot-history.png
+            │   ├── workspace-new-project.png
+            │   ├── workspace-open-existing.png
+            │   └── workspace-ready.png
+            ├── routing/ [78 assets]
+            │   ├── acl/ [7 assets]
+            │   │   ├── bindings.png
+            │   │   ├── dynamic.png
+            │   │   ├── extended.png
+            │   │   ├── mac.png
+            │   │   ├── reflexive.png
+            │   │   ├── standard.png
+            │   │   └── view-push.png
+            │   ├── dhcp/ [4 assets]
+            │   │   ├── excluded-addresses.png
+            │   │   ├── helper-addresses.png
+            │   │   ├── pools.png
+            │   │   └── view-push.png
+            │   ├── eigrp/ [9 assets]
+            │   │   ├── distribute-list.png
+            │   │   ├── interfaces.png
+            │   │   ├── key-chains.png
+            │   │   ├── networks.png
+            │   │   ├── offset-list.png
+            │   │   ├── passive-interfaces.png
+            │   │   ├── process.png
+            │   │   ├── redistribute.png
+            │   │   └── view-push.png
+            │   ├── fhrp/ [14 assets]
+            │   │   ├── glbp-configuration.png
+            │   │   ├── glbp-view-push.png
+            │   │   ├── glbp-weighting-detail.png
+            │   │   ├── hsrp-auth-protocol-detail.png
+            │   │   ├── hsrp-authentication-timers.png
+            │   │   ├── hsrp-gateway-form-detail.png
+            │   │   ├── hsrp-gateway-members.png
+            │   │   ├── hsrp-member-policy.png
+            │   │   ├── hsrp-primary-member-detail.png
+            │   │   ├── hsrp-secondary-member-detail.png
+            │   │   ├── hsrp-view-push.png
+            │   │   ├── vrrp-configuration.png
+            │   │   ├── vrrp-options-member-detail.png
+            │   │   └── vrrp-view-push.png
+            │   ├── interfaces/ [7 assets]
+            │   │   ├── loopback.png
+            │   │   ├── physical-configured.png
+            │   │   ├── physical-edit.png
+            │   │   ├── physical-overview.png
+            │   │   ├── subinterface.png
+            │   │   ├── tunnel.png
+            │   │   └── view-push.png
+            │   ├── nat/ [14 assets]
+            │   │   ├── acl-form-detail.png
+            │   │   ├── acl-overview.png
+            │   │   ├── dynamic-form-detail.png
+            │   │   ├── dynamic-overview.png
+            │   │   ├── interfaces-form-detail.png
+            │   │   ├── interfaces-overview.png
+            │   │   ├── pat-form-detail.png
+            │   │   ├── pat-overview.png
+            │   │   ├── quick-pat-setup.png
+            │   │   ├── route-map-form-detail.png
+            │   │   ├── route-map-overview.png
+            │   │   ├── static-form-detail.png
+            │   │   ├── static-overview.png
+            │   │   └── view-push.png
+            │   ├── ospf/ [14 assets]
+            │   │   ├── areas.png
+            │   │   ├── distance.png
+            │   │   ├── interfaces.png
+            │   │   ├── networks.png
+            │   │   ├── passive-interfaces.png
+            │   │   ├── process.png
+            │   │   ├── redistribute.png
+            │   │   ├── routing-group-common.png
+            │   │   ├── routing-group-hosts.png
+            │   │   ├── routing-group-identity.png
+            │   │   ├── routing-group-networks.png
+            │   │   ├── routing-group-view-push.png
+            │   │   ├── tuning.png
+            │   │   └── view-push.png
+            │   ├── static/ [3 assets]
+            │   │   ├── default-routes.png
+            │   │   ├── routes.png
+            │   │   └── view-push.png
+            │   └── syslog/ [6 assets]
+            │       ├── destinations.png
+            │       ├── group-hosts.png
+            │       ├── group-interfaces.png
+            │       ├── group-policy.png
+            │       ├── server-editor.png
+            │       └── view-push.png
+            ├── switching/ [41 assets]
+            │   ├── acl/ [3 assets]
+            │   │   ├── bindings.png
+            │   │   ├── extended-form.png
+            │   │   └── view-push.png
+            │   ├── dhcp/ [5 assets]
+            │   │   ├── pool-form.png
+            │   │   ├── relay-form.png
+            │   │   ├── relay-view-push.png
+            │   │   ├── server-overview.png
+            │   │   └── server-view-push.png
+            │   ├── etherchannel/ [5 assets]
+            │   │   ├── form.png
+            │   │   ├── quick-link-link-mode.png
+            │   │   ├── quick-link-peer.png
+            │   │   ├── quick-link.png
+            │   │   └── view-push.png
+            │   ├── interfaces-l2/ [6 assets]
+            │   │   ├── access-loop-protection.png
+            │   │   ├── access-port-form.png
+            │   │   ├── overview.png
+            │   │   ├── trunk-loop-protection.png
+            │   │   ├── trunk-port-form.png
+            │   │   └── view-push.png
+            │   ├── interfaces-l3/ [6 assets]
+            │   │   ├── interfaces-view-push-routed.png
+            │   │   ├── routed-port-form.png
+            │   │   ├── routed-ports-overview.png
+            │   │   ├── svi-form.png
+            │   │   ├── svi-overview-ip-routing.png
+            │   │   └── svi-view-push.png
+            │   ├── monitoring/ [2 assets]
+            │   │   ├── mac-address-table.png
+            │   │   └── port-counters.png
+            │   ├── security/ [6 assets]
+            │   │   ├── port-security-form.png
+            │   │   ├── port-security-view-push.png
+            │   │   ├── static-mac-form.png
+            │   │   ├── trusted-uplinks.png
+            │   │   ├── view-push.png
+            │   │   └── vlan-protection.png
+            │   ├── stp/ [2 assets]
+            │   │   ├── form.png
+            │   │   └── view-push.png
+            │   ├── vlan/ [3 assets]
+            │   │   ├── form.png
+            │   │   ├── overview.png
+            │   │   └── view-push-users.png
+            │   └── vtp/ [3 assets]
+            │       ├── group-top.png
+            │       ├── member-policy.png
+            │       └── view-push.png
+            ├── system-logs/ [7 assets]
+            │   ├── critical-filter-result.png
+            │   ├── filter-bar.png
+            │   ├── listener-status.png
+            │   ├── message-details.png
+            │   ├── overview.png
+            │   ├── severity-levels.png
+            │   └── smart-filter-builder.png
+            └── transfer/ [12 assets]
+                ├── scp/ [1 assets]
+                │   └── workspace.png
+                ├── sftp/ [8 assets]
+                │   ├── connection-bar.png
+                │   ├── connection-form.png
+                │   ├── connection-paths.png
+                │   ├── host-key-confirmation.png
+                │   ├── local-files.png
+                │   ├── remote-files.png
+                │   ├── transfer-queue.png
+                │   └── workspace-overview.png
+                └── snapshots/ [3 assets]
+                    ├── running-config-diff.png
+                    ├── running-config-history.png
+                    └── sync-notifications.png
+
+Unresolved path rows (excluded from tree):
+evidence.switching.sw2-vtp-trunk-alternate-capture <- 00_book/figures/report/diagrams/switching-lab/1_31.png
+evidence.switching.sw3-lacp-later-capture <- 00_book/figures/report/diagrams/switching-lab/1_6.png
+manifest.yaml is future infrastructure metadata, not an asset row; hypothetical recreation paths are not counted.
