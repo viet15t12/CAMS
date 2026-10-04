@@ -1,0 +1,571 @@
+{
+  "batch": "B02E1",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "dcc0f3ab279e7810cb4eb990e0a1b64cc0a8007a",
+  "status": "PASS — all three APPROVED; local and fresh-checkout validation complete",
+  "review": [
+    {
+      "asset_id": "diagrams.network.etherchannel-redundant-uplinks",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "Two access switches connect to a Distribution Switch, which has four parallel red member links to a Data Room Switch serving three servers. Labels explicitly say 4x1Gbps Port-Channel and EtherChannel (LACP or PAgP).",
+      "semantic_name_judgment": "APPROVE: etherchannel-redundant-uplinks describes the parallel physical members of an aggregated uplink between the data-room and distribution switches. Redundant refers to member-link paths within that port-channel, not redundant distribution switches, separate routed paths, chassis redundancy, or demonstrated failover. The drawing shows one logical channel; no failure scenario is depicted. This bounded reading is accurate enough to retain the planned name; no naming correction is required.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "visual_inspection": "Direct inspection of the unchanged original JPEG. No preview/replacement generation or image modification.",
+      "provenance_note": "Legacy illustrative network diagram, not experimental evidence. Source/export/author lineage remains unknown; semantic review does not upgrade provenance.",
+      "exact_duplicate_conflicts": []
+    },
+    {
+      "asset_id": "diagrams.network.stp-root-port-election",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "Three-switch triangle: Switch Z is Root Bridge with default priority 32768 and MAC 0c00.1111.0000. Switch X and Y have the same priority and larger MACs; links to Z are 100BaseT and the X-Y link is 10BaseT. Z ports are Designated Port (F); X/Y Port 0 are Root Port (F); X Port 1 is Designated Port (F), Y Port 1 Nondesignated Port (BLK).",
+      "semantic_name_judgment": "APPROVE: stp-root-port-election accurately describes the illustrated root-bridge and port-role selection outcome. It does not claim to show every STP state, convergence stages, timers or transient behavior.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "visual_inspection": "Direct inspection of the unchanged original JPEG. No preview/replacement generation or image modification.",
+      "provenance_note": "Legacy illustrative network diagram, not experimental evidence. Source/export/author lineage remains unknown; semantic review does not upgrade provenance.",
+      "exact_duplicate_conflicts": []
+    },
+    {
+      "asset_id": "diagrams.network.vtp-server-clients",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "VLAN Trunking Protocol title. A single VTP Server at the top connects to three first-tier switches; two of those forward to two lower switches. Directional arrows lead away from the server/downstream through the clients, with VTP Client labels in the hierarchy.",
+      "semantic_name_judgment": "APPROVE: vtp-server-clients accurately names the server/client distribution topology. Arrows illustrate propagation; no VTP version, live database revision, specific VLAN configuration or experimental result is inferred.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "visual_inspection": "Direct inspection of the unchanged original JPEG. No preview/replacement generation or image modification.",
+      "provenance_note": "Legacy illustrative network diagram, not experimental evidence. Source/export/author lineage remains unknown; semantic review does not upgrade provenance.",
+      "exact_duplicate_conflicts": []
+    }
+  ],
+  "migration": [
+    {
+      "asset_id": "diagrams.network.etherchannel-redundant-uplinks",
+      "old_path": "00_book/figures/report/diagrams/Etherchannel.jpg",
+      "canonical_path": "documentation_assets/diagrams/network/etherchannel-redundant-uplinks.jpg",
+      "manifest_sha": "14f22ddd7e0e43dc1ea6424974709d62308c5aca2f57bb088747475cd4f3003d",
+      "source_filesystem_sha": "14f22ddd7e0e43dc1ea6424974709d62308c5aca2f57bb088747475cd4f3003d",
+      "source_git_blob_sha": "14f22ddd7e0e43dc1ea6424974709d62308c5aca2f57bb088747475cd4f3003d",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "14f22ddd7e0e43dc1ea6424974709d62308c5aca2f57bb088747475cd4f3003d",
+      "canonical_index_sha": "14f22ddd7e0e43dc1ea6424974709d62308c5aca2f57bb088747475cd4f3003d"
+    },
+    {
+      "asset_id": "diagrams.network.stp-root-port-election",
+      "old_path": "00_book/figures/report/diagrams/STP.jpg",
+      "canonical_path": "documentation_assets/diagrams/network/stp-root-port-election.jpg",
+      "manifest_sha": "3fd4b632264b567cf9f32bad3669021d5d94231fd7b79a00e8cfc9d990125a98",
+      "source_filesystem_sha": "3fd4b632264b567cf9f32bad3669021d5d94231fd7b79a00e8cfc9d990125a98",
+      "source_git_blob_sha": "3fd4b632264b567cf9f32bad3669021d5d94231fd7b79a00e8cfc9d990125a98",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "3fd4b632264b567cf9f32bad3669021d5d94231fd7b79a00e8cfc9d990125a98",
+      "canonical_index_sha": "3fd4b632264b567cf9f32bad3669021d5d94231fd7b79a00e8cfc9d990125a98"
+    },
+    {
+      "asset_id": "diagrams.network.vtp-server-clients",
+      "old_path": "00_book/figures/report/diagrams/VTP.jpg",
+      "canonical_path": "documentation_assets/diagrams/network/vtp-server-clients.jpg",
+      "manifest_sha": "7d0492e745c74fbf8c8aaadd6d1489430cfbcfcb533a20cd2cb58f776e9f3fbf",
+      "source_filesystem_sha": "7d0492e745c74fbf8c8aaadd6d1489430cfbcfcb533a20cd2cb58f776e9f3fbf",
+      "source_git_blob_sha": "7d0492e745c74fbf8c8aaadd6d1489430cfbcfcb533a20cd2cb58f776e9f3fbf",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "7d0492e745c74fbf8c8aaadd6d1489430cfbcfcb533a20cd2cb58f776e9f3fbf",
+      "canonical_index_sha": "7d0492e745c74fbf8c8aaadd6d1489430cfbcfcb533a20cd2cb58f776e9f3fbf"
+    }
+  ],
+  "references": [],
+  "manifest": {
+    "migrated": 34,
+    "pending": 311,
+    "frozen": 62
+  },
+  "authority": {
+    "starting_commit": "dcc0f3ab279e7810cb4eb990e0a1b64cc0a8007a",
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 16,
+    "behind": 0
+  },
+  "hash_authority": "Phase 3.3 exact repository-stored bytes; historical preflight SHA is not execution authority.",
+  "metadata_policy": "Only three current_path/path/migration_state/canonical transitions. All other fields and 404 records unchanged; no new provenance, derivative or usage metadata.",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-1.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-2.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-3.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-4.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-5.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-6.log"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-7.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-8.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-9.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e1/local-10.log"
+    }
+  ],
+  "local_proof": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 311,
+      "migrated": 34,
+      "frozen": 62
+    },
+    "other_records_unchanged": 404,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 3,
+    "canonical_paths_present": 3,
+    "orphan_usage_preserved": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02d_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02d_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 34,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2,
+        "B02E2": 3
+      }
+    }
+  },
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02d_baseline": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02d_baseline": true
+    }
+  ],
+  "b02_progress": {
+    "migrated": 34,
+    "total": 39,
+    "complete": false,
+    "remaining": {
+      "B02F": 2,
+      "B02E2": 3
+    }
+  },
+  "scope": {
+    "new_transfers": 3,
+    "jpeg_bytes_unchanged": true,
+    "vectorization": false,
+    "upscale": false,
+    "recompression": false,
+    "crop": false,
+    "cleanup": false,
+    "replacement_generation": false,
+    "live_reference_rewrites": 0,
+    "document_usage_invented": false,
+    "other_batches_migrated": false,
+    "runtime_terminal_docshot_report_changes": false
+  },
+  "mkdocs": {
+    "status": "PASS",
+    "staged_assets": 178,
+    "b02e1_staged_assets": 0,
+    "ownership_ledger_unchanged": true,
+    "generated_assets_tracked": false,
+    "environment": "/tmp/cams-b02b4/docs-venv from unchanged requirements-docs.txt",
+    "mkdocs_version": "1.6.1",
+    "material_version": "9.7.7"
+  },
+  "fresh_checkout": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 311,
+      "migrated": 34,
+      "frozen": 62
+    },
+    "other_records_unchanged": 404,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 3,
+    "canonical_paths_present": 3,
+    "orphan_usage_preserved": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02e1/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02e1/clean-checkout/output/typst/package-cache",
+          "/tmp/cams-b02e1/clean-checkout/00_report/main.typ",
+          "/tmp/cams-b02e1/clean-checkout/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02d_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02e1/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02e1/clean-checkout/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/tmp/cams-b02e1/clean-checkout/00_book/main.typ",
+          "/tmp/cams-b02e1/clean-checkout/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02d_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 34,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2,
+        "B02E2": 3
+      }
+    },
+    "filesystem_blob_manifest_matches": 407,
+    "method": "Separate Linux clone of candidate Git commit, core.autocrlf=false; no generated staging before pre-sync",
+    "candidate_commit": "80357c942f862ad8fb463f7ade7c229abf361fcf",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-5.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-6.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-7.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-9.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e1/clean-10.log"
+      }
+    ]
+  }
+}

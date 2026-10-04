@@ -10333,14 +10333,14 @@ assets:
   domain: diagrams/network
   subject: etherchannel-redundant-uplinks
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/Etherchannel.jpg
-  path: 00_book/figures/report/diagrams/Etherchannel.jpg
+  current_path: documentation_assets/diagrams/network/etherchannel-redundant-uplinks.jpg
+  path: documentation_assets/diagrams/network/etherchannel-redundant-uplinks.jpg
   planned_canonical_path: documentation_assets/diagrams/network/etherchannel-redundant-uplinks.jpg
   legacy_path: 00_book/figures/report/diagrams/Etherchannel.jpg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 14f22ddd7e0e43dc1ea6424974709d62308c5aca2f57bb088747475cd4f3003d
   provenance:
     assessment: unknown
@@ -10500,14 +10500,14 @@ assets:
   domain: diagrams/network
   subject: stp-root-port-election
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/STP.jpg
-  path: 00_book/figures/report/diagrams/STP.jpg
+  current_path: documentation_assets/diagrams/network/stp-root-port-election.jpg
+  path: documentation_assets/diagrams/network/stp-root-port-election.jpg
   planned_canonical_path: documentation_assets/diagrams/network/stp-root-port-election.jpg
   legacy_path: 00_book/figures/report/diagrams/STP.jpg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3fd4b632264b567cf9f32bad3669021d5d94231fd7b79a00e8cfc9d990125a98
   provenance:
     assessment: unknown
@@ -10539,14 +10539,14 @@ assets:
   domain: diagrams/network
   subject: vtp-server-clients
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/VTP.jpg
-  path: 00_book/figures/report/diagrams/VTP.jpg
+  current_path: documentation_assets/diagrams/network/vtp-server-clients.jpg
+  path: documentation_assets/diagrams/network/vtp-server-clients.jpg
   planned_canonical_path: documentation_assets/diagrams/network/vtp-server-clients.jpg
   legacy_path: 00_book/figures/report/diagrams/VTP.jpg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7d0492e745c74fbf8c8aaadd6d1489430cfbcfcb533a20cd2cb58f776e9f3fbf
   provenance:
     assessment: unknown

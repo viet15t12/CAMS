@@ -366,6 +366,22 @@ class DocumentationAssetTests(unittest.TestCase):
             self.assertIsNone(asset["recreates_evidence_asset"])
             self.assertIsNone(asset["canonical_group_id"])
         reviewed_orphans.add(lab_vector)
+        legacy_network = {"diagrams.network.etherchannel-redundant-uplinks",
+                          "diagrams.network.stp-root-port-election", "diagrams.network.vtp-server-clients"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02E1"}, legacy_network)
+        legacy_report = json.loads((root / "output/documentation-assets-migrations/b02e1.json").read_text())
+        self.assertEqual({r["asset_id"] for r in legacy_report["review"]}, legacy_network)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in legacy_report["review"]))
+        self.assertEqual(legacy_report["references"], [])
+        for asset_id in legacy_network:
+            asset = records[asset_id]
+            self.assertEqual(asset["migration_state"], "migrated")
+            self.assertEqual(asset["source_kind"], "unknown")
+            self.assertFalse(asset["original_evidence"])
+            self.assertFalse(asset["preserve_original"])
+            self.assertFalse((root / asset["legacy_path"]).exists())
+            self.assertEqual(Path(asset["current_path"]).suffix, ".jpg")
+        reviewed_orphans |= legacy_network
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.

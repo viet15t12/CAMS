@@ -215,7 +215,6 @@
 │   ├── diagrams
 │   │   ├── dhcp-snooping.jpg
 │   │   ├── dhcp_dora.png
-│   │   ├── Etherchannel.jpg
 │   │   ├── fhrp-nat-dhcp-lab
 │   │   │   ├── 01-nat-interfaces.png
 │   │   │   ├── 02-nat-acl.png
@@ -267,7 +266,6 @@
 │   │   │   ├── 25.png
 │   │   │   ├── 26.png
 │   │   │   └── 27.png
-│   │   ├── STP.jpg
 │   │   ├── switching-lab
 │   │   │   ├── 1_1.png
 │   │   │   ├── 1_2.png
@@ -321,8 +319,7 @@
 │   │   │   ├── 16-syslog-sw1-device-logs.png
 │   │   │   ├── syslog-lab-topology-report.png
 │   │   │   └── syslog-lab-topology.svg
-│   │   ├── vlan.png
-│   │   └── VTP.jpg
+│   │   └── vlan.png
 │   └── misc
 │       ├── cams-screenshot-2026-09-13-18-17-17.png
 │       └── xxd-ntp.png
@@ -394,3 +391,11 @@ B02D independent lab-topology representations (outside this figures tree):
 - documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-vector.svg
 
 Same lab topology; export/derivative provenance unproven. Both are independent canonical assets. The report still uses the raster; the vector remains orphan-review. Neither is selected for MkDocs staging.
+
+B02E1 legacy raster network diagrams (outside this figures tree):
+
+- documentation_assets/diagrams/network/etherchannel-redundant-uplinks.jpg
+- documentation_assets/diagrams/network/stp-root-port-election.jpg
+- documentation_assets/diagrams/network/vtp-server-clients.jpg
+
+All three remain unused/orphan-review. Original JPEG bytes are preserved; no vectorization, cleanup or document insertion. None is selected for MkDocs staging.
