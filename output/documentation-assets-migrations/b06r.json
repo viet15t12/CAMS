@@ -1,0 +1,432 @@
+{
+  "batch": "B06R",
+  "asset_id": "ui.routing.fhrp.hsrp-authentication-timers",
+  "decision": "HOLD",
+  "decision_confidence": "high",
+  "reason": "The visible image contains Hold timer and member policy/preempt/tracking, but no authentication controls. Existing UI/document context separates group authentication and shows it in a different screenshot. The proposed combined authentication/timers identity is not evidenced for this PNG.",
+  "visual_inspection": {
+    "method": "direct inspection of original PNG; no OCR, crop, overlay, reconstruction or regeneration",
+    "width": 2502,
+    "height": 1888,
+    "visible": [
+      "HSRP tab and heading",
+      "Hold timer 3000 ms",
+      "Member policy",
+      "member 192.0.2.1, priority 120",
+      "Preempt enabled",
+      "minimum delay 10 sec; reload delay 30 sec",
+      "tracking object 1; decrement 30",
+      "HSRP group 10, gateway 10.10.10.1, two member hosts",
+      "partial second member 192.0.2.2"
+    ],
+    "authentication_controls_visible": false
+  },
+  "repository_evidence": [
+    {
+      "source": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 61,
+      "excerpt": "<figcaption><p>C\u1eadn c\u1ea3nh x\u00e1c th\u1ef1c, HSRP version v\u00e0 Hello/Hold timer.</p></figcaption>"
+    },
+    {
+      "source": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 44,
+      "excerpt": "caption: [C\u1eadn c\u1ea3nh x\u00e1c th\u1ef1c, HSRP version v\u00e0 Hello/Hold timer.], width: 100.0%) <fig:ch09-15-hsrp-auth-protocol-detail>"
+    },
+    {
+      "source": "UI/qml/features/fhrp/FhrpProtocolPage.qml",
+      "line": 727,
+      "excerpt": "title: \"Group authentication\""
+    },
+    {
+      "source": "UI/qml/features/fhrp/FhrpProtocolPage.qml",
+      "line": 794,
+      "excerpt": "title: \"Member policy\""
+    },
+    {
+      "source": "UI/qml/features/fhrp/FhrpProtocolOptionsEditor.qml",
+      "line": 69,
+      "excerpt": "labelText: \"Hold timer (ms)\""
+    },
+    {
+      "source": "UI/qml/features/fhrp/FhrpMemberEditor.qml",
+      "line": 224,
+      "excerpt": "labelText: \"Preempt minimum delay (sec)\""
+    }
+  ],
+  "neighbour_visual_comparison": {
+    "path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
+    "finding": "Neighbour directly displays Group authentication with MD5 key/masked secret, HSRP version and Hello/Hold timer, matching its current caption. Its visible authentication does not establish the orphan PNG identity."
+  },
+  "history": {
+    "file_history_commit": "c94b202e9ab13b4ed2cb53c0919934c2a5b23522",
+    "finding": "Repository file history identifies this import commit; current semantic use/caption and generator provenance for the orphan remain unproven. Old filename alone is insufficient."
+  },
+  "candidate_name": "hsrp-member-policy-timers.png (provisional observation only; not adopted)",
+  "current_path": "00_book/figures/gui/chapter-09/02-hsrp-authentication-timers.png",
+  "planned_canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-authentication-timers.png",
+  "file_transferred": false,
+  "manifest_record_unchanged": true,
+  "migration_state": "pending",
+  "canonical": false,
+  "status": "orphan-review",
+  "review_required": true,
+  "used_by": [],
+  "targets": [],
+  "mkdocs_stage": false,
+  "provenance": {
+    "assessment": "unknown",
+    "evidence": [
+      "Phase 1/2 unchanged"
+    ]
+  },
+  "provenance_confidence": "low",
+  "hash_proof": {
+    "manifest_sha": "5ff0d3046bf14600dbc56063ac838ddf48e33fcc5627ca458f6b3245e7b06b26",
+    "filesystem_sha": "5ff0d3046bf14600dbc56063ac838ddf48e33fcc5627ca458f6b3245e7b06b26",
+    "original_git_blob_sha": "5ff0d3046bf14600dbc56063ac838ddf48e33fcc5627ca458f6b3245e7b06b26",
+    "current_index_blob_sha": "5ff0d3046bf14600dbc56063ac838ddf48e33fcc5627ca458f6b3245e7b06b26"
+  },
+  "reference_rewrites": 0,
+  "baseline": {
+    "before": 66,
+    "resolved": 0,
+    "after": 66
+  },
+  "manifest": {
+    "migrated": 160,
+    "pending": 185,
+    "frozen": 62
+  },
+  "b06": {
+    "migrated": 38,
+    "total": 39,
+    "intentional_hold_ids": [
+      "ui.routing.fhrp.hsrp-authentication-timers"
+    ]
+  },
+  "validation_status": "PASS full cumulative local and clean checkout",
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_local_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 160,
+      "pending": 185,
+      "frozen": 62
+    },
+    "b06_migrated": 38,
+    "b06_old_paths_absent": 38,
+    "b06_canonical_paths_present": 38,
+    "other_records_unchanged": 369,
+    "b06r_decision": "HOLD",
+    "b06r_full_record_and_legacy_bytes_unchanged": true,
+    "b06r_planned_destination_absent": true,
+    "reference_edges_exact_current_lines": 64,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 66,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [
+      {
+        "target": "report",
+        "result": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_starting_baseline": true
+      },
+      {
+        "target": "book",
+        "result": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_starting_baseline": true
+      }
+    ],
+    "full_build_gate": "PASS"
+  },
+  "typst": [
+    {
+      "target": "report",
+      "result": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_starting_baseline": true
+    },
+    {
+      "target": "book",
+      "result": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_starting_baseline": true
+    }
+  ],
+  "clean_checkout": {
+    "status": "PASS",
+    "candidate_commit": "681ac021c9b0ab598a47de00395e11a16c20a31e",
+    "candidate_tree": "162dbf4bd0c03506eb6641fc53208a3da0db3ad3",
+    "actual_test_count": 39,
+    "validation": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 19
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 17
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 3
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "proof": {
+      "status": "PASS",
+      "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+      "manifest": {
+        "migrated": 160,
+        "pending": 185,
+        "frozen": 62
+      },
+      "b06_migrated": 38,
+      "b06_old_paths_absent": 38,
+      "b06_canonical_paths_present": 38,
+      "other_records_unchanged": 369,
+      "b06r_decision": "HOLD",
+      "b06r_full_record_and_legacy_bytes_unchanged": true,
+      "b06r_planned_destination_absent": true,
+      "reference_edges_exact_current_lines": 64,
+      "document_prose_captions_widths_order_labels_unchanged": true,
+      "provenance_and_replacement_intent_unchanged": true,
+      "baseline_only_resolved_entries_removed": true,
+      "baseline_remaining": 66,
+      "b02_holds_unchanged": true,
+      "b03_42_bytes_metadata_and_output_map_unchanged": true,
+      "dialog_policy_unchanged": true,
+      "terminal_freeze_and_reference_multiset_unchanged": true,
+      "runtime_assets_unchanged": true,
+      "retained_b02_copies_unchanged": true,
+      "staging_assets": 178,
+      "staging_hashes_correct": true,
+      "staging_ignored": true,
+      "staging_tracked": false,
+      "regeneration_occurred": false,
+      "typst": [
+        {
+          "target": "report",
+          "result": "PASS",
+          "pages": 110,
+          "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+          "byte_identical_to_starting_baseline": true
+        },
+        {
+          "target": "book",
+          "result": "PASS",
+          "pages": 170,
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "byte_identical_to_starting_baseline": true
+        }
+      ],
+      "full_build_gate": "PASS"
+    },
+    "completion_note": "Only b06r.md, b06r.json and b06-closure.md report completion follows the validated candidate; no source/config/assets change."
+  }
+}
