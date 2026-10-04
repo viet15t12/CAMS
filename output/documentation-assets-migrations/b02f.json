@@ -1,0 +1,695 @@
+{
+  "batch": "B02F",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "8c3bbe6948a5a9e4430f2636f2a2cec818ad1526",
+  "status": "PASS — B02 review CLOSED, 37/39 migrated + 2 intentional HOLD; local and fresh-checkout required validation PASS",
+  "review": [
+    {
+      "asset_id": "branding.logos.ptit",
+      "decision": "HOLD",
+      "confidence": "high",
+      "content_summary": "Self-contained 1000x1000 SVG wrapping one 1000x1000 RGBA PNG. XML, base64 after XML whitespace folding, PNG CRCs, full zlib stream and Pillow pixel decode pass. The image visibly contains red PTIT lettering/orbit/book and a yellow star. Pinned Typst renders it correctly. Local Inkscape command exits zero but renders a red missing-image placeholder in two runs.",
+      "semantic_name_judgment": "The PTIT identity and branding classification are supported, and the wrapper is not a true vector original. HOLD is for renderer compatibility, not uncertain logo identity, corrupt PNG or external dependencies. No official upstream, vector-author, license or exporter provenance is established. No normalization/replacement is performed.",
+      "reason": "Hybrid SVG renders PTIT in pinned Typst but local Inkscape renders a missing-image placeholder; cross-renderer compatibility remains unresolved.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "old_path": "00_book/figures/icons/ptit-logo.svg",
+      "planned_canonical_path": "documentation_assets/branding/logos/ptit.svg",
+      "manifest_sha": "4e07a38c561762af59c0dd17806127a08a465ffaaad91c4bdac4d4906e5b2f99",
+      "source_filesystem_sha": "4e07a38c561762af59c0dd17806127a08a465ffaaad91c4bdac4d4906e5b2f99",
+      "source_git_blob_sha": "4e07a38c561762af59c0dd17806127a08a465ffaaad91c4bdac4d4906e5b2f99",
+      "exact_duplicate_conflicts": [],
+      "migrated": false
+    },
+    {
+      "asset_id": "diagrams.lab-topology.multi-router-branch-routing",
+      "decision": "HOLD",
+      "confidence": "high",
+      "content_summary": "Draw.io mxfile/app.diagrams.net with embedded mxGraphModel. Pinned Typst shows R1/R2 dual connections from SWITCH1 and VPC5–VPC9 to ISP; ISP connects to R3, SWITCH2 and VPC-OUTSIDE on the far side. Two Management clouds and interface labels. Inkscape shows vector devices/links but placeholders for the R1/R3 fallback label images; Typst recovers those labels. No area, routing protocol, branch name, addressing plan or scenario purpose is labelled.",
+      "semantic_name_judgment": "Multi-router topology is directly supported. Branch-routing purpose is not established by a source caption or matching scenario description. The GLBP/NAT/DHCP report section uses R1/R2/NAT/ISP with one switch and five clients; lab_4 has R1/R2/ISP/R3, two switches and an outside client. The ACL section uses a three-router chain and three-switch inter-VLAN layout, also different. OSPF lab has six routers and different branch topology. No exact or near-exact conflict identified in inspected neighbors, but purpose is still ambiguous. HOLD rather than treating generic appearance as scenario evidence. Candidate observational wording for later human review: dual-router-lan-isp-outside-network.svg; no new identity/path is assigned.",
+      "reason": "Rendered topology is clear, but current repository context does not verify its branch-routing purpose or precise scenario identity; retain legacy source pending semantic review.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "old_path": "00_book/figures/report/diagrams/lab_4.svg",
+      "planned_canonical_path": "documentation_assets/diagrams/lab-topology/multi-router-branch-routing.svg",
+      "manifest_sha": "209a543e229c90af9448fe34e2ea83dc718f79af94b3c6f20b30d3dc8f42cc7d",
+      "source_filesystem_sha": "209a543e229c90af9448fe34e2ea83dc718f79af94b3c6f20b30d3dc8f42cc7d",
+      "source_git_blob_sha": "209a543e229c90af9448fe34e2ea83dc718f79af94b3c6f20b30d3dc8f42cc7d",
+      "exact_duplicate_conflicts": [],
+      "migrated": false
+    }
+  ],
+  "migration": [],
+  "references": [],
+  "ptit_structure": {
+    "xml_parse": "PASS",
+    "svg_dimensions": [
+      "1000px",
+      "1000px"
+    ],
+    "viewBox": "0 0 1000 1000",
+    "image_attributes": {
+      "id": "image0",
+      "width": "1000",
+      "height": "1000",
+      "x": "0",
+      "y": "0"
+    },
+    "embedded_png_count": 1,
+    "png_bytes": 28359,
+    "png_sha256": "53caae1196a703bc342941d0683c3318f5a316e780fc4e490bbde52cb2a0088d",
+    "ihdr": [
+      1000,
+      1000,
+      8,
+      6,
+      0,
+      0,
+      0
+    ],
+    "chunks": [
+      {
+        "tag": "IHDR",
+        "bytes": 13,
+        "crc_ok": true
+      },
+      {
+        "tag": "iCCP",
+        "bytes": 2342,
+        "crc_ok": true
+      },
+      {
+        "tag": "cHRM",
+        "bytes": 32,
+        "crc_ok": true
+      },
+      {
+        "tag": "bKGD",
+        "bytes": 6,
+        "crc_ok": true
+      },
+      {
+        "tag": "pHYs",
+        "bytes": 9,
+        "crc_ok": true
+      },
+      {
+        "tag": "IDAT",
+        "bytes": 25689,
+        "crc_ok": true
+      },
+      {
+        "tag": "tEXt",
+        "bytes": 37,
+        "crc_ok": true
+      },
+      {
+        "tag": "tEXt",
+        "bytes": 37,
+        "crc_ok": true
+      },
+      {
+        "tag": "tEXt",
+        "bytes": 34,
+        "crc_ok": true
+      },
+      {
+        "tag": "tEXt",
+        "bytes": 20,
+        "crc_ok": true
+      },
+      {
+        "tag": "IEND",
+        "bytes": 0,
+        "crc_ok": true
+      }
+    ],
+    "zlib_decode": {
+      "status": "PASS",
+      "bytes": 4001000
+    },
+    "trailing_bytes": 0,
+    "base64_xml_whitespace_folded": true,
+    "external_dependencies": [],
+    "text_fonts_scripts_styles": [],
+    "hybrid_svg_wrapper": true,
+    "pillow_complete_decode": "PASS"
+  },
+  "ptit_render_checks": [
+    {
+      "command": [
+        "output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/tmp/cams-b02f",
+        "--ignore-system-fonts",
+        "--font-path",
+        "output/typst/toolchain/fonts",
+        "--creation-timestamp",
+        "0",
+        "/tmp/cams-b02f/ptit-smoke.typ",
+        "/tmp/cams-b02f/ptit-smoke.pdf"
+      ],
+      "exit_code": 0,
+      "visual_result": "PTIT branding renders correctly",
+      "qualification": "compatible-with-pinned-typst"
+    },
+    {
+      "command": [
+        "inkscape",
+        "00_book/figures/icons/ptit-logo.svg",
+        "--export-type=png",
+        "--export-filename=/tmp/cams-b02f/ptit-inkscape-confirm.png",
+        "--export-width=1000"
+      ],
+      "exit_code": 0,
+      "visual_result": "Red missing-image placeholder; PTIT image absent",
+      "qualification": "incompatible-in-local-inkscape"
+    }
+  ],
+  "manifest": {
+    "migrated": 37,
+    "pending": 308,
+    "frozen": 62
+  },
+  "b02_closure": {
+    "review_complete": true,
+    "closed": true,
+    "migrated": 37,
+    "total": 39,
+    "intentional_hold": 2,
+    "hold_asset_ids": [
+      "branding.logos.ptit",
+      "diagrams.lab-topology.multi-router-branch-routing"
+    ],
+    "forced_migration": false
+  },
+  "authority": {
+    "starting_commit": "8c3bbe6948a5a9e4430f2636f2a2cec818ad1526",
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 18,
+    "behind": 0
+  },
+  "hash_authority": "Phase 3.3 exact Git blob / binary filesystem / current manifest equality for all 407 assets; historical preflight hashes are not execution authority.",
+  "metadata_policy": "Both HOLD records retain pending state, current_path/path/legacy_path, canonical=false, SHA, source_kind and orphan usage/provenance policy. Only their existing unresolved_reason values change; all 405 other records unchanged. No schema extension.",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-1.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-2.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-3.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-4.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-5.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-6.log"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-7.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-8.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-9.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02f/local-10.log"
+    }
+  ],
+  "local_proof": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "filesystem_index_or_head_blob_manifest_matches": 407,
+    "counts": {
+      "pending": 308,
+      "migrated": 37,
+      "frozen": 62
+    },
+    "other_records_unchanged": 405,
+    "all_asset_bytes_and_paths_unchanged": true,
+    "only_two_unresolved_reason_updates": true,
+    "new_transfers": 0,
+    "hold_legacy_paths_present": 2,
+    "hold_canonical_paths_absent": 2,
+    "hold_orphan_usage_preserved": true,
+    "figures_tree_unchanged": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_book_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02e2_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02e2_baseline": true
+      }
+    ],
+    "b02_closure": {
+      "review_complete": true,
+      "closed": true,
+      "migrated": 37,
+      "total": 39,
+      "intentional_hold": 2,
+      "hold_asset_ids": [
+        "branding.logos.ptit",
+        "diagrams.lab-topology.multi-router-branch-routing"
+      ],
+      "forced_migration": false
+    }
+  },
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02e2_baseline": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02e2_baseline": true
+    }
+  ],
+  "scope": {
+    "new_transfers": 0,
+    "source_byte_changes": 0,
+    "reference_rewrites": 0,
+    "figures_tree_changed": false,
+    "replacement_generation": false,
+    "temporary_review_previews_only": true,
+    "other_batches_started": false,
+    "runtime_terminal_docshot_book_report_changes": false
+  },
+  "mkdocs": {
+    "status": "PASS",
+    "staged_assets": 178,
+    "b02f_staged_assets": 0,
+    "ownership_ledger_unchanged": true,
+    "generated_assets_tracked": false,
+    "environment": "/tmp/cams-b02b4/docs-venv from unchanged requirements-docs.txt",
+    "mkdocs_version": "1.6.1",
+    "material_version": "9.7.7"
+  },
+  "lab_context_investigation": {
+    "source": "00_book/figures/report/diagrams/lab_4.svg",
+    "embedded_model": "app.diagrams.net mxfile, compressed=false, embedded mxGraphModel",
+    "current_repository_sources": [
+      "00_report/contents/09_thu_nghiem_danh_gia.typ:150-174 (OSPF scenario, six routers, different topology)",
+      "00_report/contents/09_thu_nghiem_danh_gia.typ:330-367 (GLBP/DHCP/NAT scenario, R1/R2/NAT/ISP)",
+      "00_report/contents/09_kich_ban_5_acl.typ:13-30 (ACL, R1/R2/R3, three-switch inter-VLAN model)",
+      "00_report/Tai_lieu_lab/LAB5/KICH_BAN_KIEM_THU_ACL.md",
+      "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png",
+      "00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png",
+      "00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp.svg",
+      "00_book/DOC/09_cau_hinh_fhrp.md and docs/USAGE_GUIDE.md"
+    ],
+    "observation": "No live lab_4.svg use or prose explicitly identifies this diagram/scenario. Existing topologies inspected differ in router identities, switch count, client count and interface structure.",
+    "not_inferred": [
+      "OSPF",
+      "NAT",
+      "BGP",
+      "branch failover",
+      "numbered lab/scenario",
+      "experimental result"
+    ],
+    "candidate_name_for_later_review_only": "dual-router-lan-isp-outside-network.svg",
+    "relationship_policy": "No duplicate identity or derivative/group link asserted; existing comparison assets unchanged.",
+    "render_checks": {
+      "pinned_typst": "PASS: complete device labels including R1/R3, topology readable",
+      "local_inkscape": "Vector topology visible; missing-image placeholders for R1/R3 fallback label PNGs; this is a qualification finding, not a document build result."
+    }
+  },
+  "fresh_checkout": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "filesystem_index_or_head_blob_manifest_matches": 407,
+    "counts": {
+      "pending": 308,
+      "migrated": 37,
+      "frozen": 62
+    },
+    "other_records_unchanged": 405,
+    "all_asset_bytes_and_paths_unchanged": true,
+    "only_two_unresolved_reason_updates": true,
+    "new_transfers": 0,
+    "hold_legacy_paths_present": 2,
+    "hold_canonical_paths_absent": 2,
+    "hold_orphan_usage_preserved": true,
+    "figures_tree_unchanged": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_book_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02f/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02f/clean-checkout/output/typst/package-cache",
+          "/tmp/cams-b02f/clean-checkout/00_report/main.typ",
+          "/tmp/cams-b02f/clean-checkout/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02e2_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02f/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02f/clean-checkout/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/tmp/cams-b02f/clean-checkout/00_book/main.typ",
+          "/tmp/cams-b02f/clean-checkout/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02e2_baseline": true
+      }
+    ],
+    "b02_closure": {
+      "review_complete": true,
+      "closed": true,
+      "migrated": 37,
+      "total": 39,
+      "intentional_hold": 2,
+      "hold_asset_ids": [
+        "branding.logos.ptit",
+        "diagrams.lab-topology.multi-router-branch-routing"
+      ],
+      "forced_migration": false
+    },
+    "method": "Separate Linux clone of candidate Git commit, core.autocrlf=false; no generated staging before pre-sync",
+    "candidate_commit": "fd6b91dc4ecb15859541c7159bd9dac5355ad230",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-5.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-6.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-7.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-9.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02f/clean-10.log"
+      }
+    ]
+  }
+}

@@ -410,6 +410,31 @@ class DocumentationAssetTests(unittest.TestCase):
             self.assertEqual(digest(root / comparator["path"]), comparator["sha256"])
             self.assertEqual(records[comparator["asset_id"]]["sha256"], comparator["sha256"])
         reviewed_orphans |= legacy_dhcp_vlan
+        final_hold = {"branding.logos.ptit", "diagrams.lab-topology.multi-router-branch-routing"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02F"}, final_hold)
+        final_report = json.loads((root / "output/documentation-assets-migrations/b02f.json").read_text())
+        self.assertEqual({r["asset_id"] for r in final_report["review"]}, final_hold)
+        self.assertTrue(all(r["decision"] == "HOLD" and not r["migrated"] for r in final_report["review"]))
+        self.assertEqual(final_report["migration"], [])
+        self.assertEqual(final_report["references"], [])
+        self.assertTrue(final_report["b02_closure"]["review_complete"])
+        self.assertTrue(final_report["b02_closure"]["closed"])
+        self.assertEqual(final_report["b02_closure"]["migrated"], 37)
+        self.assertEqual(set(final_report["b02_closure"]["hold_asset_ids"]), final_hold)
+        self.assertFalse(final_report["b02_closure"]["forced_migration"])
+        for asset_id in final_hold:
+            asset = records[asset_id]
+            self.assertEqual(asset["migration_state"], "pending")
+            self.assertFalse(asset["canonical"])
+            self.assertEqual(asset["current_path"], asset["legacy_path"])
+            self.assertEqual(asset["path"], asset["legacy_path"])
+            self.assertEqual(digest(root / asset["current_path"]), asset["sha256"])
+            self.assertFalse((root / asset["planned_canonical_path"]).exists())
+            self.assertEqual(asset["status"], "orphan-review")
+            self.assertEqual(asset["used_by"], [])
+            self.assertEqual(asset["targets"], [])
+            self.assertFalse(asset["mkdocs_stage"])
+            self.assertTrue(asset["unresolved_reason"])
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.

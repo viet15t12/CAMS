@@ -9332,7 +9332,7 @@ assets:
   review_required: true
   canonical_group_id: null
   duplicate_resolution: null
-  unresolved_reason: null
+  unresolved_reason: "Hybrid SVG renders PTIT in pinned Typst but local Inkscape renders a missing-image placeholder; cross-renderer compatibility remains unresolved."
   notes: Subject/source evidence supports domain and semantic filename; preserves
     unique logical asset.
 - id: diagrams.architecture.application-source-tree
@@ -11456,7 +11456,7 @@ assets:
   review_required: true
   canonical_group_id: null
   duplicate_resolution: null
-  unresolved_reason: null
+  unresolved_reason: "Rendered topology is clear, but current repository context does not verify its branch-routing purpose or precise scenario identity; retain legacy source pending semantic review."
   notes: Authored SVG describes existing source format; exporter/author identity not
     established.; Historical lab_4 identifier does not establish scenario purpose;
     topology name is provisional.
