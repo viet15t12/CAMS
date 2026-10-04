@@ -729,32 +729,29 @@ Quản trị viên mở *Settings → Email Alerts* và bật tùy chọn gửi 
 
 @fig-k4-email-settings cho thấy App Password chỉ xuất hiện dưới dạng ký tự che khuất. CAMS lưu giá trị này ở dạng mã hóa và không trả nội dung bí mật về giao diện. Nút *Send test email* cho phép kiểm tra cấu hình trước khi bật luồng cảnh báo thực tế.
 
-#step-title[Bước 11. Gửi và kiểm tra hai email cảnh báo mẫu]
+#step-title[Bước 11. Minh họa email cảnh báo do CAMS tự động gửi]
 
-Phép thử dùng chương trình `demo_send_mail/main.py` để tạo hai bản ghi có cấu trúc giống dữ liệu Syslog đã phân tích. Lệnh dưới đây gửi riêng một thư mức `2 - Critical` và một thư mức `4 - Warning`; App Password được nhập qua lời nhắc ẩn của terminal và không xuất hiện trong tham số lệnh hoặc báo cáo.
+Sau khi hoàn tất cấu hình tại @fig-k4-email-settings và bật chức năng gửi cảnh báo, CAMS tự động theo dõi các bản tin do Syslog Listener tiếp nhận. Mỗi bản tin sau khi được phân tích và lưu trữ sẽ được đối chiếu với các mức cảnh báo đã chọn. Sự kiện phù hợp được đưa vào hàng đợi gửi thư; ứng dụng tạo đồng thời nội dung văn bản thuần và HTML, sau đó gửi qua máy chủ `smtp.gmail.com:465` tới địa chỉ nhận đã cấu hình. Luồng SMTP chạy tách biệt với bộ thu nhận nên không làm gián đoạn quá trình tiếp nhận Syslog.
 
-```text
-python3 demo_send_mail/main.py --levels 2,4
-```
-
-Chương trình dựng mỗi thư ở hai định dạng văn bản thuần và HTML, đăng nhập `smtp.gmail.com:465` bằng `SMTP_SSL`, sau đó gọi `send_message`. Hai lần gửi hoàn tất mà không phát sinh lỗi xác thực, kết nối hoặc SMTP. Nội dung thư mức Critical được trình bày tại @fig-k4-email-critical.
+Để minh họa kết quả của chức năng này, báo cáo lựa chọn hai email đại diện gắn với các sự kiện đã trình bày ở Bước 9: `%LINK-3-UPDOWN` mức `3 - Error` của `SW1` và `%SYS-4-USERLOG_WARNING` mức `4 - Warning` của `R1`. Email mức Error tại @fig-k4-email-error cho thấy cách CAMS trình bày địa chỉ nguồn `192.168.122.104`, số thứ tự `110`, PRI `187`, Syslog facility `23` (`local7`) và mã Cisco `%LINK-3-UPDOWN`.
 
 #figure(
-  image("/00_book/figures/report/diagrams/syslog-lab/18-email-critical.png", width: 72%),
-  caption: [Email cảnh báo mức Critical cho sự kiện `%SYS-2-MALLOCFAIL`],
-) <fig-k4-email-critical>
+  image("/00_book/figures/report/diagrams/syslog-lab/lv3.png", width: 88%),
+  caption: [Minh họa email cảnh báo mức Error cho sự kiện `%LINK-3-UPDOWN` trên SW1],
+) <fig-k4-email-error>
 
-Thư mức Warning tại @fig-k4-email-warning giữ cùng cấu trúc nhưng thay đổi màu, nhãn, khuyến nghị xử lý và dữ liệu thiết bị theo severity. Mỗi thư chứa tên thiết bị, địa chỉ nguồn, thời điểm, số thứ tự, mã Cisco, giao thức, PRI/facility, nội dung đã phân tích và bản tin gốc.
+Thư mức Warning tại @fig-k4-email-warning giữ cùng cấu trúc nhưng sử dụng dữ liệu của `R1`: địa chỉ nguồn `192.168.122.101`, số thứ tự `98`, PRI `188`, Syslog facility `23` và mã Cisco `%SYS-4-USERLOG_WARNING`. Nội dung `DEMO-R1 CYCLE=5/5 Loopback99=DOWN` trùng với dấu mốc xuất hiện trong ảnh terminal của `R1`. Dấu `*` trước thời gian thiết bị được giữ trong bản tin gốc và được biểu diễn thành trạng thái *Chưa đồng bộ* trong phần chi tiết.
 
 #figure(
-  image("/00_book/figures/report/diagrams/syslog-lab/19-email-warning.png", width: 72%),
-  caption: [Email cảnh báo mức Warning cho sự kiện `%PM-4-ERR_DISABLE`],
+  image("/00_book/figures/report/diagrams/syslog-lab/lv4.png", width: 88%),
+  caption: [Minh họa email cảnh báo mức Warning cho sự kiện `%SYS-4-USERLOG_WARNING` trên R1],
 ) <fig-k4-email-warning>
 
-Kết quả đầu ra của chương trình ghi nhận `2` thư đã được chuyển tới máy chủ SMTP để gửi đến địa chỉ nhận đã cấu hình. Phép thử xác nhận đường gửi SMTP và định dạng thư cho hai mức cảnh báo; việc đánh giá độ trễ, giới hạn lưu lượng hoặc tỷ lệ chuyển thư ở quy mô lớn chưa thuộc phạm vi kịch bản này.
+Hai hình minh họa cho thấy email cảnh báo giữ được mối liên hệ với bản tin Syslog nguồn, đồng thời thay đổi nhãn, màu sắc và khuyến nghị theo severity. Việc đánh giá số lượng thư nhận được, độ trễ, giới hạn lưu lượng hoặc tỷ lệ chuyển thư ở quy mô lớn chưa thuộc phạm vi kịch bản này.
 
 ==== Đánh giá kết quả
 
+<<<<<<< HEAD
 CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được facility, severity và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*.
 
 
@@ -885,6 +882,9 @@ Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng b�
 - Cơ chế kiểm soát Privilege 15 theo nguyên lý Fail-Closed loại trừ hoàn toàn nguy cơ thực thi thiếu quyền trên Cisco IOS.
 - Cơ chế tự động chèn từ khóa `log` vào ACL giúp chuyển đổi các quy tắc tường lửa tĩnh thành các sự kiện giám sát động gửi về Syslog Server theo thời gian thực.
 - Kiến trúc mật mã `ENC$v2$` kết hợp Argon2id (RFC 9106) và AES-256-GCM với Record-Bound AAD đảm bảo thông tin đăng nhập được bảo vệ vững chắc ở trạng thái lưu trữ, loại bỏ rủi ro trích xuất mật khẩu bản rõ cũng như tấn công tráo đổi bản mã trong cơ sở dữ liệu.
+=======
+CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được Syslog facility, severity, mã phân hệ Cisco và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*. Phần cảnh báo email cho phép chọn mức cần gửi, bảo vệ App Password và tách thao tác SMTP khỏi bộ nhận. Hai email Error và Warning được chọn làm ví dụ minh họa, sử dụng dữ liệu liên kết trực tiếp với các sự kiện của bài lab.
+>>>>>>> a54a4a5 (chinh hinh lv mail gui syslog)
 
 
 == Đánh giá tổng hợp
