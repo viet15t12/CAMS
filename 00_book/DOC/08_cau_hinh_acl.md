@@ -21,7 +21,7 @@ Standard ACL lọc chủ yếu theo địa chỉ nguồn. Dùng wildcard để k
 dùng `any` khi rule áp dụng cho mọi nguồn.
 
 <figure>
-<p><img src="../../figures/gui/chapter-08/01-acl-standard.png"
+<p><img src="../assets/ui/legacy/routing/acl/standard.png"
 style="width:100.0%" /></p>
 <figcaption><p>Standard ACL cho phép mạng tin cậy rồi từ chối các nguồn còn lại.</p></figcaption>
 </figure>
@@ -35,7 +35,7 @@ Extended ACL có thể lọc theo protocol, địa chỉ nguồn, địa chỉ �
 port. Nó phù hợp với chính sách chi tiết như chỉ cho phép HTTPS tới một server.
 
 <figure>
-<p><img src="../../figures/gui/chapter-08/02-acl-extended.png"
+<p><img src="../assets/ui/legacy/routing/acl/extended.png"
 style="width:100.0%" /></p>
 <figcaption><p>Extended ACL cho phép TCP/443 tới application server.</p></figcaption>
 </figure>
@@ -50,7 +50,7 @@ Dynamic ACL tạo quyền truy cập tạm thời sau quá trình xác thực. N
 của Extended ACL, rule có **Dynamic Name** và timeout tính theo phút.
 
 <figure>
-<p><img src="../../figures/gui/chapter-08/03-acl-dynamic.png"
+<p><img src="../assets/ui/legacy/routing/acl/dynamic.png"
 style="width:100.0%" /></p>
 <figcaption><p>Dynamic ACL cấp quyền SSH tạm thời cho người dùng từ xa.</p></figcaption>
 </figure>
@@ -65,7 +65,7 @@ Reflexive ACL theo dõi session khởi tạo từ phía được tin cậy và t
 cho lưu lượng phản hồi. Rule có **Reflect Name** và timeout tính theo giây.
 
 <figure>
-<p><img src="../../figures/gui/chapter-08/04-acl-reflexive.png"
+<p><img src="../assets/ui/legacy/routing/acl/reflexive.png"
 style="width:100.0%" /></p>
 <figcaption><p>Reflexive ACL theo dõi các session TCP đi ra từ mạng LAN.</p></figcaption>
 </figure>
@@ -79,7 +79,7 @@ MAC ACL lọc ở Layer 2 theo MAC nguồn, MAC đích, mask và EtherType. Đ�
 dùng định dạng Cisco `xxxx.xxxx.xxxx`.
 
 <figure>
-<p><img src="../../figures/gui/chapter-08/05-acl-mac.png"
+<p><img src="../assets/ui/legacy/routing/acl/mac.png"
 style="width:100.0%" /></p>
 <figcaption><p>MAC ACL cho phép một dải địa chỉ MAC tin cậy.</p></figcaption>
 </figure>
@@ -93,7 +93,7 @@ ACL chưa ảnh hưởng lưu lượng cho tới khi được gắn vào interfa
 phù hợp. Tab **Bindings** cho phép một ACL có nhiều binding IN/OUT.
 
 <figure>
-<p><img src="../../figures/gui/chapter-08/06-acl-bindings.png"
+<p><img src="../assets/ui/legacy/routing/acl/bindings.png"
 style="width:100.0%" /></p>
 <figcaption><p>Standard ACL được gắn chiều IN trên GigabitEthernet0/0.</p></figcaption>
 </figure>
@@ -109,7 +109,7 @@ Rule**. Sau khi kiểm tra thứ tự, chọn **Create ACL** hoặc **Change ACL
 Binding được lưu riêng trong tab Bindings nhưng cùng thuộc desired state ACL.
 
 <figure>
-<p><img src="../../figures/gui/chapter-08/07-acl-view-push.png"
+<p><img src="../assets/ui/legacy/routing/acl/view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>View & Push ACL tổng hợp năm ACL và interface binding đang chờ.</p></figcaption>
 </figure>

@@ -1,18 +1,5 @@
 .
 ├── gui
-│   ├── chapter-07
-│   │   ├── 01-dhcp-pools.png
-│   │   ├── 02-dhcp-excluded-addresses.png
-│   │   ├── 03-dhcp-helper-addresses.png
-│   │   └── 04-dhcp-view-push.png
-│   ├── chapter-08
-│   │   ├── 01-acl-standard.png
-│   │   ├── 02-acl-extended.png
-│   │   ├── 03-acl-dynamic.png
-│   │   ├── 04-acl-reflexive.png
-│   │   ├── 05-acl-mac.png
-│   │   ├── 06-acl-bindings.png
-│   │   └── 07-acl-view-push.png
 │   ├── chapter-09
 │   │   ├── 01-hsrp-gateway-members.png
 │   │   ├── 02-hsrp-authentication-timers.png
@@ -431,5 +418,21 @@ B05C canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/routing/eigrp/offset-list.png
 - documentation_assets/ui/legacy/routing/eigrp/key-chains.png
 - documentation_assets/ui/legacy/routing/eigrp/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B06A canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/routing/dhcp/pools.png
+- documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png
+- documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png
+- documentation_assets/ui/legacy/routing/dhcp/view-push.png
+- documentation_assets/ui/legacy/routing/acl/standard.png
+- documentation_assets/ui/legacy/routing/acl/extended.png
+- documentation_assets/ui/legacy/routing/acl/dynamic.png
+- documentation_assets/ui/legacy/routing/acl/reflexive.png
+- documentation_assets/ui/legacy/routing/acl/mac.png
+- documentation_assets/ui/legacy/routing/acl/bindings.png
+- documentation_assets/ui/legacy/routing/acl/view-push.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

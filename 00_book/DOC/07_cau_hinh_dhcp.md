@@ -18,7 +18,7 @@ dựng các lệnh DHCP đang chờ của host hiện tại; nó không trộn v
 Tab **Pool** tạo và quản lý các dải cấp phát DHCP cục bộ trên router.
 
 <figure>
-<p><img src="../../figures/gui/chapter-07/01-dhcp-pools.png"
+<p><img src="../assets/ui/legacy/routing/dhcp/pools.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hai DHCP pool đã lưu cho các mạng VLAN 10 và VLAN 20.</p></figcaption>
 </figure>
@@ -46,7 +46,7 @@ phép cấp cho DHCP client. Thường loại trừ gateway, server, access poin
 thiết bị dùng địa chỉ tĩnh.
 
 <figure>
-<p><img src="../../figures/gui/chapter-07/02-dhcp-excluded-addresses.png"
+<p><img src="../assets/ui/legacy/routing/dhcp/excluded-addresses.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hai khoảng địa chỉ bị loại trừ khỏi quá trình cấp phát.</p></figcaption>
 </figure>
@@ -61,7 +61,7 @@ Tab **Helper** cấu hình DHCP relay trên interface Layer 3 nhận broadcast t
 client. Mỗi bản ghi ghép một interface với địa chỉ unicast của DHCP server.
 
 <figure>
-<p><img src="../../figures/gui/chapter-07/03-dhcp-helper-addresses.png"
+<p><img src="../assets/ui/legacy/routing/dhcp/helper-addresses.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hai DHCP server dự phòng được gắn với interface relay.</p></figcaption>
 </figure>
@@ -76,7 +76,7 @@ Các thay đổi trong từng tab cần được **Save** vào database CAMS tr�
 UI** nạp lại dữ liệu đã lưu; **Cancel Changes** bỏ phần chỉnh sửa cục bộ chưa Save.
 
 <figure>
-<p><img src="../../figures/gui/chapter-07/04-dhcp-view-push.png"
+<p><img src="../assets/ui/legacy/routing/dhcp/view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>View & Push DHCP tổng hợp Pool, Excluded và Helper đang chờ.</p></figcaption>
 </figure>

@@ -3698,14 +3698,14 @@ assets:
   domain: routing/dhcp
   subject: pools
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-07/01-dhcp-pools.png
-  path: 00_book/figures/gui/chapter-07/01-dhcp-pools.png
+  current_path: documentation_assets/ui/legacy/routing/dhcp/pools.png
+  path: documentation_assets/ui/legacy/routing/dhcp/pools.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/dhcp/pools.png
   legacy_path: 00_book/figures/gui/chapter-07/01-dhcp-pools.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b53eff3cd8433087ec8fb6d2dc4889144e2067ce5223e9f7586573dc2cce10b2
   provenance:
     assessment: unknown
@@ -3723,11 +3723,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/07_cau_hinh_dhcp.md
     line: 21
-    referenced_path: ../../figures/gui/chapter-07/01-dhcp-pools.png
+    referenced_path: ../assets/ui/legacy/routing/dhcp/pools.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/07_cau_hinh_dhcp.typ
     line: 20
-    referenced_path: figures/gui/chapter-07/01-dhcp-pools.png
+    referenced_path: /documentation_assets/ui/legacy/routing/dhcp/pools.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3747,14 +3747,14 @@ assets:
   domain: routing/dhcp
   subject: excluded-addresses
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-07/02-dhcp-excluded-addresses.png
-  path: 00_book/figures/gui/chapter-07/02-dhcp-excluded-addresses.png
+  current_path: documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png
+  path: documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png
   legacy_path: 00_book/figures/gui/chapter-07/02-dhcp-excluded-addresses.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0ee20eb9a6a0c53d5bbea6059ca2bd69990fa7183f6bb9dbe9f066879af53d27
   provenance:
     assessment: unknown
@@ -3772,11 +3772,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/07_cau_hinh_dhcp.md
     line: 49
-    referenced_path: ../../figures/gui/chapter-07/02-dhcp-excluded-addresses.png
+    referenced_path: ../assets/ui/legacy/routing/dhcp/excluded-addresses.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/07_cau_hinh_dhcp.typ
     line: 46
-    referenced_path: figures/gui/chapter-07/02-dhcp-excluded-addresses.png
+    referenced_path: /documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3796,14 +3796,14 @@ assets:
   domain: routing/dhcp
   subject: helper-addresses
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-07/03-dhcp-helper-addresses.png
-  path: 00_book/figures/gui/chapter-07/03-dhcp-helper-addresses.png
+  current_path: documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png
+  path: documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png
   legacy_path: 00_book/figures/gui/chapter-07/03-dhcp-helper-addresses.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 54ca3589fe1f5d199b88bacb7fbc2d8c3c47d9fd831e92b49bdda60f5bdef8aa
   provenance:
     assessment: unknown
@@ -3821,11 +3821,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/07_cau_hinh_dhcp.md
     line: 64
-    referenced_path: ../../figures/gui/chapter-07/03-dhcp-helper-addresses.png
+    referenced_path: ../assets/ui/legacy/routing/dhcp/helper-addresses.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/07_cau_hinh_dhcp.typ
     line: 55
-    referenced_path: figures/gui/chapter-07/03-dhcp-helper-addresses.png
+    referenced_path: /documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3845,14 +3845,14 @@ assets:
   domain: routing/dhcp
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-07/04-dhcp-view-push.png
-  path: 00_book/figures/gui/chapter-07/04-dhcp-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/dhcp/view-push.png
+  path: documentation_assets/ui/legacy/routing/dhcp/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/dhcp/view-push.png
   legacy_path: 00_book/figures/gui/chapter-07/04-dhcp-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: a928bb17aaf306441065736fa2fb6b9c557b17292f7c17ce4cc1968f39ed8be7
   provenance:
     assessment: unknown
@@ -3870,11 +3870,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/07_cau_hinh_dhcp.md
     line: 79
-    referenced_path: ../../figures/gui/chapter-07/04-dhcp-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/dhcp/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/07_cau_hinh_dhcp.typ
     line: 64
-    referenced_path: figures/gui/chapter-07/04-dhcp-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/routing/dhcp/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3894,14 +3894,14 @@ assets:
   domain: routing/acl
   subject: standard
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-08/01-acl-standard.png
-  path: 00_book/figures/gui/chapter-08/01-acl-standard.png
+  current_path: documentation_assets/ui/legacy/routing/acl/standard.png
+  path: documentation_assets/ui/legacy/routing/acl/standard.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/acl/standard.png
   legacy_path: 00_book/figures/gui/chapter-08/01-acl-standard.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 959e8a8d3777948b29b761bfe485fedb4d0dfa6386c9b105a640b1109bcd8cba
   provenance:
     assessment: unknown
@@ -3919,11 +3919,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/08_cau_hinh_acl.md
     line: 24
-    referenced_path: ../../figures/gui/chapter-08/01-acl-standard.png
+    referenced_path: ../assets/ui/legacy/routing/acl/standard.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/08_cau_hinh_acl.typ
     line: 19
-    referenced_path: figures/gui/chapter-08/01-acl-standard.png
+    referenced_path: /documentation_assets/ui/legacy/routing/acl/standard.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3943,14 +3943,14 @@ assets:
   domain: routing/acl
   subject: extended
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-08/02-acl-extended.png
-  path: 00_book/figures/gui/chapter-08/02-acl-extended.png
+  current_path: documentation_assets/ui/legacy/routing/acl/extended.png
+  path: documentation_assets/ui/legacy/routing/acl/extended.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/acl/extended.png
   legacy_path: 00_book/figures/gui/chapter-08/02-acl-extended.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: aae1c02ef39cfe1b8c1f607f5d6fd527fd654186e5230ee668cd514afc250a2d
   provenance:
     assessment: unknown
@@ -3968,11 +3968,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/08_cau_hinh_acl.md
     line: 38
-    referenced_path: ../../figures/gui/chapter-08/02-acl-extended.png
+    referenced_path: ../assets/ui/legacy/routing/acl/extended.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/08_cau_hinh_acl.typ
     line: 28
-    referenced_path: figures/gui/chapter-08/02-acl-extended.png
+    referenced_path: /documentation_assets/ui/legacy/routing/acl/extended.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3992,14 +3992,14 @@ assets:
   domain: routing/acl
   subject: dynamic
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-08/03-acl-dynamic.png
-  path: 00_book/figures/gui/chapter-08/03-acl-dynamic.png
+  current_path: documentation_assets/ui/legacy/routing/acl/dynamic.png
+  path: documentation_assets/ui/legacy/routing/acl/dynamic.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/acl/dynamic.png
   legacy_path: 00_book/figures/gui/chapter-08/03-acl-dynamic.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: a2a5ba78ccff7a615ae9b9496d5b3c9869f4e96e83ae93d56e6d316a07cec5ac
   provenance:
     assessment: unknown
@@ -4017,11 +4017,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/08_cau_hinh_acl.md
     line: 53
-    referenced_path: ../../figures/gui/chapter-08/03-acl-dynamic.png
+    referenced_path: ../assets/ui/legacy/routing/acl/dynamic.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/08_cau_hinh_acl.typ
     line: 37
-    referenced_path: figures/gui/chapter-08/03-acl-dynamic.png
+    referenced_path: /documentation_assets/ui/legacy/routing/acl/dynamic.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4041,14 +4041,14 @@ assets:
   domain: routing/acl
   subject: reflexive
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-08/04-acl-reflexive.png
-  path: 00_book/figures/gui/chapter-08/04-acl-reflexive.png
+  current_path: documentation_assets/ui/legacy/routing/acl/reflexive.png
+  path: documentation_assets/ui/legacy/routing/acl/reflexive.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/acl/reflexive.png
   legacy_path: 00_book/figures/gui/chapter-08/04-acl-reflexive.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 9e7d725669115554b85eddd535918d669389f90de4c890ca3abaf51c3b8fc958
   provenance:
     assessment: unknown
@@ -4066,11 +4066,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/08_cau_hinh_acl.md
     line: 68
-    referenced_path: ../../figures/gui/chapter-08/04-acl-reflexive.png
+    referenced_path: ../assets/ui/legacy/routing/acl/reflexive.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/08_cau_hinh_acl.typ
     line: 46
-    referenced_path: figures/gui/chapter-08/04-acl-reflexive.png
+    referenced_path: /documentation_assets/ui/legacy/routing/acl/reflexive.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4090,14 +4090,14 @@ assets:
   domain: routing/acl
   subject: mac
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-08/05-acl-mac.png
-  path: 00_book/figures/gui/chapter-08/05-acl-mac.png
+  current_path: documentation_assets/ui/legacy/routing/acl/mac.png
+  path: documentation_assets/ui/legacy/routing/acl/mac.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/acl/mac.png
   legacy_path: 00_book/figures/gui/chapter-08/05-acl-mac.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 87842fa704cf2b9d17486f95a6c77f7f9837eba31ddc64fd6ac356338c0c6a80
   provenance:
     assessment: unknown
@@ -4115,11 +4115,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/08_cau_hinh_acl.md
     line: 82
-    referenced_path: ../../figures/gui/chapter-08/05-acl-mac.png
+    referenced_path: ../assets/ui/legacy/routing/acl/mac.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/08_cau_hinh_acl.typ
     line: 55
-    referenced_path: figures/gui/chapter-08/05-acl-mac.png
+    referenced_path: /documentation_assets/ui/legacy/routing/acl/mac.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4139,14 +4139,14 @@ assets:
   domain: routing/acl
   subject: bindings
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-08/06-acl-bindings.png
-  path: 00_book/figures/gui/chapter-08/06-acl-bindings.png
+  current_path: documentation_assets/ui/legacy/routing/acl/bindings.png
+  path: documentation_assets/ui/legacy/routing/acl/bindings.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/acl/bindings.png
   legacy_path: 00_book/figures/gui/chapter-08/06-acl-bindings.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e217b31908eaa91a45695da04dc2d0f355a7d7f02b83ec44b20c6415482b4589
   provenance:
     assessment: unknown
@@ -4164,11 +4164,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/08_cau_hinh_acl.md
     line: 96
-    referenced_path: ../../figures/gui/chapter-08/06-acl-bindings.png
+    referenced_path: ../assets/ui/legacy/routing/acl/bindings.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/08_cau_hinh_acl.typ
     line: 64
-    referenced_path: figures/gui/chapter-08/06-acl-bindings.png
+    referenced_path: /documentation_assets/ui/legacy/routing/acl/bindings.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4188,14 +4188,14 @@ assets:
   domain: routing/acl
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-08/07-acl-view-push.png
-  path: 00_book/figures/gui/chapter-08/07-acl-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/acl/view-push.png
+  path: documentation_assets/ui/legacy/routing/acl/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/acl/view-push.png
   legacy_path: 00_book/figures/gui/chapter-08/07-acl-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 8996a94b15baa2cdffcf35e735ecd5c62bc9ba22cb1de5813e1b9fe00980ba9d
   provenance:
     assessment: unknown
@@ -4213,11 +4213,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/08_cau_hinh_acl.md
     line: 112
-    referenced_path: ../../figures/gui/chapter-08/07-acl-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/acl/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/08_cau_hinh_acl.typ
     line: 73
-    referenced_path: figures/gui/chapter-08/07-acl-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/routing/acl/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs

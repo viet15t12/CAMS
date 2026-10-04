@@ -16,7 +16,7 @@ Chọn router rồi chọn *ACL* trên Feature Bar. Chọn loại ACL trên than
 
 Standard ACL lọc chủ yếu theo địa chỉ nguồn. Dùng wildcard để khớp một mạng hoặc dùng #raw("any") khi rule áp dụng cho mọi nguồn.
 
-#insert-image("figures/gui/chapter-08/01-acl-standard.png",
+#insert-image("/documentation_assets/ui/legacy/routing/acl/standard.png",
   caption: [Standard ACL cho phép mạng tin cậy rồi từ chối các nguồn còn lại.], width: 100.0%) <fig:ch08-01-acl-standard>
 
 Nên đặt Standard ACL gần đích để tránh chặn cùng một nguồn trên quá nhiều luồng không liên quan. Kiểm tra thứ tự Permit/Deny và implicit deny trước khi áp dụng.
@@ -25,7 +25,7 @@ Nên đặt Standard ACL gần đích để tránh chặn cùng một nguồn tr
 
 Extended ACL có thể lọc theo protocol, địa chỉ nguồn, địa chỉ đích, wildcard và port. Nó phù hợp với chính sách chi tiết như chỉ cho phép HTTPS tới một server.
 
-#insert-image("figures/gui/chapter-08/02-acl-extended.png",
+#insert-image("/documentation_assets/ui/legacy/routing/acl/extended.png",
   caption: [Extended ACL cho phép TCP/443 tới application server.], width: 100.0%) <fig:ch08-02-acl-extended>
 
 Với TCP/UDP, port được chuẩn hóa sang cú pháp Cisco như #raw("eq 443"). Với ICMP, dùng tên hoặc số ICMP type phù hợp. Extended ACL thường được đặt gần nguồn để loại bỏ lưu lượng không mong muốn sớm hơn.
@@ -34,7 +34,7 @@ Với TCP/UDP, port được chuẩn hóa sang cú pháp Cisco như #raw("eq 443
 
 Dynamic ACL tạo quyền truy cập tạm thời sau quá trình xác thực. Ngoài các trường của Extended ACL, rule có *Dynamic Name* và timeout tính theo phút.
 
-#insert-image("figures/gui/chapter-08/03-acl-dynamic.png",
+#insert-image("/documentation_assets/ui/legacy/routing/acl/dynamic.png",
   caption: [Dynamic ACL cấp quyền SSH tạm thời cho người dùng từ xa.], width: 100.0%) <fig:ch08-03-acl-dynamic>
 
 Tên dynamic phải rõ ràng và timeout đủ ngắn để giảm thời gian phơi bày nhưng vẫn phù hợp phiên làm việc. Chức năng này cần được kiểm chứng với phiên bản IOS và cơ chế xác thực thực tế.
@@ -43,7 +43,7 @@ Tên dynamic phải rõ ràng và timeout đủ ngắn để giảm thời gian 
 
 Reflexive ACL theo dõi session khởi tạo từ phía được tin cậy và tạo entry tạm cho lưu lượng phản hồi. Rule có *Reflect Name* và timeout tính theo giây.
 
-#insert-image("figures/gui/chapter-08/04-acl-reflexive.png",
+#insert-image("/documentation_assets/ui/legacy/routing/acl/reflexive.png",
   caption: [Reflexive ACL theo dõi các session TCP đi ra từ mạng LAN.], width: 100.0%) <fig:ch08-04-acl-reflexive>
 
 Reflect Name phải khớp với thiết kế ACL đánh giá lưu lượng quay về. Đây không phải stateful firewall đầy đủ; cần kiểm tra giới hạn của platform trước khi dùng.
@@ -52,7 +52,7 @@ Reflect Name phải khớp với thiết kế ACL đánh giá lưu lượng quay
 
 MAC ACL lọc ở Layer 2 theo MAC nguồn, MAC đích, mask và EtherType. Địa chỉ MAC dùng định dạng Cisco #raw("xxxx.xxxx.xxxx").
 
-#insert-image("figures/gui/chapter-08/05-acl-mac.png",
+#insert-image("/documentation_assets/ui/legacy/routing/acl/mac.png",
   caption: [MAC ACL cho phép một dải địa chỉ MAC tin cậy.], width: 100.0%) <fig:ch08-05-acl-mac>
 
 MAC ACL chỉ phù hợp trên interface và platform hỗ trợ. Không xem MAC filtering là cơ chế xác thực mạnh vì địa chỉ MAC có thể bị giả mạo.
@@ -61,7 +61,7 @@ MAC ACL chỉ phù hợp trên interface và platform hỗ trợ. Không xem MAC
 
 ACL chưa ảnh hưởng lưu lượng cho tới khi được gắn vào interface và direction phù hợp. Tab *Bindings* cho phép một ACL có nhiều binding IN/OUT.
 
-#insert-image("figures/gui/chapter-08/06-acl-bindings.png",
+#insert-image("/documentation_assets/ui/legacy/routing/acl/bindings.png",
   caption: [Standard ACL được gắn chiều IN trên GigabitEthernet0/0.], width: 100.0%) <fig:ch08-06-acl-bindings>
 
 *In* lọc gói ngay khi đi vào interface; *Out* lọc trước khi gói rời interface. Không gắn cùng một policy ở cả hai chiều nếu đó không phải chủ đích. Với ACL bảo vệ truy cập quản trị, phải bảo đảm địa chỉ của phiên quản trị hiện tại được Permit.
@@ -70,7 +70,7 @@ ACL chưa ảnh hưởng lưu lượng cho tới khi được gắn vào interfa
 
 Trong Rule Builder, nhập ACL Name, Description và từng rule rồi chọn *+ Add Rule*. Sau khi kiểm tra thứ tự, chọn *Create ACL* hoặc *Change ACL* để lưu. Binding được lưu riêng trong tab Bindings nhưng cùng thuộc desired state ACL.
 
-#insert-image("figures/gui/chapter-08/07-acl-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/routing/acl/view-push.png",
   caption: [View & Push ACL tổng hợp năm ACL và interface binding đang chờ.], width: 75.0%) <fig:ch08-07-acl-view-push>
 
 Cửa sổ này chỉ xử lý controller ACL. Kiểm tra từng khối ACL, sequence, Permit/ Deny, protocol, source, destination, port và lệnh #raw("ip access-group"). Đặc biệt rà soát các lệnh #raw("no") khi sửa hoặc xóa rule. Chỉ nhấn *Push* khi tiêu đề là *View & Push ACL* và host đúng với router cần cấu hình.

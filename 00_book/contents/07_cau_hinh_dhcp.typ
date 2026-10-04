@@ -17,7 +17,7 @@ Chọn router trong Devices Sidebar rồi chọn *DHCP* trên Feature Bar. Thanh
 
 Tab *Pool* tạo và quản lý các dải cấp phát DHCP cục bộ trên router.
 
-#insert-image("figures/gui/chapter-07/01-dhcp-pools.png",
+#insert-image("/documentation_assets/ui/legacy/routing/dhcp/pools.png",
   caption: [Hai DHCP pool đã lưu cho các mạng VLAN 10 và VLAN 20.], width: 100.0%) <fig:ch07-01-dhcp-pools>
 
 #report-table(
@@ -43,7 +43,7 @@ Network phải là địa chỉ mạng đúng với subnet mask. Default Router 
 
 Tab *Excluded* khai báo một địa chỉ hoặc một khoảng địa chỉ router không được phép cấp cho DHCP client. Thường loại trừ gateway, server, access point và các thiết bị dùng địa chỉ tĩnh.
 
-#insert-image("figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+#insert-image("/documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png",
   caption: [Hai khoảng địa chỉ bị loại trừ khỏi quá trình cấp phát.], width: 100.0%) <fig:ch07-02-dhcp-excluded-addresses>
 
 *Start IP* là địa chỉ đầu. *End IP* là địa chỉ cuối của một khoảng liên tục; để trống trường này nếu chỉ loại trừ một địa chỉ. End IP không được nhỏ hơn Start IP và hai giá trị phải phù hợp với mạng đang vận hành.
@@ -52,7 +52,7 @@ Tab *Excluded* khai báo một địa chỉ hoặc một khoảng địa chỉ r
 
 Tab *Helper* cấu hình DHCP relay trên interface Layer 3 nhận broadcast từ client. Mỗi bản ghi ghép một interface với địa chỉ unicast của DHCP server.
 
-#insert-image("figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+#insert-image("/documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png",
   caption: [Hai DHCP server dự phòng được gắn với interface relay.], width: 100.0%) <fig:ch07-03-dhcp-helper-addresses>
 
 Interface phải có địa chỉ IP và hướng về mạng client. Có thể thêm nhiều Helper IP trên cùng interface để dự phòng. Trước khi lưu, kiểm tra router có route tới server và chính sách ACL không chặn DHCP relay.
@@ -61,7 +61,7 @@ Interface phải có địa chỉ IP và hướng về mạng client. Có thể 
 
 #report-note[Các thay đổi trong từng tab cần được *Save* vào database CAMS trước. *Reload UI* nạp lại dữ liệu đã lưu; *Cancel Changes* bỏ phần chỉnh sửa cục bộ chưa Save.]
 
-#insert-image("figures/gui/chapter-07/04-dhcp-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/routing/dhcp/view-push.png",
   caption: [View & Push DHCP tổng hợp Pool, Excluded và Helper đang chờ.], width: 75.0%) <fig:ch07-04-dhcp-view-push>
 
 Trong preview, kiểm tra riêng các nhóm lệnh:

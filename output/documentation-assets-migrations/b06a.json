@@ -1,0 +1,832 @@
+{
+  "batch": "B06A",
+  "starting_commit": "651c479fd19505a0b2a828b3a7155a171f5e8720",
+  "status": "PASS cheap gate; cumulative build/fresh gate deferred",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 11,
+    "dimensions_nonzero": true,
+    "chapter_context_agrees": true,
+    "terminal_or_evidence_or_runtime": false,
+    "target_collisions": false,
+    "provenance": "unknown retained; no reconstruction or new generator"
+  },
+  "assets": [
+    {
+      "asset_id": "ui.routing.dhcp.pools",
+      "old_path": "00_book/figures/gui/chapter-07/01-dhcp-pools.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/dhcp/pools.png",
+      "source_git_blob_sha": "b53eff3cd8433087ec8fb6d2dc4889144e2067ce5223e9f7586573dc2cce10b2",
+      "canonical_filesystem_sha": "b53eff3cd8433087ec8fb6d2dc4889144e2067ce5223e9f7586573dc2cce10b2",
+      "canonical_index_blob_sha": "b53eff3cd8433087ec8fb6d2dc4889144e2067ce5223e9f7586573dc2cce10b2",
+      "manifest_sha": "b53eff3cd8433087ec8fb6d2dc4889144e2067ce5223e9f7586573dc2cce10b2",
+      "staging_path": "00_book/assets/ui/legacy/routing/dhcp/pools.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+          "line": 21,
+          "referenced_path": "../assets/ui/legacy/routing/dhcp/pools.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+          "line": 20,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/dhcp/pools.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.excluded-addresses",
+      "old_path": "00_book/figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png",
+      "source_git_blob_sha": "0ee20eb9a6a0c53d5bbea6059ca2bd69990fa7183f6bb9dbe9f066879af53d27",
+      "canonical_filesystem_sha": "0ee20eb9a6a0c53d5bbea6059ca2bd69990fa7183f6bb9dbe9f066879af53d27",
+      "canonical_index_blob_sha": "0ee20eb9a6a0c53d5bbea6059ca2bd69990fa7183f6bb9dbe9f066879af53d27",
+      "manifest_sha": "0ee20eb9a6a0c53d5bbea6059ca2bd69990fa7183f6bb9dbe9f066879af53d27",
+      "staging_path": "00_book/assets/ui/legacy/routing/dhcp/excluded-addresses.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+          "line": 49,
+          "referenced_path": "../assets/ui/legacy/routing/dhcp/excluded-addresses.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+          "line": 46,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.helper-addresses",
+      "old_path": "00_book/figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png",
+      "source_git_blob_sha": "54ca3589fe1f5d199b88bacb7fbc2d8c3c47d9fd831e92b49bdda60f5bdef8aa",
+      "canonical_filesystem_sha": "54ca3589fe1f5d199b88bacb7fbc2d8c3c47d9fd831e92b49bdda60f5bdef8aa",
+      "canonical_index_blob_sha": "54ca3589fe1f5d199b88bacb7fbc2d8c3c47d9fd831e92b49bdda60f5bdef8aa",
+      "manifest_sha": "54ca3589fe1f5d199b88bacb7fbc2d8c3c47d9fd831e92b49bdda60f5bdef8aa",
+      "staging_path": "00_book/assets/ui/legacy/routing/dhcp/helper-addresses.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+          "line": 64,
+          "referenced_path": "../assets/ui/legacy/routing/dhcp/helper-addresses.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+          "line": 55,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.view-push",
+      "old_path": "00_book/figures/gui/chapter-07/04-dhcp-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/dhcp/view-push.png",
+      "source_git_blob_sha": "a928bb17aaf306441065736fa2fb6b9c557b17292f7c17ce4cc1968f39ed8be7",
+      "canonical_filesystem_sha": "a928bb17aaf306441065736fa2fb6b9c557b17292f7c17ce4cc1968f39ed8be7",
+      "canonical_index_blob_sha": "a928bb17aaf306441065736fa2fb6b9c557b17292f7c17ce4cc1968f39ed8be7",
+      "manifest_sha": "a928bb17aaf306441065736fa2fb6b9c557b17292f7c17ce4cc1968f39ed8be7",
+      "staging_path": "00_book/assets/ui/legacy/routing/dhcp/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+          "line": 79,
+          "referenced_path": "../assets/ui/legacy/routing/dhcp/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+          "line": 64,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/dhcp/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.acl.standard",
+      "old_path": "00_book/figures/gui/chapter-08/01-acl-standard.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/acl/standard.png",
+      "source_git_blob_sha": "959e8a8d3777948b29b761bfe485fedb4d0dfa6386c9b105a640b1109bcd8cba",
+      "canonical_filesystem_sha": "959e8a8d3777948b29b761bfe485fedb4d0dfa6386c9b105a640b1109bcd8cba",
+      "canonical_index_blob_sha": "959e8a8d3777948b29b761bfe485fedb4d0dfa6386c9b105a640b1109bcd8cba",
+      "manifest_sha": "959e8a8d3777948b29b761bfe485fedb4d0dfa6386c9b105a640b1109bcd8cba",
+      "staging_path": "00_book/assets/ui/legacy/routing/acl/standard.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+          "line": 24,
+          "referenced_path": "../assets/ui/legacy/routing/acl/standard.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+          "line": 19,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/acl/standard.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.acl.extended",
+      "old_path": "00_book/figures/gui/chapter-08/02-acl-extended.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/acl/extended.png",
+      "source_git_blob_sha": "aae1c02ef39cfe1b8c1f607f5d6fd527fd654186e5230ee668cd514afc250a2d",
+      "canonical_filesystem_sha": "aae1c02ef39cfe1b8c1f607f5d6fd527fd654186e5230ee668cd514afc250a2d",
+      "canonical_index_blob_sha": "aae1c02ef39cfe1b8c1f607f5d6fd527fd654186e5230ee668cd514afc250a2d",
+      "manifest_sha": "aae1c02ef39cfe1b8c1f607f5d6fd527fd654186e5230ee668cd514afc250a2d",
+      "staging_path": "00_book/assets/ui/legacy/routing/acl/extended.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+          "line": 38,
+          "referenced_path": "../assets/ui/legacy/routing/acl/extended.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+          "line": 28,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/acl/extended.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.acl.dynamic",
+      "old_path": "00_book/figures/gui/chapter-08/03-acl-dynamic.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/acl/dynamic.png",
+      "source_git_blob_sha": "a2a5ba78ccff7a615ae9b9496d5b3c9869f4e96e83ae93d56e6d316a07cec5ac",
+      "canonical_filesystem_sha": "a2a5ba78ccff7a615ae9b9496d5b3c9869f4e96e83ae93d56e6d316a07cec5ac",
+      "canonical_index_blob_sha": "a2a5ba78ccff7a615ae9b9496d5b3c9869f4e96e83ae93d56e6d316a07cec5ac",
+      "manifest_sha": "a2a5ba78ccff7a615ae9b9496d5b3c9869f4e96e83ae93d56e6d316a07cec5ac",
+      "staging_path": "00_book/assets/ui/legacy/routing/acl/dynamic.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+          "line": 53,
+          "referenced_path": "../assets/ui/legacy/routing/acl/dynamic.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+          "line": 37,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/acl/dynamic.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.acl.reflexive",
+      "old_path": "00_book/figures/gui/chapter-08/04-acl-reflexive.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/acl/reflexive.png",
+      "source_git_blob_sha": "9e7d725669115554b85eddd535918d669389f90de4c890ca3abaf51c3b8fc958",
+      "canonical_filesystem_sha": "9e7d725669115554b85eddd535918d669389f90de4c890ca3abaf51c3b8fc958",
+      "canonical_index_blob_sha": "9e7d725669115554b85eddd535918d669389f90de4c890ca3abaf51c3b8fc958",
+      "manifest_sha": "9e7d725669115554b85eddd535918d669389f90de4c890ca3abaf51c3b8fc958",
+      "staging_path": "00_book/assets/ui/legacy/routing/acl/reflexive.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+          "line": 68,
+          "referenced_path": "../assets/ui/legacy/routing/acl/reflexive.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+          "line": 46,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/acl/reflexive.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.acl.mac",
+      "old_path": "00_book/figures/gui/chapter-08/05-acl-mac.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/acl/mac.png",
+      "source_git_blob_sha": "87842fa704cf2b9d17486f95a6c77f7f9837eba31ddc64fd6ac356338c0c6a80",
+      "canonical_filesystem_sha": "87842fa704cf2b9d17486f95a6c77f7f9837eba31ddc64fd6ac356338c0c6a80",
+      "canonical_index_blob_sha": "87842fa704cf2b9d17486f95a6c77f7f9837eba31ddc64fd6ac356338c0c6a80",
+      "manifest_sha": "87842fa704cf2b9d17486f95a6c77f7f9837eba31ddc64fd6ac356338c0c6a80",
+      "staging_path": "00_book/assets/ui/legacy/routing/acl/mac.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+          "line": 82,
+          "referenced_path": "../assets/ui/legacy/routing/acl/mac.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+          "line": 55,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/acl/mac.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.acl.bindings",
+      "old_path": "00_book/figures/gui/chapter-08/06-acl-bindings.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/acl/bindings.png",
+      "source_git_blob_sha": "e217b31908eaa91a45695da04dc2d0f355a7d7f02b83ec44b20c6415482b4589",
+      "canonical_filesystem_sha": "e217b31908eaa91a45695da04dc2d0f355a7d7f02b83ec44b20c6415482b4589",
+      "canonical_index_blob_sha": "e217b31908eaa91a45695da04dc2d0f355a7d7f02b83ec44b20c6415482b4589",
+      "manifest_sha": "e217b31908eaa91a45695da04dc2d0f355a7d7f02b83ec44b20c6415482b4589",
+      "staging_path": "00_book/assets/ui/legacy/routing/acl/bindings.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+          "line": 96,
+          "referenced_path": "../assets/ui/legacy/routing/acl/bindings.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+          "line": 64,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/acl/bindings.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.acl.view-push",
+      "old_path": "00_book/figures/gui/chapter-08/07-acl-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/acl/view-push.png",
+      "source_git_blob_sha": "8996a94b15baa2cdffcf35e735ecd5c62bc9ba22cb1de5813e1b9fe00980ba9d",
+      "canonical_filesystem_sha": "8996a94b15baa2cdffcf35e735ecd5c62bc9ba22cb1de5813e1b9fe00980ba9d",
+      "canonical_index_blob_sha": "8996a94b15baa2cdffcf35e735ecd5c62bc9ba22cb1de5813e1b9fe00980ba9d",
+      "manifest_sha": "8996a94b15baa2cdffcf35e735ecd5c62bc9ba22cb1de5813e1b9fe00980ba9d",
+      "staging_path": "00_book/assets/ui/legacy/routing/acl/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+          "line": 112,
+          "referenced_path": "../assets/ui/legacy/routing/acl/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+          "line": 73,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/acl/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.routing.dhcp.pools",
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "line": 21,
+      "before": "../../figures/gui/chapter-07/01-dhcp-pools.png",
+      "after": "../assets/ui/legacy/routing/dhcp/pools.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.excluded-addresses",
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "line": 49,
+      "before": "../../figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+      "after": "../assets/ui/legacy/routing/dhcp/excluded-addresses.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.helper-addresses",
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "line": 64,
+      "before": "../../figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+      "after": "../assets/ui/legacy/routing/dhcp/helper-addresses.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.view-push",
+      "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+      "line": 79,
+      "before": "../../figures/gui/chapter-07/04-dhcp-view-push.png",
+      "after": "../assets/ui/legacy/routing/dhcp/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.acl.standard",
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "line": 24,
+      "before": "../../figures/gui/chapter-08/01-acl-standard.png",
+      "after": "../assets/ui/legacy/routing/acl/standard.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.acl.extended",
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "line": 38,
+      "before": "../../figures/gui/chapter-08/02-acl-extended.png",
+      "after": "../assets/ui/legacy/routing/acl/extended.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.acl.dynamic",
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "line": 53,
+      "before": "../../figures/gui/chapter-08/03-acl-dynamic.png",
+      "after": "../assets/ui/legacy/routing/acl/dynamic.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.acl.reflexive",
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "line": 68,
+      "before": "../../figures/gui/chapter-08/04-acl-reflexive.png",
+      "after": "../assets/ui/legacy/routing/acl/reflexive.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.acl.mac",
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "line": 82,
+      "before": "../../figures/gui/chapter-08/05-acl-mac.png",
+      "after": "../assets/ui/legacy/routing/acl/mac.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.acl.bindings",
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "line": 96,
+      "before": "../../figures/gui/chapter-08/06-acl-bindings.png",
+      "after": "../assets/ui/legacy/routing/acl/bindings.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.acl.view-push",
+      "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+      "line": 112,
+      "before": "../../figures/gui/chapter-08/07-acl-view-push.png",
+      "after": "../assets/ui/legacy/routing/acl/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.pools",
+      "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+      "line": 20,
+      "before": "figures/gui/chapter-07/01-dhcp-pools.png",
+      "after": "/documentation_assets/ui/legacy/routing/dhcp/pools.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.excluded-addresses",
+      "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+      "line": 46,
+      "before": "figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+      "after": "/documentation_assets/ui/legacy/routing/dhcp/excluded-addresses.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.helper-addresses",
+      "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+      "line": 55,
+      "before": "figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+      "after": "/documentation_assets/ui/legacy/routing/dhcp/helper-addresses.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.dhcp.view-push",
+      "source_document": "00_book/contents/07_cau_hinh_dhcp.typ",
+      "line": 64,
+      "before": "figures/gui/chapter-07/04-dhcp-view-push.png",
+      "after": "/documentation_assets/ui/legacy/routing/dhcp/view-push.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.acl.standard",
+      "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+      "line": 19,
+      "before": "figures/gui/chapter-08/01-acl-standard.png",
+      "after": "/documentation_assets/ui/legacy/routing/acl/standard.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.acl.extended",
+      "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+      "line": 28,
+      "before": "figures/gui/chapter-08/02-acl-extended.png",
+      "after": "/documentation_assets/ui/legacy/routing/acl/extended.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.acl.dynamic",
+      "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+      "line": 37,
+      "before": "figures/gui/chapter-08/03-acl-dynamic.png",
+      "after": "/documentation_assets/ui/legacy/routing/acl/dynamic.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.acl.reflexive",
+      "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+      "line": 46,
+      "before": "figures/gui/chapter-08/04-acl-reflexive.png",
+      "after": "/documentation_assets/ui/legacy/routing/acl/reflexive.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.acl.mac",
+      "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+      "line": 55,
+      "before": "figures/gui/chapter-08/05-acl-mac.png",
+      "after": "/documentation_assets/ui/legacy/routing/acl/mac.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.acl.bindings",
+      "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+      "line": 64,
+      "before": "figures/gui/chapter-08/06-acl-bindings.png",
+      "after": "/documentation_assets/ui/legacy/routing/acl/bindings.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.acl.view-push",
+      "source_document": "00_book/contents/08_cau_hinh_acl.typ",
+      "line": 73,
+      "before": "figures/gui/chapter-08/07-acl-view-push.png",
+      "after": "/documentation_assets/ui/legacy/routing/acl/view-push.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 22,
+  "baseline": {
+    "before": 104,
+    "resolved": 11,
+    "after": 93,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+        "referenced_path": "../../figures/gui/chapter-07/01-dhcp-pools.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-07/01-dhcp-pools.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+        "referenced_path": "../../figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-07/02-dhcp-excluded-addresses.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+        "referenced_path": "../../figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-07/03-dhcp-helper-addresses.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
+        "referenced_path": "../../figures/gui/chapter-07/04-dhcp-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-07/04-dhcp-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+        "referenced_path": "../../figures/gui/chapter-08/01-acl-standard.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-08/01-acl-standard.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+        "referenced_path": "../../figures/gui/chapter-08/02-acl-extended.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-08/02-acl-extended.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+        "referenced_path": "../../figures/gui/chapter-08/03-acl-dynamic.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-08/03-acl-dynamic.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+        "referenced_path": "../../figures/gui/chapter-08/04-acl-reflexive.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-08/04-acl-reflexive.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+        "referenced_path": "../../figures/gui/chapter-08/05-acl-mac.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-08/05-acl-mac.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+        "referenced_path": "../../figures/gui/chapter-08/06-acl-bindings.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-08/06-acl-bindings.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/08_cau_hinh_acl.md",
+        "referenced_path": "../../figures/gui/chapter-08/07-acl-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-08/07-acl-view-push.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 133,
+    "pending": 212,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 133,
+      "pending": 212,
+      "frozen": 62
+    },
+    "b06_migrated": 11,
+    "b06_old_paths_absent": 11,
+    "b06_canonical_paths_present": 11,
+    "other_records_unchanged": 396,
+    "reference_edges_exact_current_lines": 22,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 93,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [],
+    "full_build_gate": "DEFERRED until cumulative B06R"
+  },
+  "typst": [],
+  "png_sanity": [
+    {
+      "asset_id": "ui.routing.dhcp.pools",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.dhcp.excluded-addresses",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.dhcp.helper-addresses",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.dhcp.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.acl.standard",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.acl.extended",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.acl.dynamic",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.acl.reflexive",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.acl.mac",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.acl.bindings",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.acl.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ]
+}
