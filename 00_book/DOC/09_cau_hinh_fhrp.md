@@ -36,7 +36,7 @@ cao hơn sẽ được ưu tiên; tùy chọn Preempt cho phép nó giành lại
 sau khi phục hồi.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png"
 style="width:90.0%" /></p>
 <figcaption><p>Cận cảnh khối Gateway identity và danh sách router tham gia.</p></figcaption>
 </figure>
@@ -46,7 +46,7 @@ tả dễ nhận biết. Sau khi chọn R1 và R2, chỉ số **Gateway matches 
 cả hai router đều có interface thuộc mạng của gateway ảo.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/01-hsrp-gateway-members.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png"
 style="width:100.0%" /></p>
 <figcaption><p>Màn hình tổng thể sau khi nhập gateway và chọn hai thành viên HSRP.</p></figcaption>
 </figure>
@@ -56,7 +56,7 @@ mạng `10.10.10.0/24`. Chọn đúng các router trước khi cấu hình chín
 cho từng thành viên.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png"
 style="width:100.0%" /></p>
 <figcaption><p>Cận cảnh xác thực, HSRP version và Hello/Hold timer.</p></figcaption>
 </figure>
@@ -75,7 +75,7 @@ timer, phải nhập cùng giá trị trên R1 và R2; chỉ một router khác 
 nhóm hoạt động không ổn định.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/11-hsrp-primary-member-zoom.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png"
 style="width:90.0%" /></p>
 <figcaption><p>R1 được đặt priority 120, bật Preempt và theo dõi object 1.</p></figcaption>
 </figure>
@@ -86,7 +86,7 @@ trò ngay khi đường vừa phục hồi; reload delay `30 giây` cho router �
 khi khởi động.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png"
 style="width:90.0%" /></p>
 <figcaption><p>R2 dùng cùng interface LAN nhưng có priority và delay riêng.</p></figcaption>
 </figure>
@@ -97,7 +97,7 @@ delay và mức decrement khác nhau, nhưng phải cùng group, gateway, versio
 authentication và timer.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/03-hsrp-member-policy.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/hsrp-member-policy.png"
 style="width:100.0%" /></p>
 <figcaption><p>Màn hình tổng thể chính sách của hai thành viên trước khi Save.</p></figcaption>
 </figure>
@@ -119,7 +119,7 @@ VRRP dùng thuật ngữ Master/Backup và VRID thay cho group number. Quy trìn
 IOS trong CAMS dùng cú pháp VRRPv2.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/13-vrrp-options-member-zoom.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png"
 style="width:90.0%" /></p>
 <figcaption><p>Cận cảnh VRRPv2, advertisement timer và chính sách Master/Backup.</p></figcaption>
 </figure>
@@ -129,7 +129,7 @@ Advertisement interval trước, sau đó chọn interface, priority, Preempt v�
 tracking cho từng router.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/04-vrrp-configuration.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/vrrp-configuration.png"
 style="width:100.0%" /></p>
 <figcaption><p>Màn hình tổng thể nhóm VRRP 20 với hai router.</p></figcaption>
 </figure>
@@ -152,7 +152,7 @@ Forwarder (AVF). Priority bầu Active Virtual Gateway (AVG), còn weighting ả
 hưởng khả năng chuyển tiếp của từng AVF.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/14-glbp-weighting-zoom.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png"
 style="width:90.0%" /></p>
 <figcaption><p>Cận cảnh weighting, threshold, forwarder preempt và tracking của GLBP.</p></figcaption>
 </figure>
@@ -163,7 +163,7 @@ threshold nên thành viên ngừng vai trò AVF. Khi weighting phục hồi t�
 threshold 100, thành viên mới đủ điều kiện tham gia chuyển tiếp trở lại.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/05-glbp-configuration.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/glbp-configuration.png"
 style="width:100.0%" /></p>
 <figcaption><p>Màn hình tổng thể GLBP group 30 sau khi nhập chính sách thành viên.</p></figcaption>
 </figure>
@@ -190,19 +190,19 @@ viên của nhóm. FHRP có cửa sổ push riêng, không trộn với Routing,
 Syslog.
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/06-hsrp-view-push.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/hsrp-view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>View & Push FHRP của nhóm HSRP trên R1 và R2.</p></figcaption>
 </figure>
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/07-vrrp-view-push.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/vrrp-view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>Preview riêng của VRRP trước khi đẩy cấu hình.</p></figcaption>
 </figure>
 
 <figure>
-<p><img src="../../figures/gui/chapter-09/08-glbp-view-push.png"
+<p><img src="../assets/ui/legacy/routing/fhrp/glbp-view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>Preview riêng của GLBP với lệnh cho từng thành viên.</p></figcaption>
 </figure>

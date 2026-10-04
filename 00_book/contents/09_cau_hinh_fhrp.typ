@@ -33,14 +33,14 @@ Thực hiện theo thứ tự: nhập Group/VRID và gateway ảo, chọn router
 
 HSRP bầu một router Active và một hoặc nhiều router Standby. Router có priority cao hơn sẽ được ưu tiên; tùy chọn Preempt cho phép nó giành lại vai trò Active sau khi phục hồi.
 
-#insert-image("figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png",
   caption: [Cận cảnh khối Gateway identity và danh sách router tham gia.], width: 90.0%) <fig:ch09-09-hsrp-gateway-form-zoom>
 
 Trong @fig:ch09-09-hsrp-gateway-form-zoom, nhập Group number #raw("10"), Default Gateway IP #raw("10.10.10.1") và mô tả dễ nhận biết. Sau khi chọn R1 và R2, chỉ số *Gateway matches 2/2* xác nhận cả hai router đều có interface thuộc mạng của gateway ảo.
 
 Trong ví dụ, #raw("10.10.10.1") là địa chỉ gateway ảo; R1 và R2 đều có interface trong mạng #raw("10.10.10.0/24"). Chọn đúng các router trước khi cấu hình chính sách riêng cho từng thành viên.
 
-#insert-image("figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+#insert-image("/documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
   caption: [Cận cảnh xác thực, HSRP version và Hello/Hold timer.], width: 100.0%) <fig:ch09-15-hsrp-auth-protocol-detail>
 
 #report-table(
@@ -58,12 +58,12 @@ Trong ví dụ, #raw("10.10.10.1") là địa chỉ gateway ảo; R1 và R2 đ�
 
 Trong cấu hình minh họa, HSRPv2 dùng Hello #raw("1000 ms") và Hold #raw("3000 ms"). Nếu đổi timer, phải nhập cùng giá trị trên R1 và R2; chỉ một router khác timer có thể làm nhóm hoạt động không ổn định.
 
-#insert-image("figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png",
   caption: [R1 được đặt priority 120, bật Preempt và theo dõi object 1.], width: 90.0%) <fig:ch09-11-hsrp-primary-member-zoom>
 
 R1 là router ưu tiên. Khi object 1 lỗi, priority giảm #raw("30"), từ 120 còn 90; lúc đó R2 với priority 100 có thể tiếp quản. Minimum delay #raw("10 giây") tránh tranh vai trò ngay khi đường vừa phục hồi; reload delay #raw("30 giây") cho router ổn định sau khi khởi động.
 
-#insert-image("figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png",
   caption: [R2 dùng cùng interface LAN nhưng có priority và delay riêng.], width: 90.0%) <fig:ch09-12-hsrp-secondary-member-zoom>
 
 R2 được đặt priority 100 để giữ vai trò Standby. Không nhập cùng priority cho hai router nếu muốn vai trò Active được dự đoán rõ ràng. Mỗi router có thể dùng delay và mức decrement khác nhau, nhưng phải cùng group, gateway, version, authentication và timer.
@@ -76,7 +76,7 @@ Trong *Tracking objects*, nhập interface hoặc object ID cần giám sát và
 
 VRRP dùng thuật ngữ Master/Backup và VRID thay cho group number. Quy trình Cisco IOS trong CAMS dùng cú pháp VRRPv2.
 
-#insert-image("figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png",
   caption: [Cận cảnh VRRPv2, advertisement timer và chính sách Master/Backup.], width: 90.0%) <fig:ch09-13-vrrp-options-member-zoom>
 
 Nhập VRID và gateway ở phần trên tương tự HSRP. Ở phần cận cảnh, kiểm tra Advertisement interval trước, sau đó chọn interface, priority, Preempt và tracking cho từng router.
@@ -101,7 +101,7 @@ Gateway-facing interface và tracking được nhập theo nguyên tắc giống
 
 GLBP vừa dự phòng gateway vừa có thể phân phối máy trạm qua nhiều Active Virtual Forwarder (AVF). Priority bầu Active Virtual Gateway (AVG), còn weighting ảnh hưởng khả năng chuyển tiếp của từng AVF.
 
-#insert-image("figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+#insert-image("/documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png",
   caption: [Cận cảnh weighting, threshold, forwarder preempt và tracking của GLBP.], width: 90.0%) <fig:ch09-14-glbp-weighting-zoom>
 
 Tính trước giá trị sau khi tracking bị trừ. Ví dụ maximum weighting 120, lower threshold 80 và decrement 50 sẽ còn 70 khi object lỗi; 70 thấp hơn lower threshold nên thành viên ngừng vai trò AVF. Khi weighting phục hồi tới upper threshold 100, thành viên mới đủ điều kiện tham gia chuyển tiếp trở lại.
@@ -127,7 +127,7 @@ Tính trước giá trị sau khi tracking bị trừ. Ví dụ maximum weightin
 
 Sau khi hoàn tất, chọn *Save* để lưu desired state nhưng chưa cấu hình thiết bị. Mở đúng tab giao thức rồi chọn *View & Push* để CAMS dựng lệnh cho tất cả thành viên của nhóm. FHRP có cửa sổ push riêng, không trộn với Routing, DHCP, ACL hoặc Syslog.
 
-#insert-image("figures/gui/chapter-09/06-hsrp-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png",
   caption: [View & Push FHRP của nhóm HSRP trên R1 và R2.], width: 65%) <fig:ch09-06-hsrp-view-push>
 
 Trước khi nhấn *Push*, kiểm tra host, interface, địa chỉ ảo, group/VRID, version, timer, authentication, priority, preempt và tracking. Secret được hiển thị dưới dạng che để tránh lộ dữ liệu. Sau Push, kiểm tra vai trò Active/Standby, Master/Backup hoặc AVG/AVF trên thiết bị và thử ngắt đường uplink đã theo dõi để xác nhận failover thực sự hoạt động.

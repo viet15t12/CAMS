@@ -4237,14 +4237,14 @@ assets:
   domain: routing/fhrp
   subject: hsrp-gateway-members
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/01-hsrp-gateway-members.png
-  path: 00_book/figures/gui/chapter-09/01-hsrp-gateway-members.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png
+  path: documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png
   legacy_path: 00_book/figures/gui/chapter-09/01-hsrp-gateway-members.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: fdf5e2db431b6dd0fc2d1e618f3804620481677ceb2390268ec0053a82c5efc3
   provenance:
     assessment: unknown
@@ -4262,7 +4262,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 49
-    referenced_path: ../../figures/gui/chapter-09/01-hsrp-gateway-members.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -4320,14 +4320,14 @@ assets:
   domain: routing/fhrp
   subject: hsrp-member-policy
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/03-hsrp-member-policy.png
-  path: 00_book/figures/gui/chapter-09/03-hsrp-member-policy.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-member-policy.png
+  path: documentation_assets/ui/legacy/routing/fhrp/hsrp-member-policy.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-member-policy.png
   legacy_path: 00_book/figures/gui/chapter-09/03-hsrp-member-policy.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e65e8ff2e6f96c361a5c26dd4c5b2510410e0a6b609626a5e67e6af55838f1bc
   provenance:
     assessment: unknown
@@ -4345,7 +4345,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 100
-    referenced_path: ../../figures/gui/chapter-09/03-hsrp-member-policy.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/hsrp-member-policy.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -4364,14 +4364,14 @@ assets:
   domain: routing/fhrp
   subject: vrrp-configuration
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/04-vrrp-configuration.png
-  path: 00_book/figures/gui/chapter-09/04-vrrp-configuration.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/vrrp-configuration.png
+  path: documentation_assets/ui/legacy/routing/fhrp/vrrp-configuration.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/vrrp-configuration.png
   legacy_path: 00_book/figures/gui/chapter-09/04-vrrp-configuration.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b579f0b7b54c9d9592b041c654b0432152403cdf1dc152dde0a96c9d476defdf
   provenance:
     assessment: unknown
@@ -4389,7 +4389,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 132
-    referenced_path: ../../figures/gui/chapter-09/04-vrrp-configuration.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/vrrp-configuration.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -4408,14 +4408,14 @@ assets:
   domain: routing/fhrp
   subject: glbp-configuration
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/05-glbp-configuration.png
-  path: 00_book/figures/gui/chapter-09/05-glbp-configuration.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/glbp-configuration.png
+  path: documentation_assets/ui/legacy/routing/fhrp/glbp-configuration.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/glbp-configuration.png
   legacy_path: 00_book/figures/gui/chapter-09/05-glbp-configuration.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 6e3ce6b99c8c531107cfd3afebf0dea460902c6751f569e4f689094488756e9e
   provenance:
     assessment: unknown
@@ -4433,7 +4433,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 166
-    referenced_path: ../../figures/gui/chapter-09/05-glbp-configuration.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/glbp-configuration.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -4452,14 +4452,14 @@ assets:
   domain: routing/fhrp
   subject: hsrp-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/06-hsrp-view-push.png
-  path: 00_book/figures/gui/chapter-09/06-hsrp-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png
+  path: documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png
   legacy_path: 00_book/figures/gui/chapter-09/06-hsrp-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 86416aa0c67182445df2280b3e4a7ba7e62bc4fe83bd3c024d9492816d46ebc5
   provenance:
     assessment: unknown
@@ -4477,11 +4477,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 193
-    referenced_path: ../../figures/gui/chapter-09/06-hsrp-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/hsrp-view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/09_cau_hinh_fhrp.typ
     line: 130
-    referenced_path: figures/gui/chapter-09/06-hsrp-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4501,14 +4501,14 @@ assets:
   domain: routing/fhrp
   subject: vrrp-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/07-vrrp-view-push.png
-  path: 00_book/figures/gui/chapter-09/07-vrrp-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/vrrp-view-push.png
+  path: documentation_assets/ui/legacy/routing/fhrp/vrrp-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/vrrp-view-push.png
   legacy_path: 00_book/figures/gui/chapter-09/07-vrrp-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b5159a46cfe67487896a961285aee40510c752b2187a068623e0de59d4be0b7f
   provenance:
     assessment: unknown
@@ -4526,7 +4526,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 199
-    referenced_path: ../../figures/gui/chapter-09/07-vrrp-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/vrrp-view-push.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -4545,14 +4545,14 @@ assets:
   domain: routing/fhrp
   subject: glbp-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/08-glbp-view-push.png
-  path: 00_book/figures/gui/chapter-09/08-glbp-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/glbp-view-push.png
+  path: documentation_assets/ui/legacy/routing/fhrp/glbp-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/glbp-view-push.png
   legacy_path: 00_book/figures/gui/chapter-09/08-glbp-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 99fb8220e323e1677df02375b4aad5c117e61c0b15d6d55208d3ca40b38a0daa
   provenance:
     assessment: unknown
@@ -4570,7 +4570,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 205
-    referenced_path: ../../figures/gui/chapter-09/08-glbp-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/glbp-view-push.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -4589,14 +4589,14 @@ assets:
   domain: routing/fhrp
   subject: hsrp-gateway-form-detail
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png
-  path: 00_book/figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png
+  path: documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png
   legacy_path: 00_book/figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 5e6ea174da7f934c63ff106bde7335dafb3c23ef6f13c5d5a809189b07686195
   provenance:
     assessment: unknown
@@ -4614,11 +4614,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 39
-    referenced_path: ../../figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/09_cau_hinh_fhrp.typ
     line: 36
-    referenced_path: figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png
+    referenced_path: /documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4638,14 +4638,14 @@ assets:
   domain: routing/fhrp
   subject: hsrp-primary-member-detail
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/11-hsrp-primary-member-zoom.png
-  path: 00_book/figures/gui/chapter-09/11-hsrp-primary-member-zoom.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png
+  path: documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png
   legacy_path: 00_book/figures/gui/chapter-09/11-hsrp-primary-member-zoom.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 31c76d976763d796420249c2625f263d23c94be1e096a5ae0ad87add5be3df34
   provenance:
     assessment: unknown
@@ -4663,11 +4663,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 78
-    referenced_path: ../../figures/gui/chapter-09/11-hsrp-primary-member-zoom.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/09_cau_hinh_fhrp.typ
     line: 61
-    referenced_path: figures/gui/chapter-09/11-hsrp-primary-member-zoom.png
+    referenced_path: /documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4687,14 +4687,14 @@ assets:
   domain: routing/fhrp
   subject: hsrp-secondary-member-detail
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png
-  path: 00_book/figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png
+  path: documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png
   legacy_path: 00_book/figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 4de5cd89957250e13027f9992835b11a7f2ea0b8d72b0ad3fbb1f9666ee61101
   provenance:
     assessment: unknown
@@ -4712,11 +4712,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 89
-    referenced_path: ../../figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/09_cau_hinh_fhrp.typ
     line: 66
-    referenced_path: figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png
+    referenced_path: /documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4736,14 +4736,14 @@ assets:
   domain: routing/fhrp
   subject: vrrp-options-member-detail
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/13-vrrp-options-member-zoom.png
-  path: 00_book/figures/gui/chapter-09/13-vrrp-options-member-zoom.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png
+  path: documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png
   legacy_path: 00_book/figures/gui/chapter-09/13-vrrp-options-member-zoom.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 98eb42828e6135eafa519369749721549dfc2f862b55e26a37667f61278d957c
   provenance:
     assessment: unknown
@@ -4761,11 +4761,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 122
-    referenced_path: ../../figures/gui/chapter-09/13-vrrp-options-member-zoom.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/09_cau_hinh_fhrp.typ
     line: 79
-    referenced_path: figures/gui/chapter-09/13-vrrp-options-member-zoom.png
+    referenced_path: /documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4785,14 +4785,14 @@ assets:
   domain: routing/fhrp
   subject: glbp-weighting-detail
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/14-glbp-weighting-zoom.png
-  path: 00_book/figures/gui/chapter-09/14-glbp-weighting-zoom.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png
+  path: documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png
   legacy_path: 00_book/figures/gui/chapter-09/14-glbp-weighting-zoom.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: af39006ff2316d3c4dd481fdd20c7f721055d0d350f047afd2596906d71335ba
   provenance:
     assessment: unknown
@@ -4810,11 +4810,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 155
-    referenced_path: ../../figures/gui/chapter-09/14-glbp-weighting-zoom.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/09_cau_hinh_fhrp.typ
     line: 104
-    referenced_path: figures/gui/chapter-09/14-glbp-weighting-zoom.png
+    referenced_path: /documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4834,14 +4834,14 @@ assets:
   domain: routing/fhrp
   subject: hsrp-auth-protocol-detail
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png
-  path: 00_book/figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png
+  current_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png
+  path: documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png
   legacy_path: 00_book/figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: f61b6367ed4a04aa0ec68c2aa0c965086ec83d40f6dea995a6a5e96b7c0b2624
   provenance:
     assessment: unknown
@@ -4859,11 +4859,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/09_cau_hinh_fhrp.md
     line: 59
-    referenced_path: ../../figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png
+    referenced_path: ../assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/09_cau_hinh_fhrp.typ
     line: 43
-    referenced_path: figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png
+    referenced_path: /documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png
     target_type: book-typst
   targets:
   - book-mkdocs

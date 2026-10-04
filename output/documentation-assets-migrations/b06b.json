@@ -1,0 +1,872 @@
+{
+  "batch": "B06B",
+  "starting_commit": "ae51f5f492ca777f6765acaeb06b039c7f4bcbe4",
+  "status": "PASS cheap gate; cumulative build/fresh gate deferred",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 13,
+    "dimensions_nonzero": true,
+    "chapter_context_agrees": true,
+    "terminal_or_evidence_or_runtime": false,
+    "target_collisions": false,
+    "provenance": "unknown retained; no reconstruction or new generator"
+  },
+  "assets": [
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-gateway-members",
+      "old_path": "00_book/figures/gui/chapter-09/01-hsrp-gateway-members.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png",
+      "source_git_blob_sha": "fdf5e2db431b6dd0fc2d1e618f3804620481677ceb2390268ec0053a82c5efc3",
+      "canonical_filesystem_sha": "fdf5e2db431b6dd0fc2d1e618f3804620481677ceb2390268ec0053a82c5efc3",
+      "canonical_index_blob_sha": "fdf5e2db431b6dd0fc2d1e618f3804620481677ceb2390268ec0053a82c5efc3",
+      "manifest_sha": "fdf5e2db431b6dd0fc2d1e618f3804620481677ceb2390268ec0053a82c5efc3",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 49,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-member-policy",
+      "old_path": "00_book/figures/gui/chapter-09/03-hsrp-member-policy.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-member-policy.png",
+      "source_git_blob_sha": "e65e8ff2e6f96c361a5c26dd4c5b2510410e0a6b609626a5e67e6af55838f1bc",
+      "canonical_filesystem_sha": "e65e8ff2e6f96c361a5c26dd4c5b2510410e0a6b609626a5e67e6af55838f1bc",
+      "canonical_index_blob_sha": "e65e8ff2e6f96c361a5c26dd4c5b2510410e0a6b609626a5e67e6af55838f1bc",
+      "manifest_sha": "e65e8ff2e6f96c361a5c26dd4c5b2510410e0a6b609626a5e67e6af55838f1bc",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/hsrp-member-policy.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 100,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/hsrp-member-policy.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-configuration",
+      "old_path": "00_book/figures/gui/chapter-09/04-vrrp-configuration.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/vrrp-configuration.png",
+      "source_git_blob_sha": "b579f0b7b54c9d9592b041c654b0432152403cdf1dc152dde0a96c9d476defdf",
+      "canonical_filesystem_sha": "b579f0b7b54c9d9592b041c654b0432152403cdf1dc152dde0a96c9d476defdf",
+      "canonical_index_blob_sha": "b579f0b7b54c9d9592b041c654b0432152403cdf1dc152dde0a96c9d476defdf",
+      "manifest_sha": "b579f0b7b54c9d9592b041c654b0432152403cdf1dc152dde0a96c9d476defdf",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/vrrp-configuration.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 132,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/vrrp-configuration.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-configuration",
+      "old_path": "00_book/figures/gui/chapter-09/05-glbp-configuration.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/glbp-configuration.png",
+      "source_git_blob_sha": "6e3ce6b99c8c531107cfd3afebf0dea460902c6751f569e4f689094488756e9e",
+      "canonical_filesystem_sha": "6e3ce6b99c8c531107cfd3afebf0dea460902c6751f569e4f689094488756e9e",
+      "canonical_index_blob_sha": "6e3ce6b99c8c531107cfd3afebf0dea460902c6751f569e4f689094488756e9e",
+      "manifest_sha": "6e3ce6b99c8c531107cfd3afebf0dea460902c6751f569e4f689094488756e9e",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/glbp-configuration.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 166,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/glbp-configuration.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-view-push",
+      "old_path": "00_book/figures/gui/chapter-09/06-hsrp-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png",
+      "source_git_blob_sha": "86416aa0c67182445df2280b3e4a7ba7e62bc4fe83bd3c024d9492816d46ebc5",
+      "canonical_filesystem_sha": "86416aa0c67182445df2280b3e4a7ba7e62bc4fe83bd3c024d9492816d46ebc5",
+      "canonical_index_blob_sha": "86416aa0c67182445df2280b3e4a7ba7e62bc4fe83bd3c024d9492816d46ebc5",
+      "manifest_sha": "86416aa0c67182445df2280b3e4a7ba7e62bc4fe83bd3c024d9492816d46ebc5",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/hsrp-view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 193,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/hsrp-view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+          "line": 130,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-view-push",
+      "old_path": "00_book/figures/gui/chapter-09/07-vrrp-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/vrrp-view-push.png",
+      "source_git_blob_sha": "b5159a46cfe67487896a961285aee40510c752b2187a068623e0de59d4be0b7f",
+      "canonical_filesystem_sha": "b5159a46cfe67487896a961285aee40510c752b2187a068623e0de59d4be0b7f",
+      "canonical_index_blob_sha": "b5159a46cfe67487896a961285aee40510c752b2187a068623e0de59d4be0b7f",
+      "manifest_sha": "b5159a46cfe67487896a961285aee40510c752b2187a068623e0de59d4be0b7f",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/vrrp-view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 199,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/vrrp-view-push.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-view-push",
+      "old_path": "00_book/figures/gui/chapter-09/08-glbp-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/glbp-view-push.png",
+      "source_git_blob_sha": "99fb8220e323e1677df02375b4aad5c117e61c0b15d6d55208d3ca40b38a0daa",
+      "canonical_filesystem_sha": "99fb8220e323e1677df02375b4aad5c117e61c0b15d6d55208d3ca40b38a0daa",
+      "canonical_index_blob_sha": "99fb8220e323e1677df02375b4aad5c117e61c0b15d6d55208d3ca40b38a0daa",
+      "manifest_sha": "99fb8220e323e1677df02375b4aad5c117e61c0b15d6d55208d3ca40b38a0daa",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/glbp-view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 205,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/glbp-view-push.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-gateway-form-detail",
+      "old_path": "00_book/figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png",
+      "source_git_blob_sha": "5e6ea174da7f934c63ff106bde7335dafb3c23ef6f13c5d5a809189b07686195",
+      "canonical_filesystem_sha": "5e6ea174da7f934c63ff106bde7335dafb3c23ef6f13c5d5a809189b07686195",
+      "canonical_index_blob_sha": "5e6ea174da7f934c63ff106bde7335dafb3c23ef6f13c5d5a809189b07686195",
+      "manifest_sha": "5e6ea174da7f934c63ff106bde7335dafb3c23ef6f13c5d5a809189b07686195",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 39,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+          "line": 36,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-primary-member-detail",
+      "old_path": "00_book/figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png",
+      "source_git_blob_sha": "31c76d976763d796420249c2625f263d23c94be1e096a5ae0ad87add5be3df34",
+      "canonical_filesystem_sha": "31c76d976763d796420249c2625f263d23c94be1e096a5ae0ad87add5be3df34",
+      "canonical_index_blob_sha": "31c76d976763d796420249c2625f263d23c94be1e096a5ae0ad87add5be3df34",
+      "manifest_sha": "31c76d976763d796420249c2625f263d23c94be1e096a5ae0ad87add5be3df34",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 78,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+          "line": 61,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-secondary-member-detail",
+      "old_path": "00_book/figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png",
+      "source_git_blob_sha": "4de5cd89957250e13027f9992835b11a7f2ea0b8d72b0ad3fbb1f9666ee61101",
+      "canonical_filesystem_sha": "4de5cd89957250e13027f9992835b11a7f2ea0b8d72b0ad3fbb1f9666ee61101",
+      "canonical_index_blob_sha": "4de5cd89957250e13027f9992835b11a7f2ea0b8d72b0ad3fbb1f9666ee61101",
+      "manifest_sha": "4de5cd89957250e13027f9992835b11a7f2ea0b8d72b0ad3fbb1f9666ee61101",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 89,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+          "line": 66,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-options-member-detail",
+      "old_path": "00_book/figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png",
+      "source_git_blob_sha": "98eb42828e6135eafa519369749721549dfc2f862b55e26a37667f61278d957c",
+      "canonical_filesystem_sha": "98eb42828e6135eafa519369749721549dfc2f862b55e26a37667f61278d957c",
+      "canonical_index_blob_sha": "98eb42828e6135eafa519369749721549dfc2f862b55e26a37667f61278d957c",
+      "manifest_sha": "98eb42828e6135eafa519369749721549dfc2f862b55e26a37667f61278d957c",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 122,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+          "line": 79,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-weighting-detail",
+      "old_path": "00_book/figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png",
+      "source_git_blob_sha": "af39006ff2316d3c4dd481fdd20c7f721055d0d350f047afd2596906d71335ba",
+      "canonical_filesystem_sha": "af39006ff2316d3c4dd481fdd20c7f721055d0d350f047afd2596906d71335ba",
+      "canonical_index_blob_sha": "af39006ff2316d3c4dd481fdd20c7f721055d0d350f047afd2596906d71335ba",
+      "manifest_sha": "af39006ff2316d3c4dd481fdd20c7f721055d0d350f047afd2596906d71335ba",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 155,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+          "line": 104,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-auth-protocol-detail",
+      "old_path": "00_book/figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
+      "source_git_blob_sha": "f61b6367ed4a04aa0ec68c2aa0c965086ec83d40f6dea995a6a5e96b7c0b2624",
+      "canonical_filesystem_sha": "f61b6367ed4a04aa0ec68c2aa0c965086ec83d40f6dea995a6a5e96b7c0b2624",
+      "canonical_index_blob_sha": "f61b6367ed4a04aa0ec68c2aa0c965086ec83d40f6dea995a6a5e96b7c0b2624",
+      "manifest_sha": "f61b6367ed4a04aa0ec68c2aa0c965086ec83d40f6dea995a6a5e96b7c0b2624",
+      "staging_path": "00_book/assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+          "line": 59,
+          "referenced_path": "../assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+          "line": 43,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-gateway-members",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 49,
+      "before": "../../figures/gui/chapter-09/01-hsrp-gateway-members.png",
+      "after": "../assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-member-policy",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 100,
+      "before": "../../figures/gui/chapter-09/03-hsrp-member-policy.png",
+      "after": "../assets/ui/legacy/routing/fhrp/hsrp-member-policy.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-configuration",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 132,
+      "before": "../../figures/gui/chapter-09/04-vrrp-configuration.png",
+      "after": "../assets/ui/legacy/routing/fhrp/vrrp-configuration.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-configuration",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 166,
+      "before": "../../figures/gui/chapter-09/05-glbp-configuration.png",
+      "after": "../assets/ui/legacy/routing/fhrp/glbp-configuration.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-view-push",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 193,
+      "before": "../../figures/gui/chapter-09/06-hsrp-view-push.png",
+      "after": "../assets/ui/legacy/routing/fhrp/hsrp-view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-view-push",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 199,
+      "before": "../../figures/gui/chapter-09/07-vrrp-view-push.png",
+      "after": "../assets/ui/legacy/routing/fhrp/vrrp-view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-view-push",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 205,
+      "before": "../../figures/gui/chapter-09/08-glbp-view-push.png",
+      "after": "../assets/ui/legacy/routing/fhrp/glbp-view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-gateway-form-detail",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 39,
+      "before": "../../figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+      "after": "../assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-primary-member-detail",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 78,
+      "before": "../../figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+      "after": "../assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-secondary-member-detail",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 89,
+      "before": "../../figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+      "after": "../assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-options-member-detail",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 122,
+      "before": "../../figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+      "after": "../assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-weighting-detail",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 155,
+      "before": "../../figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+      "after": "../assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-auth-protocol-detail",
+      "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+      "line": 59,
+      "before": "../../figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+      "after": "../assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-view-push",
+      "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 130,
+      "before": "figures/gui/chapter-09/06-hsrp-view-push.png",
+      "after": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-gateway-form-detail",
+      "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 36,
+      "before": "figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-primary-member-detail",
+      "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 61,
+      "before": "figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-secondary-member-detail",
+      "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 66,
+      "before": "figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-options-member-detail",
+      "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 79,
+      "before": "figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-weighting-detail",
+      "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 104,
+      "before": "figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+      "after": "/documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-auth-protocol-detail",
+      "source_document": "00_book/contents/09_cau_hinh_fhrp.typ",
+      "line": 43,
+      "before": "figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+      "after": "/documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 20,
+  "baseline": {
+    "before": 93,
+    "resolved": 13,
+    "after": 80,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/01-hsrp-gateway-members.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/01-hsrp-gateway-members.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/03-hsrp-member-policy.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/03-hsrp-member-policy.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/04-vrrp-configuration.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/04-vrrp-configuration.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/05-glbp-configuration.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/05-glbp-configuration.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/06-hsrp-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/06-hsrp-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/07-vrrp-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/07-vrrp-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/08-glbp-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/08-glbp-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/11-hsrp-primary-member-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/13-vrrp-options-member-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/14-glbp-weighting-zoom.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/09_cau_hinh_fhrp.md",
+        "referenced_path": "../../figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 146,
+    "pending": 199,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 146,
+      "pending": 199,
+      "frozen": 62
+    },
+    "b06_migrated": 24,
+    "b06_old_paths_absent": 24,
+    "b06_canonical_paths_present": 24,
+    "other_records_unchanged": 383,
+    "reference_edges_exact_current_lines": 42,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 80,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [],
+    "full_build_gate": "DEFERRED until cumulative B06R"
+  },
+  "typst": [],
+  "png_sanity": [
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-gateway-members",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-member-policy",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-configuration",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-configuration",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-view-push",
+      "width": 1856,
+      "height": 1456,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-view-push",
+      "width": 1856,
+      "height": 1456,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-view-push",
+      "width": 1856,
+      "height": 1456,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-gateway-form-detail",
+      "width": 1650,
+      "height": 940,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-primary-member-detail",
+      "width": 1650,
+      "height": 1380,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-secondary-member-detail",
+      "width": 1650,
+      "height": 1120,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.vrrp-options-member-detail",
+      "width": 1650,
+      "height": 1400,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.glbp-weighting-detail",
+      "width": 1650,
+      "height": 1200,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.fhrp.hsrp-auth-protocol-detail",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ]
+}

@@ -1,20 +1,7 @@
 .
 ├── gui
 │   ├── chapter-09
-│   │   ├── 01-hsrp-gateway-members.png
-│   │   ├── 02-hsrp-authentication-timers.png
-│   │   ├── 03-hsrp-member-policy.png
-│   │   ├── 04-vrrp-configuration.png
-│   │   ├── 05-glbp-configuration.png
-│   │   ├── 06-hsrp-view-push.png
-│   │   ├── 07-vrrp-view-push.png
-│   │   ├── 08-glbp-view-push.png
-│   │   ├── 09-hsrp-gateway-form-zoom.png
-│   │   ├── 11-hsrp-primary-member-zoom.png
-│   │   ├── 12-hsrp-secondary-member-zoom.png
-│   │   ├── 13-vrrp-options-member-zoom.png
-│   │   ├── 14-glbp-weighting-zoom.png
-│   │   └── 15-hsrp-auth-protocol-detail.png
+│   │   └── 02-hsrp-authentication-timers.png
 │   ├── chapter-10
 │   │   ├── 01-syslog-destinations.png
 │   │   ├── 02-syslog-server-editor.png
@@ -434,5 +421,23 @@ B06A canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/routing/acl/mac.png
 - documentation_assets/ui/legacy/routing/acl/bindings.png
 - documentation_assets/ui/legacy/routing/acl/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B06B canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-members.png
+- documentation_assets/ui/legacy/routing/fhrp/hsrp-member-policy.png
+- documentation_assets/ui/legacy/routing/fhrp/vrrp-configuration.png
+- documentation_assets/ui/legacy/routing/fhrp/glbp-configuration.png
+- documentation_assets/ui/legacy/routing/fhrp/hsrp-view-push.png
+- documentation_assets/ui/legacy/routing/fhrp/vrrp-view-push.png
+- documentation_assets/ui/legacy/routing/fhrp/glbp-view-push.png
+- documentation_assets/ui/legacy/routing/fhrp/hsrp-gateway-form-detail.png
+- documentation_assets/ui/legacy/routing/fhrp/hsrp-primary-member-detail.png
+- documentation_assets/ui/legacy/routing/fhrp/hsrp-secondary-member-detail.png
+- documentation_assets/ui/legacy/routing/fhrp/vrrp-options-member-detail.png
+- documentation_assets/ui/legacy/routing/fhrp/glbp-weighting-detail.png
+- documentation_assets/ui/legacy/routing/fhrp/hsrp-auth-protocol-detail.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
