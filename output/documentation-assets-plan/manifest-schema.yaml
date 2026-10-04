@@ -1,7 +1,8 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: CAMS documentation asset manifest — Phase 2 design
-description: JSON Schema serialized as YAML. Contract/sample only; no canonical store
-  exists. Enforce cross-record/path/hash invariants in future validator.
+description: 'Phase 2.1 overrides Phase 2: terminal external records frozen, no terminal
+  reconstruction or migration. JSON Schema serialized as YAML; cross-record/file validation
+  separate.'
 type: object
 additionalProperties: false
 required:
@@ -48,13 +49,16 @@ $defs:
     - planned
     - legacy_path
     - preserve_original
+    - migration_role
+    - migration_action
+    - canonical_migration
     properties:
       id:
         type: string
         pattern: ^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$
       path:
         type: string
-        pattern: ^documentation_assets/(ui|evidence|diagrams|illustrations|branding|misc)/[a-z0-9/.-]+$
+        pattern: ^(documentation_assets/(ui|evidence|diagrams|illustrations|branding|misc)/[a-z0-9/.-]+|00_book/.+|00_report/.+)$
       media_type:
         enum:
         - image/png
@@ -91,9 +95,9 @@ $defs:
         - generated-svg
         - authored-svg
         - raster-derivative
-        - reconstructed-terminal
         - branding
         - unknown
+        - generated-terminal
       provenance:
         type: object
         required:
@@ -128,16 +132,10 @@ $defs:
         - string
         - 'null'
         pattern: ^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)+$
-      reconstruction_method: &id001
-        type:
-        - string
-        - 'null'
+      reconstruction_method:
+        type: 'null'
       reconstruction_confidence:
-        enum:
-        - high
-        - medium
-        - low
-        - null
+        type: 'null'
       preferred_for_presentation:
         type: boolean
       reproducible:
@@ -172,7 +170,10 @@ $defs:
         - planned_family
         - destination_contract
         additionalProperties: false
-      generator_command: *id001
+      generator_command:
+        type:
+        - string
+        - 'null'
       used_by:
         type: array
         items:
@@ -234,6 +235,7 @@ $defs:
         - orphan-review
         - archive-candidate
         - unresolved
+        - frozen
       notes:
         type: string
       planned:
@@ -243,6 +245,21 @@ $defs:
         - string
         - 'null'
       preserve_original:
+        type: boolean
+      migration_role:
+        enum:
+        - canonical
+        - original-evidence
+        - derivative
+        - source-material
+        - archive-candidate
+        - unresolved
+        - frozen
+      migration_action:
+        enum:
+        - transfer-after-review
+        - classify-only
+      canonical_migration:
         type: boolean
     allOf:
     - if:
@@ -264,28 +281,6 @@ $defs:
             type: 'null'
           preserve_original:
             const: true
-          path:
-            pattern: ^documentation_assets/evidence/
-    - if:
-        properties:
-          source_kind:
-            const: reconstructed-terminal
-      then:
-        properties:
-          derived_from:
-            type: string
-          original_evidence:
-            const: false
-          reconstruction_method:
-            type: string
-            minLength: 1
-          reconstruction_confidence:
-            enum:
-            - high
-            - medium
-            - low
-          path:
-            pattern: ^documentation_assets/evidence/terminal/reconstructed/
     - if:
         properties:
           recreates_evidence_asset:
@@ -335,3 +330,54 @@ $defs:
             const: true
           status:
             const: unresolved
+    - if:
+        properties:
+          canonical_migration:
+            const: false
+      then:
+        properties:
+          migration_role:
+            const: frozen
+          migration_action:
+            const: classify-only
+          status:
+            const: frozen
+          canonical:
+            const: false
+          path:
+            pattern: ^(00_book|00_report)/
+          planned:
+            const: false
+          mkdocs_stage:
+            const: false
+          mkdocs_stage_path:
+            type: 'null'
+          recreates_evidence_asset:
+            type: 'null'
+          derived_from:
+            type: 'null'
+          generator_command:
+            type: 'null'
+          preserve_original:
+            const: true
+    - if:
+        properties:
+          canonical_migration:
+            const: true
+      then:
+        properties:
+          path:
+            pattern: ^documentation_assets/
+          migration_action:
+            const: transfer-after-review
+    - if:
+        properties:
+          source_kind:
+            enum:
+            - terminal-capture
+            - syslog-capture
+            - generated-terminal
+      then:
+        properties:
+          canonical_migration:
+            const: false

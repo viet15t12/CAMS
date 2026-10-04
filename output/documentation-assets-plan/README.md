@@ -1,115 +1,61 @@
-# Documentation assets migration plan — Phase 2
+# Documentation assets plan — Phase 2.1
 
-Thiết kế migration cho branch `docs/pictures-sort`, Phase 1 commit `39be1884020c4034aff9a39bd0d54fb2d6d9b7be`. Ngày: 2026-10-04 (Asia/Ho_Chi_Minh). **Chỉ tạo plan; chưa có canonical root, staging, manifest thật, sync script hoặc migration nào.**
+**Reconciled with current main; terminal freeze supersedes Phase 2 execution proposals. No Phase 3 migration performed.**
 
-## Goals và terminology
+Current main `e44ba4e79fb14031b89eeca68446109da3cbfb2e` merged into docs/pictures-sort as `a15e7a42d03ea317f5ad5f1e7d8dbd849146167b`. Phase 1 audit unchanged. Historical Phase 2 plan remains in commit `5fb4bd7`; current CSV/YAML files are the active overlay.
 
-Chuyển việc thực thi các phase sau thành những batch nhỏ có path/ID/naming/reference rõ, bảo toàn evidence, giữ book Typst/MkDocs và report Typst nhất quán. Phase 1 là lịch sử audit không sửa; Phase 2 là overlay, không copy máy móc suggested names/buckets.
+## Goals, taxonomy and scope
 
-- Canonical store: nơi quản lý source bytes và logical records, không đồng nghĩa mọi file là best presentation.
-- Original evidence: capture thực nghiệm đang có; probable/unknown historical provenance giữ nguyên, không tự nâng thành confirmed.
-- Recreation: screenshot mới bằng fixture/QML để trình bày một state tương đương; original_evidence=false.
-- Reconstruction: trình bày lại text từ original terminal, là derivative; không phải replay thực nghiệm.
-- Staging: byte-verified generated copy cho MkDocs, không nguồn biên tập và không logical asset mới.
-- Proposed path: tên đích cần duyệt trước phase thực thi; confidence chỉ là đề xuất naming/domain, không bằng chứng lịch sử.
+Canonical documentation_assets/ and generated MkDocs staging 00_book/assets/ remain future contracts. Terminology: canonical is record authority, not a claim of best presentation; original evidence, UI recreation and staged copy have separate provenance. Logical IDs stay semantic and path-independent.
 
-## Inventory overlay
+**Explicit exception: all terminal images remain at current paths**, including terminal-generated and historical lab/connectivity/console-log captures. They are classified, never absorbed into canonical migration. Freeze extends to text sources and renderer actions. No terminal reconstruction, cropping, replacement, rename, move, regeneration or taxonomy reference rewrite is permitted in any later phase.
 
-**356 rows**, **354 concrete path proposals**, **2 filename/path holds**. Confidence: high 219, medium 122, low 15; review-required **164**. Tất cả logical IDs hiện unique; IDs provisional chỉ chốt sau semantic review và sau đó không đổi theo filesystem.
+407 current image records = 62 frozen terminals + 345 nonterminal migration records (344 path proposals + one UI naming hold).
 
-| category (including unresolved intended categories) | assets |
+| canonical category | transferable assets |
 | --- | ---: |
 | ui | 190 |
-| evidence | 124 |
-| diagrams | 40 |
-| illustrations | 0 |
+| evidence | 109 |
+| diagrams | 44 |
 | branding | 2 |
-| misc | 0 |
 
-UI: 42 confirmed docshot + 148 legacy documentation + 73 lab original. Lab originals vào evidence, không ui/legacy. 72 concrete recreation candidates; một UI capture hold chưa có recreation path. Terminal captures 32 (4 connectivity ở evidence/connectivity), syslog device-log captures 4, external tools 3 (Jenkins + 2 email), raw pages 12. 32 terminal text reconstruction candidates; không tạo file mới từ chúng.
+Counts include the unresolved nonterminal UI in intended evidence category. Terminal frozen registry is external to these counts. Four Syslog console log images are included in the 47 historical terminals despite their retained primary asset_class=syslog-evidence. 15 current terminal-generated images were added by main; 14 text sources support them, the OSPF composite has six related sources. Exact historical render/composition invocation is not asserted or executed.
 
-## Taxonomy
+## Evidence and UI policy
 
-Giữ tầng category đã quyết định: ui/docshot, ui/legacy; evidence/ui-capture/original, terminal/original|reconstructed, device-verification/original, syslog/original, connectivity/original, external-tools/original, source-material; diagrams/architecture|workflow|network|database|lab-topology; illustrations; branding/logos|icons; misc.
+84 original lab UI captures remain transferable to evidence/ui-capture/original/<lab>. 83 hypothetical UI recreation candidates remain ui/docshot/lab-recreation/<lab> with recreates_evidence_asset linking originals, original_evidence=false; equivalence/data/provenance review is required before presentation preference changes. 42 confirmed docshots and 148 legacy documentation UI remain in scope. UI framework future destinations remain canonical; stage is not a renderer destination.
 
-Leaf additions: routing/static cho static/default routes; evidence/ui-capture/original/lab1 cho extracted lab captures; evidence/terminal/original/project-format cho JSON/hex inspection; external-tools/original/ci cho Jenkins; lab-topology per scenario. Legacy domains có thể thêm cùng leaf structure với docshot để giữ mapping rõ. Những category chưa có current assets không được tạo folder chỉ để lấp taxonomy. proposed-tree.txt được generate từ asset-path-map.csv; không bao gồm hypothetical recreation hoặc future manifest metadata trong asset count.
+47 historical terminal captures and 15 main-rendered images have migration_role=frozen, migration_action=classify-only, canonical_migration=false; proposed_canonical_path and filename equal current values, batch_id empty, reconstruction_candidate=false. No rename proposals remain in naming-review.csv. Main-rendered images are not relabeled original experimental captures; source confidence remains distinct from render provenance.
 
-## Canonical vs MkDocs staging
+Email/Jenkins/external-tool evidence remains transferable. Main changed both email-card bytes and introduced lv3/lv4 full Gmail captures; cropped Error SW1 and Warning R1 cards have separate semantic IDs/paths from full Gmail screenshots. Current report uses lv3/lv4, not the old cropped-card paths. No merge/delete inferred from likely crop relationship.
 
-Canonical root **documentation_assets/**. Staging root **00_book/assets/**. Staged suffix = canonical path bỏ documentation_assets/; logo/favicon paths trong mkdocs.yml tính tương đối với docs_dir.
+Raw LAB1 pages/UI/topology remain in scope; its three terminal captures are frozen. True vectors stay preferred; same-name different-content/uncertain SVG-raster pairs kept independent. Project-structure SVG has new wording/current SHA, same semantic ID/path.
 
-```text
-documentation_assets/ui/docshot/routing/ospf/networks.png
- -> 00_book/assets/ui/docshot/routing/ospf/networks.png
-documentation_assets/branding/logos/cams.svg
- -> 00_book/assets/branding/logos/cams.svg
-```
+## Naming, IDs and manifest
 
-**178** staged current assets: 177 intended Markdown UI + CAMS logo/favicon (một file cho hai config references). Dữ liệu lấy từ Phase 1 staging set vì hiện 178 HTML image references đều broken; valid-used-only sẽ bỏ mất intended web images. 674 Phase 1 reference rows đều có disposition trong rewrite plan; 435 rows nhận logical asset mapping, những row ngoài inventory/dynamic giữ nguyên với explicit retain/investigate action.
+Nonterminal names lowercase-kebab-case without chapter/sequence prefix; device/state/data qualifiers distinguish meaning. One unresolved switching UI capture keeps empty proposed path rather than invented sequence. Logical ID stability is unaffected by future path changes. Frozen filenames preserve even opaque historic numbering.
 
-Selection future: targets contains book-mkdocs OR mkdocs_stage=true. Future validator bắt buộc targets book-mkdocs => stage=true; stage true explicit opt-in hợp lệ cho theme logo dù used_by là config. Không stage report-only/orphan assets nếu không có intended book web usage. CSS stylesheets/extra.css và JS javascripts/lightbox.js tiếp tục là book sources; không bị đưa vào image canonical taxonomy.
+manifest-schema.yaml is JSON Schema serialized as YAML, not a real canonical manifest. It now supports external frozen paths with canonical=false, planned=false, current SHA and no generator command. Terminal source kinds force canonical_migration=false. reconstruction_method/confidence must be null; reconstructed-terminal is no longer allowed. Seven examples retain UI recreation but remove the hypothetical terminal reconstruction. Original captures retain evidence provenance; new UI recreations do not rewrite original record identities.
 
-Khuyến nghị **A: generated + gitignored + CI sync**. Ưu điểm: không commit 178 binary duplicates, hash đảm bảo freshness, stale cleanup có ranh giới rõ. Đổi lại: preview local phải sync trước serve/build; CI phải chạy sync sau checkout và trước MkDocs. B generated+tracked giảm bước local nhưng tăng binary/history/conflicts/staleness; chỉ cân nhắc khi hosting không cho pre-build step. Hiện không thấy blocker cho A. Phase 2 không chỉnh .gitignore/workflow.
+Bootstrap manifest current legacy_path + planned destination applies only to nonterminal records; unresolved path record cannot become executable transfer entry. Frozen classification may live in external section/registry without moving binaries. Future validator must enforce cross-ID links/acyclic graph, path uniqueness/containment, source hashes, source-kind/freeze policy and stage suffix.
 
-## Deterministic sync contract (future only)
+## Canonical vs staging and references
 
-Future script scripts/sync_documentation_assets.py, chưa được tạo:
+Stage only targets containing book-mkdocs or explicit mkdocs_stage=true. 178 selected existing web assets remain unchanged; staged suffix equals canonical suffix. Recommend A generated+gitignored+CI sync over B generated+tracked to avoid duplicate binaries/staleness; local preview needs sync first. No .gitignore/CI edits now.
 
-1. Resolve repository root từ script, không phụ thuộc CWD; read manifest/version, validate toàn bộ IDs/path suffix/selection trước khi ghi.
-2. Reject duplicate IDs, case-insensitive canonical/staged collisions, absolute OS paths, .. traversal và symlink escape; reject canonical source bất kỳ trong staging root.
-3. Chỉ chọn active/current existing records được opt-in; planned/hypothetical/unresolved-null-hash records không được stage. Verify source SHA-256 trước mọi copy; thiếu source/hash mismatch -> nonzero, không prune.
-4. Derive stage suffix giữ nguyên taxonomy. Copy bytes losslessly vào temporary file dưới generated root, verify destination hash, atomic replace. Không convert/resize/compress tại sync.
-5. Ownership marker/ledger trong 00_book/assets ghi manifest version/selected IDs/hashes; ledger phải có trước stale removal. Có unknown hand-written file hoặc unexpected symlink -> fail, không xóa.
-6. Loại stale generated files chỉ từ ledger dưới đúng 00_book/assets; không chạm 00_book/figures, canonical, document/CSS/JS. Initial sync không có ledger tuyệt đối không prune arbitrary files.
-7. Deterministic output/listing/order; repeat run không đổi bytes; dry-run/check mode báo missing/stale/hash mismatch. Transaction/staging recovery không để partial hash mismatch được coi là passed.
+Future sync validates manifest/IDs/containment/hashes before writes, copies bytes atomically, verifies staged SHA, and removes stale files only from an ownership ledger inside 00_book/assets/. Unknown files/symlink escape cause failure. Frozen terminal sources are excluded. No convert/resize/re-render in sync.
 
-## Evidence provenance và presentation preference
+Book/report Typst transferable references use /documentation_assets/... with --root .; book helper must transition to absolute pass-through while old callers still work. Markdown paths calculated relative to actual source parent, usually ../assets/... from 00_book/DOC; mkdocs.yml logo/favicon assets/... relative to docs_dir. **Terminal Typst references retain exact existing /00_book/figures/report/terminal-generated/... or historical literals.** They are not broken canonical exceptions.
 
-73 lab UI originals đều preserve_original=true, original_evidence=true theo audit capture policy, historical confidence vẫn probable. final original path evidence/ui-capture/original/<lab>. Docshot recreation ở ui/docshot/lab-recreation/<lab>, ID riêng và recreates_evidence_asset=<original ID>. Original preferred_for_presentation=false là future preference policy: khi chưa có recreation được review, documents tiếp tục dùng original. Không tự rewrite vào hypothetical target.
+Changed main documents were rescanned only for current image literals/line numbers; unchanged source reference graph inherited from audit. reference-rewrite-plan.csv marks frozen rows no-action-frozen and keeps future_reference=old_reference. Stale references from modified sources removed, not moved to new assets by guessing captions. Phase 1 broken web-reference ledger remains historical baseline.
 
-Terminal originals giữ pixels/commands/data. Reconstructed record derived_from trỏ original; reconstruction_method và reconstruction_confidence bắt buộc. Text transcript phải faithful, flag uncertain glyph; không bịa timestamp/command output. Connectivity terminal cũng giữ semantic domain, reconstruction có thể đặt terminal/reconstructed/<lab> với cross-ID link.
+## Future infrastructure/build and atomic ordering
 
-4 router/switch log screenshots là syslog-capture; 2 email screenshots là external-tool-capture và chuyển bucket external-tools/original/syslog-lab trong overlay. Jenkins là external-tools/original/ci. Asset_class Phase 1 giữ để trace audit; source_kind/category mới sửa taxonomy interpretation, không sửa history.
+18 batches remain, 345 physical nonterminal records assigned once; 344 concrete paths plus one UI hold. Before affected transfers, 6 nonterminal exact-copy pairs need shared logical canonical identity review. These counts are conservative physical source handling, not a final count of unique canonical content. Order: B01 foundation → B02 branding/vector → B03 confirmed docshot → B04–B10 legacy UI domains → B11–B14 nonterminal lab UI/topology/email (B13 also DHCP snooping) → B15 LAB1/LAB5 nonterminal sources → B16 Jenkins only → B17 nonterminal orphan/duplicate review → B18 validation.
 
-SVG true source ưu tiên canonical; generated-svg chỉ dùng khi có generator evidence. Existing vector records proposed authored-svg với provenance_confidence low nếu author/exporter không rõ. 2 same-name different-content pairs có semantic names khác; 3 uncertain pairs raster/vector có state/media-qualified names, keep-both. Không đặt derived_from khi chưa chứng minh nguồn/export. ptit-logo.svg giữ branding wrapper, không khai là pure canonical vector.
+Each transfer batch must preserve bytes, update every nonterminal reference + manifest state + staging selection, validate, then finish coherently. Frozen terminals do not count as transfer, and terminal refs must compare equal before/after every batch. B11's former terminal name hold is removed; one nonterminal UI hold remains. No move-only intermediate commits. Failures introduced by a batch must be fixed/rolled back within that batch.
 
-## Naming và ID stability
-
-Names lowercase-kebab-case, bỏ chapter/old sequence prefix; directories giữ domain, filename chỉ subject/state/device/data cần phân biệt. Thí dụ routing/ospf/networks.png; evidence/.../routing-ospf-lab/r2-ospf-routing-verification.png. Số trong R2/VLAN/port là semantic data; không dùng old filename number để tạo ID/tên. Hai View & Push VLAN thật sự dùng Guest/Users -> logical IDs/names phân biệt state, không theo legacy/docshot folder.
-
-354 names/path proposals không collision (kể cả casefold). Không thêm -1/-2 để giải collision. Hai hold rows switching 1_31.png/1_6.png có subject gần trùng nhưng chưa xác minh khác biệt: path/filename rỗng, migration_role=unresolved; có intended category và provisional logical ID, không dùng làm executable move map. naming-review.csv ghi low-confidence/raw/ambiguous/orphan review. Raw page names chỉ candidate theo broad content; cần xác nhận heading/source sequence trước move.
-
-Logical ID biểu thị meaning, không chapter/old number/filesystem root/provenance-folder. Khi path hoặc presentation generator thay đổi mà meaning giữ nguyên, ID không đổi. Original và recreation là hai records/IDs khác nhau. New evidence session/data khác phải tạo record meaning/state qualifier mới; không reuse ID original như ảnh mới. Không có superseded/archive-candidate chỉ vì similarity.
-
-## Manifest contract
-
-manifest-schema.yaml là **JSON Schema Draft 2020-12 serialized as YAML**, dùng cho future documentation_assets/manifest.yaml, không phải manifest thật. Example gồm 8 records: confirmed UI, legacy UI, original lab UI, hypothetical recreation, original terminal, hypothetical reconstruction, SVG và branding. planned=true trên path proposals; hai hypothetical records sha256=null/status=unresolved/no invented command/targets empty.
-
-canonical=true nghĩa record authority cho source bytes; original evidence cũng có thể canonical=true mà preferred=false. staged copies không phải record canonical riêng. source_kind và status enums có đủ các giá trị yêu cầu. used_by giữ file/line/target/resolution; targets union nhiều documents, không duplicate canonical source. Provenance confidence tách naming confidence.
-
-Schema kiểm tra shape/enums/conditional metadata; future semantic validator kiểm tra IDs unique, references derived_from/recreates tồn tại, graph acyclic, counterpart original=true cho recreation, reconstructed original=false, media/extension match, path containment, path uniqueness, stage suffix equality và SHA content. Không thể chứng minh filesystem/hash/equivalence bằng schema đơn thuần.
-
-Bootstrap Phase 3: dùng legacy_path để verify source hiện tại và planned path; không đòi tất cả canonical paths tồn tại trước batch đầu. Batch commit asset transfer -> path canonical tồn tại/hash đúng, planned=false; used_by rewritten/staging map updated. Hold rows không được chuyển sang executable entries khi path chưa resolve. Current/planned state tách rõ, không fake PASS.
-
-## Reference rewriting contract
-
-Book/report Typst: /documentation_assets/... với --root .; tuyệt đối không report -> staged copy. Book HTML/Markdown: relative path từ actual parent tới 00_book/assets. Từ 00_book/DOC là ../assets/...; từ root index.md sẽ là assets/... nếu có reference. Config logo/favicon: assets/branding/logos/cams.svg, docs_dir-relative.
-
-Reference plan gồm mọi 674 row từ Phase 1, giữ row ID. Chỉ apply mapped active nodes hoặc reviewed example/generator node; không search-replace strings mù. 178 broken web references đã có precise future relative paths. Ngoài inventory/dynamic references action retain-out-of-scope không phải migration failure. Duplicate filename registry/generator references cần rename output-map + tests, không sửa renderer logic ở Phase 2.
-
-Book helper hiện image("../" + path) không nhận canonical absolute path đúng. Phase 3 cần transitional pass-through nếu path bắt đầu /; legacy relative branch giữ đúng hiện hành để batch chưa migrate không bị gãy. Phase cuối chỉ bỏ legacy branch khi scanner chứng minh không còn caller dùng old form. Preserve captions, alt, width, link target semantics. Source hash/old_literal/line context phải match trước applying plan; nếu document drift, re-resolve node và review, không áp old line number mù.
-
-## Docshot destination transition (future only)
-
-42 supported shot filenames có current workflow code/tests; destination legacy chưa sửa. Phase 3 chọn canonical output-root và workflow output-map; Phase 5 transfer current bytes + semantic leaf names. Navigation/devices/VLAN/generic mapped theo domain, không giữ chapter folders làm taxonomy. Default canonical root và explicit --output-dir override phải đồng nhất, preserve temp tests; override không ép người dùng ghi vào source store.
-
-docshot-transition.csv target_generator_family planned/... chỉ là design family, không CLI command tồn tại. Không bịa token chapter05–19/lab. For canonical regeneration update generator_command trong manifest chỉ sau infrastructure support/rename map được thực hiện và tested. Current commands trong audit vẫn đi legacy destination; đây là evidence về support, không lệnh đã chạy hoặc future-ready.
-
-Training fixture chapter03 book/fixtures/... không tồn tại, default REPOSITORY_ROOT=APP_DIR.parent sai tree, tests chapter03/04 lock book path. Phase 3 giải quyết CLI/docs/tests destination contracts và locate fixture source trước reproducibility claim. Rendering runtime logic thay đổi không thuộc Phase 2; migration later không được suy luận screenshot hash equals latest render.
-
-## Future build and CI wiring
-
-Những commands sau chỉ là **future contracts**, scripts chưa tồn tại trong checkout:
+Future commands (not run/implemented here):
 
 ```sh
 python scripts/sync_documentation_assets.py
@@ -118,70 +64,37 @@ typst compile --root . 00_book/main.typ output/documentation-validation/book.pdf
 typst compile --root . 00_report/main.typ output/documentation-validation/report.pdf
 ```
 
-Future docs.yml: add documentation_assets/**, scripts/sync_documentation_assets.py và manifest/staging validator paths vào push trigger; checkout canonical sources; install existing docs dependencies; validate manifest, sync, verify hashes rồi mkdocs build --strict; upload site như hiện tại. Không publish canonical store riêng chỉ để lách docs_dir. Local mkdocs serve cũng phải sync/check trước, documented wrapper chỉ được thêm ở infrastructure phase. Future book/report Typst validation job phải có executable/fonts; report-only canonical paths không dựa vào website output.
+Future docs.yml triggers canonical sources/sync/schema, runs validation+sync before MkDocs, uploads site as today. Typst paths use --root ., frozen external allowlist; docshot destination registry/tests keep temp-output isolation. No terminal renderer workflow added. Existing docshot fixture/default-root discrepancies remain foundation work.
 
-## Migration ordering và atomic batch contract
+Per-batch static checks: unique IDs/paths, valid current/planned paths, no new broken refs, SHA preservation, stage suffix/hash, provenance original/recreation links, no terminal execution actions. Build tools unavailable => unavailable, never PASS. Carry exact Phase 1 broken-web baseline exceptions and reduce per migrated reference; final validation needs actual builds and zero broken refs. Earlier c21c153 markers were removed by latest main e44ba4e; reconciliation performs no document repair and does not claim build success.
 
-**18 batches**, 15 transfer batches, asset count 3–42 mỗi batch; tổng assign 356 exactly once. B01 infrastructure không transfer, B17 review-only, B18 final validation.
+## Risks and unresolved work
 
-| batch | phase | scope | assets | risk |
-| --- | --- | --- | ---: | --- |
-| B01 | Phase 3 | Infrastructure foundation | 0 | high |
-| B02 | Phase 4 | Branding and diagrams | 37 | medium |
-| B03 | Phase 5 | Confirmed docshot UI | 42 | medium |
-| B04 | Phase 6 | Legacy project/core UI | 10 | medium |
-| B05 | Phase 6 | Legacy interface and routing UI | 33 | medium |
-| B06 | Phase 6 | Legacy DHCP ACL FHRP NAT UI | 39 | medium |
-| B07 | Phase 6 | Legacy switching UI | 35 | medium |
-| B08 | Phase 6 | Legacy switching security UI | 6 | medium |
-| B09 | Phase 6 | Legacy transfer and snapshots UI | 12 | high |
-| B10 | Phase 6 | Legacy Syslog and System Logs UI | 13 | high |
-| B11 | Phase 7 | Switching lab original evidence | 33 | high |
-| B12 | Phase 7 | Routing OSPF lab original evidence | 27 | high |
-| B13 | Phase 7 | FHRP NAT DHCP lab original evidence | 17 | high |
-| B14 | Phase 7 | Syslog lab original evidence | 21 | high |
-| B15 | Phase 8 | LAB1 source material | 28 | high |
-| B16 | Phase 8 | External tools and format evidence | 3 | medium |
-| B17 | Phase 9 | Duplicate orphan archive review | 0 | high |
-| B18 | Phase 10 | Final validation and cleanup review | 0 | high |
+High risk: foundation, transfer/log UI workflows, lab evidence/source reviews and final validation. Main changed former Critical email content to Error, replaced report terminal references, changed SVG bytes/terminology, added DHCP/ACL evidence, and removed its earlier committed conflict markers. Old Phase 2 validation report is superseded by validation-results.json for reconciliation.
 
-B01 → B02 → B03 → B04–B10 domain documentation → B11–B14 lab evidence → B15 raw LAB1 → B16 external/format → B17 duplicate/orphan review → B18 validation. High risk: infrastructure, transfer/log fixture assumptions, all lab/raw evidence, duplicate/orphan and final cleanup. B17 xử lý 110 orphan records bằng 5 review subpasses tối đa 25; 41 pair review bằng 2 subpasses. estimated_asset_count=0 cho review batch không che giấu số record review (có review_record_count).
+Remaining semantic review: one switching UI hold, twenty raw page headings/order (12 LAB1 + 8 LAB5), three uncertain vector pairs, legacy capture provenance/UI recreation equivalence and orphan dispositions. Orphan terminals remain orphan-but-frozen; no archive/delete. Phase 3 infrastructure readiness is **YES** from reconciliation: current main is contained, freeze contract validated, no current marker blocker. Tool/build availability and per-batch naming/provenance reviews remain implementation prerequisites; no automatic asset transfer is authorized by readiness.
 
-Mỗi transfer batch phải: verify source hash -> transfer preserving bytes -> update mọi reference (book/report/code/config/mentions đã review) -> update manifest state/IDs/provenance -> update staging selection -> sync/check -> static/build validation -> review diff. Không commit intermediate move-only state. Nếu bất kỳ check mới fail, sửa trong batch hoặc rollback riêng batch; không postpone link fixes. Không regenerate evidence trong transfer batch. Review-required là prerequisite của từng affected row; split batch thành subtransactions ≤25 khi review phức tạp, giữ all-reference atomicity per asset.
+## Active outputs
 
-Hai unresolved filename rows thuộc B11: chưa thể coi B11 complete trước review; có thể migrate các row còn lại thành atomic subtransactions rồi hold hai row. Nếu muốn giữ nguyên 18 batch completion accounting, B11 chỉ đóng khi cả hai đã có tên được duyệt.
+- [main-reconciliation.md](main-reconciliation.md): main sync, delta, policy precedence, blockers.
+- [main-delta-assets.csv](main-delta-assets.csv): all 142 changed main paths, 54 image deltas/current hashes and supporting text/docs.
+- [terminal-freeze.csv](terminal-freeze.csv): all 62 current/historical frozen images and current reference metadata.
+- [asset-path-map.csv](asset-path-map.csv): all 407 images, explicit canonical_migration/migration_action.
+- [reference-rewrite-plan.csv](reference-rewrite-plan.csv): current reference overlay and no-action frozen literals.
+- [migration-batches.csv](migration-batches.csv), [proposed-tree.txt](proposed-tree.txt), [plan-summary.json](plan-summary.json): updated nonterminal transfer accounting.
+- [naming-review.csv](naming-review.csv), [duplicate-review-plan.csv](duplicate-review-plan.csv), [orphan-review-plan.csv](orphan-review-plan.csv), [vector-plan.csv](vector-plan.csv), [docshot-transition.csv](docshot-transition.csv): current review policies; frozen terminal actions disabled.
+- [manifest-schema.yaml](manifest-schema.yaml), [manifest-example.yaml](manifest-example.yaml), [decisions.md](decisions.md): revised architecture contract.
+- [mkdocs-staging-plan.csv](mkdocs-staging-plan.csv): unchanged 178 stage selections.
+- [validation-results.json](validation-results.json): actual reconciliation integrity/plan checks, not build/migration PASS.
 
-## Validation per future batch
+## Additional main delta inspected during reconciliation
 
-- Static: canonical and current manifest paths exist as appropriate planned/current state; unique IDs and casefold paths; no path traversal/symlink escape; all document references resolve; no new unapproved broken local path.
-- Bytes: source hash equals audited baseline before move; destination SHA equals source; staged hashes equal canonical, no extra opt-out stage files. Captures source files giữ nguyên nội dung.
-- Semantics: review visual state/name, caption/alt preservation, original vs recreation/reconstruction graph, preferred records uniqueness per presentation subject; no silent replacement with changed data.
-- MkDocs: sync/check + mkdocs build --strict; both Typst compile --root .; docshot destination and isolation/repeatability tests when generator/output mapping changes. Baseline tools unavailable phải ghi unavailable, không PASS.
-- Baseline exceptions: Phase 1 có 178 pre-existing broken Markdown references và builds unavailable. Phase 3 establish precise exception ledger; per batch không tăng hoặc che lỗi. Remove exception từng migrated node; final B18 requires zero broken references and actual successful builds in capable environment. Intermediate baseline failures phải báo failed-existing/unavailable, không gọi PASS hay postpone newly introduced issues.
-- Build checks per batch có thể lộ baseline không liên quan; report exact diagnostic và distinguish original regression bằng hash/context baseline. Không sửa lỗi ngoài asset scope để ép build green.
+origin/main advanced from c21c153 to e44ba4e while the task was running. A second fetch/merge preserved that delta; the report now contains ACL lab evidence and main removed its old conflict markers. This plan is pinned to the fetched e44ba4e snapshot.
 
-## Risks và unresolved review
+34 additional images in that advance: 11 terminal captures, 11 CAMS lab UI captures, 2 topology PNGs, 2 authored SVGs, 8 photographed source pages. New terminal captures are frozen; source pages with embedded command excerpts are classified as whole raw documents, not extracted terminal captures. All 62 frozen images remain byte-identical to main. Lab UI total is now 84; documentation UI remains 42 confirmed + 148 legacy, so all UI assets total 274. Potential lab UI recreation paths total 83.
 
-164 review-required rows; 15 low confidence gồm 12 raw pages, lab_4 purpose và 2 visually near-identical capture holds. Classification/path proposals không cho phép tự thực thi. Ba topology pairs uncertain và hai different-content pairs không merge; original preservation có ưu tiên hơn naming perfection. 41 duplicate candidates có review class/state rationale; không auto-delete, không perceptual==exact. 110 orphans giữ source/evidence và review disposition riêng.
+New leaf domains: dhcp-snooping-lab, lab5, lab1 UI recreation. Existing report chapter09 now uses LAB5 terminal/UI/topology; the standalone 09_kich_ban_5_acl.typ fragment repeats evidence but is not included by main.typ, so its reference edges are resolved-inactive. New database/workflow SVGs added to B02; B13 adds DHCP snooping UI/topology; B15 expands to LAB1/LAB5 raw/UI/topology.
 
-Cần human/source review cho headings raw pages, pair state/capture lineage, ambiguous captions, SVG export equivalence, fixture availability, lab recreation equivalence và eventual archive choice. Kiến trúc canonical/staging đã chốt, không xin lại quyết định root. Không ép precise filename cho hai hold rows. Xem decisions.md U001–U008.
+Seven exact SHA-256 pairs found by comparing delta hashes to known inventory: one terminal pair frozen/no-action, six nonterminal pairs require shared canonical-source/alias review across B13/B15. Preserve both current copies; no automatic merge, move or deletion. canonical_group_id identifies review group, not an executable deduplication operation. Unique physical record IDs preserve source provenance; shared logical canonical identity must be finalized before either affected transfer. Two new email likely-crop pairs join the 41 historical visual candidates; total pair ledger has 43 visual + 7 exact records.
 
-## Outputs và verification
-
-- [asset-path-map.csv](asset-path-map.csv): 356 asset rows, 354 proposed paths + 2 holds.
-- [reference-rewrite-plan.csv](reference-rewrite-plan.csv): 674 reference rows với action/phase và future reference.
-- [naming-review.csv](naming-review.csv): candidate names cần review.
-- [duplicate-review-plan.csv](duplicate-review-plan.csv): 41 pair dispositions, keep-both.
-- [vector-plan.csv](vector-plan.csv): 30 SVG records và 5 related raster comparisons.
-- [docshot-transition.csv](docshot-transition.csv): 263 UI transitions, no invented commands.
-- [migration-batches.csv](migration-batches.csv): 18 atomic future batches.
-- [manifest-schema.yaml](manifest-schema.yaml): JSON Schema as YAML.
-- [manifest-example.yaml](manifest-example.yaml): 8 design examples, 2 hypothetical.
-- [proposed-tree.txt](proposed-tree.txt): tree generated from map.
-- [decisions.md](decisions.md): D001–D014, U001–U008.
-- [orphan-review-plan.csv](orphan-review-plan.csv): 110 preservation/review dispositions.
-- [mkdocs-staging-plan.csv](mkdocs-staging-plan.csv): 178 current intended web assets.
-- [plan-summary.json](plan-summary.json): counts and Phase 1 input hashes.
-- [validation-results.json](validation-results.json): schema/sample, map/reference/tree and repository integrity checks.
-
-Phase 2 validation kiểm tra design consistency và integrity; không chạy future migration/build/regeneration. No canonical/staging directory created. Final git status/diff chỉ có output/documentation-assets-plan; toàn bộ Phase 1 inputs và tracked files giữ SHA-256 như trước.
+Main also changes production/QML/tests and upstream deletes/renames document/helper files. Those changes arrived only via merge and match current main; no task implementation edits outside planning artifacts. Upstream production changes may affect UI recreation fixtures, so the planned workflow families remain proposals rather than reproducibility claims.

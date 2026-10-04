@@ -1,5 +1,5 @@
-# DESIGN EXAMPLES ONLY. No asset file is generated or migrated.
-# planned=true includes existing-byte path proposals; null SHA identifies hypothetical assets.
+# Phase 2.1 design contract. Terminal record is a frozen external exception.
+# No reconstructed-terminal hypothetical asset remains. Lab UI recreation remains in scope.
 manifest_version: 1
 assets:
 - id: ui.core.workspace-overview
@@ -86,6 +86,9 @@ assets:
   planned: true
   legacy_path: 00_book/figures/gui/chapter-03/01-workspace-overview.png
   preserve_original: false
+  migration_role: canonical
+  migration_action: transfer-after-review
+  canonical_migration: true
 - id: ui.routing.ospf.networks
   path: documentation_assets/ui/legacy/routing/ospf/networks.png
   media_type: image/png
@@ -135,6 +138,9 @@ assets:
   planned: true
   legacy_path: 00_book/figures/gui/chapter-06/04-ospf-networks.png
   preserve_original: false
+  migration_role: canonical
+  migration_action: transfer-after-review
+  canonical_migration: true
 - id: evidence.routing-ospf.routing-group-networks
   path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png
   media_type: image/png
@@ -178,6 +184,9 @@ assets:
   planned: true
   legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/11.png
   preserve_original: true
+  migration_role: original-evidence
+  migration_action: transfer-after-review
+  canonical_migration: true
 - id: ui.lab-recreation.routing-ospf.routing-group-networks
   path: documentation_assets/ui/docshot/lab-recreation/routing-ospf/routing-group-networks.png
   media_type: image/png
@@ -218,8 +227,11 @@ assets:
   planned: true
   legacy_path: null
   preserve_original: false
+  migration_role: canonical
+  migration_action: transfer-after-review
+  canonical_migration: true
 - id: evidence.routing-ospf.r2-ospf-routing-verification
-  path: documentation_assets/evidence/terminal/original/routing-ospf-lab/r2-ospf-routing-verification.png
+  path: 00_book/figures/report/diagrams/routing-ospf-lab/18.png
   media_type: image/png
   asset_class: terminal-evidence
   domain: routing-ospf-lab
@@ -232,7 +244,7 @@ assets:
       Dense output; inspect original at full resolution before reconstruction.
     chain_of_custody_verified: false
   provenance_confidence: medium
-  canonical: true
+  canonical: false
   original_evidence: true
   derived_from: null
   recreates_evidence_asset: null
@@ -242,58 +254,20 @@ assets:
   reproducible: unknown
   generator: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 286
-    reference_target: report-typst
-    old_reference: /00_book/figures/report/diagrams/routing-ospf-lab/18.png
-    resolution: resolved
-  targets:
-  - report-typst
-  mkdocs_stage: false
-  mkdocs_stage_path: null
-  sha256: 83aecc39dce6a550f5163fdd43d394ae2f97d3874e324bf771552d939a312e28
-  status: preserve-original
-  notes: Proposed final record for existing bytes; path does not yet exist. Preserve
-    original experimental/capture bytes; text reconstruction cannot reproduce experiment.
-  planned: true
-  legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/18.png
-  preserve_original: true
-- id: reconstruction.routing-ospf.r2-routing-verification
-  path: documentation_assets/evidence/terminal/reconstructed/routing-ospf-lab/r2-ospf-routing-verification.png
-  media_type: image/png
-  asset_class: terminal-evidence
-  domain: routing-ospf-lab
-  subject: r2-ospf-routing-verification
-  source_kind: reconstructed-terminal
-  provenance:
-    assessment: hypothetical text presentation derivative, not an experiment replay
-    evidence:
-    - Phase 2 policy example only
-    chain_of_custody_verified: false
-  provenance_confidence: low
-  canonical: false
-  original_evidence: false
-  derived_from: evidence.routing-ospf.r2-ospf-routing-verification
-  recreates_evidence_asset: null
-  reconstruction_method: Planned verbatim transcription and static terminal rendering;
-    retain commands/data, flag every uncertain glyph; never invent missing output.
-  reconstruction_confidence: low
-  preferred_for_presentation: true
-  reproducible: unknown
-  generator: null
-  generator_command: null
   used_by: []
   targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
-  sha256: null
-  status: unresolved
-  notes: 'HYPOTHETICAL: no reconstruction created. Low confidence until original-vs-transcript
-    review; cannot replace original evidence.'
-  planned: true
+  sha256: 83aecc39dce6a550f5163fdd43d394ae2f97d3874e324bf771552d939a312e28
+  status: frozen
+  notes: Phase 2.1 FROZEN external exception, classify-only/no-action. No reconstruction/move/rename/reference
+    rewrite; current bytes remain in historical path.
+  planned: false
   legacy_path: null
-  preserve_original: false
+  preserve_original: true
+  migration_role: frozen
+  migration_action: classify-only
+  canonical_migration: false
 - id: diagrams.architecture.cams-layered-system
   path: documentation_assets/diagrams/architecture/cams-layered-system.svg
   media_type: image/svg+xml
@@ -334,6 +308,9 @@ assets:
   planned: true
   legacy_path: 00_book/figures/report/diagrams/22_architecture_overview.svg
   preserve_original: false
+  migration_role: canonical
+  migration_action: transfer-after-review
+  canonical_migration: true
 - id: branding.logos.cams
   path: documentation_assets/branding/logos/cams.svg
   media_type: image/svg+xml
@@ -379,3 +356,6 @@ assets:
   planned: true
   legacy_path: 00_book/figures/icons/logo.svg
   preserve_original: false
+  migration_role: canonical
+  migration_action: transfer-after-review
+  canonical_migration: true

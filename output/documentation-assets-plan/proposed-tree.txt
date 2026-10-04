@@ -1,10 +1,10 @@
-GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
-└── documentation_assets/ [354 assets]
+GENERATED FROM asset-path-map.csv; Phase 2.1 nonterminal proposed canonical paths only.
+└── documentation_assets/ [344 assets]
     ├── branding/ [2 assets]
     │   └── logos/ [2 assets]
     │       ├── cams.svg
     │       └── ptit.svg
-    ├── diagrams/ [40 assets]
+    ├── diagrams/ [44 assets]
     │   ├── architecture/ [8 assets]
     │   │   ├── application-source-tree.svg
     │   │   ├── cams-layered-system.svg
@@ -14,14 +14,19 @@ GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
     │   │   ├── qtquick-component-tree.svg
     │   │   ├── ssh-session-connection.svg
     │   │   └── ui-thread-worker-dispatch.svg
-    │   ├── database/ [1 assets]
+    │   ├── database/ [2 assets]
+    │   │   ├── core-observed-data-relationships.svg
     │   │   └── device-entity-relations.svg
-    │   ├── lab-topology/ [9 assets]
+    │   ├── lab-topology/ [11 assets]
+    │   │   ├── dhcp-snooping-lab/ [1 assets]
+    │   │   │   └── dhcp-snooping-topology.png
     │   │   ├── fhrp-nat-dhcp/ [2 assets]
     │   │   │   ├── glbp-dhcp-pat-raster.png
     │   │   │   └── glbp-dhcp-pat-vector.svg
     │   │   ├── lab1/ [1 assets]
     │   │   │   └── router-switch-management.png
+    │   │   ├── lab5/ [1 assets]
+    │   │   │   └── acl-lab-topology.png
     │   │   ├── multi-router-branch-routing.svg
     │   │   ├── routing-ospf/ [2 assets]
     │   │   │   ├── multi-area-branches-raster.png
@@ -41,7 +46,7 @@ GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
     │   │   ├── stp-root-port-election.jpg
     │   │   ├── vlan-trunk-segmentation.png
     │   │   └── vtp-server-clients.jpg
-    │   └── workflow/ [13 assets]
+    │   └── workflow/ [14 assets]
     │       ├── acl-rule-evaluation.svg
     │       ├── cisco-cli-modes.svg
     │       ├── configuration-automation.svg
@@ -54,81 +59,49 @@ GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
     │       ├── per-host-serial-cross-host-parallel.svg
     │       ├── service-repository-test.svg
     │       ├── syslog-processing-pipeline.svg
+    │       ├── syslog-processing-sequence.svg
     │       └── worker-fake-connector-test.svg
-    ├── evidence/ [122 assets]
-    │   ├── connectivity/ [4 assets]
-    │   │   └── original/ [4 assets]
-    │   │       ├── fhrp-nat-dhcp-lab/ [1 assets]
-    │   │       │   └── client-connectivity-test.png
-    │   │       └── routing-ospf-lab/ [3 assets]
-    │   │           ├── vpc11-ping-verification.png
-    │   │           ├── vpc13-ping-verification.png
-    │   │           └── vpc15-ping-verification.png
-    │   ├── external-tools/ [3 assets]
-    │   │   └── original/ [3 assets]
+    ├── evidence/ [108 assets]
+    │   ├── external-tools/ [5 assets]
+    │   │   └── original/ [5 assets]
     │   │       ├── ci/ [1 assets]
     │   │       │   └── jenkins-pipeline-stages.png
-    │   │       └── syslog-lab/ [2 assets]
-    │   │           ├── email-critical.png
-    │   │           └── email-warning.png
-    │   ├── source-material/ [12 assets]
-    │   │   └── lab1/ [12 assets]
-    │   │       ├── cli-output-and-result-analysis.png
-    │   │       ├── configuration-checks.png
-    │   │       ├── device-access-and-basic-configuration.png
-    │   │       ├── dhcp-pool-and-acl-procedure.png
-    │   │       ├── interface-configuration-procedure.png
-    │   │       ├── interface-lifecycle-and-validation.png
-    │   │       ├── interface-verification-output.png
-    │   │       ├── lab-overview-and-objectives.png
-    │   │       ├── loopback-and-log-tests.png
-    │   │       ├── results-summary.png
-    │   │       ├── service-and-system-log-analysis.png
-    │   │       └── validation-procedure-continuation.png
-    │   ├── syslog/ [4 assets]
-    │   │   └── original/ [4 assets]
     │   │       └── syslog-lab/ [4 assets]
-    │   │           ├── r1-device-logs.png
-    │   │           ├── r2-device-logs.png
-    │   │           ├── r3-device-logs.png
-    │   │           └── sw1-device-logs.png
-    │   ├── terminal/ [27 assets]
-    │   │   └── original/ [27 assets]
-    │   │       ├── fhrp-nat-dhcp-lab/ [4 assets]
-    │   │       │   ├── dhcp-glbp-r1-verify.png
-    │   │       │   ├── glbp-r2-verify.png
-    │   │       │   ├── nat-config-verify.png
-    │   │       │   └── nat-interface-verify.png
-    │   │       ├── lab1/ [3 assets]
-    │   │       │   ├── r1-interface-ip-configuration.png
-    │   │       │   ├── r2-interface-ip-configuration.png
-    │   │       │   └── r2-interface-status.png
-    │   │       ├── project-format/ [2 assets]
-    │   │       │   ├── encrypted-package-hex-header.png
-    │   │       │   └── project-package-json-inspection.png
-    │   │       ├── routing-ospf-lab/ [9 assets]
-    │   │       │   ├── multi-router-ospf-running-config.png
-    │   │       │   ├── r1-ospf-routing-verification.png
-    │   │       │   ├── r2-ospf-routing-verification.png
-    │   │       │   ├── r3-ospf-routing-verification.png
-    │   │       │   ├── r6-ospf-routing-verification.png
-    │   │       │   ├── vpc11-ip-configuration.png
-    │   │       │   ├── vpc12-ip-configuration.png
-    │   │       │   ├── vpc13-ip-configuration.png
-    │   │       │   └── vpc14-ip-configuration.png
-    │   │       ├── switching-lab/ [5 assets]
-    │   │       │   ├── multi-switch-etherchannel-verification.png
-    │   │       │   ├── sw1-vtp-status.png
-    │   │       │   ├── sw2-vtp-status.png
-    │   │       │   ├── sw2-vtp-trunk-verification.png
-    │   │       │   └── sw5-port-security-verification.png
-    │   │       └── syslog-lab/ [4 assets]
-    │   │           ├── r1-verify.png
-    │   │           ├── r2-verify.png
-    │   │           ├── r3-verify.png
-    │   │           └── sw1-verify.png
-    │   └── ui-capture/ [72 assets]
-    │       └── original/ [72 assets]
+    │   │           ├── email-error-sw1-cropped.png
+    │   │           ├── email-error-sw1-gmail.png
+    │   │           ├── email-warning-r1-cropped.png
+    │   │           └── email-warning-r1-gmail.png
+    │   ├── source-material/ [20 assets]
+    │   │   ├── lab1/ [12 assets]
+    │   │   │   ├── cli-output-and-result-analysis.png
+    │   │   │   ├── configuration-checks.png
+    │   │   │   ├── device-access-and-basic-configuration.png
+    │   │   │   ├── dhcp-pool-and-acl-procedure.png
+    │   │   │   ├── interface-configuration-procedure.png
+    │   │   │   ├── interface-lifecycle-and-validation.png
+    │   │   │   ├── interface-verification-output.png
+    │   │   │   ├── lab-overview-and-objectives.png
+    │   │   │   ├── loopback-and-log-tests.png
+    │   │   │   ├── results-summary.png
+    │   │   │   ├── service-and-system-log-analysis.png
+    │   │   │   └── validation-procedure-continuation.png
+    │   │   └── lab5/ [8 assets]
+    │   │       ├── acl-traffic-verification-page.png
+    │   │       ├── nat-acl-verification-page.png
+    │   │       ├── requirements-procedure-page.png
+    │   │       ├── stp-dhcp-verification-page.png
+    │   │       ├── switching-trunk-verification-page.png
+    │   │       ├── topology-address-plan-page.png
+    │   │       ├── vlan-stp-verification-page.png
+    │   │       └── vtp-vlan-verification-page.png
+    │   └── ui-capture/ [83 assets]
+    │       └── original/ [83 assets]
+    │           ├── dhcp-snooping-lab/ [5 assets]
+    │           │   ├── dhcp-assignment-system-logs.png
+    │           │   ├── r1-dhcp-pool.png
+    │           │   ├── sw1-l2-security-view-push.png
+    │           │   ├── sw1-port-inventory.png
+    │           │   └── sw1-trusted-uplink-applied.png
     │           ├── fhrp-nat-dhcp-lab/ [10 assets]
     │           │   ├── dhcp-config-preview.png
     │           │   ├── dhcp-pool.png
@@ -140,7 +113,7 @@ GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
     │           │   ├── nat-interfaces.png
     │           │   ├── nat-pat-preview.png
     │           │   └── nat-pat.png
-    │           ├── lab1/ [12 assets]
+    │           ├── lab1/ [14 assets]
     │           │   ├── acl-standard-rule-editor.png
     │           │   ├── dhcp-pool-editor.png
     │           │   ├── l2-security-save-result.png
@@ -150,9 +123,16 @@ GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
     │           │   ├── router-interface-editor.png
     │           │   ├── router-physical-interface-settings.png
     │           │   ├── static-mac-editor.png
+    │           │   ├── sw1-trusted-uplink-applied.png
+    │           │   ├── sw1-trusted-uplink-editing.png
     │           │   ├── switch-port-inventory.png
     │           │   ├── system-logs-filtered.png
     │           │   └── system-logs-receiving.png
+    │           ├── lab5/ [4 assets]
+    │           │   ├── acl-permitted-tcp-message-detail.png
+    │           │   ├── acl-system-logs-filtered.png
+    │           │   ├── acl-system-logs-full.png
+    │           │   └── r1-acl-telnet-deny-editor.png
     │           ├── routing-ospf-lab/ [15 assets]
     │           │   ├── r1-process-dark.png
     │           │   ├── r1-view-push-dark.png
@@ -432,7 +412,69 @@ GENERATED FROM asset-path-map.csv; proposed current assets only, no files moved.
                     ├── running-config-history.png
                     └── sync-notifications.png
 
-Unresolved path rows (excluded from tree):
-evidence.switching.sw2-vtp-trunk-alternate-capture <- 00_book/figures/report/diagrams/switching-lab/1_31.png
-evidence.switching.sw3-lacp-later-capture <- 00_book/figures/report/diagrams/switching-lab/1_6.png
-manifest.yaml is future infrastructure metadata, not an asset row; hypothetical recreation paths are not counted.
+Frozen external exceptions (excluded from canonical counts; remain exactly at current paths):
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png
+00_book/figures/report/diagrams/routing-ospf-lab/12.png
+00_book/figures/report/diagrams/routing-ospf-lab/17.png
+00_book/figures/report/diagrams/routing-ospf-lab/18.png
+00_book/figures/report/diagrams/routing-ospf-lab/19.png
+00_book/figures/report/diagrams/routing-ospf-lab/20.png
+00_book/figures/report/diagrams/routing-ospf-lab/21.png
+00_book/figures/report/diagrams/routing-ospf-lab/22.png
+00_book/figures/report/diagrams/routing-ospf-lab/23.png
+00_book/figures/report/diagrams/routing-ospf-lab/24.png
+00_book/figures/report/diagrams/routing-ospf-lab/25.png
+00_book/figures/report/diagrams/routing-ospf-lab/26.png
+00_book/figures/report/diagrams/routing-ospf-lab/27.png
+00_book/figures/report/diagrams/switching-lab/1_27.png
+00_book/figures/report/diagrams/switching-lab/1_28.png
+00_book/figures/report/diagrams/switching-lab/1_29.png
+00_book/figures/report/diagrams/switching-lab/1_30.png
+00_book/figures/report/diagrams/switching-lab/1_31.png
+00_book/figures/report/diagrams/switching-lab/1_33.png
+00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png
+00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png
+00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png
+00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png
+00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png
+00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png
+00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png
+00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png
+00_book/figures/report/misc/cams-screenshot-2026-09-13-18-17-17.png
+00_book/figures/report/misc/xxd-ntp.png
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 10.png
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 12.png
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 9.png
+00_book/figures/report/diagrams/dhcp-snooping-lab/r2_dhcp_success.png
+00_book/figures/report/terminal-generated/nat-config.png
+00_book/figures/report/terminal-generated/nat-interfaces.png
+00_book/figures/report/terminal-generated/ospf-isp1.png
+00_book/figures/report/terminal-generated/ospf-isp2.png
+00_book/figures/report/terminal-generated/ospf-r1.png
+00_book/figures/report/terminal-generated/ospf-r2.png
+00_book/figures/report/terminal-generated/ospf-r3.png
+00_book/figures/report/terminal-generated/ospf-r6.png
+00_book/figures/report/terminal-generated/ospf-six-routers.png
+00_book/figures/report/terminal-generated/pc1-dhcp-trace.png
+00_book/figures/report/terminal-generated/r1-dhcp-glbp.png
+00_book/figures/report/terminal-generated/r1-ospf-routes.png
+00_book/figures/report/terminal-generated/r2-glbp.png
+00_book/figures/report/terminal-generated/sw3-vlan-vtp.png
+00_book/figures/report/terminal-generated/vpc11-ping.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/1.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/10.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/11.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/3.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/4.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/5.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/6.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/7.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/8.png
+00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/9.png
+
+Unresolved nonterminal hold:
+00_book/figures/report/diagrams/switching-lab/1_6.png

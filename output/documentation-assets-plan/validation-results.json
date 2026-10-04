@@ -1,119 +1,143 @@
 {
-  "scope": "Phase 2 design consistency only; no migration, build or rendering performed",
+  "phase": "2.1",
   "status": "pass",
+  "scope": "Reconciliation consistency/integrity only; not build readiness or migration PASS",
   "checks": [
     {
-      "check": "complete_asset_mapping",
+      "check": "main_merged",
       "status": "pass",
-      "detail": "356 Phase 1 assets represented exactly once"
+      "detail": {
+        "current_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+        "merge_head": "a15e7a42d03ea317f5ad5f1e7d8dbd849146167b"
+      }
     },
     {
-      "check": "stable_unique_logical_ids",
+      "check": "phase1_history_preserved",
       "status": "pass",
-      "detail": "Unique semantic IDs; no numeric components, slash, chapter or filesystem-root component"
+      "detail": "13 audit inputs unchanged byte-for-byte against pre-sync Phase 2 HEAD"
     },
     {
-      "check": "canonical_paths_and_names",
+      "check": "all_main_delta_bytes_preserved",
       "status": "pass",
-      "detail": "354 paths unique including casefold; semantic lowercase-kebab-case filenames"
+      "detail": "All 142 main delta paths match pinned fetched main, including 3 upstream deletions, PDFs/documents/images/text/code"
     },
     {
-      "check": "unresolved_holds_safe",
+      "check": "delta_inventory_complete",
       "status": "pass",
-      "detail": [
-        "00_book/figures/report/diagrams/switching-lab/1_31.png",
-        "00_book/figures/report/diagrams/switching-lab/1_6.png"
-      ]
+      "detail": "356 historical + 51 added; 3 modified current hashes; no whole-repository reaudit"
     },
     {
-      "check": "bytes_unchanged_for_all_assets",
+      "check": "all_current_asset_hashes",
       "status": "pass",
-      "detail": "All 356 current files match Phase 1 SHA-256"
+      "detail": "407 current files match overlay SHA-256"
     },
     {
-      "check": "lab_ui_preservation",
+      "check": "terminal_content_freeze",
       "status": "pass",
-      "detail": "73 original lab captures, never ui/legacy"
+      "detail": "15 rendered current + 47 direct/historical (including 4 console Syslog logs); no future transfer/rename/stage/reconstruction"
     },
     {
-      "check": "recreation_paths_separate_unique",
+      "check": "terminal_bytes_equal_main",
       "status": "pass",
-      "detail": "72 hypothetical candidate paths separate from existing-byte proposals"
+      "detail": "All 62 frozen images byte-for-byte current main authority"
     },
     {
-      "check": "staging_selection_suffix_and_hash",
+      "check": "frozen_reference_actions",
       "status": "pass",
-      "detail": "178 selected assets, exact canonical suffix preserved; no report-only staging"
+      "detail": "30 frozen reference edges remain literal/no-action"
     },
     {
-      "check": "reference_ledger_complete",
+      "check": "standardized_report_references_preserved",
       "status": "pass",
-      "detail": "All original 674 rows preserved by source, line and literal"
+      "detail": "9 active terminal-generated references exact current main literals/lines; whole report file unchanged"
     },
     {
-      "check": "relative_web_references",
+      "check": "changed_document_reference_lines",
       "status": "pass",
-      "detail": "178 Markdown/HTML paths resolve to selected stage destinations from actual source parents"
+      "detail": "Only changed .typ sources rescanned; every new current edge matches its literal at current line"
     },
     {
-      "check": "typst_uses_canonical",
+      "check": "no_dangling_reference_ids",
       "status": "pass",
-      "detail": "155 planned Typst references use project-root canonical paths"
+      "detail": "All mapped IDs valid, including new email semantic IDs"
     },
     {
-      "check": "atomic_batch_accounting",
+      "check": "nonterminal_canonical_paths",
       "status": "pass",
-      "detail": "18 batches; 15 transfer batches, 3–42 assets; each asset assigned exactly once"
+      "detail": "345 nonterminal physical records, 344 unique paths and one intentional UI hold"
     },
     {
-      "check": "review_ledgers_complete",
+      "check": "terminal_not_in_naming_or_batches",
       "status": "pass",
-      "detail": "263 UI transitions, 110 orphan reviews, 41 visual pair reviews"
+      "detail": "No frozen terminal naming proposals or transfer batch assignments"
     },
     {
-      "check": "tree_matches_map",
+      "check": "nonterminal_transfer_accounting",
       "status": "pass",
-      "detail": "Tree includes all 354 proposed leaves and separately lists both holds"
+      "detail": "18 batches; 345 physical transfers assigned once, terminal count excluded"
     },
     {
-      "check": "manifest_sample_schema_keywords",
+      "check": "staging_unaffected",
       "status": "pass",
-      "detail": "8 records satisfy every keyword used by schema using an explicit local subset validator; standard Draft 2020-12 validator unavailable (not installed)"
+      "detail": "178 nonterminal selections unchanged; no terminal staging"
     },
     {
-      "check": "manifest_sample_provenance_graph",
+      "check": "web_relative_paths",
       "status": "pass",
-      "detail": "Hypothetical recreation/reconstruction link to separate original records; all originals preserved"
+      "detail": "178 web reference paths still resolve to proposed stage suffixes"
     },
     {
-      "check": "hypothetical_examples_not_claimed_real",
+      "check": "manifest_example_contract",
       "status": "pass",
-      "detail": "Two nonexistent examples clearly marked, null hashes, no fabricated runtime commands"
+      "detail": "All used JSON Schema keywords validated locally; general Draft 2020-12 validator unavailable. Seven examples, no terminal reconstruction hypothetical."
     },
     {
-      "check": "schema_negative_controls",
+      "check": "schema_rejects_terminal_migration",
       "status": "pass",
-      "detail": "Rejects missing current hash, unpreserved original and unknown source_kind"
+      "detail": "Terminal source kinds cannot become executable canonical migrations"
     },
     {
-      "check": "phase1_inputs_unchanged",
+      "check": "schema_rejects_new_terminal_reconstruction",
       "status": "pass",
-      "detail": "All 13 source audit outputs retain initial SHA-256"
+      "detail": "Reconstructed-terminal enum removed; reconstruction metadata null; execution candidates zero"
     },
     {
-      "check": "tracked_file_integrity",
+      "check": "ui_not_accidentally_frozen",
       "status": "pass",
-      "detail": "All 2018 tracked files unchanged"
+      "detail": "All 274 CAMS UI assets still in nonterminal plan; 83 lab recreation candidates retain original links"
     },
     {
-      "check": "only_authorized_new_output",
+      "check": "email_current_state",
       "status": "pass",
-      "detail": "Only new plan outputs; no canonical or staging directory created; tracked diff empty"
+      "detail": "Jenkins + 4 current email records; main hashes, Error/Warning semantic IDs, report uses full Gmail captures"
+    },
+    {
+      "check": "preexisting_main_markers_recorded",
+      "status": "pass",
+      "detail": "Latest main has no markers in chapters08/09; earlier snapshot marker blocker resolved upstream. Infrastructure readiness true; no document repair by this task"
+    },
+    {
+      "check": "only_plan_working_tree_changes",
+      "status": "pass",
+      "detail": "After authorized main merge, working-tree diff/new files only plan output; canonical/staging not created"
+    },
+    {
+      "check": "exact_delta_pairs_preserved",
+      "status": "pass",
+      "detail": "7 exact delta pairs, including one frozen terminal pair; no automatic merge/delete, canonical-copy review gates remain"
+    },
+    {
+      "check": "delta_support_text_preserved",
+      "status": "pass",
+      "detail": "14 text sources unchanged byte-for-byte, no future renderer/reconstruction action"
     }
   ],
+  "builds": "not-run: classification/planning reconciliation; prior Phase 1 tools unavailable, latest main marker blocker removed upstream, no build claim",
+  "ready_for_phase3": true,
+  "main_document_markers": [],
   "limits": [
-    "Validation of schema uses all keywords present in this schema, not an installed general Draft 2020-12 validator.",
-    "Future target files/hashes cannot be validated until implementation; schema sample is planned.",
-    "Two unresolved names and 164 review-required records remain intentional execution gates."
+    "Schema checked with explicit subset evaluator covering every keyword used, no installed general Draft 2020-12 validator.",
+    "Unchanged-source graph inherited from Phase 1; only main delta sources rescanned.",
+    "Build tooling checks and per-batch naming/copy/provenance prerequisites remain; no file migration or rendering performed."
   ]
 }

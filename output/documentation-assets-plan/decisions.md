@@ -1,72 +1,32 @@
-# Decisions — Phase 2
+# Decision log — Phase 2.1
 
-D001–D010 là các quyết định kiến trúc đã chốt trong yêu cầu. Implementation chưa thực hiện.
+Phase 2 commit `5fb4bd7` retains historical policy; this log and main-reconciliation.md supersede it.
 
-## D001 — One shared canonical asset repository
+- D001: One shared canonical store for migrated documentation assets, with explicit terminal external exception.
+- D002: Canonical root remains documentation_assets/, outside book/report.
+- D003: MkDocs uses generated staging 00_book/assets/, suffix-preserving; recommend generated+gitignored+CI sync.
+- D004: Prefer true SVG sources; preserve different-content/uncertain pairs independently.
+- D005: Original experimental evidence preserved; nonterminal lab UI goes evidence/ui-capture/original.
+- D006: UI docshot recreation may become presentation-preferred after equivalence review, never original experimental evidence.
+- D007 (SUPERSEDED): Terminal reconstruction proposal withdrawn. Historical reconstructability metadata does not authorize any action.
+- D008: Semantic kebab-case names apply to transferable nonterminal files only. Terminal filenames stay exactly as current main/historical files.
+- D009: No deletion of originals/orphans/visual candidates.
+- D010: Each nonterminal transfer batch updates asset + all its references + manifest + stage + validation atomically. Frozen references excluded and kept literal.
+- D011: Generated+gitignored+CI sync remains recommended; no implementation in Phase 2.1.
+- D012: Bootstrap planned canonical manifest only for nonterminal scope; external frozen entries keep existing paths and canonical=false.
+- D013: UI recreation preference conditional on reviewed equivalence; no terminal recreation.
+- D014: Naming confidence separate from provenance confidence; main bytes override stale Phase 1 hashes.
+- D015 (NEW AUTHORITY): Current-main terminal images/text/reference state is frozen. migration_role=frozen, migration_action=classify-only, canonical_migration=false, future_action=no-action. No render/reconstruct/crop/move/rename/replace/taxonomy reference rewrite in any later phase.
+- D016: Terminal classification uses visual substance, including four Syslog console-log screenshots previously classified syslog-evidence. Email/Gmail/Jenkins/CAMS UI/topology are not frozen by this rule.
+- D017: Current main email bytes/usage replace previous Critical assumptions: Error SW1 and Warning R1, full Gmail captures versus cropped cards remain separate.
 
-Một logical asset dùng chung book/report chỉ có một record/source file; staged copy không tạo logical ID mới.
+## Remaining reviews
 
-## D002 — Canonical root outside 00_book/00_report
+- Switching 1_6.png: nonterminal UI state distinction unresolved; keep proposed path empty until review. Former terminal naming hold 1_31.png is frozen, no rename review needed.
+- Twenty LAB1/LAB5 page headings/source order; three uncertain SVG/raster pairs; legacy UI/lab capture provenance and future UI recreation equivalence.
+- Earlier c21c153 report conflict markers were removed by latest main e44ba4e; no current marker blocker, and no document repair performed here.
+- Old Phase 1 hashes/references remain audit history. Current overlay and main-delta-assets.csv are the active execution baseline.
 
-documentation_assets/ là source of truth; cả Typst book/report dùng project-root reference.
-
-## D003 — MkDocs uses generated staging
-
-00_book/assets/ generated từ canonical manifest, relative suffix giữ nguyên; không chỉnh tay. Khuyến nghị generated+gitignored+CI sync (A), chưa sửa .gitignore.
-
-## D004 — SVG preferred for true vector sources
-
-Ưu tiên SVG đúng source; different-content/uncertain pairs giữ độc lập; ptit wrapper không thành true vector.
-
-## D005 — Preserve original experimental evidence
-
-Lab CAMS UI vào evidence/ui-capture/original; terminal/log/external captures giữ bytes/provenance, cả orphan.
-
-## D006 — Recreation can become presentation-preferred
-
-New docshot có recreates_evidence_asset trỏ original ID, original_evidence=false; preference chỉ đổi sau review equivalence, không đổi provenance gốc.
-
-## D007 — Terminal reconstruction is a derivative
-
-derived_from + reconstruction_method + reconstruction_confidence bắt buộc; original retained; không giả định re-run tái lập thực nghiệm.
-
-## D008 — Semantic kebab-case names
-
-Không chapter/sequence prefix; dùng domain directory và state/device/meaningful data để phân biệt; ID ổn định không đổi theo path.
-
-## D009 — No deletion during early phases
-
-Không delete originals, orphan hay perceptual candidates. Archive-candidate/superseded không tự động theo ảnh giống nhau.
-
-## D010 — Internally consistent atomic migration batches
-
-Asset bytes + mọi reference + manifest + staging map + validation nằm trong cùng batch, không trì hoãn sửa links sang batch sau.
-
-## D011 — Staging ownership recommendation
-
-Chọn A: generated + gitignored + CI sync; không thấy blocker trong Phase 1. Cần script, CI ordering và local build instructions trước khi áp dụng. B (generated+tracked) giúp checkout preview trực tiếp/offline nhưng duplicate binary, stale/conflict noise; chỉ dùng nếu hosting không cho pre-build sync và có justification mới. Không sửa .gitignore trong Phase 2.
-
-## D012 — Transitional manifest/helper
-
-Bootstrap manifest records gồm legacy_path và proposed path, planned=true. Current source must exist/hash correctly; planned canonical path có thể chưa tồn tại. Sau từng atomic batch, current path=canonical, planned=false, legacy mapping chỉ còn history. Hai unresolved path rows không thành executable manifest entries trước review.
-
-Book insert-image helper cần nhận /documentation_assets/... trực tiếp, đồng thời tiếp tục ../ + legacy relative path trong giai đoạn batch migration. Direct image(...) nhận absolute project-root path. Không sửa helper Phase 2.
-
-## D013 — Preference is conditional
-
-false trên lab original biểu thị policy ưu tiên recreation đã được review trong tương lai; không khiến pipeline tự thay current references bằng hypothetical assets. Chưa có recreation -> tiếp tục dùng original như hiện tại.
-
-## D014 — Confidence split
-
-Map confidence đánh giá domain/name/proposed role, không nâng provenance unknown thành high. Giữ provenance_confidence riêng từ audit; source_kind=unknown cho 148 documentation UI không xác định nguồn. Review_required không đồng nghĩa được phép block toàn bộ unrelated batches.
-
-## Open reviews (không thay quyết định kiến trúc)
-
-- U001: phân biệt/capture lineage cho switching 1_31.png và 1_6.png; giữ path rỗng, IDs provisional semantic, không move cho đến review.
-- U002: xác nhận tên/heading và source order cho 12 raw LAB1 pages; không dùng số cũ làm ID.
-- U003: ba uncertain topology/export pairs: giữ separate IDs/paths, không merge hoặc derivative claim.
-- U004: 148 legacy UI historical provenance unknown; 73 lab UI original-capture probable. Evidence destinations ưu tiên preserve; chain of custody chưa verified.
-- U005: training fixture chapter03 không tồn tại và destination tests legacy; infrastructure phase cần xử lý trước claim reproducible tests.
-- U006: clip/state equivalence của 72 lab recreation candidates và 32 terminal reconstructions; đây không phải file đã có hoặc command đã support.
-- U007: 110 orphan records/41 visual pairs cần disposition review; hiện không đề xuất deletion/superseded/archive để tránh kết luận từ similarity alone.
-- U008: Phase 1 source context có caption chồng sang figure liền kề (feature-bar-switch, context-connected); giữ subject từ asset và review caption khi rewrite, không sửa audit history.
+- D018: Delta exact duplicates remain physical source records until reviewed. One frozen terminal pair has no action; six nonterminal pairs require shared logical canonical record/alias decision before B13/B15 transfers. No auto-delete/merge or duplicate presentation sources after that review.
+- D019: Whole photographed LAB5 pages with embedded command examples remain raw source material. Extracted/direct CLI screenshots are terminal frozen; CAMS View & Push dialogs and log tables are UI, not frozen by CLI-looking text.
+- D020: Readiness applies to Phase 3 infrastructure setup, not automatic transfer of unresolved/copy-review records. Snapshot e44ba4e resolves old marker blocker upstream.
