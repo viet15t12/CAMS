@@ -58,7 +58,7 @@
 <rect x="66" y="572" width="868" height="40" fill="#FFFFFF" stroke="#999999" stroke-width="0.9"/>
 <path d="M78,582 L86.2368,582 L90.48,586.2432 L90.48,598 L78,598 Z" fill="none" stroke="#4C3B6E" stroke-width="1.4"/><path d="M86.2368,582 L86.2368,586.2432 L90.48,586.2432" fill="none" stroke="#4C3B6E" stroke-width="1.4"/>
 <text x="102" y="589" font-family="'DejaVu Sans Mono', Consolas, 'Courier New', monospace" font-size="12" font-weight="700" fill="#111111">terminal_helper.py</text>
-<text x="102" y="603" font-family="'Liberation Serif', 'Times New Roman', Times, serif" font-size="10.3" fill="#555555">Điều phối CLI session và Alacritty companion</text>
+<text x="102" y="603" font-family="'Liberation Serif', 'Times New Roman', Times, serif" font-size="10.3" fill="#555555">Điều phối phiên CLI và terminal nhúng</text>
 <rect x="66" y="620" width="868" height="40" fill="#FFFFFF" stroke="#999999" stroke-width="0.9"/>
 <path d="M78,633.9952 L78,643.48 L94,643.48 L94,633.9952 L87.72,633.9952 L84.72,631 L78,631 Z" fill="none" stroke="#4C3B6E" stroke-width="1.4"/>
 <text x="102" y="637" font-family="'DejaVu Sans Mono', Consolas, 'Courier New', monospace" font-size="12" font-weight="700" fill="#111111">settings/</text>

@@ -1,0 +1,11 @@
+R2#show running-config interface GigabitEthernet0/0
+Building configuration...
+
+interface GigabitEthernet0/0
+ description LAN_to_SW1
+ ip address 192.168.4.3 255.255.255.0
+ glbp 113 ip 192.168.4.1
+ glbp 113 preempt
+ duplex auto
+ speed auto
+R2#

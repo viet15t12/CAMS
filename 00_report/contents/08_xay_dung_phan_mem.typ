@@ -5,7 +5,7 @@
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn phát triển bằng Python 3.11+, sử dụng Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
+CAMS là ứng dụng máy tính để bàn phát triển bằng Python 3.11+, sử dụng Qt Quick/QML và PyQt6 cho giao diện @qtQuickDocs @pyqt6Docs, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
 
 Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và các thành phần dùng chung; `core/` chứa đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và quản lý không gian làm việc. Tệp `main.py` khởi tạo ứng dụng và liên kết các thành phần. Cấu trúc chi tiết được trình bày trong phụ lục; chương này tập trung vào cách hiện thực các chức năng chính.
 
@@ -78,7 +78,7 @@ Port Security, DHCP Snooping và DAI được trình bày trong nhóm bảo mậ
 
 Chức năng Syslog gồm hai phần: cấu hình đích gửi trên thiết bị và vận hành bộ nhận trong System Logs. Địa chỉ, cổng và giao thức hai phía phải khớp nhau. Cấu hình hiện tại dùng cổng 5514 theo mặc định và cho phép thay đổi theo môi trường.
 
-Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi dữ liệu vào SQLite, sau đó chuyển sự kiện qua cầu nối Python để cập nhật QML. Đây là luồng xử lý chính; bộ nhận Python được giữ lại để tương thích và kiểm thử. Hệ thống lưu bản tin gốc cùng trạng thái phân tích. Hai chỉ số `received` và `dropped` hỗ trợ theo dõi khả năng tiếp nhận khi lưu lượng tăng.
+Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi dữ liệu vào SQLite, sau đó chuyển sự kiện qua cầu nối Python để cập nhật QML. Đây là luồng xử lý chính; bộ nhận Python được giữ lại để tương thích và kiểm thử. Hệ thống lưu bản tin gốc cùng trạng thái phân tích theo các trường của Syslog @rfc5424. Hai chỉ số `received` và `dropped` hỗ trợ theo dõi khả năng tiếp nhận khi lưu lượng tăng.
 
 #figure(
   image("/00_book/figures/gui/chapter-13/01-system-logs-overview.png", width: 100%),
@@ -125,7 +125,11 @@ SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy c
 
 Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. 
 
+<<<<<<< HEAD
+Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`) @cryptographyAeadDocs @rfc9106 @nistSp80038d. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
+=======
 Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`), loại trừ hoàn toàn nguy cơ rò rỉ thông tin xác thực trên toàn hệ thống. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
+>>>>>>> a7480ee (FUCK FUCK)
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),
