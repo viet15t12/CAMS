@@ -1,0 +1,94 @@
+{
+  "phase": "3.2",
+  "baseline_commit": "f297286b2a89dcff9958b4f415be3bc5762647bf",
+  "typst_version": "0.14.2",
+  "contract": "scripts/typst-toolchain.lock.json",
+  "provisioning": "Official GitHub release archives, version+SHA256 pinned; repository installer verified cached archives downloaded from official URLs.",
+  "toolchain": "/tmp/cams-phase32-static-toolchain",
+  "builds": [
+    {
+      "target": "report",
+      "command": [
+        "/tmp/cams-phase32-static-toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/tmp/cams-phase32-static-toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/tmp/cams-phase32-static-baseline/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/tmp/cams-phase32-static-baseline/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "pdf_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "repeat_sha_identical": true,
+      "diagnostics": "none"
+    },
+    {
+      "target": "book",
+      "command": [
+        "/tmp/cams-phase32-static-toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/tmp/cams-phase32-static-toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/tmp/cams-phase32-static-baseline/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/tmp/cams-phase32-static-baseline/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "pdf_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "repeat_sha_identical": true,
+      "diagnostics": "none"
+    }
+  ],
+  "fonts": {
+    "liberation_serif": "2.1.5",
+    "cascadia_code": "2407.24 static TTF",
+    "dejavu_sans_mono": "embedded in pinned compiler",
+    "system_fonts": "disabled",
+    "book_body_profile": "Liberation Serif via explicit input; original Times New Roman default retained"
+  },
+  "checks": {
+    "pre_sync": "PASS",
+    "sync": "PASS; no image changes",
+    "post_sync": "PASS; 178 existing broken HTML references remain baseline exceptions",
+    "asset_tests": "17 PASS",
+    "destination_tests": "5 PASS",
+    "toolchain_tests": "3 PASS",
+    "mkdocs": "PASS",
+    "diff_check": "PASS"
+  },
+  "integrity": {
+    "source_images_unchanged": 407,
+    "staged_images_unchanged": 178,
+    "frozen_terminal_images_unchanged": 62,
+    "frozen_reference_multiset": "unchanged",
+    "manifest_states": "unchanged: 345 pending, 62 frozen, 0 migrated",
+    "image_transfers": 0,
+    "docshot_renders": 0,
+    "pdf_or_font_binaries_tracked": false
+  },
+  "ready_for_b02a": true,
+  "blockers": [],
+  "limits": [
+    "Local baseline passed; newly defined remote GitHub Actions job has not been dispatched in this task.",
+    "Book validation uses an explicit free-font profile; it does not assert identical layout to licensed Times New Roman output.",
+    "34 remaining B02 review-required records and B03 semantic output gate remain unchanged."
+  ]
+}

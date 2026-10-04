@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "typst_version": "0.14.2",
+  "platform": "linux-x86_64",
+  "creation_timestamp": 0,
+  "archives": [
+    {
+      "name": "typst",
+      "url": "https://github.com/typst/typst/releases/download/v0.14.2/typst-x86_64-unknown-linux-musl.tar.xz",
+      "sha256": "a6044cbad2a954deb921167e257e120ac0a16b20339ec01121194ff9d394996d",
+      "format": "tar",
+      "files": {
+        "typst-x86_64-unknown-linux-musl/typst": "bin/typst",
+        "typst-x86_64-unknown-linux-musl/LICENSE": "licenses/typst-LICENSE",
+        "typst-x86_64-unknown-linux-musl/NOTICE": "licenses/typst-NOTICE"
+      }
+    },
+    {
+      "name": "liberation",
+      "version": "2.1.5",
+      "url": "https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz",
+      "sha256": "7191c669bf38899f73a2094ed00f7b800553364f90e2637010a69c0e268f25d0",
+      "format": "tar",
+      "files": {
+        "liberation-fonts-ttf-2.1.5/LiberationSerif-Regular.ttf": "fonts/LiberationSerif-Regular.ttf",
+        "liberation-fonts-ttf-2.1.5/LiberationSerif-Italic.ttf": "fonts/LiberationSerif-Italic.ttf",
+        "liberation-fonts-ttf-2.1.5/LiberationSerif-Bold.ttf": "fonts/LiberationSerif-Bold.ttf",
+        "liberation-fonts-ttf-2.1.5/LiberationSerif-BoldItalic.ttf": "fonts/LiberationSerif-BoldItalic.ttf",
+        "liberation-fonts-ttf-2.1.5/LICENSE": "licenses/liberation-LICENSE"
+      }
+    },
+    {
+      "name": "cascadia",
+      "version": "2407.24",
+      "url": "https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip",
+      "sha256": "e67a68ee3386db63f48b9054bd196ea752bc6a4ebb4df35adce6733da50c8474",
+      "format": "zip",
+      "files": {
+        "ttf/static/CascadiaCode-Regular.ttf": "fonts/CascadiaCode-Regular.ttf",
+        "ttf/static/CascadiaCode-Italic.ttf": "fonts/CascadiaCode-Italic.ttf",
+        "ttf/static/CascadiaCode-Light.ttf": "fonts/CascadiaCode-Light.ttf",
+        "ttf/static/CascadiaCode-LightItalic.ttf": "fonts/CascadiaCode-LightItalic.ttf",
+        "ttf/static/CascadiaCode-Bold.ttf": "fonts/CascadiaCode-Bold.ttf",
+        "ttf/static/CascadiaCode-BoldItalic.ttf": "fonts/CascadiaCode-BoldItalic.ttf"
+      },
+      "license_source": "https://github.com/microsoft/cascadia-code/blob/v2407.24/LICENSE"
+    }
+  ]
+}

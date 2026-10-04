@@ -275,3 +275,9 @@ Database runtime, log, cache, credential, private key và backup cục bộ khô
 ## Trạng thái dự án
 
 CAMS đang trong giai đoạn phát triển và kiểm chứng trong môi trường nghiên cứu/lab. API, một số worker backend và một số luồng View & Push vẫn đang được hoàn thiện; không nên sử dụng như một hệ thống production khi chưa có kiểm thử tích hợp trên hạ tầng mục tiêu.
+
+### Typst validation
+
+Build report và book bằng compiler/fonts được pin: xem [docs/TYPST.md](docs/TYPST.md).
+Chạy `python scripts/provision_typst.py`, sau đó `python scripts/build_typst.py` từ repository root.
+Generated PDFs/toolchain/cache nằm trong `output/typst/` và không được commit.

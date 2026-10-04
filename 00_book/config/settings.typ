@@ -94,7 +94,7 @@
   )
 
   set text(
-    font: "Times New Roman",
+    font: sys.inputs.at("book-body-font", default: "Times New Roman"),
     size: 13pt,
     lang: "vi",
   )

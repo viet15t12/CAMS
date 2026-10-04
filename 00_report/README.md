@@ -71,7 +71,8 @@ Xem @fig-main-window.
 từ thư mục chứa `00_book` và `00_report` bằng lệnh:
 
 ```bash
-typst compile --root . 00_report/main.typ 00_report/main.pdf
+python scripts/provision_typst.py
+python scripts/build_typst.py --target report
 ```
 
 ## Tài liệu tham khảo
@@ -89,3 +90,10 @@ Nếu project LaTeX gốc đã có `cams_references.bib`, hãy chép đè file m
 - `packages.tex` và `latexmkrc` không còn cần thiết.
 - Các chapter và appendix đã được tạo dựa trên đề cương hiện tại.
 - Các vị trí `TODO` cần cập nhật bằng thông tin, ảnh, test và số đo thực tế trước khi nộp.
+
+## Reproducible Typst build
+
+Typst 0.14.2 và fonts được pin/checksum trong `scripts/typst-toolchain.lock.json`.
+Xem [build contract](../docs/TYPST.md) để chạy report/book với đúng project root,
+font profile và CI. PDF mặc định là `output/typst/report.pdf` (generated/gitignored),
+không phải source để commit.

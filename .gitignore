@@ -216,3 +216,6 @@ UI/.qmlls.ini
 
 # Generated MkDocs copies and ownership ledger; canonical metadata is tracked.
 /00_book/assets/
+
+# Typst compiler/fonts/cache/PDF outputs are provisioned/generated, never sources.
+/output/typst/
