@@ -76,5 +76,5 @@ Nhằm mở rộng tính năng và nâng cao độ tin cậy của CAMS, nhóm n
 + *Tự động khám phá mô hình mạng:* ứng dụng CDP/LLDP để quét thiết bị, vẽ sơ đồ topology và hỗ trợ tính toán tuyến tĩnh.
 + *Mở rộng giao thức định tuyến:* bổ sung giao diện và mẫu Jinja2 cho BGP, VRF để phục vụ các kịch bản mạng ISP hoặc mạng lõi doanh nghiệp.
 + *Hỗ trợ nhiều nhà sản xuất:* xây dựng kiến trúc trình điều khiển hoặc plugin để hỗ trợ MikroTik RouterOS, VyOS, Juniper và router Linux.
-+ *Mở rộng giao thức quản trị hiện đại:* tích hợp NETCONF/RESTCONF dựa trên mô hình dữ liệu YANG (IETF/OpenConfig).
++ *Mở rộng giao thức quản trị hiện đại:* tích hợp NETCONF/RESTCONF dựa trên mô hình dữ liệu YANG (IETF/OpenConfig) @rfc6241 @rfc8040 @rfc7950.
 + *Tích hợp phân tích và cảnh báo:* phát triển công cụ phân tích sự kiện Syslog, tự động phát hiện dấu hiệu bất thường và gửi cảnh báo qua webhook hoặc email.

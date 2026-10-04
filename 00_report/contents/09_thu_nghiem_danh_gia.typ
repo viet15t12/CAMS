@@ -139,7 +139,7 @@ Security Violation Count   : 0
 
 ==== Đánh giá kết quả
 
-Các cấu hình VLAN, VTP, EtherChannel LACP, DHCP Snooping, DAI và Port Security được áp dụng đúng trên hệ thống switch của phòng lab. Kết quả kiểm tra trực tiếp trên thiết bị phù hợp với cấu hình đã thiết lập trên CAMS; các hạng mục của kịch bản 1 đều hoàn thành.
+Các cấu hình VLAN, VTP, EtherChannel LACP, DHCP Snooping, DAI và Port Security được áp dụng đúng trên hệ thống switch của phòng lab. Kết quả kiểm tra trực tiếp trên thiết bị phù hợp với cấu hình đã thiết lập trên CAMS; các hạng mục của kịch bản 1 đều hoàn thành và phần VLAN/trunk được đối chiếu theo nguyên tắc IEEE 802.1Q @ieee8021q.
 
 
 
@@ -323,7 +323,7 @@ VPCS> ping 192.168.20.10
 
 ==== Đánh giá kết quả
 
-Mô hình OSPFv2 đa vùng và cơ chế tái phân phối tuyến được triển khai đồng bộ bằng *Routing Group*. Các router nhận đúng cấu hình theo quy hoạch, bảng định tuyến có các tuyến nội vùng và ngoại vi cần thiết, đồng thời các phép thử ICMP được ghi nhận đều thành công.
+Mô hình OSPFv2 đa vùng và cơ chế tái phân phối tuyến được triển khai đồng bộ bằng *Routing Group*. Các router nhận đúng cấu hình theo quy hoạch OSPFv2 @rfc2328, bảng định tuyến có các tuyến nội vùng và ngoại vi cần thiết, đồng thời các phép thử ICMP được ghi nhận đều thành công.
 
 
 
@@ -515,7 +515,7 @@ Kết quả lệnh `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận chặng 
 
 ==== Đánh giá kết quả
 
-CAMS đã triển khai chuỗi chức năng DHCP, GLBP và NAT/PAT trên nhiều thiết bị. Máy trạm nhận địa chỉ `192.168.4.4/24` và cổng mặc định ảo `192.168.4.1`; `R1` và `R2` cùng tham gia GLBP Group 113; router NAT nhận đúng vai trò Inside/Outside, ACL và cấu hình PAT Overload. Kết quả truy vết xác nhận lưu lượng đi từ LAN qua `R1`, router NAT và tới gateway upstream `10.0.10.1`.
+CAMS đã triển khai chuỗi chức năng DHCP, GLBP và NAT/PAT trên nhiều thiết bị. Máy trạm nhận địa chỉ `192.168.4.4/24` và cổng mặc định ảo `192.168.4.1`; `R1` và `R2` cùng tham gia GLBP Group 113; router NAT nhận đúng vai trò Inside/Outside, ACL và cấu hình PAT Overload theo cơ chế chuyển đổi địa chỉ và cổng @rfc3022. Kết quả truy vết xác nhận lưu lượng đi từ LAN qua `R1`, router NAT và tới gateway upstream `10.0.10.1`.
 
 
 === Kịch bản 4: Thu thập, giám sát và phân tích nhật ký tập trung bằng Syslog Server
@@ -751,8 +751,7 @@ Hai hình minh họa cho thấy email cảnh báo giữ được mối liên h�
 
 ==== Đánh giá kết quả
 
-<<<<<<< HEAD
-CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được facility, severity và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*.
+CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được Syslog facility, severity, mã phân hệ Cisco và mnemonic, đồng thời giữ nguyên nội dung gốc theo cấu trúc Syslog @rfc5424. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*. Phần cảnh báo email cho phép chọn mức cần gửi, bảo vệ App Password và tách thao tác SMTP khỏi bộ nhận. Hai email Error và Warning được chọn làm ví dụ minh họa, sử dụng dữ liệu liên kết trực tiếp với các sự kiện của bài lab; cách lưu và rà soát này phù hợp với nguyên tắc quản lý nhật ký tập trung @nistSp80092.
 
 
 === Kịch bản 5: Kiểm thử cơ chế an ninh phân quyền và bảo mật dữ liệu lưu trữ (Security & Privilege Verification)
@@ -882,11 +881,6 @@ Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng b�
 - Cơ chế kiểm soát Privilege 15 theo nguyên lý Fail-Closed loại trừ hoàn toàn nguy cơ thực thi thiếu quyền trên Cisco IOS.
 - Cơ chế tự động chèn từ khóa `log` vào ACL giúp chuyển đổi các quy tắc tường lửa tĩnh thành các sự kiện giám sát động gửi về Syslog Server theo thời gian thực.
 - Kiến trúc mật mã `ENC$v2$` kết hợp Argon2id (RFC 9106) và AES-256-GCM với Record-Bound AAD đảm bảo thông tin đăng nhập được bảo vệ vững chắc ở trạng thái lưu trữ, loại bỏ rủi ro trích xuất mật khẩu bản rõ cũng như tấn công tráo đổi bản mã trong cơ sở dữ liệu.
-=======
-CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được Syslog facility, severity, mã phân hệ Cisco và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*. Phần cảnh báo email cho phép chọn mức cần gửi, bảo vệ App Password và tách thao tác SMTP khỏi bộ nhận. Hai email Error và Warning được chọn làm ví dụ minh họa, sử dụng dữ liệu liên kết trực tiếp với các sự kiện của bài lab.
->>>>>>> a54a4a5 (chinh hinh lv mail gui syslog)
-
-
 == Đánh giá tổng hợp
 
 === Ưu điểm nổi bật
