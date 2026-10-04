@@ -1,0 +1,614 @@
+{
+  "batch": "B02E2",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "dcc030d687e096fd70c544b792f06dd7e8ec7863",
+  "status": "PASS — all three APPROVED; DORA SAME_CONCEPT_INDEPENDENT_REPRESENTATION; local and fresh-checkout validation complete",
+  "review": [
+    {
+      "asset_id": "diagrams.network.dhcp-snooping-rogue-server",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "Victim and attacker connect through separate Layer 2 switches SW1/SW2 to a Layer 3 switch SW3 and a DHCP Server. Green DHCP DISCOVER leaves the victim; blue DHCP OFFER leaves the legitimate server. An attacker DHCP OFFER is marked with a red X and BLOCKED BY DHCP SNOOPING.",
+      "semantic_name_judgment": "APPROVE: dhcp-snooping-rogue-server names the security illustration focusing on a malicious/rogue DHCP Offer blocked by snooping. The image does not show a specific lab deployment, device configuration or measured result.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "visual_inspection": "Direct inspection of the unchanged original JPG/PNG raster. No preview/replacement generation or image modification.",
+      "provenance_note": "Legacy documentation illustration, not experimental evidence. Source/export/author lineage remains unknown; semantic review does not upgrade provenance.",
+      "exact_duplicate_conflicts": []
+    },
+    {
+      "asset_id": "diagrams.workflow.dhcp-dora-client-server-illustration",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "Client desktop icon on the left and Server desktop/tower icon on the right. Four black arrows: Discover and Request client-to-server, Offer and Acknowledge server-to-client, in that vertical order.",
+      "semantic_name_judgment": "APPROVE: dhcp-dora-client-server-illustration accurately identifies this illustrated four-message client/server exchange. It is a distinct legacy artwork representation of the DORA concept, not an experimental trace.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "visual_inspection": "Direct inspection of the unchanged original JPG/PNG raster. No preview/replacement generation or image modification.",
+      "provenance_note": "Legacy documentation illustration, not experimental evidence. Source/export/author lineage remains unknown; semantic review does not upgrade provenance.",
+      "exact_duplicate_conflicts": []
+    },
+    {
+      "asset_id": "diagrams.network.vlan-trunk-segmentation",
+      "decision": "APPROVE",
+      "confidence": "high",
+      "content_summary": "Switch 1 and Switch 2 joined by a line explicitly labelled trunk. Left PCs A/B/C and right PCs X/Y/Z attach to their respective switches and are labelled VLAN 10/20/30 on both sides.",
+      "semantic_name_judgment": "APPROVE: vlan-trunk-segmentation describes the shown VLAN segments represented on both ends of a trunk. No specific trunk encapsulation, allowed-VLAN configuration or device-state verification is inferred.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "visual_inspection": "Direct inspection of the unchanged original JPG/PNG raster. No preview/replacement generation or image modification.",
+      "provenance_note": "Legacy documentation illustration, not experimental evidence. Source/export/author lineage remains unknown; semantic review does not upgrade provenance.",
+      "exact_duplicate_conflicts": []
+    }
+  ],
+  "migration": [
+    {
+      "asset_id": "diagrams.network.dhcp-snooping-rogue-server",
+      "old_path": "00_book/figures/report/diagrams/dhcp-snooping.jpg",
+      "canonical_path": "documentation_assets/diagrams/network/dhcp-snooping-rogue-server.jpg",
+      "manifest_sha": "486f0fb4c8afc061d1855421c82cc44c3f4b73b57293e1a9a39af7a6b20f7d7f",
+      "source_filesystem_sha": "486f0fb4c8afc061d1855421c82cc44c3f4b73b57293e1a9a39af7a6b20f7d7f",
+      "source_git_blob_sha": "486f0fb4c8afc061d1855421c82cc44c3f4b73b57293e1a9a39af7a6b20f7d7f",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "486f0fb4c8afc061d1855421c82cc44c3f4b73b57293e1a9a39af7a6b20f7d7f",
+      "canonical_index_sha": "486f0fb4c8afc061d1855421c82cc44c3f4b73b57293e1a9a39af7a6b20f7d7f"
+    },
+    {
+      "asset_id": "diagrams.workflow.dhcp-dora-client-server-illustration",
+      "old_path": "00_book/figures/report/diagrams/dhcp_dora.png",
+      "canonical_path": "documentation_assets/diagrams/workflow/dhcp-dora-client-server-illustration.png",
+      "manifest_sha": "58934859e6675f6a5c0cad8224296397aea97588cc708a8b0f38d1fcdb53c6fa",
+      "source_filesystem_sha": "58934859e6675f6a5c0cad8224296397aea97588cc708a8b0f38d1fcdb53c6fa",
+      "source_git_blob_sha": "58934859e6675f6a5c0cad8224296397aea97588cc708a8b0f38d1fcdb53c6fa",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "58934859e6675f6a5c0cad8224296397aea97588cc708a8b0f38d1fcdb53c6fa",
+      "canonical_index_sha": "58934859e6675f6a5c0cad8224296397aea97588cc708a8b0f38d1fcdb53c6fa"
+    },
+    {
+      "asset_id": "diagrams.network.vlan-trunk-segmentation",
+      "old_path": "00_book/figures/report/diagrams/vlan.png",
+      "canonical_path": "documentation_assets/diagrams/network/vlan-trunk-segmentation.png",
+      "manifest_sha": "9fa7718ceb23b369c5a2c5b14817acf3e9fb423c0feb68b2968b7922b70ee2d0",
+      "source_filesystem_sha": "9fa7718ceb23b369c5a2c5b14817acf3e9fb423c0feb68b2968b7922b70ee2d0",
+      "source_git_blob_sha": "9fa7718ceb23b369c5a2c5b14817acf3e9fb423c0feb68b2968b7922b70ee2d0",
+      "preserve_original": false,
+      "canonical_filesystem_sha": "9fa7718ceb23b369c5a2c5b14817acf3e9fb423c0feb68b2968b7922b70ee2d0",
+      "canonical_index_sha": "9fa7718ceb23b369c5a2c5b14817acf3e9fb423c0feb68b2968b7922b70ee2d0"
+    }
+  ],
+  "references": [],
+  "relationship_review": {
+    "decision": "SAME_CONCEPT_INDEPENDENT_REPRESENTATION",
+    "confidence": "high",
+    "raster_asset_id": "diagrams.workflow.dhcp-dora-client-server-illustration",
+    "svg_asset_id": "diagrams.workflow.dhcp-dora-sequence",
+    "raster_summary": "Client desktop icon on the left and Server desktop/tower icon on the right. Four black arrows: Discover and Request client-to-server, Offer and Acknowledge server-to-client, in that vertical order.",
+    "svg_summary": "Rounded blue Client/DHCP Server headers, dashed vertical lifelines and blue arrows explicitly labelled DHCPDISCOVER, DHCPOFFER, DHCPREQUEST, DHCPACK. Clean sequence diagram with no desktop artwork.",
+    "comparison": "Same four ordered DHCP messages and directions, but substantially different artwork, endpoint representation, lifelines, typography, colors, proportions and spacing. Raster shows legacy desktop/server illustrations; SVG shows abstract lifeline sequencing. The raster is neither exact nor near-exact redundant rendering of this SVG. Its existing legacy artwork is worth retaining independently in this preservation migration.",
+    "provenance_note": "No exporter/source evidence links the PNG to the SVG. Both manifest provenance assessments remain unknown/low; no independent author lineage is claimed. Shared protocol semantics do not prove a derivative.",
+    "keep_independent_assets": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "no_canonical_group_id": true,
+    "both_members_preserved": true,
+    "future_redundancy_archive_review": "B17 only; not performed"
+  },
+  "b13_distinction": {
+    "illustration_asset_id": "diagrams.network.dhcp-snooping-rogue-server",
+    "lab_topology_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/topo_dhcp_snooping.png",
+    "decision": "DIFFERENT_LOGICAL_ASSETS",
+    "confidence": "high",
+    "illustration_summary": "Victim and attacker connect through separate Layer 2 switches SW1/SW2 to a Layer 3 switch SW3 and a DHCP Server. Green DHCP DISCOVER leaves the victim; blue DHCP OFFER leaves the legitimate server. An attacker DHCP OFFER is marked with a red X and BLOCKED BY DHCP SNOOPING.",
+    "lab_topology_summary": "Dark grid lab canvas showing R1—Switch—R2, Gi0/1 and Gi0/2 links, with a separate Net cloud above. No victim/attacker/DHCP Offer blocking illustration.",
+    "policy": "No deduplication, derivative link or lab-topology rename. B13 remains unchanged and out of scope."
+  },
+  "immutable_comparators": [
+    {
+      "asset_id": "diagrams.workflow.dhcp-dora-sequence",
+      "path": "documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg",
+      "sha256": "7b59bbe060b25d43511b42c7b5d80e2b98e8c5c2b938a56f8fe222560e87e234"
+    },
+    {
+      "asset_id": "diagrams.dhcp-snooping-lab.dhcp-snooping-topology",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/topo_dhcp_snooping.png",
+      "sha256": "74c29016a3676863772550c4667803fdc4fb9b88df30d3b52b302c9cafd7406b"
+    }
+  ],
+  "manifest": {
+    "migrated": 37,
+    "pending": 308,
+    "frozen": 62
+  },
+  "authority": {
+    "starting_commit": "dcc030d687e096fd70c544b792f06dd7e8ec7863",
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 17,
+    "behind": 0
+  },
+  "hash_authority": "Phase 3.3 exact repository-stored bytes; historical preflight SHA is not execution authority.",
+  "metadata_policy": "Only three current_path/path/migration_state/canonical transitions. All other fields and 404 records unchanged. DORA relationship recorded only in this report, no manifest schema or derivative/group metadata added.",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-1.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-2.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-3.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-4.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-5.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-6.log"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-7.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-8.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-9.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02e2/local-10.log"
+    }
+  ],
+  "local_proof": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 308,
+      "migrated": 37,
+      "frozen": 62
+    },
+    "other_records_unchanged": 404,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 3,
+    "canonical_paths_present": 3,
+    "orphan_usage_preserved": true,
+    "existing_dora_svg_unchanged": true,
+    "b13_lab_topology_unchanged": true,
+    "dora_independent_representations": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02e1_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02e1_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 37,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2
+      }
+    }
+  },
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02e1_baseline": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02e1_baseline": true
+    }
+  ],
+  "b02_progress": {
+    "migrated": 37,
+    "total": 39,
+    "complete": false,
+    "remaining": {
+      "B02F": 2
+    }
+  },
+  "scope": {
+    "new_transfers": 3,
+    "raster_bytes_unchanged": true,
+    "vectorization": false,
+    "upscale": false,
+    "recompression": false,
+    "crop": false,
+    "recolor": false,
+    "cleanup": false,
+    "replacement_generation": false,
+    "live_reference_rewrites": 0,
+    "document_usage_invented": false,
+    "other_batches_migrated": false,
+    "runtime_terminal_docshot_report_changes": false,
+    "existing_dora_svg_changed": false,
+    "b13_lab_topology_changed": false
+  },
+  "mkdocs": {
+    "status": "PASS",
+    "staged_assets": 178,
+    "b02e2_staged_assets": 0,
+    "ownership_ledger_unchanged": true,
+    "generated_assets_tracked": false,
+    "environment": "/tmp/cams-b02b4/docs-venv from unchanged requirements-docs.txt",
+    "mkdocs_version": "1.6.1",
+    "material_version": "9.7.7"
+  },
+  "fresh_checkout": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 308,
+      "migrated": 37,
+      "frozen": 62
+    },
+    "other_records_unchanged": 404,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 3,
+    "canonical_paths_present": 3,
+    "orphan_usage_preserved": true,
+    "existing_dora_svg_unchanged": true,
+    "b13_lab_topology_unchanged": true,
+    "dora_independent_representations": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02e2/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02e2/clean-checkout/output/typst/package-cache",
+          "/tmp/cams-b02e2/clean-checkout/00_report/main.typ",
+          "/tmp/cams-b02e2/clean-checkout/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02e1_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02e2/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02e2/clean-checkout/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/tmp/cams-b02e2/clean-checkout/00_book/main.typ",
+          "/tmp/cams-b02e2/clean-checkout/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02e1_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 37,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2
+      }
+    },
+    "filesystem_blob_manifest_matches": 407,
+    "method": "Separate Linux clone of candidate Git commit, core.autocrlf=false; no generated staging before pre-sync",
+    "candidate_commit": "044d184ae910a4634e59fd1076d38dcd3b37a673",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-5.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-6.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-7.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-9.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02e2/clean-10.log"
+      }
+    ]
+  }
+}

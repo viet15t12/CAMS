@@ -213,8 +213,6 @@
 │   └── ptit-logo.svg
 ├── report
 │   ├── diagrams
-│   │   ├── dhcp-snooping.jpg
-│   │   ├── dhcp_dora.png
 │   │   ├── fhrp-nat-dhcp-lab
 │   │   │   ├── 01-nat-interfaces.png
 │   │   │   ├── 02-nat-acl.png
@@ -300,7 +298,7 @@
 │   │   │   ├── 1_31.png
 │   │   │   ├── 1_32.png
 │   │   │   └── 1_33.png
-│   │   ├── syslog-lab
+│   │   └── syslog-lab
 │   │   │   ├── 01-syslog-configuration.png
 │   │   │   ├── 02-syslog-select-hosts.png
 │   │   │   ├── 03-syslog-source-interfaces.png
@@ -319,7 +317,6 @@
 │   │   │   ├── 16-syslog-sw1-device-logs.png
 │   │   │   ├── syslog-lab-topology-report.png
 │   │   │   └── syslog-lab-topology.svg
-│   │   └── vlan.png
 │   └── misc
 │       ├── cams-screenshot-2026-09-13-18-17-17.png
 │       └── xxd-ntp.png
@@ -399,3 +396,11 @@ B02E1 legacy raster network diagrams (outside this figures tree):
 - documentation_assets/diagrams/network/vtp-server-clients.jpg
 
 All three remain unused/orphan-review. Original JPEG bytes are preserved; no vectorization, cleanup or document insertion. None is selected for MkDocs staging.
+
+B02E2 legacy raster network diagrams (outside this figures tree):
+
+- documentation_assets/diagrams/network/dhcp-snooping-rogue-server.jpg
+- documentation_assets/diagrams/workflow/dhcp-dora-client-server-illustration.png
+- documentation_assets/diagrams/network/vlan-trunk-segmentation.png
+
+All three remain unused/orphan-review. Original JPG/PNG bytes are preserved; no vectorization, cleanup or document insertion. DHCP DORA remains independent of the existing canonical authored SVG; DHCP Snooping illustration is distinct from the unchanged B13 lab topology. None is selected for MkDocs staging.

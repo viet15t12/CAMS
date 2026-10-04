@@ -10578,14 +10578,14 @@ assets:
   domain: diagrams/network
   subject: dhcp-snooping-rogue-server
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/dhcp-snooping.jpg
-  path: 00_book/figures/report/diagrams/dhcp-snooping.jpg
+  current_path: documentation_assets/diagrams/network/dhcp-snooping-rogue-server.jpg
+  path: documentation_assets/diagrams/network/dhcp-snooping-rogue-server.jpg
   planned_canonical_path: documentation_assets/diagrams/network/dhcp-snooping-rogue-server.jpg
   legacy_path: 00_book/figures/report/diagrams/dhcp-snooping.jpg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 486f0fb4c8afc061d1855421c82cc44c3f4b73b57293e1a9a39af7a6b20f7d7f
   provenance:
     assessment: unknown
@@ -10617,14 +10617,14 @@ assets:
   domain: diagrams/workflow
   subject: dhcp-dora-client-server-illustration
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/dhcp_dora.png
-  path: 00_book/figures/report/diagrams/dhcp_dora.png
+  current_path: documentation_assets/diagrams/workflow/dhcp-dora-client-server-illustration.png
+  path: documentation_assets/diagrams/workflow/dhcp-dora-client-server-illustration.png
   planned_canonical_path: documentation_assets/diagrams/workflow/dhcp-dora-client-server-illustration.png
   legacy_path: 00_book/figures/report/diagrams/dhcp_dora.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 58934859e6675f6a5c0cad8224296397aea97588cc708a8b0f38d1fcdb53c6fa
   provenance:
     assessment: unknown
@@ -14853,14 +14853,14 @@ assets:
   domain: diagrams/network
   subject: vlan-trunk-segmentation
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/vlan.png
-  path: 00_book/figures/report/diagrams/vlan.png
+  current_path: documentation_assets/diagrams/network/vlan-trunk-segmentation.png
+  path: documentation_assets/diagrams/network/vlan-trunk-segmentation.png
   planned_canonical_path: documentation_assets/diagrams/network/vlan-trunk-segmentation.png
   legacy_path: 00_book/figures/report/diagrams/vlan.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 9fa7718ceb23b369c5a2c5b14817acf3e9fb423c0feb68b2968b7922b70ee2d0
   provenance:
     assessment: unknown

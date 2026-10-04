@@ -382,6 +382,34 @@ class DocumentationAssetTests(unittest.TestCase):
             self.assertFalse((root / asset["legacy_path"]).exists())
             self.assertEqual(Path(asset["current_path"]).suffix, ".jpg")
         reviewed_orphans |= legacy_network
+        legacy_dhcp_vlan = {"diagrams.network.dhcp-snooping-rogue-server",
+                            "diagrams.workflow.dhcp-dora-client-server-illustration",
+                            "diagrams.network.vlan-trunk-segmentation"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02E2"}, legacy_dhcp_vlan)
+        dhcp_vlan_report = json.loads((root / "output/documentation-assets-migrations/b02e2.json").read_text())
+        self.assertEqual({r["asset_id"] for r in dhcp_vlan_report["review"]}, legacy_dhcp_vlan)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in dhcp_vlan_report["review"]))
+        self.assertEqual(dhcp_vlan_report["references"], [])
+        relation = dhcp_vlan_report["relationship_review"]
+        self.assertEqual(relation["decision"], "SAME_CONCEPT_INDEPENDENT_REPRESENTATION")
+        self.assertEqual(relation["raster_asset_id"], "diagrams.workflow.dhcp-dora-client-server-illustration")
+        self.assertEqual(relation["svg_asset_id"], "diagrams.workflow.dhcp-dora-sequence")
+        self.assertTrue(relation["keep_independent_assets"])
+        self.assertTrue(relation["no_derivative_relation"])
+        self.assertTrue(relation["no_deduplication"])
+        self.assertEqual(dhcp_vlan_report["b13_distinction"]["decision"], "DIFFERENT_LOGICAL_ASSETS")
+        for asset_id in legacy_dhcp_vlan | {relation["svg_asset_id"]}:
+            asset = records[asset_id]
+            self.assertEqual(asset["migration_state"], "migrated")
+            self.assertFalse(asset["original_evidence"])
+            self.assertFalse(asset["preserve_original"])
+            self.assertFalse((root / asset["legacy_path"]).exists())
+            self.assertIsNone(asset["derived_from"])
+            self.assertIsNone(asset["canonical_group_id"])
+        for comparator in dhcp_vlan_report["immutable_comparators"]:
+            self.assertEqual(digest(root / comparator["path"]), comparator["sha256"])
+            self.assertEqual(records[comparator["asset_id"]]["sha256"], comparator["sha256"])
+        reviewed_orphans |= legacy_dhcp_vlan
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.
