@@ -486,14 +486,14 @@ assets:
   domain: core
   subject: workspace-overview
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/01-workspace-overview.png
-  path: 00_book/figures/gui/chapter-03/01-workspace-overview.png
+  current_path: documentation_assets/ui/docshot/core/workspace-overview.png
+  path: documentation_assets/ui/docshot/core/workspace-overview.png
   planned_canonical_path: documentation_assets/ui/docshot/core/workspace-overview.png
   legacy_path: 00_book/figures/gui/chapter-03/01-workspace-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 4c060f15972dc8484bd445882a9a0e07b664e09cc42bd65873af52bc7b1e420f
   provenance:
     assessment: docshot-confirmed
@@ -511,39 +511,41 @@ assets:
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 22
-    referenced_path: ../../figures/gui/chapter-03/01-workspace-overview.png
+    referenced_path: ../assets/ui/docshot/core/workspace-overview.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 16
-    referenced_path: figures/gui/chapter-03/01-workspace-overview.png
+    referenced_path: /documentation_assets/ui/docshot/core/workspace-overview.png
     target_type: book-typst
   - source_document: 00_report/README.md
     line: 31
-    referenced_path: ../00_book/figures/gui/chapter-03/01-workspace-overview.png
+    referenced_path: ../documentation_assets/ui/docshot/core/workspace-overview.png
     target_type: other
   - source_document: 00_report/README.md
     line: 58
-    referenced_path: /00_book/figures/gui/chapter-03/01-workspace-overview.png
+    referenced_path: /documentation_assets/ui/docshot/core/workspace-overview.png
     target_type: other
   - source_document: 00_report/config/images.typ
     line: 3
-    referenced_path: /00_book/figures/gui/chapter-03/01-workspace-overview.png
+    referenced_path: /documentation_assets/ui/docshot/core/workspace-overview.png
     target_type: report-typst
-  - source_document: MKDOCS.md
-    line: 27
-    referenced_path: ../figures/gui/chapter-03/01-workspace-overview.png
-    target_type: other
-  - source_document: docshots/shots.py
-    line: 55
-    referenced_path: 01-workspace-overview.png
-    target_type: code
   - source_document: 00_report/contents/08_xay_dung_phan_mem.typ
     line: 19
-    referenced_path: /00_book/figures/gui/chapter-03/01-workspace-overview.png
+    referenced_path: /documentation_assets/ui/docshot/core/workspace-overview.png
     target_type: report-typst
+  - source_document: MKDOCS.md
+    line: 33
+    referenced_path: ../assets/ui/docshot/core/workspace-overview.png
+    target_type: other
+  - source_document: docshots/outputs.py
+    line: 22
+    referenced_path: documentation_assets/ui/docshot/core/workspace-overview.png
+    target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
+  - other
   - report-typst
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/workspace-overview.png
@@ -560,14 +562,14 @@ assets:
   domain: core
   subject: view-menu
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/02-menu-bar.png
-  path: 00_book/figures/gui/chapter-03/02-menu-bar.png
+  current_path: documentation_assets/ui/docshot/core/view-menu.png
+  path: documentation_assets/ui/docshot/core/view-menu.png
   planned_canonical_path: documentation_assets/ui/docshot/core/view-menu.png
   legacy_path: 00_book/figures/gui/chapter-03/02-menu-bar.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 051797bbf7e32ae7ad318120d8f55a6ff6333d5fef9a327262f48ae3a67c7ed8
   provenance:
     assessment: docshot-confirmed
@@ -585,19 +587,20 @@ assets:
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 72
-    referenced_path: ../../figures/gui/chapter-03/02-menu-bar.png
+    referenced_path: ../assets/ui/docshot/core/view-menu.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 47
-    referenced_path: figures/gui/chapter-03/02-menu-bar.png
+    referenced_path: /documentation_assets/ui/docshot/core/view-menu.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 56
-    referenced_path: 02-menu-bar.png
+  - source_document: docshots/outputs.py
+    line: 24
+    referenced_path: documentation_assets/ui/docshot/core/view-menu.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/view-menu.png
   status: active
@@ -613,14 +616,14 @@ assets:
   domain: core
   subject: activity-bar
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/03-activity-bar.png
-  path: 00_book/figures/gui/chapter-03/03-activity-bar.png
+  current_path: documentation_assets/ui/docshot/core/activity-bar.png
+  path: documentation_assets/ui/docshot/core/activity-bar.png
   planned_canonical_path: documentation_assets/ui/docshot/core/activity-bar.png
   legacy_path: 00_book/figures/gui/chapter-03/03-activity-bar.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1e536a74b4b687128ab01a1623d90c835eb5d05fa0328164bed4ce4fd29fd8db
   provenance:
     assessment: docshot-confirmed
@@ -638,19 +641,20 @@ assets:
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 92
-    referenced_path: ../../figures/gui/chapter-03/03-activity-bar.png
+    referenced_path: ../assets/ui/docshot/core/activity-bar.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 56
-    referenced_path: figures/gui/chapter-03/03-activity-bar.png
+    referenced_path: /documentation_assets/ui/docshot/core/activity-bar.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 57
-    referenced_path: 03-activity-bar.png
+  - source_document: docshots/outputs.py
+    line: 26
+    referenced_path: documentation_assets/ui/docshot/core/activity-bar.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/activity-bar.png
   status: active
@@ -666,14 +670,14 @@ assets:
   domain: devices
   subject: sidebar-status-groups
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/04-devices-sidebar.png
-  path: 00_book/figures/gui/chapter-03/04-devices-sidebar.png
+  current_path: documentation_assets/ui/docshot/devices/sidebar-status-groups.png
+  path: documentation_assets/ui/docshot/devices/sidebar-status-groups.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/sidebar-status-groups.png
   legacy_path: 00_book/figures/gui/chapter-03/04-devices-sidebar.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: cfa2fbb557d60aa3dc84af6947a428a61c256c59efafc63f93e6204b33b434c9
   provenance:
     assessment: docshot-confirmed
@@ -690,20 +694,25 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 126
+    referenced_path: ../assets/ui/docshot/devices/sidebar-status-groups.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 127
-    referenced_path: ../../figures/gui/chapter-03/04-devices-sidebar.png
+    referenced_path: ../assets/ui/docshot/devices/sidebar-status-groups.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 69
-    referenced_path: figures/gui/chapter-03/04-devices-sidebar.png
+    referenced_path: /documentation_assets/ui/docshot/devices/sidebar-status-groups.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 58
-    referenced_path: 04-devices-sidebar.png
+  - source_document: docshots/outputs.py
+    line: 28
+    referenced_path: documentation_assets/ui/docshot/devices/sidebar-status-groups.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/sidebar-status-groups.png
   status: active
@@ -719,14 +728,14 @@ assets:
   domain: devices
   subject: tabs-router-active
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/05-device-tabs.png
-  path: 00_book/figures/gui/chapter-03/05-device-tabs.png
+  current_path: documentation_assets/ui/docshot/devices/tabs-router-active.png
+  path: documentation_assets/ui/docshot/devices/tabs-router-active.png
   planned_canonical_path: documentation_assets/ui/docshot/devices/tabs-router-active.png
   legacy_path: 00_book/figures/gui/chapter-03/05-device-tabs.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1be478630aa5cb58e9b615f959542147309e172e2bae4fe790eb54dd5479acac
   provenance:
     assessment: docshot-confirmed
@@ -743,20 +752,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 164
+    referenced_path: ../assets/ui/docshot/devices/tabs-router-active.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 165
-    referenced_path: ../../figures/gui/chapter-03/05-device-tabs.png
+    referenced_path: ../assets/ui/docshot/devices/tabs-router-active.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 84
-    referenced_path: figures/gui/chapter-03/05-device-tabs.png
+    referenced_path: /documentation_assets/ui/docshot/devices/tabs-router-active.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 59
-    referenced_path: 05-device-tabs.png
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 85
+    referenced_path: /documentation_assets/ui/docshot/devices/tabs-router-active.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 30
+    referenced_path: documentation_assets/ui/docshot/devices/tabs-router-active.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/devices/tabs-router-active.png
   status: active
@@ -772,14 +790,14 @@ assets:
   domain: core
   subject: feature-bar-router
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/06-feature-bar-router.png
-  path: 00_book/figures/gui/chapter-03/06-feature-bar-router.png
+  current_path: documentation_assets/ui/docshot/core/feature-bar-router.png
+  path: documentation_assets/ui/docshot/core/feature-bar-router.png
   planned_canonical_path: documentation_assets/ui/docshot/core/feature-bar-router.png
   legacy_path: 00_book/figures/gui/chapter-03/06-feature-bar-router.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e4698aab0bcd4843d47222efcf7b751c205f0d7d9655c666f13f4b77f80b3045
   provenance:
     assessment: docshot-confirmed
@@ -797,19 +815,24 @@ assets:
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 215
-    referenced_path: ../../figures/gui/chapter-03/06-feature-bar-router.png
+    referenced_path: ../assets/ui/docshot/core/feature-bar-router.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 107
-    referenced_path: figures/gui/chapter-03/06-feature-bar-router.png
+    referenced_path: /documentation_assets/ui/docshot/core/feature-bar-router.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 60
-    referenced_path: 06-feature-bar-router.png
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 108
+    referenced_path: /documentation_assets/ui/docshot/core/feature-bar-router.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 32
+    referenced_path: documentation_assets/ui/docshot/core/feature-bar-router.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/feature-bar-router.png
   status: active
@@ -825,14 +848,14 @@ assets:
   domain: core
   subject: feature-bar-switch
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/07-feature-bar-switch.png
-  path: 00_book/figures/gui/chapter-03/07-feature-bar-switch.png
+  current_path: documentation_assets/ui/docshot/core/feature-bar-switch.png
+  path: documentation_assets/ui/docshot/core/feature-bar-switch.png
   planned_canonical_path: documentation_assets/ui/docshot/core/feature-bar-switch.png
   legacy_path: 00_book/figures/gui/chapter-03/07-feature-bar-switch.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 2a893694a070c6f6c879da03a4bf9de8ea95a019ccc99a805d5b84366ff8aa4b
   provenance:
     assessment: docshot-confirmed
@@ -849,20 +872,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 222
+    referenced_path: ../assets/ui/docshot/core/feature-bar-switch.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 223
-    referenced_path: ../../figures/gui/chapter-03/07-feature-bar-switch.png
+    referenced_path: ../assets/ui/docshot/core/feature-bar-switch.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 110
-    referenced_path: figures/gui/chapter-03/07-feature-bar-switch.png
+    referenced_path: /documentation_assets/ui/docshot/core/feature-bar-switch.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 61
-    referenced_path: 07-feature-bar-switch.png
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 111
+    referenced_path: /documentation_assets/ui/docshot/core/feature-bar-switch.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 34
+    referenced_path: documentation_assets/ui/docshot/core/feature-bar-switch.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/feature-bar-switch.png
   status: active
@@ -878,14 +910,14 @@ assets:
   domain: core
   subject: information-empty
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/08-content-area.png
-  path: 00_book/figures/gui/chapter-03/08-content-area.png
+  current_path: documentation_assets/ui/docshot/core/information-empty.png
+  path: documentation_assets/ui/docshot/core/information-empty.png
   planned_canonical_path: documentation_assets/ui/docshot/core/information-empty.png
   legacy_path: 00_book/figures/gui/chapter-03/08-content-area.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: c12de17bcb410ab7ba96efc231f8bcc2956db08fdd7de5953ad7774860fef206
   provenance:
     assessment: docshot-confirmed
@@ -902,20 +934,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 257
+    referenced_path: ../assets/ui/docshot/core/information-empty.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 258
-    referenced_path: ../../figures/gui/chapter-03/08-content-area.png
+    referenced_path: ../assets/ui/docshot/core/information-empty.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 133
-    referenced_path: figures/gui/chapter-03/08-content-area.png
+    referenced_path: /documentation_assets/ui/docshot/core/information-empty.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 62
-    referenced_path: 08-content-area.png
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 134
+    referenced_path: /documentation_assets/ui/docshot/core/information-empty.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 36
+    referenced_path: documentation_assets/ui/docshot/core/information-empty.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/information-empty.png
   status: active
@@ -931,14 +972,14 @@ assets:
   domain: core
   subject: status-bar
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/09-status-bar.png
-  path: 00_book/figures/gui/chapter-03/09-status-bar.png
+  current_path: documentation_assets/ui/docshot/core/status-bar.png
+  path: documentation_assets/ui/docshot/core/status-bar.png
   planned_canonical_path: documentation_assets/ui/docshot/core/status-bar.png
   legacy_path: 00_book/figures/gui/chapter-03/09-status-bar.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 40a8869ad008c67fd2dd8df66b93df3e52be72188355a14865a82240c884089f
   provenance:
     assessment: docshot-confirmed
@@ -955,20 +996,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 284
+    referenced_path: ../assets/ui/docshot/core/status-bar.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 285
-    referenced_path: ../../figures/gui/chapter-03/09-status-bar.png
+    referenced_path: ../assets/ui/docshot/core/status-bar.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 144
-    referenced_path: figures/gui/chapter-03/09-status-bar.png
+    referenced_path: /documentation_assets/ui/docshot/core/status-bar.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 63
-    referenced_path: 09-status-bar.png
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 145
+    referenced_path: /documentation_assets/ui/docshot/core/status-bar.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 38
+    referenced_path: documentation_assets/ui/docshot/core/status-bar.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/status-bar.png
   status: active
@@ -984,14 +1034,14 @@ assets:
   domain: core
   subject: status-details
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/09-status-details.png
-  path: 00_book/figures/gui/chapter-03/09-status-details.png
+  current_path: documentation_assets/ui/docshot/core/status-details.png
+  path: documentation_assets/ui/docshot/core/status-details.png
   planned_canonical_path: documentation_assets/ui/docshot/core/status-details.png
   legacy_path: 00_book/figures/gui/chapter-03/09-status-details.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3ad3c2c226f6ff0423e782217c73c743b0852c8109589062f7010d1b3355ae3d
   provenance:
     assessment: docshot-confirmed
@@ -1008,20 +1058,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 297
+    referenced_path: ../assets/ui/docshot/core/status-details.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 300
-    referenced_path: ../../figures/gui/chapter-03/09-status-details.png
+    referenced_path: ../assets/ui/docshot/core/status-details.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 149
-    referenced_path: figures/gui/chapter-03/09-status-details.png
+    referenced_path: /documentation_assets/ui/docshot/core/status-details.png
     target_type: book-typst
-  - source_document: docshots/chapter03.py
-    line: 133
-    referenced_path: 09-status-details.png
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 150
+    referenced_path: /documentation_assets/ui/docshot/core/status-details.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 40
+    referenced_path: documentation_assets/ui/docshot/core/status-details.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/status-details.png
   status: active
@@ -1037,14 +1096,14 @@ assets:
   domain: core
   subject: sidebar-collapsed
   source_kind: docshot
-  current_path: 00_book/figures/gui/chapter-03/10-sidebar-collapsed.png
-  path: 00_book/figures/gui/chapter-03/10-sidebar-collapsed.png
+  current_path: documentation_assets/ui/docshot/core/sidebar-collapsed.png
+  path: documentation_assets/ui/docshot/core/sidebar-collapsed.png
   planned_canonical_path: documentation_assets/ui/docshot/core/sidebar-collapsed.png
   legacy_path: 00_book/figures/gui/chapter-03/10-sidebar-collapsed.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 87b6babd912a9ca8e682feb967d0993b3baa86ce8e9b8f542a92ea52f914a64d
   provenance:
     assessment: docshot-confirmed
@@ -1061,20 +1120,29 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
+    line: 323
+    referenced_path: ../assets/ui/docshot/core/sidebar-collapsed.png
+    target_type: book-mkdocs
+  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 326
-    referenced_path: ../../figures/gui/chapter-03/10-sidebar-collapsed.png
+    referenced_path: ../assets/ui/docshot/core/sidebar-collapsed.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
     line: 160
-    referenced_path: figures/gui/chapter-03/10-sidebar-collapsed.png
+    referenced_path: /documentation_assets/ui/docshot/core/sidebar-collapsed.png
     target_type: book-typst
-  - source_document: docshots/shots.py
-    line: 64
-    referenced_path: 10-sidebar-collapsed.png
+  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
+    line: 161
+    referenced_path: /documentation_assets/ui/docshot/core/sidebar-collapsed.png
+    target_type: book-typst
+  - source_document: docshots/outputs.py
+    line: 42
+    referenced_path: documentation_assets/ui/docshot/core/sidebar-collapsed.png
     target_type: code
   targets:
   - book-mkdocs
   - book-typst
+  - code
   mkdocs_stage: true
   mkdocs_stage_path: 00_book/assets/ui/docshot/core/sidebar-collapsed.png
   status: active
@@ -9167,14 +9235,14 @@ assets:
   domain: core
   subject: welcome-recent-projects
   source_kind: docshot
-  current_path: 00_book/figures/gui/welcome.png
-  path: 00_book/figures/gui/welcome.png
+  current_path: documentation_assets/ui/docshot/core/welcome-recent-projects.png
+  path: documentation_assets/ui/docshot/core/welcome-recent-projects.png
   planned_canonical_path: documentation_assets/ui/docshot/core/welcome-recent-projects.png
   legacy_path: 00_book/figures/gui/welcome.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 392902698e7ce8906d3a61a93fad0fdf5b1e59e33569de56ee4343a38474a8e2
   provenance:
     assessment: docshot-confirmed
@@ -9190,11 +9258,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 1
-    referenced_path: welcome.png
+  - source_document: docshots/outputs.py
+    line: 102
+    referenced_path: documentation_assets/ui/docshot/core/welcome-recent-projects.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9210,14 +9279,14 @@ assets:
   domain: core
   subject: workspace-empty
   source_kind: docshot
-  current_path: 00_book/figures/gui/workspace.png
-  path: 00_book/figures/gui/workspace.png
+  current_path: documentation_assets/ui/docshot/core/workspace-empty.png
+  path: documentation_assets/ui/docshot/core/workspace-empty.png
   planned_canonical_path: documentation_assets/ui/docshot/core/workspace-empty.png
   legacy_path: 00_book/figures/gui/workspace.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: a5cfe6a96859e0c75538c80c30f3446c7b4fcbb472fde5dd584ec1515ddfd2a5
   provenance:
     assessment: docshot-confirmed
@@ -9233,11 +9302,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 1
-    referenced_path: workspace.png
+  - source_document: docshots/outputs.py
+    line: 104
+    referenced_path: documentation_assets/ui/docshot/core/workspace-empty.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active

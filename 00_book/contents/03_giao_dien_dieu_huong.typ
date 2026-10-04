@@ -13,7 +13,7 @@ Các hình sử dụng Workspace minh họa *CAMS Interface Lab*, gồm R1 (#raw
 
 Workspace là không gian làm việc chính của CAMS. Trong @fig:ch03-workspace-overview, người dùng đang ở Dashboard, tab R1 đang được chọn và nội dung Information đang hiển thị. Thanh tiêu đề phía trên cho biết tên project đang mở.
 
-#insert-image("figures/gui/chapter-03/01-workspace-overview.png",
+#insert-image("/documentation_assets/ui/docshot/core/workspace-overview.png",
   caption: [Các khu vực chính trong Workspace của CAMS.], width: 100.0%) <fig:ch03-workspace-overview>
 
 Đọc giao diện từ ngoài vào trong: *Menu Bar* nằm trên cùng; *Activity Bar* là dải biểu tượng sát cạnh trái; *Sidebar* nằm ngay bên phải dải này. Phía trên vùng làm việc thiết bị là *Device Tabs*, bên dưới là *Feature Bar*. *Content Area* chiếm phần lớn diện tích còn lại; *Status Bar* chạy dọc cạnh dưới cửa sổ.
@@ -44,7 +44,7 @@ Thanh menu có ba nhóm *File*, *View* và *Help*. Chọn tên menu để mở d
 
 *View* là điểm truy cập các lệnh điều hướng: *Reload UI* nạp lại nội dung giao diện hiện tại; *Toggle Sidebar* ẩn hoặc hiện Sidebar; các lệnh *Dashboard*, *SFTP*, *System Logs*, *Database* và *Settings* đưa người dùng tới khu vực tương ứng. @fig:ch03-menu-bar minh họa menu View đang mở.
 
-#insert-image("figures/gui/chapter-03/02-menu-bar.png",
+#insert-image("/documentation_assets/ui/docshot/core/view-menu.png",
   caption: [Các lệnh điều hướng trong menu View.], width: 60.0%) <fig:ch03-menu-bar>
 
 *Help* cung cấp *Keyboard Shortcuts* để xem bảng phím tắt trong ứng dụng và *About CAMS* để xem thông tin phần mềm. Các hình trong chương dùng kiểu menu tùy biến của CAMS; vị trí menu có thể khác khi chọn cách hiển thị menu do hệ điều hành quản lý.
@@ -53,7 +53,7 @@ Thanh menu có ba nhóm *File*, *View* và *Help*. Chọn tên menu để mở d
 
 Activity Bar nằm sát cạnh trái của Workspace và dùng để chuyển giữa các chế độ làm việc chính. Biểu tượng đang được chọn có dấu nhấn màu; đưa con trỏ lên biểu tượng để đọc tên và phím tắt. Phần trên của thanh được minh họa tại @fig:ch03-activity-bar.
 
-#insert-image("figures/gui/chapter-03/03-activity-bar.png",
+#insert-image("/documentation_assets/ui/docshot/core/activity-bar.png",
   caption: [Nhóm điều hướng phía trên với Dashboard đang được chọn.], width: 56.0%) <fig:ch03-activity-bar>
 
 Theo thứ tự từ trên xuống, nhóm phía trên gồm *Dashboard* để làm việc với thiết bị, *SFTP* để mở khu vực truyền tệp và *System Logs* để xem khu vực nhật ký hệ thống. Nhóm sát đáy gồm *Database* và *Settings*. Khi chuyển chế độ, Sidebar cũng đổi nội dung: danh sách thiết bị, kết nối SFTP, đối tượng log, bảng dữ liệu hoặc nhóm thiết lập.
@@ -66,7 +66,7 @@ Nhấn lại *Dashboard* hoặc *Settings* đang active sẽ ẩn/hiện Sidebar
 
 Trong Dashboard, Sidebar hiển thị panel *DEVICES*. Ô *Search devices…* tìm theo tên hoặc địa chỉ IP; nút *Filter* ở phần đầu panel lọc theo trạng thái và loại thiết bị. Nếu không thấy thiết bị cần tìm, hãy kiểm tra từ khóa, bộ lọc và các nhóm đang thu gọn trước.
 
-#insert-image("figures/gui/chapter-03/04-devices-sidebar.png",
+#insert-image("/documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
   caption: [Devices Sidebar với các nhóm trạng thái và thiết bị mẫu.], width: 45.0%) <fig:ch03-devices-sidebar>
 
 Các thiết bị được chia vào ba nhóm *Connected*, *Waiting* và *Disconnected*, kèm số lượng đang hiển thị. Biểu tượng xanh, vàng và đỏ hỗ trợ phân biệt các trạng thái này. Chọn mũi tên ở đầu nhóm để mở rộng hoặc thu gọn danh sách. Trong hình, nhóm Disconnected đã được mở rộng để thấy SW3.
@@ -81,7 +81,7 @@ Các lệnh quản lý thiết bị sẽ được trình bày ở @ch04. Trong c
 
 Device Tabs nằm trên Feature Bar. Mỗi tab đại diện cho ngữ cảnh của một thiết bị, nhận diện bằng tên và biểu tượng loại thiết bị. Tab đang active có vạch nhấn ở cạnh trên. @fig:ch03-device-tabs cho thấy R1 và SW1 đã được mở, trong đó R1 đang active.
 
-#insert-image("figures/gui/chapter-03/05-device-tabs.png",
+#insert-image("/documentation_assets/ui/docshot/devices/tabs-router-active.png",
   caption: [Hai tab thiết bị với R1 đang là tab hoạt động.], width: 100.0%) <fig:ch03-device-tabs>
 
 Chọn tab SW1 để chuyển ngữ cảnh làm việc sang SW1; chọn lại tab R1 để quay về Router. Mở lại cùng một host từ Sidebar sẽ đưa tab đã có lên phía trước, không tạo thêm tab trùng. Mỗi tab ghi nhớ feature đang xem: chẳng hạn R1 đang ở Routing, còn SW1 vẫn ở Information khi chuyển qua lại.
@@ -104,10 +104,10 @@ Ba biểu tượng chính lần lượt là *Information*, *CAMS Terminal* và *
 
 @fig:ch03-feature-router và @fig:ch03-feature-switch cùng giữ Information đang được chọn, nhưng phần tên chức năng khác nhau vì tab active đã đổi từ R1 sang SW1.
 
-#insert-image("figures/gui/chapter-03/06-feature-bar-router.png",
+#insert-image("/documentation_assets/ui/docshot/core/feature-bar-router.png",
   caption: [Feature Bar khi làm việc với Router R1.], width: 100.0%) <fig:ch03-feature-router>
 
-#insert-image("figures/gui/chapter-03/07-feature-bar-switch.png",
+#insert-image("/documentation_assets/ui/docshot/core/feature-bar-switch.png",
   caption: [Feature Bar khi làm việc với Switch Layer 2 SW1.], width: 100.0%) <fig:ch03-feature-switch>
 
 #report-table(
@@ -130,7 +130,7 @@ Bảng liệt kê các nhóm đang khả dụng theo thứ tự hiển thị; n�
 
 Content Area là vùng nội dung chính bên dưới Feature Bar. Nội dung thay đổi theo host active, feature, loại thiết bị và chế độ ứng dụng. Trong Settings, khu vực này hiển thị thiết lập; trong Dashboard, nó hiển thị nội dung của thiết bị đang chọn. Tên màn hình và địa chỉ host ở đầu vùng giúp kiểm tra mình đang xem đúng nơi.
 
-#insert-image("figures/gui/chapter-03/08-content-area.png",
+#insert-image("/documentation_assets/ui/docshot/core/information-empty.png",
   caption: [Phần nội dung Information của R1 khi chưa có dữ liệu cấu hình.], width: 100.0%) <fig:ch03-content-area>
 
 Trong @fig:ch03-content-area, *No backup history* và *No running-config data is available* là thông báo chưa có dữ liệu, không phải ứng dụng đang tải vô thời hạn. Mục Snapshot tại đây thuộc nội dung cấu hình thiết bị; không nhầm với snapshot toàn project trong menu File. Chương này chỉ yêu cầu nhận diện vùng nội dung, chưa cần thu thập hay so sánh cấu hình.
@@ -141,12 +141,12 @@ Một số màn hình chỉ được nạp khi mở lần đầu nên có thể 
 
 Status Bar nằm ở cạnh dưới Workspace. Phần trái hiển thị trạng thái Python/runtime và kiểm tra database, ví dụ *SYSTEM READY* khi môi trường sẵn sàng. Khi ứng dụng có tác vụ nền, thanh này có thể hiển thị thông báo, tiến độ hoặc kết quả tác vụ.
 
-#insert-image("figures/gui/chapter-03/09-status-bar.png",
+#insert-image("/documentation_assets/ui/docshot/core/status-bar.png",
   caption: [Vị trí các nhóm thông tin trên Status Bar.], width: 100.0%) <fig:ch03-status-bar>
 
 Phần phải có thông tin kết nối mạng, Virtual Lab nếu được phát hiện, RAM, ngày/giờ và chuông thông báo. Trạng thái mạng của máy chạy CAMS không thay thế trạng thái kết nối từng thiết bị trong Sidebar. Chọn chuông để mở khu vực thông báo; đây cũng là nơi kiểm tra lại kết quả hoặc vấn đề ứng dụng vừa báo.
 
-#insert-image("figures/gui/chapter-03/09-status-details.png",
+#insert-image("/documentation_assets/ui/docshot/core/status-details.png",
   caption: [Chi tiết kết nối mẫu, RAM và biểu tượng thông báo.], width: 98.2%) <fig:ch03-status-details>
 
 Trong các hình, *DOC FIXTURE* đánh dấu phiên minh họa, *Documentation Link* là tên kết nối mẫu và RAM được cố định ở 42%. Ngày/giờ được ẩn để ảnh không thay đổi theo thời điểm chụp. Khi dùng CAMS bình thường, các giá trị phản ánh môi trường đang chạy; người dùng có thể bật/tắt những nhóm thông tin trong *Settings → Theme → Status Bar*.
@@ -157,7 +157,7 @@ Trong các hình, *DOC FIXTURE* đánh dấu phiên minh họa, *Documentation L
 
 Có ba cách thuận tiện để ẩn/hiện Sidebar: nhấn #raw("Ctrl+B"), chọn *View → Toggle Sidebar*, hoặc nhấn lại biểu tượng *Dashboard* đang active. Nhấn lại lần nữa để hiện Sidebar. Cách dùng Activity Bar ở các chế độ khác đã được lưu ý ở phần trước.
 
-#insert-image("figures/gui/chapter-03/10-sidebar-collapsed.png",
+#insert-image("/documentation_assets/ui/docshot/core/sidebar-collapsed.png",
   caption: [Workspace khi Sidebar được thu gọn.], width: 100.0%) <fig:ch03-sidebar-collapsed>
 
 So sánh @fig:ch03-sidebar-collapsed với @fig:ch03-workspace-overview : Content Area rộng hơn, còn tab R1, tab SW1 và Information vẫn được giữ. Ẩn Sidebar không đóng tab, không đổi host active và không xóa lựa chọn thiết bị.

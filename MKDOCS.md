@@ -30,7 +30,7 @@ mkdocs build --strict
 Vì file chương nằm trong `00_book/DOC`, đường dẫn ảnh cần đi lên một cấp, ví dụ:
 
 ```markdown
-![Tổng quan Workspace](../figures/gui/chapter-03/01-workspace-overview.png)
+![Tổng quan Workspace](../assets/ui/docshot/core/workspace-overview.png)
 ```
 
 Mẫu khai báo một chương mới trong `mkdocs.yml`:

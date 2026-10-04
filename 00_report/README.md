@@ -28,7 +28,7 @@ Toàn bộ ảnh của sách hướng dẫn và báo cáo được quản lý t�
 Ví dụ một ảnh giao diện dùng chung:
 
 ```text
-../00_book/figures/gui/chapter-03/01-workspace-overview.png
+../documentation_assets/ui/docshot/core/workspace-overview.png
 ```
 
 ## Bảng trong báo cáo
@@ -55,7 +55,7 @@ Trong file `.typ`:
 
 ```typst
 #insert-image(
-  "/00_book/figures/gui/chapter-03/01-workspace-overview.png",
+  "/documentation_assets/ui/docshot/core/workspace-overview.png",
   width: 80%,
   caption: [Giao diện chính của CAMS],
 ) <fig-main-window>

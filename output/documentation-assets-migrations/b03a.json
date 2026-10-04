@@ -1,0 +1,964 @@
+{
+  "batch": "B03A",
+  "starting_commit": "36ce6dd778bf6a18f5f244a6a277be8bde7c9a24",
+  "status": "PASS",
+  "assets": [
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "old_path": "00_book/figures/gui/chapter-03/01-workspace-overview.png",
+      "new_path": "documentation_assets/ui/docshot/core/workspace-overview.png",
+      "source_git_blob_sha": "4c060f15972dc8484bd445882a9a0e07b664e09cc42bd65873af52bc7b1e420f",
+      "canonical_filesystem_sha": "4c060f15972dc8484bd445882a9a0e07b664e09cc42bd65873af52bc7b1e420f",
+      "canonical_index_blob_sha": "4c060f15972dc8484bd445882a9a0e07b664e09cc42bd65873af52bc7b1e420f",
+      "manifest_sha": "4c060f15972dc8484bd445882a9a0e07b664e09cc42bd65873af52bc7b1e420f",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 22,
+          "referenced_path": "../assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 16,
+          "referenced_path": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_report/README.md",
+          "line": 31,
+          "referenced_path": "../documentation_assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "other"
+        },
+        {
+          "source_document": "00_report/README.md",
+          "line": 58,
+          "referenced_path": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "other"
+        },
+        {
+          "source_document": "00_report/config/images.typ",
+          "line": 3,
+          "referenced_path": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "report-typst"
+        },
+        {
+          "source_document": "00_report/contents/08_xay_dung_phan_mem.typ",
+          "line": 19,
+          "referenced_path": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "report-typst"
+        },
+        {
+          "source_document": "MKDOCS.md",
+          "line": 33,
+          "referenced_path": "../assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "other"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 22,
+          "referenced_path": "documentation_assets/ui/docshot/core/workspace-overview.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/workspace-overview.png"
+    },
+    {
+      "asset_id": "ui.core.view-menu",
+      "old_path": "00_book/figures/gui/chapter-03/02-menu-bar.png",
+      "new_path": "documentation_assets/ui/docshot/core/view-menu.png",
+      "source_git_blob_sha": "051797bbf7e32ae7ad318120d8f55a6ff6333d5fef9a327262f48ae3a67c7ed8",
+      "canonical_filesystem_sha": "051797bbf7e32ae7ad318120d8f55a6ff6333d5fef9a327262f48ae3a67c7ed8",
+      "canonical_index_blob_sha": "051797bbf7e32ae7ad318120d8f55a6ff6333d5fef9a327262f48ae3a67c7ed8",
+      "manifest_sha": "051797bbf7e32ae7ad318120d8f55a6ff6333d5fef9a327262f48ae3a67c7ed8",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 72,
+          "referenced_path": "../assets/ui/docshot/core/view-menu.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 47,
+          "referenced_path": "/documentation_assets/ui/docshot/core/view-menu.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 24,
+          "referenced_path": "documentation_assets/ui/docshot/core/view-menu.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/view-menu.png"
+    },
+    {
+      "asset_id": "ui.core.activity-bar",
+      "old_path": "00_book/figures/gui/chapter-03/03-activity-bar.png",
+      "new_path": "documentation_assets/ui/docshot/core/activity-bar.png",
+      "source_git_blob_sha": "1e536a74b4b687128ab01a1623d90c835eb5d05fa0328164bed4ce4fd29fd8db",
+      "canonical_filesystem_sha": "1e536a74b4b687128ab01a1623d90c835eb5d05fa0328164bed4ce4fd29fd8db",
+      "canonical_index_blob_sha": "1e536a74b4b687128ab01a1623d90c835eb5d05fa0328164bed4ce4fd29fd8db",
+      "manifest_sha": "1e536a74b4b687128ab01a1623d90c835eb5d05fa0328164bed4ce4fd29fd8db",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 92,
+          "referenced_path": "../assets/ui/docshot/core/activity-bar.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 56,
+          "referenced_path": "/documentation_assets/ui/docshot/core/activity-bar.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 26,
+          "referenced_path": "documentation_assets/ui/docshot/core/activity-bar.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/activity-bar.png"
+    },
+    {
+      "asset_id": "ui.devices.sidebar-status-groups",
+      "old_path": "00_book/figures/gui/chapter-03/04-devices-sidebar.png",
+      "new_path": "documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+      "source_git_blob_sha": "cfa2fbb557d60aa3dc84af6947a428a61c256c59efafc63f93e6204b33b434c9",
+      "canonical_filesystem_sha": "cfa2fbb557d60aa3dc84af6947a428a61c256c59efafc63f93e6204b33b434c9",
+      "canonical_index_blob_sha": "cfa2fbb557d60aa3dc84af6947a428a61c256c59efafc63f93e6204b33b434c9",
+      "manifest_sha": "cfa2fbb557d60aa3dc84af6947a428a61c256c59efafc63f93e6204b33b434c9",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 126,
+          "referenced_path": "../assets/ui/docshot/devices/sidebar-status-groups.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 127,
+          "referenced_path": "../assets/ui/docshot/devices/sidebar-status-groups.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 69,
+          "referenced_path": "/documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 28,
+          "referenced_path": "documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/devices/sidebar-status-groups.png"
+    },
+    {
+      "asset_id": "ui.devices.tabs-router-active",
+      "old_path": "00_book/figures/gui/chapter-03/05-device-tabs.png",
+      "new_path": "documentation_assets/ui/docshot/devices/tabs-router-active.png",
+      "source_git_blob_sha": "1be478630aa5cb58e9b615f959542147309e172e2bae4fe790eb54dd5479acac",
+      "canonical_filesystem_sha": "1be478630aa5cb58e9b615f959542147309e172e2bae4fe790eb54dd5479acac",
+      "canonical_index_blob_sha": "1be478630aa5cb58e9b615f959542147309e172e2bae4fe790eb54dd5479acac",
+      "manifest_sha": "1be478630aa5cb58e9b615f959542147309e172e2bae4fe790eb54dd5479acac",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 164,
+          "referenced_path": "../assets/ui/docshot/devices/tabs-router-active.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 165,
+          "referenced_path": "../assets/ui/docshot/devices/tabs-router-active.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 84,
+          "referenced_path": "/documentation_assets/ui/docshot/devices/tabs-router-active.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 85,
+          "referenced_path": "/documentation_assets/ui/docshot/devices/tabs-router-active.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 30,
+          "referenced_path": "documentation_assets/ui/docshot/devices/tabs-router-active.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/devices/tabs-router-active.png"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-router",
+      "old_path": "00_book/figures/gui/chapter-03/06-feature-bar-router.png",
+      "new_path": "documentation_assets/ui/docshot/core/feature-bar-router.png",
+      "source_git_blob_sha": "e4698aab0bcd4843d47222efcf7b751c205f0d7d9655c666f13f4b77f80b3045",
+      "canonical_filesystem_sha": "e4698aab0bcd4843d47222efcf7b751c205f0d7d9655c666f13f4b77f80b3045",
+      "canonical_index_blob_sha": "e4698aab0bcd4843d47222efcf7b751c205f0d7d9655c666f13f4b77f80b3045",
+      "manifest_sha": "e4698aab0bcd4843d47222efcf7b751c205f0d7d9655c666f13f4b77f80b3045",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 215,
+          "referenced_path": "../assets/ui/docshot/core/feature-bar-router.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 107,
+          "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-router.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 108,
+          "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-router.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 32,
+          "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-router.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/feature-bar-router.png"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-switch",
+      "old_path": "00_book/figures/gui/chapter-03/07-feature-bar-switch.png",
+      "new_path": "documentation_assets/ui/docshot/core/feature-bar-switch.png",
+      "source_git_blob_sha": "2a893694a070c6f6c879da03a4bf9de8ea95a019ccc99a805d5b84366ff8aa4b",
+      "canonical_filesystem_sha": "2a893694a070c6f6c879da03a4bf9de8ea95a019ccc99a805d5b84366ff8aa4b",
+      "canonical_index_blob_sha": "2a893694a070c6f6c879da03a4bf9de8ea95a019ccc99a805d5b84366ff8aa4b",
+      "manifest_sha": "2a893694a070c6f6c879da03a4bf9de8ea95a019ccc99a805d5b84366ff8aa4b",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 222,
+          "referenced_path": "../assets/ui/docshot/core/feature-bar-switch.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 223,
+          "referenced_path": "../assets/ui/docshot/core/feature-bar-switch.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 110,
+          "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-switch.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 111,
+          "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-switch.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 34,
+          "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-switch.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/feature-bar-switch.png"
+    },
+    {
+      "asset_id": "ui.core.information-empty",
+      "old_path": "00_book/figures/gui/chapter-03/08-content-area.png",
+      "new_path": "documentation_assets/ui/docshot/core/information-empty.png",
+      "source_git_blob_sha": "c12de17bcb410ab7ba96efc231f8bcc2956db08fdd7de5953ad7774860fef206",
+      "canonical_filesystem_sha": "c12de17bcb410ab7ba96efc231f8bcc2956db08fdd7de5953ad7774860fef206",
+      "canonical_index_blob_sha": "c12de17bcb410ab7ba96efc231f8bcc2956db08fdd7de5953ad7774860fef206",
+      "manifest_sha": "c12de17bcb410ab7ba96efc231f8bcc2956db08fdd7de5953ad7774860fef206",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 257,
+          "referenced_path": "../assets/ui/docshot/core/information-empty.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 258,
+          "referenced_path": "../assets/ui/docshot/core/information-empty.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 133,
+          "referenced_path": "/documentation_assets/ui/docshot/core/information-empty.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 134,
+          "referenced_path": "/documentation_assets/ui/docshot/core/information-empty.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 36,
+          "referenced_path": "documentation_assets/ui/docshot/core/information-empty.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/information-empty.png"
+    },
+    {
+      "asset_id": "ui.core.status-bar",
+      "old_path": "00_book/figures/gui/chapter-03/09-status-bar.png",
+      "new_path": "documentation_assets/ui/docshot/core/status-bar.png",
+      "source_git_blob_sha": "40a8869ad008c67fd2dd8df66b93df3e52be72188355a14865a82240c884089f",
+      "canonical_filesystem_sha": "40a8869ad008c67fd2dd8df66b93df3e52be72188355a14865a82240c884089f",
+      "canonical_index_blob_sha": "40a8869ad008c67fd2dd8df66b93df3e52be72188355a14865a82240c884089f",
+      "manifest_sha": "40a8869ad008c67fd2dd8df66b93df3e52be72188355a14865a82240c884089f",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 284,
+          "referenced_path": "../assets/ui/docshot/core/status-bar.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 285,
+          "referenced_path": "../assets/ui/docshot/core/status-bar.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 144,
+          "referenced_path": "/documentation_assets/ui/docshot/core/status-bar.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 145,
+          "referenced_path": "/documentation_assets/ui/docshot/core/status-bar.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 38,
+          "referenced_path": "documentation_assets/ui/docshot/core/status-bar.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/status-bar.png"
+    },
+    {
+      "asset_id": "ui.core.status-details",
+      "old_path": "00_book/figures/gui/chapter-03/09-status-details.png",
+      "new_path": "documentation_assets/ui/docshot/core/status-details.png",
+      "source_git_blob_sha": "3ad3c2c226f6ff0423e782217c73c743b0852c8109589062f7010d1b3355ae3d",
+      "canonical_filesystem_sha": "3ad3c2c226f6ff0423e782217c73c743b0852c8109589062f7010d1b3355ae3d",
+      "canonical_index_blob_sha": "3ad3c2c226f6ff0423e782217c73c743b0852c8109589062f7010d1b3355ae3d",
+      "manifest_sha": "3ad3c2c226f6ff0423e782217c73c743b0852c8109589062f7010d1b3355ae3d",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 297,
+          "referenced_path": "../assets/ui/docshot/core/status-details.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 300,
+          "referenced_path": "../assets/ui/docshot/core/status-details.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 149,
+          "referenced_path": "/documentation_assets/ui/docshot/core/status-details.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 150,
+          "referenced_path": "/documentation_assets/ui/docshot/core/status-details.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 40,
+          "referenced_path": "documentation_assets/ui/docshot/core/status-details.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/status-details.png"
+    },
+    {
+      "asset_id": "ui.core.sidebar-collapsed",
+      "old_path": "00_book/figures/gui/chapter-03/10-sidebar-collapsed.png",
+      "new_path": "documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+      "source_git_blob_sha": "87b6babd912a9ca8e682feb967d0993b3baa86ce8e9b8f542a92ea52f914a64d",
+      "canonical_filesystem_sha": "87b6babd912a9ca8e682feb967d0993b3baa86ce8e9b8f542a92ea52f914a64d",
+      "canonical_index_blob_sha": "87b6babd912a9ca8e682feb967d0993b3baa86ce8e9b8f542a92ea52f914a64d",
+      "manifest_sha": "87b6babd912a9ca8e682feb967d0993b3baa86ce8e9b8f542a92ea52f914a64d",
+      "workflow": "chapter-03",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 323,
+          "referenced_path": "../assets/ui/docshot/core/sidebar-collapsed.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+          "line": 326,
+          "referenced_path": "../assets/ui/docshot/core/sidebar-collapsed.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 160,
+          "referenced_path": "/documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+          "line": 161,
+          "referenced_path": "/documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 42,
+          "referenced_path": "documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": "00_book/assets/ui/docshot/core/sidebar-collapsed.png"
+    },
+    {
+      "asset_id": "ui.core.welcome-recent-projects",
+      "old_path": "00_book/figures/gui/welcome.png",
+      "new_path": "documentation_assets/ui/docshot/core/welcome-recent-projects.png",
+      "source_git_blob_sha": "392902698e7ce8906d3a61a93fad0fdf5b1e59e33569de56ee4343a38474a8e2",
+      "canonical_filesystem_sha": "392902698e7ce8906d3a61a93fad0fdf5b1e59e33569de56ee4343a38474a8e2",
+      "canonical_index_blob_sha": "392902698e7ce8906d3a61a93fad0fdf5b1e59e33569de56ee4343a38474a8e2",
+      "manifest_sha": "392902698e7ce8906d3a61a93fad0fdf5b1e59e33569de56ee4343a38474a8e2",
+      "workflow": "welcome",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 102,
+          "referenced_path": "documentation_assets/ui/docshot/core/welcome-recent-projects.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.core.workspace-empty",
+      "old_path": "00_book/figures/gui/workspace.png",
+      "new_path": "documentation_assets/ui/docshot/core/workspace-empty.png",
+      "source_git_blob_sha": "a5cfe6a96859e0c75538c80c30f3446c7b4fcbb472fde5dd584ec1515ddfd2a5",
+      "canonical_filesystem_sha": "a5cfe6a96859e0c75538c80c30f3446c7b4fcbb472fde5dd584ec1515ddfd2a5",
+      "canonical_index_blob_sha": "a5cfe6a96859e0c75538c80c30f3446c7b4fcbb472fde5dd584ec1515ddfd2a5",
+      "manifest_sha": "a5cfe6a96859e0c75538c80c30f3446c7b4fcbb472fde5dd584ec1515ddfd2a5",
+      "workflow": "workspace",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 104,
+          "referenced_path": "documentation_assets/ui/docshot/core/workspace-empty.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 22,
+      "before": "../../figures/gui/chapter-03/01-workspace-overview.png",
+      "after": "../assets/ui/docshot/core/workspace-overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.view-menu",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 72,
+      "before": "../../figures/gui/chapter-03/02-menu-bar.png",
+      "after": "../assets/ui/docshot/core/view-menu.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.activity-bar",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 92,
+      "before": "../../figures/gui/chapter-03/03-activity-bar.png",
+      "after": "../assets/ui/docshot/core/activity-bar.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.devices.sidebar-status-groups",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 126,
+      "before": "../../figures/gui/chapter-03/04-devices-sidebar.png",
+      "after": "../assets/ui/docshot/devices/sidebar-status-groups.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.devices.tabs-router-active",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 164,
+      "before": "../../figures/gui/chapter-03/05-device-tabs.png",
+      "after": "../assets/ui/docshot/devices/tabs-router-active.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-router",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 215,
+      "before": "../../figures/gui/chapter-03/06-feature-bar-router.png",
+      "after": "../assets/ui/docshot/core/feature-bar-router.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-switch",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 222,
+      "before": "../../figures/gui/chapter-03/07-feature-bar-switch.png",
+      "after": "../assets/ui/docshot/core/feature-bar-switch.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.information-empty",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 257,
+      "before": "../../figures/gui/chapter-03/08-content-area.png",
+      "after": "../assets/ui/docshot/core/information-empty.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.status-bar",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 284,
+      "before": "../../figures/gui/chapter-03/09-status-bar.png",
+      "after": "../assets/ui/docshot/core/status-bar.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.status-details",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 297,
+      "before": "../../figures/gui/chapter-03/09-status-details.png",
+      "after": "../assets/ui/docshot/core/status-details.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.sidebar-collapsed",
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "line": 323,
+      "before": "../../figures/gui/chapter-03/10-sidebar-collapsed.png",
+      "after": "../assets/ui/docshot/core/sidebar-collapsed.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 16,
+      "before": "figures/gui/chapter-03/01-workspace-overview.png",
+      "after": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.view-menu",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 47,
+      "before": "figures/gui/chapter-03/02-menu-bar.png",
+      "after": "/documentation_assets/ui/docshot/core/view-menu.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.activity-bar",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 56,
+      "before": "figures/gui/chapter-03/03-activity-bar.png",
+      "after": "/documentation_assets/ui/docshot/core/activity-bar.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.devices.sidebar-status-groups",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 69,
+      "before": "figures/gui/chapter-03/04-devices-sidebar.png",
+      "after": "/documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.devices.tabs-router-active",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 85,
+      "before": "figures/gui/chapter-03/05-device-tabs.png",
+      "after": "/documentation_assets/ui/docshot/devices/tabs-router-active.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-router",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 108,
+      "before": "figures/gui/chapter-03/06-feature-bar-router.png",
+      "after": "/documentation_assets/ui/docshot/core/feature-bar-router.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-switch",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 111,
+      "before": "figures/gui/chapter-03/07-feature-bar-switch.png",
+      "after": "/documentation_assets/ui/docshot/core/feature-bar-switch.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.information-empty",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 134,
+      "before": "figures/gui/chapter-03/08-content-area.png",
+      "after": "/documentation_assets/ui/docshot/core/information-empty.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.status-bar",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 145,
+      "before": "figures/gui/chapter-03/09-status-bar.png",
+      "after": "/documentation_assets/ui/docshot/core/status-bar.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.status-details",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 150,
+      "before": "figures/gui/chapter-03/09-status-details.png",
+      "after": "/documentation_assets/ui/docshot/core/status-details.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.sidebar-collapsed",
+      "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+      "line": 161,
+      "before": "figures/gui/chapter-03/10-sidebar-collapsed.png",
+      "after": "/documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "00_report/README.md",
+      "line": 31,
+      "before": "../00_book/figures/gui/chapter-03/01-workspace-overview.png",
+      "after": "../documentation_assets/ui/docshot/core/workspace-overview.png",
+      "target_type": "other"
+    },
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "00_report/README.md",
+      "line": 58,
+      "before": "/00_book/figures/gui/chapter-03/01-workspace-overview.png",
+      "after": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+      "target_type": "other"
+    },
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "00_report/config/images.typ",
+      "line": 3,
+      "before": "/00_book/figures/gui/chapter-03/01-workspace-overview.png",
+      "after": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+      "target_type": "report-typst"
+    },
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "00_report/contents/08_xay_dung_phan_mem.typ",
+      "line": 19,
+      "before": "/00_book/figures/gui/chapter-03/01-workspace-overview.png",
+      "after": "/documentation_assets/ui/docshot/core/workspace-overview.png",
+      "target_type": "report-typst"
+    },
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "MKDOCS.md",
+      "line": 33,
+      "before": "../figures/gui/chapter-03/01-workspace-overview.png",
+      "after": "../assets/ui/docshot/core/workspace-overview.png",
+      "target_type": "other"
+    }
+  ],
+  "reference_rewrite_count": 27,
+  "baseline_removed": [
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/01-workspace-overview.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/01-workspace-overview.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/02-menu-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/02-menu-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/03-activity-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/03-activity-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/04-devices-sidebar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/04-devices-sidebar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/05-device-tabs.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/05-device-tabs.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/06-feature-bar-router.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/06-feature-bar-router.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/07-feature-bar-switch.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/07-feature-bar-switch.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/08-content-area.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/08-content-area.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/09-status-bar.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/09-status-bar.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/09-status-details.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/09-status-details.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+      "referenced_path": "../../figures/gui/chapter-03/10-sidebar-collapsed.png",
+      "reference_kind": "html-img",
+      "resolved_path": "figures/gui/chapter-03/10-sidebar-collapsed.png",
+      "count": 1
+    }
+  ],
+  "baseline_exceptions_resolved": 11,
+  "baseline_remaining": 167,
+  "manifest": {
+    "pending": 295,
+    "migrated": 50,
+    "frozen": 62
+  },
+  "generator_default": "blocked until all 42 migrated",
+  "canonical_regeneration": false,
+  "validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 9
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 31,
+  "proof": {
+    "status": "PASS",
+    "all_407_manifest_filesystem_source_git_index_sha_contracts": true,
+    "manifest": {
+      "pending": 295,
+      "migrated": 50,
+      "frozen": 62
+    },
+    "b03_migrated": 13,
+    "b03_legacy_absent": 13,
+    "b03_canonical_present": 13,
+    "remaining_365_asset_records_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "b02_holds_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "canonical_regeneration": false,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "baseline_remaining": 167,
+    "baseline_removed_only_resolved_occurrences": true,
+    "typst": [
+      {
+        "target": "report",
+        "result": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_starting_baseline": true
+      },
+      {
+        "target": "book",
+        "result": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_starting_baseline": true
+      }
+    ]
+  },
+  "typst": [
+    {
+      "target": "report",
+      "result": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_starting_baseline": true
+    },
+    {
+      "target": "book",
+      "result": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_starting_baseline": true
+    }
+  ]
+}

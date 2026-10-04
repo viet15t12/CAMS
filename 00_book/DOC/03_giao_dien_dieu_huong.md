@@ -19,7 +19,7 @@ Workspace là không gian làm việc chính của CAMS. Trong
 hiển thị. Thanh tiêu đề phía trên cho biết tên project đang mở.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/01-workspace-overview.png"
+<p><img src="../assets/ui/docshot/core/workspace-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Các khu vực chính trong Workspace của
 CAMS.</p></figcaption>
@@ -69,7 +69,7 @@ lệnh **Dashboard**, **SFTP**, **System Logs**, **Database** và
 đang mở.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/02-menu-bar.png"
+<p><img src="../assets/ui/docshot/core/view-menu.png"
 style="width:60.0%" /></p>
 <figcaption><p>Các lệnh điều hướng trong menu View.</p></figcaption>
 </figure>
@@ -89,7 +89,7 @@ con trỏ lên biểu tượng để đọc tên và phím tắt. Phần trên c
 minh họa tại <a href="#fig" class="ref">[fig]</a>:ch03-activity-bar.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/03-activity-bar.png"
+<p><img src="../assets/ui/docshot/core/activity-bar.png"
 style="width:56.0%" /></p>
 <figcaption><p>Nhóm điều hướng phía trên với Dashboard đang được
 chọn.</p></figcaption>
@@ -124,7 +124,7 @@ lọc theo trạng thái và loại thiết bị. Nếu không thấy thiết b�
 hãy kiểm tra từ khóa, bộ lọc và các nhóm đang thu gọn trước.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/04-devices-sidebar.png"
+<p><img src="../assets/ui/docshot/devices/sidebar-status-groups.png"
 style="width:45.0%" /></p>
 <figcaption><p>Devices Sidebar với các nhóm trạng thái và thiết bị
 mẫu.</p></figcaption>
@@ -162,7 +162,7 @@ active có vạch nhấn ở cạnh trên.
 đã được mở, trong đó R1 đang active.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/05-device-tabs.png"
+<p><img src="../assets/ui/docshot/devices/tabs-router-active.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hai tab thiết bị với R1 đang là tab hoạt
 động.</p></figcaption>
@@ -212,7 +212,7 @@ Information đang được chọn, nhưng phần tên chức năng khác nhau v�
 active đã đổi từ R1 sang SW1.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/06-feature-bar-router.png"
+<p><img src="../assets/ui/docshot/core/feature-bar-router.png"
 style="width:100.0%" /></p>
 <figcaption><p>Feature Bar khi làm việc với Router R1.</p></figcaption>
 </figure>
@@ -220,7 +220,7 @@ style="width:100.0%" /></p>
 \<fig:ch03-feature-router\>
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/07-feature-bar-switch.png"
+<p><img src="../assets/ui/docshot/core/feature-bar-switch.png"
 style="width:100.0%" /></p>
 <figcaption><p>Feature Bar khi làm việc với Switch Layer 2
 SW1.</p></figcaption>
@@ -255,7 +255,7 @@ nội dung của thiết bị đang chọn. Tên màn hình và địa chỉ hos
 giúp kiểm tra mình đang xem đúng nơi.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/08-content-area.png"
+<p><img src="../assets/ui/docshot/core/information-empty.png"
 style="width:100.0%" /></p>
 <figcaption><p>Phần nội dung Information của R1 khi chưa có dữ liệu cấu
 hình.</p></figcaption>
@@ -282,7 +282,7 @@ trường sẵn sàng. Khi ứng dụng có tác vụ nền, thanh này có th�
 thông báo, tiến độ hoặc kết quả tác vụ.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/09-status-bar.png"
+<p><img src="../assets/ui/docshot/core/status-bar.png"
 style="width:100.0%" /></p>
 <figcaption><p>Vị trí các nhóm thông tin trên Status
 Bar.</p></figcaption>
@@ -297,7 +297,7 @@ chuông để mở khu vực thông báo; đây cũng là nơi kiểm tra lại 
 hoặc vấn đề ứng dụng vừa báo.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/09-status-details.png"
+<p><img src="../assets/ui/docshot/core/status-details.png"
 style="width:100.0%" /></p>
 <figcaption><p>Chi tiết kết nối mẫu, RAM và biểu tượng thông
 báo.</p></figcaption>
@@ -323,7 +323,7 @@ Nhấn lại lần nữa để hiện Sidebar. Cách dùng Activity Bar ở các
 khác đã được lưu ý ở phần trước.
 
 <figure>
-<p><img src="../../figures/gui/chapter-03/10-sidebar-collapsed.png"
+<p><img src="../assets/ui/docshot/core/sidebar-collapsed.png"
 style="width:100.0%" /></p>
 <figcaption><p>Workspace khi Sidebar được thu gọn.</p></figcaption>
 </figure>

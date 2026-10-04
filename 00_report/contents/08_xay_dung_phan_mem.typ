@@ -16,7 +16,7 @@ Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện v
 Các bộ điều khiển dữ liệu, Syslog, SFTP và không gian làm việc xử lý chức năng tương ứng. Tác vụ mạng chạy nền và gửi kết quả về giao diện. @fig-cams-workspace minh họa giao diện làm việc của ứng dụng.
 
 #figure(
-  image("/00_book/figures/gui/chapter-03/01-workspace-overview.png", width: 88%),
+  image("/documentation_assets/ui/docshot/core/workspace-overview.png", width: 88%),
   caption: [Không gian làm việc tập trung của CAMS],
 ) <fig-cams-workspace>
 

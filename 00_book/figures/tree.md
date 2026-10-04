@@ -11,18 +11,6 @@
 │   │   ├── 08-save-project.png
 │   │   ├── 09-snapshot-history.png
 │   │   └── 10-ready-workspace.png
-│   ├── chapter-03
-│   │   ├── 01-workspace-overview.png
-│   │   ├── 02-menu-bar.png
-│   │   ├── 03-activity-bar.png
-│   │   ├── 04-devices-sidebar.png
-│   │   ├── 05-device-tabs.png
-│   │   ├── 06-feature-bar-router.png
-│   │   ├── 07-feature-bar-switch.png
-│   │   ├── 08-content-area.png
-│   │   ├── 09-status-bar.png
-│   │   ├── 09-status-details.png
-│   │   └── 10-sidebar-collapsed.png
 │   ├── chapter-04
 │   │   ├── 01-devices-inventory.png
 │   │   ├── 02-add-device-empty.png
@@ -207,8 +195,6 @@
 │   │   ├── 07-ready-to-save.png
 │   │   ├── 08-vlan-created.png
 │   │   └── 09-view-preview.png
-│   ├── welcome.png
-│   └── workspace.png
 ├── icons
 │   └── ptit-logo.svg
 ├── report
@@ -404,3 +390,21 @@ B02E2 legacy raster network diagrams (outside this figures tree):
 - documentation_assets/diagrams/network/vlan-trunk-segmentation.png
 
 All three remain unused/orphan-review. Original JPG/PNG bytes are preserved; no vectorization, cleanup or document insertion. DHCP DORA remains independent of the existing canonical authored SVG; DHCP Snooping illustration is distinct from the unchanged B13 lab topology. None is selected for MkDocs staging.
+
+B03A canonical docshot assets (outside this figures tree):
+
+- documentation_assets/ui/docshot/core/workspace-overview.png
+- documentation_assets/ui/docshot/core/view-menu.png
+- documentation_assets/ui/docshot/core/activity-bar.png
+- documentation_assets/ui/docshot/devices/sidebar-status-groups.png
+- documentation_assets/ui/docshot/devices/tabs-router-active.png
+- documentation_assets/ui/docshot/core/feature-bar-router.png
+- documentation_assets/ui/docshot/core/feature-bar-switch.png
+- documentation_assets/ui/docshot/core/information-empty.png
+- documentation_assets/ui/docshot/core/status-bar.png
+- documentation_assets/ui/docshot/core/status-details.png
+- documentation_assets/ui/docshot/core/sidebar-collapsed.png
+- documentation_assets/ui/docshot/core/welcome-recent-projects.png
+- documentation_assets/ui/docshot/core/workspace-empty.png
+
+Original approved PNG bytes preserved. MkDocs uses generated staging only for manifest-selected assets; generator-only assets gain no document placement.
