@@ -19,6 +19,7 @@ from ..export import export_logs_xlsx, file_url_to_path
 from ..group_service import SyslogGroupService
 from ..native import NativeSyslogCollector
 from ..smart_filter import SmartFilterError, build_log_filters
+from ..security import annotate_security
 from .alerts import EmailAlertManager
 from .settings import SyslogSettings
 
@@ -117,6 +118,7 @@ class SyslogManager(QObject):
         if was_running:
             self.stopServer()
         self.service.set_database_paths(info_db, device_db)
+        self.security_detector.reset()
         if was_running:
             self.startServer()
 
@@ -190,6 +192,7 @@ class SyslogManager(QObject):
         return {"ok": True, "message": self.statusMessage}
 
     def _messages_stored(self, rows: list[dict[str, Any]]) -> None:
+        rows = [annotate_security(row) for row in rows]
         with self._count_lock:
             self._received_count += len(rows)
         self.email_alerts.submit(rows)

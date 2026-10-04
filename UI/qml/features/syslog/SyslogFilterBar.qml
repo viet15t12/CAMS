@@ -16,6 +16,7 @@ Rectangle {
     property int displayedCount: 0
     property string validationMessage: ""
     property bool resetting: false
+    readonly property var securityValues: ["", "all", "acl", "dhcp_snooping", "port_security", "dai", "authentication", "stp_guard", "security_alert"]
     readonly property var backend: typeof syslogManager !== "undefined"
                                    && syslogManager !== null ? syslogManager : null
     readonly property bool wideLayout: width >= 1180
@@ -80,7 +81,8 @@ Rectangle {
             "protocols": protocols,
             "from_time": fromField.text.trim(),
             "to_time": toField.text.trim(),
-            "per_host": latestPerHost.value
+            "per_host": latestPerHost.value,
+            "security": root.securityValues[securityBox.currentIndex] || ""
         }
     }
 
@@ -113,6 +115,7 @@ Rectangle {
         root.selectedSeverities = []
         root.selectedHosts = []
         protocolBox.currentIndex = 0
+        securityBox.currentIndex = 0
         fromField.clear()
         toField.clear()
         latestPerHost.value = 0
@@ -264,7 +267,8 @@ Rectangle {
                 text: "Reset"
                 type: "Secondary"
                 enabled: smartSearch.text !== "" || root.selectedSeverities.length > 0
-                         || protocolBox.currentIndex > 0 || fromField.text !== ""
+                         || protocolBox.currentIndex > 0 || securityBox.currentIndex > 0
+                         || fromField.text !== ""
                          || toField.text !== "" || latestPerHost.value > 0
                          || root.selectedHosts.length > 0
                 onClicked: root.resetFilters()
@@ -309,8 +313,20 @@ Rectangle {
             onValueChanged: debounce.restart()
         }
 
+        StandardComboBox {
+            id: securityBox
+            objectName: "syslogSecurityFilter"
+            Layout.row: root.wideLayout ? 2 : (root.twoColumnLayout ? 5 : 8)
+            Layout.column: 0
+            Layout.columnSpan: root.wideLayout ? 3 : (root.twoColumnLayout ? 2 : 1)
+            Layout.fillWidth: true
+            labelText: "Security events"
+            model: ["All system logs", "All security events", "ACL", "DHCP Snooping", "Port Security", "Dynamic ARP Inspection", "Authentication", "STP Protection", "Security Alerts"]
+            onActivated: root.emitFilters()
+        }
+
         Text {
-            Layout.row: root.wideLayout ? 1 : (root.twoColumnLayout ? 5 : 8)
+            Layout.row: root.wideLayout ? 2 : (root.twoColumnLayout ? 6 : 9)
             Layout.column: root.wideLayout ? 3 : 0
             Layout.columnSpan: root.wideLayout ? 3 : (root.twoColumnLayout ? 2 : 1)
             Layout.fillWidth: true

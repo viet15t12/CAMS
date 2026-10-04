@@ -155,6 +155,14 @@ Rectangle {
             }
         }
 
+        InlineMessage {
+            Layout.fillWidth: true
+            Layout.leftMargin: 24
+            Layout.rightMargin: 24
+            wrapText: true
+            message: "IP ACL rules and the final deny generate logs. Configure the Syslog destination separately for this device with trap severity 6 or 7. MAC ACL and reflexive reflect/evaluate rules do not support per-match logging on IOS."
+        }
+
         Item {
             Layout.fillWidth:  true
             Layout.fillHeight: true

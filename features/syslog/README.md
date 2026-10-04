@@ -68,7 +68,7 @@ Mỗi router/SW2/SW3 có tab **Syslog Server** để lưu nhiều destination đ
 trong `device_network.db.t10_syslog_servers`, gồm protocol, port, severity,
 timestamp và sequence-number. Log nhận được được lưu riêng ở
 `info_collected.db.t12_syslog_messages`. Cấu hình mới mặc định UDP/5514 và
-severity 5 (`notifications`) để nhận cả `%SYS-5-CONFIG_I`. Các row dùng
+severity 6 (`informational`) để nhận cả ACL log và `%SYS-5-CONFIG_I`. Các row dùng
 `sync_status` và luồng View & Push chung; sửa endpoint đã áp dụng sẽ tạo đồng thời
 task gỡ endpoint cũ và task thêm endpoint mới. Activity bar chỉ sở hữu listener,
 bộ lọc và bảng log. Bộ lọc hỗ trợ host, khoảng thời gian nhận, severity,
@@ -79,7 +79,12 @@ protocol và N log mới nhất trên từng host. Ô Smart filter nhận cú ph
 thời lưu tóm tắt bộ lọc trong workbook. Cancel chỉ xóa destination do
 CAMS quản lý.
 
-Chưa hỗ trợ RFC6587 octet-counting, TLS, nhiều bind endpoint/port hoặc alert engine.
+Security events phân loại ACL, DHCP Snooping, DAI, Port Security, xác thực,
+STP Protection và cảnh báo theo ngưỡng CAMS cho cả log lưu trữ và log trực tiếp.
+Cấu hình destination vẫn thực hiện riêng từng thiết bị.
+Xem [giám sát an ninh](../../docs/SECURITY_MONITORING.md).
+
+Chưa hỗ trợ RFC6587 octet-counting, TLS hoặc nhiều bind endpoint/port.
 Chi tiết vận hành: [`../../docs/SYSTEM_LOGS.md`](../../docs/SYSTEM_LOGS.md).
 Test nằm trong `tests/syslog/`, gồm cả các nhóm parsing, transport, application,
 persistence và device configuration.

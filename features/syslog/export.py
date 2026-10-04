@@ -112,7 +112,8 @@ def _filters_summary(filters: Mapping[str, object]) -> str:
     labels = (
         ("host", "Host"), ("from_time", "From"), ("to_time", "To"),
         ("per_host", "Latest/host"), ("facility", "Facility"),
-        ("mnemonic", "Mnemonic"), ("smart_query", "Smart query"),
+        ("mnemonic", "Mnemonic"), ("security", "Security events"),
+        ("smart_query", "Smart query"),
     )
     for key, label in labels:
         value = filters.get(key)

@@ -169,6 +169,11 @@ def _save_optional_profiles(
     if boolean(payload.get("port_security_enabled")):
         if mode != "access":
             raise ValueError("Port Security can only be enabled on an access port")
+        if str(payload.get("violation") or "shutdown").strip().lower() == "protect":
+            raise ValueError(
+                "Port Security protect drops packets without Syslog. "
+                "Choose restrict or shutdown to monitor security violations."
+            )
         max_mac = integer(payload.get("max_mac", 1), "Maximum MAC", 1, 16384)
         aging_time = integer(payload.get("aging_time", 0), "Aging time", 0, 1_000_000)
         conn.execute(
@@ -211,7 +216,7 @@ def _save_optional_profiles(
                 choice(
                     payload.get("violation"),
                     "Violation",
-                    {"shutdown", "restrict", "protect"},
+                    {"shutdown", "restrict"},
                     "shutdown",
                 ),
                 boolean(payload.get("sticky")),

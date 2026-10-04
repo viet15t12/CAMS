@@ -5,7 +5,7 @@
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn phát triển bằng Python 3.11+, sử dụng Qt Quick/QML và PyQt6 cho giao diện @qtQuickDocs @pyqt6Docs, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
+CAMS là ứng dụng máy tính để bàn phát triển bằng Python 3.11+ và bộ thu Syslog C++,  sử dụng Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
 
 Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và các thành phần dùng chung; `core/` chứa đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và quản lý không gian làm việc. Tệp `main.py` khởi tạo ứng dụng và liên kết các thành phần. Cấu trúc chi tiết được trình bày trong phụ lục; chương này tập trung vào cách hiện thực các chức năng chính.
 
@@ -64,7 +64,7 @@ Các biểu mẫu FHRP hỗ trợ khai báo gateway dự phòng và tham số th
 
 Chức năng ACL cung cấp biểu mẫu cho Standard, Extended, Dynamic, Reflexive và MAC ACL theo khả năng của loại thiết bị. Quy tắc được quản lý theo thứ tự, kèm cổng áp dụng và chiều áp dụng. 
 
-Để hiện thực hóa cơ chế giám sát an ninh mạng chủ động, các mẫu Jinja2 sinh tập lệnh ACL được cải tiến để tự động gắn từ khóa `log` vào cuối các quy tắc lọc. Khi thiết bị phát hiện lưu lượng khớp với danh sách kiểm soát, bản tin Syslog (ví dụ `%SEC-6-IPACCESSLOGP`) sẽ được sinh ra và đẩy về CAMS Syslog Server, cho phép giám sát trực tiếp mà không cần cấu hình thủ công. Điểm cần kiểm soát là thứ tự khớp luật và chính sách cho phép/từ chối; sau triển khai phải thử cả lưu lượng được phép và lưu lượng bị chặn.
+Mẫu ACL Standard và các nhánh Extended hỗ trợ ghi nhật ký bổ sung từ khóa `log`, đồng thời tạo quy tắc từ chối tường minh ở cuối danh sách. Các nhánh Reflexive dùng `reflect` hoặc `evaluate` được xử lý riêng. Thiết bị có thể sinh bản tin như `%SEC-6-IPACCESSLOGP` khi lưu lượng khớp luật; để chuyển về CAMS phải cấu hình đích Syslog, ngưỡng gửi bao gồm mức 6 và đường truyền phù hợp. Điểm cần kiểm soát là thứ tự khớp luật và chính sách cho phép/từ chối; sau triển khai phải thử cả lưu lượng được phép và lưu lượng bị chặn.
 
 NAT/PAT quản lý ánh xạ tĩnh, pool động, chế độ overload, vai trò inside/outside của cổng và điều kiện chọn lưu lượng. Dữ liệu từ bảng chuyển đổi địa chỉ giúp đối chiếu cấu hình với các phiên thực tế. NAT được xem là chức năng chuyển đổi địa chỉ, không thay thế cơ chế lọc truy cập.
 
@@ -78,7 +78,7 @@ Port Security, DHCP Snooping và DAI được trình bày trong nhóm bảo mậ
 
 Chức năng Syslog gồm hai phần: cấu hình đích gửi trên thiết bị và vận hành bộ nhận trong System Logs. Địa chỉ, cổng và giao thức hai phía phải khớp nhau. Cấu hình hiện tại dùng cổng 5514 theo mặc định và cho phép thay đổi theo môi trường.
 
-Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi dữ liệu vào SQLite, sau đó chuyển sự kiện qua cầu nối Python để cập nhật QML. Đây là luồng xử lý chính; bộ nhận Python được giữ lại để tương thích và kiểm thử. Hệ thống lưu bản tin gốc cùng trạng thái phân tích theo các trường của Syslog @rfc5424. Hai chỉ số `received` và `dropped` hỗ trợ theo dõi khả năng tiếp nhận khi lưu lượng tăng.
+Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi dữ liệu vào SQLite, sau đó chuyển sự kiện qua cầu nối Python để cập nhật QML. Đây là luồng xử lý chính; bộ nhận Python được giữ lại để tương thích và kiểm thử. Hệ thống lưu bản tin gốc cùng trạng thái phân tích. Hai chỉ số `received` và `dropped` hỗ trợ theo dõi khả năng tiếp nhận khi lưu lượng tăng.
 
 #figure(
   image("/00_book/figures/gui/chapter-13/01-system-logs-overview.png", width: 100%),
@@ -117,23 +117,21 @@ System Logs cho phép tập trung các sự kiện cần chú ý bằng cách ch
 
 Ngưỡng gửi trên thiết bị và bộ lọc hiển thị có ý nghĩa khác nhau: ngưỡng gửi thường bao gồm mức đã chọn cùng các mức nghiêm trọng hơn, còn bộ lọc trong CAMS chọn các mức cụ thể. Khi điều tra, người dùng cần đọc nội dung, nguồn và chuỗi thời gian thay vì kết luận chỉ dựa trên màu hoặc severity.
 
-Trong phạm vi hiện tại, CAMS hỗ trợ phân tích dấu hiệu bất thường qua nhật ký, kiểm tra chính sách và gửi cảnh báo Syslog qua email. Hệ thống chưa hoàn thiện bộ tương quan sự kiện, khả năng phát hiện xâm nhập bằng phân tích gói tin hoặc cảnh báo qua SMS.
+Bộ `SecurityEventDetector` hiện đếm sự kiện theo nguồn và cửa sổ thời gian cho các nhóm ACL, DHCP Snooping, DAI và Port Security. Khi vượt ngưỡng, bộ xử lý tạo bản tin tổng hợp mang mã phân hệ `CAMS` để lưu, hiển thị và chuyển cho dịch vụ cảnh báo. Đây là cơ chế dựa trên quy tắc; độ chính xác phát hiện, tỷ lệ cảnh báo nhầm và khả năng bỏ sót cần được đánh giá bằng bộ dữ liệu kiểm thử. Hệ thống chưa phân tích gói tin để phát hiện xâm nhập hoặc gửi cảnh báo qua SMS.
 
 == Tiện ích vận hành và bảo vệ dự án
 
 SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy chủ và hàng đợi truyền nền. Terminal đồng hành cung cấp phiên CLI phục vụ thao tác trực tiếp. Sau thay đổi thủ công, cần đồng bộ lại để dữ liệu trong CAMS phản ánh cấu hình mới.
 
-Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. 
+Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. Phần mở rộng `.ntp` là tên định dạng tệp nội bộ của CAMS, không liên quan đến giao thức đồng bộ thời gian NTP. 
 
-<<<<<<< HEAD
-Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`) @cryptographyAeadDocs @rfc9106 @nistSp80038d. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
-=======
-Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`), loại trừ hoàn toàn nguy cơ rò rỉ thông tin xác thực trên toàn hệ thống. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
->>>>>>> a7480ee (FUCK FUCK)
+Bảo vệ gói dự án và mã hóa trường xác thực là hai lớp riêng. Gói `.ntp` được mã hóa toàn bộ khi bật bảo vệ bằng mật khẩu. Trong cơ sở dữ liệu, các trường xác thực được ghi theo định dạng `ENC$v2$` với AAD theo `host:column`; dữ liệu cấu hình khác không vì vậy trở thành cơ sở dữ liệu mã hóa toàn bộ. Khi không đặt mật khẩu dự án, khóa dẫn xuất từ dữ liệu cục bộ không ngăn được người đã có dữ liệu và hiểu cơ chế dẫn xuất khóa.
+
+Cấu hình email lưu bí mật ở dạng mã hóa và giới hạn quyền truy cập tệp khi nền tảng hỗ trợ. Những cơ chế này giảm lộ dữ liệu trực tiếp, nhưng không loại bỏ rủi ro từ tài khoản hệ điều hành bị chiếm quyền, bản sao lưu cấu hình hoặc bộ nhớ tiến trình. Việc khôi phục không gian làm việc chỉ phục hồi dữ liệu dự án; cấu hình trên thiết bị phải được xử lý bằng quy trình riêng.
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),
   caption: [Phần đầu tệp dự án được bảo vệ, quan sát bằng công cụ xxd],
 ) <fig-cams-encrypted-project>
 
-@fig-cams-encrypted-project cho thấy dấu nhận dạng `NTPAES1` và phần thông tin đầu tệp, gồm thuật toán AES-256-GCM, hàm dẫn xuất khóa Argon2id cùng các tham số liên quan. Phần thông tin này có thể đọc được để phục vụ xử lý tệp; ảnh minh họa cấu trúc lưu trữ, không thay thế kiểm thử mã hóa và giải mã. Chương 5 trình bày các kịch bản kiểm chứng chức năng.
+@fig-cams-encrypted-project cho thấy dấu nhận dạng `NTPAES1` và phần thông tin đầu tệp, gồm thuật toán AES-256-GCM, hàm dẫn xuất khóa Argon2id cùng các tham số liên quan. Phần thông tin này có thể đọc được để phục vụ xử lý tệp; ảnh minh họa cấu trúc lưu trữ. Đánh giá khả năng bảo vệ cần kiểm tra mở bằng mật khẩu đúng, từ chối mật khẩu sai và phát hiện sửa bản mã; mức kết luận được tổng hợp ở Chương 6.

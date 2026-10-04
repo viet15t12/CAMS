@@ -230,7 +230,7 @@ class SyslogViewPushController(BaseViewPushController):
                     interface,
                     True,
                     "Verified in running-config and startup-config.",
-                    int(row.get("trap_severity") or 6),
+                    int(row.get("trap_severity", 6)),
                     bool(row.get("timestamps")),
                     bool(row.get("sequence_numbers")),
                 )

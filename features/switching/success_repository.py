@@ -26,6 +26,7 @@ _SUCCESS_TARGETS = {
     ),
     "stp": _SuccessTarget("stp", "id", "success"),
     "l2_vlan": _SuccessTarget("l2_vlan", "id", "success"),
+    "security_global": _SuccessTarget("security_global", "host", "success"),
     "trust_port": _SuccessTarget("trust_port", "id", "success"),
     "static_mac": _SuccessTarget("static_mac", "id", "success"),
     "port_security": _SuccessTarget("port_security", "iface_id", "success"),

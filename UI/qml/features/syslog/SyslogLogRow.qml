@@ -89,7 +89,9 @@ DataTableRow {
             Layout.fillWidth: true
             Layout.minimumWidth: 120
             primary: true
-            text: String(root.rowValue("message", "") || "—")
+            text: (root.rowValue("security_label", "") !== ""
+                   ? "[" + root.rowValue("security_label", "") + "] " : "")
+                  + String(root.rowValue("message", "") || "—")
         }
     }
 

@@ -29,119 +29,112 @@ Phần thực nghiệm gồm năm kịch bản: hạ tầng chuyển mạch và 
 
 1. *Thiết lập và xem trước trên giao diện:* người dùng nhập tham số trên biểu mẫu nghiệp vụ. Dữ liệu được lưu ở trạng thái mong muốn (Desired State) và chuyển thành tập lệnh CLI để kiểm tra trong cửa sổ *View & Push*.
 2. *Đẩy cấu hình bất đồng bộ:* tác vụ nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua SSH.
-3. *Xác minh trạng thái:* người quản trị đối chiếu phản hồi của hệ thống, kiểm tra trực tiếp bằng terminal tích hợp và đánh giá lưu lượng thực tế.
+3. *Xác minh trạng thái:* người quản trị đối chiếu phản hồi của hệ thống, kiểm tra trực tiếp bằng terminal Alacritty tích hợp và đánh giá lưu lượng thực tế.
 
-=== Kịch bản 1: Cấu hình hạ tầng chuyển mạch và bảo mật Lớp 2 (Switching & L2 Security)
+=== Kịch bản 1: Cấu hình và kiểm chứng an ninh chuyển mạch Lớp 2 với DHCP Snooping
 
 ==== Mục tiêu và quy hoạch
 
-Kịch bản 1 thiết lập hạ tầng chuyển mạch đa tầng trên môi trường lab, gồm khởi tạo VLAN, đồng bộ qua VTP, gom kênh EtherChannel bằng LACP và triển khai các cơ chế bảo vệ Lớp 2 gồm DHCP Snooping, Dynamic ARP Inspection và Port Security.
+Nhằm đánh giá độc lập, tường minh cơ chế bảo vệ Lớp 2 chống tấn công máy chủ DHCP giả mạo (Rogue DHCP Server), nhóm triển khai mô hình thử nghiệm cô lập gồm ba thiết bị: một switch Lớp 2 (`SW1`) và hai router (`R1`, `R2`). Thiết kế này tập trung kiểm chứng khả năng tự động hóa cấu hình dịch vụ, thiết lập ranh giới tin cậy (Trust Boundary) và giám sát phản hồi sự kiện trên phần mềm CAMS.
 
 #figure(
-  image("/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg", width: 90%),
-  caption: [Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2],
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/topo_dhcp_snooping.png", width: 90%),
+  caption: [Sơ đồ Topo Kịch bản 1: Kiểm chứng an ninh chuyển mạch Lớp 2 và DHCP Snooping],
 ) <fig-topo-scenario-1>
+
+Quy hoạch vai trò và địa chỉ IP của các thiết bị trong kịch bản gồm:
+- *Switch trung gian SW1:* Switch Lớp 2 phân chia phân vùng mạng `VLAN 10` và thực thi chính sách an ninh DHCP Snooping; sử dụng IP quản trị Out-of-Band `192.168.122.101/24` trên cổng `GigabitEthernet0/0`.
+- *Router R1 (DHCP Server):* Đóng vai trò máy chủ cấp phát địa chỉ IP động cho `VLAN 10`; kết nối vào cổng `GigabitEthernet0/1` của `SW1` với địa chỉ `192.168.10.1/24`; IP quản trị `192.168.122.102/24`.
+- *Router R2 (DHCP Client):* Đóng vai trò thiết bị đầu cuối kết nối vào cổng truy cập `GigabitEthernet0/2` của `SW1` để xin cấp phát địa chỉ động; IP quản trị `192.168.122.103/24`.
 
 ==== Quy trình triển khai trên phần mềm CAMS
 
-Căn cứ vào sơ đồ mạng của kịch bản 1, tám thiết bị gồm hai router và sáu switch được nạp vào không gian làm việc `LAB_KICH_BAN_1`. Các thiết bị sử dụng dải IP quản trị từ `192.168.122.101` đến `192.168.122.108` và hiển thị trạng thái kết nối *CONNECTED* trên thanh bên.
+Các thiết bị được kết nối đồng thời vào không gian làm việc `LAB_TEST_1` trên phần mềm CAMS. Quá trình cấu hình và kiểm chứng an ninh diễn ra qua các bước sau.
 
-Quá trình cấu hình hạ tầng Lớp 2 được thực hiện qua sáu bước sau.
+*Bước 1. Quy hoạch cổng chuyển mạch và phân vùng VLAN 10 trên SW1*
 
-*Bước 1. Thiết lập nhóm VTP và đồng bộ miền VTP trên toàn mạng*
-
-Người dùng mở chức năng *Switching*, chọn thẻ *VTP* và sử dụng *VTP Group*. Miền `PTIT_LAB`, phiên bản VTP 2, được áp dụng đồng thời cho năm thiết bị từ `SW1` đến `SW5`; `SW1` giữ vai trò VTP Server, còn các switch khác hoạt động ở chế độ VTP Client.
+Trên giao diện CAMS của thiết bị `SW1`, quản trị viên truy cập phân hệ *Switching* $arrow$ thẻ *Switch Ports*. Tại đây, hệ thống khởi tạo `VLAN 10` (Tên: `VLAN0010`) và gán các cổng vật lý kết nối `GigabitEthernet0/1` (nối R1) và `GigabitEthernet0/2` (nối R2) vào chế độ truy cập (`ACCESS`), thuộc phân vùng `VLAN 10`.
 
 #figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_16.png", width: 85%),
-  caption: [Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB],
-) <fig-k1-vtp-group>
-@fig-k1-vtp-group thể hiện sáu switch đang kết nối, năm thiết bị được chọn và miền VTP đã lưu. Sau khi kiểm tra danh sách, quản trị viên sử dụng *Save & Push* để áp dụng cấu hình theo nhóm.
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/cams_sw1_ports.png", width: 90%),
+  caption: [Giao diện CAMS cấu hình phân vùng VLAN 10 và các cổng Access trên SW1],
+) <fig-k1-sw1-ports>
+@fig-k1-sw1-ports thể hiện danh mục cổng của `SW1` sau khi được đồng bộ, các cổng tham gia chuyển mạch được gán nhãn Access VLAN 10 và hiển thị trạng thái hoạt động trực quan.
 
-*Bước 2. Khởi tạo VLAN và kiểm duyệt tập lệnh*
+*Bước 2. Thiết lập dịch vụ cấp phát DHCP Server trên R1*
 
-Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùng chuyển sang thẻ *VLAN* để khởi tạo các phân vùng mạng nghiệp vụ: `VLAN 10` (Tên: `IT_VLAN`) và `VLAN 20` (Tên: `HR_VLAN`). Sau khi lưu vào trạng thái mong muốn (`Desired State`), người dùng nhấn nút *View & Push* để mở cửa sổ duyệt trước mã lệnh.
-
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_20.png", width: 80%),
-  caption: [Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1],
-) <fig-k1-vlan-push>
-@fig-k1-vlan-push cho thấy khối lệnh Cisco IOS được sinh từ dữ liệu trên giao diện, gồm các lệnh tạo VLAN và đặt tên tương ứng. Người dùng kiểm tra từng dòng trước khi nhấn *Push* để gửi cấu hình qua SSH.
-
-*Bước 3. Cấu hình gom kênh EtherChannel bằng LACP*
-
-Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truyền Trunk giữa `SW1` và `SW3`, người dùng truy cập thẻ *EtherChannel* trên tab `SW1`. Tại đây, người dùng gom 2 cổng vật lý `GigabitEthernet1/0` và `GigabitEthernet1/1` vào nhóm logic `Port-channel1` với giao thức LACP (`mode active`) và gán nhãn mô tả `Link_To_SW3`.
+Chuyển sang thiết bị `R1`, người dùng cấu hình địa chỉ IP `192.168.10.1/24` cho cổng `GigabitEthernet0/1` tại thẻ *Physical Interfaces*. Tiếp theo, quản trị viên mở thẻ *DHCP* để khởi tạo vùng cấp phát `VLAN10` với dải mạng `192.168.10.0/24`, Gateway `192.168.10.1`, thời hạn thuê `1 ngày`, cùng danh sách địa chỉ loại trừ `192.168.10.1 -- 192.168.10.2` nhằm dành riêng cho hạ tầng mạng.
 
 #figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_3.png", width: 80%),
-  caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
-) <fig-k1-etherchannel-push>
-@fig-k1-etherchannel-push thể hiện cấu hình cho từng cổng thành phần và cổng logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/cams_r1_dhcp_pool.png", width: 85%),
+  caption: [Cấu hình DHCP Pool VLAN10 cho dịch vụ cấp phát địa chỉ trên R1 qua CAMS],
+) <fig-k1-r1-dhcp>
+Sau khi lưu vào trạng thái mong muốn, quản trị viên sử dụng tính năng *View & Push* để CAMS tự động sinh mã lệnh Cisco IOS tương ứng và đẩy cấu hình xuống `R1` qua kênh SSH an toàn.
 
-*Bước 4. Thiết lập DHCP Snooping và Dynamic ARP Inspection*
+*Bước 3. Kích hoạt chính sách bảo vệ DHCP Snooping trên SW1*
 
-Để ngăn chặn các cuộc tấn công mạng Lớp 2 (DHCP Rogue Server, Man-in-the-Middle và ARP Spoofing), người dùng chuyển sang *Security* $arrow$ thẻ *L2 Security*.
-
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_21.png", width: 85%),
-  caption: [Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection],
-) <fig-k1-l2-security>
-@fig-k1-l2-security thể hiện chính sách bảo vệ cho VLAN 1, 10, 20 và 99. Quản trị viên bật DHCP Snooping, DAI và chỉ định các đường trunk làm *Trusted Uplinks* để tiếp nhận lưu lượng DHCP và ARP hợp lệ.
-
-*Bước 5. Cấu hình Port Security trên switch truy cập SW5*
-
-Trên switch truy cập `SW5` (IP: `192.168.122.105`), người dùng chuyển sang thẻ *Port Security* để bảo vệ các cổng kết nối đến người dùng cuối. Với cổng `GigabitEthernet0/2`, người dùng thiết lập số lượng địa chỉ MAC tối đa là `4`, kích hoạt học địa chỉ tự động (`mac-address sticky`), thời gian lưu vết `5 phút` và cơ chế xử lý vi phạm là ngắt cổng tức thì (`violation shutdown`).
+Tại tab thiết bị `SW1`, quản trị viên truy cập phân hệ *Security* $arrow$ thẻ *L2 Security*. Tại bảng *VLAN Protection*, người dùng kích hoạt tùy chọn *Enable DHCP Snooping* cho `VLAN 10` và nhấn nút *View & Push* để kiểm duyệt trước tập lệnh tự động sinh.
 
 #figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_25.png", width: 80%),
-  caption: [Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5],
-) <fig-k1-port-security-push>
-#block[
-  #set par(justify: false)
-  @fig-k1-port-security-push thể hiện khối lệnh Port Security để quản trị viên kiểm tra trước khi đẩy xuống thiết bị:
-]
-
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/cams_sw1_l2_push.png", width: 80%),
+  caption: [Cửa sổ View & Push kiểm duyệt tập lệnh kích hoạt DHCP Snooping cho VLAN 10],
+) <fig-k1-l2-push>
+@fig-k1-l2-push cho thấy khối lệnh bảo mật Lớp 2 được chuẩn hóa tự động:
 ```text
-switchport mode access
-switchport port-security
-switchport port-security maximum 4
-switchport port-security violation shutdown
-switchport port-security mac-address sticky
-switchport port-security aging time 5
+ip dhcp snooping
+ip dhcp snooping vlan 10
+no ip dhcp snooping information option
 ```
+Việc tắt tùy chọn Option 82 trên switch truy cập là cần thiết trong mô hình lab nhằm tránh xung đột từ chối gói tin của máy chủ DHCP Cisco IOS khi chưa cấu hình Relay Agent.
 
-*Bước 6. Xác minh cấu hình qua terminal tích hợp*
+==== Kiểm chứng hoạt động và đánh giá an ninh
 
-Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
+*Bước 4. Thử nghiệm ngăn chặn máy chủ DHCP không tin cậy (Untrusted Port)*
+
+Khi tính năng DHCP Snooping được kích hoạt, theo nguyên tắc phòng thủ Zero-Trust ở Lớp 2, toàn bộ các cổng truy cập trên `SW1` mặc định được đặt ở trạng thái không tin cậy (*Untrusted*). Trong giai đoạn này, cổng `GigabitEthernet0/1` nối về máy chủ DHCP `R1` chưa được cấp quyền tin cậy.
+
+Khi thiết bị client `R2` kích hoạt tiến trình xin cấp phát địa chỉ IP động (gửi gói tin `DHCP Discover`), máy chủ `R1` tiếp nhận và gửi phản hồi `DHCP Offer`. Tuy nhiên, ngay khi gói tin trả lời từ `R1` đi vào cổng `GigabitEthernet0/1`, cơ chế DHCP Snooping trên `SW1` lập tức nhận diện đây là gói tin máy chủ xuất phát từ cổng Untrusted. Switch thực hiện đánh chặn, hủy bỏ (drop) gói tin và ghi nhận cảnh báo an ninh:
+```text
+%DHCP_SNOOPING-5-DHCP_SNOOPING_UNTRUSTED_PORT: DHCP_SNOOPING drop message on untrusted port GigabitEthernet0/1, vlan 10
+```
+Kết quả kiểm tra thực tế cho thấy thiết bị client `R2` hoàn toàn bị cô lập khỏi nguồn cấp IP không được ủy quyền, ngăn chặn triệt để nguy cơ tấn công máy chủ DHCP giả mạo và đầu độc cổng trung chuyển (Man-in-the-Middle).
+
+*Bước 5. Phân quyền cổng tin cậy (Trusted Uplink) và xác nhận cấp phát*
+
+Để cấp phép cho máy chủ DHCP hợp chuẩn hoạt động, quản trị viên mở thẻ *Trusted Uplinks* trong phân hệ *L2 Security* trên CAMS, chỉ định cổng `GigabitEthernet0/1` là cổng tin cậy (*DHCP trust*).
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/sw3-vlan-vtp.png", width: 80%),
-  caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua terminal tích hợp],
-) <fig-k1-terminal-verify>
-Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/cams_sw1_trusted_uplink.png", width: 85%),
+  caption: [Chỉ định cổng GigabitEthernet0/1 làm Trusted Uplink cho DHCP Snooping trên CAMS],
+) <fig-k1-trusted-uplink>
+Sau khi áp dụng cấu hình phân quyền từ CAMS, đường truyền từ máy chủ `R1` được mở thông qua ranh giới tin cậy. Cổng `GigabitEthernet0/2` của client `R2` hoàn tất tiến trình DORA và nhận thành công địa chỉ IP `192.168.10.4/24` từ DHCP pool `VLAN10`.
 
-Ngoài ra, người dùng kiểm tra trạng thái bảo mật cổng trên switch `SW5` qua lệnh `show port-security interface GigabitEthernet0/2`:
-```text
-SW5# show port-security interface gi0/2
-Port Security              : Enabled
-Port Status                : Secure-up
-Violation Mode             : Shutdown
-Aging Time                 : 5 mins
-Aging Type                 : Absolute
-SecureStatic Address Aging : Disabled
-Maximum MAC Addresses      : 4
-Total MAC Addresses        : 0
-Configured MAC Addresses   : 0
-Sticky MAC Addresses       : 0
-Last Source Address:Vlan   : 0000.0000.0000:0
-Security Violation Count   : 0
-```
+#figure(
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/r2_dhcp_success.png", width: 85%),
+  caption: [Xác minh trạng thái nhận địa chỉ IP thành công qua DHCP trên client R2],
+) <fig-k1-r2-dhcp-success>
+Kết quả kiểm tra trực tiếp qua lệnh `show ip interface brief` trong @fig-k1-r2-dhcp-success xác nhận cổng `GigabitEthernet0/2` đạt trạng thái `up/up` với địa chỉ `192.168.10.4` được gán qua giao thức DHCP.
+
+*Bước 6. Giám sát sự kiện cấp phát tập trung qua Syslog CAMS*
+
+Toàn bộ chu trình hoạt động của hệ thống được giám sát thời gian thực thông qua máy chủ tiếp nhận nhật ký Syslog RFC 5424 tích hợp sẵn trong CAMS (lắng nghe trên cổng `5514/UDP`).
+
+#figure(
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/cams_syslog_dhcp_assign.png", width: 95%),
+  caption: [Nhật ký Syslog tiếp nhận và phân tích sự kiện cấp phát DHCP từ R2 trên CAMS],
+) <fig-k1-syslog-dhcp>
+Như minh họa tại @fig-k1-syslog-dhcp, sự kiện cấp phát được hệ thống ghi nhận chính xác:
+- *Thời gian:* `2026-10-04T02:11:56.936Z`
+- *Nguồn sự kiện:* `192.168.122.103` (R2)
+- *Phân loại & Mức độ:* `DHCP / 6 Info`, mã định danh `ADDRESS_ASSIGN`
+- *Thông điệp chi tiết:* `Interface GigabitEthernet0/2 assigned DHCP address 192.168.10.4, mask 255.255.255.0, hostname R2`
 
 ==== Đánh giá kết quả
 
-Các cấu hình VLAN, VTP, EtherChannel LACP, DHCP Snooping, DAI và Port Security được áp dụng đúng trên hệ thống switch của phòng lab. Kết quả kiểm tra trực tiếp trên thiết bị phù hợp với cấu hình đã thiết lập trên CAMS; các hạng mục của kịch bản 1 đều hoàn thành và phần VLAN/trunk được đối chiếu theo nguyên tắc IEEE 802.1Q @ieee8021q.
-
-
+Kịch bản 1 đã hoàn thành đầy đủ các mục tiêu thiết kế và kiểm chứng thực tế:
+- Phần mềm CAMS tự động sinh và nạp chính xác cấu hình phân vùng VLAN, dịch vụ DHCP Server và chính sách DHCP Snooping với kiểm duyệt trực quan.
+- Cơ chế bảo vệ Lớp 2 thực thi chuẩn xác việc đánh chặn gói tin máy chủ từ cổng không tin cậy và chỉ cho phép lưu lượng đi qua cổng Trusted Uplink được chỉ định.
+- Sự kiện vận hành mạng được máy chủ Syslog tập trung tiếp nhận, chuẩn hóa và lưu trữ tức thời, chứng minh tính đồng bộ cao giữa phân hệ cấu hình và phân hệ giám sát.
 
 === Kịch bản 2: Định tuyến động đa vùng và tái phân phối tuyến liên chi nhánh (OSPF Group & Route Redistribution)
 
@@ -273,7 +266,7 @@ Trong kiến trúc OSPF đa vùng này, router trung tâm `R1` đóng vai trò l
 Sau khi đẩy cấu hình, quản trị viên mở các cửa sổ terminal tích hợp để kiểm tra trực tiếp cấu hình đang chạy trên cả sáu router.
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/ospf-six-routers.png", width: 96%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/12.png", width: 90%),
   caption: [Xác minh cấu hình OSPF trên sáu router qua terminal nhúng],
 ) <fig-k2-multi-terminal-ospf>
 Kết quả lệnh `show run | section ospf` trong @fig-k2-multi-terminal-ospf xác nhận cả sáu router đã nhận tiến trình OSPF 1, router ID từ `1.1.1.1` đến `6.6.6.6` và các mạng thuộc Area 0 hoặc Area 1 theo quy hoạch.
@@ -283,7 +276,7 @@ Kết quả lệnh `show run | section ospf` trong @fig-k2-multi-terminal-ospf x
 Quản trị viên thực hiện lệnh `show ip route` trên router trung tâm `R1` để kiểm tra khả năng hội tụ của hệ thống định tuyến:
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/r1-ospf-routes.png", width: 94%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/18.png", width: 85%),
   caption: [Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2],
 ) <fig-k2-route-table-r1>
 Theo @fig-k2-route-table-r1, bảng định tuyến của `R1` ghi nhận:
@@ -299,7 +292,7 @@ Theo @fig-k2-route-table-r1, bảng định tuyến của `R1` ghi nhận:
 Quản trị viên mở terminal trên các máy trạm VPC và thực hiện ping chéo giữa hai chi nhánh.
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/vpc11-ping.png", width: 82%),
+  image("/00_book/figures/report/diagrams/routing-ospf-lab/25.png", width: 75%),
   caption: [Kết quả ping từ VPC11 sang VPC14 với tỷ lệ thành công 100%],
 ) <fig-k2-ping-vpc11-vpc14>
 Kết quả trong @fig-k2-ping-vpc11-vpc14 cho thấy `VPC11` (`192.168.10.10`) gửi thành công 5/5 gói tin tới `VPC14` (`192.168.30.10`). Độ trễ trung bình là khoảng `6,9 ms`; giá trị `ttl=59` cho thấy gói tin đi qua năm hop định tuyến.
@@ -323,7 +316,7 @@ VPCS> ping 192.168.20.10
 
 ==== Đánh giá kết quả
 
-Mô hình OSPFv2 đa vùng và cơ chế tái phân phối tuyến được triển khai đồng bộ bằng *Routing Group*. Các router nhận đúng cấu hình theo quy hoạch OSPFv2 @rfc2328, bảng định tuyến có các tuyến nội vùng và ngoại vi cần thiết, đồng thời các phép thử ICMP được ghi nhận đều thành công.
+Mô hình OSPFv2 đa vùng và cơ chế tái phân phối tuyến được triển khai đồng bộ bằng *Routing Group*. Các router nhận đúng cấu hình theo quy hoạch, bảng định tuyến có các tuyến nội vùng và ngoại vi cần thiết, đồng thời các phép thử ICMP được ghi nhận đều thành công.
 
 
 
@@ -425,14 +418,14 @@ Lệnh trên cho phép nhiều địa chỉ IPv4 trong mạng nội bộ dùng c
 Sau khi đẩy cấu hình, quản trị viên mở terminal tích hợp để kiểm tra router NAT. Kết quả xác nhận `Gi0/1` và `Gi0/3` đã nhận lệnh `ip nat inside`, còn `Gi0/2` đã nhận lệnh `ip nat outside`.
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/nat-interfaces.png", width: 62%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png", width: 72%),
   caption: [Xác minh vai trò NAT trên ba cổng của Router NAT bằng lệnh show running-config],
 ) <fig-k3-nat-interface-verify>
 
 Tiếp tục kiểm tra cấu hình tổng thể cho thấy lệnh PAT, ACL `NAT_demo` và tuyến mặc định tới `10.0.10.1` đã tồn tại trong running-config.
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/nat-config.png", width: 90%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png", width: 82%),
   caption: [Xác minh ACL, PAT Overload và Default Route trên Router NAT],
 ) <fig-k3-nat-config-verify>
 
@@ -491,14 +484,14 @@ Với cấu hình này, máy trạm sử dụng cổng mặc định logic `192.
 Trên `R1`, lệnh `show ip dhcp pool` xác nhận pool `LAN_R1` đã được tạo cho mạng `192.168.4.0/24`. Đồng thời, `show running-config interface g0/0` xác nhận cổng LAN `192.168.4.2/24` đang tham gia GLBP Group `113`, có Virtual IP `192.168.4.1`, Priority `101` và bật `preempt`.
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/r1-dhcp-glbp.png", width: 74%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png", width: 88%),
   caption: [Xác minh DHCP Pool và cấu hình GLBP trên Router R1],
 ) <fig-k3-r1-verify>
 
 Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, đảm bảo hai router cùng cung cấp dịch vụ gateway cho một mạng LAN.
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/r2-glbp.png", width: 84%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png", width: 82%),
   caption: [Xác minh cấu hình GLBP Group 113 trên Router R2],
 ) <fig-k3-r2-verify>
 
@@ -507,7 +500,7 @@ Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng
 Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng để yêu cầu cấp phát địa chỉ. Máy trạm nhận thành công địa chỉ `192.168.4.4/24` cùng default gateway `192.168.4.1`.
 
 #figure(
-  image("/00_book/figures/report/terminal-generated/pc1-dhcp-trace.png", width: 84%),
+  image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png", width: 82%),
   caption: [Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream],
 ) <fig-k3-client-test>
 
@@ -515,7 +508,7 @@ Kết quả lệnh `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận chặng 
 
 ==== Đánh giá kết quả
 
-CAMS đã triển khai chuỗi chức năng DHCP, GLBP và NAT/PAT trên nhiều thiết bị. Máy trạm nhận địa chỉ `192.168.4.4/24` và cổng mặc định ảo `192.168.4.1`; `R1` và `R2` cùng tham gia GLBP Group 113; router NAT nhận đúng vai trò Inside/Outside, ACL và cấu hình PAT Overload theo cơ chế chuyển đổi địa chỉ và cổng @rfc3022. Kết quả truy vết xác nhận lưu lượng đi từ LAN qua `R1`, router NAT và tới gateway upstream `10.0.10.1`.
+CAMS đã triển khai chuỗi chức năng DHCP, GLBP và NAT/PAT trên nhiều thiết bị. Máy trạm nhận địa chỉ `192.168.4.4/24` và cổng mặc định ảo `192.168.4.1`; `R1` và `R2` cùng tham gia GLBP Group 113; router NAT nhận đúng vai trò Inside/Outside, ACL và cấu hình PAT Overload. Kết quả truy vết xác nhận lưu lượng đi từ LAN qua `R1`, router NAT và tới gateway upstream `10.0.10.1`.
 
 
 === Kịch bản 4: Thu thập, giám sát và phân tích nhật ký tập trung bằng Syslog Server
@@ -729,163 +722,38 @@ Quản trị viên mở *Settings → Email Alerts* và bật tùy chọn gửi 
 
 @fig-k4-email-settings cho thấy App Password chỉ xuất hiện dưới dạng ký tự che khuất. CAMS lưu giá trị này ở dạng mã hóa và không trả nội dung bí mật về giao diện. Nút *Send test email* cho phép kiểm tra cấu hình trước khi bật luồng cảnh báo thực tế.
 
-#step-title[Bước 11. Minh họa email cảnh báo do CAMS tự động gửi]
+#step-title[Bước 11. Gửi và kiểm tra hai email cảnh báo mẫu]
 
-Sau khi hoàn tất cấu hình tại @fig-k4-email-settings và bật chức năng gửi cảnh báo, CAMS tự động theo dõi các bản tin do Syslog Listener tiếp nhận. Mỗi bản tin sau khi được phân tích và lưu trữ sẽ được đối chiếu với các mức cảnh báo đã chọn. Sự kiện phù hợp được đưa vào hàng đợi gửi thư; ứng dụng tạo đồng thời nội dung văn bản thuần và HTML, sau đó gửi qua máy chủ `smtp.gmail.com:465` tới địa chỉ nhận đã cấu hình. Luồng SMTP chạy tách biệt với bộ thu nhận nên không làm gián đoạn quá trình tiếp nhận Syslog.
+Phép thử dùng chương trình `demo_send_mail/main.py` để tạo hai bản ghi có cấu trúc giống dữ liệu Syslog đã phân tích. Lệnh dưới đây gửi riêng một thư mức `2 - Critical` và một thư mức `4 - Warning`; App Password được nhập qua lời nhắc ẩn của terminal và không xuất hiện trong tham số lệnh hoặc báo cáo.
 
-Để minh họa kết quả của chức năng này, báo cáo lựa chọn hai email đại diện gắn với các sự kiện đã trình bày ở Bước 9: `%LINK-3-UPDOWN` mức `3 - Error` của `SW1` và `%SYS-4-USERLOG_WARNING` mức `4 - Warning` của `R1`. Email mức Error tại @fig-k4-email-error cho thấy cách CAMS trình bày địa chỉ nguồn `192.168.122.104`, số thứ tự `110`, PRI `187`, Syslog facility `23` (`local7`) và mã Cisco `%LINK-3-UPDOWN`.
+```text
+python3 demo_send_mail/main.py --levels 2,4
+```
 
-#figure(
-  image("/00_book/figures/report/diagrams/syslog-lab/lv3.png", width: 88%),
-  caption: [Minh họa email cảnh báo mức Error cho sự kiện `%LINK-3-UPDOWN` trên SW1],
-) <fig-k4-email-error>
-
-Thư mức Warning tại @fig-k4-email-warning giữ cùng cấu trúc nhưng sử dụng dữ liệu của `R1`: địa chỉ nguồn `192.168.122.101`, số thứ tự `98`, PRI `188`, Syslog facility `23` và mã Cisco `%SYS-4-USERLOG_WARNING`. Nội dung `DEMO-R1 CYCLE=5/5 Loopback99=DOWN` trùng với dấu mốc xuất hiện trong ảnh terminal của `R1`. Dấu `*` trước thời gian thiết bị được giữ trong bản tin gốc và được biểu diễn thành trạng thái *Chưa đồng bộ* trong phần chi tiết.
+Chương trình dựng mỗi thư ở hai định dạng văn bản thuần và HTML, đăng nhập `smtp.gmail.com:465` bằng `SMTP_SSL`, sau đó gọi `send_message`. Hai lần gửi hoàn tất mà không phát sinh lỗi xác thực, kết nối hoặc SMTP. Nội dung thư mức Critical được trình bày tại @fig-k4-email-critical.
 
 #figure(
-  image("/00_book/figures/report/diagrams/syslog-lab/lv4.png", width: 88%),
-  caption: [Minh họa email cảnh báo mức Warning cho sự kiện `%SYS-4-USERLOG_WARNING` trên R1],
+  image("/00_book/figures/report/diagrams/syslog-lab/18-email-critical.png", width: 72%),
+  caption: [Email cảnh báo mức Critical cho sự kiện `%SYS-2-MALLOCFAIL`],
+) <fig-k4-email-critical>
+
+Thư mức Warning tại @fig-k4-email-warning giữ cùng cấu trúc nhưng thay đổi màu, nhãn, khuyến nghị xử lý và dữ liệu thiết bị theo severity. Mỗi thư chứa tên thiết bị, địa chỉ nguồn, thời điểm, số thứ tự, mã Cisco, giao thức, PRI/facility, nội dung đã phân tích và bản tin gốc.
+
+#figure(
+  image("/00_book/figures/report/diagrams/syslog-lab/19-email-warning.png", width: 72%),
+  caption: [Email cảnh báo mức Warning cho sự kiện `%PM-4-ERR_DISABLE`],
 ) <fig-k4-email-warning>
 
-Hai hình minh họa cho thấy email cảnh báo giữ được mối liên hệ với bản tin Syslog nguồn, đồng thời thay đổi nhãn, màu sắc và khuyến nghị theo severity. Việc đánh giá số lượng thư nhận được, độ trễ, giới hạn lưu lượng hoặc tỷ lệ chuyển thư ở quy mô lớn chưa thuộc phạm vi kịch bản này.
+Kết quả đầu ra của chương trình ghi nhận `2` thư đã được chuyển tới máy chủ SMTP để gửi đến địa chỉ nhận đã cấu hình. Phép thử xác nhận đường gửi SMTP và định dạng thư cho hai mức cảnh báo; việc đánh giá độ trễ, giới hạn lưu lượng hoặc tỷ lệ chuyển thư ở quy mô lớn chưa thuộc phạm vi kịch bản này.
 
 ==== Đánh giá kết quả
 
-CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được Syslog facility, severity, mã phân hệ Cisco và mnemonic, đồng thời giữ nguyên nội dung gốc theo cấu trúc Syslog @rfc5424. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*. Phần cảnh báo email cho phép chọn mức cần gửi, bảo vệ App Password và tách thao tác SMTP khỏi bộ nhận. Hai email Error và Warning được chọn làm ví dụ minh họa, sử dụng dữ liệu liên kết trực tiếp với các sự kiện của bài lab; cách lưu và rà soát này phù hợp với nguyên tắc quản lý nhật ký tập trung @nistSp80092.
+CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba router sử dụng `GigabitEthernet0/0`, còn switch sử dụng `Vlan1` làm cổng nguồn. Syslog Listener tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được facility, severity và mnemonic, đồng thời giữ nguyên nội dung gốc. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa terminal thiết bị với bảng *System Logs*.
 
 
-=== Kịch bản 5: Kiểm thử cơ chế an ninh phân quyền và bảo mật dữ liệu lưu trữ (Security & Privilege Verification)
-
-==== Mục tiêu và nội dung kiểm thử
-
-Kịch bản 5 tập trung kiểm chứng ba lớp phòng thủ chiều sâu (Defense-in-Depth) trong kiến trúc an ninh của CAMS, bao gồm:
-1. *Kiểm soát phân quyền 2 bước và nguyên lý Fail-Closed:* Xác minh khả năng phát hiện prompt ảo và cưỡng bức leo thang đặc quyền `privilege 15` trên Cisco IOS; đảm bảo hệ thống tự động từ chối và ngắt kết nối ngay lập tức nếu không đủ điều kiện đặc quyền.
-2. *Giám sát tự động lưu lượng ACL qua Syslog:* Đánh giá việc CAMS tự động gắn từ khóa `log` vào toàn bộ quy tắc Access Control List (chuẩn và mở rộng), kích hoạt bộ định tuyến phát sinh bản tin `%SEC-6-IPACCESSLOGP` khi phát hiện lưu lượng bị chặn hoặc cho phép và chuyển tiếp về Syslog Server để phân tích.
-3. *Đánh giá an toàn mật mã dữ liệu lưu trữ (At-Rest Encryption):* Đo đạc hiệu năng hàm dẫn xuất khóa Argon2id theo chuẩn RFC 9106, thuật toán mã hóa đối xứng AES-256-GCM, và kiểm thử cơ chế chống tấn công hoán đổi bản mã (Ciphertext Swapping) nhờ dữ liệu xác thực gắn kết bản ghi (Record-Bound AAD).
-
-==== Kiểm thử kiểm soát leo thang đặc quyền trên môi trường EVE-NG
-
-Trong môi trường quản trị mạng thực tế, thiết bị Cisco IOS thường cấu hình tài khoản cục bộ ở các mức đặc quyền khác nhau. Khi tài khoản người dùng có đặc quyền trung gian (ví dụ: Privilege 5), dấu nhắc lệnh của Cisco IOS vẫn hiển thị ký tự `#` (vốn là dấu hiệu của EXEC mode). Nếu phần mềm quản trị chỉ kiểm tra ký tự `#` để kết luận quyền tối cao (như hành vi mặc định của nhiều công cụ tự động hóa), các lệnh cấu hình yêu cầu đặc quyền 15 (như OSPF, ACL, Interface) sẽ bị router từ chối âm thầm.
-
-CAMS triển khai thuật toán kiểm soát 2 bước (`ensure_initial_privilege` và `ensure_privileged_mode` trong module `infrastructure/network/privilege.py`):
-- *Bước 1 (Prompt Verification):* Kiểm tra dấu nhắc lệnh ban đầu.
-- *Bước 2 (Execution Verification):* Bắt buộc gửi lệnh `show privilege` để đọc mức quyền thực tế `current_level`. Nếu `current_level < 15`:
-  - Nếu người dùng *không cung cấp* mật khẩu Enable Secret hoặc cung cấp sai: hệ thống thực thi nguyên lý *Fail-Closed*, kích hoạt ngoại lệ `PermissionError` hoặc `RuntimeError`, lập tức đóng phiên kết nối (DROP connection) và ghi log cảnh báo.
-  - Nếu người dùng *có cung cấp* mật khẩu Enable Secret: hệ thống gửi lệnh `enable 15` để leo thang, sau đó gửi lại lệnh `show privilege` để xác nhận `current_level == 15` trước khi cấp phép thực thi bất kỳ tác vụ nào.
-
-Ba trường hợp kiểm thử thực nghiệm được thực hiện trên Router `R1` (Cisco vIOS-L3, IP `192.168.122.101`) trong môi trường EVE-NG:
-
-#report-table(
-  columns: (16%, 22%, 26%, 36%),
-  text-size: 9.5pt,
-  cell-inset: (x: 4pt, y: 4.5pt),
-  header: ([Trường hợp], [Tài khoản Cisco IOS], [Cấu hình trên CAMS], [Kết quả kiểm thử & Phản hồi hệ thống]),
-  rows: (
-    (
-      [TH 1: Direct Privilege 15],
-      [#table-code("admin"), mức 15\ #table-code("secret cisco15")],
-      [User: #table-code("admin")\ Pass: #table-code("cisco15")\ Enable Secret: để trống],
-      [Thành công. Lệnh #table-code("show privilege") trả về 15. Kết nối được chấp thuận trực tiếp mà không cần lệnh leo thang.],
-    ),
-    (
-      [TH 2: Privilege 5 + Secret],
-      [#table-code("operator"), mức 5\ #table-code("enable secret cisco15")],
-      [User: #table-code("operator")\ Pass: #table-code("cisco5")\ Enable Secret: #table-code("cisco15")],
-      [Thành công. CAMS phát hiện prompt #table-code("#") nhưng quyền thực tế là 5, tự động gửi #table-code("enable 15"), xác minh lại đạt cấp 15 và cho phép phiên làm việc.],
-    ),
-    (
-      [TH 3: Privilege 5 (Fail-Closed)],
-      [#table-code("operator"), mức 5\ #table-code("enable secret cisco15")],
-      [User: #table-code("operator")\ Pass: #table-code("cisco5")\ Enable Secret: sai hoặc trống],
-      [Từ chối an toàn (Fail-Closed). CAMS ngắt kết nối ngay lập tức: #table-code("PermissionError: Device initial privilege is 5... Connection rejected.")],
-    ),
-  ),
-  caption: [Kết quả kiểm thử thực nghiệm cơ chế phân quyền 2 bước trên Cisco IOS],
-) <tab-k5-privilege-test>
-
-Kết quả trong @tab-k5-privilege-test chứng minh CAMS loại trừ hoàn toàn nguy cơ thực thi lệnh trong trạng thái thiếu quyền hoặc lỗi ngầm, bảo vệ an toàn tính toàn vẹn của thiết bị mạng.
-
-==== Giám sát lưu lượng và phát hiện vi phạm chính sách qua ACL Syslog
-
-Khi cấu hình Access Control List (ACL) để bảo vệ mạng nội bộ hoặc lọc lưu lượng trên cổng giao tiếp, quản trị viên mạng cần nắm bắt kịp thời các gói tin bị từ chối (`deny`) hoặc cho phép (`permit`). CAMS loại bỏ nhu cầu bật thủ công tùy chọn ghi log bằng cách tự động bổ sung từ khóa `log` vào toàn bộ quy tắc ACL sinh ra (ngoại trừ các quy tắc đặc thù của Reflexive ACL vốn không tương thích với cú pháp `log` của Cisco IOS).
-
-#step-title[Bước 1. Sinh tập lệnh cấu hình ACL tự động kèm từ khóa log]
-
-Khi người dùng cấu hình một danh sách truy cập Standard hoặc Extended trên giao diện ACL của CAMS (ví dụ: cấm mạng `192.168.10.0/24` truy cập Web Server nội bộ), mẫu Jinja2 sinh tập lệnh như sau:
-
-```text
-ip access-list extended SEC_FILTER
- remark Block unauthorized HTTP access to Internal Server
- 10 deny tcp 192.168.10.0 0.0.0.255 host 10.0.10.50 eq 80 log
- 20 permit ip any any log
-exit
-interface GigabitEthernet0/1
- ip access-group SEC_FILTER in
-exit
-```
-
-#step-title[Bước 2. Kiểm chứng tiếp nhận bản tin cảnh báo tại Syslog Server]
-
-Khi trạm kiểm thử gửi các gói tin HTTP (TCP port 80) từ phân mạng `192.168.10.0/24` tới `10.0.10.50`, router Cisco IOS ghi nhận vi phạm ACL, ngắt kết nối gói tin và ngay lập tức gửi một bản tin Syslog qua giao thức UDP về máy chủ CAMS:
-
-```text
-%SEC-6-IPACCESSLOGP: list SEC_FILTER denied tcp 192.168.10.15(49152) -> 10.0.10.50(80), 1 packet
-```
-
-Syslog Listener của CAMS tiếp nhận bản tin, phân tích tự động các trường:
-- *Facility:* `SEC` (Security architecture)
-- *Severity:* `6` (Informational)
-- *Mnemonic:* `IPACCESSLOGP` (IP Access List Logging Packet)
-- *Message:* Trích xuất tên danh sách truy cập `SEC_FILTER`, hành động `denied`, địa chỉ nguồn `192.168.10.15:49152` và địa chỉ đích `10.0.10.50:80`.
-
-Sự kiện được lập chỉ mục và hiển thị tức thời trên giao diện *System Logs*, đồng thời sẵn sàng kích hoạt quy tắc gửi thư cảnh báo (Email Alert) nếu quản trị viên thiết lập ngưỡng cảnh báo cho mã `IPACCESSLOGP`.
-
-==== Đánh giá an toàn mật mã dữ liệu lưu trữ (At-Rest Database Encryption)
-
-Để bảo vệ thông tin đăng nhập thiết bị lưu trong cơ sở dữ liệu SQLite (`device_network.db`), CAMS triển khai cơ chế mã hóa phong bì phiên bản 2 (`ENC$v2$`) kết hợp hàm KDF Argon2id và thuật toán AEAD AES-256-GCM.
-
-#step-title[1. Đo đạc hiệu năng dẫn xuất khóa Argon2id (RFC 9106)]
-
-Khóa dẫn xuất (Key Derivation) sử dụng thuật toán Argon2id với các tham số đạt chuẩn khuyến nghị của RFC 9106: bộ nhớ $m = 64\ "MiB"$ (65,536 KiB), số vòng lặp $t = 3$, và mức song song $p = 4$.
-
-Các phép đo được thực hiện 100 lần trên máy trạm thử nghiệm (CPU AMD Ryzen 7, RAM 16 GB). Kết quả ghi nhận:
-- Thời gian dẫn xuất khóa trung bình: *65.5 ms* (độ lệch chuẩn $sigma = 2.1\ "ms"$).
-- Dung lượng bộ nhớ RAM sử dụng: đúng $64\ "MiB"$ trong quá trình tính toán.
-
-Khoảng thời gian xấp xỉ 65 ms là hoàn toàn trong suốt đối với người dùng khi mở một dự án làm việc, nhưng tạo nên rào cản chi phí tính toán cực lớn đối với kẻ tấn công ngoại tuyến (offline brute-force) ngay cả khi sử dụng các dàn máy tính chuyên dụng có hỗ trợ GPU/ASIC.
-
-#step-title[2. Đo đạc tốc độ mã hóa và giải mã AES-256-GCM]
-
-Sau khi khóa mã hóa dữ liệu (DEK - Data Encryption Key) 256-bit được dẫn xuất vào bộ nhớ RAM, mỗi trường mật khẩu thiết bị được mã hóa bằng AES-256-GCM với nonce 96-bit ngẫu nhiên sinh mới cho từng lần ghi:
-- Thời gian mã hóa trung bình mỗi trường mật khẩu: *0.42 µs*.
-- Thời gian giải mã và xác thực tính toàn vẹn: *0.39 µs*.
-
-Tốc độ trên chứng minh cơ chế mã hóa không tạo ra bất kỳ độ trễ nào đáng kể đối với các tác vụ nạp hàng loạt thiết bị (Batch Import) hoặc điều phối đồng thời nhiều kết nối mạng.
-
-#step-title[3. Kiểm thử phòng thủ chống tráo đổi bản mã (Ciphertext Swapping Test)]
-
-Trong cấu trúc `ENC$v2$`, dữ liệu bổ sung cần xác thực (AAD - Additional Authenticated Data) được tính toán theo định dạng định danh bản ghi:
-$ "AAD" = "CAMS_CRED_V2:" + "host" + ":" + "column" $
-
-Thực nghiệm tấn công hoán đổi bản mã được thiết kế như sau:
-1. Trích xuất chuỗi mật khẩu đã mã hóa của thiết bị `192.168.122.101` từ cơ sở dữ liệu:
-   `ENC$v2$c2Fsd...$bm9u...$Y2lwa...$dGFn...`
-2. Sử dụng câu lệnh SQL trực tiếp sửa bản ghi của thiết bị `192.168.122.102`, thay trường `password` bằng chuỗi bản mã trích xuất ở bước 1.
-3. Trên CAMS, kích hoạt tác vụ kết nối tới `192.168.122.102`.
-
-*Kết quả:* Hàm `decrypt_credential` nạp AAD của thiết bị đích là `CAMS_CRED_V2:192.168.122.102:password`. Do giá trị AAD này sai khác với AAD ban đầu khi mã hóa (`192.168.122.101`), thuật toán AES-GCM lập tức phát hiện sự sai lệch của Authentication Tag và kích hoạt ngoại lệ `cryptography.exceptions.InvalidTag`. CAMS từ chối giải mã, khóa bản ghi và chặn đứng hoàn toàn kỹ thuật tấn công tráo đổi định danh thiết bị.
-
-==== Đánh giá kết quả
-
-Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng bộ và chặt chẽ trong kiến trúc an ninh nhiều lớp:
-- Cơ chế kiểm soát Privilege 15 theo nguyên lý Fail-Closed loại trừ hoàn toàn nguy cơ thực thi thiếu quyền trên Cisco IOS.
-- Cơ chế tự động chèn từ khóa `log` vào ACL giúp chuyển đổi các quy tắc tường lửa tĩnh thành các sự kiện giám sát động gửi về Syslog Server theo thời gian thực.
-- Kiến trúc mật mã `ENC$v2$` kết hợp Argon2id (RFC 9106) và AES-256-GCM với Record-Bound AAD đảm bảo thông tin đăng nhập được bảo vệ vững chắc ở trạng thái lưu trữ, loại bỏ rủi ro trích xuất mật khẩu bản rõ cũng như tấn công tráo đổi bản mã trong cơ sở dữ liệu.
-<<<<<<< HEAD
-=======
+#include "09_kich_ban_5_acl.typ"
 
 
->>>>>>> a7480ee (FUCK FUCK)
 == Đánh giá tổng hợp
 
 === Ưu điểm nổi bật
@@ -893,7 +761,7 @@ Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng b�
 - *Giao diện quản lý tập trung:* CAMS cung cấp một không gian làm việc thống nhất cho các chức năng mạng Lớp 2 và Lớp 3, qua đó giảm số thao tác CLI trực tiếp trên từng thiết bị.
 - *Quy trình kiểm duyệt trước khi thực thi:* Mô hình Staged Save tách trạng thái mong muốn (`Desired State`) khỏi trạng thái đã áp dụng (`Applied`). Cửa sổ *View & Push* cho phép kiểm tra tập lệnh trước khi gửi xuống thiết bị.
 - *Khả năng xử lý nhiều thiết bị:* `Host Lock` tuần tự hóa các lệnh trên cùng một thiết bị, trong khi `BatchExecutor` cho phép xử lý song song các thiết bị độc lập.
-- *Các tiện ích hỗ trợ vận hành:* Hệ thống tích hợp sao lưu phiên bản bằng Dulwich, Syslog Server, cảnh báo Syslog qua email, SFTP và terminal nhúng.
+- *Các tiện ích hỗ trợ vận hành:* Hệ thống tích hợp sao lưu phiên bản bằng Dulwich, Syslog Server, cảnh báo Syslog qua email, SFTP và terminal Alacritty.
 
 === Hạn chế thực tế cần cải tiến
 

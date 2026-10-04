@@ -87,6 +87,11 @@ def build_security_tasks(
             vlan_rows = trust_rows = static_rows = []
         else:
             port_rows = []
+            global_row = conn.execute(
+                """SELECT host, dhcp_option_82, success FROM t06_security_global
+                   WHERE host = ? AND success = 'pending_apply';""",
+                (host,),
+            ).fetchone()
             vlan_rows = conn.execute(
                 """
                 SELECT id, vlan_id, dhcp_snooping, dai_enabled, success
@@ -123,9 +128,20 @@ def build_security_tasks(
 
     if module == "port_security":
         return _port_security_tasks(host, port_rows, task_factory)
-    return _l2_security_tasks(
+    tasks = _l2_security_tasks(
         host, module, vlan_rows, trust_rows, static_rows, task_factory
     )
+    if global_row is not None:
+        payload = {
+            "global_config": {"dhcp_option_82": global_row["dhcp_option_82"]},
+            "vlans": [], "trust_ports": [], "ports": [], "static_macs": [],
+        }
+        tasks.insert(0, task_factory(
+            host, module, "global:dhcp_option_82", "DHCP Option 82",
+            payload, render_commands("security", payload),
+            {"success_rows": [{"kind": "security_global", "id": host}]},
+        ))
+    return tasks
 
 
 def _port_security_tasks(

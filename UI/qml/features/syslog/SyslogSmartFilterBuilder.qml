@@ -9,6 +9,7 @@ StandardDialog {
     id: dialog
 
     readonly property string previewExpression: buildExpression()
+    readonly property var securityValues: ["", "all", "acl", "dhcp_snooping", "port_security", "dai", "authentication", "stp_guard", "security_alert"]
 
     signal applyRequested(string expression)
 
@@ -38,6 +39,7 @@ StandardDialog {
         hostField.clear()
         severityField.clear()
         protocolBox.currentIndex = 0
+        securityBox.currentIndex = 0
         facilityField.clear()
         mnemonicField.clear()
         fromField.clear()
@@ -73,6 +75,7 @@ StandardDialog {
                                            : protocol === "tcp" ? 2
                                            : protocol === "udp,tcp" || protocol === "tcp,udp" ? 3 : 0
             } else if (key === "facility" || key === "fac") facilityField.text = value
+            else if (key === "security") securityBox.currentIndex = Math.max(0, dialog.securityValues.indexOf(value.toLowerCase().replace(/-/g, "_")))
             else if (key === "mnemonic" || key === "mn") mnemonicField.text = value
             else if (key === "from") fromField.text = value
             else if (key === "to") toField.text = value
@@ -109,6 +112,8 @@ StandardDialog {
             parts.push("facility:" + quoteValue(facilityField.text))
         if (mnemonicField.text.trim() !== "")
             parts.push("mnemonic:" + quoteValue(mnemonicField.text))
+        if (securityBox.currentIndex > 0)
+            parts.push("security:" + dialog.securityValues[securityBox.currentIndex])
         if (textField.text.trim() !== "")
             parts.push("text:" + quoteValue(textField.text))
         return parts.join(" ")
@@ -142,6 +147,13 @@ StandardDialog {
                         Layout.fillWidth: true
                         labelText: "Message contains"
                         placeholderText: "interface changed state"
+                    }
+                    StandardComboBox {
+                        id: securityBox
+                        objectName: "syslogSmartSecurityFilter"
+                        Layout.fillWidth: true
+                        labelText: "Security events"
+                        model: ["Keep toolbar filter", "All security events", "ACL", "DHCP Snooping", "Port Security", "Dynamic ARP Inspection", "Authentication", "STP Protection", "Security Alerts"]
                     }
                     StandardTextField {
                         id: hostField

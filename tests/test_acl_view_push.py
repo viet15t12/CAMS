@@ -78,6 +78,8 @@ class AclViewPushTests(unittest.TestCase):
         commands = render_acl_payload(tasks[0])
         self.assertIn("ip access-list standard EDGE_IN", commands)
         self.assertIn("10 permit 192.168.1.0 0.0.0.255 log", commands)
+        self.assertIn("2147483647 deny any log", commands)
+        self.assertLess(commands.index("10 permit 192.168.1.0 0.0.0.255 log"), commands.index("2147483647 deny any log"))
         self.assertIn("ip access-group EDGE_IN in", commands)
 
         report = apply_acl_results(
@@ -204,6 +206,9 @@ class AclViewPushTests(unittest.TestCase):
         }
         cmds_ext = render_acl_payload(payload_ext)
         self.assertIn("20 permit tcp any host 10.1.1.1 eq 80 log", cmds_ext)
+        self.assertIn("2147483647 deny ip any any log", cmds_ext)
+        self.assertLess(cmds_ext.index("no 2147483647"), cmds_ext.index("2147483647 deny ip any any log"))
+        self.assertEqual(render_acl_payload({**payload_ext, "action": "delete"}), ["no ip access-list extended TEST_EXT"])
 
         # Dynamic ACL
         payload_dyn = {
@@ -240,4 +245,3 @@ class AclViewPushTests(unittest.TestCase):
         self.assertNotIn("10 evaluate REFL_TRACK log", cmds_refl)
         self.assertIn("20 permit tcp any any reflect REFL_TRACK timeout 60", cmds_refl)
         self.assertNotIn("timeout 60 log", cmds_refl)
-

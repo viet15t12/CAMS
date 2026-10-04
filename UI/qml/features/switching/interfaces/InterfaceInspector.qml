@@ -446,7 +446,7 @@ SwitchInspectorPane {
         Layout.fillWidth: true
         visible: root.viewMode === "portSecurity" && root.layer2Port
         title: "MAC admission policy"
-        helpText: "Enable Port Security to restrict learned source MAC addresses. Maximum MAC sets the allowed count. Violation chooses protect, restrict, or shutdown behavior. Sticky saves dynamically learned addresses. Aging type/time controls when secure MAC entries expire."
+        helpText: "Enable Port Security to restrict learned source MAC addresses. Restrict drops violating packets and sends Syslog; shutdown disables the port and sends Syslog. Silent protect mode is unavailable for monitored policies. Configure the device's Syslog Server destination separately. Sticky saves dynamically learned addresses. Aging type/time controls when secure MAC entries expire."
         description: "Limit learned source addresses and define violation handling."
         showDivider: false
 
@@ -478,7 +478,7 @@ SwitchInspectorPane {
             StandardComboBox {
                 Layout.fillWidth: true
                 labelText: "Violation action"
-                model: ["shutdown", "restrict", "protect"]
+                model: ["shutdown", "restrict"]
                 currentIndex: root.comboIndex(model, root.value("violation", "shutdown"))
                 onActivated: index => root.fieldChanged("violation", model[index])
             }
@@ -486,7 +486,7 @@ SwitchInspectorPane {
         InlineMessage {
             Layout.fillWidth: true
             visible: root.editing && enabled && String(root.value("violation", "shutdown")) === "protect"
-            message: "The 'protect' mode drops packets silently. Port security violation events will not be logged to syslog."
+            message: "This existing protect policy drops packets silently. Select restrict or shutdown before saving to enable security monitoring."
             severity: "warning"
         }
         StandardCheckBox {

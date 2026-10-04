@@ -64,6 +64,19 @@ class _Harness(ViewPushSlotsMixin):
 
 
 class ViewPushAsyncTests(unittest.TestCase):
+    def test_vtp_client_snapshots_notify_ui_for_single_and_batch_completion(self) -> None:
+        for operation in ("post-push-single", "post-push-batch"):
+            with self.subTest(operation=operation):
+                harness = _Harness()
+                harness._background_tasks["sync"] = {"controller": "switching", "host": "server", "module": "vlan", "operation": operation}
+                completion = {"host": "server", "reconciliation": {"snapshotUpdated": True}, "vtpClientReconciliation": {"results": [
+                    {"host": "client1", "ok": True, "summary": {"snapshotUpdated": True}},
+                    {"host": "client2", "ok": False, "summary": {"snapshotUpdated": False}},
+                ]}}
+                result = {"results": [completion]} if operation == "post-push-batch" else completion
+                harness._handle_background_task_finished("sync", True, "synced", result)
+                self.assertEqual(harness.runningConfigUpdated.calls, [("server",), ("client1",)])
+
     def test_single_async_push_uses_apply_only_controller_path(self) -> None:
         harness = _Harness()
 

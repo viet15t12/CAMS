@@ -100,7 +100,7 @@
   )
 
   set text(
-    font: "Times New Roman",
+    font: "Liberation Serif",
     size: 12.5pt,
     lang: "vi",
   )

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from contextlib import closing
+import re
+import time
 from typing import Any
 
 from core.view_push import BaseViewPushController
@@ -11,18 +13,18 @@ from .interface_task_builder import build_interface_tasks
 from .policy_task_builder import build_security_tasks, build_stp_tasks
 from .schema import ensure_switch_schema
 from .success_repository import mark_task_success
-from .sync import parse_vtp_status, sync_switch_state
+from .sync import parse_vlan_brief, parse_vtp_status, sync_switch_state
 from .vtp_membership import vlan_vtp_clients, vlan_vtp_context
 from .worker import apply_commands
 
 
 PUBLIC_MODULES = (
+    "vtp",
     "vlan",
     "svi",
     "interfaces",
     "etherchannel",
     "stp",
-    "vtp",
     "l2_security",
     "port_security",
 )
@@ -32,6 +34,8 @@ class SwitchingViewPushController(BaseViewPushController):
     """Build and apply granular switching tasks scoped to the active tab."""
 
     module_label = "Switching"
+    vtp_sync_attempts = 6
+    vtp_sync_delay = 1.0
 
     def reconciliation_options(self, module_name: str) -> dict[str, Any]:
         """Refresh the complete bounded switch snapshot after every Push."""
@@ -397,7 +401,7 @@ class SwitchingViewPushController(BaseViewPushController):
         normalized_module = str(module_name or "all").strip().lower()
         own_reconciliation = result.get("reconciliation")
         if (
-            normalized_module not in {"all", "vlan"}
+            normalized_module not in {"all", "vlan", "vtp"}
             or not bool(result.get("ok"))
             or not isinstance(own_reconciliation, dict)
             or not bool(own_reconciliation.get("ok"))
@@ -422,17 +426,40 @@ class SwitchingViewPushController(BaseViewPushController):
                 f"in domain {context['domain_name']}."
             )
         else:
+            result["ok"] = False
+            result["success"] = False
             result["severity"] = "warning"
             result["message"] = (
                 f"{original} Warning: synchronized {client_sync['success']} of "
                 f"{client_sync['total']} VTP client(s) in domain "
                 f"{context['domain_name']}."
             )
+            errors = "; ".join(
+                f"{item['host']}: {item.get('message', 'Synchronization failed')}"
+                for item in client_sync["results"] if not item["ok"]
+            )
+            if errors:
+                result["message"] += " " + errors
         return result
 
     def _reconcile_vtp_clients(
         self, server_host: str, expected_domain: str
     ) -> dict[str, Any]:
+        with closing(self.db._connect()) as conn:
+            domain = conn.execute(
+                "SELECT d.version FROM t09_vtp_domains d JOIN t09_vtp_switches s "
+                "ON s.vtp_domain_id = d.vtp_domain_id WHERE s.host = ?",
+                (server_host,),
+            ).fetchone()
+            expected_version = int(domain["version"]) if domain else None
+            expected_vlans = {
+                int(row["vlan_id"]): (str(row["vlan_name"] or ""), str(row["state"]))
+                for row in conn.execute(
+                    "SELECT vlan_id, vlan_name, state FROM t06_vlan_db "
+                    "WHERE host = ? AND device_present = 1 AND success = 'synchronized'",
+                    (server_host,),
+                )
+            }
         results: list[dict[str, Any]] = []
         for client_host in vlan_vtp_clients(self.db, server_host):
             try:
@@ -440,7 +467,7 @@ class SwitchingViewPushController(BaseViewPushController):
                     executed = self._session_registry.execute(
                         client_host,
                         lambda connector, target=client_host: self._sync_vtp_client(
-                            target, expected_domain, connector
+                            target, expected_domain, connector, expected_vlans, expected_version
                         ),
                     )
                     if not bool(executed.get("ok")):
@@ -463,7 +490,7 @@ class SwitchingViewPushController(BaseViewPushController):
                             f"Could not open a device session for {client_host}"
                         )
                     detail = self._sync_vtp_client(
-                        client_host, expected_domain, connector
+                        client_host, expected_domain, connector, expected_vlans, expected_version
                     )
                 results.append(
                     {"host": client_host, "ok": True, "summary": detail}
@@ -484,46 +511,76 @@ class SwitchingViewPushController(BaseViewPushController):
         }
 
     def _sync_vtp_client(
-        self, host: str, expected_domain: str, connector: Any
+        self, host: str, expected_domain: str, connector: Any,
+        expected_vlans: dict[int, tuple[str, str]] | None = None,
+        expected_version: int | None = None,
     ) -> dict[str, Any]:
-        collected = dict(
-            connector.collect_switch_state(("vtp_status", "vlan_brief")) or {}
-        )
-        if not bool(collected.get("ok")):
-            raise RuntimeError(
-                str(
-                    collected.get("message")
-                    or f"Could not collect VTP client state from {host}"
-                )
+        if expected_vlans == {}:
+            raise ValueError("No verified server VLAN snapshot is available")
+        for attempt in range(self.vtp_sync_attempts):
+            collected = dict(
+                connector.collect_switch_state(("vtp_status", "vlan_brief")) or {}
             )
-        snapshot = dict(collected.get("outputs") or {})
-        status = parse_vtp_status(snapshot.get("vtp_status", ""))
-        if status is None:
-            raise ValueError(f"{host} did not return a configured VTP domain")
-        actual_domain = str(status["domain_name"])
-        if actual_domain.casefold() != expected_domain.casefold():
-            raise ValueError(
-                f"{host} reported VTP domain {actual_domain}, expected {expected_domain}"
-            )
-        if str(status["mode"]).lower() != "client":
-            raise ValueError(
-                f"{host} reported VTP mode {status['mode']}, expected client"
-            )
+            if not bool(collected.get("ok")):
+                raise RuntimeError(str(collected.get("message") or f"Could not collect VTP client state from {host}"))
+            snapshot = dict(collected.get("outputs") or {})
+            status = parse_vtp_status(snapshot.get("vtp_status", ""))
+            if status is None:
+                raise ValueError(f"{host} did not return a configured VTP domain")
+            actual_domain = str(status["domain_name"])
+            if actual_domain != expected_domain:
+                raise ValueError(f"{host} reported VTP domain {actual_domain}, expected {expected_domain}")
+            if str(status["mode"]).lower() != "client":
+                raise ValueError(f"{host} reported VTP mode {status['mode']}, expected client")
+            if expected_version is not None and status["version"] != expected_version:
+                raise ValueError(f"{host} reported VTP version {status['version']}, expected {expected_version}")
+            actual_vlans = {
+                row["vlan_id"]: (row["vlan_name"], row["state"])
+                for row in parse_vlan_brief(snapshot.get("vlan_brief", ""))
+            }
+            if expected_vlans is None or actual_vlans == expected_vlans:
+                break
+            if attempt + 1 == self.vtp_sync_attempts:
+                raise ValueError(f"{host} VLAN database has not converged with the VTP server; check trunk links, domain, version and revision")
+            time.sleep(self.vtp_sync_delay)
 
         db_path = getattr(self.db, "db_path", None) or getattr(
             self.db, "path", None
         )
         if db_path is None:
             raise RuntimeError("The active device database path is unavailable")
-        return dict(
+        summary = dict(
             sync_switch_state(
                 db_path,
                 host,
                 snapshot,
-                mode="force_device_state",
+                mode="safe",
             )
             or {}
         )
+        summary["snapshotUpdated"] = "vlan" in summary.get("applied", [])
+        if not summary["snapshotUpdated"]:
+            raise ValueError(f"{host} has pending local VLAN changes; client UI snapshot was not overwritten")
+        return summary
+
+    @staticmethod
+    def _verify_vtp_tasks(connector: Any, tasks: list[dict[str, Any]]) -> None:
+        for task in tasks:
+            if task["module"] != "vtp":
+                continue
+            output = connector.connection.send_command("show vtp status", read_timeout=30)
+            status = parse_vtp_status(str(output))
+            if task.get("success") == "pending_delete":
+                # Transparent with an empty domain is valid too.
+                if not re.search(r"VTP Operating Mode\s*:\s*Transparent\b", str(output), re.IGNORECASE):
+                    raise ValueError("VTP detach was not verified: device is not transparent")
+                continue
+            rows = task["config"]["vtp"]
+            expected = next(row for row in rows if row["database_type"] == "vlan")
+            if status is None or any(status[key] != expected[key] for key in ("domain_name", "version", "mode")):
+                raise ValueError("VTP domain, version or mode does not match the requested configuration")
+            if expected["mode"] == "server" and status["pruning"] != expected["pruning"]:
+                raise ValueError("VTP pruning does not match the requested server configuration")
 
     def push_tasks(
         self, host: str, module_name: str, tasks: list[dict[str, Any]]
@@ -543,6 +600,7 @@ class SwitchingViewPushController(BaseViewPushController):
         commands = [command for task in tasks for command in task["commands"]]
         try:
             output = apply_commands(connector, commands)
+            self._verify_vtp_tasks(connector, tasks)
             for task in tasks:
                 mark_task_success(self.db, task.get("tracking") or {})
                 report.append(

@@ -312,12 +312,44 @@ class SyslogQmlTests(unittest.TestCase):
             self.assertEqual(filters["hosts"], ["r1", "r3"])
             self.assertEqual(filters["host"], "")
             self.assertEqual(filters["severities"], [2, 3, 4])
+            security_filter = instance.findChild(QObject, "syslogSecurityFilter")
+            security_filter.setProperty("currentIndex", 4)
+            result, _ = QQmlExpression(QQmlEngine.contextForObject(instance), instance, "currentFilters()").evaluate()
+            self.assertEqual(result.toVariant()["security"], "port_security")
             host_filter = instance.findChild(QObject, "syslogHostFilterChip")
             severity_filter = instance.findChild(QObject, "syslogSeverityFilter")
             self.assertEqual(host_filter.property("summaryText"), "2 hosts selected")
             self.assertEqual(
                 severity_filter.property("summaryText"), "3 severities selected"
             )
+            QQmlExpression(QQmlEngine.contextForObject(instance), instance, "selectedHosts = []; selectedSeverities = []").evaluate()
+            reset = instance.findChild(QObject, "syslogResetFiltersButton")
+            self.assertTrue(reset.property("enabled"))
+            QQmlExpression(QQmlEngine.contextForObject(instance), instance, "resetFilters()").evaluate()
+            self.assertEqual(security_filter.property("currentIndex"), 0)
+            self.assertEqual(warnings, [])
+        finally:
+            instance.deleteLater()
+            engine.deleteLater()
+
+    def test_security_filter_applies_to_live_workspace_rows(self) -> None:
+        engine, instance, warnings = self._create(
+            "UI/qml/features/syslog/SyslogWorkspace.qml", {"syslogManager": None}
+        )
+        try:
+            result, undefined = QQmlExpression(
+                QQmlEngine.contextForObject(instance), instance,
+                """
+                activeFilters = {security: 'dai'};
+                var row = normalizedLogRow({security_feature: 'dai', security_label: 'Dynamic ARP Inspection'});
+                var exact = matchesFilters(row) && !matchesFilters({security_feature: 'acl'});
+                activeFilters = {security: 'all'};
+                exact && row.security_label === 'Dynamic ARP Inspection'
+                    && matchesFilters(row) && !matchesFilters({})
+                """,
+            ).evaluate()
+            self.assertFalse(undefined)
+            self.assertTrue(result)
             self.assertEqual(warnings, [])
         finally:
             instance.deleteLater()
@@ -334,7 +366,7 @@ class SyslogQmlTests(unittest.TestCase):
                 """
                 loadExpression('host:r1,r2 severity:error,warning protocol:udp '
                                + 'since:30m last:20 facility:LINK '
-                               + 'mnemonic:UPDOWN text:"changed state"');
+                               + 'mnemonic:UPDOWN security:dai text:"changed state"');
                 buildExpression()
                 """,
             ).evaluate()
@@ -345,6 +377,7 @@ class SyslogQmlTests(unittest.TestCase):
             self.assertIn("severity:error,warning", expression)
             self.assertIn("protocol:udp", expression)
             self.assertIn("since:30m", expression)
+            self.assertIn("security:dai", expression)
             self.assertIn('text:"changed state"', expression)
             self.assertEqual(warnings, [])
         finally:

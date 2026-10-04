@@ -1,108 +1,37 @@
-// Trang bìa chính báo cáo NCKH sinh viên – PTIT cơ sở TP.HCM
-
-#import "../config/commands.typ": cover-institution, cover-report-label, cover-project-title, cover-metadata
+// Bìa chính và bìa phụ; giữ thông tin đã có, không tự đặt mã số đề tài.
 #import "../config/info.typ": *
-
-// Bìa chính
-#page(
+#let report-cover(subtitle) = page(
   paper: "a4",
   margin: (left: 3cm, right: 2cm, top: 2.5cm, bottom: 2.5cm),
   numbering: none,
 )[
-  #set text(font: "Times New Roman", lang: "vi")
-  #set align(center)
+  #set text(font: "Liberation Serif", size: 13pt, lang: "vi")
+  #set par(justify: false, first-line-indent: 0pt, leading: 0.65em, spacing: 10pt)
+  #align(center)[
+    #text(weight: "bold")[#ministry \ #academy \ #campus]
 
-  // Tên trường / cơ sở
-  #cover-institution[#ministry]
-  #v(2pt)
-  #cover-institution[#academy]
-  #v(2pt)
-  #cover-institution[#campus]
-  #v(4pt)
-  #text(size: 13pt)[#faculty]
-
-  #v(10pt)
-  #line(length: 100%, stroke: 0.5pt)
-  #v(30pt)
-
-  // Loại báo cáo
-  #cover-report-label[#report-type]
-  #v(24pt)
-
-  // Tên đề tài
-  #cover-project-title[#project-title]
-  #v(8pt)
-  #text(size: 14pt, style: "italic")[Tên sản phẩm: #product-name]
-
-  #v(36pt)
-
-  // Thông tin chi tiết
-  #set align(left)
-  #pad(left: 4cm)[
-    #set text(size: 13pt)
-    #set par(leading: 1.5em, spacing: 0pt)
-    *Lĩnh vực:* #field \
-    *Giảng viên hướng dẫn:* #advisor \
-    *Sinh viên thực hiện:*
-    #pad(left: 1cm)[
-      #members
-    ]
-    *Lớp:* #student-class
+    #faculty
+    #v(8pt)
+    #line(length: 100%, stroke: 0.5pt)
+    #v(26pt)
+    #report-type
+    #v(20pt)
+    #text(size: 16pt, weight: "bold")[#project-title]
+    #v(8pt)
+    #emph[Tên sản phẩm: #product-name]
+    #v(8pt)
+    #subtitle
   ]
-
-  #v(1fr)
-
-  // Nơi và năm thực hiện
-  #set align(center)
-  #cover-metadata[#place-year]
-]
-
-// Trang bìa phụ (bìa lót)
-#pagebreak()
-#page(
-  paper: "a4",
-  margin: (left: 3cm, right: 2cm, top: 2.5cm, bottom: 2.5cm),
-  numbering: none,
-)[
-  #set text(font: "Times New Roman", lang: "vi")
-  #set align(center)
-
-  #cover-institution[#ministry]
-  #v(2pt)
-  #cover-institution[#academy]
-  #v(2pt)
-  #cover-institution[#campus]
-  #v(4pt)
-  #text(size: 13pt)[#faculty]
-
-  #v(10pt)
-  #line(length: 100%, stroke: 0.5pt)
-  #v(30pt)
-
-  #cover-report-label[#report-type]
   #v(24pt)
-
-  #cover-project-title[#project-title]
-  #v(8pt)
-  #text(size: 14pt, style: "italic")[Tên sản phẩm: #product-name]
-
-  #v(36pt)
-
-  #set align(left)
-  #pad(left: 4cm)[
-    #set text(size: 13pt)
-    #set par(leading: 1.5em, spacing: 0pt)
-    *Lĩnh vực:* #field \
-    *Giảng viên hướng dẫn:* #advisor \
-    *Sinh viên thực hiện:*
-    #pad(left: 1cm)[
-      #members
-    ]
-    *Lớp:* #student-class
-  ]
-
+  #table(
+    columns: (37%, 63%), stroke: none, inset: (x: 0pt, y: 7pt), align: left,
+    [*Lĩnh vực:*], [Mạng máy tính, tự động hóa mạng, phần mềm máy tính để bàn],
+    [*Giảng viên hướng dẫn:*], [#advisor],
+    [*Sinh viên thực hiện:*], [Nguyễn Quốc Việt – N24DCVT113 \ Nguyễn Phan Kiên – N24DCVT046 \ Nguyễn Trần Đạt Phú – N24DCVT072],
+    [*Lớp:*], [#student-class],
+  )
   #v(1fr)
-
-  #set align(center)
-  #cover-metadata[#place-year]
+  #align(center)[#place-year]
 ]
+#report-cover([])
+#report-cover([BẢN THUYẾT MINH ĐỀ TÀI])

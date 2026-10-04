@@ -7,7 +7,7 @@ import UI
 StandardDialog {
     id: root
     preferredWidth: 680
-    implicitHeight: 570
+    implicitHeight: 640
     title: "Smart Filter Help"
     subtitle: "Combine simple key:value filters in one line"
     closeTooltip: "Close smart filter help"
@@ -41,6 +41,7 @@ StandardDialog {
                     { key: "protocol:<name>", detail: "UDP or TCP" },
                     { key: "facility:<name>", detail: "Cisco facility contains value" },
                     { key: "mnemonic:<name>", detail: "Mnemonic contains value" },
+                    { key: "security:<feature>", detail: "all, acl, dhcp_snooping, port_security, dai…" },
                     { key: "text:<phrase>", detail: "Explicit message text; quote spaces" }
                 ]
 
@@ -85,7 +86,7 @@ StandardDialog {
         }
         Text {
             Layout.fillWidth: true
-            text: "host:192.168.122.101,192.168.122.102 last:20\nfrom:2026-08-26T18:00 to:2026-08-26T19:00\nseverity:error,warning protocol:udp\nfacility:LINK mnemonic:UPDOWN\nsince:30m text:\"Loopback99 changed state\""
+            text: "host:192.168.122.101,192.168.122.102 last:20\nsecurity:all since:30m\nsecurity:acl severity:info\nsecurity:dai protocol:udp\nfacility:LINK mnemonic:UPDOWN"
             color: Theme.textSecondary
             font.family: Theme.monoFontFamily
             font.pixelSize: Theme.fontSizeSmall

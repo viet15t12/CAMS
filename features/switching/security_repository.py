@@ -134,7 +134,7 @@ def save_l2_vlan_security(db: Any, host: str, payload: dict[str, Any]) -> dict[s
                     ON CONFLICT(host, vlan_id) DO UPDATE SET
                         dhcp_snooping = excluded.dhcp_snooping,
                         dai_enabled = excluded.dai_enabled,
-                        success = 'pending_apply', trust_dhcp = excluded.trust_dhcp, trust_arp = excluded.trust_arp;
+                        success = 'pending_apply';
                     """,
                     (target, vlan_id, snooping, dai),
                 )
@@ -273,6 +273,8 @@ def save_l2_security_global(db: Any, host: str, payload: dict[str, Any]) -> dict
     try:
         ensure_switch_schema(db)
         option_82 = text(payload.get("dhcp_option_82") or "insert")
+        if option_82 not in {"insert", "allow-untrusted", "disable"}:
+            raise ValueError("Unsupported DHCP Option 82 mode")
         with closing(db._connect()) as conn:
             with conn:
                 conn.execute(
@@ -281,10 +283,10 @@ def save_l2_security_global(db: Any, host: str, payload: dict[str, Any]) -> dict
                     VALUES (?, ?)
                     ON CONFLICT(host) DO UPDATE SET
                         dhcp_option_82 = excluded.dhcp_option_82,
-                        success = 'pending_apply', trust_dhcp = excluded.trust_dhcp, trust_arp = excluded.trust_arp;
+                        success = 'pending_apply';
                     """,
                     (target, option_82),
                 )
-        return ok("Global security settings saved")
+        return ok("Global security settings saved. Use View & Push to apply to the device.")
     except (sqlite3.Error, ValueError, TypeError) as exc:
         return failed(str(exc))

@@ -38,6 +38,7 @@ def build_enable_commands(
         raise ValueError("Severity must be between 0 and 7")
     commands = [
         f"logging host {server_ip} transport {protocol} port {port}",
+        "logging on",
         f"logging trap {SEVERITY_WORDS[trap_severity]}",
     ]
     if timestamps:

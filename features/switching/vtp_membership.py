@@ -42,7 +42,7 @@ def vlan_vtp_clients(db: Any, server_host: str) -> list[str]:
             JOIN t09_vtp_database_modes AS m
               ON m.vtp_switch_id = s.vtp_switch_id
              AND m.database_type = 'vlan'
-            WHERE s.host = ? AND m.mode = 'server'
+            WHERE s.host = ? AND m.mode = 'server' AND s.success = 'synchronized'
             LIMIT 1;
             """,
             (target,),
@@ -59,6 +59,7 @@ def vlan_vtp_clients(db: Any, server_host: str) -> list[str]:
             WHERE s.vtp_domain_id = ?
               AND s.host <> ?
               AND m.mode = 'client'
+              AND s.success = 'synchronized'
             ORDER BY s.host COLLATE NOCASE;
             """,
             (int(server["vtp_domain_id"]), target),

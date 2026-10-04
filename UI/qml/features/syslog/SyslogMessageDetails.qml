@@ -39,6 +39,9 @@ StandardDialog {
             columnSpacing: Theme.spacing12
             rowSpacing: Theme.spacing8
 
+            Text { text: "Security feature"; color: Theme.textSecondary; font.family: Theme.fontFamily; font.pixelSize: Theme.fontSizeSmall }
+            Text { Layout.fillWidth: true; Layout.columnSpan: 3; text: String(root.rowValue("security_label", "") || "General system event"); color: Theme.accentColor; font.family: Theme.fontFamily }
+
             Text { text: "Source"; color: Theme.textSecondary; font.family: Theme.fontFamily; font.pixelSize: Theme.fontSizeSmall }
             Text { Layout.fillWidth: true; text: String(root.rowValue("source_ip", "") || "—"); color: Theme.textPrimary; font.family: Theme.monoFontFamily; elide: Text.ElideRight }
             Text { text: "Protocol"; color: Theme.textSecondary; font.family: Theme.fontFamily; font.pixelSize: Theme.fontSizeSmall }

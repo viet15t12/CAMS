@@ -29,14 +29,21 @@ class DeviceLookupRepository:
             ).fetchone()
             if row:
                 return str(row["host"])
-            row = conn.execute(
-                """SELECT host FROM t02_interface_name WHERE ip_address = ?
-                   ORDER BY CASE sync_status
-                     WHEN 'synchronized' THEN 0 WHEN 'pending_apply' THEN 1
-                     WHEN 'pending_delete' THEN 2 ELSE 3 END LIMIT 1""",
-                (source_ip,),
-            ).fetchone()
-        return str(row["host"]) if row else None
+            for table in ("t02_interface_name", "t06_svi"):
+                if not conn.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (table,)
+                ).fetchone():
+                    continue
+                row = conn.execute(
+                    f"""SELECT host FROM {table} WHERE ip_address = ?
+                        AND COALESCE(sync_status, '') <> 'pending_delete'
+                        ORDER BY CASE WHEN sync_status = 'synchronized' THEN 0 ELSE 1 END
+                        LIMIT 1""",
+                    (source_ip,),
+                ).fetchone()
+                if row:
+                    return str(row["host"])
+        return None
 
     def source_interface(self, host: str) -> str | None:
         with closing(device_connection(self.device_db)) as conn:

@@ -99,20 +99,29 @@ def render_vtp(payload: dict[str, Any]) -> list[str]:
     vlan_mode = next((row["mode"] for row in rows if row["database_type"] == "vlan"), None)
     if vlan_mode:
         commands.append(f"vtp mode {vlan_mode}")
-    commands.append("vtp pruning" if first["pruning"] else "no vtp pruning")
+    if vlan_mode == "server":
+        commands.append("vtp pruning" if first["pruning"] else "no vtp pruning")
     return commands
 
 
 def render_security(payload: dict[str, Any]) -> list[str]:
     commands: list[str] = []
-    global_config = payload.get("global_config", {})
-    option_82 = global_config.get("dhcp_option_82", "insert")
-    if option_82 == "allow-untrusted":
-        commands.append("ip dhcp snooping information option allow-untrusted")
-    elif option_82 == "disable":
-        commands.append("no ip dhcp snooping information option")
-    else:
-        commands.append("ip dhcp snooping information option")
+    # Only a global-settings task may change Option 82. Other policy tasks
+    # must not re-enable insertion using an implicit default.
+    if "global_config" in payload:
+        option_82 = payload["global_config"]["dhcp_option_82"]
+        if option_82 not in {"insert", "allow-untrusted", "disable"}:
+            raise ValueError("Unsupported DHCP Option 82 mode")
+        commands.append(
+            "ip dhcp snooping information option allow-untrusted"
+            if option_82 == "allow-untrusted"
+            else "no ip dhcp snooping information option allow-untrusted"
+        )
+        commands.append(
+            "no ip dhcp snooping information option"
+            if option_82 == "disable"
+            else "ip dhcp snooping information option"
+        )
     snooping_vlans = [str(row["vlan_id"]) for row in payload["vlans"] if row["dhcp_snooping"]]
     if snooping_vlans:
         commands.extend(["ip dhcp snooping", f"ip dhcp snooping vlan {','.join(snooping_vlans)}"])
@@ -122,6 +131,12 @@ def render_security(payload: dict[str, Any]) -> list[str]:
     dai_vlans = [str(row["vlan_id"]) for row in payload["vlans"] if row["dai_enabled"]]
     if dai_vlans:
         commands.append(f"ip arp inspection vlan {','.join(dai_vlans)}")
+        # IOS permits disabling per-VLAN DAI logs independently of inspection.
+        # Reset both policies to the documented default: log denied packets.
+        commands.extend([
+            f"no ip arp inspection vlan {','.join(dai_vlans)} logging dhcp-bindings",
+            f"no ip arp inspection vlan {','.join(dai_vlans)} logging acl-match",
+        ])
         commands.append("ip arp inspection log-buffer logs 1024 interval 10")
     for item in payload["vlans"]:
         if not item["dai_enabled"]:
@@ -150,6 +165,11 @@ def render_security(payload: dict[str, Any]) -> list[str]:
             
         commands.append(" exit")
     for item in payload["ports"]:
+        if item["enabled"] and item["violation"] == "protect":
+            raise ValueError(
+                "Port Security protect drops packets without Syslog. "
+                "Choose restrict or shutdown to monitor security violations."
+            )
         commands.extend(_interface_header(item["if_name"]))
         if not item["enabled"]:
             commands.append(" no switchport port-security")

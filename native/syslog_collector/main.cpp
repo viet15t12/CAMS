@@ -173,9 +173,15 @@ public:
         if (auto value = select_host(direct, source); !value.empty()) return value;
         const char* interface =
             "SELECT host FROM t02_interface_name WHERE ip_address = ? "
+            "AND COALESCE(sync_status, '') <> 'pending_delete' "
             "ORDER BY CASE sync_status WHEN 'synchronized' THEN 0 "
             "WHEN 'pending_apply' THEN 1 WHEN 'pending_delete' THEN 2 ELSE 3 END LIMIT 1";
         if (auto value = select_host(interface, source); !value.empty()) return value;
+        const char* svi =
+            "SELECT host FROM t06_svi WHERE ip_address = ? "
+            "AND COALESCE(sync_status, '') <> 'pending_delete' "
+            "ORDER BY CASE WHEN sync_status = 'synchronized' THEN 0 ELSE 1 END LIMIT 1";
+        if (auto value = select_host(svi, source); !value.empty()) return value;
         return source;
     }
 

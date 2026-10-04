@@ -7,6 +7,8 @@ import re
 import shlex
 from typing import Any
 
+from .security import normalize_security_filter
+
 
 _SEVERITIES = {
     "0": 0, "emergency": 0, "emergencies": 0, "emerg": 0,
@@ -35,6 +37,7 @@ _KEY_ALIASES = {
     "mn": "mnemonic",
     "text": "text",
     "message": "text",
+    "security": "security",
 }
 _DURATION_RE = re.compile(r"^(\d+)([mhdw])$", re.IGNORECASE)
 _KEY_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*$")
@@ -42,6 +45,13 @@ _KEY_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*$")
 
 class SmartFilterError(ValueError):
     """Raised when a smart-filter expression cannot be interpreted safely."""
+
+
+def _parse_security(value: Any) -> str:
+    try:
+        return normalize_security_filter(value)
+    except ValueError as exc:
+        raise SmartFilterError(str(exc)) from exc
 
 
 def _as_list(value: Any) -> list[Any]:
@@ -157,6 +167,7 @@ def build_log_filters(
         "per_host": _parse_per_host(base.get("per_host"), allow_zero=True),
         "facility": str(base.get("facility") or "").strip(),
         "mnemonic": str(base.get("mnemonic") or "").strip(),
+        "security": _parse_security(base.get("security")),
     }
 
     try:
@@ -217,6 +228,8 @@ def build_log_filters(
             filters["facility"] = value.strip()
         elif target == "mnemonic":
             filters["mnemonic"] = value.strip()
+        elif target == "security":
+            filters["security"] = _parse_security(value)
         elif target == "text":
             explicit_text.append(value.strip())
 

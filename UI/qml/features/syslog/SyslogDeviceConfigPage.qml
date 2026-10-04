@@ -487,7 +487,7 @@ Item {
                 SwitchInspectorSection {
                     Layout.fillWidth: true
                     title: "Message policy"
-                    helpText: "Trap severity: Controls which message levels Cisco sends. Lower numbers are more severe; 7 Debug is the most verbose.\n\nTimestamps: Adds millisecond timestamps to generated log messages.\n\nSequence numbers: Adds device-side ordering numbers.\n\nPush status: pending_apply waits to be pushed, pending_delete waits for removal, synchronized matches verified device state, and skipped is intentionally not applied."
+                    helpText: "Trap severity: Sends all levels from 0 through the selected level. Use 6 Informational or 7 Debug for security monitoring: ACL matches are level 6, DHCP Snooping violations can be level 5, and DAI/Port Security violations can be level 4.\n\nTimestamps: Adds millisecond timestamps to generated log messages.\n\nSequence numbers: Adds device-side ordering numbers.\n\nPush status: pending_apply waits to be pushed, pending_delete waits for removal, synchronized matches verified device state, and skipped is intentionally not applied."
                     showDivider: false
                     SwitchPropertyRow { visible: root.formMode === 0; label: "Trap severity"; value: root.severityLabels[Number(root.activeData().trap_severity || 0)] || "—" }
                     SwitchPropertyRow { visible: root.formMode === 0; label: "Timestamps"; value: root.activeData().timestamps ? "Enabled" : "Disabled" }
@@ -501,6 +501,13 @@ Item {
                         model: root.severityLabels
                         currentIndex: Number(root.draftData.trap_severity === undefined ? 6 : root.draftData.trap_severity)
                         onActivated: index => root.updateField("trap_severity", index)
+                    }
+                    InlineMessage {
+                        Layout.fillWidth: true
+                        visible: Number(root.activeData().trap_severity === undefined ? 6 : root.activeData().trap_severity) < 6
+                        wrapText: true
+                        severity: "warning"
+                        message: "This severity excludes ACL traffic logs (level 6). Select 6 Informational or 7 Debugging to receive all supported security events."
                     }
                     StandardCheckBox {
                         Layout.fillWidth: true
