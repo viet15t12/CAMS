@@ -9385,14 +9385,14 @@ assets:
   domain: diagrams/workflow
   subject: configuration-automation
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/01_pipeline_automation.svg
-  path: 00_book/figures/report/diagrams/01_pipeline_automation.svg
+  current_path: documentation_assets/diagrams/workflow/configuration-automation.svg
+  path: documentation_assets/diagrams/workflow/configuration-automation.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/configuration-automation.svg
   legacy_path: 00_book/figures/report/diagrams/01_pipeline_automation.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ee8407fcbe37c578f1013ec785c52822132da03913424056e7ea2ab50d333a0e
   provenance:
     assessment: unknown
@@ -9468,14 +9468,14 @@ assets:
   domain: diagrams/workflow
   subject: cisco-cli-modes
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/03_cli_modes.svg
-  path: 00_book/figures/report/diagrams/03_cli_modes.svg
+  current_path: documentation_assets/diagrams/workflow/cisco-cli-modes.svg
+  path: documentation_assets/diagrams/workflow/cisco-cli-modes.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/cisco-cli-modes.svg
   legacy_path: 00_book/figures/report/diagrams/03_cli_modes.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ca947bc7e2ab144fa1474a3ba5a8aa0d29cb8fce9e21f0d658cf87ad4095b8af
   provenance:
     assessment: unknown
@@ -9507,14 +9507,14 @@ assets:
   domain: diagrams/architecture
   subject: ssh-session-connection
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/04_ssh_connection.svg
-  path: 00_book/figures/report/diagrams/04_ssh_connection.svg
+  current_path: documentation_assets/diagrams/architecture/ssh-session-connection.svg
+  path: documentation_assets/diagrams/architecture/ssh-session-connection.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/ssh-session-connection.svg
   legacy_path: 00_book/figures/report/diagrams/04_ssh_connection.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 84577fbc9a3ba39d05b987a271d6808789045445f3574db9c2ca5b258e15e9e2
   provenance:
     assessment: unknown
@@ -9546,14 +9546,14 @@ assets:
   domain: diagrams/workflow
   subject: device-session-lifecycle
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/05_session_lifecycle.svg
-  path: 00_book/figures/report/diagrams/05_session_lifecycle.svg
+  current_path: documentation_assets/diagrams/workflow/device-session-lifecycle.svg
+  path: documentation_assets/diagrams/workflow/device-session-lifecycle.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/device-session-lifecycle.svg
   legacy_path: 00_book/figures/report/diagrams/05_session_lifecycle.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 4cec229e2bd1ccb222dc68a02ee134f6339ed1bb6f879f9e09cd38b69d60c268
   provenance:
     assessment: unknown
@@ -9585,14 +9585,14 @@ assets:
   domain: diagrams/workflow
   subject: dhcp-dora-sequence
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/06_dhcp_dora.svg
-  path: 00_book/figures/report/diagrams/06_dhcp_dora.svg
+  current_path: documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg
+  path: documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg
   legacy_path: 00_book/figures/report/diagrams/06_dhcp_dora.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7b59bbe060b25d43511b42c7b5d80e2b98e8c5c2b938a56f8fe222560e87e234
   provenance:
     assessment: unknown

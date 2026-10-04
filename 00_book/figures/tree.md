@@ -213,11 +213,6 @@
 │   └── ptit-logo.svg
 ├── report
 │   ├── diagrams
-│   │   ├── 01_pipeline_automation.svg
-│   │   ├── 03_cli_modes.svg
-│   │   ├── 04_ssh_connection.svg
-│   │   ├── 05_session_lifecycle.svg
-│   │   ├── 06_dhcp_dora.svg
 │   │   ├── 07_ospf_area.png
 │   │   ├── 07_ospf_area.svg
 │   │   ├── 08_acl_packet_flow.jpg
@@ -360,3 +355,13 @@ B02A canonical assets (outside this figures tree):
 - documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg
 
 MkDocs stages the CAMS logo at 00_book/assets/branding/logos/cams.svg (generated/gitignored).
+
+B02B1 canonical orphan diagrams (outside this figures tree):
+
+- documentation_assets/diagrams/workflow/configuration-automation.svg
+- documentation_assets/diagrams/workflow/cisco-cli-modes.svg
+- documentation_assets/diagrams/architecture/ssh-session-connection.svg
+- documentation_assets/diagrams/workflow/device-session-lifecycle.svg
+- documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg
+
+These five diagrams remain unused/orphan-review and are not selected for MkDocs staging.

@@ -292,7 +292,14 @@ class DocumentationAssetTests(unittest.TestCase):
         safe = {"branding.logos.cams", "diagrams.architecture.application-source-tree",
                 "diagrams.workflow.configuration-state-flow", "diagrams.architecture.cams-layered-system",
                 "diagrams.lab-topology.switching.layer-two-security"}
+        reviewed_orphans = {"diagrams.workflow.configuration-automation", "diagrams.workflow.cisco-cli-modes",
+                            "diagrams.architecture.ssh-session-connection", "diagrams.workflow.device-session-lifecycle",
+                            "diagrams.workflow.dhcp-dora-sequence"}
         self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02A"}, safe)
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02B1"}, reviewed_orphans)
+        review = json.loads((root / "output/documentation-assets-migrations/b02b1.json").read_text())["review"]
+        self.assertEqual({r["asset_id"] for r in review}, reviewed_orphans)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.
@@ -309,6 +316,14 @@ class DocumentationAssetTests(unittest.TestCase):
                 self.assertIn(asset["migration_state"], {"pending", "migrated"})
                 self.assertFalse(asset["review_required"])
                 self.assertEqual(asset["confidence"], "high")
+            elif row["asset_id"] in reviewed_orphans:
+                self.assertIn(asset["migration_state"], {"pending", "migrated"})
+                self.assertTrue(asset["review_required"])
+                self.assertEqual(asset["status"], "orphan-review")
+                self.assertEqual(asset["used_by"], [])
+                self.assertEqual(asset["targets"], [])
+                self.assertFalse(asset["mkdocs_stage"])
+                self.assertEqual(row["review_approved"], "false")  # historical preflight
             else:
                 self.assertEqual(asset["migration_state"], "pending")
                 self.assertTrue(asset["review_required"])

@@ -1,0 +1,545 @@
+{
+  "batch": "B02B1",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "f976ac15df014137907acbc51e717d2d5dd706d1",
+  "status": "PASS — all 5 APPROVED; local and fresh-checkout validation complete",
+  "review": [
+    {
+      "asset_id": "diagrams.workflow.configuration-automation",
+      "decision": "APPROVE",
+      "content_summary": "Dữ liệu đầu vào → Kiểm tra hợp lệ → Sinh cấu hình → Kết nối thiết bị → Triển khai → Thu thập và xác minh kết quả.",
+      "asset_class": "workflow-diagram",
+      "semantic_review": "configuration-automation accurately names the six-step configuration process; workflow is the appropriate directory.",
+      "current_documentation_review": "Consistent as an abridged conceptual pipeline with current View & Push documentation; the preview/approval UI step is outside this overview, so this is not a complete operational procedure. No obsolete API/UI/version claim.",
+      "current_evidence": "00_report/contents/07_phan_tich_thiet_ke.typ:65-74; 00_report/contents/08_xay_dung_phan_mem.typ:47-57",
+      "reason": "Clear rendered meaning, accurate planned name/category, no exact duplicate or destination conflict; useful reusable documentation material despite zero live usage.",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Inkscape PNG rendering viewed directly; SVG XML structure/text also inspected",
+        "preview": "/tmp/cams-b02b1/01_pipeline_automation.png",
+        "text_outlined": true
+      },
+      "provenance_note": "Authored SVG source format; original author/exporter remains unestablished. No generator claim.",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.workflow.cisco-cli-modes",
+      "decision": "APPROVE",
+      "content_summary": "User EXEC (Router>) → Privileged EXEC (Router#) → Global Configuration (Router(config)#), branching to Interface Configuration (Router(config-if)#) and Routing Configuration (Router(config-router)#).",
+      "asset_class": "workflow-diagram",
+      "semantic_review": "cisco-cli-modes describes the branching Cisco CLI mode progression, not a screenshot.",
+      "current_documentation_review": "The mode labels match the requested semantic check and current report privilege/prompt discussion; it is a conceptual subset, not exhaustive command or OS coverage.",
+      "current_evidence": "00_report/contents/07_phan_tich_thiet_ke.typ:93-100",
+      "reason": "Clear rendered meaning, accurate planned name/category, no exact duplicate or destination conflict; useful reusable documentation material despite zero live usage.",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Inkscape PNG rendering viewed directly; SVG XML structure/text also inspected",
+        "preview": "/tmp/cams-b02b1/03_cli_modes.png",
+        "text_outlined": false
+      },
+      "provenance_note": "Authored SVG source format; original author/exporter remains unestablished. No generator claim.",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.architecture.ssh-session-connection",
+      "decision": "APPROVE",
+      "content_summary": "Hệ thống CAMS → SSH → Router / Switch → CLI session; source labels are outlined paths.",
+      "asset_class": "architecture-diagram",
+      "semantic_review": "ssh-session-connection describes the logical application/device/CLI boundary and SSH connection; architecture directory fits this relationship rather than a physical topology.",
+      "current_documentation_review": "Current report supports SSH or Telnet; depicting the SSH case does not assert that SSH is the only supported transport. No legacy GUI/API claims.",
+      "current_evidence": "00_report/contents/07_phan_tich_thiet_ke.typ:55-59; 00_report/contents/08_xay_dung_phan_mem.typ:8",
+      "reason": "Clear rendered meaning, accurate planned name/category, no exact duplicate or destination conflict; useful reusable documentation material despite zero live usage.",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Inkscape PNG rendering viewed directly; SVG XML structure/text also inspected",
+        "preview": "/tmp/cams-b02b1/04_ssh_connection.png",
+        "text_outlined": true
+      },
+      "provenance_note": "Authored SVG source format; original author/exporter remains unestablished. No generator claim.",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.workflow.device-session-lifecycle",
+      "decision": "APPROVE",
+      "content_summary": "Connect → Authenticate → Open session → Execute → Read output → Disconnect/Reuse.",
+      "asset_class": "workflow-diagram",
+      "semantic_review": "device-session-lifecycle matches the ordered session lifecycle and the existing reuse/disconnect option.",
+      "current_documentation_review": "Consistent with current reusable DeviceSessionRegistry and connection-service documentation. Abstract flow omits locks/error paths; it does not claim automatic rollback or disconnection after every command.",
+      "current_evidence": "00_report/contents/08_xay_dung_phan_mem.typ:25-29; infrastructure/network/session_registry.py; features/devices/connection_service.py",
+      "reason": "Clear rendered meaning, accurate planned name/category, no exact duplicate or destination conflict; useful reusable documentation material despite zero live usage.",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Inkscape PNG rendering viewed directly; SVG XML structure/text also inspected",
+        "preview": "/tmp/cams-b02b1/05_session_lifecycle.png",
+        "text_outlined": false
+      },
+      "provenance_note": "Authored SVG source format; original author/exporter remains unestablished. No generator claim.",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.workflow.dhcp-dora-sequence",
+      "decision": "APPROVE",
+      "content_summary": "Client → DHCPDISCOVER → DHCP Server; DHCPOFFER server→client; DHCPREQUEST client→server; DHCPACK server→client, with vertical lifelines.",
+      "asset_class": "workflow-diagram",
+      "semantic_review": "dhcp-dora-sequence accurately identifies the four-message sequence; workflow directory includes sequence/process diagrams.",
+      "current_documentation_review": "Generic technical explanation rather than a current CAMS UI or implementation claim; no old application state, addresses or device-specific fixture. Worth retaining for future DHCP documentation.",
+      "current_evidence": "00_report/contents/08_xay_dung_phan_mem.typ:59-65",
+      "reason": "Clear rendered meaning, accurate planned name/category, no exact duplicate or destination conflict; useful reusable documentation material despite zero live usage.",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Inkscape PNG rendering viewed directly; SVG XML structure/text also inspected",
+        "preview": "/tmp/cams-b02b1/06_dhcp_dora.png",
+        "text_outlined": false
+      },
+      "provenance_note": "Authored SVG source format; original author/exporter remains unestablished. No generator claim.",
+      "used_by": [],
+      "targets": []
+    }
+  ],
+  "hash_authority": "Phase 3.3 exact repository-stored bytes",
+  "usage": "All five remain orphan-review; zero discovered live references",
+  "metadata_policy": "Only migration_state/current_path/path/canonical changed; review_required=true and historical classification/provenance remain unchanged. Review approval is scoped to preservation/migration, not invented document usage.",
+  "manifest": {
+    "migrated": 10,
+    "pending": 335,
+    "frozen": 62
+  },
+  "authority": {
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 10,
+    "behind": 0
+  },
+  "migration": [
+    {
+      "asset_id": "diagrams.workflow.configuration-automation",
+      "old_path": "00_book/figures/report/diagrams/01_pipeline_automation.svg",
+      "canonical_path": "documentation_assets/diagrams/workflow/configuration-automation.svg",
+      "source_blob_sha": "ee8407fcbe37c578f1013ec785c52822132da03913424056e7ea2ab50d333a0e",
+      "canonical_filesystem_sha": "ee8407fcbe37c578f1013ec785c52822132da03913424056e7ea2ab50d333a0e",
+      "canonical_index_sha": "ee8407fcbe37c578f1013ec785c52822132da03913424056e7ea2ab50d333a0e",
+      "manifest_sha": "ee8407fcbe37c578f1013ec785c52822132da03913424056e7ea2ab50d333a0e",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "used_by": [],
+      "targets": [],
+      "status": "orphan-review",
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.workflow.cisco-cli-modes",
+      "old_path": "00_book/figures/report/diagrams/03_cli_modes.svg",
+      "canonical_path": "documentation_assets/diagrams/workflow/cisco-cli-modes.svg",
+      "source_blob_sha": "ca947bc7e2ab144fa1474a3ba5a8aa0d29cb8fce9e21f0d658cf87ad4095b8af",
+      "canonical_filesystem_sha": "ca947bc7e2ab144fa1474a3ba5a8aa0d29cb8fce9e21f0d658cf87ad4095b8af",
+      "canonical_index_sha": "ca947bc7e2ab144fa1474a3ba5a8aa0d29cb8fce9e21f0d658cf87ad4095b8af",
+      "manifest_sha": "ca947bc7e2ab144fa1474a3ba5a8aa0d29cb8fce9e21f0d658cf87ad4095b8af",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "used_by": [],
+      "targets": [],
+      "status": "orphan-review",
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.architecture.ssh-session-connection",
+      "old_path": "00_book/figures/report/diagrams/04_ssh_connection.svg",
+      "canonical_path": "documentation_assets/diagrams/architecture/ssh-session-connection.svg",
+      "source_blob_sha": "84577fbc9a3ba39d05b987a271d6808789045445f3574db9c2ca5b258e15e9e2",
+      "canonical_filesystem_sha": "84577fbc9a3ba39d05b987a271d6808789045445f3574db9c2ca5b258e15e9e2",
+      "canonical_index_sha": "84577fbc9a3ba39d05b987a271d6808789045445f3574db9c2ca5b258e15e9e2",
+      "manifest_sha": "84577fbc9a3ba39d05b987a271d6808789045445f3574db9c2ca5b258e15e9e2",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "used_by": [],
+      "targets": [],
+      "status": "orphan-review",
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.workflow.device-session-lifecycle",
+      "old_path": "00_book/figures/report/diagrams/05_session_lifecycle.svg",
+      "canonical_path": "documentation_assets/diagrams/workflow/device-session-lifecycle.svg",
+      "source_blob_sha": "4cec229e2bd1ccb222dc68a02ee134f6339ed1bb6f879f9e09cd38b69d60c268",
+      "canonical_filesystem_sha": "4cec229e2bd1ccb222dc68a02ee134f6339ed1bb6f879f9e09cd38b69d60c268",
+      "canonical_index_sha": "4cec229e2bd1ccb222dc68a02ee134f6339ed1bb6f879f9e09cd38b69d60c268",
+      "manifest_sha": "4cec229e2bd1ccb222dc68a02ee134f6339ed1bb6f879f9e09cd38b69d60c268",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "used_by": [],
+      "targets": [],
+      "status": "orphan-review",
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.workflow.dhcp-dora-sequence",
+      "old_path": "00_book/figures/report/diagrams/06_dhcp_dora.svg",
+      "canonical_path": "documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg",
+      "source_blob_sha": "7b59bbe060b25d43511b42c7b5d80e2b98e8c5c2b938a56f8fe222560e87e234",
+      "canonical_filesystem_sha": "7b59bbe060b25d43511b42c7b5d80e2b98e8c5c2b938a56f8fe222560e87e234",
+      "canonical_index_sha": "7b59bbe060b25d43511b42c7b5d80e2b98e8c5c2b938a56f8fe222560e87e234",
+      "manifest_sha": "7b59bbe060b25d43511b42c7b5d80e2b98e8c5c2b938a56f8fe222560e87e234",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "used_by": [],
+      "targets": [],
+      "status": "orphan-review",
+      "mkdocs_stage": false
+    }
+  ],
+  "conflict_usage_review": [
+    {
+      "asset_id": "diagrams.workflow.configuration-automation",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/01_pipeline_automation.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.cisco-cli-modes",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/03_cli_modes.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.architecture.ssh-session-connection",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/04_ssh_connection.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.device-session-lifecycle",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/05_session_lifecycle.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.dhcp-dora-sequence",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/06_dhcp_dora.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    }
+  ],
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-0.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-1.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-2.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-3.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-4.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-5.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02a-docs/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-6.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-7.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-8.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b1-9.log",
+      "result": "PASS"
+    }
+  ],
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_pages": 110,
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02a": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_pages": 170,
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02a": true
+    }
+  ],
+  "manifest_before": {
+    "migrated": 5,
+    "pending": 340,
+    "frozen": 62
+  },
+  "other_manifest_records_unchanged": 402,
+  "mkdocs": {
+    "build": "PASS",
+    "selected_nonterminal_staged_assets": 178,
+    "b02b1_staged": 0,
+    "generated_ledger_unchanged": true,
+    "staging_tracked": false
+  },
+  "terminal": {
+    "frozen_assets_unchanged": 62,
+    "contract_unchanged": true,
+    "reference_multiset_unchanged": true
+  },
+  "reference_baseline": {
+    "unchanged": true,
+    "accepted_existing_occurrences": 178
+  },
+  "scope": {
+    "new_transfers": 5,
+    "svg_blob_content_changes": 0,
+    "live_document_references_changed": 0,
+    "other_batches_migrated": false,
+    "docshot_renders": 0,
+    "runtime_assets_changed": false
+  },
+  "delivery_policy": "Commit and push only after fresh-checkout PASS; immutable commit and remote SHA reported in final delivery message.",
+  "fresh_checkout": {
+    "filesystem_blob_manifest_matches": 407,
+    "counts": {
+      "pending": 335,
+      "migrated": 10,
+      "frozen": 62
+    },
+    "other_manifest_records_unchanged": 402,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 5,
+    "canonical_paths_present": 5,
+    "orphan_usage_preserved": true,
+    "generated_assets_tracked": false,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "pdfs_byte_identical_to_b02a": true,
+    "method": "Separate normal Linux clone of candidate Git commit with core.autocrlf=false; generated staging initially absent",
+    "candidate_commit": "8665ca4b72a267f169a2807cde8d76fa41d9a113",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-0.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-5.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02a-docs/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-6.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-7.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b1/clean-9.log"
+      }
+    ]
+  }
+}
