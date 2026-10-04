@@ -213,10 +213,6 @@
 │   └── ptit-logo.svg
 ├── report
 │   ├── diagrams
-│   │   ├── 07_ospf_area.png
-│   │   ├── 07_ospf_area.svg
-│   │   ├── 08_acl_packet_flow.jpg
-│   │   ├── 08_acl_packet_flow.svg
 │   │   ├── dhcp-snooping.jpg
 │   │   ├── dhcp_dora.png
 │   │   ├── Etherchannel.jpg
@@ -384,3 +380,12 @@ B02B4 canonical diagrams (outside this figures tree):
 - documentation_assets/diagrams/workflow/syslog-processing-sequence.svg
 
 The three testing/lab workflows remain unused/orphan-review. The ERD and Syslog sequence are active report assets; their unchanged legacy sources remain in report/diagrams/ because preserve_original=true. Report references use the canonical copies. None of these five assets is selected for MkDocs staging.
+
+B02C independent diagram pairs (outside this figures tree):
+
+- documentation_assets/diagrams/network/ospf-multi-area-backbone.png
+- documentation_assets/diagrams/network/ospf-area-zero-router-chain.svg
+- documentation_assets/diagrams/workflow/inbound-acl-tests.jpg
+- documentation_assets/diagrams/workflow/acl-rule-evaluation.svg
+
+All four remain unused/orphan-review. Both OSPF and ACL pairs have different content and remain independent assets; no deduplication or derivative relation. None is selected for MkDocs staging.

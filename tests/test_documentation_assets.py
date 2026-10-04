@@ -325,6 +325,25 @@ class DocumentationAssetTests(unittest.TestCase):
         self.assertEqual({r["asset_id"] for r in review}, fourth_orphans | preserved_active)
         self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
         reviewed_orphans |= fourth_orphans
+        independent_pairs = {"diagrams.network.ospf-multi-area-backbone", "diagrams.network.ospf-area-zero-router-chain",
+                             "diagrams.workflow.inbound-acl-tests", "diagrams.workflow.acl-rule-evaluation"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02C"}, independent_pairs)
+        pair_report = json.loads((root / "output/documentation-assets-migrations/b02c.json").read_text())
+        self.assertEqual({r["asset_id"] for r in pair_report["review"]}, independent_pairs)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in pair_report["review"]))
+        expected_pairs = {
+            ("diagrams.network.ospf-multi-area-backbone", "diagrams.network.ospf-area-zero-router-chain"),
+            ("diagrams.workflow.inbound-acl-tests", "diagrams.workflow.acl-rule-evaluation"),
+        }
+        self.assertEqual(len(pair_report["pair_review"]), 2)
+        self.assertEqual({(r["raster_asset_id"], r["svg_asset_id"]) for r in pair_report["pair_review"]}, expected_pairs)
+        self.assertTrue(all(r["decision"] == "DIFFERENT_CONTENT_CONFIRMED" and r["no_deduplication"]
+                            and r["no_derivative_relation"] and r["both_members_preserved"]
+                            for r in pair_report["pair_review"]))
+        for asset_id in independent_pairs:
+            self.assertIsNone(records[asset_id]["derived_from"])
+            self.assertIsNone(records[asset_id]["canonical_group_id"])
+        reviewed_orphans |= independent_pairs
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.

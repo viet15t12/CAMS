@@ -1,0 +1,714 @@
+{
+  "batch": "B02C",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "c0e08508b1a334ecf910491e807dac9233828566",
+  "status": "PASS — all four APPROVED; both pairs DIFFERENT_CONTENT_CONFIRMED; local and fresh-checkout validation complete",
+  "review": [
+    {
+      "asset_id": "diagrams.network.ospf-multi-area-backbone",
+      "decision": "APPROVE",
+      "content_summary": "Nine router icons total: eight in the OSPF topology and one in Other Routing Domain. Yellow OSPF Area 0 Backbone connects orange Area 1, peach Area 2 and blue Area 3. Five backbone/border icons plus one internal router per non-backbone area; backbone has a triangular core with branches to area-border routers and an external-domain link.",
+      "semantic_name_judgment": "APPROVE: ospf-multi-area-backbone accurately describes the explicitly labelled Area 0 backbone and three non-backbone areas. It distinguishes this wider branching topology from the single-area SVG. Router counts are visual observations, not live inventory or evidence of a deployed network.",
+      "asset_class": "network-diagram",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Direct inspection of original raster or temporary Inkscape SVG preview, plus SVG XML/text",
+        "path": "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/figures/report/diagrams/07_ospf_area.png"
+      },
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "provenance_note": "Source/export lineage remains unknown; visual semantic confidence is not derivative provenance."
+    },
+    {
+      "asset_id": "diagrams.network.ospf-area-zero-router-chain",
+      "decision": "APPROVE",
+      "content_summary": "Dashed Area 0 enclosure containing three labelled boxes R1 → R2 → R3; two chain links, no Area 1/2/3 or external routing domain.",
+      "semantic_name_judgment": "APPROVE: ospf-area-zero-router-chain exactly describes the single Area 0 three-router chain. The arrows are diagrammatic links, not a claim that OSPF adjacency is unidirectional.",
+      "asset_class": "network-diagram",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Direct inspection of original raster or temporary Inkscape SVG preview, plus SVG XML/text",
+        "path": "/tmp/cams-b02c/07_ospf_area.png"
+      },
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "provenance_note": "Source/export lineage remains unknown; visual semantic confidence is not derivative provenance."
+    },
+    {
+      "asset_id": "diagrams.workflow.inbound-acl-tests",
+      "decision": "APPROVE",
+      "content_summary": "Inbound ACLs heading. Packets enter the router interface with access group, then First/Second/Final test passed decisions. YES leads to a shared Permit or deny access decision; Permit leads to exit interface, Deny and implicit deny all lead to Discard the packets.",
+      "semantic_name_judgment": "APPROVE: inbound-acl-tests accurately names the explicitly inbound/interface-scoped packet-test flow. Tests means the shown ACL predicate checks, not empirical test results. There are no concrete source/destination addresses, packet tuples or permit/deny case values; none is inferred. Inbound entry, exit interface and explicit discard paths distinguish it from the context-free rule-matching SVG.",
+      "asset_class": "workflow-diagram",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Direct inspection of original raster or temporary Inkscape SVG preview, plus SVG XML/text",
+        "path": "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/figures/report/diagrams/08_acl_packet_flow.jpg"
+      },
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "provenance_note": "Source/export lineage remains unknown; visual semantic confidence is not derivative provenance."
+    },
+    {
+      "asset_id": "diagrams.workflow.acl-rule-evaluation",
+      "decision": "APPROVE",
+      "content_summary": "Packet → Rule 1 — match? → Rule 2 — match? → subsequent rules → Deny ngầm định / Không rule nào khớp. Each matching YES branch terminates in permit / deny; NO continues to the next rule.",
+      "semantic_name_judgment": "APPROVE: acl-rule-evaluation accurately describes ordered rule matching and the implicit-deny fallback. No inbound/interface binding or specific test-case result is depicted.",
+      "asset_class": "workflow-diagram",
+      "confidence": "high",
+      "visual_inspection": {
+        "method": "Direct inspection of original raster or temporary Inkscape SVG preview, plus SVG XML/text",
+        "path": "/tmp/cams-b02c/08_acl_packet_flow.png"
+      },
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "provenance_note": "Source/export lineage remains unknown; visual semantic confidence is not derivative provenance."
+    }
+  ],
+  "pair_review": [
+    {
+      "pair": "OSPF",
+      "raster_asset_id": "diagrams.network.ospf-multi-area-backbone",
+      "svg_asset_id": "diagrams.network.ospf-area-zero-router-chain",
+      "decision": "DIFFERENT_CONTENT_CONFIRMED",
+      "confidence": "high",
+      "raster_visual_summary": "Nine router icons total: eight in the OSPF topology and one in Other Routing Domain. Yellow OSPF Area 0 Backbone connects orange Area 1, peach Area 2 and blue Area 3. Five backbone/border icons plus one internal router per non-backbone area; backbone has a triangular core with branches to area-border routers and an external-domain link.",
+      "svg_visual_summary": "Dashed Area 0 enclosure containing three labelled boxes R1 → R2 → R3; two chain links, no Area 1/2/3 or external routing domain.",
+      "meaningful_differences": "PNG has nine router icons including an external domain, backbone mesh/branches and four explicit areas. SVG has three named routers in a single Area 0 chain. Topology, router count, area structure and labels differ materially.",
+      "semantic_filename_judgment": "Both proposed names APPROVED; broader multi-area backbone versus Area 0 router chain.",
+      "no_deduplication": true,
+      "no_derivative_relation": true,
+      "both_members_preserved": true,
+      "keep_independent_assets": true
+    },
+    {
+      "pair": "ACL",
+      "raster_asset_id": "diagrams.workflow.inbound-acl-tests",
+      "svg_asset_id": "diagrams.workflow.acl-rule-evaluation",
+      "decision": "DIFFERENT_CONTENT_CONFIRMED",
+      "confidence": "high",
+      "raster_visual_summary": "Inbound ACLs heading. Packets enter the router interface with access group, then First/Second/Final test passed decisions. YES leads to a shared Permit or deny access decision; Permit leads to exit interface, Deny and implicit deny all lead to Discard the packets.",
+      "svg_visual_summary": "Packet → Rule 1 — match? → Rule 2 — match? → subsequent rules → Deny ngầm định / Không rule nào khớp. Each matching YES branch terminates in permit / deny; NO continues to the next rule.",
+      "meaningful_differences": "JPG explicitly binds packet tests to inbound router access-group processing and includes exit-interface/discard actions with a shared permit/deny decision. SVG is a context-free per-rule matching/fallback diagram, with separate action branches on each matching rule. They share an ACL concept but are not identical visual/content representations or established exports of each other.",
+      "semantic_filename_judgment": "Both proposed names APPROVED; inbound ACL predicate tests versus general ACL rule evaluation. No IP-specific empirical scenarios are inferred.",
+      "no_deduplication": true,
+      "no_derivative_relation": true,
+      "both_members_preserved": true,
+      "keep_independent_assets": true
+    }
+  ],
+  "migration": [
+    {
+      "asset_id": "diagrams.network.ospf-multi-area-backbone",
+      "old_path": "00_book/figures/report/diagrams/07_ospf_area.png",
+      "canonical_path": "documentation_assets/diagrams/network/ospf-multi-area-backbone.png",
+      "source_blob_sha": "dea09ba6f077a224486145c079a7a7499f1f8115937021ff7bd4673ee7804b13",
+      "source_filesystem_sha": "dea09ba6f077a224486145c079a7a7499f1f8115937021ff7bd4673ee7804b13",
+      "canonical_filesystem_sha": "dea09ba6f077a224486145c079a7a7499f1f8115937021ff7bd4673ee7804b13",
+      "canonical_index_sha": "dea09ba6f077a224486145c079a7a7499f1f8115937021ff7bd4673ee7804b13",
+      "manifest_sha": "dea09ba6f077a224486145c079a7a7499f1f8115937021ff7bd4673ee7804b13",
+      "byte_equal": true,
+      "old_path_absent": true
+    },
+    {
+      "asset_id": "diagrams.network.ospf-area-zero-router-chain",
+      "old_path": "00_book/figures/report/diagrams/07_ospf_area.svg",
+      "canonical_path": "documentation_assets/diagrams/network/ospf-area-zero-router-chain.svg",
+      "source_blob_sha": "e3f9553bdd82f7088e30c87fa805bc5bb8ae8825b1426c7dfd5d7130a4fb21e4",
+      "source_filesystem_sha": "e3f9553bdd82f7088e30c87fa805bc5bb8ae8825b1426c7dfd5d7130a4fb21e4",
+      "canonical_filesystem_sha": "e3f9553bdd82f7088e30c87fa805bc5bb8ae8825b1426c7dfd5d7130a4fb21e4",
+      "canonical_index_sha": "e3f9553bdd82f7088e30c87fa805bc5bb8ae8825b1426c7dfd5d7130a4fb21e4",
+      "manifest_sha": "e3f9553bdd82f7088e30c87fa805bc5bb8ae8825b1426c7dfd5d7130a4fb21e4",
+      "byte_equal": true,
+      "old_path_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.inbound-acl-tests",
+      "old_path": "00_book/figures/report/diagrams/08_acl_packet_flow.jpg",
+      "canonical_path": "documentation_assets/diagrams/workflow/inbound-acl-tests.jpg",
+      "source_blob_sha": "40a0fa5ad7b02350772deebba6cb38f630e799c083ddb58f17ba0de0836cd323",
+      "source_filesystem_sha": "40a0fa5ad7b02350772deebba6cb38f630e799c083ddb58f17ba0de0836cd323",
+      "canonical_filesystem_sha": "40a0fa5ad7b02350772deebba6cb38f630e799c083ddb58f17ba0de0836cd323",
+      "canonical_index_sha": "40a0fa5ad7b02350772deebba6cb38f630e799c083ddb58f17ba0de0836cd323",
+      "manifest_sha": "40a0fa5ad7b02350772deebba6cb38f630e799c083ddb58f17ba0de0836cd323",
+      "byte_equal": true,
+      "old_path_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.acl-rule-evaluation",
+      "old_path": "00_book/figures/report/diagrams/08_acl_packet_flow.svg",
+      "canonical_path": "documentation_assets/diagrams/workflow/acl-rule-evaluation.svg",
+      "source_blob_sha": "afc15902c049eb3c28ffdbdc15d71ca8e4941168af6eefe38d61422573e6ae34",
+      "source_filesystem_sha": "afc15902c049eb3c28ffdbdc15d71ca8e4941168af6eefe38d61422573e6ae34",
+      "canonical_filesystem_sha": "afc15902c049eb3c28ffdbdc15d71ca8e4941168af6eefe38d61422573e6ae34",
+      "canonical_index_sha": "afc15902c049eb3c28ffdbdc15d71ca8e4941168af6eefe38d61422573e6ae34",
+      "manifest_sha": "afc15902c049eb3c28ffdbdc15d71ca8e4941168af6eefe38d61422573e6ae34",
+      "byte_equal": true,
+      "old_path_absent": true
+    }
+  ],
+  "historical_pair_input": [
+    {
+      "svg_path": "00_book/figures/report/diagrams/07_ospf_area.svg",
+      "raster_path": "00_book/figures/report/diagrams/07_ospf_area.png",
+      "relationship": "different-content",
+      "canonical_choice": "keep-independent-sources",
+      "keep_both": "true",
+      "future_paths": "[\"documentation_assets/diagrams/network/ospf-area-zero-router-chain.svg\", \"documentation_assets/diagrams/network/ospf-multi-area-backbone.png\"]",
+      "reason": "Visual composition differs: original illustration vs simplified vector diagram",
+      "review_required": "true",
+      "svg_asset_id": "diagrams.network.ospf-area-zero-router-chain",
+      "raster_asset_id": "diagrams.network.ospf-multi-area-backbone",
+      "batch_id": "B02",
+      "current_svg_sha256": "f80af3b8cd4e8d1af5287f3d9f0e39116d3d6c4faf583cd517e0c07b7128dca4"
+    },
+    {
+      "svg_path": "00_book/figures/report/diagrams/08_acl_packet_flow.svg",
+      "raster_path": "00_book/figures/report/diagrams/08_acl_packet_flow.jpg",
+      "relationship": "different-content",
+      "canonical_choice": "keep-independent-sources",
+      "keep_both": "true",
+      "future_paths": "[\"documentation_assets/diagrams/workflow/acl-rule-evaluation.svg\", \"documentation_assets/diagrams/workflow/inbound-acl-tests.jpg\"]",
+      "reason": "Visual composition differs: original illustration vs simplified vector diagram",
+      "review_required": "true",
+      "svg_asset_id": "diagrams.workflow.acl-rule-evaluation",
+      "raster_asset_id": "diagrams.workflow.inbound-acl-tests",
+      "batch_id": "B02",
+      "current_svg_sha256": "4bed4ebe3db618336b4da32c3be430d5de0a281cd970c48375409b1571bf24af"
+    }
+  ],
+  "conflict_usage_review": [
+    {
+      "asset_id": "diagrams.network.ospf-multi-area-backbone",
+      "live_image_references": [],
+      "exact_copies_before": [
+        "00_book/figures/report/diagrams/07_ospf_area.png"
+      ],
+      "canonical_destination_absent_before": true,
+      "duplicate_conflict": false
+    },
+    {
+      "asset_id": "diagrams.network.ospf-area-zero-router-chain",
+      "live_image_references": [],
+      "exact_copies_before": [
+        "00_book/figures/report/diagrams/07_ospf_area.svg"
+      ],
+      "canonical_destination_absent_before": true,
+      "duplicate_conflict": false
+    },
+    {
+      "asset_id": "diagrams.workflow.inbound-acl-tests",
+      "live_image_references": [],
+      "exact_copies_before": [
+        "00_book/figures/report/diagrams/08_acl_packet_flow.jpg"
+      ],
+      "canonical_destination_absent_before": true,
+      "duplicate_conflict": false
+    },
+    {
+      "asset_id": "diagrams.workflow.acl-rule-evaluation",
+      "live_image_references": [],
+      "exact_copies_before": [
+        "00_book/figures/report/diagrams/08_acl_packet_flow.svg"
+      ],
+      "canonical_destination_absent_before": true,
+      "duplicate_conflict": false
+    }
+  ],
+  "manifest": {
+    "migrated": 29,
+    "pending": 316,
+    "frozen": 62
+  },
+  "authority": {
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 14,
+    "behind": 0
+  },
+  "hash_authority": "Phase 3.3 exact repository-stored bytes; historical vector/preflight SHA retained only as audit input",
+  "metadata_policy": "Only four current_path/path/migration_state/canonical transitions; all other fields and 403 records unchanged. No manifest schema/relationship additions.",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-1.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-2.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-3.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-4.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-5.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-6.log"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-7.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-8.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-9.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02c/local-10.log"
+    }
+  ],
+  "local_proof": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 316,
+      "migrated": 29,
+      "frozen": 62
+    },
+    "other_records_unchanged": 403,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 4,
+    "canonical_paths_present": 4,
+    "orphan_usage_preserved": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02b4_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02b4_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 29,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2,
+        "B02E1": 3,
+        "B02D": 2,
+        "B02E2": 3
+      }
+    }
+  },
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02b4_baseline": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02b4_baseline": true
+    }
+  ],
+  "b02_progress": {
+    "migrated": 29,
+    "total": 39,
+    "complete": false,
+    "remaining": {
+      "B02F": 2,
+      "B02E1": 3,
+      "B02D": 2,
+      "B02E2": 3
+    }
+  },
+  "scope": {
+    "new_transfers": 4,
+    "semantic_pairs": 2,
+    "svg_blob_content_changes": 0,
+    "raster_recompression": false,
+    "live_reference_rewrites": 0,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "other_batches_migrated": false,
+    "runtime_terminal_docshot_report_changes": false,
+    "screenshot_renders": 0
+  },
+  "mkdocs": {
+    "status": "PASS",
+    "staged_assets": 178,
+    "b02c_staged_assets": 0,
+    "ownership_ledger_unchanged": true,
+    "generated_assets_tracked": false,
+    "environment": "/tmp/cams-b02b4/docs-venv from unchanged requirements-docs.txt",
+    "mkdocs_version": "1.6.1",
+    "material_version": "9.7.7"
+  },
+  "fresh_checkout": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 316,
+      "migrated": 29,
+      "frozen": 62
+    },
+    "other_records_unchanged": 403,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 4,
+    "canonical_paths_present": 4,
+    "orphan_usage_preserved": true,
+    "no_deduplication": true,
+    "no_derivative_relation": true,
+    "both_members_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "previous_b02b4_retained_copies_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02c/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02c/clean-checkout/output/typst/package-cache",
+          "/tmp/cams-b02c/clean-checkout/00_report/main.typ",
+          "/tmp/cams-b02c/clean-checkout/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02b4_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02c/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02c/clean-checkout/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/tmp/cams-b02c/clean-checkout/00_book/main.typ",
+          "/tmp/cams-b02c/clean-checkout/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02b4_baseline": true
+      }
+    ],
+    "b02_progress": {
+      "migrated": 29,
+      "total": 39,
+      "complete": false,
+      "remaining": {
+        "B02F": 2,
+        "B02E1": 3,
+        "B02D": 2,
+        "B02E2": 3
+      }
+    },
+    "filesystem_blob_manifest_matches": 407,
+    "method": "Separate Linux clone of candidate Git commit, core.autocrlf=false; no generated staging before pre-sync",
+    "candidate_commit": "6b3abe5164599050268168a44a3ff37a4d2fd4e6",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-5.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-6.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-7.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-9.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02c/clean-10.log"
+      }
+    ]
+  }
+}

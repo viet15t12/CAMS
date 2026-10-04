@@ -9624,14 +9624,14 @@ assets:
   domain: diagrams/network
   subject: ospf-multi-area-backbone
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/07_ospf_area.png
-  path: 00_book/figures/report/diagrams/07_ospf_area.png
+  current_path: documentation_assets/diagrams/network/ospf-multi-area-backbone.png
+  path: documentation_assets/diagrams/network/ospf-multi-area-backbone.png
   planned_canonical_path: documentation_assets/diagrams/network/ospf-multi-area-backbone.png
   legacy_path: 00_book/figures/report/diagrams/07_ospf_area.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: dea09ba6f077a224486145c079a7a7499f1f8115937021ff7bd4673ee7804b13
   provenance:
     assessment: unknown
@@ -9663,14 +9663,14 @@ assets:
   domain: diagrams/network
   subject: ospf-area-zero-router-chain
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/07_ospf_area.svg
-  path: 00_book/figures/report/diagrams/07_ospf_area.svg
+  current_path: documentation_assets/diagrams/network/ospf-area-zero-router-chain.svg
+  path: documentation_assets/diagrams/network/ospf-area-zero-router-chain.svg
   planned_canonical_path: documentation_assets/diagrams/network/ospf-area-zero-router-chain.svg
   legacy_path: 00_book/figures/report/diagrams/07_ospf_area.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e3f9553bdd82f7088e30c87fa805bc5bb8ae8825b1426c7dfd5d7130a4fb21e4
   provenance:
     assessment: unknown
@@ -9703,14 +9703,14 @@ assets:
   domain: diagrams/workflow
   subject: inbound-acl-tests
   source_kind: unknown
-  current_path: 00_book/figures/report/diagrams/08_acl_packet_flow.jpg
-  path: 00_book/figures/report/diagrams/08_acl_packet_flow.jpg
+  current_path: documentation_assets/diagrams/workflow/inbound-acl-tests.jpg
+  path: documentation_assets/diagrams/workflow/inbound-acl-tests.jpg
   planned_canonical_path: documentation_assets/diagrams/workflow/inbound-acl-tests.jpg
   legacy_path: 00_book/figures/report/diagrams/08_acl_packet_flow.jpg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 40a0fa5ad7b02350772deebba6cb38f630e799c083ddb58f17ba0de0836cd323
   provenance:
     assessment: unknown
@@ -9742,14 +9742,14 @@ assets:
   domain: diagrams/workflow
   subject: acl-rule-evaluation
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/08_acl_packet_flow.svg
-  path: 00_book/figures/report/diagrams/08_acl_packet_flow.svg
+  current_path: documentation_assets/diagrams/workflow/acl-rule-evaluation.svg
+  path: documentation_assets/diagrams/workflow/acl-rule-evaluation.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/acl-rule-evaluation.svg
   legacy_path: 00_book/figures/report/diagrams/08_acl_packet_flow.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: afc15902c049eb3c28ffdbdc15d71ca8e4941168af6eefe38d61422573e6ae34
   provenance:
     assessment: unknown
