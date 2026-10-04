@@ -125,6 +125,22 @@ Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã th
   caption: [Lược đồ thực thể - quan hệ (ERD) các bảng nghiệp vụ cốt lõi của CAMS],
 ) <tab-core-erd>
 
+Để hệ thống hóa cấu trúc dữ liệu, hệ thống bao gồm 93 bảng nghiệp vụ khác nhau. Dưới đây là lược đồ các bảng chính yếu đại diện cho các phân hệ cốt lõi:
+
+#report-table(
+  columns: (25%, 35%, 40%),
+  header: ([Tên bảng (Table)], [Khóa chính / Khóa ngoại], [Vai trò và dữ liệu lưu trữ]),
+  rows: (
+    ([#table-code("t01_devices")], [PK: #table-code("host")], [Lưu định danh, thông tin kết nối, OS và `enable_password` (ENC\$v2\$)]),
+    ([#table-code("t02_interfaces")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý cấu hình cổng L3, L2, trạng thái UP/DOWN và mô tả]),
+    ([#table-code("t03_routing_ospf")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu thông tin tiến trình OSPF, vùng Area, Router ID]),
+    ([#table-code("t04_acl_rules")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu danh sách kiểm soát truy cập, thứ tự, hành động và từ khóa `log`]),
+    ([#table-code("t05_nat_pat")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý danh sách ánh xạ địa chỉ biên (NAT/PAT), Inside/Outside]),
+    ([#table-code("t06_syslog_events")], [PK: #table-code("id")], [Nằm trong `info_collected.db`: Lưu trữ bản tin Syslog gốc, phân loại RFC 5424]),
+  ),
+  caption: [Lược đồ thực thể - quan hệ (ERD) các bảng nghiệp vụ cốt lõi của CAMS],
+) <tab-core-erd>
+
 == Thiết kế giao diện và xử lý lỗi
 
 Giao diện gồm khu vực danh mục thiết bị, tab làm việc, vùng chức năng và thanh trạng thái. Các biểu mẫu dùng chung cách nhập, lưu và xem trước thay đổi. System Logs cung cấp không gian đọc nhật ký tập trung; các tiện ích SFTP và terminal được mở theo nhu cầu. Hình minh họa giao diện được trình bày tại Chương 4 để gắn thiết kế với phần hiện thực.

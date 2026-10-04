@@ -125,7 +125,11 @@ SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy c
 
 Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. 
 
+<<<<<<< HEAD
 Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`) @cryptographyAeadDocs @rfc9106 @nistSp80038d. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
+=======
+Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`), loại trừ hoàn toàn nguy cơ rò rỉ thông tin xác thực trên toàn hệ thống. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
+>>>>>>> a7480ee (FUCK FUCK)
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),

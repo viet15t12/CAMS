@@ -881,6 +881,11 @@ Kịch bản 5 khẳng định hệ thống CAMS đạt được sự đồng b�
 - Cơ chế kiểm soát Privilege 15 theo nguyên lý Fail-Closed loại trừ hoàn toàn nguy cơ thực thi thiếu quyền trên Cisco IOS.
 - Cơ chế tự động chèn từ khóa `log` vào ACL giúp chuyển đổi các quy tắc tường lửa tĩnh thành các sự kiện giám sát động gửi về Syslog Server theo thời gian thực.
 - Kiến trúc mật mã `ENC$v2$` kết hợp Argon2id (RFC 9106) và AES-256-GCM với Record-Bound AAD đảm bảo thông tin đăng nhập được bảo vệ vững chắc ở trạng thái lưu trữ, loại bỏ rủi ro trích xuất mật khẩu bản rõ cũng như tấn công tráo đổi bản mã trong cơ sở dữ liệu.
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a7480ee (FUCK FUCK)
 == Đánh giá tổng hợp
 
 === Ưu điểm nổi bật
