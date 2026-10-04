@@ -61,9 +61,20 @@ CHAPTER_03_FILENAMES = (
     "07-feature-bar-switch.png",
     "08-content-area.png",
     "09-status-bar.png",
+    "09-status-details.png",
     "10-sidebar-collapsed.png",
 )
 
+
+CHAPTER_04_FILENAMES = (
+ '01-devices-inventory.png', '02-add-device-empty.png', '03-add-device-filled.png',
+ '04-device-added-waiting.png', '05-ssh-compatibility.png', '06-add-multiple-devices.png',
+ '07-batch-devices-filled.png', '08-search-filter.png', '09-device-context-waiting.png',
+ '10-device-connected.png', '11-device-context-connected.png', '12-device-context-disconnected.png',
+ '13-multi-select.png', '14-multi-select-actions.png', '15-edit-device.png',
+ '16-delete-device-confirmation.png', '17-running-config-result.png',
+ '18-import-result.png', '19-batch-table-detail.png',
+)
 
 def resolve_shots(name: str) -> tuple[ShotSpec, ...]:
     if name == "all":
@@ -79,6 +90,7 @@ __all__ = [
     "SHOT_REGISTRY",
     "DIALOG_REGRESSION_FILENAMES",
     "CHAPTER_03_FILENAMES",
+    "CHAPTER_04_FILENAMES",
     "VLAN_WORKFLOW_FILENAMES",
     "ShotSpec",
     "resolve_shots",

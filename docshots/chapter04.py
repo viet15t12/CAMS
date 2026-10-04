@@ -18,15 +18,7 @@ from infrastructure.network.session_registry import DeviceSessionRegistry
 
 HOSTS = ('192.168.56.11', '192.168.56.12', '192.168.56.21', '192.168.56.23')
 TEMP = '192.168.56.99'
-FILENAMES = (
- '01-devices-inventory.png', '02-add-device-empty.png', '03-add-device-filled.png',
- '04-device-added-waiting.png', '05-ssh-compatibility.png', '06-add-multiple-devices.png',
- '07-batch-devices-filled.png', '08-search-filter.png', '09-device-context-waiting.png',
- '10-device-connected.png', '11-device-context-connected.png', '12-device-context-disconnected.png',
- '13-multi-select.png', '14-multi-select-actions.png', '15-edit-device.png',
- '16-delete-device-confirmation.png', '17-running-config-result.png',
- '18-import-result.png', '19-batch-table-detail.png',
-)
+from .shots import CHAPTER_04_FILENAMES as FILENAMES
 
 class Connector:
     """Deterministic in-memory network boundary; never creates a socket."""

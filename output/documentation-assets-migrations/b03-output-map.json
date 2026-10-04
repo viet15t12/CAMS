@@ -1,0 +1,335 @@
+{
+  "batch": "B03-0",
+  "starting_commit": "f1d099ce63d74172a21b0c30bfaef560f6cb8146",
+  "status": "PASS",
+  "mapped_assets": 42,
+  "workflow_counts": {
+    "chapter-03": 11,
+    "chapter-04": 19,
+    "vlan": 9,
+    "welcome": 1,
+    "workspace": 1,
+    "devices": 1
+  },
+  "mappings": [
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "01-workspace-overview.png",
+      "asset_id": "ui.core.workspace-overview",
+      "canonical_path": "documentation_assets/ui/docshot/core/workspace-overview.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "02-menu-bar.png",
+      "asset_id": "ui.core.view-menu",
+      "canonical_path": "documentation_assets/ui/docshot/core/view-menu.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "03-activity-bar.png",
+      "asset_id": "ui.core.activity-bar",
+      "canonical_path": "documentation_assets/ui/docshot/core/activity-bar.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "04-devices-sidebar.png",
+      "asset_id": "ui.devices.sidebar-status-groups",
+      "canonical_path": "documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "05-device-tabs.png",
+      "asset_id": "ui.devices.tabs-router-active",
+      "canonical_path": "documentation_assets/ui/docshot/devices/tabs-router-active.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "06-feature-bar-router.png",
+      "asset_id": "ui.core.feature-bar-router",
+      "canonical_path": "documentation_assets/ui/docshot/core/feature-bar-router.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "07-feature-bar-switch.png",
+      "asset_id": "ui.core.feature-bar-switch",
+      "canonical_path": "documentation_assets/ui/docshot/core/feature-bar-switch.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "08-content-area.png",
+      "asset_id": "ui.core.information-empty",
+      "canonical_path": "documentation_assets/ui/docshot/core/information-empty.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "09-status-bar.png",
+      "asset_id": "ui.core.status-bar",
+      "canonical_path": "documentation_assets/ui/docshot/core/status-bar.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "09-status-details.png",
+      "asset_id": "ui.core.status-details",
+      "canonical_path": "documentation_assets/ui/docshot/core/status-details.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-03",
+      "legacy_filename": "10-sidebar-collapsed.png",
+      "asset_id": "ui.core.sidebar-collapsed",
+      "canonical_path": "documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "01-devices-inventory.png",
+      "asset_id": "ui.devices.inventory-waiting",
+      "canonical_path": "documentation_assets/ui/docshot/devices/inventory-waiting.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "02-add-device-empty.png",
+      "asset_id": "ui.devices.create-empty",
+      "canonical_path": "documentation_assets/ui/docshot/devices/create-empty.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "03-add-device-filled.png",
+      "asset_id": "ui.devices.create-filled",
+      "canonical_path": "documentation_assets/ui/docshot/devices/create-filled.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "04-device-added-waiting.png",
+      "asset_id": "ui.devices.created-waiting",
+      "canonical_path": "documentation_assets/ui/docshot/devices/created-waiting.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "05-ssh-compatibility.png",
+      "asset_id": "ui.devices.ssh-compatibility",
+      "canonical_path": "documentation_assets/ui/docshot/devices/ssh-compatibility.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "06-add-multiple-devices.png",
+      "asset_id": "ui.devices.batch-create-empty",
+      "canonical_path": "documentation_assets/ui/docshot/devices/batch-create-empty.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "07-batch-devices-filled.png",
+      "asset_id": "ui.devices.batch-create-filled",
+      "canonical_path": "documentation_assets/ui/docshot/devices/batch-create-filled.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "08-search-filter.png",
+      "asset_id": "ui.devices.search-switches",
+      "canonical_path": "documentation_assets/ui/docshot/devices/search-switches.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "09-device-context-waiting.png",
+      "asset_id": "ui.devices.context-waiting",
+      "canonical_path": "documentation_assets/ui/docshot/devices/context-waiting.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "10-device-connected.png",
+      "asset_id": "ui.devices.connected",
+      "canonical_path": "documentation_assets/ui/docshot/devices/connected.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "11-device-context-connected.png",
+      "asset_id": "ui.devices.context-connected",
+      "canonical_path": "documentation_assets/ui/docshot/devices/context-connected.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "12-device-context-disconnected.png",
+      "asset_id": "ui.devices.context-disconnected",
+      "canonical_path": "documentation_assets/ui/docshot/devices/context-disconnected.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "13-multi-select.png",
+      "asset_id": "ui.devices.multi-select-mixed-status",
+      "canonical_path": "documentation_assets/ui/docshot/devices/multi-select-mixed-status.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "14-multi-select-actions.png",
+      "asset_id": "ui.devices.multi-select-actions",
+      "canonical_path": "documentation_assets/ui/docshot/devices/multi-select-actions.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "15-edit-device.png",
+      "asset_id": "ui.devices.edit",
+      "canonical_path": "documentation_assets/ui/docshot/devices/edit.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "16-delete-device-confirmation.png",
+      "asset_id": "ui.devices.delete-confirmation",
+      "canonical_path": "documentation_assets/ui/docshot/devices/delete-confirmation.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "17-running-config-result.png",
+      "asset_id": "ui.devices.running-config-snapshot",
+      "canonical_path": "documentation_assets/ui/docshot/devices/running-config-snapshot.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "18-import-result.png",
+      "asset_id": "ui.devices.import-result",
+      "canonical_path": "documentation_assets/ui/docshot/devices/import-result.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "chapter-04",
+      "legacy_filename": "19-batch-table-detail.png",
+      "asset_id": "ui.devices.batch-host-name-detail",
+      "canonical_path": "documentation_assets/ui/docshot/devices/batch-host-name-detail.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "devices",
+      "legacy_filename": "devices.png",
+      "asset_id": "ui.devices.inventory-router-selected",
+      "canonical_path": "documentation_assets/ui/docshot/devices/inventory-router-selected.png",
+      "pack": "B03B"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "01-select-switch.png",
+      "asset_id": "ui.switching.vlan.switch-selected",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/switch-selected.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "02-open-vlan.png",
+      "asset_id": "ui.switching.vlan.database",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/database.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "03-add-vlan.png",
+      "asset_id": "ui.switching.vlan.create-empty",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/create-empty.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "04-vlan-id.png",
+      "asset_id": "ui.switching.vlan.create-id-filled",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/create-id-filled.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "05-vlan-name.png",
+      "asset_id": "ui.switching.vlan.create-name-filled",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/create-name-filled.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "06-vlan-state.png",
+      "asset_id": "ui.switching.vlan.create-state-selector",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/create-state-selector.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "07-ready-to-save.png",
+      "asset_id": "ui.switching.vlan.create-ready",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/create-ready.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "08-vlan-created.png",
+      "asset_id": "ui.switching.vlan.created-pending-apply",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "vlan",
+      "legacy_filename": "09-view-preview.png",
+      "asset_id": "ui.switching.vlan.view-push-guest",
+      "canonical_path": "documentation_assets/ui/docshot/switching/vlan/view-push-guest.png",
+      "pack": "B03C"
+    },
+    {
+      "workflow": "welcome",
+      "legacy_filename": "welcome.png",
+      "asset_id": "ui.core.welcome-recent-projects",
+      "canonical_path": "documentation_assets/ui/docshot/core/welcome-recent-projects.png",
+      "pack": "B03A"
+    },
+    {
+      "workflow": "workspace",
+      "legacy_filename": "workspace.png",
+      "asset_id": "ui.core.workspace-empty",
+      "canonical_path": "documentation_assets/ui/docshot/core/workspace-empty.png",
+      "pack": "B03A"
+    }
+  ],
+  "canonical_writes": "blocked until all 42 are migrated",
+  "dialogs": "temporary-only; no IDs assigned",
+  "assets_transferred": 0,
+  "manifest": {
+    "migrated": 37,
+    "pending": 308,
+    "frozen": 62
+  },
+  "tests": {
+    "command": "python -m unittest tests.test_docshot_destinations tests.test_documentation_assets -v",
+    "count": 28,
+    "result": "PASS"
+  },
+  "diff_check": "PASS",
+  "optional_qt_smoke": {
+    "result": "UNAVAILABLE",
+    "reason": "docshots.runtime import fails: ModuleNotFoundError: No module named jinja2; no fixtures/dependencies invented"
+  },
+  "review_flag_discrepancy": {
+    "ids": [
+      "ui.core.feature-bar-switch",
+      "ui.devices.context-connected"
+    ],
+    "finding": "Historical review_required=true flags retained. Targeted visual check confirms SW1 feature bar and Connected context menu; current captions already agree. Existing provenance and semantics unchanged."
+  }
+}

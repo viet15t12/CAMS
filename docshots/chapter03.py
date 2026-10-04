@@ -130,7 +130,7 @@ def render_chapter_03_workflow(request: rt.RenderRequest) -> tuple[rt.RenderResu
             save(CHAPTER_03_FILENAMES[7], (p.x(), p.y(), content.width(), 560))
             p = origin(status)
             save(CHAPTER_03_FILENAMES[8], (0, p.y(), window.width(), status.height()))
-            save("09-status-details.png", (window.width() - 550, p.y(), 550, status.height()))
+            save(CHAPTER_03_FILENAMES[9], (window.width() - 550, p.y(), 550, status.height()))
 
             # Real Dashboard click path toggles, unlike the menu's navigation action.
             dashboard = rt._find_visible_item(activity, "tooltipText", "Dashboard (Ctrl+Alt+D)", "Dashboard")
@@ -145,7 +145,7 @@ def render_chapter_03_workflow(request: rt.RenderRequest) -> tuple[rt.RenderResu
             require(not window.property("sidebarVisible") and tabs.property("activeUid") == "192.0.2.1"
                     and sidebar.property("activeHost") == "192.0.2.1"
                     and tabs.property("currentFMain") == 0, "Sidebar toggle lost context")
-            save(CHAPTER_03_FILENAMES[9])
+            save(CHAPTER_03_FILENAMES[10])
             registry.triggerToggleSidebar()
             registry.triggerSettings()
             settle()
