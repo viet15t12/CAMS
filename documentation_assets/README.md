@@ -2,6 +2,12 @@
 
 This store is the future authority for migrated book/report documentation assets. Phase 3 creates metadata only: **345 pending nonterminal records, 62 frozen external records, zero migrated images**. No screenshots are moved, renamed, rendered or replaced here.
 
+## Repository byte contract (Phase 3.3)
+
+Documentation image SHA-256 represents exact repository-stored bytes. Explicit `-text` rules in `.gitattributes` cover SVG/PNG/JPG/JPEG/WebP/GIF under `00_book/figures/`, `00_report/`, and `documentation_assets/`; Git cannot normalize their EOLs during add or checkout. Runtime/application assets retain their existing policy. The validator hashes binary filesystem bytes without normalizing or ignoring differences.
+
+Phase 3.3 corrects 29 prior manifest hashes derived from CRLF working-tree copies to the corresponding committed LF blob hashes. No image semantics, classification, migration state, planned path, approval, or terminal contract changes. The historical planning hashes remain historical evidence; see `output/documentation-assets-foundation/phase3-3-eol-audit.csv` for the explicit reconciliation and `phase3-3.md` for clean-checkout verification.
+
 ## Manifest lifecycle
 
 `manifest.yaml` is bootstrapped from the committed Phase 2.1 planning overlay, using its current SHA-256 values. Each record has a stable logical ID, authoritative `current_path` (also `path`), `planned_canonical_path`, and `migration_state`:

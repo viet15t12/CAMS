@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -56,6 +57,56 @@ class DocumentationAssetTests(unittest.TestCase):
         with self.assertRaisesRegex(AssetError, "SHA mismatch"):
             sync(self.data, self.root)
         self.assertFalse((self.root / STAGE_ROOT).exists())
+
+    def test_documentation_image_paths_explicitly_disable_git_text_filtering(self):
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        records = yaml.safe_load((root / "documentation_assets/manifest.yaml").read_text())["assets"]
+        paths = {a[key] for a in records for key in ("current_path", "planned_canonical_path")
+                 if a.get(key) and a[key].endswith(".svg")}
+        # Exercise all formats at both root and nested levels, including future assets.
+        paths.update(f"{base}/{nested}fixture.{ext}"
+                     for base in ("00_book/figures", "00_report", "documentation_assets")
+                     for nested in ("", "nested/")
+                     for ext in ("svg", "png", "jpg", "jpeg", "webp", "gif"))
+        output = subprocess.check_output(["git", "check-attr", "-z", "text", "--", *sorted(paths)], cwd=root)
+        values = output.decode().strip("\0").split("\0")
+        for path, attribute, value in zip(values[::3], values[1::3], values[2::3]):
+            with self.subTest(path=path):
+                self.assertEqual((attribute, value), ("text", "unset"))
+        runtime = subprocess.check_output(["git", "check-attr", "text", "--", "UI/resources/brand/logo.svg"], cwd=root, text=True)
+        self.assertEqual(runtime.strip().rsplit(": ", 1)[1], "auto")
+
+    def test_svg_repository_bytes_survive_autocrlf_and_validator_checks_exact_bytes(self):
+        root = Path(__file__).resolve().parents[1]
+        subprocess.run(["git", "init", "--quiet", str(self.root)], check=True)
+        (self.root / ".gitattributes").write_bytes((root / ".gitattributes").read_bytes())
+        path = "documentation_assets/diagrams/example.svg"
+        source = self.root / path
+        source.parent.mkdir(parents=True)
+        content = b'<svg xmlns="http://www.w3.org/2000/svg">\r\n<text>fixture</text>\r\n</svg>\r\n'
+        source.write_bytes(content)
+        subprocess.run(["git", "-c", "core.autocrlf=true", "add", ".gitattributes", path], cwd=self.root, check=True)
+        subprocess.run(["git", "-c", "user.name=Asset Test", "-c", "user.email=asset-test@example.invalid",
+                        "-c", "commit.gpgsign=false", "commit", "--quiet", "-m", "byte fixture"], cwd=self.root, check=True)
+        blob = subprocess.check_output(["git", "cat-file", "blob", f"HEAD:{path}"], cwd=self.root)
+        self.assertEqual(blob, content)
+        self.record.update(migration_state="migrated", canonical=True, current_path=path,
+                           path=path, planned_canonical_path=path, sha256=digest(source),
+                           mkdocs_stage=False, mkdocs_stage_path=None, targets=[])
+        for autocrlf in ("false", "true", "input"):
+            with self.subTest(autocrlf=autocrlf):
+                checkout = self.root / f"clean-{autocrlf}"
+                checkout.mkdir()
+                subprocess.run(["git", "-c", f"core.autocrlf={autocrlf}", "checkout-index", "--all",
+                                f"--prefix={checkout}/"], cwd=self.root, check=True)
+                self.assertEqual((checkout / path).read_bytes(), blob)
+                self.assertEqual(digest(checkout / path), self.record["sha256"])
+                contract = checkout / "documentation_assets/terminal-freeze.json"
+                contract.write_text(json.dumps(self.contract))
+                self.assertEqual(validate_manifest(self.data, checkout), [])
+                (checkout / path).write_bytes(content.replace(b"\r\n", b"\n"))
+                self.assertTrue(any("SHA mismatch" in e for e in validate_manifest(self.data, checkout)))
 
     def test_duplicates_casefold_and_traversal_rejected(self):
         for edit in [dict(id=self.record["id"]),
@@ -230,6 +281,8 @@ class DocumentationAssetTests(unittest.TestCase):
         import yaml
         root = Path(__file__).resolve().parents[1]
         records = {a["id"]: a for a in yaml.safe_load((root / "documentation_assets/manifest.yaml").read_text())["assets"]}
+        with (root / "output/documentation-assets-foundation/phase3-3-eol-audit.csv").open() as stream:
+            reconciled = {r["asset_id"]: r for r in csv.DictReader(stream) if r["eol_only"] == "true"}
         with (root / "output/documentation-assets-plan/b02-preflight.csv").open() as stream:
             rows = list(csv.DictReader(stream))
         with (root / "output/documentation-assets-plan/migration-batches.csv").open() as stream:
@@ -244,7 +297,13 @@ class DocumentationAssetTests(unittest.TestCase):
             asset = records[row["asset_id"]]
             self.assertEqual(row["current_path"], asset["current_path"])
             self.assertEqual(row["planned_canonical_path"], asset["planned_canonical_path"])
-            self.assertEqual(row["sha256"], asset["sha256"])
+            # Historical preflight hashes precede the repository-byte contract.
+            if row["asset_id"] in reconciled:
+                audit = reconciled[row["asset_id"]]
+                self.assertEqual(row["sha256"], audit["manifest_sha"])
+                self.assertEqual(asset["sha256"], audit["git_blob_sha"])
+            else:
+                self.assertEqual(row["sha256"], asset["sha256"])
             self.assertEqual(asset["migration_state"], "pending")
             if row["asset_id"] in safe:
                 self.assertFalse(asset["review_required"])
