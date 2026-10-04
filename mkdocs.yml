@@ -45,8 +45,8 @@ exclude_docs: |
 theme:
   name: material
   language: vi
-  logo: figures/icons/logo.svg
-  favicon: figures/icons/logo.svg
+  logo: assets/branding/logos/cams.svg
+  favicon: assets/branding/logos/cams.svg
   font: false
   icon:
     repo: fontawesome/brands/github

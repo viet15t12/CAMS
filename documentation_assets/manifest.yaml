@@ -9253,14 +9253,14 @@ assets:
   domain: branding/logos
   subject: cams
   source_kind: branding
-  current_path: 00_book/figures/icons/logo.svg
-  path: 00_book/figures/icons/logo.svg
+  current_path: documentation_assets/branding/logos/cams.svg
+  path: documentation_assets/branding/logos/cams.svg
   planned_canonical_path: documentation_assets/branding/logos/cams.svg
   legacy_path: 00_book/figures/icons/logo.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: da754f1488d129cb48c1fb2452adb421f4145bf05609c094b981c9a51b140612
   provenance:
     assessment: unknown
@@ -9278,11 +9278,11 @@ assets:
   used_by:
   - source_document: mkdocs.yml
     line: 48
-    referenced_path: figures/icons/logo.svg
+    referenced_path: assets/branding/logos/cams.svg
     target_type: config
   - source_document: mkdocs.yml
     line: 49
-    referenced_path: figures/icons/logo.svg
+    referenced_path: assets/branding/logos/cams.svg
     target_type: config
   targets:
   - book-mkdocs
@@ -9340,14 +9340,14 @@ assets:
   domain: diagrams/architecture
   subject: application-source-tree
   source_kind: authored-svg
-  current_path: 00_book/figures/report/appendix/project-structure.svg
-  path: 00_book/figures/report/appendix/project-structure.svg
+  current_path: documentation_assets/diagrams/architecture/application-source-tree.svg
+  path: documentation_assets/diagrams/architecture/application-source-tree.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/application-source-tree.svg
   legacy_path: 00_book/figures/report/appendix/project-structure.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: c94c656ab5b4666bd7270eed9491b84c6a18f276ce720977abadbfd232439443
   provenance:
     assessment: unknown
@@ -9365,7 +9365,7 @@ assets:
   used_by:
   - source_document: 00_report/appendix/appendix_a_cau_truc_du_an.typ
     line: 17
-    referenced_path: /00_book/figures/report/appendix/project-structure.svg
+    referenced_path: /documentation_assets/diagrams/architecture/application-source-tree.svg
     target_type: report-typst
   targets:
   - report-typst
@@ -9424,14 +9424,14 @@ assets:
   domain: diagrams/workflow
   subject: configuration-state-flow
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/02_state_flow.svg
-  path: 00_book/figures/report/diagrams/02_state_flow.svg
+  current_path: documentation_assets/diagrams/workflow/configuration-state-flow.svg
+  path: documentation_assets/diagrams/workflow/configuration-state-flow.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/configuration-state-flow.svg
   legacy_path: 00_book/figures/report/diagrams/02_state_flow.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 5b71aaddc018cb70ace76eb9c29e8cbe38048659416fe34a90f686decb94b758
   provenance:
     assessment: unknown
@@ -9449,7 +9449,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/07_phan_tich_thiet_ke.typ
     line: 68
-    referenced_path: /00_book/figures/report/diagrams/02_state_flow.svg
+    referenced_path: /documentation_assets/diagrams/workflow/configuration-state-flow.svg
     target_type: report-typst
   targets:
   - report-typst
@@ -10289,14 +10289,14 @@ assets:
   domain: diagrams/architecture
   subject: cams-layered-system
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/22_architecture_overview.svg
-  path: 00_book/figures/report/diagrams/22_architecture_overview.svg
+  current_path: documentation_assets/diagrams/architecture/cams-layered-system.svg
+  path: documentation_assets/diagrams/architecture/cams-layered-system.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/cams-layered-system.svg
   legacy_path: 00_book/figures/report/diagrams/22_architecture_overview.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 610a56c16256dadaa9cccf09d9ab13a68bd8146353b105eb17c49dad1fdc5787
   provenance:
     assessment: unknown
@@ -10314,7 +10314,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/07_phan_tich_thiet_ke.typ
     line: 45
-    referenced_path: /00_book/figures/report/diagrams/22_architecture_overview.svg
+    referenced_path: /documentation_assets/diagrams/architecture/cams-layered-system.svg
     target_type: report-typst
   targets:
   - report-typst
@@ -10456,14 +10456,14 @@ assets:
   domain: diagrams/lab-topology/switching
   subject: layer-two-security
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg
-  path: 00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg
+  current_path: documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg
+  path: documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg
   planned_canonical_path: documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg
   legacy_path: 00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3401ecff4fd6d4f9bb7c586b8c468891d1d96af4de2e60170f08b44640bf91ce
   provenance:
     assessment: unknown
@@ -10481,7 +10481,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
     line: 41
-    referenced_path: /00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg
+    referenced_path: /documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg
     target_type: report-typst
   targets:
   - report-typst

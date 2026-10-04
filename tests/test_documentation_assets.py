@@ -295,7 +295,8 @@ class DocumentationAssetTests(unittest.TestCase):
         self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02A"}, safe)
         for row in rows:
             asset = records[row["asset_id"]]
-            self.assertEqual(row["current_path"], asset["current_path"])
+            # The historical plan retains the source path after migration.
+            self.assertEqual(row["current_path"], asset["legacy_path"] if asset["migration_state"] == "migrated" else asset["current_path"])
             self.assertEqual(row["planned_canonical_path"], asset["planned_canonical_path"])
             # Historical preflight hashes precede the repository-byte contract.
             if row["asset_id"] in reconciled:
@@ -304,11 +305,12 @@ class DocumentationAssetTests(unittest.TestCase):
                 self.assertEqual(asset["sha256"], audit["git_blob_sha"])
             else:
                 self.assertEqual(row["sha256"], asset["sha256"])
-            self.assertEqual(asset["migration_state"], "pending")
             if row["asset_id"] in safe:
+                self.assertIn(asset["migration_state"], {"pending", "migrated"})
                 self.assertFalse(asset["review_required"])
                 self.assertEqual(asset["confidence"], "high")
             else:
+                self.assertEqual(asset["migration_state"], "pending")
                 self.assertTrue(asset["review_required"])
                 self.assertEqual(row["review_approved"], "false")
 

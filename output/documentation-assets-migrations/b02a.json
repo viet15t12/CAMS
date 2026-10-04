@@ -1,0 +1,373 @@
+{
+  "batch": "B02A",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "22653d8e80398fb211fe96a9348b60c4f8b387ad",
+  "status": "PASS — working tree, index and fresh-checkout B02A validation complete",
+  "authority": {
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 8,
+    "behind": 0
+  },
+  "assets": [
+    {
+      "asset_id": "branding.logos.cams",
+      "old_path": "00_book/figures/icons/logo.svg",
+      "new_path": "documentation_assets/branding/logos/cams.svg",
+      "sha256_before": "da754f1488d129cb48c1fb2452adb421f4145bf05609c094b981c9a51b140612",
+      "sha256_after": "da754f1488d129cb48c1fb2452adb421f4145bf05609c094b981c9a51b140612",
+      "index_sha256": "da754f1488d129cb48c1fb2452adb421f4145bf05609c094b981c9a51b140612",
+      "manifest_sha256": "da754f1488d129cb48c1fb2452adb421f4145bf05609c094b981c9a51b140612",
+      "source_blob_equals_canonical_bytes": true,
+      "old_file_absent": true
+    },
+    {
+      "asset_id": "diagrams.architecture.application-source-tree",
+      "old_path": "00_book/figures/report/appendix/project-structure.svg",
+      "new_path": "documentation_assets/diagrams/architecture/application-source-tree.svg",
+      "sha256_before": "c94c656ab5b4666bd7270eed9491b84c6a18f276ce720977abadbfd232439443",
+      "sha256_after": "c94c656ab5b4666bd7270eed9491b84c6a18f276ce720977abadbfd232439443",
+      "index_sha256": "c94c656ab5b4666bd7270eed9491b84c6a18f276ce720977abadbfd232439443",
+      "manifest_sha256": "c94c656ab5b4666bd7270eed9491b84c6a18f276ce720977abadbfd232439443",
+      "source_blob_equals_canonical_bytes": true,
+      "old_file_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.configuration-state-flow",
+      "old_path": "00_book/figures/report/diagrams/02_state_flow.svg",
+      "new_path": "documentation_assets/diagrams/workflow/configuration-state-flow.svg",
+      "sha256_before": "5b71aaddc018cb70ace76eb9c29e8cbe38048659416fe34a90f686decb94b758",
+      "sha256_after": "5b71aaddc018cb70ace76eb9c29e8cbe38048659416fe34a90f686decb94b758",
+      "index_sha256": "5b71aaddc018cb70ace76eb9c29e8cbe38048659416fe34a90f686decb94b758",
+      "manifest_sha256": "5b71aaddc018cb70ace76eb9c29e8cbe38048659416fe34a90f686decb94b758",
+      "source_blob_equals_canonical_bytes": true,
+      "old_file_absent": true
+    },
+    {
+      "asset_id": "diagrams.architecture.cams-layered-system",
+      "old_path": "00_book/figures/report/diagrams/22_architecture_overview.svg",
+      "new_path": "documentation_assets/diagrams/architecture/cams-layered-system.svg",
+      "sha256_before": "610a56c16256dadaa9cccf09d9ab13a68bd8146353b105eb17c49dad1fdc5787",
+      "sha256_after": "610a56c16256dadaa9cccf09d9ab13a68bd8146353b105eb17c49dad1fdc5787",
+      "index_sha256": "610a56c16256dadaa9cccf09d9ab13a68bd8146353b105eb17c49dad1fdc5787",
+      "manifest_sha256": "610a56c16256dadaa9cccf09d9ab13a68bd8146353b105eb17c49dad1fdc5787",
+      "source_blob_equals_canonical_bytes": true,
+      "old_file_absent": true
+    },
+    {
+      "asset_id": "diagrams.lab-topology.switching.layer-two-security",
+      "old_path": "00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg",
+      "new_path": "documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg",
+      "sha256_before": "3401ecff4fd6d4f9bb7c586b8c468891d1d96af4de2e60170f08b44640bf91ce",
+      "sha256_after": "3401ecff4fd6d4f9bb7c586b8c468891d1d96af4de2e60170f08b44640bf91ce",
+      "index_sha256": "3401ecff4fd6d4f9bb7c586b8c468891d1d96af4de2e60170f08b44640bf91ce",
+      "manifest_sha256": "3401ecff4fd6d4f9bb7c586b8c468891d1d96af4de2e60170f08b44640bf91ce",
+      "source_blob_equals_canonical_bytes": true,
+      "old_file_absent": true
+    }
+  ],
+  "references": [
+    {
+      "source_document": "mkdocs.yml",
+      "line_before": 48,
+      "line_after": 48,
+      "old_referenced_path": "figures/icons/logo.svg",
+      "new_referenced_path": "assets/branding/logos/cams.svg",
+      "target_type": "config"
+    },
+    {
+      "source_document": "mkdocs.yml",
+      "line_before": 49,
+      "line_after": 49,
+      "old_referenced_path": "figures/icons/logo.svg",
+      "new_referenced_path": "assets/branding/logos/cams.svg",
+      "target_type": "config"
+    },
+    {
+      "source_document": "00_report/appendix/appendix_a_cau_truc_du_an.typ",
+      "line_before": 17,
+      "line_after": 17,
+      "old_referenced_path": "/00_book/figures/report/appendix/project-structure.svg",
+      "new_referenced_path": "/documentation_assets/diagrams/architecture/application-source-tree.svg",
+      "target_type": "report-typst"
+    },
+    {
+      "source_document": "00_report/contents/07_phan_tich_thiet_ke.typ",
+      "line_before": 68,
+      "line_after": 68,
+      "old_referenced_path": "/00_book/figures/report/diagrams/02_state_flow.svg",
+      "new_referenced_path": "/documentation_assets/diagrams/workflow/configuration-state-flow.svg",
+      "target_type": "report-typst"
+    },
+    {
+      "source_document": "00_report/contents/07_phan_tich_thiet_ke.typ",
+      "line_before": 45,
+      "line_after": 45,
+      "old_referenced_path": "/00_book/figures/report/diagrams/22_architecture_overview.svg",
+      "new_referenced_path": "/documentation_assets/diagrams/architecture/cams-layered-system.svg",
+      "target_type": "report-typst"
+    },
+    {
+      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+      "line_before": 41,
+      "line_after": 41,
+      "old_referenced_path": "/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg",
+      "new_referenced_path": "/documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg",
+      "target_type": "report-typst"
+    }
+  ],
+  "manifest": {
+    "migrated": 5,
+    "pending": 340,
+    "frozen": 62,
+    "other_records_unchanged": 402,
+    "comparison_baseline": "Phase 3.3 foundation commit; 29 earlier SHA corrections are recorded separately"
+  },
+  "mkdocs": {
+    "stage_path": "00_book/assets/branding/logos/cams.svg",
+    "stage_sha256": "da754f1488d129cb48c1fb2452adb421f4145bf05609c094b981c9a51b140612",
+    "stage_tracked": false,
+    "build": "PASS",
+    "logo_favicon_links_verified": 69,
+    "deployment_base": "/CAMS/"
+  },
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "page_count_unchanged": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "page_count_unchanged": true
+    }
+  ],
+  "terminal": {
+    "frozen_images_unchanged": 62,
+    "contract_and_reference_multiset_unchanged": true
+  },
+  "checks": [
+    {
+      "command": "python scripts/validate_documentation_assets.py --manifest-only",
+      "result": "PASS",
+      "log": "output/documentation-assets-migrations/b02a-resumed-0.log"
+    },
+    {
+      "command": "python scripts/sync_documentation_assets.py",
+      "result": "PASS",
+      "log": "output/documentation-assets-migrations/b02a-resumed-1.log"
+    },
+    {
+      "command": "python scripts/validate_documentation_assets.py --check-staging",
+      "result": "PASS",
+      "log": "output/documentation-assets-migrations/b02a-resumed-2.log"
+    },
+    {
+      "command": "python -m unittest tests.test_documentation_assets -v",
+      "result": "PASS: 19 tests",
+      "log": "output/documentation-assets-migrations/b02a-resumed-3.log"
+    },
+    {
+      "command": "python -m unittest tests.test_docshot_destinations -v",
+      "result": "PASS: 5 tests",
+      "log": "output/documentation-assets-migrations/b02a-resumed-4.log"
+    },
+    {
+      "command": "python -m unittest tests.test_typst_tooling -v",
+      "result": "PASS: 3 tests",
+      "log": "output/documentation-assets-migrations/b02a-resumed-5.log"
+    },
+    {
+      "command": "/tmp/cams-b02a-docs/bin/mkdocs build --strict",
+      "result": "PASS",
+      "log": "output/documentation-assets-migrations/b02a-resumed-6.log"
+    },
+    {
+      "command": "python scripts/build_typst.py",
+      "result": "PASS",
+      "log": "output/documentation-assets-migrations/b02a-resumed-7.log"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS",
+      "log": "output/documentation-assets-migrations/b02a-resumed-8.log"
+    },
+    {
+      "command": "git diff --cached --check",
+      "result": "PASS",
+      "log": "output/documentation-assets-migrations/b02a-resumed-9.log"
+    }
+  ],
+  "reference_baseline": "unchanged byte-for-byte; no B02A baseline occurrence resolved",
+  "scope": {
+    "transfers": 5,
+    "additional_transfers": 0,
+    "docshot_renders": 0,
+    "other_batches_executed": false,
+    "repository_svg_content_changes": 0
+  },
+  "blockers": [],
+  "remote_ci": {
+    "status": "REMOTE CI NOT RUN",
+    "reason": "gh CLI is unavailable and no workflow_dispatch connector tool is exposed; no remote success is claimed."
+  },
+  "next_batches_started": false,
+  "runtime_duplicate_exception": {
+    "user_confirmed": true,
+    "policy": "Keep runtime logo unchanged; uniqueness applies to documentation B02A sources only",
+    "path": "UI/resources/brand/logo.svg"
+  },
+  "foundation_commit": "28f41347ee8ebe6581af3941fdd34554a69003d3",
+  "hash_authority": "exact repository-stored source blob bytes",
+  "hash_contract_reconciliation": {
+    "original_affected_records": 29,
+    "b02a_affected_records": 4,
+    "other_pending_affected_records": 25,
+    "frozen_affected_records": 0,
+    "policy": "Explicit documentation-root -text attributes; exact Git blob SHA authority",
+    "audit": "output/documentation-assets-foundation/phase3-3-eol-audit.csv"
+  },
+  "delivery_policy": "After fresh-checkout acceptance, create a separate B02A commit and push both authorized commits; final delivery message reports immutable commit/remote SHAs.",
+  "clean_checkout": {
+    "method": "Temporary candidate Git commit followed by a separate normal Linux clone with core.autocrlf=false; generated staging absent before pre-sync",
+    "filesystem_blob_manifest_matches": 407,
+    "migration_counts": {
+      "migrated": 5,
+      "pending": 340,
+      "frozen": 62
+    },
+    "affected_pending_assets_remaining_legacy": 25,
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-0.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-5.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02a-docs/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-6.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-7.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-phase33/b02a-clean-8.log"
+      }
+    ],
+    "report_pages": 110,
+    "book_pages": 170,
+    "pdf_shas_match_local_builds": true,
+    "foundation_clean_checkout_commit": "28f41347ee8ebe6581af3941fdd34554a69003d3"
+  }
+}

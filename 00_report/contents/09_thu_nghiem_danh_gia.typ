@@ -38,7 +38,7 @@ Phần thực nghiệm gồm năm kịch bản: hạ tầng chuyển mạch và 
 Kịch bản 1 thiết lập hạ tầng chuyển mạch đa tầng trên môi trường lab, gồm khởi tạo VLAN, đồng bộ qua VTP, gom kênh EtherChannel bằng LACP và triển khai các cơ chế bảo vệ Lớp 2 gồm DHCP Snooping, Dynamic ARP Inspection và Port Security.
 
 #figure(
-  image("/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg", width: 90%),
+  image("/documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg", width: 90%),
   caption: [Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2],
 ) <fig-topo-scenario-1>
 

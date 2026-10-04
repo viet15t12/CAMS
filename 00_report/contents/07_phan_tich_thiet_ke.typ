@@ -42,7 +42,7 @@ Các yêu cầu này là tiêu chí thiết kế và đánh giá. Mức đáp �
 CAMS tổ chức trách nhiệm thành bốn lớp như @fig-layer-architecture. Lớp giao diện Qt Quick/QML nhận thao tác và hiển thị dữ liệu. Lớp cầu nối PyQt6 tiếp nhận yêu cầu, gọi chức năng và trả về tín hiệu cập nhật. Lớp nghiệp vụ và dữ liệu kiểm tra quy tắc, quản lý trạng thái và truy cập SQLite. Lớp mạng và thực thi quản lý kết nối, sinh lệnh và thực hiện tác vụ nền.
 
 #figure(
-  image("/00_book/figures/report/diagrams/22_architecture_overview.svg", width: 74%),
+  image("/documentation_assets/diagrams/architecture/cams-layered-system.svg", width: 74%),
   caption: [Kiến trúc phân lớp của CAMS],
 ) <fig-layer-architecture>
 
@@ -65,7 +65,7 @@ Người dùng nhập tham số trên biểu mẫu của từng chức năng. Sa
 Luồng View & Push được mô tả tại @fig-state-flow. Bộ điều khiển lấy dữ liệu chờ và dùng Jinja2 tạo khối lệnh. Người dùng kiểm tra thiết bị đích, nội dung thay đổi và thứ tự lệnh trước khi chọn Push. Tác vụ nền sử dụng phiên kết nối có khóa, gửi lệnh và xử lý phản hồi.
 
 #figure(
-  image("/00_book/figures/report/diagrams/02_state_flow.svg", width: 100%),
+  image("/documentation_assets/diagrams/workflow/configuration-state-flow.svg", width: 100%),
   caption: [Luồng cấu hình từ dữ liệu chờ đến thực thi và cập nhật kết quả],
 ) <fig-state-flow>
 

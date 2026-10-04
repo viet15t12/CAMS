@@ -14,7 +14,7 @@
 Mã nguồn ứng dụng desktop CAMS được tổ chức tại thư mục gốc của kho mã nguồn theo kiến trúc phân lớp. Sơ đồ dưới đây thể hiện các lớp chính, nhóm mô-đun và trách nhiệm tương ứng.
 
 #figure(
-  image("/00_book/figures/report/appendix/project-structure.svg", width: 90%),
+  image("/documentation_assets/diagrams/architecture/application-source-tree.svg", width: 90%),
   caption: [Cấu trúc thư mục mã nguồn ứng dụng desktop CAMS],
 ) <fig-appendix-project-structure>
 

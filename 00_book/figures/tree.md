@@ -210,14 +210,10 @@
 │   ├── welcome.png
 │   └── workspace.png
 ├── icons
-│   ├── logo.svg
 │   └── ptit-logo.svg
 ├── report
-│   ├── appendix
-│   │   └── project-structure.svg
 │   ├── diagrams
 │   │   ├── 01_pipeline_automation.svg
-│   │   ├── 02_state_flow.svg
 │   │   ├── 03_cli_modes.svg
 │   │   ├── 04_ssh_connection.svg
 │   │   ├── 05_session_lifecycle.svg
@@ -239,7 +235,6 @@
 │   │   ├── 19_testing_flow_a.svg
 │   │   ├── 20_testing_flow_b.svg
 │   │   ├── 21_lab_test_flow.svg
-│   │   ├── 22_architecture_overview.svg
 │   │   ├── dhcp-snooping.jpg
 │   │   ├── dhcp_dora.png
 │   │   ├── Etherchannel.jpg
@@ -266,7 +261,6 @@
 │   │   ├── LAB_2-report.png
 │   │   ├── LAB_2.svg
 │   │   ├── lab_4.svg
-│   │   ├── LAB_KICH_BAN_1.svg
 │   │   ├── routing-ospf-lab
 │   │   │   ├── 1.png
 │   │   │   ├── 2.png
@@ -355,3 +349,14 @@
 │       ├── cams-screenshot-2026-09-13-18-17-17.png
 │       └── xxd-ntp.png
 └── tree.md
+
+
+B02A canonical assets (outside this figures tree):
+
+- documentation_assets/branding/logos/cams.svg
+- documentation_assets/diagrams/architecture/application-source-tree.svg
+- documentation_assets/diagrams/workflow/configuration-state-flow.svg
+- documentation_assets/diagrams/architecture/cams-layered-system.svg
+- documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg
+
+MkDocs stages the CAMS logo at 00_book/assets/branding/logos/cams.svg (generated/gitignored).
