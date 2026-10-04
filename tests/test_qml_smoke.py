@@ -252,6 +252,43 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertEqual(limit_map["targets"], 5)
         self.assertIn("at most 5 hosts", limit_map["error"])
 
+    def test_routing_group_network_area_columns_align_across_hosts_and_widths(self) -> None:
+        window = self._create("tests/qml/RoutingGroupNetworkGeometryHarness.qml")
+        self.assertTrue(QTest.qWaitForWindowExposed(window, 1000))
+        dialog = window.property("dialog")
+        targets_before = dialog.selectedTargets().toVariant()
+
+        def area_fields():
+            pending = [window.contentItem()]
+            fields = []
+            while pending:
+                item = pending.pop()
+                pending.extend(item.childItems())
+                if item.property("labelText") == "Area":
+                    fields.append(item)
+            return fields
+
+        for width in (1000, 720, 500):
+            with self.subTest(window_width=width):
+                window.setWidth(width)
+                QTest.qWait(50)
+                fields = area_fields()
+                self.assertEqual(len(fields), 12)  # Four networks on each of R1/R2/R3.
+                geometry = [
+                    (field.mapToItem(window.contentItem(), QPointF(0, 0)).x(),
+                     field.width())
+                    for field in fields
+                ]
+                self.assertLessEqual(max(x for x, _ in geometry)
+                                     - min(x for x, _ in geometry), 1, geometry)
+                self.assertLessEqual(max(w for _, w in geometry)
+                                     - min(w for _, w in geometry), 1, geometry)
+                self.assertGreaterEqual(min(w for _, w in geometry), 100)
+                self.assertTrue(all(x >= 0 and x + w <= width for x, w in geometry),
+                                geometry)
+                self.assertEqual(dialog.selectedTargets().toVariant(), targets_before)
+        self.assertEqual(self.warnings, [])
+
     def test_view_push_polling_stops_when_database_manager_shuts_down(self) -> None:
         button = self._create_with_properties(
             "UI/qml/shared/ViewPushButton.qml",

@@ -9,6 +9,18 @@ FormSection {
     required property var targetModel
     required property var controller
     required property string protocol
+    readonly property bool compactColumns: width < 480
+    readonly property real networkColumnWidth: Math.ceil(networkLabelMetrics.width)
+                                               + Theme.checkboxSize
+                                               + Theme.spacing8 + Theme.spacing12
+    readonly property real areaColumnWidth: Math.max(100, Theme.inputMinimumWidth)
+
+    TextMetrics {
+        id: networkLabelMetrics
+        font.family: Theme.fontFamily
+        font.pixelSize: Theme.fontSizeNormal
+        text: "255.255.255.255 /32"
+    }
     title: protocol === "ospf"
            ? "Connected networks and OSPF area"
            : "Connected networks"
@@ -49,11 +61,17 @@ FormSection {
             }
             Repeater {
                 model: networks
-                delegate: RowLayout {
+                delegate: GridLayout {
                     required property int index
                     required property var modelData
                     Layout.fillWidth: true
+                    columns: root.compactColumns ? 2 : 3
                     StandardCheckBox {
+                        Layout.columnSpan: root.compactColumns ? 2 : 1
+                        Layout.fillWidth: root.compactColumns
+                        Layout.minimumWidth: root.compactColumns ? 0 : root.networkColumnWidth
+                        Layout.preferredWidth: root.networkColumnWidth
+                        Layout.maximumWidth: root.compactColumns ? Infinity : root.networkColumnWidth
                         text: modelData.network + " /" + modelData.prefix_length
                         checked: modelData.selected === true
                         onToggled: root.controller.updateNetwork(
@@ -62,13 +80,21 @@ FormSection {
                     }
                     Text {
                         Layout.fillWidth: true
+                        Layout.minimumWidth: 0
+                        Layout.preferredWidth: 0
+                        elide: Text.ElideRight
                         text: root.interfaceNames(modelData.interfaces)
                         color: Theme.textSecondary
                         font.family: Theme.fontFamily
                     }
                     StandardTextField {
+                        objectName: "routingGroupNetworkAreaField"
                         visible: root.protocol === "ospf"
-                        Layout.preferredWidth: 100
+                        // Override ColumnLayout's implicit stretch and shared input minimum.
+                        Layout.fillWidth: false
+                        Layout.minimumWidth: root.areaColumnWidth
+                        Layout.preferredWidth: root.areaColumnWidth
+                        Layout.maximumWidth: root.areaColumnWidth
                         labelText: "Area"
                         text: modelData.area || "0"
                         onTextEdited: value => root.controller.updateNetwork(
