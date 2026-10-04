@@ -217,11 +217,6 @@
 │   │   ├── 07_ospf_area.svg
 │   │   ├── 08_acl_packet_flow.jpg
 │   │   ├── 08_acl_packet_flow.svg
-│   │   ├── 14_qml_signal_slot.svg
-│   │   ├── 15_ui_thread_workers.svg
-│   │   ├── 16_host_lock.svg
-│   │   ├── 17_serialize_parallel.svg
-│   │   ├── 18_syslog_pipeline.svg
 │   │   ├── 19_testing_flow_a.svg
 │   │   ├── 20_testing_flow_b.svg
 │   │   ├── 21_lab_test_flow.svg
@@ -368,5 +363,15 @@ B02B2 canonical orphan diagrams (outside this figures tree):
 - documentation_assets/diagrams/database/device-entity-relations.svg
 - documentation_assets/diagrams/architecture/netmiko-ssh-stack.svg
 - documentation_assets/diagrams/architecture/qtquick-component-tree.svg
+
+These five diagrams remain unused/orphan-review and are not selected for MkDocs staging.
+
+B02B3 canonical orphan diagrams (outside this figures tree):
+
+- documentation_assets/diagrams/architecture/qml-python-signal-flow.svg
+- documentation_assets/diagrams/architecture/ui-thread-worker-dispatch.svg
+- documentation_assets/diagrams/architecture/per-host-session-lock.svg
+- documentation_assets/diagrams/workflow/per-host-serial-cross-host-parallel.svg
+- documentation_assets/diagrams/workflow/syslog-processing-pipeline.svg
 
 These five diagrams remain unused/orphan-review and are not selected for MkDocs staging.

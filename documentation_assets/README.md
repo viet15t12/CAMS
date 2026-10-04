@@ -1,6 +1,6 @@
 # Shared documentation assets — infrastructure foundation
 
-Current inventory after B02B2: **15 migrated canonical SVGs, 330 pending nonterminal records, 62 frozen external records**. B02A migrated five used documentation sources; B02B1/B02B2 preserve ten reviewed authored diagrams that remain `orphan-review`, without document references or MkDocs staging. See `output/documentation-assets-migrations/b02a.md`, `b02b1.md` and `b02b2.md`. Runtime assets, terminal evidence, later batches and default docshot rendering remain outside this migration. The Phase 3 counts below describe the historical bootstrap.
+Current inventory after B02B3: **20 migrated canonical SVGs, 325 pending nonterminal records, 62 frozen external records**. B02A migrated five used documentation sources; B02B1/B02B2/B02B3 preserve fifteen reviewed authored diagrams that remain `orphan-review`, without document references or MkDocs staging. See `output/documentation-assets-migrations/b02a.md`, `b02b1.md`, `b02b2.md` and `b02b3.md`. Runtime assets, terminal evidence, later batches and default docshot rendering remain outside this migration. The Phase 3 counts below describe the historical bootstrap.
 
 This store is the future authority for migrated book/report documentation assets. Phase 3 creates metadata only: **345 pending nonterminal records, 62 frozen external records, zero migrated images**. No screenshots are moved, renamed, rendered or replaced here.
 

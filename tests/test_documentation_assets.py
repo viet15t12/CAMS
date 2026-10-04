@@ -308,6 +308,14 @@ class DocumentationAssetTests(unittest.TestCase):
         self.assertEqual({r["asset_id"] for r in review}, second_orphans)
         self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
         reviewed_orphans |= second_orphans
+        third_orphans = {"diagrams.architecture.qml-python-signal-flow", "diagrams.architecture.ui-thread-worker-dispatch",
+                         "diagrams.architecture.per-host-session-lock", "diagrams.workflow.per-host-serial-cross-host-parallel",
+                         "diagrams.workflow.syslog-processing-pipeline"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02B3"}, third_orphans)
+        review = json.loads((root / "output/documentation-assets-migrations/b02b3.json").read_text())["review"]
+        self.assertEqual({r["asset_id"] for r in review}, third_orphans)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
+        reviewed_orphans |= third_orphans
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.

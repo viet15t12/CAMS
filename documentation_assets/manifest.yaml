@@ -9977,14 +9977,14 @@ assets:
   domain: diagrams/architecture
   subject: qml-python-signal-flow
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/14_qml_signal_slot.svg
-  path: 00_book/figures/report/diagrams/14_qml_signal_slot.svg
+  current_path: documentation_assets/diagrams/architecture/qml-python-signal-flow.svg
+  path: documentation_assets/diagrams/architecture/qml-python-signal-flow.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/qml-python-signal-flow.svg
   legacy_path: 00_book/figures/report/diagrams/14_qml_signal_slot.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 5156f0f1d43de24be91a6362bdeb569938fb0c26157fa082b38ca46fa861227d
   provenance:
     assessment: unknown
@@ -10016,14 +10016,14 @@ assets:
   domain: diagrams/architecture
   subject: ui-thread-worker-dispatch
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/15_ui_thread_workers.svg
-  path: 00_book/figures/report/diagrams/15_ui_thread_workers.svg
+  current_path: documentation_assets/diagrams/architecture/ui-thread-worker-dispatch.svg
+  path: documentation_assets/diagrams/architecture/ui-thread-worker-dispatch.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/ui-thread-worker-dispatch.svg
   legacy_path: 00_book/figures/report/diagrams/15_ui_thread_workers.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 4b708c40abde264d9594aeb076923863d6206f015d58cf1a6a7e1b84aa905f04
   provenance:
     assessment: unknown
@@ -10055,14 +10055,14 @@ assets:
   domain: diagrams/architecture
   subject: per-host-session-lock
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/16_host_lock.svg
-  path: 00_book/figures/report/diagrams/16_host_lock.svg
+  current_path: documentation_assets/diagrams/architecture/per-host-session-lock.svg
+  path: documentation_assets/diagrams/architecture/per-host-session-lock.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/per-host-session-lock.svg
   legacy_path: 00_book/figures/report/diagrams/16_host_lock.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 94dc544c6f716773c4c724a52427a73f7eae3c94c8805b1b59c20a5f0848f453
   provenance:
     assessment: unknown
@@ -10094,14 +10094,14 @@ assets:
   domain: diagrams/workflow
   subject: per-host-serial-cross-host-parallel
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/17_serialize_parallel.svg
-  path: 00_book/figures/report/diagrams/17_serialize_parallel.svg
+  current_path: documentation_assets/diagrams/workflow/per-host-serial-cross-host-parallel.svg
+  path: documentation_assets/diagrams/workflow/per-host-serial-cross-host-parallel.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/per-host-serial-cross-host-parallel.svg
   legacy_path: 00_book/figures/report/diagrams/17_serialize_parallel.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 87e9417b44573f659c8e4d5b8975b9dae83c2bb10d85e211328f8c0736041662
   provenance:
     assessment: unknown
@@ -10133,14 +10133,14 @@ assets:
   domain: diagrams/workflow
   subject: syslog-processing-pipeline
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/18_syslog_pipeline.svg
-  path: 00_book/figures/report/diagrams/18_syslog_pipeline.svg
+  current_path: documentation_assets/diagrams/workflow/syslog-processing-pipeline.svg
+  path: documentation_assets/diagrams/workflow/syslog-processing-pipeline.svg
   planned_canonical_path: documentation_assets/diagrams/workflow/syslog-processing-pipeline.svg
   legacy_path: 00_book/figures/report/diagrams/18_syslog_pipeline.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 354129d8bc1b63ba77564ca848ea0032cd011e74527e51698c045984e448fd9a
   provenance:
     assessment: unknown

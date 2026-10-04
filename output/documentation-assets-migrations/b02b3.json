@@ -1,0 +1,732 @@
+{
+  "batch": "B02B3",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "5daa420ac5b3afb0551ff80f215bad6d09b5b991",
+  "status": "PASS — all five APPROVED; local and independent fresh-checkout validation complete",
+  "review": [
+    {
+      "asset_id": "diagrams.architecture.qml-python-signal-flow",
+      "decision": "APPROVE",
+      "content_summary": "QML → QObject (Python) → Service / Backend; first arrow labelled method / signal.",
+      "asset_class": "architecture-diagram",
+      "semantic_name_judgment": "qml-python-signal-flow and diagrams/architecture accurately describe the conceptual content.",
+      "architecture_sanity_result": "PASS",
+      "current_semantic_review": "Current DatabaseManager inherits QObject, exposes pyqtSlot methods and pyqtSignal notifications; main.py registers Python facades in the QML context. Current QML calls the facade and listens to signals. The visible arrows show the downward invocation path, not a complete bidirectional event graph.",
+      "repository_evidence": [
+        "core/database/manager.py:35-61",
+        "core/database/routing_slots.py",
+        "main.py:402-419",
+        "UI/qml/features/routing/ospf/OspfTuningSection.qml"
+      ],
+      "confidence": "high",
+      "reason": "Visually readable and useful conceptual diagram; planned category/name fits; current implementation supports the claim; zero live image references, no exact duplicate, linked raster derivative or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of 1400px Inkscape PNG rendering and SVG text/XML",
+        "preview": "/tmp/cams-b02b3/14_qml_signal_slot.png"
+      },
+      "provenance_note": "Original author/exporter remains unestablished; no reproducible generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.architecture.ui-thread-worker-dispatch",
+      "decision": "APPROVE",
+      "content_summary": "UI Thread branches to Worker R1, Worker R2 and Worker R3.",
+      "asset_class": "architecture-diagram",
+      "semantic_name_judgment": "ui-thread-worker-dispatch and diagrams/architecture accurately describe the conceptual content.",
+      "architecture_sanity_result": "PASS",
+      "current_semantic_review": "AsyncTaskCoordinator starts BackgroundTask objects in QThread and connects completion/progress signals to the facade. ViewPushBatchService additionally dispatches device work through BatchExecutor. This is a conceptual UI/background-worker model, not a promise of exactly three permanent device threads.",
+      "repository_evidence": [
+        "core/tasks.py:AsyncTaskCoordinator.start",
+        "core/database/view_push_runtime.py",
+        "core/view_push_batch.py",
+        "infrastructure/network/batch_executor.py"
+      ],
+      "confidence": "high",
+      "reason": "Visually readable and useful conceptual diagram; planned category/name fits; current implementation supports the claim; zero live image references, no exact duplicate, linked raster derivative or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of 1400px Inkscape PNG rendering and SVG text/XML",
+        "preview": "/tmp/cams-b02b3/15_ui_thread_workers.png"
+      },
+      "provenance_note": "Original author/exporter remains unestablished; no reproducible generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.architecture.per-host-session-lock",
+      "decision": "APPROVE",
+      "content_summary": "DHCP Worker and OSPF Worker converge on Session R1.",
+      "asset_class": "architecture-diagram",
+      "semantic_name_judgment": "per-host-session-lock and diagrams/architecture accurately describe the conceptual content.",
+      "architecture_sanity_result": "PASS",
+      "current_semantic_review": "ViewPushControllerFactory injects one shared session registry into DHCP and routing controllers. SessionEntry holds an operation RLock; DeviceSessionRegistry.execute acquires it for that host and releases it in finally. The lock is implicit in the pictured shared session, rather than explicitly drawn. Per-host CLI/session exclusion remains a defensible abstraction; it is not a global lock or a claim about all transports.",
+      "repository_evidence": [
+        "core/view_push.py:BaseViewPushController._execute_session",
+        "core/view_push.py:ViewPushControllerFactory",
+        "infrastructure/network/session_entry.py:SessionEntry.operation_lock",
+        "infrastructure/network/session_registry.py:DeviceSessionRegistry.execute",
+        "tests/test_session_registry_concurrency.py"
+      ],
+      "confidence": "high",
+      "reason": "Visually readable and useful conceptual diagram; planned category/name fits; current implementation supports the claim; zero live image references, no exact duplicate, linked raster derivative or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of 1400px Inkscape PNG rendering and SVG text/XML",
+        "preview": "/tmp/cams-b02b3/16_host_lock.png"
+      },
+      "provenance_note": "Original author/exporter remains unestablished; no reproducible generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.workflow.per-host-serial-cross-host-parallel",
+      "decision": "APPROVE",
+      "content_summary": "Separate lanes: R1 Worker A → Worker B → Worker C; R2 Worker D → Worker E; R3 Worker F.",
+      "asset_class": "workflow-diagram",
+      "semantic_name_judgment": "per-host-serial-cross-host-parallel and diagrams/workflow accurately describe the conceptual content.",
+      "architecture_sanity_result": "PASS",
+      "current_semantic_review": "BatchExecutor uses a bounded ThreadPoolExecutor across hosts, while DeviceSessionRegistry.execute serializes operations on one host entry. Existing concurrency tests exercise same-host exclusion and different-host overlap. The lanes correctly convey serial per-host session operations and cross-host concurrency; arrows are not a FIFO scheduling or exact-timing guarantee.",
+      "repository_evidence": [
+        "infrastructure/network/batch_executor.py:BatchExecutor.run",
+        "core/view_push_batch.py:ViewPushBatchService",
+        "infrastructure/network/session_registry.py:DeviceSessionRegistry.execute",
+        "tests/test_session_registry_concurrency.py:test_same_host_operations_are_serialized",
+        "tests/test_session_registry_concurrency.py:test_different_hosts_can_overlap_and_keep_sessions"
+      ],
+      "confidence": "high",
+      "reason": "Visually readable and useful conceptual diagram; planned category/name fits; current implementation supports the claim; zero live image references, no exact duplicate, linked raster derivative or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of 1400px Inkscape PNG rendering and SVG text/XML",
+        "preview": "/tmp/cams-b02b3/17_serialize_parallel.png"
+      },
+      "provenance_note": "Original author/exporter remains unestablished; no reproducible generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.workflow.syslog-processing-pipeline",
+      "decision": "APPROVE",
+      "content_summary": "Router/Switch → Syslog Receiver → Parser → Storage → UI.",
+      "asset_class": "workflow-diagram",
+      "semantic_name_judgment": "syslog-processing-pipeline and diagrams/workflow accurately describe the conceptual content.",
+      "architecture_sanity_result": "PASS",
+      "current_semantic_review": "Current native C++ UDP/TCP collector receives frames, parses messages, inserts SQLite rows, then emits JSON-line events. NativeSyslogCollector wraps QProcess and emits messageInserted; SyslogManager emits messagesInserted to QML. These boxes describe responsibility stages, not separate processes or a Python-only receiver. Current feature README and report describe this same processing order.",
+      "repository_evidence": [
+        "native/syslog_collector/main.cpp:473-478",
+        "features/syslog/native.py:NativeSyslogCollector._handle_event",
+        "features/syslog/qt/manager.py:SyslogManager._native_message_stored",
+        "features/syslog/README.md",
+        "00_report/contents/08_xay_dung_phan_mem.typ:81"
+      ],
+      "confidence": "high",
+      "reason": "Visually readable and useful conceptual diagram; planned category/name fits; current implementation supports the claim; zero live image references, no exact duplicate, linked raster derivative or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of 1400px Inkscape PNG rendering and SVG text/XML",
+        "preview": "/tmp/cams-b02b3/18_syslog_pipeline.png"
+      },
+      "provenance_note": "Original author/exporter remains unestablished; no reproducible generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    }
+  ],
+  "migration": [
+    {
+      "asset_id": "diagrams.architecture.qml-python-signal-flow",
+      "old_path": "00_book/figures/report/diagrams/14_qml_signal_slot.svg",
+      "canonical_path": "documentation_assets/diagrams/architecture/qml-python-signal-flow.svg",
+      "source_blob_sha": "5156f0f1d43de24be91a6362bdeb569938fb0c26157fa082b38ca46fa861227d",
+      "source_filesystem_sha": "5156f0f1d43de24be91a6362bdeb569938fb0c26157fa082b38ca46fa861227d",
+      "canonical_filesystem_sha": "5156f0f1d43de24be91a6362bdeb569938fb0c26157fa082b38ca46fa861227d",
+      "canonical_index_sha": "5156f0f1d43de24be91a6362bdeb569938fb0c26157fa082b38ca46fa861227d",
+      "manifest_sha": "5156f0f1d43de24be91a6362bdeb569938fb0c26157fa082b38ca46fa861227d",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.architecture.ui-thread-worker-dispatch",
+      "old_path": "00_book/figures/report/diagrams/15_ui_thread_workers.svg",
+      "canonical_path": "documentation_assets/diagrams/architecture/ui-thread-worker-dispatch.svg",
+      "source_blob_sha": "4b708c40abde264d9594aeb076923863d6206f015d58cf1a6a7e1b84aa905f04",
+      "source_filesystem_sha": "4b708c40abde264d9594aeb076923863d6206f015d58cf1a6a7e1b84aa905f04",
+      "canonical_filesystem_sha": "4b708c40abde264d9594aeb076923863d6206f015d58cf1a6a7e1b84aa905f04",
+      "canonical_index_sha": "4b708c40abde264d9594aeb076923863d6206f015d58cf1a6a7e1b84aa905f04",
+      "manifest_sha": "4b708c40abde264d9594aeb076923863d6206f015d58cf1a6a7e1b84aa905f04",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.architecture.per-host-session-lock",
+      "old_path": "00_book/figures/report/diagrams/16_host_lock.svg",
+      "canonical_path": "documentation_assets/diagrams/architecture/per-host-session-lock.svg",
+      "source_blob_sha": "94dc544c6f716773c4c724a52427a73f7eae3c94c8805b1b59c20a5f0848f453",
+      "source_filesystem_sha": "94dc544c6f716773c4c724a52427a73f7eae3c94c8805b1b59c20a5f0848f453",
+      "canonical_filesystem_sha": "94dc544c6f716773c4c724a52427a73f7eae3c94c8805b1b59c20a5f0848f453",
+      "canonical_index_sha": "94dc544c6f716773c4c724a52427a73f7eae3c94c8805b1b59c20a5f0848f453",
+      "manifest_sha": "94dc544c6f716773c4c724a52427a73f7eae3c94c8805b1b59c20a5f0848f453",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.workflow.per-host-serial-cross-host-parallel",
+      "old_path": "00_book/figures/report/diagrams/17_serialize_parallel.svg",
+      "canonical_path": "documentation_assets/diagrams/workflow/per-host-serial-cross-host-parallel.svg",
+      "source_blob_sha": "87e9417b44573f659c8e4d5b8975b9dae83c2bb10d85e211328f8c0736041662",
+      "source_filesystem_sha": "87e9417b44573f659c8e4d5b8975b9dae83c2bb10d85e211328f8c0736041662",
+      "canonical_filesystem_sha": "87e9417b44573f659c8e4d5b8975b9dae83c2bb10d85e211328f8c0736041662",
+      "canonical_index_sha": "87e9417b44573f659c8e4d5b8975b9dae83c2bb10d85e211328f8c0736041662",
+      "manifest_sha": "87e9417b44573f659c8e4d5b8975b9dae83c2bb10d85e211328f8c0736041662",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.workflow.syslog-processing-pipeline",
+      "old_path": "00_book/figures/report/diagrams/18_syslog_pipeline.svg",
+      "canonical_path": "documentation_assets/diagrams/workflow/syslog-processing-pipeline.svg",
+      "source_blob_sha": "354129d8bc1b63ba77564ca848ea0032cd011e74527e51698c045984e448fd9a",
+      "source_filesystem_sha": "354129d8bc1b63ba77564ca848ea0032cd011e74527e51698c045984e448fd9a",
+      "canonical_filesystem_sha": "354129d8bc1b63ba77564ca848ea0032cd011e74527e51698c045984e448fd9a",
+      "canonical_index_sha": "354129d8bc1b63ba77564ca848ea0032cd011e74527e51698c045984e448fd9a",
+      "manifest_sha": "354129d8bc1b63ba77564ca848ea0032cd011e74527e51698c045984e448fd9a",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    }
+  ],
+  "conflict_usage_review": [
+    {
+      "asset_id": "diagrams.architecture.qml-python-signal-flow",
+      "live_image_references": [],
+      "exact_copies": [
+        "00_book/figures/report/diagrams/14_qml_signal_slot.svg"
+      ],
+      "historical_vector_relationships": {
+        "canonical_vector": true,
+        "vector_source_of": [],
+        "raster_derivative_of": ""
+      },
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.architecture.ui-thread-worker-dispatch",
+      "live_image_references": [],
+      "exact_copies": [
+        "00_book/figures/report/diagrams/15_ui_thread_workers.svg"
+      ],
+      "historical_vector_relationships": {
+        "canonical_vector": true,
+        "vector_source_of": [],
+        "raster_derivative_of": ""
+      },
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.architecture.per-host-session-lock",
+      "live_image_references": [],
+      "exact_copies": [
+        "00_book/figures/report/diagrams/16_host_lock.svg"
+      ],
+      "historical_vector_relationships": {
+        "canonical_vector": true,
+        "vector_source_of": [],
+        "raster_derivative_of": ""
+      },
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.per-host-serial-cross-host-parallel",
+      "live_image_references": [],
+      "exact_copies": [
+        "00_book/figures/report/diagrams/17_serialize_parallel.svg"
+      ],
+      "historical_vector_relationships": {
+        "canonical_vector": true,
+        "vector_source_of": [],
+        "raster_derivative_of": ""
+      },
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.workflow.syslog-processing-pipeline",
+      "live_image_references": [],
+      "exact_copies": [
+        "00_book/figures/report/diagrams/18_syslog_pipeline.svg"
+      ],
+      "historical_vector_relationships": {
+        "canonical_vector": true,
+        "vector_source_of": [],
+        "raster_derivative_of": ""
+      },
+      "canonical_destination_absent": true
+    }
+  ],
+  "manifest": {
+    "migrated": 20,
+    "pending": 325,
+    "frozen": 62
+  },
+  "hash_authority": "Phase 3.3 exact repository-stored bytes",
+  "metadata_policy": "Only current_path/path/migration_state/canonical change for exactly 5 assets; all other fields and 402 records unchanged.",
+  "usage": "All five remain orphan-review; no live image references",
+  "authority": {
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 12,
+    "behind": 0
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-1.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-2.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-3.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-4.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-5.log"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-6.log"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02a-docs/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-7.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-8.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-9.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "/tmp/cams-b02b3/local-10.log"
+    }
+  ],
+  "local_proof": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 325,
+      "migrated": 20,
+      "frozen": 62
+    },
+    "other_records_unchanged": 402,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 5,
+    "canonical_paths_present": 5,
+    "orphan_usage_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02b2_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02b2_baseline": true
+      }
+    ]
+  },
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02b2_baseline": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02b2_baseline": true
+    }
+  ],
+  "scope": {
+    "new_transfers": 5,
+    "svg_blob_content_changes": 0,
+    "live_document_reference_changes": 0,
+    "other_batches_migrated": false,
+    "terminal_assets_changed": false,
+    "runtime_assets_changed": false,
+    "docshot_mapping_changed": false,
+    "screenshot_renders": 0
+  },
+  "mkdocs": {
+    "status": "PASS",
+    "staged_assets": 178,
+    "b02b3_staged_assets": 0,
+    "ownership_ledger_unchanged": true,
+    "generated_assets_tracked": false,
+    "environment": "/tmp/cams-b02a-docs from repository requirements-docs.txt"
+  },
+  "fresh_checkout": {
+    "filesystem_manifest_sha_matches": 407,
+    "filesystem_source_blob_matches": 407,
+    "counts": {
+      "pending": 325,
+      "migrated": 20,
+      "frozen": 62
+    },
+    "other_records_unchanged": 402,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 5,
+    "canonical_paths_present": 5,
+    "orphan_usage_preserved": true,
+    "generated_assets_tracked": false,
+    "staging_ledger_unchanged": true,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "reference_baseline_unchanged": true,
+    "runtime_terminal_docshot_report_changes": false,
+    "pdfs_byte_identical_to_baseline": true,
+    "typst": [
+      {
+        "target": "report",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02b3/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02b3/clean-checkout/output/typst/package-cache",
+          "/tmp/cams-b02b3/clean-checkout/00_report/main.typ",
+          "/tmp/cams-b02b3/clean-checkout/output/typst/report.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b02b2_baseline": true
+      },
+      {
+        "target": "book",
+        "command": [
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+          "compile",
+          "--root",
+          "/tmp/cams-b02b3/clean-checkout",
+          "--font-path",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+          "--ignore-system-fonts",
+          "--creation-timestamp",
+          "0",
+          "--package-cache-path",
+          "/tmp/cams-b02b3/clean-checkout/output/typst/package-cache",
+          "--input",
+          "book-body-font=Liberation Serif",
+          "/tmp/cams-b02b3/clean-checkout/00_book/main.typ",
+          "/tmp/cams-b02b3/clean-checkout/output/typst/book.pdf"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b02b2_baseline": true
+      }
+    ],
+    "filesystem_blob_manifest_matches": 407,
+    "method": "Separate Linux clone of a candidate Git commit, core.autocrlf=false; no generated staging before pre-sync",
+    "candidate_commit": "073c370f049fcb79ce1ef10420344c7e9c04d30a",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-5.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-6.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02a-docs/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-7.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-9.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-b02b3/clean-10.log"
+      }
+    ]
+  }
+}
