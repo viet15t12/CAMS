@@ -6,7 +6,11 @@ No runtime YAML dependency and no filename/domain inference.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
+import os
+import tempfile
+
+from .shots import SHOT_REGISTRY
 
 
 @dataclass(frozen=True, slots=True)
@@ -125,10 +129,59 @@ def validate_output_map(specs=OUTPUT_MAP) -> None:
 
 def workflow_outputs(workflow: str) -> tuple[OutputSpec, ...]:
     validate_output_map()
-    specs = tuple(s for s in OUTPUT_MAP if s.workflow == workflow)
+    workflows = tuple(SHOT_REGISTRY) if workflow == "all" else (workflow,)
+    specs = tuple(s for s in OUTPUT_MAP if s.workflow in workflows)
     if not specs:
         raise ValueError(f"Unmanaged docshot workflow: {workflow}")
     return specs
 
 
 validate_output_map()
+
+
+def canonical_destinations(workflow: str, root: Path) -> dict[str, Path]:
+    """Resolve the complete managed set without writes; reject symlink paths."""
+    root = root.resolve()
+    canonical = root / "documentation_assets/ui/docshot"
+    destinations = {}
+    for spec in workflow_outputs(workflow):
+        path = root / spec.canonical_path
+        if not path.resolve().is_relative_to(canonical):
+            raise ValueError("Docshot destination escapes canonical root (check symlinks)")
+        for part in (path, *path.parents):
+            if part == root:
+                break
+            if part.is_symlink():
+                raise ValueError("Symlink in canonical docshot destination")
+        if spec.filename in destinations:
+            raise ValueError("Docshot output filename collision")
+        destinations[spec.filename] = path
+    return destinations
+
+
+def publish_outputs(workflow: str, paths: list[Path], staging: Path, root: Path) -> dict[str, Path]:
+    """Publish rendered temporary bytes only after validating the entire output set."""
+    destinations = canonical_destinations(workflow, root)
+    names = [p.name for p in paths]
+    if len(names) != len(set(names)) or set(names) != set(destinations):
+        raise ValueError("Incomplete, unmanaged or colliding docshot outputs")
+    for path in paths:
+        if path.is_symlink() or path.resolve().parent != staging.resolve() or not path.is_file():
+            raise ValueError("Docshot output is outside temporary rendering directory")
+    # Check all source bytes before replacing any canonical file.
+    payloads = {p.name: p.read_bytes() for p in paths}
+    for name, payload in payloads.items():
+        destination = canonical_destinations(workflow, root)[name]
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(dir=destination.parent, prefix=".docshot-", delete=False) as stream:
+                temporary = Path(stream.name)
+                stream.write(payload)
+            # Recheck immediately before the atomic replacement as well.
+            canonical_destinations(workflow, root)
+            os.replace(temporary, destination)
+        finally:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
+    return destinations

@@ -26,16 +26,16 @@ Options:
 --output-dir PATH    destination directory
 ```
 
-The reserved default destination is resolved from the repository location, independent of CWD. **Phase 3.1 strategy B blocks default writes:** rendering requires an explicit `--output-dir` until all 42 B03 assets are migrated. The resolver layout below is not yet a supported canonical generation contract:
+Managed default generation publishes through the explicit registry in `docshots/outputs.py`, resolved from the repository root independently of CWD. All 42 B03 source PNGs are now canonical. The registry maps workflow output filenames to logical IDs and exact semantic paths, including chapter-03 outputs across core and devices:
 
 ```text
 <repo-root>/documentation_assets/ui/docshot/
-├── core/             welcome.png + chapter-03 workflow
-├── project/          workspace.png
-├── devices/          devices.png + chapter-04 workflow
-├── switching/vlan/   VLAN workflow
-└── core/dialogs/     dialog regression workflow
+├── core/             welcome-recent-projects.png, workspace-empty.png, navigation
+├── devices/          inventory-router-selected.png, chapter-03 device panels, chapter-04
+└── switching/vlan/   nine semantic VLAN outputs
 ```
+
+`welcome`, `workspace`, `devices`, `chapter-03`, `chapter-04`, and `vlan` support default publishing. `all` renders only the three generic registered shots (welcome/workspace/devices). Renderers first write legacy filenames into a temporary directory; publishing validates the complete output set and exact canonical destinations before atomic file replacement. Unmanaged outputs, collisions and symlink paths fail closed. `dialogs` requires an explicit `--output-dir` and has no canonical identities.
 
 Existing files are replaced atomically and filenames never contain timestamps.
 
@@ -109,9 +109,9 @@ uv run python scripts/docshots.py dialogs --output-dir /tmp/cams-docshot-dialogs
 uv run python scripts/docshots.py chapter-03 --output-dir /tmp/cams-chapter03-check
 ```
 
-`--output-dir` is an **exact destination**, for every shot/workflow, including VLAN and chapters. Without an override the CLI fails before Qt/runtime initialization. With an override, `all` keeps all three shots directly in that chosen directory. Defaults are checkout-relative, independent of CWD, and reject symlink escape; explicit one-off output may be outside the checkout. No command is forced back into canonical storage when an override is given.
+`--output-dir` is an **exact destination**, for every shot/workflow, including VLAN and chapters. Without an override managed workflows use the semantic output map; dialogs fails before Qt/runtime initialization. With an override, `all` keeps all three shots directly in that chosen directory. Defaults are checkout-relative, independent of CWD, and reject symlink escape; explicit one-off output may be outside the checkout. No command is forced back into canonical storage when an override is given.
 
-This infrastructure change does not move/regenerate any existing screenshot. Renderer filenames/order stay unchanged until the later semantic output-map/asset batch; chapter numbers remain CLI workflow names, not proposed long-term asset taxonomy. Temporary test captures are isolated, never written over repository images. `00_book/assets/` is solely generated staging via `scripts/sync_documentation_assets.py`, never a docshot default. Terminal images and the terminal renderer are frozen external assets, outside docshot destination migration.
+This infrastructure change does not move/regenerate any existing screenshot. Temporary renderer filenames/order stay unchanged; chapter numbers remain CLI workflow names, not proposed long-term asset taxonomy. Temporary test captures are isolated, never written over repository images. `00_book/assets/` is solely generated staging via `scripts/sync_documentation_assets.py`, never a docshot default. Terminal images and the terminal renderer are frozen external assets, outside docshot destination migration.
 
 Run destination contracts without application runtime imports:
 
@@ -121,8 +121,8 @@ python -m unittest tests.test_docshot_destinations -v
 
 Full Qt/workflow repeatability tests require the project environment (`uv run ...`). The chapter-03 offline training-package test additionally requires `00_book/fixtures/chapter-03/build_fixture.py`. That builder is absent in the current checkout; this existing test prerequisite is reported rather than invented by the asset infrastructure phase.
 
-## B03 semantic output gate (Phase 3.1 strategy B)
+## B03 semantic output contract
 
-The explicit registry in `docshots/outputs.py` maps all 42 managed workflow filenames to logical IDs and full semantic paths. Destination tests compare every entry against the manifest and Phase 3 preflight; no numeric-prefix stripping or domain guessing. Chapter-03 includes status-details and two devices-domain outputs. Registered workspace maps to core/workspace-empty.
+`docshots/outputs.py` explicitly maps all 42 managed workflow filenames to logical IDs and full semantic paths. Destination tests compare every entry against the migrated manifest and historical preflight; no prefix stripping or domain guessing. Chapter-03 registers all 11 outputs including status-details. Its device panels belong to devices; the generic workspace belongs to core.
 
-Default canonical writes remain blocked until all 42 source images have migrated. Explicit temporary overrides retain the original filenames and workflow state/crops. Dialog regression outputs remain temporary-only with no manifest identities. No PNG is regenerated by B03 migration. See `output/documentation-assets-migrations/b03-output-map.md`.
+B03 migrated current approved PNG bytes without regeneration. Default managed generation is now enabled and may replace canonical images when deliberately invoked in a future regeneration task. MkDocs staging must subsequently be synced and updated asset hashes reviewed separately. Temporary overrides retain legacy filenames and never redirect to canonical storage. The four dialog regression outputs remain temporary-only with no assigned IDs. See `output/documentation-assets-migrations/b03-closure.md`.

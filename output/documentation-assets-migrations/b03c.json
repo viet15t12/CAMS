@@ -1,0 +1,2122 @@
+{
+  "batch": "B03C",
+  "starting_commit": "7d6d66aa80086ef26dcb75dfa33da16c66dafcc3",
+  "status": "PASS",
+  "assets": [
+    {
+      "asset_id": "ui.switching.vlan.switch-selected",
+      "old_path": "00_book/figures/gui/vlan/01-select-switch.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/switch-selected.png",
+      "source_git_blob_sha": "cf24a7fbbba46d9088dd5f5da5edaf35d7fdeeaeb5c8d34f49000f6aa7163d0f",
+      "canonical_filesystem_sha": "cf24a7fbbba46d9088dd5f5da5edaf35d7fdeeaeb5c8d34f49000f6aa7163d0f",
+      "canonical_index_blob_sha": "cf24a7fbbba46d9088dd5f5da5edaf35d7fdeeaeb5c8d34f49000f6aa7163d0f",
+      "manifest_sha": "cf24a7fbbba46d9088dd5f5da5edaf35d7fdeeaeb5c8d34f49000f6aa7163d0f",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 88,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/switch-selected.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.database",
+      "old_path": "00_book/figures/gui/vlan/02-open-vlan.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/database.png",
+      "source_git_blob_sha": "9336953482ba9a73b1acf80c46f4298e5603690cf2314e7815910a72e5976ba1",
+      "canonical_filesystem_sha": "9336953482ba9a73b1acf80c46f4298e5603690cf2314e7815910a72e5976ba1",
+      "canonical_index_blob_sha": "9336953482ba9a73b1acf80c46f4298e5603690cf2314e7815910a72e5976ba1",
+      "manifest_sha": "9336953482ba9a73b1acf80c46f4298e5603690cf2314e7815910a72e5976ba1",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 90,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/database.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-empty",
+      "old_path": "00_book/figures/gui/vlan/03-add-vlan.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/create-empty.png",
+      "source_git_blob_sha": "ae54201903b5b6ad52fe46b17a44f17b263c376181327f0e2cf96a414e2de519",
+      "canonical_filesystem_sha": "ae54201903b5b6ad52fe46b17a44f17b263c376181327f0e2cf96a414e2de519",
+      "canonical_index_blob_sha": "ae54201903b5b6ad52fe46b17a44f17b263c376181327f0e2cf96a414e2de519",
+      "manifest_sha": "ae54201903b5b6ad52fe46b17a44f17b263c376181327f0e2cf96a414e2de519",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 92,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-empty.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-id-filled",
+      "old_path": "00_book/figures/gui/vlan/04-vlan-id.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/create-id-filled.png",
+      "source_git_blob_sha": "02e61c1ccee536d42960238aad6ac5e64a616a1daa1e2f5a42199f397d380409",
+      "canonical_filesystem_sha": "02e61c1ccee536d42960238aad6ac5e64a616a1daa1e2f5a42199f397d380409",
+      "canonical_index_blob_sha": "02e61c1ccee536d42960238aad6ac5e64a616a1daa1e2f5a42199f397d380409",
+      "manifest_sha": "02e61c1ccee536d42960238aad6ac5e64a616a1daa1e2f5a42199f397d380409",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 94,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-id-filled.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-name-filled",
+      "old_path": "00_book/figures/gui/vlan/05-vlan-name.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/create-name-filled.png",
+      "source_git_blob_sha": "62af2f6273b62e6de8d5410c47369479ca15680ec039a53958d4c787eaf2bf3b",
+      "canonical_filesystem_sha": "62af2f6273b62e6de8d5410c47369479ca15680ec039a53958d4c787eaf2bf3b",
+      "canonical_index_blob_sha": "62af2f6273b62e6de8d5410c47369479ca15680ec039a53958d4c787eaf2bf3b",
+      "manifest_sha": "62af2f6273b62e6de8d5410c47369479ca15680ec039a53958d4c787eaf2bf3b",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 96,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-name-filled.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-state-selector",
+      "old_path": "00_book/figures/gui/vlan/06-vlan-state.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/create-state-selector.png",
+      "source_git_blob_sha": "759ea094c1dce98a65151510dc7f8851f6446f4eda8bb8e459a050d4e31cebf9",
+      "canonical_filesystem_sha": "759ea094c1dce98a65151510dc7f8851f6446f4eda8bb8e459a050d4e31cebf9",
+      "canonical_index_blob_sha": "759ea094c1dce98a65151510dc7f8851f6446f4eda8bb8e459a050d4e31cebf9",
+      "manifest_sha": "759ea094c1dce98a65151510dc7f8851f6446f4eda8bb8e459a050d4e31cebf9",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 98,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-state-selector.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-ready",
+      "old_path": "00_book/figures/gui/vlan/07-ready-to-save.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/create-ready.png",
+      "source_git_blob_sha": "0a7c7eb72b86f96cb068603b514b0b6ba2f8a645069ce9a7de8e3f25aeaf8db3",
+      "canonical_filesystem_sha": "0a7c7eb72b86f96cb068603b514b0b6ba2f8a645069ce9a7de8e3f25aeaf8db3",
+      "canonical_index_blob_sha": "0a7c7eb72b86f96cb068603b514b0b6ba2f8a645069ce9a7de8e3f25aeaf8db3",
+      "manifest_sha": "0a7c7eb72b86f96cb068603b514b0b6ba2f8a645069ce9a7de8e3f25aeaf8db3",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 100,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-ready.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.created-pending-apply",
+      "old_path": "00_book/figures/gui/vlan/08-vlan-created.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png",
+      "source_git_blob_sha": "90db856f56f03644217919c723cb628473bf45f8c5ae8d9c3a62ed5f38b5cba2",
+      "canonical_filesystem_sha": "90db856f56f03644217919c723cb628473bf45f8c5ae8d9c3a62ed5f38b5cba2",
+      "canonical_index_blob_sha": "90db856f56f03644217919c723cb628473bf45f8c5ae8d9c3a62ed5f38b5cba2",
+      "manifest_sha": "90db856f56f03644217919c723cb628473bf45f8c5ae8d9c3a62ed5f38b5cba2",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 102,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    },
+    {
+      "asset_id": "ui.switching.vlan.view-push-guest",
+      "old_path": "00_book/figures/gui/vlan/09-view-preview.png",
+      "new_path": "documentation_assets/ui/docshot/switching/vlan/view-push-guest.png",
+      "source_git_blob_sha": "e7ef4353aad6cb2ec90cd6177c8dedbec9a8fc87d85a833ff459058659379264",
+      "canonical_filesystem_sha": "e7ef4353aad6cb2ec90cd6177c8dedbec9a8fc87d85a833ff459058659379264",
+      "canonical_index_blob_sha": "e7ef4353aad6cb2ec90cd6177c8dedbec9a8fc87d85a833ff459058659379264",
+      "manifest_sha": "e7ef4353aad6cb2ec90cd6177c8dedbec9a8fc87d85a833ff459058659379264",
+      "workflow": "vlan",
+      "used_by": [
+        {
+          "source_document": "docshots/outputs.py",
+          "line": 104,
+          "referenced_path": "documentation_assets/ui/docshot/switching/vlan/view-push-guest.png",
+          "target_type": "code"
+        }
+      ],
+      "mkdocs_stage_path": null
+    }
+  ],
+  "references": [],
+  "reference_rewrite_count": 0,
+  "baseline_removed": [],
+  "baseline_exceptions_resolved": 0,
+  "baseline_remaining": 147,
+  "manifest": {
+    "pending": 266,
+    "migrated": 79,
+    "frozen": 62
+  },
+  "generator_default": "enabled managed semantic outputs; dialogs temporary-only",
+  "canonical_regeneration": false,
+  "generator_edge_line_refresh": [
+    {
+      "asset_id": "ui.core.workspace-overview",
+      "source_document": "docshots/outputs.py",
+      "old_line": 22,
+      "line": 26,
+      "referenced_path": "documentation_assets/ui/docshot/core/workspace-overview.png"
+    },
+    {
+      "asset_id": "ui.core.view-menu",
+      "source_document": "docshots/outputs.py",
+      "old_line": 24,
+      "line": 28,
+      "referenced_path": "documentation_assets/ui/docshot/core/view-menu.png"
+    },
+    {
+      "asset_id": "ui.core.activity-bar",
+      "source_document": "docshots/outputs.py",
+      "old_line": 26,
+      "line": 30,
+      "referenced_path": "documentation_assets/ui/docshot/core/activity-bar.png"
+    },
+    {
+      "asset_id": "ui.devices.sidebar-status-groups",
+      "source_document": "docshots/outputs.py",
+      "old_line": 28,
+      "line": 32,
+      "referenced_path": "documentation_assets/ui/docshot/devices/sidebar-status-groups.png"
+    },
+    {
+      "asset_id": "ui.devices.tabs-router-active",
+      "source_document": "docshots/outputs.py",
+      "old_line": 30,
+      "line": 34,
+      "referenced_path": "documentation_assets/ui/docshot/devices/tabs-router-active.png"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-router",
+      "source_document": "docshots/outputs.py",
+      "old_line": 32,
+      "line": 36,
+      "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-router.png"
+    },
+    {
+      "asset_id": "ui.core.feature-bar-switch",
+      "source_document": "docshots/outputs.py",
+      "old_line": 34,
+      "line": 38,
+      "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-switch.png"
+    },
+    {
+      "asset_id": "ui.core.information-empty",
+      "source_document": "docshots/outputs.py",
+      "old_line": 36,
+      "line": 40,
+      "referenced_path": "documentation_assets/ui/docshot/core/information-empty.png"
+    },
+    {
+      "asset_id": "ui.core.status-bar",
+      "source_document": "docshots/outputs.py",
+      "old_line": 38,
+      "line": 42,
+      "referenced_path": "documentation_assets/ui/docshot/core/status-bar.png"
+    },
+    {
+      "asset_id": "ui.core.status-details",
+      "source_document": "docshots/outputs.py",
+      "old_line": 40,
+      "line": 44,
+      "referenced_path": "documentation_assets/ui/docshot/core/status-details.png"
+    },
+    {
+      "asset_id": "ui.core.sidebar-collapsed",
+      "source_document": "docshots/outputs.py",
+      "old_line": 42,
+      "line": 46,
+      "referenced_path": "documentation_assets/ui/docshot/core/sidebar-collapsed.png"
+    },
+    {
+      "asset_id": "ui.devices.inventory-waiting",
+      "source_document": "docshots/outputs.py",
+      "old_line": 44,
+      "line": 48,
+      "referenced_path": "documentation_assets/ui/docshot/devices/inventory-waiting.png"
+    },
+    {
+      "asset_id": "ui.devices.create-empty",
+      "source_document": "docshots/outputs.py",
+      "old_line": 46,
+      "line": 50,
+      "referenced_path": "documentation_assets/ui/docshot/devices/create-empty.png"
+    },
+    {
+      "asset_id": "ui.devices.create-filled",
+      "source_document": "docshots/outputs.py",
+      "old_line": 48,
+      "line": 52,
+      "referenced_path": "documentation_assets/ui/docshot/devices/create-filled.png"
+    },
+    {
+      "asset_id": "ui.devices.created-waiting",
+      "source_document": "docshots/outputs.py",
+      "old_line": 50,
+      "line": 54,
+      "referenced_path": "documentation_assets/ui/docshot/devices/created-waiting.png"
+    },
+    {
+      "asset_id": "ui.devices.ssh-compatibility",
+      "source_document": "docshots/outputs.py",
+      "old_line": 52,
+      "line": 56,
+      "referenced_path": "documentation_assets/ui/docshot/devices/ssh-compatibility.png"
+    },
+    {
+      "asset_id": "ui.devices.batch-create-empty",
+      "source_document": "docshots/outputs.py",
+      "old_line": 54,
+      "line": 58,
+      "referenced_path": "documentation_assets/ui/docshot/devices/batch-create-empty.png"
+    },
+    {
+      "asset_id": "ui.devices.batch-create-filled",
+      "source_document": "docshots/outputs.py",
+      "old_line": 56,
+      "line": 60,
+      "referenced_path": "documentation_assets/ui/docshot/devices/batch-create-filled.png"
+    },
+    {
+      "asset_id": "ui.devices.search-switches",
+      "source_document": "docshots/outputs.py",
+      "old_line": 58,
+      "line": 62,
+      "referenced_path": "documentation_assets/ui/docshot/devices/search-switches.png"
+    },
+    {
+      "asset_id": "ui.devices.context-waiting",
+      "source_document": "docshots/outputs.py",
+      "old_line": 60,
+      "line": 64,
+      "referenced_path": "documentation_assets/ui/docshot/devices/context-waiting.png"
+    },
+    {
+      "asset_id": "ui.devices.connected",
+      "source_document": "docshots/outputs.py",
+      "old_line": 62,
+      "line": 66,
+      "referenced_path": "documentation_assets/ui/docshot/devices/connected.png"
+    },
+    {
+      "asset_id": "ui.devices.context-connected",
+      "source_document": "docshots/outputs.py",
+      "old_line": 64,
+      "line": 68,
+      "referenced_path": "documentation_assets/ui/docshot/devices/context-connected.png"
+    },
+    {
+      "asset_id": "ui.devices.context-disconnected",
+      "source_document": "docshots/outputs.py",
+      "old_line": 66,
+      "line": 70,
+      "referenced_path": "documentation_assets/ui/docshot/devices/context-disconnected.png"
+    },
+    {
+      "asset_id": "ui.devices.multi-select-mixed-status",
+      "source_document": "docshots/outputs.py",
+      "old_line": 68,
+      "line": 72,
+      "referenced_path": "documentation_assets/ui/docshot/devices/multi-select-mixed-status.png"
+    },
+    {
+      "asset_id": "ui.devices.multi-select-actions",
+      "source_document": "docshots/outputs.py",
+      "old_line": 70,
+      "line": 74,
+      "referenced_path": "documentation_assets/ui/docshot/devices/multi-select-actions.png"
+    },
+    {
+      "asset_id": "ui.devices.edit",
+      "source_document": "docshots/outputs.py",
+      "old_line": 72,
+      "line": 76,
+      "referenced_path": "documentation_assets/ui/docshot/devices/edit.png"
+    },
+    {
+      "asset_id": "ui.devices.delete-confirmation",
+      "source_document": "docshots/outputs.py",
+      "old_line": 74,
+      "line": 78,
+      "referenced_path": "documentation_assets/ui/docshot/devices/delete-confirmation.png"
+    },
+    {
+      "asset_id": "ui.devices.running-config-snapshot",
+      "source_document": "docshots/outputs.py",
+      "old_line": 76,
+      "line": 80,
+      "referenced_path": "documentation_assets/ui/docshot/devices/running-config-snapshot.png"
+    },
+    {
+      "asset_id": "ui.devices.import-result",
+      "source_document": "docshots/outputs.py",
+      "old_line": 78,
+      "line": 82,
+      "referenced_path": "documentation_assets/ui/docshot/devices/import-result.png"
+    },
+    {
+      "asset_id": "ui.devices.batch-host-name-detail",
+      "source_document": "docshots/outputs.py",
+      "old_line": 80,
+      "line": 84,
+      "referenced_path": "documentation_assets/ui/docshot/devices/batch-host-name-detail.png"
+    },
+    {
+      "asset_id": "ui.devices.inventory-router-selected",
+      "source_document": "docshots/outputs.py",
+      "old_line": 82,
+      "line": 86,
+      "referenced_path": "documentation_assets/ui/docshot/devices/inventory-router-selected.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.switch-selected",
+      "source_document": "docshots/outputs.py",
+      "old_line": 84,
+      "line": 88,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/switch-selected.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.database",
+      "source_document": "docshots/outputs.py",
+      "old_line": 86,
+      "line": 90,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/database.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-empty",
+      "source_document": "docshots/outputs.py",
+      "old_line": 88,
+      "line": 92,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-empty.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-id-filled",
+      "source_document": "docshots/outputs.py",
+      "old_line": 90,
+      "line": 94,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-id-filled.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-name-filled",
+      "source_document": "docshots/outputs.py",
+      "old_line": 92,
+      "line": 96,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-name-filled.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-state-selector",
+      "source_document": "docshots/outputs.py",
+      "old_line": 94,
+      "line": 98,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-state-selector.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.create-ready",
+      "source_document": "docshots/outputs.py",
+      "old_line": 96,
+      "line": 100,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/create-ready.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.created-pending-apply",
+      "source_document": "docshots/outputs.py",
+      "old_line": 98,
+      "line": 102,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png"
+    },
+    {
+      "asset_id": "ui.switching.vlan.view-push-guest",
+      "source_document": "docshots/outputs.py",
+      "old_line": 100,
+      "line": 104,
+      "referenced_path": "documentation_assets/ui/docshot/switching/vlan/view-push-guest.png"
+    },
+    {
+      "asset_id": "ui.core.welcome-recent-projects",
+      "source_document": "docshots/outputs.py",
+      "old_line": 102,
+      "line": 106,
+      "referenced_path": "documentation_assets/ui/docshot/core/welcome-recent-projects.png"
+    },
+    {
+      "asset_id": "ui.core.workspace-empty",
+      "source_document": "docshots/outputs.py",
+      "old_line": 104,
+      "line": 108,
+      "referenced_path": "documentation_assets/ui/docshot/core/workspace-empty.png"
+    }
+  ],
+  "final_reference_metadata_correction": {
+    "reason": "Temporary migration helper originally counted changed-path offsets against original source text, adding surplus fallback edges. Removed surplus edges and recalculated exact current lines; image reference literals themselves were already correct.",
+    "affected_records": 24,
+    "verified_current_edges": 109,
+    "corrections": [
+      {
+        "asset_id": "ui.devices.context-connected",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 406,
+            "referenced_path": "../assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 409,
+            "referenced_path": "../assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+            "line": 196,
+            "referenced_path": "../assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 241,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 242,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+            "line": 133,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 68,
+            "referenced_path": "documentation_assets/ui/docshot/devices/context-connected.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 409,
+            "referenced_path": "../assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+            "line": 196,
+            "referenced_path": "../assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 241,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+            "line": 133,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 68,
+            "referenced_path": "documentation_assets/ui/docshot/devices/context-connected.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.running-config-snapshot",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 495,
+            "referenced_path": "../assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 499,
+            "referenced_path": "../assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 282,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 285,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 80,
+            "referenced_path": "documentation_assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 499,
+            "referenced_path": "../assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 282,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 80,
+            "referenced_path": "documentation_assets/ui/docshot/devices/running-config-snapshot.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.core.feature-bar-switch",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 222,
+            "referenced_path": "../assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 223,
+            "referenced_path": "../assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 110,
+            "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 111,
+            "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 38,
+            "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 223,
+            "referenced_path": "../assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 110,
+            "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 38,
+            "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-switch.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.delete-confirmation",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 613,
+            "referenced_path": "../assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 619,
+            "referenced_path": "../assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 341,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 344,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 78,
+            "referenced_path": "documentation_assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 619,
+            "referenced_path": "../assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 341,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 78,
+            "referenced_path": "documentation_assets/ui/docshot/devices/delete-confirmation.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.multi-select-mixed-status",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 354,
+            "referenced_path": "../assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 358,
+            "referenced_path": "../assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 211,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 212,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 72,
+            "referenced_path": "documentation_assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 358,
+            "referenced_path": "../assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 211,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 72,
+            "referenced_path": "documentation_assets/ui/docshot/devices/multi-select-mixed-status.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.core.feature-bar-router",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 215,
+            "referenced_path": "../assets/ui/docshot/core/feature-bar-router.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 107,
+            "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-router.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 108,
+            "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-router.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 36,
+            "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-router.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 215,
+            "referenced_path": "../assets/ui/docshot/core/feature-bar-router.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 107,
+            "referenced_path": "/documentation_assets/ui/docshot/core/feature-bar-router.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 36,
+            "referenced_path": "documentation_assets/ui/docshot/core/feature-bar-router.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.core.status-bar",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 284,
+            "referenced_path": "../assets/ui/docshot/core/status-bar.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 285,
+            "referenced_path": "../assets/ui/docshot/core/status-bar.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 144,
+            "referenced_path": "/documentation_assets/ui/docshot/core/status-bar.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 145,
+            "referenced_path": "/documentation_assets/ui/docshot/core/status-bar.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 42,
+            "referenced_path": "documentation_assets/ui/docshot/core/status-bar.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 285,
+            "referenced_path": "../assets/ui/docshot/core/status-bar.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 144,
+            "referenced_path": "/documentation_assets/ui/docshot/core/status-bar.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 42,
+            "referenced_path": "documentation_assets/ui/docshot/core/status-bar.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.connected",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 423,
+            "referenced_path": "../assets/ui/docshot/devices/connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 427,
+            "referenced_path": "../assets/ui/docshot/devices/connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 250,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 251,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 66,
+            "referenced_path": "documentation_assets/ui/docshot/devices/connected.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 427,
+            "referenced_path": "../assets/ui/docshot/devices/connected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 250,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/connected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 66,
+            "referenced_path": "documentation_assets/ui/docshot/devices/connected.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.context-disconnected",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 450,
+            "referenced_path": "../assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 454,
+            "referenced_path": "../assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 261,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 262,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 70,
+            "referenced_path": "documentation_assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 454,
+            "referenced_path": "../assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 261,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 70,
+            "referenced_path": "documentation_assets/ui/docshot/devices/context-disconnected.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.core.status-details",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 297,
+            "referenced_path": "../assets/ui/docshot/core/status-details.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 300,
+            "referenced_path": "../assets/ui/docshot/core/status-details.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 149,
+            "referenced_path": "/documentation_assets/ui/docshot/core/status-details.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 150,
+            "referenced_path": "/documentation_assets/ui/docshot/core/status-details.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 44,
+            "referenced_path": "documentation_assets/ui/docshot/core/status-details.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 300,
+            "referenced_path": "../assets/ui/docshot/core/status-details.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 149,
+            "referenced_path": "/documentation_assets/ui/docshot/core/status-details.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 44,
+            "referenced_path": "documentation_assets/ui/docshot/core/status-details.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.core.information-empty",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 257,
+            "referenced_path": "../assets/ui/docshot/core/information-empty.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 258,
+            "referenced_path": "../assets/ui/docshot/core/information-empty.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 133,
+            "referenced_path": "/documentation_assets/ui/docshot/core/information-empty.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 134,
+            "referenced_path": "/documentation_assets/ui/docshot/core/information-empty.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 40,
+            "referenced_path": "documentation_assets/ui/docshot/core/information-empty.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 258,
+            "referenced_path": "../assets/ui/docshot/core/information-empty.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 133,
+            "referenced_path": "/documentation_assets/ui/docshot/core/information-empty.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 40,
+            "referenced_path": "documentation_assets/ui/docshot/core/information-empty.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.multi-select-actions",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 548,
+            "referenced_path": "../assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 552,
+            "referenced_path": "../assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 305,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 308,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 74,
+            "referenced_path": "documentation_assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 552,
+            "referenced_path": "../assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 305,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 74,
+            "referenced_path": "documentation_assets/ui/docshot/devices/multi-select-actions.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.batch-host-name-detail",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 250,
+            "referenced_path": "../assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 254,
+            "referenced_path": "../assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 162,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 163,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 84,
+            "referenced_path": "documentation_assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 254,
+            "referenced_path": "../assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 162,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 84,
+            "referenced_path": "documentation_assets/ui/docshot/devices/batch-host-name-detail.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.context-waiting",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 397,
+            "referenced_path": "../assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 400,
+            "referenced_path": "../assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 238,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 239,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 64,
+            "referenced_path": "documentation_assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 400,
+            "referenced_path": "../assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 238,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 64,
+            "referenced_path": "documentation_assets/ui/docshot/devices/context-waiting.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.created-waiting",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 195,
+            "referenced_path": "../assets/ui/docshot/devices/created-waiting.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 196,
+            "referenced_path": "../assets/ui/docshot/devices/created-waiting.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 135,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/created-waiting.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 54,
+            "referenced_path": "documentation_assets/ui/docshot/devices/created-waiting.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 196,
+            "referenced_path": "../assets/ui/docshot/devices/created-waiting.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 135,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/created-waiting.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 54,
+            "referenced_path": "documentation_assets/ui/docshot/devices/created-waiting.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.import-result",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 303,
+            "referenced_path": "../assets/ui/docshot/devices/import-result.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 307,
+            "referenced_path": "../assets/ui/docshot/devices/import-result.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 189,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/import-result.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 190,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/import-result.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 82,
+            "referenced_path": "documentation_assets/ui/docshot/devices/import-result.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 307,
+            "referenced_path": "../assets/ui/docshot/devices/import-result.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 189,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/import-result.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 82,
+            "referenced_path": "documentation_assets/ui/docshot/devices/import-result.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.tabs-router-active",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 164,
+            "referenced_path": "../assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 165,
+            "referenced_path": "../assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 84,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 85,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 34,
+            "referenced_path": "documentation_assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 165,
+            "referenced_path": "../assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 84,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 34,
+            "referenced_path": "documentation_assets/ui/docshot/devices/tabs-router-active.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.ssh-compatibility",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 159,
+            "referenced_path": "../assets/ui/docshot/devices/ssh-compatibility.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 160,
+            "referenced_path": "../assets/ui/docshot/devices/ssh-compatibility.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 120,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/ssh-compatibility.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 56,
+            "referenced_path": "documentation_assets/ui/docshot/devices/ssh-compatibility.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 160,
+            "referenced_path": "../assets/ui/docshot/devices/ssh-compatibility.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 120,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/ssh-compatibility.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 56,
+            "referenced_path": "documentation_assets/ui/docshot/devices/ssh-compatibility.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.edit",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 581,
+            "referenced_path": "../assets/ui/docshot/devices/edit.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 585,
+            "referenced_path": "../assets/ui/docshot/devices/edit.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 328,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/edit.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 331,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/edit.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 76,
+            "referenced_path": "documentation_assets/ui/docshot/devices/edit.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 585,
+            "referenced_path": "../assets/ui/docshot/devices/edit.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 328,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/edit.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 76,
+            "referenced_path": "documentation_assets/ui/docshot/devices/edit.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.search-switches",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 329,
+            "referenced_path": "../assets/ui/docshot/devices/search-switches.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 332,
+            "referenced_path": "../assets/ui/docshot/devices/search-switches.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 200,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/search-switches.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 201,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/search-switches.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 62,
+            "referenced_path": "documentation_assets/ui/docshot/devices/search-switches.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 332,
+            "referenced_path": "../assets/ui/docshot/devices/search-switches.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 200,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/search-switches.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 62,
+            "referenced_path": "documentation_assets/ui/docshot/devices/search-switches.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.core.sidebar-collapsed",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 323,
+            "referenced_path": "../assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 326,
+            "referenced_path": "../assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 160,
+            "referenced_path": "/documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 161,
+            "referenced_path": "/documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 46,
+            "referenced_path": "documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 326,
+            "referenced_path": "../assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 160,
+            "referenced_path": "/documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 46,
+            "referenced_path": "documentation_assets/ui/docshot/core/sidebar-collapsed.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.batch-create-filled",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 238,
+            "referenced_path": "../assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 241,
+            "referenced_path": "../assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 157,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 158,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 60,
+            "referenced_path": "documentation_assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 241,
+            "referenced_path": "../assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 157,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 60,
+            "referenced_path": "documentation_assets/ui/docshot/devices/batch-create-filled.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.batch-create-empty",
+        "before": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 210,
+            "referenced_path": "../assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 213,
+            "referenced_path": "../assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 144,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 145,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 58,
+            "referenced_path": "documentation_assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/04_quan_ly_thiet_bi.md",
+            "line": 213,
+            "referenced_path": "../assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/04_quan_ly_thiet_bi.typ",
+            "line": 144,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 58,
+            "referenced_path": "documentation_assets/ui/docshot/devices/batch-create-empty.png",
+            "target_type": "code"
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.devices.sidebar-status-groups",
+        "before": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 126,
+            "referenced_path": "../assets/ui/docshot/devices/sidebar-status-groups.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 127,
+            "referenced_path": "../assets/ui/docshot/devices/sidebar-status-groups.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 69,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 32,
+            "referenced_path": "documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+            "target_type": "code"
+          }
+        ],
+        "after": [
+          {
+            "source_document": "00_book/DOC/03_giao_dien_dieu_huong.md",
+            "line": 127,
+            "referenced_path": "../assets/ui/docshot/devices/sidebar-status-groups.png",
+            "target_type": "book-mkdocs"
+          },
+          {
+            "source_document": "00_book/contents/03_giao_dien_dieu_huong.typ",
+            "line": 69,
+            "referenced_path": "/documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+            "target_type": "book-typst"
+          },
+          {
+            "source_document": "docshots/outputs.py",
+            "line": 32,
+            "referenced_path": "documentation_assets/ui/docshot/devices/sidebar-status-groups.png",
+            "target_type": "code"
+          }
+        ]
+      }
+    ]
+  },
+  "validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "proof": {
+    "status": "PASS",
+    "all_407_manifest_filesystem_source_git_index_sha_contracts": true,
+    "manifest": {
+      "pending": 266,
+      "migrated": 79,
+      "frozen": 62
+    },
+    "b03_migrated": 42,
+    "b03_legacy_absent": 42,
+    "b03_canonical_present": 42,
+    "remaining_365_asset_records_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "b02_holds_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "canonical_regeneration": false,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "baseline_remaining": 147,
+    "baseline_removed_only_resolved_occurrences": true,
+    "typst": [
+      {
+        "target": "report",
+        "result": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_starting_baseline": true
+      },
+      {
+        "target": "book",
+        "result": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_starting_baseline": true
+      }
+    ]
+  },
+  "typst": [
+    {
+      "target": "report",
+      "result": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_starting_baseline": true
+    },
+    {
+      "target": "book",
+      "result": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_starting_baseline": true
+    }
+  ],
+  "fresh_checkout": {
+    "result": "PASS",
+    "checkouts_created": 1,
+    "candidate_commit": "ced000fc6cbc14fe30511a292a0cc89a7d5207da",
+    "candidate_tree": "14bba357c92153f41929c8171cd0888f32bbbf3f",
+    "validation": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 19
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 17
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 3
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "actual_test_count": 39,
+    "proof": {
+      "status": "PASS",
+      "all_407_manifest_filesystem_source_git_index_sha_contracts": true,
+      "manifest": {
+        "pending": 266,
+        "migrated": 79,
+        "frozen": 62
+      },
+      "b03_migrated": 42,
+      "b03_legacy_absent": 42,
+      "b03_canonical_present": 42,
+      "remaining_365_asset_records_unchanged": true,
+      "terminal_freeze_and_reference_multiset_unchanged": true,
+      "runtime_assets_unchanged": true,
+      "b02_holds_unchanged": true,
+      "retained_b02_copies_unchanged": true,
+      "canonical_regeneration": false,
+      "staging_assets": 178,
+      "staging_hashes_correct": true,
+      "staging_ignored": true,
+      "staging_tracked": false,
+      "baseline_remaining": 147,
+      "baseline_removed_only_resolved_occurrences": true,
+      "typst": [
+        {
+          "target": "report",
+          "result": "PASS",
+          "pages": 110,
+          "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+          "byte_identical_to_starting_baseline": true
+        },
+        {
+          "target": "book",
+          "result": "PASS",
+          "pages": 170,
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "byte_identical_to_starting_baseline": true
+        }
+      ]
+    },
+    "scope": "Full cumulative series; source code/manifest/assets match final candidate. Execution-report completion is the only subsequent change."
+  },
+  "current_used_by_edges_verified": 109,
+  "total_b03_migrated": 42
+}

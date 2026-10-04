@@ -3,16 +3,16 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import replace
+from contextlib import nullcontext
+import tempfile
 import sys
 from pathlib import Path
 from typing import Sequence
 
 from .environment import configure_qt_environment
+from .outputs import canonical_destinations, publish_outputs
 from .shots import (
-    DIALOG_REGRESSION_FILENAMES,
     SHOT_REGISTRY,
-    VLAN_WORKFLOW_FILENAMES,
     resolve_shots,
 )
 
@@ -21,7 +21,7 @@ APP_DIR = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = APP_DIR
 DEFAULT_OUTPUT_DIR = REPOSITORY_ROOT / "documentation_assets" / "ui" / "docshot"
 DEFAULT_DOMAINS = {
-    "welcome": "core", "workspace": "project", "devices": "devices",
+    "welcome": "core", "workspace": "core", "devices": "devices",
     "chapter-03": "core", "chapter-04": "devices",
     "vlan": "switching/vlan", "dialogs": "core/dialogs", "all": "",
 }
@@ -68,7 +68,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--output-dir",
         type=Path,
         default=None,
-        help=f"exact PNG destination override (default: workflow domain under {DEFAULT_OUTPUT_DIR})",
+        help="exact temporary destination with legacy filenames (default: managed semantic canonical paths)",
     )
     return parser
 
@@ -81,11 +81,14 @@ def ensure_output_directory(path: Path) -> Path:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    if args.output_dir is None:
-        print("docshots: default canonical writes are blocked until B03 supplies a manifest-backed semantic output map; use --output-dir for temporary rendering", file=sys.stderr)
+    if args.output_dir is None and args.shot == "dialogs":
+        print("docshots: dialogs are temporary-only; use --output-dir", file=sys.stderr)
         return 1
     try:
-        output_dir = resolve_output_directory(args.shot, args.output_dir)
+        if args.output_dir is None:
+            canonical_destinations(args.shot, REPOSITORY_ROOT)
+        else:
+            resolve_output_directory(args.shot, args.output_dir)
     except ValueError as exc:
         print(f"docshots: {exc}", file=sys.stderr)
         return 1
@@ -93,57 +96,40 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     # Qt and main.py must only be imported after the headless/DPI variables exist.
     from .runtime import (
-        DocshotError,
-        RenderRequest,
-        render_dialog_regressions,
-        render_shot,
-        render_vlan_workflow,
+        DocshotError, RenderRequest, render_dialog_regressions,
+        render_shot, render_vlan_workflow,
     )
 
-    request = RenderRequest(
-        width=args.width,
-        height=args.height,
-        scale=args.scale,
-        theme=args.theme,
-        output_dir=output_dir,
-    )
+    # Default rendering emits legacy filenames in a temporary directory first.
+    # Only the explicit map may publish them; overrides never publish canonically.
+    context = (tempfile.TemporaryDirectory(prefix="cams-docshot-publish-")
+               if args.output_dir is None else nullcontext(None))
     try:
-        if args.shot == "chapter-04":
-            from .chapter04 import render_chapter_04_workflow
-            for result in render_chapter_04_workflow(request):
-                print(f"{result.path.name}: {result.path} ({result.width}x{result.height})")
-            return 0
-        if args.shot == "chapter-03":
-            from .chapter03 import render_chapter_03_workflow
-            for result in render_chapter_03_workflow(request):
-                print(f"{result.path.name}: {result.path} ({result.width}x{result.height})")
-            return 0
-        if args.shot == "vlan":
-            workflow_request = RenderRequest(
-                width=request.width,
-                height=request.height,
-                scale=request.scale,
-                theme=request.theme,
-                output_dir=output_dir,
-                timeout_ms=request.timeout_ms,
-            )
-            results = render_vlan_workflow(workflow_request)
-            print("Created VLAN documentation screenshots:")
-            for filename, result in zip(VLAN_WORKFLOW_FILENAMES, results, strict=True):
-                print(f"{filename}: {result.path} ({result.width}x{result.height})")
-            return 0
-        if args.shot == "dialogs":
-            results = render_dialog_regressions(request)
-            print("Created dialog regression screenshots:")
-            for filename, result in zip(
-                DIALOG_REGRESSION_FILENAMES, results, strict=True
-            ):
-                print(f"{filename}: {result.path} ({result.width}x{result.height})")
-            return 0
-        for shot in resolve_shots(args.shot):
-            shot_request = replace(request, output_dir=resolve_output_directory(shot.name)) if args.output_dir is None else request
-            result = render_shot(shot, shot_request)
-            print(f"{shot.name}: {result.path} ({result.width}x{result.height})")
+        with context as temporary:
+            output_dir = (Path(temporary) if temporary is not None
+                          else resolve_output_directory(args.shot, args.output_dir))
+            request = RenderRequest(width=args.width, height=args.height, scale=args.scale,
+                                    theme=args.theme, output_dir=output_dir)
+            if args.shot == "chapter-04":
+                from .chapter04 import render_chapter_04_workflow
+                results = render_chapter_04_workflow(request)
+            elif args.shot == "chapter-03":
+                from .chapter03 import render_chapter_03_workflow
+                results = render_chapter_03_workflow(request)
+            elif args.shot == "vlan":
+                results = render_vlan_workflow(request)
+            elif args.shot == "dialogs":
+                results = render_dialog_regressions(request)
+            else:
+                results = [render_shot(shot, request) for shot in resolve_shots(args.shot)]
+            if args.output_dir is None:
+                destinations = publish_outputs(args.shot, [r.path for r in results],
+                                               output_dir, REPOSITORY_ROOT)
+            else:
+                destinations = {r.path.name: r.path for r in results}
+            for result in results:
+                path = destinations[result.path.name]
+                print(f"{path.name}: {path} ({result.width}x{result.height})")
     except (DocshotError, OSError, ValueError) as exc:
         print(f"docshots: {exc}", file=sys.stderr)
         return 1

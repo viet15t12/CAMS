@@ -164,16 +164,6 @@
 │   │   ├── 06-acl-extended-form.png
 │   │   ├── 07-acl-bindings.png
 │   │   └── 08-acl-view-push.png
-│   ├── vlan
-│   │   ├── 01-select-switch.png
-│   │   ├── 02-open-vlan.png
-│   │   ├── 03-add-vlan.png
-│   │   ├── 04-vlan-id.png
-│   │   ├── 05-vlan-name.png
-│   │   ├── 06-vlan-state.png
-│   │   ├── 07-ready-to-save.png
-│   │   ├── 08-vlan-created.png
-│   │   └── 09-view-preview.png
 ├── icons
 │   └── ptit-logo.svg
 ├── report
@@ -410,5 +400,19 @@ B03B canonical docshot assets (outside this figures tree):
 - documentation_assets/ui/docshot/devices/import-result.png
 - documentation_assets/ui/docshot/devices/batch-host-name-detail.png
 - documentation_assets/ui/docshot/devices/inventory-router-selected.png
+
+Original approved PNG bytes preserved. MkDocs uses generated staging only for manifest-selected assets; generator-only assets gain no document placement.
+
+B03C canonical docshot assets (outside this figures tree):
+
+- documentation_assets/ui/docshot/switching/vlan/switch-selected.png
+- documentation_assets/ui/docshot/switching/vlan/database.png
+- documentation_assets/ui/docshot/switching/vlan/create-empty.png
+- documentation_assets/ui/docshot/switching/vlan/create-id-filled.png
+- documentation_assets/ui/docshot/switching/vlan/create-name-filled.png
+- documentation_assets/ui/docshot/switching/vlan/create-state-selector.png
+- documentation_assets/ui/docshot/switching/vlan/create-ready.png
+- documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png
+- documentation_assets/ui/docshot/switching/vlan/view-push-guest.png
 
 Original approved PNG bytes preserved. MkDocs uses generated staging only for manifest-selected assets; generator-only assets gain no document placement.

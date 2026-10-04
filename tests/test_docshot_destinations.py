@@ -14,7 +14,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from docshots import cli
-from docshots.outputs import OUTPUT_MAP, validate_output_map, workflow_outputs
+from docshots.outputs import OUTPUT_MAP, validate_output_map, workflow_outputs, canonical_destinations, publish_outputs
 from docshots.shots import CHAPTER_03_FILENAMES, CHAPTER_04_FILENAMES, SHOT_REGISTRY
 from docshots.shots import VLAN_WORKFLOW_FILENAMES, DIALOG_REGRESSION_FILENAMES
 
@@ -50,8 +50,13 @@ class DocshotDestinationTests(unittest.TestCase):
         chapter03.render_chapter_03_workflow = lambda r: workflow(r, 'chapter-03', CHAPTER_03_FILENAMES)
         chapter04 = types.ModuleType('docshots.chapter04')
         chapter04.render_chapter_04_workflow = lambda r: workflow(r, 'chapter-04', CHAPTER_04_FILENAMES)
-        with patch.dict(sys.modules, {'docshots.runtime': runtime, 'docshots.chapter03': chapter03, 'docshots.chapter04': chapter04}), patch('builtins.print'):
+        with patch.dict(sys.modules, {'docshots.runtime': runtime, 'docshots.chapter03': chapter03, 'docshots.chapter04': chapter04}), patch('builtins.print'), patch.object(cli, 'publish_outputs', side_effect=lambda workflow, paths, stage, root: canonical_destinations(workflow, root)) as publish:
             self.assertEqual(cli.main(arguments), 0)
+            if '--output-dir' in arguments:
+                publish.assert_not_called()
+            else:
+                publish.assert_called_once()
+                self.assertEqual({p.name for p in publish.call_args.args[1]}, set(canonical_destinations(arguments[0], cli.REPOSITORY_ROOT)))
         return calls
 
     def test_default_root_is_this_repository(self):
@@ -66,12 +71,20 @@ class DocshotDestinationTests(unittest.TestCase):
             finally:
                 os.chdir(previous)
 
-    def test_default_canonical_writes_blocked_before_runtime_import(self):
+    def test_dialogs_default_blocked_before_runtime_import(self):
         with patch.object(cli, 'configure_qt_environment') as configure, patch('builtins.print') as message:
-            for name in cli.DEFAULT_DOMAINS:
-                self.assertEqual(cli.main([name]), 1)
+            self.assertEqual(cli.main(['dialogs']), 1)
             configure.assert_not_called()
-            self.assertIn('semantic output map', message.call_args.args[0])
+            self.assertIn('temporary-only', message.call_args.args[0])
+
+    def test_default_managed_dispatch_uses_temporary_rendering_then_map(self):
+        for name in ['welcome', 'workspace', 'devices', 'chapter-03', 'chapter-04', 'vlan', 'all']:
+            calls = self.run_cli([name])
+            self.assertTrue(calls)
+            for _, request in calls:
+                self.assertFalse(request.output_dir.is_relative_to(cli.DEFAULT_OUTPUT_DIR))
+                self.assertFalse(request.output_dir.exists())  # temporary context cleaned
+        self.assertEqual([n for n, _ in self.run_cli(['all'])], list(SHOT_REGISTRY))
 
     def test_every_workflow_respects_exact_temporary_override(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -146,6 +159,89 @@ class DocshotDestinationTests(unittest.TestCase):
                      'documentation_assets/ui/docshot/core/01-legacy.png']:
             with self.assertRaisesRegex(ValueError, 'Unsafe'):
                 validate_output_map([replace(OUTPUT_MAP[0], canonical_path=path)])
+
+    def test_enabled_defaults_require_all_42_manifest_transitions(self):
+        import yaml
+        records = {a['id']: a for a in yaml.safe_load((cli.REPOSITORY_ROOT / 'documentation_assets/manifest.yaml').read_text())['assets']}
+        for spec in OUTPUT_MAP:
+            self.assertEqual(records[spec.asset_id]['migration_state'], 'migrated')
+            self.assertTrue(records[spec.asset_id]['canonical'])
+            self.assertEqual(records[spec.asset_id]['current_path'], spec.canonical_path)
+
+    def test_all_exact_generic_destinations_and_canonical_containment(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for workflow in ['chapter-03', 'chapter-04', 'vlan', *SHOT_REGISTRY, 'all']:
+                resolved = canonical_destinations(workflow, root)
+                self.assertEqual(resolved, {s.filename: root / s.canonical_path for s in workflow_outputs(workflow)})
+                self.assertTrue(all(p.is_relative_to(root / 'documentation_assets/ui/docshot') for p in resolved.values()))
+            self.assertEqual(set(canonical_destinations('all', root)), {'welcome.png', 'workspace.png', 'devices.png'})
+            self.assertEqual(list(root.iterdir()), [])
+
+    def test_semantic_symlink_parent_and_leaf_escapes_rejected(self):
+        for location in ['documentation_assets', 'documentation_assets/ui/docshot/core',
+                         'documentation_assets/ui/docshot/core/welcome-recent-projects.png']:
+            with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as outside:
+                root = Path(directory); link = root / location
+                link.parent.mkdir(parents=True, exist_ok=True)
+                link.symlink_to(outside, target_is_directory=True)
+                with self.assertRaisesRegex(ValueError, 'escapes canonical|Symlink'):
+                    canonical_destinations('welcome', root)
+                self.assertEqual(list(Path(outside).iterdir()), [])
+        # Escaping canonical storage to another directory INSIDE the repo is unsafe too.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); link = root / 'documentation_assets/ui/docshot/core'
+            link.parent.mkdir(parents=True); (root / 'unmanaged').mkdir()
+            link.symlink_to(root / 'unmanaged', target_is_directory=True)
+            with self.assertRaises(ValueError):
+                canonical_destinations('welcome', root)
+
+    def test_publisher_rejects_unmanaged_missing_colliding_and_escaped_outputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / 'repo'; stage = Path(directory) / 'stage'; stage.mkdir()
+            normal = stage / 'welcome.png'; normal.write_bytes(b'test temporary bytes')
+            extra = stage / 'unmanaged.png'; extra.write_bytes(b'test temporary bytes')
+            for paths in [[], [normal, normal], [normal, extra], [extra]]:
+                with self.assertRaisesRegex(ValueError, 'Incomplete, unmanaged or colliding'):
+                    publish_outputs('welcome', paths, stage, root)
+                self.assertFalse(root.exists())
+            outside = Path(directory) / 'welcome.png'; outside.write_bytes(b'outside')
+            with self.assertRaisesRegex(ValueError, 'outside temporary'):
+                publish_outputs('welcome', [outside], stage, root)
+            self.assertFalse(root.exists())
+
+    def test_publisher_preserves_rendered_bytes_and_semantic_filename_in_temp_repo(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / 'repo'; stage = Path(directory) / 'stage'; stage.mkdir()
+            paths = []
+            for spec in workflow_outputs('chapter-03'):
+                path = stage / spec.filename; path.write_bytes(spec.asset_id.encode()); paths.append(path)
+            destinations = publish_outputs('chapter-03', paths, stage, root)
+            self.assertEqual(len(destinations), 11)
+            for spec in workflow_outputs('chapter-03'):
+                self.assertEqual(destinations[spec.filename], root / spec.canonical_path)
+                self.assertEqual(destinations[spec.filename].read_bytes(), spec.asset_id.encode())
+            self.assertFalse(list(root.rglob('.docshot-*')))
+
+    def test_default_escape_fails_before_qt_initialization(self):
+        with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as outside:
+            root = Path(directory)
+            (root / 'documentation_assets').symlink_to(outside, target_is_directory=True)
+            with patch.object(cli, 'REPOSITORY_ROOT', root), patch.object(cli, 'configure_qt_environment') as configure, patch('builtins.print'):
+                self.assertEqual(cli.main(['welcome']), 1)
+                configure.assert_not_called()
+            self.assertEqual(list(Path(outside).iterdir()), [])
+
+    def test_migrated_used_by_edges_have_exact_current_lines_without_duplicates(self):
+        import yaml
+        root = cli.REPOSITORY_ROOT
+        records = {a['id']: a for a in yaml.safe_load((root / 'documentation_assets/manifest.yaml').read_text())['assets']}
+        for spec in OUTPUT_MAP:
+            edges = records[spec.asset_id]['used_by']
+            keys = [(e['source_document'], e['line'], e['referenced_path']) for e in edges]
+            self.assertEqual(len(keys), len(set(keys)), spec.asset_id)
+            for source, line, referenced in keys:
+                self.assertIn(referenced, (root / source).read_text().splitlines()[line - 1], spec.asset_id)
 
 if __name__ == '__main__':
     unittest.main()

@@ -538,7 +538,7 @@ assets:
     referenced_path: ../assets/ui/docshot/core/workspace-overview.png
     target_type: other
   - source_document: docshots/outputs.py
-    line: 22
+    line: 26
     referenced_path: documentation_assets/ui/docshot/core/workspace-overview.png
     target_type: code
   targets:
@@ -594,7 +594,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/core/view-menu.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 24
+    line: 28
     referenced_path: documentation_assets/ui/docshot/core/view-menu.png
     target_type: code
   targets:
@@ -648,7 +648,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/core/activity-bar.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 26
+    line: 30
     referenced_path: documentation_assets/ui/docshot/core/activity-bar.png
     target_type: code
   targets:
@@ -694,10 +694,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
-    line: 126
-    referenced_path: ../assets/ui/docshot/devices/sidebar-status-groups.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 127
     referenced_path: ../assets/ui/docshot/devices/sidebar-status-groups.png
     target_type: book-mkdocs
@@ -706,7 +702,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/devices/sidebar-status-groups.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 28
+    line: 32
     referenced_path: documentation_assets/ui/docshot/devices/sidebar-status-groups.png
     target_type: code
   targets:
@@ -752,10 +748,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
-    line: 164
-    referenced_path: ../assets/ui/docshot/devices/tabs-router-active.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 165
     referenced_path: ../assets/ui/docshot/devices/tabs-router-active.png
     target_type: book-mkdocs
@@ -763,12 +755,8 @@ assets:
     line: 84
     referenced_path: /documentation_assets/ui/docshot/devices/tabs-router-active.png
     target_type: book-typst
-  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
-    line: 85
-    referenced_path: /documentation_assets/ui/docshot/devices/tabs-router-active.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 30
+    line: 34
     referenced_path: documentation_assets/ui/docshot/devices/tabs-router-active.png
     target_type: code
   targets:
@@ -821,12 +809,8 @@ assets:
     line: 107
     referenced_path: /documentation_assets/ui/docshot/core/feature-bar-router.png
     target_type: book-typst
-  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
-    line: 108
-    referenced_path: /documentation_assets/ui/docshot/core/feature-bar-router.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 32
+    line: 36
     referenced_path: documentation_assets/ui/docshot/core/feature-bar-router.png
     target_type: code
   targets:
@@ -872,10 +856,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
-    line: 222
-    referenced_path: ../assets/ui/docshot/core/feature-bar-switch.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 223
     referenced_path: ../assets/ui/docshot/core/feature-bar-switch.png
     target_type: book-mkdocs
@@ -883,12 +863,8 @@ assets:
     line: 110
     referenced_path: /documentation_assets/ui/docshot/core/feature-bar-switch.png
     target_type: book-typst
-  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
-    line: 111
-    referenced_path: /documentation_assets/ui/docshot/core/feature-bar-switch.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 34
+    line: 38
     referenced_path: documentation_assets/ui/docshot/core/feature-bar-switch.png
     target_type: code
   targets:
@@ -934,10 +910,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
-    line: 257
-    referenced_path: ../assets/ui/docshot/core/information-empty.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 258
     referenced_path: ../assets/ui/docshot/core/information-empty.png
     target_type: book-mkdocs
@@ -945,12 +917,8 @@ assets:
     line: 133
     referenced_path: /documentation_assets/ui/docshot/core/information-empty.png
     target_type: book-typst
-  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
-    line: 134
-    referenced_path: /documentation_assets/ui/docshot/core/information-empty.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 36
+    line: 40
     referenced_path: documentation_assets/ui/docshot/core/information-empty.png
     target_type: code
   targets:
@@ -996,10 +964,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
-    line: 284
-    referenced_path: ../assets/ui/docshot/core/status-bar.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 285
     referenced_path: ../assets/ui/docshot/core/status-bar.png
     target_type: book-mkdocs
@@ -1007,12 +971,8 @@ assets:
     line: 144
     referenced_path: /documentation_assets/ui/docshot/core/status-bar.png
     target_type: book-typst
-  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
-    line: 145
-    referenced_path: /documentation_assets/ui/docshot/core/status-bar.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 38
+    line: 42
     referenced_path: documentation_assets/ui/docshot/core/status-bar.png
     target_type: code
   targets:
@@ -1058,10 +1018,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
-    line: 297
-    referenced_path: ../assets/ui/docshot/core/status-details.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 300
     referenced_path: ../assets/ui/docshot/core/status-details.png
     target_type: book-mkdocs
@@ -1069,12 +1025,8 @@ assets:
     line: 149
     referenced_path: /documentation_assets/ui/docshot/core/status-details.png
     target_type: book-typst
-  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
-    line: 150
-    referenced_path: /documentation_assets/ui/docshot/core/status-details.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 40
+    line: 44
     referenced_path: documentation_assets/ui/docshot/core/status-details.png
     target_type: code
   targets:
@@ -1120,10 +1072,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
-    line: 323
-    referenced_path: ../assets/ui/docshot/core/sidebar-collapsed.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/03_giao_dien_dieu_huong.md
     line: 326
     referenced_path: ../assets/ui/docshot/core/sidebar-collapsed.png
     target_type: book-mkdocs
@@ -1131,12 +1079,8 @@ assets:
     line: 160
     referenced_path: /documentation_assets/ui/docshot/core/sidebar-collapsed.png
     target_type: book-typst
-  - source_document: 00_book/contents/03_giao_dien_dieu_huong.typ
-    line: 161
-    referenced_path: /documentation_assets/ui/docshot/core/sidebar-collapsed.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 42
+    line: 46
     referenced_path: documentation_assets/ui/docshot/core/sidebar-collapsed.png
     target_type: code
   targets:
@@ -1190,7 +1134,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/devices/inventory-waiting.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 44
+    line: 48
     referenced_path: documentation_assets/ui/docshot/devices/inventory-waiting.png
     target_type: code
   targets:
@@ -1244,7 +1188,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/devices/create-empty.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 46
+    line: 50
     referenced_path: documentation_assets/ui/docshot/devices/create-empty.png
     target_type: code
   targets:
@@ -1298,7 +1242,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/devices/create-filled.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 48
+    line: 52
     referenced_path: documentation_assets/ui/docshot/devices/create-filled.png
     target_type: code
   targets:
@@ -1344,10 +1288,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 195
-    referenced_path: ../assets/ui/docshot/devices/created-waiting.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 196
     referenced_path: ../assets/ui/docshot/devices/created-waiting.png
     target_type: book-mkdocs
@@ -1356,7 +1296,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/devices/created-waiting.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 50
+    line: 54
     referenced_path: documentation_assets/ui/docshot/devices/created-waiting.png
     target_type: code
   targets:
@@ -1402,10 +1342,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 159
-    referenced_path: ../assets/ui/docshot/devices/ssh-compatibility.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 160
     referenced_path: ../assets/ui/docshot/devices/ssh-compatibility.png
     target_type: book-mkdocs
@@ -1414,7 +1350,7 @@ assets:
     referenced_path: /documentation_assets/ui/docshot/devices/ssh-compatibility.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 52
+    line: 56
     referenced_path: documentation_assets/ui/docshot/devices/ssh-compatibility.png
     target_type: code
   targets:
@@ -1460,10 +1396,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 210
-    referenced_path: ../assets/ui/docshot/devices/batch-create-empty.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 213
     referenced_path: ../assets/ui/docshot/devices/batch-create-empty.png
     target_type: book-mkdocs
@@ -1471,12 +1403,8 @@ assets:
     line: 144
     referenced_path: /documentation_assets/ui/docshot/devices/batch-create-empty.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 145
-    referenced_path: /documentation_assets/ui/docshot/devices/batch-create-empty.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 54
+    line: 58
     referenced_path: documentation_assets/ui/docshot/devices/batch-create-empty.png
     target_type: code
   targets:
@@ -1522,10 +1450,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 238
-    referenced_path: ../assets/ui/docshot/devices/batch-create-filled.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 241
     referenced_path: ../assets/ui/docshot/devices/batch-create-filled.png
     target_type: book-mkdocs
@@ -1533,12 +1457,8 @@ assets:
     line: 157
     referenced_path: /documentation_assets/ui/docshot/devices/batch-create-filled.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 158
-    referenced_path: /documentation_assets/ui/docshot/devices/batch-create-filled.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 56
+    line: 60
     referenced_path: documentation_assets/ui/docshot/devices/batch-create-filled.png
     target_type: code
   targets:
@@ -1584,10 +1504,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 329
-    referenced_path: ../assets/ui/docshot/devices/search-switches.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 332
     referenced_path: ../assets/ui/docshot/devices/search-switches.png
     target_type: book-mkdocs
@@ -1595,12 +1511,8 @@ assets:
     line: 200
     referenced_path: /documentation_assets/ui/docshot/devices/search-switches.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 201
-    referenced_path: /documentation_assets/ui/docshot/devices/search-switches.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 58
+    line: 62
     referenced_path: documentation_assets/ui/docshot/devices/search-switches.png
     target_type: code
   targets:
@@ -1646,10 +1558,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 397
-    referenced_path: ../assets/ui/docshot/devices/context-waiting.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 400
     referenced_path: ../assets/ui/docshot/devices/context-waiting.png
     target_type: book-mkdocs
@@ -1657,12 +1565,8 @@ assets:
     line: 238
     referenced_path: /documentation_assets/ui/docshot/devices/context-waiting.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 239
-    referenced_path: /documentation_assets/ui/docshot/devices/context-waiting.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 60
+    line: 64
     referenced_path: documentation_assets/ui/docshot/devices/context-waiting.png
     target_type: code
   targets:
@@ -1708,10 +1612,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 423
-    referenced_path: ../assets/ui/docshot/devices/connected.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 427
     referenced_path: ../assets/ui/docshot/devices/connected.png
     target_type: book-mkdocs
@@ -1719,12 +1619,8 @@ assets:
     line: 250
     referenced_path: /documentation_assets/ui/docshot/devices/connected.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 251
-    referenced_path: /documentation_assets/ui/docshot/devices/connected.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 62
+    line: 66
     referenced_path: documentation_assets/ui/docshot/devices/connected.png
     target_type: code
   targets:
@@ -1770,10 +1666,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 406
-    referenced_path: ../assets/ui/docshot/devices/context-connected.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 409
     referenced_path: ../assets/ui/docshot/devices/context-connected.png
     target_type: book-mkdocs
@@ -1785,16 +1677,12 @@ assets:
     line: 241
     referenced_path: /documentation_assets/ui/docshot/devices/context-connected.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 242
-    referenced_path: /documentation_assets/ui/docshot/devices/context-connected.png
-    target_type: book-typst
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 133
     referenced_path: /documentation_assets/ui/docshot/devices/context-connected.png
     target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 64
+    line: 68
     referenced_path: documentation_assets/ui/docshot/devices/context-connected.png
     target_type: code
   targets:
@@ -1840,10 +1728,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 450
-    referenced_path: ../assets/ui/docshot/devices/context-disconnected.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 454
     referenced_path: ../assets/ui/docshot/devices/context-disconnected.png
     target_type: book-mkdocs
@@ -1851,12 +1735,8 @@ assets:
     line: 261
     referenced_path: /documentation_assets/ui/docshot/devices/context-disconnected.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 262
-    referenced_path: /documentation_assets/ui/docshot/devices/context-disconnected.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 66
+    line: 70
     referenced_path: documentation_assets/ui/docshot/devices/context-disconnected.png
     target_type: code
   targets:
@@ -1902,10 +1782,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 354
-    referenced_path: ../assets/ui/docshot/devices/multi-select-mixed-status.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 358
     referenced_path: ../assets/ui/docshot/devices/multi-select-mixed-status.png
     target_type: book-mkdocs
@@ -1913,12 +1789,8 @@ assets:
     line: 211
     referenced_path: /documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 212
-    referenced_path: /documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 68
+    line: 72
     referenced_path: documentation_assets/ui/docshot/devices/multi-select-mixed-status.png
     target_type: code
   targets:
@@ -1964,10 +1836,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 548
-    referenced_path: ../assets/ui/docshot/devices/multi-select-actions.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 552
     referenced_path: ../assets/ui/docshot/devices/multi-select-actions.png
     target_type: book-mkdocs
@@ -1975,12 +1843,8 @@ assets:
     line: 305
     referenced_path: /documentation_assets/ui/docshot/devices/multi-select-actions.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 308
-    referenced_path: /documentation_assets/ui/docshot/devices/multi-select-actions.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 70
+    line: 74
     referenced_path: documentation_assets/ui/docshot/devices/multi-select-actions.png
     target_type: code
   targets:
@@ -2026,10 +1890,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 581
-    referenced_path: ../assets/ui/docshot/devices/edit.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 585
     referenced_path: ../assets/ui/docshot/devices/edit.png
     target_type: book-mkdocs
@@ -2037,12 +1897,8 @@ assets:
     line: 328
     referenced_path: /documentation_assets/ui/docshot/devices/edit.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 331
-    referenced_path: /documentation_assets/ui/docshot/devices/edit.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 72
+    line: 76
     referenced_path: documentation_assets/ui/docshot/devices/edit.png
     target_type: code
   targets:
@@ -2088,10 +1944,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 613
-    referenced_path: ../assets/ui/docshot/devices/delete-confirmation.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 619
     referenced_path: ../assets/ui/docshot/devices/delete-confirmation.png
     target_type: book-mkdocs
@@ -2099,12 +1951,8 @@ assets:
     line: 341
     referenced_path: /documentation_assets/ui/docshot/devices/delete-confirmation.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 344
-    referenced_path: /documentation_assets/ui/docshot/devices/delete-confirmation.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 74
+    line: 78
     referenced_path: documentation_assets/ui/docshot/devices/delete-confirmation.png
     target_type: code
   targets:
@@ -2150,10 +1998,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 495
-    referenced_path: ../assets/ui/docshot/devices/running-config-snapshot.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 499
     referenced_path: ../assets/ui/docshot/devices/running-config-snapshot.png
     target_type: book-mkdocs
@@ -2161,12 +2005,8 @@ assets:
     line: 282
     referenced_path: /documentation_assets/ui/docshot/devices/running-config-snapshot.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 285
-    referenced_path: /documentation_assets/ui/docshot/devices/running-config-snapshot.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 76
+    line: 80
     referenced_path: documentation_assets/ui/docshot/devices/running-config-snapshot.png
     target_type: code
   targets:
@@ -2212,10 +2052,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 303
-    referenced_path: ../assets/ui/docshot/devices/import-result.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 307
     referenced_path: ../assets/ui/docshot/devices/import-result.png
     target_type: book-mkdocs
@@ -2223,12 +2059,8 @@ assets:
     line: 189
     referenced_path: /documentation_assets/ui/docshot/devices/import-result.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 190
-    referenced_path: /documentation_assets/ui/docshot/devices/import-result.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 78
+    line: 82
     referenced_path: documentation_assets/ui/docshot/devices/import-result.png
     target_type: code
   targets:
@@ -2274,10 +2106,6 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
-    line: 250
-    referenced_path: ../assets/ui/docshot/devices/batch-host-name-detail.png
-    target_type: book-mkdocs
-  - source_document: 00_book/DOC/04_quan_ly_thiet_bi.md
     line: 254
     referenced_path: ../assets/ui/docshot/devices/batch-host-name-detail.png
     target_type: book-mkdocs
@@ -2285,12 +2113,8 @@ assets:
     line: 162
     referenced_path: /documentation_assets/ui/docshot/devices/batch-host-name-detail.png
     target_type: book-typst
-  - source_document: 00_book/contents/04_quan_ly_thiet_bi.typ
-    line: 163
-    referenced_path: /documentation_assets/ui/docshot/devices/batch-host-name-detail.png
-    target_type: book-typst
   - source_document: docshots/outputs.py
-    line: 80
+    line: 84
     referenced_path: documentation_assets/ui/docshot/devices/batch-host-name-detail.png
     target_type: code
   targets:
@@ -8968,7 +8792,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: docshots/outputs.py
-    line: 82
+    line: 86
     referenced_path: documentation_assets/ui/docshot/devices/inventory-router-selected.png
     target_type: code
   targets:
@@ -8988,14 +8812,14 @@ assets:
   domain: switching/vlan
   subject: switch-selected
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/01-select-switch.png
-  path: 00_book/figures/gui/vlan/01-select-switch.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/switch-selected.png
+  path: documentation_assets/ui/docshot/switching/vlan/switch-selected.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/switch-selected.png
   legacy_path: 00_book/figures/gui/vlan/01-select-switch.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: cf24a7fbbba46d9088dd5f5da5edaf35d7fdeeaeb5c8d34f49000f6aa7163d0f
   provenance:
     assessment: docshot-confirmed
@@ -9011,11 +8835,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 36
-    referenced_path: 01-select-switch.png
+  - source_document: docshots/outputs.py
+    line: 88
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/switch-selected.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9031,14 +8856,14 @@ assets:
   domain: switching/vlan
   subject: database
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/02-open-vlan.png
-  path: 00_book/figures/gui/vlan/02-open-vlan.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/database.png
+  path: documentation_assets/ui/docshot/switching/vlan/database.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/database.png
   legacy_path: 00_book/figures/gui/vlan/02-open-vlan.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 9336953482ba9a73b1acf80c46f4298e5603690cf2314e7815910a72e5976ba1
   provenance:
     assessment: docshot-confirmed
@@ -9054,11 +8879,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 37
-    referenced_path: 02-open-vlan.png
+  - source_document: docshots/outputs.py
+    line: 90
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/database.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9074,14 +8900,14 @@ assets:
   domain: switching/vlan
   subject: create-empty
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/03-add-vlan.png
-  path: 00_book/figures/gui/vlan/03-add-vlan.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/create-empty.png
+  path: documentation_assets/ui/docshot/switching/vlan/create-empty.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/create-empty.png
   legacy_path: 00_book/figures/gui/vlan/03-add-vlan.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ae54201903b5b6ad52fe46b17a44f17b263c376181327f0e2cf96a414e2de519
   provenance:
     assessment: docshot-confirmed
@@ -9097,11 +8923,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 38
-    referenced_path: 03-add-vlan.png
+  - source_document: docshots/outputs.py
+    line: 92
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/create-empty.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9117,14 +8944,14 @@ assets:
   domain: switching/vlan
   subject: create-id-filled
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/04-vlan-id.png
-  path: 00_book/figures/gui/vlan/04-vlan-id.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/create-id-filled.png
+  path: documentation_assets/ui/docshot/switching/vlan/create-id-filled.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/create-id-filled.png
   legacy_path: 00_book/figures/gui/vlan/04-vlan-id.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 02e61c1ccee536d42960238aad6ac5e64a616a1daa1e2f5a42199f397d380409
   provenance:
     assessment: docshot-confirmed
@@ -9140,11 +8967,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 39
-    referenced_path: 04-vlan-id.png
+  - source_document: docshots/outputs.py
+    line: 94
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/create-id-filled.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9160,14 +8988,14 @@ assets:
   domain: switching/vlan
   subject: create-name-filled
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/05-vlan-name.png
-  path: 00_book/figures/gui/vlan/05-vlan-name.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/create-name-filled.png
+  path: documentation_assets/ui/docshot/switching/vlan/create-name-filled.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/create-name-filled.png
   legacy_path: 00_book/figures/gui/vlan/05-vlan-name.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 62af2f6273b62e6de8d5410c47369479ca15680ec039a53958d4c787eaf2bf3b
   provenance:
     assessment: docshot-confirmed
@@ -9183,11 +9011,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 40
-    referenced_path: 05-vlan-name.png
+  - source_document: docshots/outputs.py
+    line: 96
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/create-name-filled.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9203,14 +9032,14 @@ assets:
   domain: switching/vlan
   subject: create-state-selector
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/06-vlan-state.png
-  path: 00_book/figures/gui/vlan/06-vlan-state.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/create-state-selector.png
+  path: documentation_assets/ui/docshot/switching/vlan/create-state-selector.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/create-state-selector.png
   legacy_path: 00_book/figures/gui/vlan/06-vlan-state.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 759ea094c1dce98a65151510dc7f8851f6446f4eda8bb8e459a050d4e31cebf9
   provenance:
     assessment: docshot-confirmed
@@ -9226,11 +9055,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 41
-    referenced_path: 06-vlan-state.png
+  - source_document: docshots/outputs.py
+    line: 98
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/create-state-selector.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9246,14 +9076,14 @@ assets:
   domain: switching/vlan
   subject: create-ready
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/07-ready-to-save.png
-  path: 00_book/figures/gui/vlan/07-ready-to-save.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/create-ready.png
+  path: documentation_assets/ui/docshot/switching/vlan/create-ready.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/create-ready.png
   legacy_path: 00_book/figures/gui/vlan/07-ready-to-save.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0a7c7eb72b86f96cb068603b514b0b6ba2f8a645069ce9a7de8e3f25aeaf8db3
   provenance:
     assessment: docshot-confirmed
@@ -9269,11 +9099,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 42
-    referenced_path: 07-ready-to-save.png
+  - source_document: docshots/outputs.py
+    line: 100
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/create-ready.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9289,14 +9120,14 @@ assets:
   domain: switching/vlan
   subject: created-pending-apply
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/08-vlan-created.png
-  path: 00_book/figures/gui/vlan/08-vlan-created.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png
+  path: documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png
   legacy_path: 00_book/figures/gui/vlan/08-vlan-created.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 90db856f56f03644217919c723cb628473bf45f8c5ae8d9c3a62ed5f38b5cba2
   provenance:
     assessment: docshot-confirmed
@@ -9312,11 +9143,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 43
-    referenced_path: 08-vlan-created.png
+  - source_document: docshots/outputs.py
+    line: 102
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/created-pending-apply.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9332,14 +9164,14 @@ assets:
   domain: switching/vlan
   subject: view-push-guest
   source_kind: docshot
-  current_path: 00_book/figures/gui/vlan/09-view-preview.png
-  path: 00_book/figures/gui/vlan/09-view-preview.png
+  current_path: documentation_assets/ui/docshot/switching/vlan/view-push-guest.png
+  path: documentation_assets/ui/docshot/switching/vlan/view-push-guest.png
   planned_canonical_path: documentation_assets/ui/docshot/switching/vlan/view-push-guest.png
   legacy_path: 00_book/figures/gui/vlan/09-view-preview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e7ef4353aad6cb2ec90cd6177c8dedbec9a8fc87d85a833ff459058659379264
   provenance:
     assessment: docshot-confirmed
@@ -9355,11 +9187,12 @@ assets:
   reconstruction_confidence: null
   generator_command: null
   used_by:
-  - source_document: docshots/shots.py
-    line: 44
-    referenced_path: 09-view-preview.png
+  - source_document: docshots/outputs.py
+    line: 104
+    referenced_path: documentation_assets/ui/docshot/switching/vlan/view-push-guest.png
     target_type: code
-  targets: []
+  targets:
+  - code
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -9399,7 +9232,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: docshots/outputs.py
-    line: 102
+    line: 106
     referenced_path: documentation_assets/ui/docshot/core/welcome-recent-projects.png
     target_type: code
   targets:
@@ -9443,7 +9276,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: docshots/outputs.py
-    line: 104
+    line: 108
     referenced_path: documentation_assets/ui/docshot/core/workspace-empty.png
     target_type: code
   targets:
