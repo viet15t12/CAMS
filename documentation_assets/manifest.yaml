@@ -2949,14 +2949,14 @@ assets:
   domain: routing/eigrp
   subject: process
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/11-eigrp-process.png
-  path: 00_book/figures/gui/chapter-06/11-eigrp-process.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/process.png
+  path: documentation_assets/ui/legacy/routing/eigrp/process.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/process.png
   legacy_path: 00_book/figures/gui/chapter-06/11-eigrp-process.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3994c8b87d243d362c169ad68c5654c6c54b30005ce9d5b6e7bd79b542181138
   provenance:
     assessment: unknown
@@ -2974,11 +2974,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 190
-    referenced_path: ../../figures/gui/chapter-06/11-eigrp-process.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/process.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 121
-    referenced_path: figures/gui/chapter-06/11-eigrp-process.png
+    referenced_path: /documentation_assets/ui/legacy/routing/eigrp/process.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2998,14 +2998,14 @@ assets:
   domain: routing/eigrp
   subject: networks
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/12-eigrp-networks.png
-  path: 00_book/figures/gui/chapter-06/12-eigrp-networks.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/networks.png
+  path: documentation_assets/ui/legacy/routing/eigrp/networks.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/networks.png
   legacy_path: 00_book/figures/gui/chapter-06/12-eigrp-networks.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7e4366a4fbe722b388e1eddcfaf90dbbb22321000e1d99029af4fbd56b7f8387
   provenance:
     assessment: unknown
@@ -3023,7 +3023,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 206
-    referenced_path: ../../figures/gui/chapter-06/12-eigrp-networks.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/networks.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -3042,14 +3042,14 @@ assets:
   domain: routing/eigrp
   subject: interfaces
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/13-eigrp-interfaces.png
-  path: 00_book/figures/gui/chapter-06/13-eigrp-interfaces.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/interfaces.png
+  path: documentation_assets/ui/legacy/routing/eigrp/interfaces.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/interfaces.png
   legacy_path: 00_book/figures/gui/chapter-06/13-eigrp-interfaces.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: a9456f8f09771ea7438375d1677a9e9920b09dc4180835ec35967234dbf73732
   provenance:
     assessment: unknown
@@ -3067,11 +3067,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 217
-    referenced_path: ../../figures/gui/chapter-06/13-eigrp-interfaces.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/interfaces.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 134
-    referenced_path: figures/gui/chapter-06/13-eigrp-interfaces.png
+    referenced_path: /documentation_assets/ui/legacy/routing/eigrp/interfaces.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3091,14 +3091,14 @@ assets:
   domain: routing/eigrp
   subject: passive-interfaces
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/14-eigrp-passive-interface.png
-  path: 00_book/figures/gui/chapter-06/14-eigrp-passive-interface.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/passive-interfaces.png
+  path: documentation_assets/ui/legacy/routing/eigrp/passive-interfaces.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/passive-interfaces.png
   legacy_path: 00_book/figures/gui/chapter-06/14-eigrp-passive-interface.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 4a40f76dbb3ac61f1b2f9b8486be7f77121a52135d7593887e75f3281d61f21c
   provenance:
     assessment: unknown
@@ -3116,7 +3116,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 232
-    referenced_path: ../../figures/gui/chapter-06/14-eigrp-passive-interface.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/passive-interfaces.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -3135,14 +3135,14 @@ assets:
   domain: routing/eigrp
   subject: redistribute
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/15-eigrp-redistribute.png
-  path: 00_book/figures/gui/chapter-06/15-eigrp-redistribute.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/redistribute.png
+  path: documentation_assets/ui/legacy/routing/eigrp/redistribute.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/redistribute.png
   legacy_path: 00_book/figures/gui/chapter-06/15-eigrp-redistribute.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b4f391440ee2eb89adb1b91a5566d0e7cdce53b2603db9ba6b4d445edc5c31e5
   provenance:
     assessment: unknown
@@ -3160,11 +3160,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 243
-    referenced_path: ../../figures/gui/chapter-06/15-eigrp-redistribute.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/redistribute.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 147
-    referenced_path: figures/gui/chapter-06/15-eigrp-redistribute.png
+    referenced_path: /documentation_assets/ui/legacy/routing/eigrp/redistribute.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3184,14 +3184,14 @@ assets:
   domain: routing/eigrp
   subject: distribute-list
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/16-eigrp-distribute-list.png
-  path: 00_book/figures/gui/chapter-06/16-eigrp-distribute-list.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/distribute-list.png
+  path: documentation_assets/ui/legacy/routing/eigrp/distribute-list.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/distribute-list.png
   legacy_path: 00_book/figures/gui/chapter-06/16-eigrp-distribute-list.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e0b629e319c417d0981d4dc7b240d90e4c7f086d714c4f7712fd15c01fe53d00
   provenance:
     assessment: unknown
@@ -3209,7 +3209,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 254
-    referenced_path: ../../figures/gui/chapter-06/16-eigrp-distribute-list.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/distribute-list.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -3228,14 +3228,14 @@ assets:
   domain: routing/eigrp
   subject: offset-list
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/17-eigrp-offset-list.png
-  path: 00_book/figures/gui/chapter-06/17-eigrp-offset-list.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/offset-list.png
+  path: documentation_assets/ui/legacy/routing/eigrp/offset-list.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/offset-list.png
   legacy_path: 00_book/figures/gui/chapter-06/17-eigrp-offset-list.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b796882da0f2b406fa004f100c9e96c2512fe0b6976b0c229b744ca7cbc0c15e
   provenance:
     assessment: unknown
@@ -3253,7 +3253,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 265
-    referenced_path: ../../figures/gui/chapter-06/17-eigrp-offset-list.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/offset-list.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -3272,14 +3272,14 @@ assets:
   domain: routing/eigrp
   subject: key-chains
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/18-eigrp-key-chains.png
-  path: 00_book/figures/gui/chapter-06/18-eigrp-key-chains.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/key-chains.png
+  path: documentation_assets/ui/legacy/routing/eigrp/key-chains.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/key-chains.png
   legacy_path: 00_book/figures/gui/chapter-06/18-eigrp-key-chains.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: cdfbe301669b9c35804600d085d8c2ea3eaf9e7ad30447fccfd65ba267d441f2
   provenance:
     assessment: unknown
@@ -3297,11 +3297,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 279
-    referenced_path: ../../figures/gui/chapter-06/18-eigrp-key-chains.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/key-chains.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 164
-    referenced_path: figures/gui/chapter-06/18-eigrp-key-chains.png
+    referenced_path: /documentation_assets/ui/legacy/routing/eigrp/key-chains.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -3605,14 +3605,14 @@ assets:
   domain: routing/eigrp
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/25-eigrp-view-push.png
-  path: 00_book/figures/gui/chapter-06/25-eigrp-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/eigrp/view-push.png
+  path: documentation_assets/ui/legacy/routing/eigrp/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/eigrp/view-push.png
   legacy_path: 00_book/figures/gui/chapter-06/25-eigrp-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 966cfb49cfe4df8538ec4c779e202d1dbcc62c8f7197c7a72332bb6a520a7b74
   provenance:
     assessment: unknown
@@ -3630,7 +3630,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 385
-    referenced_path: ../../figures/gui/chapter-06/25-eigrp-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/eigrp/view-push.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs

@@ -4,69 +4,6 @@
   "description": "Pre-existing image reference exceptions from Phase 3 bootstrap; remove individual entries as batches fix references. Never automatically refresh this baseline to hide new failures.",
   "broken_images": [
     {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/11-eigrp-process.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/11-eigrp-process.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/12-eigrp-networks.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/12-eigrp-networks.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/13-eigrp-interfaces.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/13-eigrp-interfaces.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/14-eigrp-passive-interface.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/14-eigrp-passive-interface.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/15-eigrp-redistribute.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/15-eigrp-redistribute.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/16-eigrp-distribute-list.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/16-eigrp-distribute-list.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/17-eigrp-offset-list.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/17-eigrp-offset-list.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/18-eigrp-key-chains.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/18-eigrp-key-chains.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/25-eigrp-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/25-eigrp-view-push.png",
-      "count": 1
-    },
-    {
       "source_document": "00_book/DOC/07_cau_hinh_dhcp.md",
       "referenced_path": "../../figures/gui/chapter-07/01-dhcp-pools.png",
       "reference_kind": "html-img",

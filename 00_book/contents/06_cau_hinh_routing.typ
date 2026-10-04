@@ -118,7 +118,7 @@ Tab *EIGRP* cũng có thống kê Process, Networks, Host và State cùng tám n
 
 *Process* quản lý AS Number, Router ID, Auto Summary, Passive Default, BFD, Stub, metric weights, active timer, distance, variance và maximum paths.
 
-#insert-image("figures/gui/chapter-06/11-eigrp-process.png",
+#insert-image("/documentation_assets/ui/legacy/routing/eigrp/process.png",
   caption: [EIGRP AS 100 với các tham số process mẫu.], width: 100.0%) <fig:ch06-11-eigrp-process>
 
 Neighbor EIGRP phải dùng cùng AS Number. Auto Summary thường được tắt trong mạng không phân lớp. Variance hỗ trợ unequal-cost load balancing; Stub giới hạn query và loại route được quảng bá. Không đổi metric weights nếu các router trong miền không dùng cùng công thức.
@@ -131,7 +131,7 @@ Neighbor EIGRP phải dùng cùng AS Number. Auto Summary thường được t�
 
 *Interfaces* quản lý bandwidth, delay, hello/hold timer, authentication key chain, summary, split horizon, bandwidth percent, next-hop-self và BFD.
 
-#insert-image("figures/gui/chapter-06/13-eigrp-interfaces.png",
+#insert-image("/documentation_assets/ui/legacy/routing/eigrp/interfaces.png",
   caption: [Các tham số EIGRP của GigabitEthernet0/1.], width: 100.0%) <fig:ch06-13-eigrp-interfaces>
 
 Bandwidth và Delay tác động metric EIGRP, không trực tiếp giới hạn lưu lượng. Split Horizon thường ngăn quảng bá route trở lại interface đã học. Timer và authentication cần khớp với neighbor.
@@ -144,7 +144,7 @@ Bandwidth và Delay tác động metric EIGRP, không trực tiếp giới hạn
 
 *Redistribute* nhập route từ protocol khác. EIGRP có thể cần đủ năm thành phần seed metric: bandwidth, delay, reliability, load và MTU.
 
-#insert-image("figures/gui/chapter-06/15-eigrp-redistribute.png",
+#insert-image("/documentation_assets/ui/legacy/routing/eigrp/redistribute.png",
   caption: [Redistribute static vào EIGRP với route-map và seed metric.], width: 100.0%) <fig:ch06-15-eigrp-redistribute>
 
 === EIGRP Distribute Lists
@@ -161,7 +161,7 @@ Offset chỉ làm route kém ưu tiên hơn; cần tránh tạo kết quả ch�
 
 *Key chains* lưu chain name, key ID, key string cùng accept/send lifetime để dùng cho authentication trên interface.
 
-#insert-image("figures/gui/chapter-06/18-eigrp-key-chains.png",
+#insert-image("/documentation_assets/ui/legacy/routing/eigrp/key-chains.png",
   caption: [Key chain KC-EIGRP và khoảng thời gian hiệu lực mẫu.], width: 100.0%) <fig:ch06-18-eigrp-key-chains>
 
 Key string là thông tin nhạy cảm. Không dùng secret thật trong ảnh, tài liệu hay repository; cấu hình thời gian hiệu lực phải tính đến đồng bộ đồng hồ giữa các router.

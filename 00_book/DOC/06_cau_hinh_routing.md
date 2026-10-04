@@ -187,7 +187,7 @@ cấu hình riêng.
 Stub, metric weights, active timer, distance, variance và maximum paths.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/11-eigrp-process.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/process.png"
 style="width:100.0%" /></p>
 <figcaption><p>EIGRP AS 100 với các tham số process mẫu.</p></figcaption>
 </figure>
@@ -203,7 +203,7 @@ không dùng cùng công thức.
 kết tường minh do CAMS lưu cùng cấu hình.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/12-eigrp-networks.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/networks.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hai network thuộc EIGRP AS 100.</p></figcaption>
 </figure>
@@ -214,7 +214,7 @@ style="width:100.0%" /></p>
 chain, summary, split horizon, bandwidth percent, next-hop-self và BFD.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/13-eigrp-interfaces.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/interfaces.png"
 style="width:100.0%" /></p>
 <figcaption><p>Các tham số EIGRP của GigabitEthernet0/1.</p></figcaption>
 </figure>
@@ -229,7 +229,7 @@ authentication cần khớp với neighbor.
 connected network. **No passive** ghi đè Passive Default.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/14-eigrp-passive-interface.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/passive-interfaces.png"
 style="width:100.0%" /></p>
 <figcaption><p>Passive và no-passive trong EIGRP.</p></figcaption>
 </figure>
@@ -240,7 +240,7 @@ style="width:100.0%" /></p>
 seed metric: bandwidth, delay, reliability, load và MTU.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/15-eigrp-redistribute.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/redistribute.png"
 style="width:100.0%" /></p>
 <figcaption><p>Redistribute static vào EIGRP với route-map và seed metric.</p></figcaption>
 </figure>
@@ -251,7 +251,7 @@ style="width:100.0%" /></p>
 bá ra. Interface là tùy chọn; bỏ trống để áp dụng ở cấp process.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/16-eigrp-distribute-list.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/distribute-list.png"
 style="width:100.0%" /></p>
 <figcaption><p>Distribute list chiều in trên một interface.</p></figcaption>
 </figure>
@@ -262,7 +262,7 @@ style="width:100.0%" /></p>
 hoặc out.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/17-eigrp-offset-list.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/offset-list.png"
 style="width:100.0%" /></p>
 <figcaption><p>Offset list chiều out với offset 1000.</p></figcaption>
 </figure>
@@ -276,7 +276,7 @@ Offset chỉ làm route kém ưu tiên hơn; cần tránh tạo kết quả ch�
 dùng cho authentication trên interface.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/18-eigrp-key-chains.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/key-chains.png"
 style="width:100.0%" /></p>
 <figcaption><p>Key chain KC-EIGRP và khoảng thời gian hiệu lực mẫu.</p></figcaption>
 </figure>
@@ -382,7 +382,7 @@ style="width:75.0%" /></p>
 </figure>
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/25-eigrp-view-push.png"
+<p><img src="../assets/ui/legacy/routing/eigrp/view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>View & Push EIGRP gồm process, network, interface và policy.</p></figcaption>
 </figure>

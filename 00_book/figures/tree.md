@@ -1,15 +1,5 @@
 .
 ├── gui
-│   ├── chapter-06
-│   │   ├── 11-eigrp-process.png
-│   │   ├── 12-eigrp-networks.png
-│   │   ├── 13-eigrp-interfaces.png
-│   │   ├── 14-eigrp-passive-interface.png
-│   │   ├── 15-eigrp-redistribute.png
-│   │   ├── 16-eigrp-distribute-list.png
-│   │   ├── 17-eigrp-offset-list.png
-│   │   ├── 18-eigrp-key-chains.png
-│   │   ├── 25-eigrp-view-push.png
 │   ├── chapter-07
 │   │   ├── 01-dhcp-pools.png
 │   │   ├── 02-dhcp-excluded-addresses.png
@@ -427,5 +417,19 @@ B05B canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/routing/ospf/routing-group-networks.png
 - documentation_assets/ui/legacy/routing/ospf/view-push.png
 - documentation_assets/ui/legacy/routing/ospf/routing-group-view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B05C canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/routing/eigrp/process.png
+- documentation_assets/ui/legacy/routing/eigrp/networks.png
+- documentation_assets/ui/legacy/routing/eigrp/interfaces.png
+- documentation_assets/ui/legacy/routing/eigrp/passive-interfaces.png
+- documentation_assets/ui/legacy/routing/eigrp/redistribute.png
+- documentation_assets/ui/legacy/routing/eigrp/distribute-list.png
+- documentation_assets/ui/legacy/routing/eigrp/offset-list.png
+- documentation_assets/ui/legacy/routing/eigrp/key-chains.png
+- documentation_assets/ui/legacy/routing/eigrp/view-push.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
