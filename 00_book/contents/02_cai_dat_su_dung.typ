@@ -143,7 +143,7 @@ CAMS luôn nạp cửa sổ Welcome trước Workspace. Ở trạng thái sạch
 
 Khi đã có lịch sử làm việc, khu vực giữa cửa sổ hiển thị *Recent Projects*. Trạng thái khởi động sạch được minh họa tại @fig:ch02-welcome.
 
-#insert-image("figures/gui/chapter-02/01-welcome-window.png",
+#insert-image("/documentation_assets/ui/legacy/core/welcome-no-recent-projects.png",
   caption: [Màn hình Welcome của CAMS khi chưa có project gần đây.], width: 100.0%) <fig:ch02-welcome>
 
 Workspace chỉ mở sau khi controller tạo hoặc giải nén thành công một project hợp lệ. Ứng dụng không tự mở project gần đây ngay khi khởi động.
@@ -176,17 +176,17 @@ Thực hiện theo thứ tự sau:
 
 Hộp thoại ban đầu được minh họa tại @fig:ch02-create-dialog. Trường vị trí trỏ tới một thư mục có thật; CAMS tự tạo tên file #raw(".ntp") an toàn từ tên project.
 
-#insert-image("figures/gui/chapter-02/02-create-project.png",
+#insert-image("/documentation_assets/ui/legacy/project/create-empty.png",
   caption: [Hộp thoại tạo một project CAMS mới.], width: 100.0%) <fig:ch02-create-dialog>
 
 Trong ví dụ tại @fig:ch02-project-details, project có tên #raw("Network-Lab") và được lưu thành #raw("Network-Lab.ntp") tại thư mục đã chọn. Nút *Create Project* chỉ được bật khi tên và vị trí hợp lệ; nếu bật bảo vệ bằng mật khẩu, hai lần nhập phải khớp nhau.
 
-#insert-image("figures/gui/chapter-02/03-project-details.png",
+#insert-image("/documentation_assets/ui/legacy/project/create-ready.png",
   caption: [Thông tin project mới đã sẵn sàng để xác nhận.], width: 100.0%) <fig:ch02-project-details>
 
 Sau khi package đầu tiên được tạo thành công, CAMS chuyển sang Workspace. Tên project xuất hiện trên thanh tiêu đề như trong @fig:ch02-created-workspace. Project mới chưa có thiết bị; đây là trạng thái đúng ở cuối workflow tạo project.
 
-#insert-image("figures/gui/chapter-02/04-workspace-opened.png",
+#insert-image("/documentation_assets/ui/legacy/project/workspace-new-project.png",
   caption: [Workspace trống sau khi project Network-Lab được tạo thành công.], width: 100.0%) <fig:ch02-created-workspace>
 
 == Bảo vệ project bằng mật khẩu
@@ -211,7 +211,7 @@ Các ảnh của chương này dùng project không có mật khẩu. Không có
 
 Nếu package hợp lệ, thanh tiêu đề hiển thị tên project đã mở. @fig:ch02-existing-opened cho thấy mẫu #raw("Branch-Office-Lab.ntp") đã được mở thành công; Workspace vẫn sạch và chưa có thiết bị.
 
-#insert-image("figures/gui/chapter-02/06-open-existing-project.png",
+#insert-image("/documentation_assets/ui/legacy/project/workspace-open-existing.png",
   caption: [Workspace sau khi mở project Branch-Office-Lab có sẵn.], width: 100.0%) <fig:ch02-existing-opened>
 
 == Recent Projects
@@ -220,14 +220,14 @@ Mỗi lần tạo hoặc mở project thành công, CAMS ghi project vào *Recen
 
 @fig:ch02-recents sử dụng hai package mẫu hợp lệ và đường dẫn tạm an toàn. Nếu một file đã bị di chuyển hoặc xóa, mục không còn tồn tại sẽ được loại khỏi danh sách khi ứng dụng nạp lịch sử.
 
-#insert-image("figures/gui/chapter-02/07-recent-projects.png",
+#insert-image("/documentation_assets/ui/legacy/project/recent-projects.png",
   caption: [Danh sách Recent Projects với hai project mẫu hợp lệ.], width: 100.0%) <fig:ch02-recents>
 
 == Lưu project
 
 Trong Workspace, mở menu *File* và chọn *Save Workspace*, hoặc nhấn #raw("Ctrl+S"). Lệnh này đóng gói trạng thái hiện tại và thay file #raw(".ntp") theo cơ chế ghi an toàn. Vị trí lệnh được minh họa tại @fig:ch02-save.
 
-#insert-image("figures/gui/chapter-02/08-save-project.png",
+#insert-image("/documentation_assets/ui/legacy/project/save-menu.png",
   caption: [Lệnh Save Workspace và các lệnh snapshot trong menu File.], width: 100.0%) <fig:ch02-save>
 
 Phiên bản giao diện hiện tại không cung cấp action *Save As*. Vì vậy, không nên tìm một lệnh *Save As* trong menu hoặc dựa vào mô tả cũ. Nếu cần một bản sao độc lập, hãy lưu và đóng Workspace trước, rồi sao chép file #raw(".ntp") bằng công cụ của hệ điều hành; bản sao ngoài ứng dụng là backup, không phải một thao tác Save As trong CAMS.
@@ -245,7 +245,7 @@ Snapshot là điểm lưu trạng thái toàn project. Từ menu *File*:
 
 @fig:ch02-snapshot hiển thị một snapshot thủ công #raw("Before chapter 3") và một mốc automatic được tạo trong workflow lưu an toàn. Snapshot gồm ảnh nhất quán của database và backup files. Lịch sử automatic được giới hạn để tránh tăng dung lượng không kiểm soát.
 
-#insert-image("figures/gui/chapter-02/09-snapshot-history.png",
+#insert-image("/documentation_assets/ui/legacy/project/snapshot-history.png",
   caption: [Khu vực Snapshot History với các điểm khôi phục của project.], width: 100.0%) <fig:ch02-snapshot>
 
 Khi rollback, CAMS tạo một safety snapshot được ghim trước khi phục hồi trạng thái cũ, rồi lưu lại package. Cơ chế này giảm rủi ro mất trạng thái ngay trước rollback, nhưng snapshot nằm trong project và không thay thế backup ở thiết bị hoặc vị trí lưu trữ khác.

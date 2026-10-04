@@ -1,16 +1,5 @@
 .
 ├── gui
-│   ├── chapter-02
-│   │   ├── 01-welcome-window.png
-│   │   ├── 02-create-project.png
-│   │   ├── 03-project-details.png
-│   │   ├── 04-workspace-opened.png
-│   │   ├── 05-open-project-choice.png
-│   │   ├── 06-open-existing-project.png
-│   │   ├── 07-recent-projects.png
-│   │   ├── 08-save-project.png
-│   │   ├── 09-snapshot-history.png
-│   │   └── 10-ready-workspace.png
 │   ├── chapter-05
 │   │   ├── 01-router-interface-overview.png
 │   │   ├── 02-edit-physical-interface.png
@@ -416,3 +405,18 @@ B03C canonical docshot assets (outside this figures tree):
 - documentation_assets/ui/docshot/switching/vlan/view-push-guest.png
 
 Original approved PNG bytes preserved. MkDocs uses generated staging only for manifest-selected assets; generator-only assets gain no document placement.
+
+B04 canonical legacy project/core UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/core/welcome-no-recent-projects.png
+- documentation_assets/ui/legacy/project/create-empty.png
+- documentation_assets/ui/legacy/project/create-ready.png
+- documentation_assets/ui/legacy/project/workspace-new-project.png
+- documentation_assets/ui/legacy/project/open-project-choice.png
+- documentation_assets/ui/legacy/project/workspace-open-existing.png
+- documentation_assets/ui/legacy/project/recent-projects.png
+- documentation_assets/ui/legacy/project/save-menu.png
+- documentation_assets/ui/legacy/project/snapshot-history.png
+- documentation_assets/ui/legacy/project/workspace-ready.png
+
+Original legacy PNG bytes preserved; provenance remains unknown. MkDocs uses generated staging. Future regeneration is separate; no docshot workflow or output-map identity was added.

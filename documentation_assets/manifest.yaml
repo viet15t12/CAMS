@@ -6,14 +6,14 @@ assets:
   domain: core
   subject: welcome-no-recent-projects
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/01-welcome-window.png
-  path: 00_book/figures/gui/chapter-02/01-welcome-window.png
+  current_path: documentation_assets/ui/legacy/core/welcome-no-recent-projects.png
+  path: documentation_assets/ui/legacy/core/welcome-no-recent-projects.png
   planned_canonical_path: documentation_assets/ui/legacy/core/welcome-no-recent-projects.png
   legacy_path: 00_book/figures/gui/chapter-02/01-welcome-window.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 6dbe1505c3c741477a8ed92a51076b6d58d4673520013015ef2c04b4cf054bbd
   provenance:
     assessment: unknown
@@ -31,11 +31,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 188
-    referenced_path: ../../figures/gui/chapter-02/01-welcome-window.png
+    referenced_path: ../assets/ui/legacy/core/welcome-no-recent-projects.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 146
-    referenced_path: figures/gui/chapter-02/01-welcome-window.png
+    referenced_path: /documentation_assets/ui/legacy/core/welcome-no-recent-projects.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -55,14 +55,14 @@ assets:
   domain: project
   subject: create-empty
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/02-create-project.png
-  path: 00_book/figures/gui/chapter-02/02-create-project.png
+  current_path: documentation_assets/ui/legacy/project/create-empty.png
+  path: documentation_assets/ui/legacy/project/create-empty.png
   planned_canonical_path: documentation_assets/ui/legacy/project/create-empty.png
   legacy_path: 00_book/figures/gui/chapter-02/02-create-project.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b3d74cb9f86b0ffac2c4917488008502b5fbe0718d5b4490fd7ec7e7e5cb520f
   provenance:
     assessment: unknown
@@ -80,11 +80,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 245
-    referenced_path: ../../figures/gui/chapter-02/02-create-project.png
+    referenced_path: ../assets/ui/legacy/project/create-empty.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 179
-    referenced_path: figures/gui/chapter-02/02-create-project.png
+    referenced_path: /documentation_assets/ui/legacy/project/create-empty.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -104,14 +104,14 @@ assets:
   domain: project
   subject: create-ready
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/03-project-details.png
-  path: 00_book/figures/gui/chapter-02/03-project-details.png
+  current_path: documentation_assets/ui/legacy/project/create-ready.png
+  path: documentation_assets/ui/legacy/project/create-ready.png
   planned_canonical_path: documentation_assets/ui/legacy/project/create-ready.png
   legacy_path: 00_book/figures/gui/chapter-02/03-project-details.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: bd1a6892115ed6685deaa15ec146941a4e3331accd1668d3e4ce0e51ff5c6707
   provenance:
     assessment: unknown
@@ -129,11 +129,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 260
-    referenced_path: ../../figures/gui/chapter-02/03-project-details.png
+    referenced_path: ../assets/ui/legacy/project/create-ready.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 184
-    referenced_path: figures/gui/chapter-02/03-project-details.png
+    referenced_path: /documentation_assets/ui/legacy/project/create-ready.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -153,14 +153,14 @@ assets:
   domain: project
   subject: workspace-new-project
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/04-workspace-opened.png
-  path: 00_book/figures/gui/chapter-02/04-workspace-opened.png
+  current_path: documentation_assets/ui/legacy/project/workspace-new-project.png
+  path: documentation_assets/ui/legacy/project/workspace-new-project.png
   planned_canonical_path: documentation_assets/ui/legacy/project/workspace-new-project.png
   legacy_path: 00_book/figures/gui/chapter-02/04-workspace-opened.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e7a687467b959823d749c993c7ad823d65304c9137ea328c734ddd3064705a36
   provenance:
     assessment: unknown
@@ -178,11 +178,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 274
-    referenced_path: ../../figures/gui/chapter-02/04-workspace-opened.png
+    referenced_path: ../assets/ui/legacy/project/workspace-new-project.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 189
-    referenced_path: figures/gui/chapter-02/04-workspace-opened.png
+    referenced_path: /documentation_assets/ui/legacy/project/workspace-new-project.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -202,14 +202,14 @@ assets:
   domain: project
   subject: open-project-choice
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/05-open-project-choice.png
-  path: 00_book/figures/gui/chapter-02/05-open-project-choice.png
+  current_path: documentation_assets/ui/legacy/project/open-project-choice.png
+  path: documentation_assets/ui/legacy/project/open-project-choice.png
   planned_canonical_path: documentation_assets/ui/legacy/project/open-project-choice.png
   legacy_path: 00_book/figures/gui/chapter-02/05-open-project-choice.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e7e918a348d2203fd68c2c05a579b0d3a423b65ef61644551ace02dcccf6a95f
   provenance:
     assessment: unknown
@@ -227,7 +227,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 316
-    referenced_path: ../../figures/gui/chapter-02/05-open-project-choice.png
+    referenced_path: ../assets/ui/legacy/project/open-project-choice.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -246,14 +246,14 @@ assets:
   domain: project
   subject: workspace-open-existing
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/06-open-existing-project.png
-  path: 00_book/figures/gui/chapter-02/06-open-existing-project.png
+  current_path: documentation_assets/ui/legacy/project/workspace-open-existing.png
+  path: documentation_assets/ui/legacy/project/workspace-open-existing.png
   planned_canonical_path: documentation_assets/ui/legacy/project/workspace-open-existing.png
   legacy_path: 00_book/figures/gui/chapter-02/06-open-existing-project.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7de27f0a95e1694667be8d4b6d381df7cb4b02e3adc3a2aa334e9739ba3036f4
   provenance:
     assessment: unknown
@@ -271,11 +271,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 330
-    referenced_path: ../../figures/gui/chapter-02/06-open-existing-project.png
+    referenced_path: ../assets/ui/legacy/project/workspace-open-existing.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 214
-    referenced_path: figures/gui/chapter-02/06-open-existing-project.png
+    referenced_path: /documentation_assets/ui/legacy/project/workspace-open-existing.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -295,14 +295,14 @@ assets:
   domain: project
   subject: recent-projects
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/07-recent-projects.png
-  path: 00_book/figures/gui/chapter-02/07-recent-projects.png
+  current_path: documentation_assets/ui/legacy/project/recent-projects.png
+  path: documentation_assets/ui/legacy/project/recent-projects.png
   planned_canonical_path: documentation_assets/ui/legacy/project/recent-projects.png
   legacy_path: 00_book/figures/gui/chapter-02/07-recent-projects.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 212f5ac2dd93d9812961ca1a9665c61e49b02987f1b93fa131148da4d3558cc5
   provenance:
     assessment: unknown
@@ -320,11 +320,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 351
-    referenced_path: ../../figures/gui/chapter-02/07-recent-projects.png
+    referenced_path: ../assets/ui/legacy/project/recent-projects.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 223
-    referenced_path: figures/gui/chapter-02/07-recent-projects.png
+    referenced_path: /documentation_assets/ui/legacy/project/recent-projects.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -344,14 +344,14 @@ assets:
   domain: project
   subject: save-menu
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/08-save-project.png
-  path: 00_book/figures/gui/chapter-02/08-save-project.png
+  current_path: documentation_assets/ui/legacy/project/save-menu.png
+  path: documentation_assets/ui/legacy/project/save-menu.png
   planned_canonical_path: documentation_assets/ui/legacy/project/save-menu.png
   legacy_path: 00_book/figures/gui/chapter-02/08-save-project.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 69ee0d25e8594580fe3226e59301de39abc37d2e0781af922f9a15ddc935b0db
   provenance:
     assessment: unknown
@@ -369,11 +369,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 367
-    referenced_path: ../../figures/gui/chapter-02/08-save-project.png
+    referenced_path: ../assets/ui/legacy/project/save-menu.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 230
-    referenced_path: figures/gui/chapter-02/08-save-project.png
+    referenced_path: /documentation_assets/ui/legacy/project/save-menu.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -393,14 +393,14 @@ assets:
   domain: project
   subject: snapshot-history
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/09-snapshot-history.png
-  path: 00_book/figures/gui/chapter-02/09-snapshot-history.png
+  current_path: documentation_assets/ui/legacy/project/snapshot-history.png
+  path: documentation_assets/ui/legacy/project/snapshot-history.png
   planned_canonical_path: documentation_assets/ui/legacy/project/snapshot-history.png
   legacy_path: 00_book/figures/gui/chapter-02/09-snapshot-history.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: cb631f8f1621412d5db5849b5c9c9a581e191de83fea79d87d063089b14b7b98
   provenance:
     assessment: unknown
@@ -418,11 +418,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 404
-    referenced_path: ../../figures/gui/chapter-02/09-snapshot-history.png
+    referenced_path: ../assets/ui/legacy/project/snapshot-history.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/02_cai_dat_su_dung.typ
     line: 248
-    referenced_path: figures/gui/chapter-02/09-snapshot-history.png
+    referenced_path: /documentation_assets/ui/legacy/project/snapshot-history.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -442,14 +442,14 @@ assets:
   domain: project
   subject: workspace-ready
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-02/10-ready-workspace.png
-  path: 00_book/figures/gui/chapter-02/10-ready-workspace.png
+  current_path: documentation_assets/ui/legacy/project/workspace-ready.png
+  path: documentation_assets/ui/legacy/project/workspace-ready.png
   planned_canonical_path: documentation_assets/ui/legacy/project/workspace-ready.png
   legacy_path: 00_book/figures/gui/chapter-02/10-ready-workspace.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: f8ee59d3e04fd060bc069dcd1b0468cc03a6c30619dd848d830254243f108acd
   provenance:
     assessment: unknown
@@ -467,7 +467,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/02_cai_dat_su_dung.md
     line: 461
-    referenced_path: ../../figures/gui/chapter-02/10-ready-workspace.png
+    referenced_path: ../assets/ui/legacy/project/workspace-ready.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs

@@ -185,7 +185,7 @@ Projects**. Trạng thái khởi động sạch được minh họa tại
 <a href="#fig" class="ref">[fig]</a>:ch02-welcome.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/01-welcome-window.png"
+<p><img src="../assets/ui/legacy/core/welcome-no-recent-projects.png"
 style="width:100.0%" /></p>
 <figcaption><p>Màn hình Welcome của CAMS khi chưa có project gần
 đây.</p></figcaption>
@@ -242,7 +242,7 @@ trỏ tới một thư mục có thật; CAMS tự tạo tên file `.ntp` an to�
 project.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/02-create-project.png"
+<p><img src="../assets/ui/legacy/project/create-empty.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hộp thoại tạo một project CAMS mới.</p></figcaption>
 </figure>
@@ -257,7 +257,7 @@ tên và vị trí hợp lệ; nếu bật bảo vệ bằng mật khẩu, hai l
 khớp nhau.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/03-project-details.png"
+<p><img src="../assets/ui/legacy/project/create-ready.png"
 style="width:100.0%" /></p>
 <figcaption><p>Thông tin project mới đã sẵn sàng để xác
 nhận.</p></figcaption>
@@ -271,7 +271,7 @@ Workspace. Tên project xuất hiện trên thanh tiêu đề như trong
 chưa có thiết bị; đây là trạng thái đúng ở cuối workflow tạo project.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/04-workspace-opened.png"
+<p><img src="../assets/ui/legacy/project/workspace-new-project.png"
 style="width:100.0%" /></p>
 <figcaption><p>Workspace trống sau khi project Network-Lab được tạo
 thành công.</p></figcaption>
@@ -313,7 +313,7 @@ thật hoặc fixture password nào xuất hiện trong PNG.
 5.  Chờ CAMS kiểm tra package, giải nén dữ liệu và mở Workspace.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/05-open-project-choice.png"
+<p><img src="../assets/ui/legacy/project/open-project-choice.png"
 style="width:100.0%" /></p>
 <figcaption><p>Vị trí lệnh Open để chọn một project đã
 có.</p></figcaption>
@@ -327,7 +327,7 @@ fixture `Branch-Office-Lab.ntp` đã được mở thật qua service project c�
 ứng dụng; Workspace vẫn sạch và chưa có thiết bị.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/06-open-existing-project.png"
+<p><img src="../assets/ui/legacy/project/workspace-open-existing.png"
 style="width:100.0%" /></p>
 <figcaption><p>Workspace sau khi mở project Branch-Office-Lab có
 sẵn.</p></figcaption>
@@ -348,7 +348,7 @@ hoặc xóa, mục không còn tồn tại sẽ được loại khỏi danh sác
 nạp lịch sử.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/07-recent-projects.png"
+<p><img src="../assets/ui/legacy/project/recent-projects.png"
 style="width:100.0%" /></p>
 <figcaption><p>Danh sách Recent Projects với hai project fixture hợp
 lệ.</p></figcaption>
@@ -364,7 +364,7 @@ cơ chế ghi an toàn. Vị trí lệnh được minh họa tại
 <a href="#fig" class="ref">[fig]</a>:ch02-save.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/08-save-project.png"
+<p><img src="../assets/ui/legacy/project/save-menu.png"
 style="width:100.0%" /></p>
 <figcaption><p>Lệnh Save Workspace và các lệnh snapshot trong menu
 File.</p></figcaption>
@@ -401,7 +401,7 @@ Lịch sử automatic được giới hạn để tránh tăng dung lượng kh�
 soát.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/09-snapshot-history.png"
+<p><img src="../assets/ui/legacy/project/snapshot-history.png"
 style="width:100.0%" /></p>
 <figcaption><p>Khu vực Snapshot History với các điểm khôi phục của
 project.</p></figcaption>
@@ -458,7 +458,7 @@ Trạng thái sẵn sàng được minh họa tại
 hoặc kết nối mạng để hoàn thành bước kiểm tra này.
 
 <figure>
-<p><img src="../../figures/gui/chapter-02/10-ready-workspace.png"
+<p><img src="../assets/ui/legacy/project/workspace-ready.png"
 style="width:100.0%" /></p>
 <figcaption><p>Workspace sạch và sẵn sàng cho chương tiếp
 theo.</p></figcaption>

@@ -1,0 +1,977 @@
+{
+  "batch": "B04",
+  "date": "2026-10-05",
+  "starting_commit": "7e5a53182a01fa735cb5b36b3178cf4d39ad4413",
+  "status": "PASS",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 10,
+    "dimensions_nonzero": true,
+    "semantic_context_agrees": true,
+    "visual_finding": "Legacy Welcome/Create/Open/Recent/Save/Snapshot/empty Workspace UI agrees with chapter-02 caption context. Some retain historical NetworkTools branding; this is preserved as legacy content, not replaced with B03 or asserted as current canonical render provenance.",
+    "terminal_evidence_or_runtime_files": false,
+    "canonical_target_collisions": 0
+  },
+  "assets": [
+    {
+      "asset_id": "ui.core.welcome-no-recent-projects",
+      "old_path": "00_book/figures/gui/chapter-02/01-welcome-window.png",
+      "canonical_path": "documentation_assets/ui/legacy/core/welcome-no-recent-projects.png",
+      "source_git_blob_sha": "6dbe1505c3c741477a8ed92a51076b6d58d4673520013015ef2c04b4cf054bbd",
+      "canonical_filesystem_sha": "6dbe1505c3c741477a8ed92a51076b6d58d4673520013015ef2c04b4cf054bbd",
+      "canonical_index_blob_sha": "6dbe1505c3c741477a8ed92a51076b6d58d4673520013015ef2c04b4cf054bbd",
+      "manifest_sha": "6dbe1505c3c741477a8ed92a51076b6d58d4673520013015ef2c04b4cf054bbd",
+      "staging_path": "00_book/assets/ui/legacy/core/welcome-no-recent-projects.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 188,
+          "referenced_path": "../assets/ui/legacy/core/welcome-no-recent-projects.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 146,
+          "referenced_path": "/documentation_assets/ui/legacy/core/welcome-no-recent-projects.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.create-empty",
+      "old_path": "00_book/figures/gui/chapter-02/02-create-project.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/create-empty.png",
+      "source_git_blob_sha": "b3d74cb9f86b0ffac2c4917488008502b5fbe0718d5b4490fd7ec7e7e5cb520f",
+      "canonical_filesystem_sha": "b3d74cb9f86b0ffac2c4917488008502b5fbe0718d5b4490fd7ec7e7e5cb520f",
+      "canonical_index_blob_sha": "b3d74cb9f86b0ffac2c4917488008502b5fbe0718d5b4490fd7ec7e7e5cb520f",
+      "manifest_sha": "b3d74cb9f86b0ffac2c4917488008502b5fbe0718d5b4490fd7ec7e7e5cb520f",
+      "staging_path": "00_book/assets/ui/legacy/project/create-empty.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 245,
+          "referenced_path": "../assets/ui/legacy/project/create-empty.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 179,
+          "referenced_path": "/documentation_assets/ui/legacy/project/create-empty.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.create-ready",
+      "old_path": "00_book/figures/gui/chapter-02/03-project-details.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/create-ready.png",
+      "source_git_blob_sha": "bd1a6892115ed6685deaa15ec146941a4e3331accd1668d3e4ce0e51ff5c6707",
+      "canonical_filesystem_sha": "bd1a6892115ed6685deaa15ec146941a4e3331accd1668d3e4ce0e51ff5c6707",
+      "canonical_index_blob_sha": "bd1a6892115ed6685deaa15ec146941a4e3331accd1668d3e4ce0e51ff5c6707",
+      "manifest_sha": "bd1a6892115ed6685deaa15ec146941a4e3331accd1668d3e4ce0e51ff5c6707",
+      "staging_path": "00_book/assets/ui/legacy/project/create-ready.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 260,
+          "referenced_path": "../assets/ui/legacy/project/create-ready.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 184,
+          "referenced_path": "/documentation_assets/ui/legacy/project/create-ready.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.workspace-new-project",
+      "old_path": "00_book/figures/gui/chapter-02/04-workspace-opened.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/workspace-new-project.png",
+      "source_git_blob_sha": "e7a687467b959823d749c993c7ad823d65304c9137ea328c734ddd3064705a36",
+      "canonical_filesystem_sha": "e7a687467b959823d749c993c7ad823d65304c9137ea328c734ddd3064705a36",
+      "canonical_index_blob_sha": "e7a687467b959823d749c993c7ad823d65304c9137ea328c734ddd3064705a36",
+      "manifest_sha": "e7a687467b959823d749c993c7ad823d65304c9137ea328c734ddd3064705a36",
+      "staging_path": "00_book/assets/ui/legacy/project/workspace-new-project.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 274,
+          "referenced_path": "../assets/ui/legacy/project/workspace-new-project.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 189,
+          "referenced_path": "/documentation_assets/ui/legacy/project/workspace-new-project.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.open-project-choice",
+      "old_path": "00_book/figures/gui/chapter-02/05-open-project-choice.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/open-project-choice.png",
+      "source_git_blob_sha": "e7e918a348d2203fd68c2c05a579b0d3a423b65ef61644551ace02dcccf6a95f",
+      "canonical_filesystem_sha": "e7e918a348d2203fd68c2c05a579b0d3a423b65ef61644551ace02dcccf6a95f",
+      "canonical_index_blob_sha": "e7e918a348d2203fd68c2c05a579b0d3a423b65ef61644551ace02dcccf6a95f",
+      "manifest_sha": "e7e918a348d2203fd68c2c05a579b0d3a423b65ef61644551ace02dcccf6a95f",
+      "staging_path": "00_book/assets/ui/legacy/project/open-project-choice.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 316,
+          "referenced_path": "../assets/ui/legacy/project/open-project-choice.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.workspace-open-existing",
+      "old_path": "00_book/figures/gui/chapter-02/06-open-existing-project.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/workspace-open-existing.png",
+      "source_git_blob_sha": "7de27f0a95e1694667be8d4b6d381df7cb4b02e3adc3a2aa334e9739ba3036f4",
+      "canonical_filesystem_sha": "7de27f0a95e1694667be8d4b6d381df7cb4b02e3adc3a2aa334e9739ba3036f4",
+      "canonical_index_blob_sha": "7de27f0a95e1694667be8d4b6d381df7cb4b02e3adc3a2aa334e9739ba3036f4",
+      "manifest_sha": "7de27f0a95e1694667be8d4b6d381df7cb4b02e3adc3a2aa334e9739ba3036f4",
+      "staging_path": "00_book/assets/ui/legacy/project/workspace-open-existing.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 330,
+          "referenced_path": "../assets/ui/legacy/project/workspace-open-existing.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 214,
+          "referenced_path": "/documentation_assets/ui/legacy/project/workspace-open-existing.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.recent-projects",
+      "old_path": "00_book/figures/gui/chapter-02/07-recent-projects.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/recent-projects.png",
+      "source_git_blob_sha": "212f5ac2dd93d9812961ca1a9665c61e49b02987f1b93fa131148da4d3558cc5",
+      "canonical_filesystem_sha": "212f5ac2dd93d9812961ca1a9665c61e49b02987f1b93fa131148da4d3558cc5",
+      "canonical_index_blob_sha": "212f5ac2dd93d9812961ca1a9665c61e49b02987f1b93fa131148da4d3558cc5",
+      "manifest_sha": "212f5ac2dd93d9812961ca1a9665c61e49b02987f1b93fa131148da4d3558cc5",
+      "staging_path": "00_book/assets/ui/legacy/project/recent-projects.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 351,
+          "referenced_path": "../assets/ui/legacy/project/recent-projects.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 223,
+          "referenced_path": "/documentation_assets/ui/legacy/project/recent-projects.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.save-menu",
+      "old_path": "00_book/figures/gui/chapter-02/08-save-project.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/save-menu.png",
+      "source_git_blob_sha": "69ee0d25e8594580fe3226e59301de39abc37d2e0781af922f9a15ddc935b0db",
+      "canonical_filesystem_sha": "69ee0d25e8594580fe3226e59301de39abc37d2e0781af922f9a15ddc935b0db",
+      "canonical_index_blob_sha": "69ee0d25e8594580fe3226e59301de39abc37d2e0781af922f9a15ddc935b0db",
+      "manifest_sha": "69ee0d25e8594580fe3226e59301de39abc37d2e0781af922f9a15ddc935b0db",
+      "staging_path": "00_book/assets/ui/legacy/project/save-menu.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 367,
+          "referenced_path": "../assets/ui/legacy/project/save-menu.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 230,
+          "referenced_path": "/documentation_assets/ui/legacy/project/save-menu.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.snapshot-history",
+      "old_path": "00_book/figures/gui/chapter-02/09-snapshot-history.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/snapshot-history.png",
+      "source_git_blob_sha": "cb631f8f1621412d5db5849b5c9c9a581e191de83fea79d87d063089b14b7b98",
+      "canonical_filesystem_sha": "cb631f8f1621412d5db5849b5c9c9a581e191de83fea79d87d063089b14b7b98",
+      "canonical_index_blob_sha": "cb631f8f1621412d5db5849b5c9c9a581e191de83fea79d87d063089b14b7b98",
+      "manifest_sha": "cb631f8f1621412d5db5849b5c9c9a581e191de83fea79d87d063089b14b7b98",
+      "staging_path": "00_book/assets/ui/legacy/project/snapshot-history.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 404,
+          "referenced_path": "../assets/ui/legacy/project/snapshot-history.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+          "line": 248,
+          "referenced_path": "/documentation_assets/ui/legacy/project/snapshot-history.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.project.workspace-ready",
+      "old_path": "00_book/figures/gui/chapter-02/10-ready-workspace.png",
+      "canonical_path": "documentation_assets/ui/legacy/project/workspace-ready.png",
+      "source_git_blob_sha": "f8ee59d3e04fd060bc069dcd1b0468cc03a6c30619dd848d830254243f108acd",
+      "canonical_filesystem_sha": "f8ee59d3e04fd060bc069dcd1b0468cc03a6c30619dd848d830254243f108acd",
+      "canonical_index_blob_sha": "f8ee59d3e04fd060bc069dcd1b0468cc03a6c30619dd848d830254243f108acd",
+      "manifest_sha": "f8ee59d3e04fd060bc069dcd1b0468cc03a6c30619dd848d830254243f108acd",
+      "staging_path": "00_book/assets/ui/legacy/project/workspace-ready.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+          "line": 461,
+          "referenced_path": "../assets/ui/legacy/project/workspace-ready.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "provenance_confidence": "low",
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    }
+  ],
+  "png_validation": [
+    {
+      "asset_id": "ui.core.welcome-no-recent-projects",
+      "path": "00_book/figures/gui/chapter-02/01-welcome-window.png",
+      "width": 3200,
+      "height": 2000,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "6dbe1505c3c741477a8ed92a51076b6d58d4673520013015ef2c04b4cf054bbd"
+    },
+    {
+      "asset_id": "ui.project.create-empty",
+      "path": "00_book/figures/gui/chapter-02/02-create-project.png",
+      "width": 1296,
+      "height": 1066,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "b3d74cb9f86b0ffac2c4917488008502b5fbe0718d5b4490fd7ec7e7e5cb520f"
+    },
+    {
+      "asset_id": "ui.project.create-ready",
+      "path": "00_book/figures/gui/chapter-02/03-project-details.png",
+      "width": 2165,
+      "height": 1364,
+      "mode": "RGBA",
+      "valid_png": true,
+      "sha256": "bd1a6892115ed6685deaa15ec146941a4e3331accd1668d3e4ce0e51ff5c6707"
+    },
+    {
+      "asset_id": "ui.project.workspace-new-project",
+      "path": "00_book/figures/gui/chapter-02/04-workspace-opened.png",
+      "width": 3200,
+      "height": 2000,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "e7a687467b959823d749c993c7ad823d65304c9137ea328c734ddd3064705a36"
+    },
+    {
+      "asset_id": "ui.project.open-project-choice",
+      "path": "00_book/figures/gui/chapter-02/05-open-project-choice.png",
+      "width": 3200,
+      "height": 2000,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "e7e918a348d2203fd68c2c05a579b0d3a423b65ef61644551ace02dcccf6a95f"
+    },
+    {
+      "asset_id": "ui.project.workspace-open-existing",
+      "path": "00_book/figures/gui/chapter-02/06-open-existing-project.png",
+      "width": 3200,
+      "height": 2000,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "7de27f0a95e1694667be8d4b6d381df7cb4b02e3adc3a2aa334e9739ba3036f4"
+    },
+    {
+      "asset_id": "ui.project.recent-projects",
+      "path": "00_book/figures/gui/chapter-02/07-recent-projects.png",
+      "width": 3200,
+      "height": 2000,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "212f5ac2dd93d9812961ca1a9665c61e49b02987f1b93fa131148da4d3558cc5"
+    },
+    {
+      "asset_id": "ui.project.save-menu",
+      "path": "00_book/figures/gui/chapter-02/08-save-project.png",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "69ee0d25e8594580fe3226e59301de39abc37d2e0781af922f9a15ddc935b0db"
+    },
+    {
+      "asset_id": "ui.project.snapshot-history",
+      "path": "00_book/figures/gui/chapter-02/09-snapshot-history.png",
+      "width": 1536,
+      "height": 1276,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "cb631f8f1621412d5db5849b5c9c9a581e191de83fea79d87d063089b14b7b98"
+    },
+    {
+      "asset_id": "ui.project.workspace-ready",
+      "path": "00_book/figures/gui/chapter-02/10-ready-workspace.png",
+      "width": 3200,
+      "height": 2000,
+      "mode": "RGB",
+      "valid_png": true,
+      "sha256": "f8ee59d3e04fd060bc069dcd1b0468cc03a6c30619dd848d830254243f108acd"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.core.welcome-no-recent-projects",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 188,
+      "before": "../../figures/gui/chapter-02/01-welcome-window.png",
+      "after": "../assets/ui/legacy/core/welcome-no-recent-projects.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.create-empty",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 245,
+      "before": "../../figures/gui/chapter-02/02-create-project.png",
+      "after": "../assets/ui/legacy/project/create-empty.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.create-ready",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 260,
+      "before": "../../figures/gui/chapter-02/03-project-details.png",
+      "after": "../assets/ui/legacy/project/create-ready.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.workspace-new-project",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 274,
+      "before": "../../figures/gui/chapter-02/04-workspace-opened.png",
+      "after": "../assets/ui/legacy/project/workspace-new-project.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.open-project-choice",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 316,
+      "before": "../../figures/gui/chapter-02/05-open-project-choice.png",
+      "after": "../assets/ui/legacy/project/open-project-choice.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.workspace-open-existing",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 330,
+      "before": "../../figures/gui/chapter-02/06-open-existing-project.png",
+      "after": "../assets/ui/legacy/project/workspace-open-existing.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.recent-projects",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 351,
+      "before": "../../figures/gui/chapter-02/07-recent-projects.png",
+      "after": "../assets/ui/legacy/project/recent-projects.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.save-menu",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 367,
+      "before": "../../figures/gui/chapter-02/08-save-project.png",
+      "after": "../assets/ui/legacy/project/save-menu.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.snapshot-history",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 404,
+      "before": "../../figures/gui/chapter-02/09-snapshot-history.png",
+      "after": "../assets/ui/legacy/project/snapshot-history.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.project.workspace-ready",
+      "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+      "line": 461,
+      "before": "../../figures/gui/chapter-02/10-ready-workspace.png",
+      "after": "../assets/ui/legacy/project/workspace-ready.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.core.welcome-no-recent-projects",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 146,
+      "before": "figures/gui/chapter-02/01-welcome-window.png",
+      "after": "/documentation_assets/ui/legacy/core/welcome-no-recent-projects.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.project.create-empty",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 179,
+      "before": "figures/gui/chapter-02/02-create-project.png",
+      "after": "/documentation_assets/ui/legacy/project/create-empty.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.project.create-ready",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 184,
+      "before": "figures/gui/chapter-02/03-project-details.png",
+      "after": "/documentation_assets/ui/legacy/project/create-ready.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.project.workspace-new-project",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 189,
+      "before": "figures/gui/chapter-02/04-workspace-opened.png",
+      "after": "/documentation_assets/ui/legacy/project/workspace-new-project.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.project.workspace-open-existing",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 214,
+      "before": "figures/gui/chapter-02/06-open-existing-project.png",
+      "after": "/documentation_assets/ui/legacy/project/workspace-open-existing.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.project.recent-projects",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 223,
+      "before": "figures/gui/chapter-02/07-recent-projects.png",
+      "after": "/documentation_assets/ui/legacy/project/recent-projects.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.project.save-menu",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 230,
+      "before": "figures/gui/chapter-02/08-save-project.png",
+      "after": "/documentation_assets/ui/legacy/project/save-menu.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.project.snapshot-history",
+      "source_document": "00_book/contents/02_cai_dat_su_dung.typ",
+      "line": 248,
+      "before": "figures/gui/chapter-02/09-snapshot-history.png",
+      "after": "/documentation_assets/ui/legacy/project/snapshot-history.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 18,
+  "baseline": {
+    "before": 147,
+    "resolved": 10,
+    "after": 137,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/01-welcome-window.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/01-welcome-window.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/02-create-project.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/02-create-project.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/03-project-details.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/03-project-details.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/04-workspace-opened.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/04-workspace-opened.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/05-open-project-choice.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/05-open-project-choice.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/06-open-existing-project.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/06-open-existing-project.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/07-recent-projects.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/07-recent-projects.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/08-save-project.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/08-save-project.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/09-snapshot-history.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/09-snapshot-history.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/02_cai_dat_su_dung.md",
+        "referenced_path": "../../figures/gui/chapter-02/10-ready-workspace.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-02/10-ready-workspace.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 89,
+    "pending": 256,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "qt_docshot_smoke": "NOT APPLICABLE TO BYTE-PRESERVING B04",
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 89,
+      "pending": 256,
+      "frozen": 62
+    },
+    "b04_migrated": 10,
+    "b04_old_paths_absent": 10,
+    "b04_canonical_paths_present": 10,
+    "other_397_records_unchanged": true,
+    "all_18_reference_edges_exact_current_lines": true,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_10_resolved_entries_removed": true,
+    "baseline_remaining": 137,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [
+      {
+        "target": "report",
+        "result": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_b03_baseline": true
+      },
+      {
+        "target": "book",
+        "result": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_b03_baseline": true
+      }
+    ],
+    "qt_docshot_smoke": "NOT APPLICABLE TO BYTE-PRESERVING B04"
+  },
+  "typst": [
+    {
+      "target": "report",
+      "result": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b03_baseline": true
+    },
+    {
+      "target": "book",
+      "result": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b03_baseline": true
+    }
+  ],
+  "fresh_checkout": {
+    "result": "PASS",
+    "checkouts_created": 1,
+    "candidate_commit": "c522399611270196a47d7b09b028a26aa35ae50f",
+    "candidate_tree": "86403dbbbff41efd4a70fa66b68ebd1f2cfc8d32",
+    "actual_test_count": 39,
+    "validation": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 19
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 17
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 3
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "proof": {
+      "status": "PASS",
+      "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+      "manifest": {
+        "migrated": 89,
+        "pending": 256,
+        "frozen": 62
+      },
+      "b04_migrated": 10,
+      "b04_old_paths_absent": 10,
+      "b04_canonical_paths_present": 10,
+      "other_397_records_unchanged": true,
+      "all_18_reference_edges_exact_current_lines": true,
+      "document_prose_captions_widths_order_labels_unchanged": true,
+      "provenance_and_replacement_intent_unchanged": true,
+      "baseline_only_10_resolved_entries_removed": true,
+      "baseline_remaining": 137,
+      "b02_holds_unchanged": true,
+      "b03_42_bytes_metadata_and_output_map_unchanged": true,
+      "dialog_policy_unchanged": true,
+      "terminal_freeze_and_reference_multiset_unchanged": true,
+      "runtime_assets_unchanged": true,
+      "retained_b02_copies_unchanged": true,
+      "staging_assets": 178,
+      "staging_hashes_correct": true,
+      "staging_ignored": true,
+      "staging_tracked": false,
+      "regeneration_occurred": false,
+      "typst": [
+        {
+          "target": "report",
+          "result": "PASS",
+          "pages": 110,
+          "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+          "byte_identical_to_b03_baseline": true
+        },
+        {
+          "target": "book",
+          "result": "PASS",
+          "pages": 170,
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "byte_identical_to_b03_baseline": true
+        }
+      ],
+      "qt_docshot_smoke": "NOT APPLICABLE TO BYTE-PRESERVING B04"
+    },
+    "scope": "Full candidate validated; only completion of these execution reports changes after validation."
+  }
+}
