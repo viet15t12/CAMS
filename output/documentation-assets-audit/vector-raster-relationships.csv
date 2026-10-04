@@ -1,0 +1,6 @@
+vector_path,raster_path,relationship,confidence,evidence
+00_book/figures/report/diagrams/07_ospf_area.svg,00_book/figures/report/diagrams/07_ospf_area.png,different-content,high,Visual composition differs: original illustration vs simplified vector diagram
+00_book/figures/report/diagrams/08_acl_packet_flow.svg,00_book/figures/report/diagrams/08_acl_packet_flow.jpg,different-content,high,Visual composition differs: original illustration vs simplified vector diagram
+00_book/figures/report/diagrams/LAB_2.svg,00_book/figures/report/diagrams/LAB_2-report.png,uncertain,low,"Same topology/labels by inspection; raster is plausible export, but no exporter/source provenance found and SVG previews differ in embedded icon rendering"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp.svg,00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png,uncertain,low,"Same topology/labels by inspection; raster is plausible export, but no exporter/source provenance found and SVG previews differ in embedded icon rendering"
+00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology.svg,00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png,uncertain,low,"Same topology/labels by inspection; raster is plausible export, but no exporter/source provenance found and SVG previews differ in embedded icon rendering"

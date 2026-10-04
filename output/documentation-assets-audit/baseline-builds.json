@@ -1,0 +1,20 @@
+[
+  {
+    "target": "mkdocs",
+    "command": "mkdocs build --strict",
+    "status": "unavailable",
+    "diagnostic": "mkdocs executable not found on PATH; no dependency installed."
+  },
+  {
+    "target": "book-typst",
+    "command": "typst compile --root . 00_book/main.typ /home/ntdatphu/Data/Workspace/Repository/CAMS/output/documentation-assets-audit/book-baseline.pdf",
+    "status": "unavailable",
+    "diagnostic": "typst executable not found on PATH; no dependency installed."
+  },
+  {
+    "target": "report-typst",
+    "command": "typst compile --root . 00_report/main.typ /home/ntdatphu/Data/Workspace/Repository/CAMS/output/documentation-assets-audit/report-baseline.pdf",
+    "status": "unavailable",
+    "diagnostic": "typst executable not found on PATH; no dependency installed."
+  }
+]

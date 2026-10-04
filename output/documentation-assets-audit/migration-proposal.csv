@@ -1,0 +1,1979 @@
+old_path,asset_class,migration_bucket,suggested_semantic_name,suggested_future_directory,confidence,reason
+00_book/figures/gui/chapter-02/01-welcome-window.png,ui,ui-legacy,01-welcome-window.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Khi đã có lịch sử làm việc, khu vực giữa cửa sổ hiển thị *Recent Projects*. Trạng thái khởi động sạch được minh họa tại @fig:ch02-welcome.
+
+#insert-image(""figures/gui/chapter-02/01-welcome-window.png"",
+  caption: [Màn hình Welcome của CAMS khi chưa có project gần đây.], width: 100.0%) <fig:ch02-welcome>
+
+Workspace chỉ mở sau khi controller tạo hoặc giải nén thành công một project hợp lệ. Ứng dụng không tự mở project gần đây ngay khi khởi động.
+
+== Project trong CAMS"
+00_book/figures/gui/chapter-02/02-create-project.png,ui,ui-legacy,02-create-project.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Hộp thoại ban đầu được minh họa tại @fig:ch02-create-dialog. Trường vị trí trỏ tới một thư mục có thật; CAMS tự tạo tên file #raw("".ntp"") an toàn từ tên project.
+
+#insert-image(""figures/gui/chapter-02/02-create-project.png"",
+  caption: [Hộp thoại tạo một project CAMS mới.], width: 100.0%) <fig:ch02-create-dialog>
+
+Trong ví dụ tại @fig:ch02-project-details, project có tên #raw(""Network-Lab"") và được lưu thành #raw(""Network-Lab.ntp"") tại thư mục đã chọn. Nút *Create Project* chỉ được bật khi tên và vị trí hợp lệ; nếu bật bảo vệ bằng mật khẩu, hai lần nhập phải khớp nhau.
+
+#insert-image(""figures/gui/chapter-02/03-project-details.png"","
+00_book/figures/gui/chapter-02/03-project-details.png,ui,ui-legacy,03-project-details.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trong ví dụ tại @fig:ch02-project-details, project có tên #raw(""Network-Lab"") và được lưu thành #raw(""Network-Lab.ntp"") tại thư mục đã chọn. Nút *Create Project* chỉ được bật khi tên và vị trí hợp lệ; nếu bật bảo vệ bằng mật khẩu, hai lần nhập phải khớp nhau.
+
+#insert-image(""figures/gui/chapter-02/03-project-details.png"",
+  caption: [Thông tin project mới đã sẵn sàng để xác nhận.], width: 100.0%) <fig:ch02-project-details>
+
+Sau khi package đầu tiên được tạo thành công, CAMS chuyển sang Workspace. Tên project xuất hiện trên thanh tiêu đề như trong @fig:ch02-created-workspace. Project mới chưa có thiết bị; đây là trạng thái đúng ở cuối workflow tạo project.
+
+#insert-image(""figures/gui/chapter-02/04-workspace-opened.png"","
+00_book/figures/gui/chapter-02/04-workspace-opened.png,ui,ui-legacy,04-workspace-opened.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau khi package đầu tiên được tạo thành công, CAMS chuyển sang Workspace. Tên project xuất hiện trên thanh tiêu đề như trong @fig:ch02-created-workspace. Project mới chưa có thiết bị; đây là trạng thái đúng ở cuối workflow tạo project.
+
+#insert-image(""figures/gui/chapter-02/04-workspace-opened.png"",
+  caption: [Workspace trống sau khi project Network-Lab được tạo thành công.], width: 100.0%) <fig:ch02-created-workspace>
+
+== Bảo vệ project bằng mật khẩu
+
+Tùy chọn *Protect project with a password* bảo vệ toàn bộ package #raw("".ntp""). Khi mở lại project được bảo vệ, ứng dụng yêu cầu mật khẩu trước khi giải nén Workspace."
+00_book/figures/gui/chapter-02/05-open-project-choice.png,ui,ui-legacy,05-open-project-choice.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-02/05-open-project-choice.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Vị trí lệnh Open để chọn một project đã
+có.</p></figcaption>
+</figure>
+"
+00_book/figures/gui/chapter-02/06-open-existing-project.png,ui,ui-legacy,06-open-existing-project.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nếu package hợp lệ, thanh tiêu đề hiển thị tên project đã mở. @fig:ch02-existing-opened cho thấy mẫu #raw(""Branch-Office-Lab.ntp"") đã được mở thành công; Workspace vẫn sạch và chưa có thiết bị.
+
+#insert-image(""figures/gui/chapter-02/06-open-existing-project.png"",
+  caption: [Workspace sau khi mở project Branch-Office-Lab có sẵn.], width: 100.0%) <fig:ch02-existing-opened>
+
+== Recent Projects
+
+Mỗi lần tạo hoặc mở project thành công, CAMS ghi project vào *Recent Projects*. Danh sách lưu tên, URL file và thời điểm mở gần nhất; mật khẩu không được lưu. Chọn trực tiếp một dòng để mở lại project bằng cùng cơ chế kiểm tra package như lệnh *Open*."
+00_book/figures/gui/chapter-02/07-recent-projects.png,ui,ui-legacy,07-recent-projects.png,documentation_assets/ui-legacy/,medium,"Inspected image content; @fig:ch02-recents sử dụng hai package mẫu hợp lệ và đường dẫn tạm an toàn. Nếu một file đã bị di chuyển hoặc xóa, mục không còn tồn tại sẽ được loại khỏi danh sách khi ứng dụng nạp lịch sử.
+
+#insert-image(""figures/gui/chapter-02/07-recent-projects.png"",
+  caption: [Danh sách Recent Projects với hai project mẫu hợp lệ.], width: 100.0%) <fig:ch02-recents>
+
+== Lưu project
+
+Trong Workspace, mở menu *File* và chọn *Save Workspace*, hoặc nhấn #raw(""Ctrl+S""). Lệnh này đóng gói trạng thái hiện tại và thay file #raw("".ntp"") theo cơ chế ghi an toàn. Vị trí lệnh được minh họa tại @fig:ch02-save."
+00_book/figures/gui/chapter-02/08-save-project.png,ui,ui-legacy,08-save-project.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trong Workspace, mở menu *File* và chọn *Save Workspace*, hoặc nhấn #raw(""Ctrl+S""). Lệnh này đóng gói trạng thái hiện tại và thay file #raw("".ntp"") theo cơ chế ghi an toàn. Vị trí lệnh được minh họa tại @fig:ch02-save.
+
+#insert-image(""figures/gui/chapter-02/08-save-project.png"",
+  caption: [Lệnh Save Workspace và các lệnh snapshot trong menu File.], width: 100.0%) <fig:ch02-save>
+
+Phiên bản giao diện hiện tại không cung cấp action *Save As*. Vì vậy, không nên tìm một lệnh *Save As* trong menu hoặc dựa vào mô tả cũ. Nếu cần một bản sao độc lập, hãy lưu và đóng Workspace trước, rồi sao chép file #raw("".ntp"") bằng công cụ của hệ điều hành; bản sao ngoài ứng dụng là backup, không phải một thao tác Save As trong CAMS.
+
+*Mẹo:* CAMS có cơ chế auto-save theo chu kỳ, nhưng nên chủ động dùng #raw(""Ctrl+S"") trước khi đóng ứng dụng hoặc trước một thay đổi quan trọng."
+00_book/figures/gui/chapter-02/09-snapshot-history.png,ui,ui-legacy,09-snapshot-history.png,documentation_assets/ui-legacy/,medium,"Inspected image content; @fig:ch02-snapshot hiển thị một snapshot thủ công #raw(""Before chapter 3"") và một mốc automatic được tạo trong workflow lưu an toàn. Snapshot gồm ảnh nhất quán của database và backup files. Lịch sử automatic được giới hạn để tránh tăng dung lượng không kiểm soát.
+
+#insert-image(""figures/gui/chapter-02/09-snapshot-history.png"",
+  caption: [Khu vực Snapshot History với các điểm khôi phục của project.], width: 100.0%) <fig:ch02-snapshot>
+
+Khi rollback, CAMS tạo một safety snapshot được ghim trước khi phục hồi trạng thái cũ, rồi lưu lại package. Cơ chế này giảm rủi ro mất trạng thái ngay trước rollback, nhưng snapshot nằm trong project và không thay thế backup ở thiết bị hoặc vị trí lưu trữ khác.
+
+#report-note[*Cảnh báo:* Không thử rollback trên project đang dùng cho công việc thật chỉ để làm quen giao diện. Hãy thực hành trên một bản sao hoặc project lab.]"
+00_book/figures/gui/chapter-02/10-ready-workspace.png,ui,ui-legacy,10-ready-workspace.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-02/10-ready-workspace.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Workspace sạch và sẵn sàng cho chương tiếp
+theo.</p></figcaption>
+</figure>
+"
+00_book/figures/gui/chapter-03/01-workspace-overview.png,ui,ui-docshot,01-workspace-overview.png,documentation_assets/ui-docshot/,high,"Inspected image content; Workspace là không gian làm việc chính của CAMS. Trong @fig:ch03-workspace-overview, người dùng đang ở Dashboard, tab R1 đang được chọn và nội dung Information đang hiển thị. Thanh tiêu đề phía trên cho biết tên project đang mở.
+
+#insert-image(""figures/gui/chapter-03/01-workspace-overview.png"",
+  caption: [Các khu vực chính trong Workspace của CAMS.], width: 100.0%) <fig:ch03-workspace-overview>
+
+Đọc giao diện từ ngoài vào trong: *Menu Bar* nằm trên cùng; *Activity Bar* là dải biểu tượng sát cạnh trái; *Sidebar* nằm ngay bên phải dải này. Phía trên vùng làm việc thiết bị là *Device Tabs*, bên dưới là *Feature Bar*. *Content Area* chiếm phần lớn diện tích còn lại; *Status Bar* chạy dọc cạnh dưới cửa sổ.
+
+#report-table("
+00_book/figures/gui/chapter-03/02-menu-bar.png,ui,ui-docshot,02-menu-bar.png,documentation_assets/ui-docshot/,high,"Inspected image content; *View* là điểm truy cập các lệnh điều hướng: *Reload UI* nạp lại nội dung giao diện hiện tại; *Toggle Sidebar* ẩn hoặc hiện Sidebar; các lệnh *Dashboard*, *SFTP*, *System Logs*, *Database* và *Settings* đưa người dùng tới khu vực tương ứng. @fig:ch03-menu-bar minh họa menu View đang mở.
+
+#insert-image(""figures/gui/chapter-03/02-menu-bar.png"",
+  caption: [Các lệnh điều hướng trong menu View.], width: 60.0%) <fig:ch03-menu-bar>
+
+*Help* cung cấp *Keyboard Shortcuts* để xem bảng phím tắt trong ứng dụng và *About CAMS* để xem thông tin phần mềm. Các hình trong chương dùng kiểu menu tùy biến của CAMS; vị trí menu có thể khác khi chọn cách hiển thị menu do hệ điều hành quản lý.
+
+== Activity Bar"
+00_book/figures/gui/chapter-03/03-activity-bar.png,ui,ui-docshot,03-activity-bar.png,documentation_assets/ui-docshot/,high,"Inspected image content; Activity Bar nằm sát cạnh trái của Workspace và dùng để chuyển giữa các chế độ làm việc chính. Biểu tượng đang được chọn có dấu nhấn màu; đưa con trỏ lên biểu tượng để đọc tên và phím tắt. Phần trên của thanh được minh họa tại @fig:ch03-activity-bar.
+
+#insert-image(""figures/gui/chapter-03/03-activity-bar.png"",
+  caption: [Nhóm điều hướng phía trên với Dashboard đang được chọn.], width: 56.0%) <fig:ch03-activity-bar>
+
+Theo thứ tự từ trên xuống, nhóm phía trên gồm *Dashboard* để làm việc với thiết bị, *SFTP* để mở khu vực truyền tệp và *System Logs* để xem khu vực nhật ký hệ thống. Nhóm sát đáy gồm *Database* và *Settings*. Khi chuyển chế độ, Sidebar cũng đổi nội dung: danh sách thiết bị, kết nối SFTP, đối tượng log, bảng dữ liệu hoặc nhóm thiết lập.
+
+Database có thể mở trình duyệt dữ liệu trong CAMS hoặc công cụ ngoài tùy thiết lập. Khi thành phần hỗ trợ chưa có, biểu tượng có thể bị vô hiệu hóa; nếu công cụ ngoài chưa sẵn sàng, ứng dụng có thể đưa ra thông báo hướng dẫn. Tương tự, SFTP có thể mở ứng dụng ngoài nếu người dùng đã chọn dùng SFTP client ngoài."
+00_book/figures/gui/chapter-03/04-devices-sidebar.png,ui,ui-docshot,04-devices-sidebar.png,documentation_assets/ui-docshot/,high,"Inspected image content; Trong Dashboard, Sidebar hiển thị panel *DEVICES*. Ô *Search devices…* tìm theo tên hoặc địa chỉ IP; nút *Filter* ở phần đầu panel lọc theo trạng thái và loại thiết bị. Nếu không thấy thiết bị cần tìm, hãy kiểm tra từ khóa, bộ lọc và các nhóm đang thu gọn trước.
+
+#insert-image(""figures/gui/chapter-03/04-devices-sidebar.png"",
+  caption: [Devices Sidebar với các nhóm trạng thái và thiết bị mẫu.], width: 45.0%) <fig:ch03-devices-sidebar>
+
+Các thiết bị được chia vào ba nhóm *Connected*, *Waiting* và *Disconnected*, kèm số lượng đang hiển thị. Biểu tượng xanh, vàng và đỏ hỗ trợ phân biệt các trạng thái này. Chọn mũi tên ở đầu nhóm để mở rộng hoặc thu gọn danh sách. Trong hình, nhóm Disconnected đã được mở rộng để thấy SW3.
+
+Ở chế độ chọn đơn, nhấn một dòng thiết bị khả dụng để mở hoặc chuyển tới tab của thiết bị đó. Thiết bị Waiting có dòng hiển thị mờ và chưa cho mở vùng cấu hình; trạng thái này không có nghĩa thiết bị đã bị xóa khỏi project."
+00_book/figures/gui/chapter-03/05-device-tabs.png,ui,ui-docshot,05-device-tabs.png,documentation_assets/ui-docshot/,high,"Inspected image content; Device Tabs nằm trên Feature Bar. Mỗi tab đại diện cho ngữ cảnh của một thiết bị, nhận diện bằng tên và biểu tượng loại thiết bị. Tab đang active có vạch nhấn ở cạnh trên. @fig:ch03-device-tabs cho thấy R1 và SW1 đã được mở, trong đó R1 đang active.
+
+#insert-image(""figures/gui/chapter-03/05-device-tabs.png"",
+  caption: [Hai tab thiết bị với R1 đang là tab hoạt động.], width: 100.0%) <fig:ch03-device-tabs>
+
+Chọn tab SW1 để chuyển ngữ cảnh làm việc sang SW1; chọn lại tab R1 để quay về Router. Mở lại cùng một host từ Sidebar sẽ đưa tab đã có lên phía trước, không tạo thêm tab trùng. Mỗi tab ghi nhớ feature đang xem: chẳng hạn R1 đang ở Routing, còn SW1 vẫn ở Information khi chuyển qua lại.
+
+Chọn nút đóng trên tab để đóng vùng làm việc đó. Nếu đóng tab active, CAMS ưu tiên tab còn mở vừa dùng gần nhất trong lịch sử; nếu không có lịch sử phù hợp, ứng dụng chọn tab cuối còn lại. Khi đóng hết tab, vùng làm việc trở về trạng thái chưa chọn thiết bị. Menu chuột phải trên tab cũng có các lệnh đóng tab, đóng các tab khác và mở lại tab vừa đóng."
+00_book/figures/gui/chapter-03/06-feature-bar-router.png,ui,ui-docshot,06-feature-bar-router.png,documentation_assets/ui-docshot/,high,"Inspected image content; @fig:ch03-feature-router và @fig:ch03-feature-switch cùng giữ Information đang được chọn, nhưng phần tên chức năng khác nhau vì tab active đã đổi từ R1 sang SW1.
+
+#insert-image(""figures/gui/chapter-03/06-feature-bar-router.png"",
+  caption: [Feature Bar khi làm việc với Router R1.], width: 100.0%) <fig:ch03-feature-router>
+
+#insert-image(""figures/gui/chapter-03/07-feature-bar-switch.png"",
+  caption: [Feature Bar khi làm việc với Switch Layer 2 SW1.], width: 100.0%) <fig:ch03-feature-switch>
+"
+00_book/figures/gui/chapter-03/07-feature-bar-switch.png,ui,ui-docshot,07-feature-bar-switch.png,documentation_assets/ui-docshot/,high,"Inspected image content;   caption: [Feature Bar khi làm việc với Router R1.], width: 100.0%) <fig:ch03-feature-router>
+
+#insert-image(""figures/gui/chapter-03/07-feature-bar-switch.png"",
+  caption: [Feature Bar khi làm việc với Switch Layer 2 SW1.], width: 100.0%) <fig:ch03-feature-switch>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Loại thiết bị], [Nhóm chức năng hiển thị và có thể chọn]),"
+00_book/figures/gui/chapter-03/08-content-area.png,ui,ui-docshot,08-content-area.png,documentation_assets/ui-docshot/,high,"Inspected image content; Content Area là vùng nội dung chính bên dưới Feature Bar. Nội dung thay đổi theo host active, feature, loại thiết bị và chế độ ứng dụng. Trong Settings, khu vực này hiển thị thiết lập; trong Dashboard, nó hiển thị nội dung của thiết bị đang chọn. Tên màn hình và địa chỉ host ở đầu vùng giúp kiểm tra mình đang xem đúng nơi.
+
+#insert-image(""figures/gui/chapter-03/08-content-area.png"",
+  caption: [Phần nội dung Information của R1 khi chưa có dữ liệu cấu hình.], width: 100.0%) <fig:ch03-content-area>
+
+Trong @fig:ch03-content-area, *No backup history* và *No running-config data is available* là thông báo chưa có dữ liệu, không phải ứng dụng đang tải vô thời hạn. Mục Snapshot tại đây thuộc nội dung cấu hình thiết bị; không nhầm với snapshot toàn project trong menu File. Chương này chỉ yêu cầu nhận diện vùng nội dung, chưa cần thu thập hay so sánh cấu hình.
+
+Một số màn hình chỉ được nạp khi mở lần đầu nên có thể xuất hiện trạng thái tải ngắn. Sau khi chuyển tab hoặc feature, hãy chờ nội dung ổn định và kiểm tra tên host trước khi tiếp tục."
+00_book/figures/gui/chapter-03/09-status-bar.png,ui,ui-docshot,09-status-bar.png,documentation_assets/ui-docshot/,high,"Inspected image content; Status Bar nằm ở cạnh dưới Workspace. Phần trái hiển thị trạng thái Python/runtime và kiểm tra database, ví dụ *SYSTEM READY* khi môi trường sẵn sàng. Khi ứng dụng có tác vụ nền, thanh này có thể hiển thị thông báo, tiến độ hoặc kết quả tác vụ.
+
+#insert-image(""figures/gui/chapter-03/09-status-bar.png"",
+  caption: [Vị trí các nhóm thông tin trên Status Bar.], width: 100.0%) <fig:ch03-status-bar>
+
+Phần phải có thông tin kết nối mạng, Virtual Lab nếu được phát hiện, RAM, ngày/giờ và chuông thông báo. Trạng thái mạng của máy chạy CAMS không thay thế trạng thái kết nối từng thiết bị trong Sidebar. Chọn chuông để mở khu vực thông báo; đây cũng là nơi kiểm tra lại kết quả hoặc vấn đề ứng dụng vừa báo.
+
+#insert-image(""figures/gui/chapter-03/09-status-details.png"","
+00_book/figures/gui/chapter-03/09-status-details.png,ui,ui-docshot,09-status-details.png,documentation_assets/ui-docshot/,high,"Inspected image content; Phần phải có thông tin kết nối mạng, Virtual Lab nếu được phát hiện, RAM, ngày/giờ và chuông thông báo. Trạng thái mạng của máy chạy CAMS không thay thế trạng thái kết nối từng thiết bị trong Sidebar. Chọn chuông để mở khu vực thông báo; đây cũng là nơi kiểm tra lại kết quả hoặc vấn đề ứng dụng vừa báo.
+
+#insert-image(""figures/gui/chapter-03/09-status-details.png"",
+  caption: [Chi tiết kết nối mẫu, RAM và biểu tượng thông báo.], width: 98.2%) <fig:ch03-status-details>
+
+Trong các hình, *DOC FIXTURE* đánh dấu phiên minh họa, *Documentation Link* là tên kết nối mẫu và RAM được cố định ở 42%. Ngày/giờ được ẩn để ảnh không thay đổi theo thời điểm chụp. Khi dùng CAMS bình thường, các giá trị phản ánh môi trường đang chạy; người dùng có thể bật/tắt những nhóm thông tin trong *Settings → Theme → Status Bar*.
+
+== Điều chỉnh không gian làm việc"
+00_book/figures/gui/chapter-03/10-sidebar-collapsed.png,ui,ui-docshot,10-sidebar-collapsed.png,documentation_assets/ui-docshot/,high,"Inspected image content; Có ba cách thuận tiện để ẩn/hiện Sidebar: nhấn #raw(""Ctrl+B""), chọn *View → Toggle Sidebar*, hoặc nhấn lại biểu tượng *Dashboard* đang active. Nhấn lại lần nữa để hiện Sidebar. Cách dùng Activity Bar ở các chế độ khác đã được lưu ý ở phần trước.
+
+#insert-image(""figures/gui/chapter-03/10-sidebar-collapsed.png"",
+  caption: [Workspace khi Sidebar được thu gọn.], width: 100.0%) <fig:ch03-sidebar-collapsed>
+
+So sánh @fig:ch03-sidebar-collapsed với @fig:ch03-workspace-overview : Content Area rộng hơn, còn tab R1, tab SW1 và Information vẫn được giữ. Ẩn Sidebar không đóng tab, không đổi host active và không xóa lựa chọn thiết bị.
+
+== Các phím tắt điều hướng"
+00_book/figures/gui/chapter-04/01-devices-inventory.png,ui,ui-docshot,01-devices-inventory.png,documentation_assets/ui-docshot/,high,"Inspected image content; Ví dụ xuyên suốt chương dùng R1 (#raw(""192.168.56.11""), Router), R2 (#raw(""192.168.56.12""), Router), SW1 (#raw(""192.168.56.21""), Switch Layer 2) và SW3 (#raw(""192.168.56.23""), Switch Layer 3). Dùng địa chỉ tương ứng với mạng lab của mình khi thực hành. Kiểm tra đúng project trước khi thay đổi danh sách.
+
+#insert-image(""figures/gui/chapter-04/01-devices-inventory.png"",
+  caption: [Inventory gồm bốn thiết bị vừa được khai báo.], width: 47.0%) <fig:ch04-inventory>
+
+Trong @fig:ch04-inventory, cả bốn thiết bị thuộc nhóm Waiting. Nút thêm một thiết bị và nút thêm nhiều thiết bị nằm ở phần đầu panel DEVICES. Có thể đưa con trỏ lên từng biểu tượng để xem tên lệnh trước khi chọn.
+
+== Trạng thái thiết bị"
+00_book/figures/gui/chapter-04/02-add-device-empty.png,ui,ui-docshot,02-add-device-empty.png,documentation_assets/ui-docshot/,high,"Inspected image content; Trong Dashboard, chọn nút thêm một thiết bị ở đầu DEVICES hoặc nhấn #raw(""Ctrl+N""). Cửa sổ *Add New Device* xuất hiện như @fig:ch04-add-device. Đây là cửa sổ riêng; dùng *Cancel* hoặc nút đóng nếu chưa muốn lưu.
+
+#insert-image(""figures/gui/chapter-04/02-add-device-empty.png"",
+  caption: [Cửa sổ khai báo một thiết bị mới.], width: 75.0%) <fig:ch04-add-device>
+
+=== Khai báo Host và tên thiết bị
+
+Nhập #raw(""192.168.56.11"") vào *Host* và #raw(""R1"") vào *Device Name*. Host phải là IPv4 private hoặc domain hợp lệ có dạng phân cấp, chẳng hạn #raw(""r1.lab.example""). Tên ngắn như #raw(""R1"") dùng cho Device Name, không thay thế domain trong Host. Nếu để trống Device Name, danh sách dùng Host làm tên hiển thị."
+00_book/figures/gui/chapter-04/03-add-device-filled.png,ui,ui-docshot,03-add-device-filled.png,documentation_assets/ui-docshot/,high,"Inspected image content; Nhập tài khoản được cấp cho thiết bị vào Username và Password. Username chỉ nhận chữ cái Latin, chữ số, dấu gạch dưới, dấu chấm và dấu gạch ngang. Password không được chứa khoảng trắng. Giữ mật khẩu ở chế độ che khi trình chiếu hoặc chụp ảnh.
+
+#insert-image(""figures/gui/chapter-04/03-add-device-filled.png"",
+  caption: [Thông tin của R1 đã được điền, mật khẩu được che.], width: 75.0%) <fig:ch04-add-filled>
+
+=== SSH Compatibility cho thiết bị cũ
+
+Nút *SSH Compatibility — Legacy devices only* chỉ khả dụng khi Protocol là SSH. Đây là thiết lập nâng cao cho từng thiết bị, dành cho trường hợp đã xác định thiết bị cũ cần thuật toán tương thích riêng."
+00_book/figures/gui/chapter-04/04-device-added-waiting.png,ui,ui-docshot,04-device-added-waiting.png,documentation_assets/ui-docshot/,high,"Inspected image content; Khi lưu thành công, cửa sổ đóng và Devices Panel nạp lại danh sách. R1 xuất hiện trong Waiting như @fig:ch04-added-waiting; thao tác thêm chưa tự kết nối tới thiết bị.
+
+#insert-image(""figures/gui/chapter-04/04-device-added-waiting.png"",
+  caption: [R1 xuất hiện trong Waiting sau khi được thêm.], width: 47.0%) <fig:ch04-added-waiting>
+
+== Thêm nhiều thiết bị
+
+=== Add Multiple Devices"
+00_book/figures/gui/chapter-04/05-ssh-compatibility.png,ui,ui-docshot,05-ssh-compatibility.png,documentation_assets/ui-docshot/,high,"Inspected image content; Nút *SSH Compatibility — Legacy devices only* chỉ khả dụng khi Protocol là SSH. Đây là thiết lập nâng cao cho từng thiết bị, dành cho trường hợp đã xác định thiết bị cũ cần thuật toán tương thích riêng.
+
+#insert-image(""figures/gui/chapter-04/05-ssh-compatibility.png"",
+  caption: [Các trường tương thích SSH riêng cho một thiết bị.], width: 66.0%) <fig:ch04-ssh>
+
+Các trường *Key exchange algorithms*, *Host key algorithms*, *Ciphers* và *MAC algorithms* nhận danh sách phân cách bằng dấu phẩy. *Note* ghi lý do cần ngoại lệ. Chữ màu nhạt trong ô trống là gợi ý của giao diện, không phải bộ thuật toán đã được bật. Để trống các ô nếu không cần thay đổi mặc định.
+
+#report-note[*Cảnh báo:* Thuật toán SSH legacy có thể làm giảm mức an toàn của kết nối. Chỉ thêm ngoại lệ cần thiết cho đúng thiết bị và theo chính sách của hệ thống.]"
+00_book/figures/gui/chapter-04/06-add-multiple-devices.png,ui,ui-docshot,06-add-multiple-devices.png,documentation_assets/ui-docshot/,high,"Inspected image content; Chọn nút thêm nhiều thiết bị ở đầu DEVICES hoặc nhấn #raw(""Ctrl+Alt+N""). *Add Multiple Devices* có phần thiết lập chung, bảng nhập từng host và thanh nút ở cuối cửa sổ.
+
+#insert-image(""figures/gui/chapter-04/06-add-multiple-devices.png"",
+  caption: [Cửa sổ thêm nhiều thiết bị và các nút nhập danh sách.], width: 100.0%) <fig:ch04-batch-empty>
+
+=== Shared connection settings
+
+Phần *Shared connection settings* gồm Protocol, Port, OS, Role, Username và Password. Dòng mới kế thừa các giá trị này. Khi thay đổi thiết lập chung, các dòng đã có không tự đổi: dùng *Apply to all* để cập nhật chúng, rồi chỉnh riêng từng dòng nếu cần."
+00_book/figures/gui/chapter-04/07-batch-devices-filled.png,ui,ui-docshot,07-batch-devices-filled.png,documentation_assets/ui-docshot/,high,"Inspected image content; R1 đã có từ bước trước, vì vậy chỉ thêm R2, SW1 và SW3 vào bảng. Dùng *Add another row* để thêm dòng; sửa trực tiếp Host, Name và các trường còn lại. Nút xóa ở cuối dòng bỏ dòng nhập đó; *Clear* đưa bảng về một dòng trống, không xóa các thiết bị đã lưu trong inventory.
+
+#insert-image(""figures/gui/chapter-04/07-batch-devices-filled.png"",
+  caption: [Ba thiết bị bổ sung với Role riêng trên từng dòng.], width: 100.0%) <fig:ch04-batch-filled>
+
+@fig:ch04-batch-detail phóng phần Host và Name để dễ đối chiếu. Mỗi host chỉ xuất hiện một lần trong danh sách nhập.
+
+#insert-image(""figures/gui/chapter-04/19-batch-table-detail.png"","
+00_book/figures/gui/chapter-04/08-search-filter.png,ui,ui-docshot,08-search-filter.png,documentation_assets/ui-docshot/,high,"Inspected image content; Ô *Search devices…* tìm theo tên hoặc địa chỉ IP; tìm tên không phân biệt chữ hoa/thường. Nhập #raw(""SW"") để chỉ giữ SW1 và SW3 như @fig:ch04-search. Xóa từ khóa để trở lại danh sách đầy đủ.
+
+#insert-image(""figures/gui/chapter-04/08-search-filter.png"",
+  caption: [Tìm SW để giữ lại các switch phù hợp.], width: 47.0%) <fig:ch04-search>
+
+Nút *Filter* mở các nhóm STATUS và DEVICE TYPE. Có thể chọn Connected, Waiting hoặc Disconnected trong STATUS; khi không chọn trạng thái nào, CAMS hiển thị mọi trạng thái. Từ khóa và bộ lọc được áp dụng đồng thời. Nhấn mũi tên của nhóm để mở rộng nếu nhóm đang thu gọn.
+
+#report-note[*Giới hạn hiện tại:* Các lựa chọn DEVICE TYPE chưa khớp mã phân loại thiết bị trong inventory, nên chọn Router hoặc Switch có thể làm danh sách trống dù có thiết bị tương ứng. Bỏ chọn lọc loại và dùng Search theo tên/IP kết hợp STATUS.]"
+00_book/figures/gui/chapter-04/09-device-context-waiting.png,ui,ui-docshot,09-device-context-waiting.png,documentation_assets/ui-docshot/,high,"Inspected image content; Trong lúc tác vụ liên quan đang chạy, một số lệnh tạm bị vô hiệu hóa. Menu hiện không có Disconnect riêng cho một host; dùng chế độ chọn nhiều ngay cả khi chỉ muốn ngắt một thiết bị.
+
+#insert-image(""figures/gui/chapter-04/09-device-context-waiting.png"",
+  caption: [Menu của thiết bị Waiting với lệnh Connect.], width: 53.6%) <fig:ch04-context-waiting>
+
+#insert-image(""figures/gui/chapter-04/11-device-context-connected.png"",
+  caption: [Menu của thiết bị Connected.], width: 53.6%) <fig:ch04-context-connected>
+"
+00_book/figures/gui/chapter-04/10-device-connected.png,ui,ui-docshot,10-device-connected.png,documentation_assets/ui-docshot/,high,"Inspected image content; Với R1 đang Waiting, chuột phải lên R1 và chọn *Connect*. CAMS dùng thông tin đã lưu để mở phiên quản lý, thu thập running-config, lưu bản sao và đồng bộ dữ liệu cấu hình được hỗ trợ vào Workspace. Chờ tác vụ kết thúc, theo dõi Status Bar/thông báo và kiểm tra R1 chuyển sang Connected.
+
+#insert-image(""figures/gui/chapter-04/10-device-connected.png"",
+  caption: [R1 chuyển sang Connected sau thao tác Connect.], width: 47.0%) <fig:ch04-connected>
+
+Nếu Connect thất bại, kiểm tra Host, cổng, giao thức, tài khoản và khả năng truy cập dịch vụ quản lý từ máy chạy CAMS. Sửa thông tin bằng Edit khi cần. Với cảnh báo khóa host SSH, kiểm tra thông tin nhận diện trước khi chấp nhận kết nối.
+
+Trạng thái Connected không bảo đảm mọi bước thu thập, backup hoặc đồng bộ đã thành công: CAMS có thể giữ kết nối và báo cảnh báo cho một bước tiếp theo. Đọc thông báo chi tiết; không bấm Connect lặp lại khi tác vụ cũ còn chạy."
+00_book/figures/gui/chapter-04/11-device-context-connected.png,ui,ui-docshot,11-device-context-connected.png,documentation_assets/ui-docshot/,high,"Inspected image content;   caption: [Menu của thiết bị Waiting với lệnh Connect.], width: 53.6%) <fig:ch04-context-waiting>
+
+#insert-image(""figures/gui/chapter-04/11-device-context-connected.png"",
+  caption: [Menu của thiết bị Connected.], width: 53.6%) <fig:ch04-context-connected>
+
+== Kết nối thiết bị
+
+=== Connect"
+00_book/figures/gui/chapter-04/12-device-context-disconnected.png,ui,ui-docshot,12-device-context-disconnected.png,documentation_assets/ui-docshot/,high,"Inspected image content; Với host Disconnected, mở menu như @fig:ch04-context-disconnected và chọn *Reconnect*. Thiết bị chuyển về Waiting. Sau đó chuột phải lần nữa, chọn *Connect* để thực sự mở lại phiên. Phím #raw(""Ctrl+Alt+R"") thực hiện cùng bước đưa về Waiting.
+
+#insert-image(""figures/gui/chapter-04/12-device-context-disconnected.png"",
+  caption: [Lệnh Reconnect của thiết bị Disconnected.], width: 53.6%) <fig:ch04-context-disconnected>
+
+=== Disconnect
+
+Chọn *Select multiple*, giữ lại host Connected cần ngắt, rồi dùng *Disconnect connected (N)* hoặc #raw(""Ctrl+Shift+D""). Có thể chỉ chọn một host. CAMS đóng phiên quản lý của những host Connected đủ điều kiện và đưa chúng về Waiting; inventory, cấu hình đã lưu và lịch sử backup vẫn được giữ."
+00_book/figures/gui/chapter-04/13-multi-select.png,ui,ui-docshot,13-multi-select.png,documentation_assets/ui-docshot/,high,"Inspected image content; Chuột phải lên một host rồi chọn *Select multiple* để bắt đầu. Có thể giữ #raw(""Ctrl"") và nhấn từng dòng để chọn/bỏ chọn; giữ #raw(""Shift"") và nhấn để chọn một khoảng trong danh sách đang hiển thị. Khi đã bật chọn nhiều, nhấn một dòng sẽ đổi trạng thái chọn, không chuyển tab như chế độ chọn đơn.
+
+#insert-image(""figures/gui/chapter-04/13-multi-select.png"",
+  caption: [Bốn host được chọn với trạng thái hỗn hợp.], width: 47.0%) <fig:ch04-multi-select>
+
+Thanh chọn nhiều hiển thị số lượng host đã chọn. *Select all visible hosts* hoặc #raw(""Ctrl+A"") trong chế độ này chọn các host của danh sách đang được lọc, kể cả host trong nhóm đang thu gọn. *Clear selection and exit*, nút xóa lựa chọn hoặc #raw(""Esc"") thoát chế độ chọn nhiều. Khi con trỏ đang nhập trong Search, phím theo ngữ cảnh có thể chưa tác động tới danh sách.
+
+Chuột phải lên host đã chọn giữ nguyên nhóm lựa chọn. Chuột phải lên một host chưa chọn sẽ trở lại ngữ cảnh riêng của host đó. Trước khi chạy lệnh, luôn đọc số host ở đầu menu."
+00_book/figures/gui/chapter-04/14-multi-select-actions.png,ui,ui-docshot,14-multi-select-actions.png,documentation_assets/ui-docshot/,high,"Inspected image content; Sau khi chọn nhiều host, chuột phải lên một dòng đã chọn để mở menu nhóm. Ví dụ @fig:ch04-batch-actions gồm R1 và SW1 Connected, R2 Waiting, SW3 Disconnected. Do đó menu có đúng một host đủ điều kiện Connect và hai host đủ điều kiện Get configs hoặc Disconnect.
+
+#insert-image(""figures/gui/chapter-04/14-multi-select-actions.png"",
+  caption: [Thao tác hàng loạt với bốn thiết bị được chọn.], width: 75.0%) <fig:ch04-batch-actions>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Lệnh trong ví dụ], [Host thực sự được xử lý]),"
+00_book/figures/gui/chapter-04/15-edit-device.png,ui,ui-docshot,15-edit-device.png,documentation_assets/ui-docshot/,high,"Inspected image content; Chuột phải lên R1, chọn *Edit*, đổi *Device Name* thành #raw(""Core-Router"") rồi chọn *Save Changes*. Các trường kết nối và phân loại có thể được chỉnh trong cùng cửa sổ. @fig:ch04-edit minh họa trạng thái ngay trước khi lưu.
+
+#insert-image(""figures/gui/chapter-04/15-edit-device.png"",
+  caption: [Đổi tên R1 thành Core-Router trong Edit Device.], width: 75.0%) <fig:ch04-edit>
+
+*Host* chỉ đọc trong Edit; không sửa IP trực tiếp tại đây. Nếu cần một host mới, thêm bản ghi mới và kiểm tra trước khi quyết định xóa bản ghi cũ. Xóa rồi thêm lại không bảo toàn lịch sử gắn với host cũ.
+
+Lưu chỉnh sửa đóng phiên quản lý hiện có và đưa thiết bị về Waiting. Sau khi kiểm tra thông tin mới, dùng Connect để mở lại phiên. Đừng hiểu trạng thái Waiting sau Edit là mất bản ghi."
+00_book/figures/gui/chapter-04/16-delete-device-confirmation.png,ui,ui-docshot,16-delete-device-confirmation.png,documentation_assets/ui-docshot/,high,"Inspected image content; #report-note[*Cảnh báo xóa vĩnh viễn:* Delete Host xóa thiết bị cùng cấu hình liên quan, dữ liệu đã thu thập, dữ liệu Syslog và lịch sử backup của host trong Workspace. Thao tác này không có Undo. Nếu cần giữ dữ liệu, lưu bản project hoặc snapshot phù hợp trước khi xóa; kiểm tra kỹ địa chỉ trong hộp xác nhận.]
+
+#insert-image(""figures/gui/chapter-04/16-delete-device-confirmation.png"",
+  caption: [Xác nhận trước khi xóa vĩnh viễn thiết bị tạm.], width: 100.0%) <fig:ch04-delete>
+
+Để xác nhận, đánh dấu ô đã hiểu hậu quả và nhập chính xác chuỗi mà hộp thoại yêu cầu, ví dụ #raw(""DELETE 192.168.56.99""). Chỉ khi cả hai điều kiện đúng, nút *Permanently Delete* mới khả dụng. Chọn *Cancel* để giữ nguyên dữ liệu.
+
+Khi xác nhận, CAMS đóng phiên quản lý của host rồi thực hiện xóa. Kiểm tra thông báo kết quả và danh sách sau đó. Lệnh này xóa dữ liệu quản lý trong project, không phải lệnh xóa cấu hình trên thiết bị mạng. CAMS hiện không có phím Delete để xóa device đang chọn; phải đi qua menu chuột phải và hộp xác nhận."
+00_book/figures/gui/chapter-04/17-running-config-result.png,ui,ui-docshot,17-running-config-result.png,documentation_assets/ui-docshot/,high,"Inspected image content; Mở tab R1, chọn *Information*, rồi xem phần *Snapshot* và *Version*. Chọn phiên bản cần đọc trong danh sách. @fig:ch04-running-config minh họa phần nội dung đã thu thập; cấu hình ngắn giúp nhận diện đúng hostname và địa chỉ, chưa phải bài cấu hình Interface.
+
+#insert-image(""figures/gui/chapter-04/17-running-config-result.png"",
+  caption: [Một phiên bản running-config trong Information.], width: 100.0%) <fig:ch04-running-config>
+
+Mỗi lần thu thập thành công tạo một mốc lịch sử, kể cả khi nội dung chưa đổi. *Compare* dùng để đối chiếu phiên bản. Nếu chưa có dữ liệu hoặc tác vụ thất bại, kiểm tra thông báo và thử lại khi phiên quản lý sẵn sàng. Mốc backup này thuộc riêng thiết bị; snapshot toàn project trong menu File được trình bày ở @ch02.
+
+Quy trình đọc thông báo đồng bộ, chọn một cấu hình cũ và so sánh hai mốc bằng Diff được minh họa chi tiết tại @ch12."
+00_book/figures/gui/chapter-04/18-import-result.png,ui,ui-docshot,18-import-result.png,documentation_assets/ui-docshot/,high,"Inspected image content; Host trùng hoặc dòng thiếu Host được bỏ qua; thông báo cho biết số lượng Imported và Skipped. Import không cập nhật thông tin của host đã tồn tại. @fig:ch04-import minh họa TEMP-SW được thêm vào Waiting trong một inventory đang có các trạng thái khác nhau.
+
+#insert-image(""figures/gui/chapter-04/18-import-result.png"",
+  caption: [TEMP-SW xuất hiện trong inventory sau import.], width: 47.0%) <fig:ch04-import>
+
+=== Sample import file
+
+Nút *Download template* mở hộp chọn nơi lưu với tên gợi ý *Template\_CAMS-MultipleDevices.xlsx*. Ở phiên bản được khảo sát, chức năng này có thể báo *Sample file not found* do đường dẫn mẫu chưa khớp tệp được đóng gói. Nếu gặp lỗi, dùng tệp #raw(""templates/EXdevices.xlsx"") đi kèm bản source, hoặc tạo JSON theo ví dụ trên. Không đổi tên phần mở rộng của một tệp văn bản thành #raw("".xlsx"")."
+00_book/figures/gui/chapter-04/19-batch-table-detail.png,ui,ui-docshot,19-batch-table-detail.png,documentation_assets/ui-docshot/,high,"Inspected image content; @fig:ch04-batch-detail phóng phần Host và Name để dễ đối chiếu. Mỗi host chỉ xuất hiện một lần trong danh sách nhập.
+
+#insert-image(""figures/gui/chapter-04/19-batch-table-detail.png"",
+  caption: [Chi tiết Host và Name của ba dòng nhập.], width: 70.9%) <fig:ch04-batch-detail>
+
+=== Xác nhận danh sách thiết bị
+
+Nút *Add 3 devices* thể hiện số dòng đã nhập trong ví dụ. Chọn nút này để kiểm tra và lưu toàn bộ danh sách; có thể dùng #raw(""Ctrl+Enter"") khi cửa sổ đang mở. Nếu một dòng không hợp lệ hoặc cùng host xuất hiện hai lần trong bảng, CAMS báo dòng lỗi để sửa trước khi thêm."
+00_book/figures/gui/chapter-05/01-router-interface-overview.png,ui,ui-legacy,01-router-interface-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trong *Devices Sidebar*, chọn R1 để mở tab thiết bị. Trên *Feature Bar*, chọn biểu tượng *Interface*. Màn hình *Router Interfaces* mở ở tab con *Physical* như @fig:ch05-01-router-interface-overview.
+
+#insert-image(""figures/gui/chapter-05/01-router-interface-overview.png"",
+  caption: [Tổng quan tab Physical của Router Interface.], width: 100.0%) <fig:ch05-01-router-interface-overview>
+
+Màn hình gồm ba phần cần nhận biết:
+
+- Thanh tab con *Physical*, *Loopback*, *Tunnel* và *Subinterface* dùng để chọn loại interface."
+00_book/figures/gui/chapter-05/02-edit-physical-interface.png,ui,ui-legacy,02-edit-physical-interface.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-05/02-edit-physical-interface.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Cấu hình đã lưu của GigabitEthernet0/0 được nạp vào form.</p></figcaption>
+</figure>
+
+Phần **Identity and addressing** hiển thị tên interface, profile, địa chỉ IPv4,"
+00_book/figures/gui/chapter-05/03-physical-interface-configured.png,ui,ui-legacy,03-physical-interface-configured.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trong ví dụ dưới đây, #raw(""GigabitEthernet0/0"") được đổi thành địa chỉ #raw(""10.10.10.1/24""), mô tả #raw(""Uplink to distribution router"") và bandwidth #raw(""100000""). Kiểm tra lại địa chỉ, mask và cổng đích trước khi lưu.
+
+#insert-image(""figures/gui/chapter-05/03-physical-interface-configured.png"",
+  caption: [Các giá trị chuẩn bị lưu cho interface vật lý.], width: 100.0%) <fig:ch05-03-physical-interface-configured>
+
+#report-note[Chọn *Update Interface* để lưu desired state vào Workspace. Bước này chưa gửi lệnh xuống router. Những trường đã thay đổi được CAMS đánh dấu nội bộ để dùng khi tạo preview.]
+
+Các tùy chọn cần chú ý:"
+00_book/figures/gui/chapter-05/04-loopback-interface.png,ui,ui-legacy,04-loopback-interface.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn tab *Loopback*, nhập hậu tố số rồi chọn *Create Loopback*. CAMS sinh tên canonical, ví dụ số #raw(""0"") tạo #raw(""Loopback0""); người dùng không gõ tên interface tự do. Sau đó nhập địa chỉ, mask và mô tả rồi chọn *Save Interface*.
+
+#insert-image(""figures/gui/chapter-05/04-loopback-interface.png"",
+  caption: [Loopback0 dùng địa chỉ /32 làm Router ID mẫu.], width: 100.0%) <fig:ch05-04-loopback-interface>
+
+Loopback và các interface ảo có biểu tượng xóa trong danh sách. Xóa một interface ảo đã tồn tại trên thiết bị sẽ tạo desired state tương ứng với lệnh #raw(""no interface""); thao tác vẫn cần được kiểm tra trong View & Push.
+
+== Tạo Tunnel"
+00_book/figures/gui/chapter-05/05-tunnel-interface.png,ui,ui-legacy,05-tunnel-interface.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn tab *Tunnel*, nhập số tunnel và chọn *Create Tunnel*. Cần có source và destination trước khi lưu. CAMS hiện hỗ trợ các lựa chọn mode GRE, IP-in-IP, IPsec và GRE-IPsec trong form; việc thiết bị thực tế chấp nhận cấu hình còn phụ thuộc phiên bản IOS và cấu hình liên quan.
+
+#insert-image(""figures/gui/chapter-05/05-tunnel-interface.png"",
+  caption: [Tunnel10 với source, destination, key và keepalive mẫu.], width: 100.0%) <fig:ch05-05-tunnel-interface>
+
+Trong ví dụ, Tunnel10 dùng #raw(""GigabitEthernet0/0"") làm source, #raw(""198.51.100.2"") làm destination, key #raw(""10"") và keepalive #raw(""10 3""). Source có thể là địa chỉ cục bộ hoặc tên interface phù hợp với IOS.
+
+== Tạo 802.1Q Subinterface"
+00_book/figures/gui/chapter-05/06-subinterface.png,ui,ui-legacy,06-subinterface.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn tab *Subinterface*. Chọn parent từ danh sách interface Physical đã đồng bộ, nhập Subinterface ID rồi chọn *Create Subinterface*. Với parent #raw(""GigabitEthernet0/0"") và ID #raw(""20""), CAMS sinh tên #raw(""GigabitEthernet0/0.20"").
+
+#insert-image(""figures/gui/chapter-05/06-subinterface.png"",
+  caption: [Subinterface .20 làm gateway cho VLAN 20.], width: 100.0%) <fig:ch05-06-subinterface>
+
+Nhập VLAN ID, địa chỉ IPv4, mask và mô tả. Chỉ bật *Native VLAN* khi thiết kế trunk yêu cầu và hai đầu liên kết dùng cùng quy ước. Subinterface thuộc Router Interface; SVI trên switch được quản lý trong phần Switching.
+
+== Xem lệnh trước khi Push"
+00_book/figures/gui/chapter-05/07-view-push-preview.png,ui,ui-legacy,07-view-push-preview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau khi lưu các thay đổi cục bộ, chọn *View & Push*. CAMS dựng lệnh Cisco IOS từ những bản ghi đang chờ và hiển thị host cùng từng interface trong preview.
+
+#insert-image(""figures/gui/chapter-05/07-view-push-preview.png"",
+  caption: [Preview tổng hợp các tác vụ Router Interface đang chờ.], width: 75.0%) <fig:ch05-07-view-push-preview>
+
+Đọc preview từ trên xuống và kiểm tra tối thiểu:
+
++ Host đích đúng là router cần cấu hình."
+00_book/figures/gui/chapter-06/01-static-routes.png,ui,ui-legacy,01-static-routes.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Tab *Static* quản lý các route có destination cụ thể. Chọn *+ Add*, nhập Network, Subnet Mask, Next hop và AD rồi chọn *Save Static*.
+
+#insert-image(""figures/gui/chapter-06/01-static-routes.png"",
+  caption: [Hai static route đã lưu cho R1.], width: 100.0%) <fig:ch06-01-static-routes>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa]),"
+00_book/figures/gui/chapter-06/02-default-routes.png,ui,ui-legacy,02-default-routes.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/02-default-routes.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Hai next hop cho default route của R1.</p></figcaption>
+</figure>
+
+Next hop phải là địa chỉ IPv4 hợp lệ và có khả năng truy cập đệ quy. Khi dùng"
+00_book/figures/gui/chapter-06/03-ospf-process.png,ui,ui-legacy,03-ospf-process.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Process* quản lý Process ID, Router ID, Reference Bandwidth, Passive Default, Default Originate và AuthenticationCFG.
+
+#insert-image(""figures/gui/chapter-06/03-ospf-process.png"",
+  caption: [OSPF process 10 với Router ID 1.1.1.1.], width: 100.0%) <fig:ch06-03-ospf-process>
+
+- Process ID có phạm vi 1–65535 và chỉ có ý nghĩa cục bộ trên router.
+- Router ID phải là IPv4 duy nhất trong miền OSPF.
+- Reference BW tính theo Mbps; nên dùng cùng giá trị trong toàn miền."
+00_book/figures/gui/chapter-06/04-ospf-networks.png,ui,ui-legacy,04-ospf-networks.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Networks* gắn các interface phù hợp với process và area bằng network cùng wildcard mask.
+
+#insert-image(""figures/gui/chapter-06/04-ospf-networks.png"",
+  caption: [Các network statement thuộc area 0 và area 10.], width: 100.0%) <fig:ch06-04-ospf-networks>
+
+Chọn process, nhập Network, Wildcard và Area rồi chọn *+ Add Network*. Wildcard là mask đảo, ví dụ mạng #raw(""/24"") dùng #raw(""0.0.0.255""). Một network statement quá rộng có thể kích hoạt OSPF trên interface ngoài dự kiến.
+
+=== OSPF Areas"
+00_book/figures/gui/chapter-06/05-ospf-areas.png,ui,ui-legacy,05-ospf-areas.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Areas* tạo area normal, stub hoặc NSSA, cấu hình authentication, no-summary và area range.
+
+#insert-image(""figures/gui/chapter-06/05-ospf-areas.png"",
+  caption: [Area 0 và stub area 10 cùng một summary range.], width: 100.0%) <fig:ch06-05-ospf-areas>
+
+Các router trong cùng area phải dùng loại area tương thích. *No summary* chỉ phù hợp với stub/NSSA. Area range dùng IP và mask để tổng hợp route; Cost là giá trị tùy chọn và *Advertise* quyết định summary có được công bố hay không.
+
+=== OSPF Distance"
+00_book/figures/gui/chapter-06/06-ospf-distance.png,ui,ui-legacy,06-ospf-distance.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/06-ospf-distance.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Các giá trị OSPF distance của process 10.</p></figcaption>
+</figure>
+
+Giá trị hợp lệ là 1–255; Cisco IOS thường dùng 110. Chỉ đổi distance khi thiết"
+00_book/figures/gui/chapter-06/07-ospf-redistribute.png,ui,ui-legacy,07-ospf-redistribute.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Redistribute* nhập route từ static, connected hoặc protocol khác vào OSPF.
+
+#insert-image(""figures/gui/chapter-06/07-ospf-redistribute.png"",
+  caption: [Redistribute static có route-map và metric mẫu.], width: 100.0%) <fig:ch06-07-ospf-redistribute>
+
+Route Map giới hạn route được nhập; *Subnets* cho phép đưa cả subnet vào OSPF. Metric Type 1 cộng internal cost dọc đường, còn Type 2 thường giữ external metric và chỉ dùng internal cost để phá hòa. Redistribution có thể tạo loop nên cần policy rõ ràng.
+
+=== OSPF Interfaces"
+00_book/figures/gui/chapter-06/08-ospf-interfaces.png,ui,ui-legacy,08-ospf-interfaces.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Interfaces* cấu hình hành vi OSPF trên một interface cụ thể.
+
+#insert-image(""figures/gui/chapter-06/08-ospf-interfaces.png"",
+  caption: [Cost, timer, network type, BFD và authentication trên interface.], width: 100.0%) <fig:ch06-08-ospf-interfaces>
+
+Tên interface phải khớp IOS. Cost, priority, hello/dead timer, network type và authentication cần tương thích với neighbor. *MTU Ignore* chỉ nên dùng khi đã đánh giá chênh lệch MTU. Khóa authentication phải được cấu hình đồng nhất ở hai đầu; preview che dữ liệu nhạy cảm khi backend hỗ trợ redaction.
+
+=== OSPF Passive Interfaces"
+00_book/figures/gui/chapter-06/09-ospf-passive-interface.png,ui,ui-legacy,09-ospf-passive-interface.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/09-ospf-passive-interface.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Danh sách passive và non-passive interface.</p></figcaption>
+</figure>
+
+### OSPF Tuning"
+00_book/figures/gui/chapter-06/10-ospf-tuning.png,ui,ui-legacy,10-ospf-tuning.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/10-ospf-tuning.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Các tham số tuning của OSPF process 10.</p></figcaption>
+</figure>
+
+Timer quá thấp có thể tăng tải CPU khi topology thay đổi liên tục. Chỉ thay đổi"
+00_book/figures/gui/chapter-06/11-eigrp-process.png,ui,ui-legacy,11-eigrp-process.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Process* quản lý AS Number, Router ID, Auto Summary, Passive Default, BFD, Stub, metric weights, active timer, distance, variance và maximum paths.
+
+#insert-image(""figures/gui/chapter-06/11-eigrp-process.png"",
+  caption: [EIGRP AS 100 với các tham số process mẫu.], width: 100.0%) <fig:ch06-11-eigrp-process>
+
+Neighbor EIGRP phải dùng cùng AS Number. Auto Summary thường được tắt trong mạng không phân lớp. Variance hỗ trợ unequal-cost load balancing; Stub giới hạn query và loại route được quảng bá. Không đổi metric weights nếu các router trong miền không dùng cùng công thức.
+
+=== EIGRP Networks"
+00_book/figures/gui/chapter-06/12-eigrp-networks.png,ui,ui-legacy,12-eigrp-networks.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/12-eigrp-networks.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Hai network thuộc EIGRP AS 100.</p></figcaption>
+</figure>
+
+### EIGRP Interfaces"
+00_book/figures/gui/chapter-06/13-eigrp-interfaces.png,ui,ui-legacy,13-eigrp-interfaces.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Interfaces* quản lý bandwidth, delay, hello/hold timer, authentication key chain, summary, split horizon, bandwidth percent, next-hop-self và BFD.
+
+#insert-image(""figures/gui/chapter-06/13-eigrp-interfaces.png"",
+  caption: [Các tham số EIGRP của GigabitEthernet0/1.], width: 100.0%) <fig:ch06-13-eigrp-interfaces>
+
+Bandwidth và Delay tác động metric EIGRP, không trực tiếp giới hạn lưu lượng. Split Horizon thường ngăn quảng bá route trở lại interface đã học. Timer và authentication cần khớp với neighbor.
+
+=== EIGRP Passive Interfaces"
+00_book/figures/gui/chapter-06/14-eigrp-passive-interface.png,ui,ui-legacy,14-eigrp-passive-interface.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/14-eigrp-passive-interface.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Passive và no-passive trong EIGRP.</p></figcaption>
+</figure>
+
+### EIGRP Redistribute"
+00_book/figures/gui/chapter-06/15-eigrp-redistribute.png,ui,ui-legacy,15-eigrp-redistribute.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Redistribute* nhập route từ protocol khác. EIGRP có thể cần đủ năm thành phần seed metric: bandwidth, delay, reliability, load và MTU.
+
+#insert-image(""figures/gui/chapter-06/15-eigrp-redistribute.png"",
+  caption: [Redistribute static vào EIGRP với route-map và seed metric.], width: 100.0%) <fig:ch06-15-eigrp-redistribute>
+
+=== EIGRP Distribute Lists
+
+*Distribute list* dùng ACL hoặc prefix-list để lọc route nhận vào hoặc quảng bá ra. Interface là tùy chọn; bỏ trống để áp dụng ở cấp process."
+00_book/figures/gui/chapter-06/16-eigrp-distribute-list.png,ui,ui-legacy,16-eigrp-distribute-list.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/16-eigrp-distribute-list.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Distribute list chiều in trên một interface.</p></figcaption>
+</figure>
+
+### EIGRP Offset Lists"
+00_book/figures/gui/chapter-06/17-eigrp-offset-list.png,ui,ui-legacy,17-eigrp-offset-list.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/17-eigrp-offset-list.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Offset list chiều out với offset 1000.</p></figcaption>
+</figure>
+
+Offset chỉ làm route kém ưu tiên hơn; cần tránh tạo kết quả chọn đường khó dự"
+00_book/figures/gui/chapter-06/18-eigrp-key-chains.png,ui,ui-legacy,18-eigrp-key-chains.png,documentation_assets/ui-legacy/,medium,"Inspected image content; *Key chains* lưu chain name, key ID, key string cùng accept/send lifetime để dùng cho authentication trên interface.
+
+#insert-image(""figures/gui/chapter-06/18-eigrp-key-chains.png"",
+  caption: [Key chain KC-EIGRP và khoảng thời gian hiệu lực mẫu.], width: 100.0%) <fig:ch06-18-eigrp-key-chains>
+
+Key string là thông tin nhạy cảm. Không dùng secret thật trong ảnh, tài liệu hay repository; cấu hình thời gian hiệu lực phải tính đến đồng bộ đồng hồ giữa các router.
+
+== Routing Group"
+00_book/figures/gui/chapter-06/19-routing-group-hosts.png,ui,ui-legacy,19-routing-group-hosts.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn các router tham gia nhóm. Chỉ những router được đánh dấu mới được lưu và đưa vào cửa sổ View & Push nhiều thiết bị.
+
+#insert-image(""figures/gui/chapter-06/19-routing-group-hosts.png"",
+  caption: [Chọn hai router R1 và R2 cho Routing Group OSPF.], width: 78.0%) <fig:ch06-19-routing-group-hosts>
+
+=== Bước 2 — Identity
+
+Nhập *Process ID* và *Router ID* riêng cho từng host. Process ID có thể khác nhau giữa các router, còn Router ID phải duy nhất trong miền OSPF."
+00_book/figures/gui/chapter-06/20-routing-group-identity.png,ui,ui-legacy,20-routing-group-identity.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nhập *Process ID* và *Router ID* riêng cho từng host. Process ID có thể khác nhau giữa các router, còn Router ID phải duy nhất trong miền OSPF.
+
+#insert-image(""figures/gui/chapter-06/20-routing-group-identity.png"",
+  caption: [Process ID và Router ID riêng của từng router.], width: 78.0%) <fig:ch06-20-routing-group-identity>
+
+=== Bước 3 — Common
+
+Khai báo tham số dùng chung như Reference Bandwidth và Passive Default. Dùng cùng Reference Bandwidth trên toàn miền để phép tính OSPF cost nhất quán."
+00_book/figures/gui/chapter-06/21-routing-group-common.png,ui,ui-legacy,21-routing-group-common.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/21-routing-group-common.png""
+style=""width:78.0%"" /></p>
+<figcaption><p>Các tham số OSPF dùng chung cho cả nhóm.</p></figcaption>
+</figure>
+
+### Bước 4 — Networks"
+00_book/figures/gui/chapter-06/22-routing-group-networks.png,ui,ui-legacy,22-routing-group-networks.png,documentation_assets/ui-legacy/,medium,"Inspected image content; CAMS liệt kê các connected network theo từng host và kèm interface đã phát hiện. Chọn network cần chạy OSPF, gán Area rồi dùng *Save* hoặc *Save & Push*.
+
+#insert-image(""figures/gui/chapter-06/22-routing-group-networks.png"",
+  caption: [Chọn network và area độc lập cho R1 và R2.], width: 78.0%) <fig:ch06-22-routing-group-networks>
+
+Toàn bộ quy trình gồm:
+
++ *Hosts*: chọn các router tham gia."
+00_book/figures/gui/chapter-06/23-static-view-push.png,ui,ui-legacy,23-static-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/23-static-view-push.png""
+style=""width:75.0%"" /></p>
+<figcaption><p>Preview Static gồm default route và static route đang chờ.</p></figcaption>
+</figure>
+
+Static và Default dùng chung preview của module STATIC. OSPF và EIGRP có preview"
+00_book/figures/gui/chapter-06/24-ospf-view-push.png,ui,ui-legacy,24-ospf-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Static và Default dùng chung preview của module STATIC. OSPF và EIGRP có preview riêng để người vận hành đọc đúng process, network, interface, policy và các lệnh xóa đang chờ của từng giao thức.
+
+#insert-image(""figures/gui/chapter-06/24-ospf-view-push.png"",
+  caption: [View & Push OSPF với toàn bộ lệnh của process đang chờ.], width: 75.0%) <fig:ch06-24-ospf-view-push>
+
+#report-note[Trong preview, kiểm tra host, module, destination, mask, next hop, AD, process, area/AS và mọi lệnh xóa. *Refresh* dựng lại preview sau khi dữ liệu thay đổi. Chỉ chọn *Push* khi session SSH/Telnet sẵn sàng và đã sao lưu running-config. Sau Push, lấy running-config hoặc routing table mới để xác minh; CAMS chưa cung cấp rollback tự động đầy đủ cho mọi tình huống.]
+
+== Bài thực hành tổng hợp"
+00_book/figures/gui/chapter-06/25-eigrp-view-push.png,ui,ui-legacy,25-eigrp-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-06/25-eigrp-view-push.png""
+style=""width:75.0%"" /></p>
+<figcaption><p>View & Push EIGRP gồm process, network, interface và policy.</p></figcaption>
+</figure>
+
+Trong preview, kiểm tra host, module, destination, mask, next hop, AD, process,"
+00_book/figures/gui/chapter-06/26-routing-group-view-push.png,ui,ui-legacy,26-routing-group-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; + *Networks*: chọn connected network và area của từng host.
+
+#insert-image(""figures/gui/chapter-06/26-routing-group-view-push.png"",
+  caption: [View & Push OSPF tổng hợp lệnh riêng cho hai thiết bị.], width: 75.0%) <fig:ch06-26-routing-group-view-push>
+
+Backend kiểm tra network thuộc đúng host trước khi lưu. Kết quả được ghi riêng từng thiết bị; một host lỗi không làm dữ liệu của host khác bị nhập nhầm. Đọc kết quả partial trước khi tiếp tục Push. Trong preview nhiều thiết bị, kiểm tra từng khối #raw(""Device"") để tránh áp cùng Router ID, sai Process ID hoặc sai network.
+
+== Save, Reload và View & Push"
+00_book/figures/gui/chapter-07/01-dhcp-pools.png,ui,ui-legacy,01-dhcp-pools.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Tab *Pool* tạo và quản lý các dải cấp phát DHCP cục bộ trên router.
+
+#insert-image(""figures/gui/chapter-07/01-dhcp-pools.png"",
+  caption: [Hai DHCP pool đã lưu cho các mạng VLAN 10 và VLAN 20.], width: 100.0%) <fig:ch07-01-dhcp-pools>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa]),"
+00_book/figures/gui/chapter-07/02-dhcp-excluded-addresses.png,ui,ui-legacy,02-dhcp-excluded-addresses.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Tab *Excluded* khai báo một địa chỉ hoặc một khoảng địa chỉ router không được phép cấp cho DHCP client. Thường loại trừ gateway, server, access point và các thiết bị dùng địa chỉ tĩnh.
+
+#insert-image(""figures/gui/chapter-07/02-dhcp-excluded-addresses.png"",
+  caption: [Hai khoảng địa chỉ bị loại trừ khỏi quá trình cấp phát.], width: 100.0%) <fig:ch07-02-dhcp-excluded-addresses>
+
+*Start IP* là địa chỉ đầu. *End IP* là địa chỉ cuối của một khoảng liên tục; để trống trường này nếu chỉ loại trừ một địa chỉ. End IP không được nhỏ hơn Start IP và hai giá trị phải phù hợp với mạng đang vận hành.
+
+== DHCP Helper"
+00_book/figures/gui/chapter-07/03-dhcp-helper-addresses.png,ui,ui-legacy,03-dhcp-helper-addresses.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Tab *Helper* cấu hình DHCP relay trên interface Layer 3 nhận broadcast từ client. Mỗi bản ghi ghép một interface với địa chỉ unicast của DHCP server.
+
+#insert-image(""figures/gui/chapter-07/03-dhcp-helper-addresses.png"",
+  caption: [Hai DHCP server dự phòng được gắn với interface relay.], width: 100.0%) <fig:ch07-03-dhcp-helper-addresses>
+
+Interface phải có địa chỉ IP và hướng về mạng client. Có thể thêm nhiều Helper IP trên cùng interface để dự phòng. Trước khi lưu, kiểm tra router có route tới server và chính sách ACL không chặn DHCP relay.
+
+== Save, Reload và View & Push DHCP"
+00_book/figures/gui/chapter-07/04-dhcp-view-push.png,ui,ui-legacy,04-dhcp-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; #report-note[Các thay đổi trong từng tab cần được *Save* vào database CAMS trước. *Reload UI* nạp lại dữ liệu đã lưu; *Cancel Changes* bỏ phần chỉnh sửa cục bộ chưa Save.]
+
+#insert-image(""figures/gui/chapter-07/04-dhcp-view-push.png"",
+  caption: [View & Push DHCP tổng hợp Pool, Excluded và Helper đang chờ.], width: 75.0%) <fig:ch07-04-dhcp-view-push>
+
+Trong preview, kiểm tra riêng các nhóm lệnh:
+
+- #raw(""ip dhcp excluded-address"") cho địa chỉ bị loại trừ;"
+00_book/figures/gui/chapter-08/01-acl-standard.png,ui,ui-legacy,01-acl-standard.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Standard ACL lọc chủ yếu theo địa chỉ nguồn. Dùng wildcard để khớp một mạng hoặc dùng #raw(""any"") khi rule áp dụng cho mọi nguồn.
+
+#insert-image(""figures/gui/chapter-08/01-acl-standard.png"",
+  caption: [Standard ACL cho phép mạng tin cậy rồi từ chối các nguồn còn lại.], width: 100.0%) <fig:ch08-01-acl-standard>
+
+Nên đặt Standard ACL gần đích để tránh chặn cùng một nguồn trên quá nhiều luồng không liên quan. Kiểm tra thứ tự Permit/Deny và implicit deny trước khi áp dụng.
+
+== Extended ACL"
+00_book/figures/gui/chapter-08/02-acl-extended.png,ui,ui-legacy,02-acl-extended.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Extended ACL có thể lọc theo protocol, địa chỉ nguồn, địa chỉ đích, wildcard và port. Nó phù hợp với chính sách chi tiết như chỉ cho phép HTTPS tới một server.
+
+#insert-image(""figures/gui/chapter-08/02-acl-extended.png"",
+  caption: [Extended ACL cho phép TCP/443 tới application server.], width: 100.0%) <fig:ch08-02-acl-extended>
+
+Với TCP/UDP, port được chuẩn hóa sang cú pháp Cisco như #raw(""eq 443""). Với ICMP, dùng tên hoặc số ICMP type phù hợp. Extended ACL thường được đặt gần nguồn để loại bỏ lưu lượng không mong muốn sớm hơn.
+
+== Dynamic ACL"
+00_book/figures/gui/chapter-08/03-acl-dynamic.png,ui,ui-legacy,03-acl-dynamic.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Dynamic ACL tạo quyền truy cập tạm thời sau quá trình xác thực. Ngoài các trường của Extended ACL, rule có *Dynamic Name* và timeout tính theo phút.
+
+#insert-image(""figures/gui/chapter-08/03-acl-dynamic.png"",
+  caption: [Dynamic ACL cấp quyền SSH tạm thời cho người dùng từ xa.], width: 100.0%) <fig:ch08-03-acl-dynamic>
+
+Tên dynamic phải rõ ràng và timeout đủ ngắn để giảm thời gian phơi bày nhưng vẫn phù hợp phiên làm việc. Chức năng này cần được kiểm chứng với phiên bản IOS và cơ chế xác thực thực tế.
+
+== Reflexive ACL"
+00_book/figures/gui/chapter-08/04-acl-reflexive.png,ui,ui-legacy,04-acl-reflexive.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Reflexive ACL theo dõi session khởi tạo từ phía được tin cậy và tạo entry tạm cho lưu lượng phản hồi. Rule có *Reflect Name* và timeout tính theo giây.
+
+#insert-image(""figures/gui/chapter-08/04-acl-reflexive.png"",
+  caption: [Reflexive ACL theo dõi các session TCP đi ra từ mạng LAN.], width: 100.0%) <fig:ch08-04-acl-reflexive>
+
+Reflect Name phải khớp với thiết kế ACL đánh giá lưu lượng quay về. Đây không phải stateful firewall đầy đủ; cần kiểm tra giới hạn của platform trước khi dùng.
+
+== MAC ACL"
+00_book/figures/gui/chapter-08/05-acl-mac.png,ui,ui-legacy,05-acl-mac.png,documentation_assets/ui-legacy/,medium,"Inspected image content; MAC ACL lọc ở Layer 2 theo MAC nguồn, MAC đích, mask và EtherType. Địa chỉ MAC dùng định dạng Cisco #raw(""xxxx.xxxx.xxxx"").
+
+#insert-image(""figures/gui/chapter-08/05-acl-mac.png"",
+  caption: [MAC ACL cho phép một dải địa chỉ MAC tin cậy.], width: 100.0%) <fig:ch08-05-acl-mac>
+
+MAC ACL chỉ phù hợp trên interface và platform hỗ trợ. Không xem MAC filtering là cơ chế xác thực mạnh vì địa chỉ MAC có thể bị giả mạo.
+
+== Interface Bindings"
+00_book/figures/gui/chapter-08/06-acl-bindings.png,ui,ui-legacy,06-acl-bindings.png,documentation_assets/ui-legacy/,medium,"Inspected image content; ACL chưa ảnh hưởng lưu lượng cho tới khi được gắn vào interface và direction phù hợp. Tab *Bindings* cho phép một ACL có nhiều binding IN/OUT.
+
+#insert-image(""figures/gui/chapter-08/06-acl-bindings.png"",
+  caption: [Standard ACL được gắn chiều IN trên GigabitEthernet0/0.], width: 100.0%) <fig:ch08-06-acl-bindings>
+
+*In* lọc gói ngay khi đi vào interface; *Out* lọc trước khi gói rời interface. Không gắn cùng một policy ở cả hai chiều nếu đó không phải chủ đích. Với ACL bảo vệ truy cập quản trị, phải bảo đảm địa chỉ của phiên quản trị hiện tại được Permit.
+
+== Save và View & Push ACL"
+00_book/figures/gui/chapter-08/07-acl-view-push.png,ui,ui-legacy,07-acl-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trong Rule Builder, nhập ACL Name, Description và từng rule rồi chọn *+ Add Rule*. Sau khi kiểm tra thứ tự, chọn *Create ACL* hoặc *Change ACL* để lưu. Binding được lưu riêng trong tab Bindings nhưng cùng thuộc desired state ACL.
+
+#insert-image(""figures/gui/chapter-08/07-acl-view-push.png"",
+  caption: [View & Push ACL tổng hợp năm ACL và interface binding đang chờ.], width: 75.0%) <fig:ch08-07-acl-view-push>
+
+Cửa sổ này chỉ xử lý controller ACL. Kiểm tra từng khối ACL, sequence, Permit/ Deny, protocol, source, destination, port và lệnh #raw(""ip access-group""). Đặc biệt rà soát các lệnh #raw(""no"") khi sửa hoặc xóa rule. Chỉ nhấn *Push* khi tiêu đề là *View & Push ACL* và host đúng với router cần cấu hình.
+
+Sau Push, kiểm tra running-config, ACL hit counter và thử cả lưu lượng được phép lẫn lưu lượng phải bị chặn. Nếu thay đổi ACL qua phiên SSH, nên có console hoặc đường quản trị dự phòng."
+00_book/figures/gui/chapter-09/01-hsrp-gateway-members.png,ui,ui-legacy,01-hsrp-gateway-members.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-09/01-hsrp-gateway-members.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Màn hình tổng thể sau khi nhập gateway và chọn hai thành viên HSRP.</p></figcaption>
+</figure>
+
+Trong ví dụ, `10.10.10.1` là địa chỉ gateway ảo; R1 và R2 đều có interface trong"
+00_book/figures/gui/chapter-09/02-hsrp-authentication-timers.png,ui,ui-legacy,02-hsrp-authentication-timers.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/gui/chapter-09/03-hsrp-member-policy.png,ui,ui-legacy,03-hsrp-member-policy.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-09/03-hsrp-member-policy.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Màn hình tổng thể chính sách của hai thành viên trước khi Save.</p></figcaption>
+</figure>
+
+Với từng router, chọn **Gateway-facing interface** là cổng nối vào LAN chứa"
+00_book/figures/gui/chapter-09/04-vrrp-configuration.png,ui,ui-legacy,04-vrrp-configuration.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-09/04-vrrp-configuration.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Màn hình tổng thể nhóm VRRP 20 với hai router.</p></figcaption>
+</figure>
+
+- **VRID**: số từ 1 đến 255, giống nhau trên mọi router của nhóm."
+00_book/figures/gui/chapter-09/05-glbp-configuration.png,ui,ui-legacy,05-glbp-configuration.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-09/05-glbp-configuration.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Màn hình tổng thể GLBP group 30 sau khi nhập chính sách thành viên.</p></figcaption>
+</figure>
+
+- **Hello/Hold timer (ms)**: điều khiển phát hiện peer; Hold phải lớn hơn Hello."
+00_book/figures/gui/chapter-09/06-hsrp-view-push.png,ui,ui-legacy,06-hsrp-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau khi hoàn tất, chọn *Save* để lưu desired state nhưng chưa cấu hình thiết bị. Mở đúng tab giao thức rồi chọn *View & Push* để CAMS dựng lệnh cho tất cả thành viên của nhóm. FHRP có cửa sổ push riêng, không trộn với Routing, DHCP, ACL hoặc Syslog.
+
+#insert-image(""figures/gui/chapter-09/06-hsrp-view-push.png"",
+  caption: [View & Push FHRP của nhóm HSRP trên R1 và R2.], width: 65%) <fig:ch09-06-hsrp-view-push>
+
+Trước khi nhấn *Push*, kiểm tra host, interface, địa chỉ ảo, group/VRID, version, timer, authentication, priority, preempt và tracking. Secret được hiển thị dưới dạng che để tránh lộ dữ liệu. Sau Push, kiểm tra vai trò Active/Standby, Master/Backup hoặc AVG/AVF trên thiết bị và thử ngắt đường uplink đã theo dõi để xác nhận failover thực sự hoạt động."
+00_book/figures/gui/chapter-09/07-vrrp-view-push.png,ui,ui-legacy,07-vrrp-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-09/07-vrrp-view-push.png""
+style=""width:75.0%"" /></p>
+<figcaption><p>Preview riêng của VRRP trước khi đẩy cấu hình.</p></figcaption>
+</figure>
+
+<figure>"
+00_book/figures/gui/chapter-09/08-glbp-view-push.png,ui,ui-legacy,08-glbp-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-09/08-glbp-view-push.png""
+style=""width:75.0%"" /></p>
+<figcaption><p>Preview riêng của GLBP với lệnh cho từng thành viên.</p></figcaption>
+</figure>
+
+Trước khi nhấn **Push**, kiểm tra host, interface, địa chỉ ảo, group/VRID, version,"
+00_book/figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png,ui,ui-legacy,09-hsrp-gateway-form-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; HSRP bầu một router Active và một hoặc nhiều router Standby. Router có priority cao hơn sẽ được ưu tiên; tùy chọn Preempt cho phép nó giành lại vai trò Active sau khi phục hồi.
+
+#insert-image(""figures/gui/chapter-09/09-hsrp-gateway-form-zoom.png"",
+  caption: [Cận cảnh khối Gateway identity và danh sách router tham gia.], width: 90.0%) <fig:ch09-09-hsrp-gateway-form-zoom>
+
+Trong @fig:ch09-09-hsrp-gateway-form-zoom, nhập Group number #raw(""10""), Default Gateway IP #raw(""10.10.10.1"") và mô tả dễ nhận biết. Sau khi chọn R1 và R2, chỉ số *Gateway matches 2/2* xác nhận cả hai router đều có interface thuộc mạng của gateway ảo.
+
+Trong ví dụ, #raw(""10.10.10.1"") là địa chỉ gateway ảo; R1 và R2 đều có interface trong mạng #raw(""10.10.10.0/24""). Chọn đúng các router trước khi cấu hình chính sách riêng cho từng thành viên."
+00_book/figures/gui/chapter-09/11-hsrp-primary-member-zoom.png,ui,ui-legacy,11-hsrp-primary-member-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trong cấu hình minh họa, HSRPv2 dùng Hello #raw(""1000 ms"") và Hold #raw(""3000 ms""). Nếu đổi timer, phải nhập cùng giá trị trên R1 và R2; chỉ một router khác timer có thể làm nhóm hoạt động không ổn định.
+
+#insert-image(""figures/gui/chapter-09/11-hsrp-primary-member-zoom.png"",
+  caption: [R1 được đặt priority 120, bật Preempt và theo dõi object 1.], width: 90.0%) <fig:ch09-11-hsrp-primary-member-zoom>
+
+R1 là router ưu tiên. Khi object 1 lỗi, priority giảm #raw(""30""), từ 120 còn 90; lúc đó R2 với priority 100 có thể tiếp quản. Minimum delay #raw(""10 giây"") tránh tranh vai trò ngay khi đường vừa phục hồi; reload delay #raw(""30 giây"") cho router ổn định sau khi khởi động.
+
+#insert-image(""figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png"","
+00_book/figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png,ui,ui-legacy,12-hsrp-secondary-member-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; R1 là router ưu tiên. Khi object 1 lỗi, priority giảm #raw(""30""), từ 120 còn 90; lúc đó R2 với priority 100 có thể tiếp quản. Minimum delay #raw(""10 giây"") tránh tranh vai trò ngay khi đường vừa phục hồi; reload delay #raw(""30 giây"") cho router ổn định sau khi khởi động.
+
+#insert-image(""figures/gui/chapter-09/12-hsrp-secondary-member-zoom.png"",
+  caption: [R2 dùng cùng interface LAN nhưng có priority và delay riêng.], width: 90.0%) <fig:ch09-12-hsrp-secondary-member-zoom>
+
+R2 được đặt priority 100 để giữ vai trò Standby. Không nhập cùng priority cho hai router nếu muốn vai trò Active được dự đoán rõ ràng. Mỗi router có thể dùng delay và mức decrement khác nhau, nhưng phải cùng group, gateway, version, authentication và timer.
+
+Với từng router, chọn *Gateway-facing interface* là cổng nối vào LAN chứa gateway ảo. Nhập *Priority* cao hơn cho router muốn làm Active. Bật *Preempt* nếu router đó cần lấy lại vai trò sau khi phục hồi; *Preempt minimum delay* cho mạng ổn định trước khi tranh vai trò, còn *Preempt reload delay* trì hoãn sau khi thiết bị khởi động lại."
+00_book/figures/gui/chapter-09/13-vrrp-options-member-zoom.png,ui,ui-legacy,13-vrrp-options-member-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; VRRP dùng thuật ngữ Master/Backup và VRID thay cho group number. Quy trình Cisco IOS trong CAMS dùng cú pháp VRRPv2.
+
+#insert-image(""figures/gui/chapter-09/13-vrrp-options-member-zoom.png"",
+  caption: [Cận cảnh VRRPv2, advertisement timer và chính sách Master/Backup.], width: 90.0%) <fig:ch09-13-vrrp-options-member-zoom>
+
+Nhập VRID và gateway ở phần trên tương tự HSRP. Ở phần cận cảnh, kiểm tra Advertisement interval trước, sau đó chọn interface, priority, Preempt và tracking cho từng router.
+
+#report-table("
+00_book/figures/gui/chapter-09/14-glbp-weighting-zoom.png,ui,ui-legacy,14-glbp-weighting-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; GLBP vừa dự phòng gateway vừa có thể phân phối máy trạm qua nhiều Active Virtual Forwarder (AVF). Priority bầu Active Virtual Gateway (AVG), còn weighting ảnh hưởng khả năng chuyển tiếp của từng AVF.
+
+#insert-image(""figures/gui/chapter-09/14-glbp-weighting-zoom.png"",
+  caption: [Cận cảnh weighting, threshold, forwarder preempt và tracking của GLBP.], width: 90.0%) <fig:ch09-14-glbp-weighting-zoom>
+
+Tính trước giá trị sau khi tracking bị trừ. Ví dụ maximum weighting 120, lower threshold 80 và decrement 50 sẽ còn 70 khi object lỗi; 70 thấp hơn lower threshold nên thành viên ngừng vai trò AVF. Khi weighting phục hồi tới upper threshold 100, thành viên mới đủ điều kiện tham gia chuyển tiếp trở lại.
+
+#report-table("
+00_book/figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png,ui,ui-legacy,15-hsrp-auth-protocol-detail.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trong ví dụ, #raw(""10.10.10.1"") là địa chỉ gateway ảo; R1 và R2 đều có interface trong mạng #raw(""10.10.10.0/24""). Chọn đúng các router trước khi cấu hình chính sách riêng cho từng thành viên.
+
+#insert-image(""figures/gui/chapter-09/15-hsrp-auth-protocol-detail.png"",
+  caption: [Cận cảnh xác thực, HSRP version và Hello/Hold timer.], width: 100.0%) <fig:ch09-15-hsrp-auth-protocol-detail>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Tham số], [Ý nghĩa và cách dùng]),"
+00_book/figures/gui/chapter-10/01-syslog-destinations.png,ui,ui-legacy,01-syslog-destinations.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn router rồi chọn *Syslog Server* trên Feature Bar. Khu vực *Syslog destinations* hiển thị các máy thu đã lưu cho thiết bị hiện tại.
+
+#insert-image(""figures/gui/chapter-10/01-syslog-destinations.png"",
+  caption: [Danh sách destination và trạng thái cấu hình Syslog của router.], width: 100.0%) <fig:ch10-01-syslog-destinations>
+
+Chọn *Add server* để tạo mới. *View* chỉ xem, *Edit* cập nhật và *Delete* đánh dấu destination cần xóa; thay đổi chỉ tới thiết bị khi thực hiện Push. Trạng thái #raw(""pending_apply"") là đang chờ áp dụng, #raw(""pending_delete"") là chờ xóa, #raw(""synchronized"") là đã khớp với thiết bị và #raw(""skipped"") là chủ động bỏ qua.
+
+== Thêm hoặc sửa Syslog server"
+00_book/figures/gui/chapter-10/02-syslog-server-editor.png,ui,ui-legacy,02-syslog-server-editor.png,documentation_assets/ui-legacy/,medium,"Inspected image content; == Thêm hoặc sửa Syslog server
+
+#insert-image(""figures/gui/chapter-10/02-syslog-server-editor.png"",
+  caption: [Biểu mẫu destination với địa chỉ máy thu, transport, port và policy log.], width: 100.0%) <fig:ch10-02-syslog-server-editor>
+
+#report-table(
+  breakable: true,
+  columns: (1.15fr, 2.85fr),"
+00_book/figures/gui/chapter-10/03-syslog-group-hosts.png,ui,ui-legacy,03-syslog-group-hosts.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === Bước 1 — Hosts
+
+#insert-image(""figures/gui/chapter-10/03-syslog-group-hosts.png"",
+  caption: [Chọn các router Connected đã có dữ liệu interface trong inventory.], width: 82.0%) <fig:ch10-03-syslog-group-hosts>
+
+Chọn từ hai đến năm host. Thiết bị có nhãn *Inventory required* chưa đủ dữ liệu interface và không thể tham gia; hãy đồng bộ thiết bị trước rồi mở lại Syslog Group.
+
+=== Bước 2 — Interfaces"
+00_book/figures/gui/chapter-10/04-syslog-group-interfaces.png,ui,ui-legacy,04-syslog-group-interfaces.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === Bước 2 — Interfaces
+
+#insert-image(""figures/gui/chapter-10/04-syslog-group-interfaces.png"",
+  caption: [Chọn một source interface riêng cho từng router.], width: 82.0%) <fig:ch10-04-syslog-group-interfaces>
+
+Mỗi host có thể dùng interface khác nhau nhưng tất cả interface đã chọn phải có đường tới máy thu. Loopback thường là lựa chọn ổn định nhất; nếu routing chưa quảng bá Loopback, hãy chọn management interface hoặc SVI reachable.
+
+=== Bước 3 — Policy"
+00_book/figures/gui/chapter-10/05-syslog-group-policy.png,ui,ui-legacy,05-syslog-group-policy.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === Bước 3 — Policy
+
+#insert-image(""figures/gui/chapter-10/05-syslog-group-policy.png"",
+  caption: [Nhập destination và chính sách thông báo dùng chung cho cả nhóm.], width: 82.0%) <fig:ch10-05-syslog-group-policy>
+
+Nhập *Server IP*, *Transport*, *Port* và *Trap severity* dùng chung. Bật timestamp và sequence number nếu cần đối chiếu sự kiện. *Save* chỉ lưu cấu hình đang chờ; *Save & Push* lưu rồi bắt đầu quy trình áp dụng cho nhóm. Với tài liệu và môi trường cần kiểm soát, nên Save trước và xem preview độc lập.
+
+== View & Push SYSLOG"
+00_book/figures/gui/chapter-10/06-syslog-view-push.png,ui,ui-legacy,06-syslog-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau khi Save, chọn *View & Push* trong tab Syslog Server.
+
+#insert-image(""figures/gui/chapter-10/06-syslog-view-push.png"",
+  caption: [View & Push SYSLOG tổng hợp lệnh riêng cho R1 và R2.], width: 75.0%) <fig:ch10-06-syslog-view-push>
+
+Xác nhận tiêu đề là *View & Push SYSLOG* và kiểm tra từng host, server IP, transport, port, source interface, severity, timestamp và sequence number. Nếu preview chứa lệnh #raw(""no logging host""), kiểm tra lại destination đang xóa trước khi Push.
+
+Sau Push, xác nhận listener đang chạy đúng IP/port/transport, tạo một sự kiện thử trên router và kiểm tra log đến từ đúng source address. Nếu không nhận được log, kiểm tra route, ACL/firewall, port listener và mức severity trước khi thay đổi cấu hình lần nữa."
+00_book/figures/gui/chapter-11/01-quick-pat-setup.png,ui,ui-legacy,01-quick-pat-setup.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nếu mục tiêu là cho nhiều máy trong LAN dùng chung địa chỉ của interface Internet, chọn *Quick setup* để mở form tại @fig:ch11-01-quick-pat-setup. CAMS sẽ tạo đồng thời vai trò Inside/Outside, NAT ACL và PAT overload.
+
+#insert-image(""figures/gui/chapter-11/01-quick-pat-setup.png"",
+  caption: [Quick PAT Setup với hai interface và mạng LAN cần dịch địa chỉ.], width: 78.0%) <fig:ch11-01-quick-pat-setup>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Giá trị cần nhập]),"
+00_book/figures/gui/chapter-11/02-interfaces-form-zoom.png,ui,ui-legacy,02-interfaces-form-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mỗi đường dịch NAT cần ít nhất một interface *Inside* và một interface *Outside*.
+
+#insert-image(""figures/gui/chapter-11/02-interfaces-form-zoom.png"",
+  caption: [Form gán interface LAN vào vai trò Inside.], width: 62.0%) <fig:ch11-02-interfaces-form-zoom>
+
+- *Interface Name*: chọn interface routed đã có trên router.
+- *NAT Role*: Inside cho phía địa chỉ riêng; Outside cho phía public/upstream.
+"
+00_book/figures/gui/chapter-11/03-interfaces-overview.png,ui,ui-legacy,03-interfaces-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-11/03-interfaces-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Tổng thể hai interface NAT: G0/0 Inside và G0/1 Outside.</p></figcaption>
+</figure>
+
+## Bước 2 — Tạo NAT ACL"
+00_book/figures/gui/chapter-11/04-acl-form-zoom.png,ui,ui-legacy,04-acl-form-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; NAT ACL xác định địa chỉ nguồn nào được phép đi vào quy trình dịch địa chỉ.
+
+#insert-image(""figures/gui/chapter-11/04-acl-form-zoom.png"",
+  caption: [Form NAT ACL cho mạng 192.168.10.0/24.], width: 62.0%) <fig:ch11-04-acl-form-zoom>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa cơ bản]),"
+00_book/figures/gui/chapter-11/05-acl-overview.png,ui,ui-legacy,05-acl-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-11/05-acl-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Tổng thể form và NAT ACL Entry đã thêm cục bộ.</p></figcaption>
+</figure>
+
+## Static NAT"
+00_book/figures/gui/chapter-11/06-static-form-zoom.png,ui,ui-legacy,06-static-form-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Static NAT ánh xạ cố định một địa chỉ Inside Local sang một địa chỉ Inside Global. Có thể chọn TCP/UDP để chỉ ánh xạ một port.
+
+#insert-image(""figures/gui/chapter-11/06-static-form-zoom.png"",
+  caption: [Form Static NAT ánh xạ TCP/443 nội bộ sang TCP/8443 bên ngoài.], width: 62.0%) <fig:ch11-06-static-form-zoom>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Tham số], [Ý nghĩa và cách dùng]),"
+00_book/figures/gui/chapter-11/07-static-overview.png,ui,ui-legacy,07-static-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-11/07-static-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Tổng thể Static NAT Entry đang chờ Save và Push.</p></figcaption>
+</figure>
+
+## Dynamic NAT"
+00_book/figures/gui/chapter-11/08-dynamic-form-zoom.png,ui,ui-legacy,08-dynamic-form-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Dynamic NAT lấy một địa chỉ từ public pool cho mỗi translation đang hoạt động. Số địa chỉ trong pool phải đáp ứng số phiên cần dùng đồng thời.
+
+#insert-image(""figures/gui/chapter-11/08-dynamic-form-zoom.png"",
+  caption: [Form Dynamic NAT Pool và ACL được liên kết.], width: 62.0%) <fig:ch11-08-dynamic-form-zoom>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Tham số], [Ý nghĩa và cách dùng]),"
+00_book/figures/gui/chapter-11/09-dynamic-overview.png,ui,ui-legacy,09-dynamic-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-11/09-dynamic-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Tổng thể Dynamic NAT Pool từ 203.0.113.8 đến 203.0.113.12.</p></figcaption>
+</figure>
+
+## PAT (Overload)"
+00_book/figures/gui/chapter-11/10-pat-form-zoom.png,ui,ui-legacy,10-pat-form-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; PAT cho nhiều inside host dùng chung một địa chỉ public bằng cách phân biệt port. Đây là kiểu thường dùng cho truy cập Internet từ LAN.
+
+#insert-image(""figures/gui/chapter-11/10-pat-form-zoom.png"",
+  caption: [Form PAT dùng địa chỉ của Outside Interface.], width: 62.0%) <fig:ch11-10-pat-form-zoom>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Tham số], [Ý nghĩa và cách dùng]),"
+00_book/figures/gui/chapter-11/11-pat-overview.png,ui,ui-legacy,11-pat-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-11/11-pat-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Tổng thể PAT rule dùng NAT_INSIDE và GigabitEthernet0/1.</p></figcaption>
+</figure>
+
+## Route Map cho NAT"
+00_book/figures/gui/chapter-11/12-route-map-form-zoom.png,ui,ui-legacy,12-route-map-form-zoom.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Route Map là phần tùy chọn, dùng khi cần policy NAT có nhiều sequence hoặc cần liên kết điều kiện ACL rõ ràng hơn.
+
+#insert-image(""figures/gui/chapter-11/12-route-map-form-zoom.png"",
+  caption: [Form Route Map Entry với sequence 10 và NAT ACL.], width: 62.0%) <fig:ch11-12-route-map-form-zoom>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa cơ bản]),"
+00_book/figures/gui/chapter-11/13-route-map-overview.png,ui,ui-legacy,13-route-map-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-11/13-route-map-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Tổng thể Route Map NAT_POLICY sau khi thêm entry.</p></figcaption>
+</figure>
+
+## Add Locally, Save và View & Push NAT"
+00_book/figures/gui/chapter-11/14-nat-view-push.png,ui,ui-legacy,14-nat-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; #report-note[*Add Locally* hoặc *Apply Edit* chỉ đưa thay đổi vào danh sách tạm trên tab. Chọn *Save* ở cuối màn hình để lưu desired state. Sau đó mở *View & Push*; NAT có cửa sổ push riêng, không trộn với ACL, DHCP, FHRP hay Syslog.]
+
+#insert-image(""figures/gui/chapter-11/14-nat-view-push.png"",
+  caption: [View & Push NAT tổng hợp interface role, ACL, Static, Dynamic, PAT và Route Map.], width: 78.0%) <fig:ch11-14-nat-view-push>
+
+Trước khi Push, kiểm tra đúng host và đọc lệnh theo thứ tự: #raw(""ip nat inside/outside""), ACL, public pool, Static NAT, PAT overload và route-map. Đặc biệt kiểm tra địa chỉ public không trùng interface hoặc thiết bị khác, ACL không chọn nhầm mạng và Inside/Outside không bị đảo. Sau Push, kiểm tra bảng translation và thử kết nối từ cả phía trong lẫn phía ngoài theo đúng mục tiêu cấu hình."
+00_book/figures/gui/chapter-12/01-sftp-connection-form.png,ui,ui-legacy,01-sftp-connection-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn nút thêm kết nối trong panel *SFTP/SCP CONNECTIONS*. CAMS mở biểu mẫu thông tin máy chủ tại @fig:ch12-01-sftp-connection-form.
+
+#insert-image(""figures/gui/chapter-12/01-sftp-connection-form.png"",
+  caption: [Thông tin xác thực và trường Transfer mode của profile SFTP/SCP.], width: 72.0%) <fig:ch12-01-sftp-connection-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập]),"
+00_book/figures/gui/chapter-12/02-sftp-workspace-overview.png,ui,ui-legacy,02-sftp-workspace-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau khi kết nối, hai panel local và remote nằm cạnh nhau để dễ đối chiếu nguồn với đích. Danh sách profile có thể được giữ ở bên trái; không bắt buộc phải mở rộng panel này khi thao tác tệp.
+
+#insert-image(""figures/gui/chapter-12/02-sftp-workspace-overview.png"",
+  caption: [Tổng thể Workspace SFTP với hai panel và hàng đợi truyền tệp.], width: 100.0%) <fig:ch12-02-sftp-workspace-overview>
+
+Mỗi lần Upload hoặc Download bằng SFTP hay SCP tạo một mục trong *FILE TRANSFER QUEUE*.
+
+#insert-image(""figures/gui/chapter-12/06-sftp-transfer-queue.png"","
+00_book/figures/gui/chapter-12/03-sftp-connection-bar.png,ui,ui-legacy,03-sftp-connection-bar.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Thanh phía trên Workspace cho phép nhập nhanh thông tin kết nối mà không cần mở lại biểu mẫu profile.
+
+#insert-image(""figures/gui/chapter-12/03-sftp-connection-bar.png"",
+  caption: [Thanh kết nối nhanh có thêm lựa chọn Mode SFTP hoặc SCP.], width: 100.0%) <fig:ch12-03-sftp-connection-bar>
+
+Nhập *Host/IP*, *Port*, *Username*, chọn *Mode*, chọn *Private key* nếu có, rồi nhấn *Connect*. Mode chỉ đổi được khi chưa kết nối. Khi phiên đã hoạt động, nút này chuyển thành *Disconnect*. Nếu server yêu cầu mật khẩu nhưng profile không lưu mật khẩu, CAMS sẽ yêu cầu nhập thông tin xác thực trong quá trình kết nối.
+
+=== Xác minh host key lần đầu"
+00_book/figures/gui/chapter-12/04-sftp-local-files.png,ui,ui-legacy,04-sftp-local-files.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-12/04-sftp-local-files.png""
+style=""width:72.0%"" /></p>
+<figcaption><p>Panel local với đường dẫn, điều hướng và các thao tác tệp.</p></figcaption>
+</figure>
+
+- Nhập đường dẫn hoặc dùng **Back**, **Forward**, **Up**, **Refresh** để điều"
+00_book/figures/gui/chapter-12/05-sftp-remote-files.png,ui,ui-legacy,05-sftp-remote-files.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-12/05-sftp-remote-files.png""
+style=""width:72.0%"" /></p>
+<figcaption><p>Panel remote tại thư mục lưu cấu hình mạng trên SFTP server.</p></figcaption>
+</figure>
+
+- **Download** tải mục đang chọn về thư mục local đang mở."
+00_book/figures/gui/chapter-12/06-sftp-transfer-queue.png,ui,ui-legacy,06-sftp-transfer-queue.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mỗi lần Upload hoặc Download bằng SFTP hay SCP tạo một mục trong *FILE TRANSFER QUEUE*.
+
+#insert-image(""figures/gui/chapter-12/06-sftp-transfer-queue.png"",
+  caption: [Tiến độ Upload, Download và trạng thái hoàn thành.], width: 100.0%) <fig:ch12-06-sftp-transfer-queue>
+
+- Biểu tượng và cột tên cho biết tệp cùng chiều *upload/download*.
+- Thanh tiến độ, trạng thái và phần mô tả giúp theo dõi từng tác vụ.
+- *Cancel* chỉ khả dụng khi tác vụ đang chờ hoặc đang truyền."
+00_book/figures/gui/chapter-12/07-sftp-host-key-confirmation.png,ui,ui-legacy,07-sftp-host-key-confirmation.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Khi gặp server chưa từng được tin cậy, CAMS hiển thị fingerprint của SSH host key trước khi tiếp tục.
+
+#insert-image(""figures/gui/chapter-12/07-sftp-host-key-confirmation.png"",
+  caption: [Xác nhận fingerprint của SFTP server trước lần kết nối đầu tiên.], width: 66.0%) <fig:ch12-07-sftp-host-key-confirmation>
+
+#report-note[Hộp xác nhận này dùng cho cả SFTP và SCP. Đối chiếu fingerprint với quản trị viên hoặc một kênh tin cậy khác. Chỉ chọn *Trust and Connect* khi fingerprint trùng khớp. Nếu host key của một server đã biết đột ngột thay đổi, dừng kết nối và xác minh nguyên nhân thay vì chấp nhận ngay.]
+
+== Truyền tệp bằng SFTP"
+00_book/figures/gui/chapter-12/08-sftp-connection-paths.png,ui,ui-legacy,08-sftp-connection-paths.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Cuộn xuống phần cuối biểu mẫu để đặt thư mục mở ban đầu.
+
+#insert-image(""figures/gui/chapter-12/08-sftp-connection-paths.png"",
+  caption: [Đường dẫn local và remote được mở sau khi kết nối.], width: 72.0%) <fig:ch12-08-sftp-connection-paths>
+
+- *Initial local directory*: thư mục trên máy chạy CAMS, ví dụ #raw(""/home/user/CAMS-Backups"").
+- Với *SFTP*, *Initial remote directory* là thư mục được mở sau khi kết nối, ví dụ #raw(""/network/configs"").
+- Với *SCP*, trường này đổi thành *Remote upload/download path*. Nhập đường dẫn remote cụ thể, ví dụ #raw(""/network/incoming/R1.cfg"") hoặc thư mục đích được server cho phép."
+00_book/figures/gui/chapter-12/09-scp-workspace.png,ui,ui-legacy,09-scp-workspace.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn Mode *SCP* trước khi Connect. Panel local vẫn cho phép chọn tệp hoặc thư mục, nhưng panel remote chuyển thành *REMOTE SCP PATH* và không hiển thị danh sách filesystem.
+
+#insert-image(""figures/gui/chapter-12/09-scp-workspace.png"",
+  caption: [Workspace SCP với đường dẫn remote nhập trực tiếp.], width: 100.0%) <fig:ch12-09-scp-workspace>
+
+Để upload, nhập thư mục hoặc đường dẫn đích ở panel phải, chọn mục ở panel local rồi nhấn *Upload*. Để download, nhập đầy đủ đường dẫn file/thư mục remote rồi nhấn *Download path*. Kiểm tra dấu #raw(""/""), tên tệp, quyền ghi và quy tắc đường dẫn của server trước khi bắt đầu.
+
+SCP không có các thao tác duyệt, Refresh, New folder, Rename hoặc Delete ở phía remote. Nếu chưa chắc đường dẫn tồn tại, chuyển sang SFTP để kiểm tra hoặc xác minh bằng công cụ quản trị server."
+00_book/figures/gui/chapter-12/10-sync-notifications.png,ui,ui-legacy,10-sync-notifications.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Khi tác vụ chạy, theo dõi Status Bar và Notification Center. Không chạy lại liên tục chỉ vì chưa thấy dữ liệu mới; quá trình thu thập, lưu snapshot và đồng bộ có thể hoàn tất ở các thời điểm khác nhau.
+
+#insert-image(""figures/gui/chapter-12/10-sync-notifications.png"",
+  caption: [Thông báo lần lượt khi lấy running-config, lưu snapshot và hoàn tất đồng bộ nền.], width: 52.0%) <fig:ch12-10-sync-notifications>
+
+- Thông báo *Getting running-config…* cho biết tác vụ đã bắt đầu, chưa phải kết quả thành công.
+- *Running-config snapshot saved…* xác nhận bản cấu hình đã được lưu vào lịch sử của host.
+- *Background synchronization completed…* xác nhận bước cập nhật database đã hoàn tất."
+00_book/figures/gui/chapter-12/11-running-config-history.png,ui,ui-legacy,11-running-config-history.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở tab thiết bị → *Information* → *Snapshot*. Danh sách *Version* chứa tối đa 100 mốc mới nhất theo host. Chọn một mốc để đọc đúng nội dung đã lưu tại thời điểm đó; thao tác này không checkout repository và không thay đổi cấu hình thiết bị.
+
+#insert-image(""figures/gui/chapter-12/11-running-config-history.png"",
+  caption: [Snapshot mới nhất và danh sách các phiên bản running-config.], width: 100.0%) <fig:ch12-11-running-config-history>
+
+*Copy All* sao chép phần đang hiển thị. *Export CFG* xuất snapshot được chọn thành tệp #raw("".cfg""); nút này chỉ hoạt động trong chế độ Snapshot, không xuất trực tiếp nội dung Diff.
+
+== So sánh cấu hình bằng Diff"
+00_book/figures/gui/chapter-12/12-running-config-diff.png,ui,ui-legacy,12-running-config-diff.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Khi có ít nhất hai phiên bản, chọn *Compare*. Chọn *Original (older)* và *Modified (newer)*; hai mốc không cần liền kề, vì CAMS có thể tạo diff tích lũy cho toàn bộ khoảng phiên bản giữa chúng.
+
+#insert-image(""figures/gui/chapter-12/12-running-config-diff.png"",
+  caption: [Diff giữa hai phiên bản với số dòng thêm và xóa.], width: 100.0%) <fig:ch12-12-running-config-diff>
+
+- Dòng bắt đầu bằng #raw(""-"") là nội dung có trong bản cũ nhưng không còn ở bản mới.
+- Dòng bắt đầu bằng #raw(""+"") là nội dung được thêm vào bản mới.
+- Các badge #raw(""+N"") và #raw(""−N"") cho biết tổng số dòng thêm/xóa; số *versions* cho biết khoảng lịch sử đang được so sánh."
+00_book/figures/gui/chapter-13/01-system-logs-overview.png,ui,ui-legacy,01-system-logs-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; == Đọc bảng log
+
+#insert-image(""figures/gui/chapter-13/01-system-logs-overview.png"",
+  caption: [Tổng thể System Logs với đủ tám mức severity từ 0 đến 7.], width: 100.0%) <fig:ch13-01-system-logs-overview>
+
+Mỗi dòng thể hiện thời điểm nhận, thiết bị nguồn, giao thức, severity, Cisco facility/mnemonic và nội dung bản tin. Có thể chọn một host ở panel bên trái để tập trung vào thiết bị đó, để giới hạn phạm vi phân tích log.
+
+== Tám mức độ log Cisco: 0–7"
+00_book/figures/gui/chapter-13/02-listener-status.png,ui,ui-legacy,02-listener-status.png,documentation_assets/ui-legacy/,medium,"Inspected image content; == Khởi động bộ nhận log
+
+#insert-image(""figures/gui/chapter-13/02-listener-status.png"",
+  caption: [Listener đang nhận Syslog qua UDP và TCP.], width: 100.0%) <fig:ch13-02-listener-status>
+
+Thanh trạng thái cho biết:
+
+- *Listener active/stopped*: bộ nhận đang chạy hay đã dừng."
+00_book/figures/gui/chapter-13/03-log-filter-bar.png,ui,ui-legacy,03-log-filter-bar.png,documentation_assets/ui-legacy/,medium,"Inspected image content; == Lọc log trên thanh công cụ
+
+#insert-image(""figures/gui/chapter-13/03-log-filter-bar.png"",
+  caption: [Các điều kiện lọc nhanh trước khi đọc hoặc xuất log.], width: 100.0%) <fig:ch13-03-log-filter-bar>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Bộ lọc], [Cách sử dụng]),"
+00_book/figures/gui/chapter-13/04-severity-levels.png,ui,ui-legacy,04-severity-levels.png,documentation_assets/ui-legacy/,medium,"Inspected image content; )
+
+#insert-image(""figures/gui/chapter-13/04-severity-levels.png"",
+  caption: [Bộ lọc cho phép chọn chính xác từng mức severity 0–7.], width: 48.0%) <fig:ch13-04-severity-levels>
+
+#report-note[*Phân biệt mức gửi và bộ lọc xem*
+
+Trên router, cấu hình mức trap #raw(""5"") thường có nghĩa là gửi mức #raw(""0"") đến #raw(""5""), tức mức đã chọn và mọi mức nghiêm trọng hơn. Trong trang System Logs, đánh dấu riêng mức #raw(""5"") chỉ hiển thị bản ghi có severity đúng bằng #raw(""5""). Muốn xem nhóm sự cố nghiêm trọng từ Emergency đến Error, chọn đồng thời #raw(""0""), #raw(""1""), #raw(""2"") và #raw(""3"").]"
+00_book/figures/gui/chapter-13/05-critical-filter-result.png,ui,ui-legacy,05-critical-filter-result.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Trên router, cấu hình mức trap #raw(""5"") thường có nghĩa là gửi mức #raw(""0"") đến #raw(""5""), tức mức đã chọn và mọi mức nghiêm trọng hơn. Trong trang System Logs, đánh dấu riêng mức #raw(""5"") chỉ hiển thị bản ghi có severity đúng bằng #raw(""5""). Muốn xem nhóm sự cố nghiêm trọng từ Emergency đến Error, chọn đồng thời #raw(""0""), #raw(""1""), #raw(""2"") và #raw(""3"").]
+
+#insert-image(""figures/gui/chapter-13/05-critical-filter-result.png"",
+  caption: [Kết quả khi lọc đồng thời bốn mức nghiêm trọng 0, 1, 2 và 3.], width: 100.0%) <fig:ch13-05-critical-filter-result>
+
+== Lọc log trên thanh công cụ
+
+#insert-image(""figures/gui/chapter-13/03-log-filter-bar.png"","
+00_book/figures/gui/chapter-13/06-smart-filter-builder.png,ui,ui-legacy,06-smart-filter-builder.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nhấp vào ô *Click to build a Smart Filter…* để mở biểu mẫu. Chỉ nhập những điều kiện cần thiết; CAMS tự tạo biểu thức ở cuối cửa sổ.
+
+#insert-image(""figures/gui/chapter-13/06-smart-filter-builder.png"",
+  caption: [Smart Filter kết hợp host, severity, facility, mnemonic và thời gian.], width: 78.0%) <fig:ch13-06-smart-filter-builder>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Tham số], [Ý nghĩa và cách dùng]),"
+00_book/figures/gui/chapter-13/07-log-message-details.png,ui,ui-legacy,07-log-message-details.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nhấp đúp một dòng log để mở cửa sổ chi tiết tại @fig:ch13-07-log-message-details.
+
+#insert-image(""figures/gui/chapter-13/07-log-message-details.png"",
+  caption: [Thông tin đã phân tích và raw message của một sự kiện Cisco.], width: 78.0%) <fig:ch13-07-log-message-details>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Thuộc tính], [Ý nghĩa]),"
+00_book/figures/gui/chapter-14/01-switch-ports-overview.png,ui,ui-legacy,01-switch-ports-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Tab *Port Status* cho phép xem đồng thời mode, VLAN membership, description và trạng thái link. Chọn một hàng để đọc thông tin ở inspector bên phải; nút Edit trong tab này chỉ phù hợp khi cần chuyển mode Access/Trunk, còn tham số chi tiết nên sửa trong tab tương ứng.
+
+#insert-image(""figures/gui/chapter-14/01-switch-ports-overview.png"",
+  caption: [Tổng thể Switch Ports với hai Access Port và hai Trunk Port.], width: 100.0%) <fig:ch14-01-switch-ports-overview>
+
+Các chỉ số phía trên cho biết tổng switchport, số link up, số Access và số Trunk. Trạng thái *Link Up* chỉ xác nhận liên kết vật lý đang hoạt động; vẫn cần kiểm tra VLAN, STP và lưu lượng thực tế.
+
+== View & Push Interfaces"
+00_book/figures/gui/chapter-14/02-access-port-form.png,ui,ui-legacy,02-access-port-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở tab *Access*, chọn port rồi nhấn *Edit*. Access port mang một VLAN dữ liệu không gắn thẻ và có thể có thêm Voice VLAN cho điện thoại IP.
+
+#insert-image(""figures/gui/chapter-14/02-access-port-form.png"",
+  caption: [Form Access Port với VLAN dữ liệu và Voice VLAN.], width: 55.0%) <fig:ch14-02-access-port-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập]),"
+00_book/figures/gui/chapter-14/03-access-loop-protection.png,ui,ui-legacy,03-access-loop-protection.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Cuộn xuống phần *Loop protection* để đặt cơ chế bảo vệ STP theo port.
+
+#insert-image(""figures/gui/chapter-14/03-access-loop-protection.png"",
+  caption: [PortFast và BPDU Guard trên port nối thiết bị đầu cuối.], width: 55.0%) <fig:ch14-03-access-loop-protection>
+
+- *PortFast* bỏ qua thời gian hội tụ STP ban đầu. Chỉ bật trên port nối máy trạm, server hoặc điện thoại; không bật trên liên kết giữa hai switch.
+- *BPDU Guard* đưa port edge vào trạng thái bảo vệ khi nhận BPDU. Thường bật cùng PortFast để ngăn người dùng cắm switch ngoài ý muốn.
+- *BPDU Filter* ngăn gửi/nhận BPDU và có thể che giấu loop; chỉ dùng khi thiết kế đã được kiểm chứng."
+00_book/figures/gui/chapter-14/04-trunk-port-form.png,ui,ui-legacy,04-trunk-port-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở tab *Trunk*, chọn đường uplink rồi nhấn *Edit*. Trunk vận chuyển nhiều VLAN giữa switch, router-on-a-stick, firewall hoặc hypervisor.
+
+#insert-image(""figures/gui/chapter-14/04-trunk-port-form.png"",
+  caption: [Form Trunk với danh sách VLAN được phép đi qua liên kết.], width: 55.0%) <fig:ch14-04-trunk-port-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập]),"
+00_book/figures/gui/chapter-14/05-trunk-loop-protection.png,ui,ui-legacy,05-trunk-loop-protection.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === Loop protection cho Trunk
+
+#insert-image(""figures/gui/chapter-14/05-trunk-loop-protection.png"",
+  caption: [Root Guard trên một uplink cần ngăn superior root.], width: 55.0%) <fig:ch14-05-trunk-loop-protection>
+
+Trunk giữa hai switch thường không bật PortFast hoặc BPDU Guard. Chọn *Root Guard* ở nhánh không được phép trở thành đường về root; chọn *Loop Guard* ở liên kết dự phòng cần bảo vệ trước lỗi mất BPDU. Không dùng cả hai theo thói quen: vai trò topology của port quyết định cơ chế phù hợp.
+
+== Port Status và giao diện tổng thể"
+00_book/figures/gui/chapter-14/06-interfaces-view-push.png,ui,ui-legacy,06-interfaces-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau khi Save các thay đổi, chọn *View & Push* trong trang Switch Ports.
+
+#insert-image(""figures/gui/chapter-14/06-interfaces-view-push.png"",
+  caption: [Preview riêng của Interfaces trước khi áp dụng lên SW2.], width: 78.0%) <fig:ch14-06-interfaces-view-push>
+
+Kiểm tra từng khối #raw(""interface"") và đặc biệt các lệnh sau:
+
+- #raw(""switchport mode access/trunk"") đúng với vai trò port;"
+00_book/figures/gui/chapter-15/01-vlan-form.png,ui,ui-legacy,01-vlan-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn *Switching → VLAN*, chọn một VLAN để Edit hoặc nhấn *Add* để tạo mới.
+
+#insert-image(""figures/gui/chapter-15/01-vlan-form.png"",
+  caption: [Form VLAN ID 10 dành cho người dùng.], width: 52.0%) <fig:ch15-01-vlan-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập]),"
+00_book/figures/gui/chapter-15/02-vlan-overview.png,ui,ui-legacy,02-vlan-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-15/02-vlan-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>VLAN inventory, trạng thái và số Access Port đang sử dụng.</p></figcaption>
+</figure>
+
+Sau Save, chọn **View & Push VLAN**. Preview chỉ nên chứa VLAN đang chờ áp dụng"
+00_book/figures/gui/chapter-15/03-vlan-view-push.png,ui,ui-legacy,03-vlan-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau Save, chọn *View & Push VLAN*. Preview chỉ nên chứa VLAN đang chờ áp dụng hoặc xóa.
+
+#insert-image(""figures/gui/chapter-15/03-vlan-view-push.png"",
+  caption: [Preview tạo VLAN 10, đặt tên Users và trạng thái active.], width: 76.0%) <fig:ch15-03-vlan-view-push>
+
+== EtherChannel thủ công
+
+EtherChannel gộp nhiều liên kết vật lý thành một Port-channel. Các member phải tương thích về speed, duplex, switchport mode, native VLAN và allowed VLANs."
+00_book/figures/gui/chapter-15/04-etherchannel-form.png,ui,ui-legacy,04-etherchannel-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; EtherChannel gộp nhiều liên kết vật lý thành một Port-channel. Các member phải tương thích về speed, duplex, switchport mode, native VLAN và allowed VLANs.
+
+#insert-image(""figures/gui/chapter-15/04-etherchannel-form.png"",
+  caption: [Port-channel10 dùng LACP active với hai member uplink.], width: 54.0%) <fig:ch15-04-etherchannel-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa]),"
+00_book/figures/gui/chapter-15/05-quick-etherchannel.png,ui,ui-legacy,05-quick-etherchannel.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === Bước 1 — Local port
+
+#insert-image(""figures/gui/chapter-15/05-quick-etherchannel.png"",
+  caption: [Chọn member local, số Port-channel và giao thức.], width: 75.0%) <fig:ch15-05-quick-etherchannel>
+
+- *Local member port*: cổng vật lý trên switch hiện tại.
+- *Port-channel number*: cùng một số sẽ được dùng ở hai đầu.
+- *Protocol*: nên chọn LACP khi cả hai thiết bị hỗ trợ."
+00_book/figures/gui/chapter-15/06-etherchannel-view-push.png,ui,ui-legacy,06-etherchannel-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nút *Quick select available interfaces* chỉ liệt kê port phù hợp và chưa thuộc EtherChannel khác. Vẫn phải xác minh dây nối thực tế và cấu hình phía peer.
+
+#insert-image(""figures/gui/chapter-15/06-etherchannel-view-push.png"",
+  caption: [View & Push EtherChannel gồm Port-channel và từng member interface.], width: 76.0%) <fig:ch15-06-etherchannel-view-push>
+
+Trong preview, kiểm tra cấu hình Port-channel trước, sau đó từng member và lệnh #raw(""channel-group""). Protocol/mode ở hai đầu phải tạo được cặp hợp lệ; cấu hình VLAN của Port-channel và member phải đồng nhất.
+
+== Quick EtherChannel giữa hai switch"
+00_book/figures/gui/chapter-15/07-stp-form.png,ui,ui-legacy,07-stp-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chọn *STP*, Add hoặc Edit policy theo VLAN.
+
+#insert-image(""figures/gui/chapter-15/07-stp-form.png"",
+  caption: [Rapid-PVST và vai trò Root Primary cho VLAN 10.], width: 54.0%) <fig:ch15-07-stp-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập]),"
+00_book/figures/gui/chapter-15/08-stp-view-push.png,ui,ui-legacy,08-stp-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Không đặt Primary cho cùng VLAN trên nhiều switch. Một thiết kế phổ biến là distribution switch thứ nhất Primary và switch thứ hai Secondary, có đối chiếu đường đi thực tế của VLAN.
+
+#insert-image(""figures/gui/chapter-15/08-stp-view-push.png"",
+  caption: [View & Push STP với policy riêng cho VLAN 10 và VLAN 20.], width: 76.0%) <fig:ch15-08-stp-view-push>
+
+Kiểm tra #raw(""spanning-tree mode""), từng VLAN và root role/priority. Sau Push, xem root bridge, root port, blocked/forwarding port và thử failover trong lab.
+
+== VTP Group"
+00_book/figures/gui/chapter-15/09-vtp-group-top.png,ui,ui-legacy,09-vtp-group-top.png,documentation_assets/ui-legacy/,medium,"Inspected image content; #report-note[VTP Group áp dụng một domain cho từ hai đến năm switch đang Connected. VTP có thể thay đổi VLAN database trên nhiều thiết bị, vì vậy chỉ dùng khi đã hiểu trạng thái revision/domain hiện tại và có bản sao lưu.]
+
+#insert-image(""figures/gui/chapter-15/09-vtp-group-top.png"",
+  caption: [Domain CAMPUS, phiên bản 2 và hai switch tham gia.], width: 100.0%) <fig:ch15-09-vtp-group-top>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa]),"
+00_book/figures/gui/chapter-15/10-vtp-member-policy.png,ui,ui-legacy,10-vtp-member-policy.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Authentication và kích hoạt VTPv3 primary/MST nằm ngoài workflow không tương tác này.
+
+#insert-image(""figures/gui/chapter-15/10-vtp-member-policy.png"",
+  caption: [Member policy với SW1 Server, SW3 Client và Pruning.], width: 100.0%) <fig:ch15-10-vtp-member-policy>
+
+- *server* có thể cập nhật VLAN database và quảng bá thay đổi.
+- *client* học VLAN database từ server và không tạo VLAN cục bộ theo cách thông thường.
+- *transparent* chuyển tiếp advertisement nhưng duy trì VLAN cục bộ."
+00_book/figures/gui/chapter-15/11-vtp-view-push.png,ui,ui-legacy,11-vtp-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nên có số lượng server phù hợp với thiết kế, không đặt mọi switch access thành server. Chọn *Save* để chỉ lưu hoặc *Save & Push* nếu muốn mở ngay preview.
+
+#insert-image(""figures/gui/chapter-15/11-vtp-view-push.png"",
+  caption: [View & Push VTP tổng hợp preview riêng cho từng member.], width: 78.0%) <fig:ch15-11-vtp-view-push>
+
+Đọc từng khối #raw(""# Device""), kiểm tra domain, version, mode và pruning của đúng host. Chỉ Push khi cả hai preview thành công. Sau Push, kiểm tra VTP status và VLAN database trên từng switch trước khi tạo hoặc xóa VLAN tiếp theo."
+00_book/figures/gui/chapter-15/12-quick-etherchannel-peer.png,ui,ui-legacy,12-quick-etherchannel-peer.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === Bước 2 — Peer port
+
+#insert-image(""figures/gui/chapter-15/12-quick-etherchannel-peer.png"",
+  caption: [Chọn switch peer và cổng nối đúng với local port.], width: 75.0%) <fig:ch15-12-quick-etherchannel-peer>
+
+*Connect to* là switch ở đầu kia; *Peer member port* phải là đầu nối vật lý tương ứng. CAMS không thể xác minh thay người dùng rằng hai cổng đang nối cùng một sợi/cặp liên kết.
+
+=== Bước 3 — Link mode"
+00_book/figures/gui/chapter-15/13-quick-etherchannel-link-mode.png,ui,ui-legacy,13-quick-etherchannel-link-mode.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === Bước 3 — Link mode
+
+#insert-image(""figures/gui/chapter-15/13-quick-etherchannel-link-mode.png"",
+  caption: [Đặt cùng Switchport mode và VLAN cho cả hai đầu.], width: 75.0%) <fig:ch15-13-quick-etherchannel-link-mode>
+
+- Chọn *Trunk* cho uplink mang nhiều VLAN; nhập Native VLAN và Allowed VLANs.
+- Chọn *Access* khi Port-channel chỉ thuộc một VLAN dữ liệu.
+- Chỉ các VLAN active có chung trên hai switch mới được chọn."
+00_book/figures/gui/chapter-16/01-vlan-protection.png,ui,ui-legacy,01-vlan-protection.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở *Security → L2 Security → VLAN Protection*, chọn VLAN cần bảo vệ.
+
+#insert-image(""figures/gui/chapter-16/01-vlan-protection.png"",
+  caption: [DHCP Snooping và Dynamic ARP Inspection theo từng VLAN.], width: 100.0%) <fig:ch16-01-vlan-protection>
+
+- *Enable DHCP Snooping* kiểm tra bản tin DHCP trên VLAN và tạo cơ sở dữ liệu binding IP–MAC–port. Xác định trusted uplink trước khi triển khai để không chặn phản hồi từ DHCP server hợp lệ.
+- *Enable DAI* kiểm tra ARP dựa trên DHCP Snooping binding hoặc Static MAC. CAMS tự bật DHCP Snooping khi bật DAI trong workflow này, vì DAI cần nguồn binding cho client học động.
+- *Save Policy* lưu hai trạng thái cho VLAN đang chọn. Có thể bật Snooping mà chưa bật DAI để triển khai theo từng giai đoạn."
+00_book/figures/gui/chapter-16/02-trusted-uplinks.png,ui,ui-legacy,02-trusted-uplinks.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chuyển sang *Trusted Uplinks*.
+
+#insert-image(""figures/gui/chapter-16/02-trusted-uplinks.png"",
+  caption: [Danh sách uplink tin cậy và form chọn Layer 2 interface.], width: 100.0%) <fig:ch16-02-trusted-uplinks>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Thành phần], [Cách dùng]),"
+00_book/figures/gui/chapter-16/03-static-mac-form.png,ui,ui-legacy,03-static-mac-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Chuyển sang *Static MAC*, chọn *Add* hoặc Edit binding hiện có.
+
+#insert-image(""figures/gui/chapter-16/03-static-mac-form.png"",
+  caption: [Binding cố định MAC–VLAN–Interface cho một thiết bị.], width: 52.0%) <fig:ch16-03-static-mac-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập]),"
+00_book/figures/gui/chapter-16/04-l2-security-view-push.png,ui,ui-legacy,04-l2-security-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; VLAN Protection, Trusted Uplinks và Static MAC dùng chung một preview *L2\_SECURITY*.
+
+#insert-image(""figures/gui/chapter-16/04-l2-security-view-push.png"",
+  caption: [Preview Snooping, DAI, trust port và Static MAC.], width: 76.0%) <fig:ch16-04-l2-security-view-push>
+
+Kiểm tra theo thứ tự:
+
++ VLAN nào bật #raw(""ip dhcp snooping"") và #raw(""ip arp inspection"")."
+00_book/figures/gui/chapter-16/05-port-security-form.png,ui,ui-legacy,05-port-security-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở *Security → Port Security*, chọn access port rồi nhấn *Edit*. CAMS không cho áp dụng profile này lên routed/trunk port trong workflow SW2.
+
+#insert-image(""figures/gui/chapter-16/05-port-security-form.png"",
+  caption: [Port Security cho GigabitEthernet0/1.], width: 55.0%) <fig:ch16-05-port-security-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Ý nghĩa]),"
+00_book/figures/gui/chapter-16/07-port-security-view-push.png,ui,ui-legacy,07-port-security-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Port Security có cửa sổ push riêng, không gộp vào L2 Security hoặc Interfaces.
+
+#insert-image(""figures/gui/chapter-16/07-port-security-view-push.png"",
+  caption: [Preview PORT\_SECURITY cho một access port.], width: 76.0%) <fig:ch16-07-port-security-view-push>
+
+Xác nhận đúng interface, mode access, maximum, violation, sticky và aging. Sau Push, kiểm tra secure MAC table, violation counter và trạng thái err-disabled. Chỉ thử MAC vi phạm trong môi trường lab hoặc thời gian bảo trì đã được phép."
+00_book/figures/gui/chapter-17/01-port-counters.png,ui,ui-legacy,01-port-counters.png,documentation_assets/ui-legacy/,medium,"Inspected image content; == Port Counters
+
+#insert-image(""figures/gui/chapter-17/01-port-counters.png"",
+  caption: [Lưu lượng, lỗi, discard và lần link flap gần nhất theo port.], width: 100.0%) <fig:ch17-01-port-counters>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Cột], [Cách đọc]),"
+00_book/figures/gui/chapter-17/02-mac-address-table.png,ui,ui-legacy,02-mac-address-table.png,documentation_assets/ui-legacy/,medium,"Inspected image content; == MAC Address Table
+
+#insert-image(""figures/gui/chapter-17/02-mac-address-table.png"",
+  caption: [Địa chỉ MAC đã học theo VLAN, interface và loại entry.], width: 100.0%) <fig:ch17-02-mac-address-table>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Cột], [Ý nghĩa]),"
+00_book/figures/gui/chapter-18/01-routed-port-form.png,ui,ui-legacy,01-routed-port-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở *Interfaces → Routed Ports*, chọn cổng rồi nhấn *Edit*. Nếu cổng đang là Access hoặc Trunk, có thể chuyển mode thành #raw(""routed"") từ *Switch Ports → Port Status*; sau khi Save, cổng xuất hiện trong danh sách Routed Ports.
+
+#insert-image(""figures/gui/chapter-18/01-routed-port-form.png"",
+  caption: [Các trường mode và trạng thái liên kết của Routed Port.], width: 55.0%) <fig:ch18-01-routed-port-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập và tác dụng]),"
+00_book/figures/gui/chapter-18/02-routed-ports-overview.png,ui,ui-legacy,02-routed-ports-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-18/02-routed-ports-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Danh sách Routed Ports và trạng thái link của SW3.</p></figcaption>
+</figure>
+
+Các chỉ số phía trên cho biết tổng routed port, số link up, số Access và số"
+00_book/figures/gui/chapter-18/03-interfaces-view-push-routed.png,ui,ui-legacy,03-interfaces-view-push-routed.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Routed Port dùng chung controller *INTERFACES* với Switch Ports. Sau khi Save, quay lại *Switch Ports* và mở *View & Push* để kiểm tra lệnh #raw(""no switchport"") trên đúng cổng.
+
+#insert-image(""figures/gui/chapter-18/03-interfaces-view-push-routed.png"",
+  caption: [Preview Interfaces có lệnh chuyển GigabitEthernet0/1 thành routed port.], width: 78.0%) <fig:ch18-03-interfaces-view-push-routed>
+
+Trước khi Push, kiểm tra tên interface, description, speed, duplex, #raw(""no switchport"") và #raw(""no shutdown""). Việc chuyển một trunk hoặc access port sang routed port sẽ loại bỏ VLAN forwarding trên cổng đó; nên có đường quản trị dự phòng nếu cổng đang mang lưu lượng quản trị.
+
+== Cấu hình SVI"
+00_book/figures/gui/chapter-18/04-svi-form.png,ui,ui-legacy,04-svi-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; SVI là interface logic gắn với một VLAN đã tồn tại. Mở *Interfaces → SVI*, nhấn *Add* để tạo mới hoặc chọn một hàng rồi nhấn *Edit*.
+
+#insert-image(""figures/gui/chapter-18/04-svi-form.png"",
+  caption: [Form SVI với VLAN ID, địa chỉ gateway, subnet mask và trạng thái quản trị.], width: 52.0%) <fig:ch18-04-svi-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập và tác dụng]),"
+00_book/figures/gui/chapter-18/05-svi-overview-ip-routing.png,ui,ui-legacy,05-svi-overview-ip-routing.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Nút *IP Routing* nằm trên thanh tiêu đề của tab SVI (xem @fig:ch18-05-svi-overview-ip-routing). Bật tùy chọn này khi SW3 cần định tuyến giữa các SVI hoặc giữa SVI và routed port. Nếu chỉ dùng switch như thiết bị Layer 2, có thể để tắt.
+
+#insert-image(""figures/gui/chapter-18/05-svi-overview-ip-routing.png"",
+  caption: [Ba SVI đã có địa chỉ và trạng thái IP Routing đang On.], width: 100.0%) <fig:ch18-05-svi-overview-ip-routing>
+
+Không bật IP Routing chỉ vì đã tạo SVI. Trước hết cần kiểm tra sơ đồ địa chỉ, VLAN membership, default gateway của client, route mặc định/upstream và ACL áp dụng trên các SVI.
+
+== View & Push SVI"
+00_book/figures/gui/chapter-18/06-svi-view-push.png,ui,ui-legacy,06-svi-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; SVI có nút *View & Push* riêng. Nút này dựng lệnh IP Routing và toàn bộ SVI đang chờ, không trộn với View & Push Interfaces hoặc VLAN.
+
+#insert-image(""figures/gui/chapter-18/06-svi-view-push.png"",
+  caption: [Preview riêng của SVI gồm #raw(""ip routing"") và từng #raw(""interface Vlan"").], width: 78.0%) <fig:ch18-06-svi-view-push>
+
+Kiểm tra các điểm sau trước khi Push:
+
+- #raw(""ip routing"") chỉ xuất hiện khi thật sự cần định tuyến Layer 3;"
+00_book/figures/gui/chapter-19/01-dhcp-pool-form.png,ui,ui-legacy,01-dhcp-pool-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở *Services → DHCP Server → Pool*. Mỗi pool phục vụ một subnet; Default Router thường là địa chỉ SVI của chính VLAN đó.
+
+#insert-image(""figures/gui/chapter-19/01-dhcp-pool-form.png"",
+  caption: [Các tham số DHCP Pool cho VLAN 10.], width: 58.0%) <fig:ch19-01-dhcp-pool-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập và tác dụng]),"
+00_book/figures/gui/chapter-19/02-dhcp-server-overview.png,ui,ui-legacy,02-dhcp-server-overview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+<figure>
+<p><img src=""../../figures/gui/chapter-19/02-dhcp-server-overview.png""
+style=""width:100.0%"" /></p>
+<figcaption><p>Tổng thể DHCP Server với hai pool cho VLAN 10 và VLAN 20.</p></figcaption>
+</figure>
+
+### Excluded Address"
+00_book/figures/gui/chapter-19/03-dhcp-server-view-push.png,ui,ui-legacy,03-dhcp-server-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Sau khi Save Pool và Excluded Address, mở *View & Push* từ DHCP Server.
+
+#insert-image(""figures/gui/chapter-19/03-dhcp-server-view-push.png"",
+  caption: [Preview chỉ gồm Excluded Address và hai DHCP Pool của SW3.], width: 76.0%) <fig:ch19-03-dhcp-server-view-push>
+
+Kiểm tra #raw(""ip dhcp excluded-address""), tên từng #raw(""ip dhcp pool""), network/mask, #raw(""default-router""), #raw(""dns-server"") và #raw(""lease""). Sau Push, thử client trong từng VLAN, kiểm tra địa chỉ nhận được, gateway, DNS và DHCP binding trên switch.
+
+== DHCP Relay trên SW3"
+00_book/figures/gui/chapter-19/04-dhcp-relay-form.png,ui,ui-legacy,04-dhcp-relay-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Dùng Relay khi DHCP server nằm ở mạng khác. Mở *Services → DHCP Relay*; CAMS đưa thẳng tới tab Helper. Broadcast DHCP nhận trên interface được chuyển thành unicast tới Helper IP.
+
+#insert-image(""figures/gui/chapter-19/04-dhcp-relay-form.png"",
+  caption: [Helper Address trên SVI Vlan99 trỏ tới DHCP server 192.0.2.50.], width: 55.0%) <fig:ch19-04-dhcp-relay-form>
+
+#report-table(
+  columns: (1.15fr, 2.85fr),
+  header: ([Trường], [Cách nhập và tác dụng]),"
+00_book/figures/gui/chapter-19/05-dhcp-relay-view-push.png,ui,ui-legacy,05-dhcp-relay-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; === View & Push DHCP Relay
+
+#insert-image(""figures/gui/chapter-19/05-dhcp-relay-view-push.png"",
+  caption: [Preview riêng của DHCP Relay với #raw(""ip helper-address"") dưới Vlan99.], width: 76.0%) <fig:ch19-05-dhcp-relay-view-push>
+
+Kiểm tra #raw(""interface Vlan99"") và #raw(""ip helper-address 192.0.2.50"") nằm cùng một khối. Sau Push, kiểm tra route hai chiều giữa SW3 và server, DHCP scope cho subnet của client, gateway trong offer và ACL trên đường đi.
+
+== ACL trên SW3"
+00_book/figures/gui/chapter-19/06-acl-extended-form.png,ui,ui-legacy,06-acl-extended-form.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở *Security → ACL*. Các tab Standard, Extended, Dynamic, Reflexive và MAC dùng chung cách tạo rule đã trình bày ở @ch08. Trên SW3, điểm cần chú ý nhất là gắn IP ACL vào đúng SVI hoặc interface Layer 3 để kiểm soát lưu lượng giữa các VLAN.
+
+#insert-image(""figures/gui/chapter-19/06-acl-extended-form.png"",
+  caption: [Form Extended ACL USERS\_TO\_SERVERS và Rule Builder.], width: 58.0%) <fig:ch19-06-acl-extended-form>
+
+Các trường cơ bản của Extended ACL:
+
+#report-table("
+00_book/figures/gui/chapter-19/07-acl-bindings.png,ui,ui-legacy,07-acl-bindings.png,documentation_assets/ui-legacy/,medium,"Inspected image content; Mở tab *Bindings*, chọn ACL, interface và direction rồi chọn *Add* và *Save*.
+
+#insert-image(""figures/gui/chapter-19/07-acl-bindings.png"",
+  caption: [ACL USERS\_TO\_SERVERS được gắn chiều IN trên Vlan10.], width: 100.0%) <fig:ch19-07-acl-bindings>
+
+- *IN* lọc gói ngay khi đi vào SVI. Với #raw(""Vlan10 IN""), policy kiểm soát lưu lượng do client VLAN 10 gửi vào quá trình định tuyến;
+- *OUT* lọc gói trước khi rời interface. Chỉ chọn khi policy được thiết kế theo hướng đích;
+- một binding sai direction có thể không chặn được luồng mong muốn hoặc chặn nhầm lưu lượng quản trị."
+00_book/figures/gui/chapter-19/08-acl-view-push.png,ui,ui-legacy,08-acl-view-push.png,documentation_assets/ui-legacy/,medium,"Inspected image content; ACL dùng nút *View & Push* riêng trong trang Access Control Lists.
+
+#insert-image(""figures/gui/chapter-19/08-acl-view-push.png"",
+  caption: [Preview ACL gồm rule và lệnh #raw(""ip access-group"") trên Vlan10.], width: 76.0%) <fig:ch19-08-acl-view-push>
+
+Đọc theo thứ tự sequence và kiểm tra action, protocol, source, wildcard, destination, port, interface cùng direction của #raw(""ip access-group""). Trước khi Push qua SSH, bảo đảm địa chỉ quản trị vẫn được Permit hoặc có console/đường dự phòng.
+
+Sau Push, kiểm tra ACL hit counter và thử cả hai nhóm lưu lượng: luồng phải được Permit và luồng phải bị Deny. Nếu inter-VLAN routing không hoạt động, kiểm tra theo thứ tự IP Routing → trạng thái SVI → route connected → ACL binding → route upstream."
+00_book/figures/gui/devices.png,ui,ui-docshot,devices.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/01-select-switch.png,ui,ui-docshot,01-select-switch.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/02-open-vlan.png,ui,ui-docshot,02-open-vlan.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/03-add-vlan.png,ui,ui-docshot,03-add-vlan.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/04-vlan-id.png,ui,ui-docshot,04-vlan-id.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/05-vlan-name.png,ui,ui-docshot,05-vlan-name.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/06-vlan-state.png,ui,ui-docshot,06-vlan-state.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/07-ready-to-save.png,ui,ui-docshot,07-ready-to-save.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/08-vlan-created.png,ui,ui-docshot,08-vlan-created.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/vlan/09-view-preview.png,ui,ui-docshot,09-view-preview.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/welcome.png,ui,ui-docshot,welcome.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/gui/workspace.png,ui,ui-docshot,workspace.png,documentation_assets/ui-docshot/,high,Inspected image content; 
+00_book/figures/icons/logo.svg,logo-icon,logo-icon,logo.svg,documentation_assets/logo-icon/,high,Inspected image content; 
+00_book/figures/icons/ptit-logo.svg,logo-icon,logo-icon,ptit-logo.svg,documentation_assets/logo-icon/,high,Inspected image content; 
+00_book/figures/report/appendix/project-structure.svg,architecture-diagram,diagram-architecture,project-structure.svg,documentation_assets/diagram-architecture/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/appendix/project-structure.svg"", width: 90%),
+  caption: [Cấu trúc thư mục mã nguồn ứng dụng desktop CAMS],
+) <fig-appendix-project-structure>
+
+#pagebreak(weak: true)
+#appendix-section[A.2.][Bảng ánh xạ luồng thành phần toàn hệ thống]"
+00_book/figures/report/diagrams/01_pipeline_automation.svg,workflow-diagram,diagram-workflow,01-pipeline-automation.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/02_state_flow.svg,workflow-diagram,diagram-workflow,02-state-flow.svg,documentation_assets/diagram-workflow/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/02_state_flow.svg"", width: 100%),
+  caption: [Luồng cấu hình từ dữ liệu chờ đến thực thi và cập nhật kết quả],
+) <fig-state-flow>
+
+Với thao tác thành công, ứng dụng cập nhật trạng thái bản ghi; với lỗi, thông tin phải được giữ để người dùng kiểm tra và xử lý tiếp. Thành công ở bước gửi lệnh chưa chứng minh dịch vụ hoạt động đúng. Cần truy vấn trạng thái hoặc thử lưu lượng phù hợp để xác minh, nhất là khi một khối lệnh có thể đã được áp dụng một phần trước khi lỗi xuất hiện.
+"
+00_book/figures/report/diagrams/03_cli_modes.svg,workflow-diagram,diagram-workflow,03-cli-modes.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/04_ssh_connection.svg,architecture-diagram,diagram-architecture,04-ssh-connection.svg,documentation_assets/diagram-architecture/,high,Inspected image content; 
+00_book/figures/report/diagrams/05_session_lifecycle.svg,workflow-diagram,diagram-workflow,05-session-lifecycle.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/06_dhcp_dora.svg,workflow-diagram,diagram-workflow,06-dhcp-dora.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/07_ospf_area.png,network-diagram,diagram-network,07-ospf-area.png,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/07_ospf_area.svg,network-diagram,diagram-network,07-ospf-area.svg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/08_acl_packet_flow.jpg,workflow-diagram,diagram-workflow,08-acl-packet-flow.jpg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/08_acl_packet_flow.svg,workflow-diagram,diagram-workflow,08-acl-packet-flow.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/09_nat_pat.svg,network-diagram,diagram-network,09-nat-pat.svg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/10_fhrp_gateway.svg,network-diagram,diagram-network,10-fhrp-gateway.svg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/11_db_schema.svg,database-diagram,diagram-database,11-db-schema.svg,documentation_assets/diagram-database/,high,Inspected image content; 
+00_book/figures/report/diagrams/12_netmiko_stack.svg,architecture-diagram,diagram-architecture,12-netmiko-stack.svg,documentation_assets/diagram-architecture/,high,Inspected image content; 
+00_book/figures/report/diagrams/13_qtquick_tree.svg,architecture-diagram,diagram-architecture,13-qtquick-tree.svg,documentation_assets/diagram-architecture/,high,Inspected image content; 
+00_book/figures/report/diagrams/14_qml_signal_slot.svg,architecture-diagram,diagram-architecture,14-qml-signal-slot.svg,documentation_assets/diagram-architecture/,high,Inspected image content; 
+00_book/figures/report/diagrams/15_ui_thread_workers.svg,architecture-diagram,diagram-architecture,15-ui-thread-workers.svg,documentation_assets/diagram-architecture/,high,Inspected image content; 
+00_book/figures/report/diagrams/16_host_lock.svg,architecture-diagram,diagram-architecture,16-host-lock.svg,documentation_assets/diagram-architecture/,high,Inspected image content; 
+00_book/figures/report/diagrams/17_serialize_parallel.svg,workflow-diagram,diagram-workflow,17-serialize-parallel.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/18_syslog_pipeline.svg,workflow-diagram,diagram-workflow,18-syslog-pipeline.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/19_testing_flow_a.svg,workflow-diagram,diagram-workflow,19-testing-flow-a.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/20_testing_flow_b.svg,workflow-diagram,diagram-workflow,20-testing-flow-b.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/21_lab_test_flow.svg,workflow-diagram,diagram-workflow,21-lab-test-flow.svg,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/22_architecture_overview.svg,architecture-diagram,diagram-architecture,22-architecture-overview.svg,documentation_assets/diagram-architecture/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/22_architecture_overview.svg"", width: 74%),
+  caption: [Kiến trúc phân lớp của CAMS],
+) <fig-layer-architecture>
+
+Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
+"
+00_book/figures/report/diagrams/Etherchannel.jpg,network-diagram,diagram-network,etherchannel.jpg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/LAB_2-report.png,network-diagram,diagram-network,lab-2-report.png,documentation_assets/diagram-network/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/LAB_2-report.png"", width: 95%),
+  caption: [Sơ đồ Kịch bản 1: Định tuyến OSPF đa vùng giữa hai chi nhánh],
+) <fig-topo-scenario-2>
+
+Mô hình được chia thành các phân vùng định tuyến và dải địa chỉ như trình bày trong bảng quy hoạch dưới đây.
+"
+00_book/figures/report/diagrams/LAB_2.svg,network-diagram,diagram-network,lab-2.svg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg,network-diagram,diagram-network,lab-kich-ban-1.svg,documentation_assets/diagram-network/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg"", width: 90%),
+  caption: [Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2],
+) <fig-topo-scenario-1>
+
+==== Quy trình triển khai trên phần mềm CAMS
+"
+00_book/figures/report/diagrams/STP.jpg,network-diagram,diagram-network,stp.jpg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/VTP.jpg,network-diagram,diagram-network,vtp.jpg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/dhcp-snooping.jpg,network-diagram,diagram-network,dhcp-snooping.jpg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/dhcp_dora.png,workflow-diagram,diagram-workflow,dhcp-dora.png,documentation_assets/diagram-workflow/,high,Inspected image content; 
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png,ui,ui-legacy,01-nat-interfaces.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png"", width: 90%),
+  caption: [Giao diện cấu hình cổng NAT Inside/Outside trên Router NAT],
+) <fig-k3-nat-interfaces>
+
+@fig-k3-nat-interfaces cho thấy ba cổng đã được lưu ở trạng thái mong muốn: `Gi0/1` và `Gi0/3` có vai trò `Inside`, còn `Gi0/2` có vai trò `Outside`. Thông tin này được kiểm tra trước khi CAMS sinh tập lệnh cấu hình.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png,ui,ui-legacy,02-nat-acl.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png"", width: 90%),
+  caption: [Khai báo ACL NAT_demo xác định các mạng nội bộ được phép chuyển đổi địa chỉ],
+) <fig-k3-nat-acl>
+
+Sau khi lưu các tham số cổng và ACL, người dùng mở cửa sổ *View & Push* để kiểm duyệt tập lệnh trước khi gửi xuống thiết bị.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png,ui,ui-legacy,03-nat-config-preview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png"", width: 78%),
+  caption: [Cửa sổ View & Push sinh cấu hình NAT Interface và ACL cho Router NAT],
+) <fig-k3-nat-preview>
+
+@fig-k3-nat-preview cho thấy CAMS sinh các lệnh `ip nat inside`, `ip nat outside` trên từng cổng và khối ACL sau:
+```text"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png,ui,ui-legacy,04-nat-pat.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png"", width: 90%),
+  caption: [Giao diện cấu hình PAT Overload sử dụng cổng Outside GigabitEthernet0/2],
+) <fig-k3-pat-gui>
+
+Cửa sổ *View & Push* cho thấy lệnh PAT được sinh tự động:
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png,ui,ui-legacy,05-nat-pat-preview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png"", width: 78%),
+  caption: [Cửa sổ View & Push kiểm duyệt lệnh PAT Overload trước khi đẩy xuống Router NAT],
+) <fig-k3-pat-preview>
+
+```text
+ip nat inside source list NAT_demo interface GigabitEthernet0/2 overload"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png,terminal-evidence,evidence-terminal,06-nat-interface-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/06-nat-interface-verify.png"", width: 72%),
+  caption: [Xác minh vai trò NAT trên ba cổng của Router NAT bằng lệnh show running-config],
+) <fig-k3-nat-interface-verify>
+
+Tiếp tục kiểm tra cấu hình tổng thể cho thấy lệnh PAT, ACL `NAT_demo` và tuyến mặc định tới `10.0.10.1` đã tồn tại trong running-config.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png,terminal-evidence,evidence-terminal,07-nat-config-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/07-nat-config-verify.png"", width: 82%),
+  caption: [Xác minh ACL, PAT Overload và Default Route trên Router NAT],
+) <fig-k3-nat-config-verify>
+
+#step-title[Bước 5. Thiết lập GLBP làm cổng mặc định dự phòng]
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png,ui,ui-legacy,08-glbp-setup.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png"", width: 86%),
+  caption: [Giao diện tạo GLBP Group 113 với Virtual IP 192.168.4.1 trên R1 và R2],
+) <fig-k3-glbp-setup>
+
+Tại phần *Member policy*, CAMS tự động ghép các cổng cùng mạng con với địa chỉ IP ảo. Cổng `Gi0/0` của `R1` (`192.168.4.2/24`) có mức ưu tiên `101`, còn cổng `Gi0/0` của `R2` (`192.168.4.3/24`) có mức ưu tiên `100`. Cả hai đều bật `Preempt`, sử dụng `Maximum Weighting 100` và đặt `Forwarder Preempt Delay` là `30` giây.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png,ui,ui-legacy,09-glbp-member-policy.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png"", width: 86%),
+  caption: [Thiết lập chính sách thành viên GLBP cho R1 và R2],
+) <fig-k3-glbp-member-policy>
+
+Trước khi áp dụng, cửa sổ *View & Push FHRP* tổng hợp lệnh cho cả hai thiết bị trong cùng một phiên kiểm duyệt.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png,ui,ui-legacy,10-glbp-config-preview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png"", width: 80%),
+  caption: [Cửa sổ View & Push FHRP sinh đồng thời cấu hình GLBP cho R1 và R2],
+) <fig-k3-glbp-preview>
+
+@fig-k3-glbp-preview cho thấy CAMS sinh cấu hình nhóm GLBP 113 trên cả hai router, gồm địa chỉ ảo, chế độ cân bằng tải, trọng số và thời gian chờ preempt. `R1` có mức ưu tiên 101, cao hơn `R2` với mức 100, phù hợp với chính sách đã khai báo.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png,ui,ui-legacy,11-dhcp-pool.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png"", width: 88%),
+  caption: [Giao diện tạo DHCP Pool LAN_R1 với Default Gateway là GLBP Virtual IP 192.168.4.1],
+) <fig-k3-dhcp-pool>
+
+Cửa sổ kiểm duyệt cho thấy cấu hình DHCP được sinh tương ứng:
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png,ui,ui-legacy,13-dhcp-config-preview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png"", width: 78%),
+  caption: [Cửa sổ View & Push DHCP sinh cấu hình pool LAN_R1 trên R1],
+) <fig-k3-dhcp-preview>
+
+```text
+ip dhcp pool LAN_R1"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png,terminal-evidence,evidence-terminal,14-dhcp-glbp-r1-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/14-dhcp-glbp-r1-verify.png"", width: 88%),
+  caption: [Xác minh DHCP Pool và cấu hình GLBP trên Router R1],
+) <fig-k3-r1-verify>
+
+Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, đảm bảo hai router cùng cung cấp dịch vụ gateway cho một mạng LAN.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png,terminal-evidence,evidence-terminal,15-glbp-r2-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/15-glbp-r2-verify.png"", width: 82%),
+  caption: [Xác minh cấu hình GLBP Group 113 trên Router R2],
+) <fig-k3-r2-verify>
+
+#step-title[Bước 8. Kiểm tra cấp phát DHCP và đường đi của lưu lượng]
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png,terminal-evidence,evidence-terminal,16-client-connectivity-test.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/16-client-connectivity-test.png"", width: 82%),
+  caption: [Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream],
+) <fig-k3-client-test>
+
+Kết quả lệnh `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận chặng đầu tiên là `192.168.4.2` (`R1`), tiếp theo là `192.168.1.2` (router NAT) và `10.0.10.1` (gateway phía ngoài). Thiết bị phía ngoài trả về ICMP `Destination port unreachable`; vì vậy, phép thử chỉ xác minh đường đi từ mạng LAN tới biên ngoài của mô hình lab, không chứng minh kết nối hoàn chỉnh tới `1.1.1.1`.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png,network-diagram,diagram-network,fhrp-nat-dhcp-report.png,documentation_assets/diagram-network/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png"", width: 95%),
+  caption: [Sơ đồ Kịch bản 2: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN],
+) <fig-topo-scenario-3>
+
+Địa chỉ và vai trò của từng thiết bị được trình bày trong bảng quy hoạch dưới đây.
+"
+00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp.svg,network-diagram,diagram-network,fhrp-nat-dhcp.svg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/jenkins_pipeline_stages.png,device-verification,evidence-device,jenkins-pipeline-stages.png,documentation_assets/evidence-device/,medium,Inspected image content; 
+00_book/figures/report/diagrams/lab_4.svg,network-diagram,diagram-network,lab-4.svg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/1.png,ui,ui-legacy,routing-ospf-lab-router-interfaces-overview-1.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/1.png"", width: 85%),
+  caption: [Giao diện quản lý và cấu hình tham số Lớp 3 cho các cổng router],
+) <fig-k2-interfaces>
+@fig-k2-interfaces thể hiện trạng thái IP của các cổng trên `R1`. Ngăn thuộc tính cho phép khai báo địa chỉ IP, subnet mask, mô tả và trạng thái hoạt động của từng cổng.
+
+#step-title[Bước 2. Cấu hình OSPF theo nhóm bằng Routing Group]"
+00_book/figures/report/diagrams/routing-ospf-lab/10.png,ui,ui-legacy,routing-ospf-lab-ospf-routing-group-hosts-10.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/10.png"", width: 80%),
+  caption: [Cửa sổ Routing Group - OSPF (Bước 1: Chọn sáu router tham gia cấu hình nhóm)],
+) <fig-k2-group-hosts>
+Trong @fig-k2-group-hosts, các router được chọn từ không gian làm việc `LAB_KICH_BAN_2`. CAMS sử dụng thông tin của các cổng và địa chỉ IP của từng thiết bị làm dữ liệu đầu vào cho các bước tiếp theo.
+
+Tại bước *Networks*, quản trị viên gán các mạng kết nối trực tiếp vào vùng định tuyến tương ứng: Area 0 cho các liên kết đường trục ISP và Area 1 cho các liên kết nội bộ của Chi nhánh A."
+00_book/figures/report/diagrams/routing-ospf-lab/11.png,ui,ui-legacy,routing-ospf-lab-ospf-routing-group-networks-11.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/11.png"", width: 80%),
+  caption: [Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)],
+) <fig-k2-group-networks>
+#block[
+  #set par(justify: false)
+  @fig-k2-group-networks thể hiện các cổng được nhóm theo từng router và ánh xạ mỗi dải mạng vào vùng OSPF tương ứng:"
+00_book/figures/report/diagrams/routing-ospf-lab/12.png,terminal-evidence,evidence-terminal,routing-ospf-lab-ospf-running-config-multi-router-verification-12.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/12.png"", width: 90%),
+  caption: [Xác minh cấu hình OSPF trên sáu router qua terminal nhúng],
+) <fig-k2-multi-terminal-ospf>
+Kết quả lệnh `show run | section ospf` trong @fig-k2-multi-terminal-ospf xác nhận cả sáu router đã nhận tiến trình OSPF 1, router ID từ `1.1.1.1` đến `6.6.6.6` và các mạng thuộc Area 0 hoặc Area 1 theo quy hoạch.
+
+#step-title[Bước 5. Kiểm tra bảng định tuyến OSPF]"
+00_book/figures/report/diagrams/routing-ospf-lab/13.png,ui,ui-legacy,routing-ospf-lab-r1-ospf-process-dark-13.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/14.png,ui,ui-legacy,routing-ospf-lab-ospf-group-view-push-progress-14.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/14.png"", width: 80%),
+  caption: [Cửa sổ View & Push OSPF tự động sinh khối lệnh tái phân phối tuyến cho Router R2],
+) <fig-k2-redistribute-push>
+Cửa sổ kiểm duyệt trong @fig-k2-redistribute-push hiển thị khối lệnh Cisco IOS được sinh cho router `R2`:
+```text
+# Cấu hình OSPF và Redistribution sinh tự động cho R2"
+00_book/figures/report/diagrams/routing-ospf-lab/15.png,ui,ui-legacy,routing-ospf-lab-r1-ospf-view-push-dark-15.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/16.png,ui,ui-legacy,routing-ospf-lab-r2-ospf-process-16.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/16.png"", width: 85%),
+  caption: [Giao diện thiết lập tham số Tái phân phối tuyến (OSPF Redistribute) trên Router biên R6],
+) <fig-k2-redistribute-gui>
+Tại tab `R6`, quản trị viên mở *Routing*, chọn *OSPF* và mục *Redistribute*. Các tham số được thiết lập như sau:
+
+- Tiến trình OSPF: `1`. (Lưu ý: Không điền Process ID cho nguồn `connected` vì mạng kết nối trực tiếp không có tiến trình định tuyến)."
+00_book/figures/report/diagrams/routing-ospf-lab/17.png,terminal-evidence,evidence-terminal,routing-ospf-lab-r1-ospf-routing-verification-17.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/18.png,terminal-evidence,evidence-terminal,routing-ospf-lab-r2-ospf-routing-verification-18.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/18.png"", width: 85%),
+  caption: [Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2],
+) <fig-k2-route-table-r1>
+Theo @fig-k2-route-table-r1, bảng định tuyến của `R1` ghi nhận:
+- Các tuyến nội vùng OSPF (`O`): `2.2.2.2/32`, `3.3.3.3/32`, `4.4.4.4/32`, `5.5.5.5/32`, `6.6.6.6/32` và các mạng liên kết `10.0.2.0/24`, `10.0.3.0/24`, `10.1.23.0/24`.
+- Cả bốn mạng LAN của hai chi nhánh được học qua cơ chế tái phân phối tuyến ngoại vi:"
+00_book/figures/report/diagrams/routing-ospf-lab/19.png,terminal-evidence,evidence-terminal,routing-ospf-lab-r3-ospf-routing-verification-19.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/2.png,ui,ui-legacy,routing-ospf-lab-router-interface-editor-dark-2.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/20.png,terminal-evidence,evidence-terminal,routing-ospf-lab-r6-ospf-routing-verification-20.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/21.png,terminal-evidence,evidence-terminal,routing-ospf-lab-vpc11-ip-configuration-21.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/22.png,terminal-evidence,evidence-terminal,routing-ospf-lab-vpc12-ip-configuration-22.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/23.png,terminal-evidence,evidence-terminal,routing-ospf-lab-vpc14-ip-configuration-23.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/24.png,terminal-evidence,evidence-terminal,routing-ospf-lab-vpc13-ip-configuration-24.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/25.png,terminal-evidence,evidence-terminal,routing-ospf-lab-vpc11-ping-verification-25.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/routing-ospf-lab/25.png"", width: 75%),
+  caption: [Kết quả ping từ VPC11 sang VPC14 với tỷ lệ thành công 100%],
+) <fig-k2-ping-vpc11-vpc14>
+Kết quả trong @fig-k2-ping-vpc11-vpc14 cho thấy `VPC11` (`192.168.10.10`) gửi thành công 5/5 gói tin tới `VPC14` (`192.168.30.10`). Độ trễ trung bình là khoảng `6,9 ms`; giá trị `ttl=59` cho thấy gói tin đi qua năm hop định tuyến.
+
+Phép thử từ `VPC15` (`192.168.40.10`, thuộc `B2_VLAN` tại Chi nhánh B) đến hai máy trạm ở Chi nhánh A cũng ghi nhận đầy đủ phản hồi:"
+00_book/figures/report/diagrams/routing-ospf-lab/26.png,terminal-evidence,evidence-terminal,routing-ospf-lab-vpc13-ping-verification-26.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/27.png,terminal-evidence,evidence-terminal,routing-ospf-lab-vpc15-ping-verification-27.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/3.png,ui,ui-legacy,routing-ospf-lab-router-interface-addresses-dark-3.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/4.png,ui,ui-legacy,routing-ospf-lab-router-interface-policy-dark-4.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/5.png,ui,ui-legacy,routing-ospf-lab-router-interfaces-inventory-dark-5.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/6.png,ui,ui-legacy,routing-ospf-lab-router-interfaces-inventory-selected-dark-6.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/7.png,ui,ui-legacy,routing-ospf-lab-router-interface-inventory-edit-dark-7.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/8.png,ui,ui-legacy,routing-ospf-lab-router-interface-counters-dark-8.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/routing-ospf-lab/9.png,ui,ui-legacy,routing-ospf-lab-router-ospf-process-dark-9.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_1.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-1-1-1.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_10.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-10-1-10.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_11.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-11-1-11.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_12.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-12-1-12.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_13.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-13-1-13.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_14.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-14-1-14.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_15.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-15-1-15.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_16.png,ui,ui-legacy,switching-lab-vtp-group-policy-1-16-1-16.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_16.png"", width: 85%),
+  caption: [Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB],
+) <fig-k1-vtp-group>
+@fig-k1-vtp-group thể hiện sáu switch đang kết nối, năm thiết bị được chọn và miền VTP đã lưu. Sau khi kiểm tra danh sách, quản trị viên sử dụng *Save & Push* để áp dụng cấu hình theo nhóm.
+
+*Bước 2. Khởi tạo VLAN và kiểm duyệt tập lệnh*"
+00_book/figures/report/diagrams/switching-lab/1_17.png,ui,ui-legacy,switching-lab-vtp-group-policy-1-17-1-17.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_18.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-18-1-18.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_19.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-19-1-19.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_2.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-2-1-2.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_20.png,ui,ui-legacy,switching-lab-vlan-view-push-preview-1-20-1-20.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_20.png"", width: 80%),
+  caption: [Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1],
+) <fig-k1-vlan-push>
+@fig-k1-vlan-push cho thấy khối lệnh Cisco IOS được sinh từ dữ liệu trên giao diện, gồm các lệnh tạo VLAN và đặt tên tương ứng. Người dùng kiểm tra từng dòng trước khi nhấn *Push* để gửi cấu hình qua SSH.
+
+*Bước 3. Cấu hình gom kênh EtherChannel bằng LACP*"
+00_book/figures/report/diagrams/switching-lab/1_21.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-21-1-21.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_21.png"", width: 85%),
+  caption: [Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection],
+) <fig-k1-l2-security>
+@fig-k1-l2-security thể hiện chính sách bảo vệ cho VLAN 1, 10, 20 và 99. Quản trị viên bật DHCP Snooping, DAI và chỉ định các đường trunk làm *Trusted Uplinks* để tiếp nhận lưu lượng DHCP và ARP hợp lệ.
+
+*Bước 5. Cấu hình Port Security trên switch truy cập SW5*"
+00_book/figures/report/diagrams/switching-lab/1_22.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-22-1-22.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_23.png,ui,ui-legacy,switching-lab-l2-security-view-push-preview-1-23-1-23.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_24.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-24-1-24.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_25.png,ui,ui-legacy,switching-lab-port-security-view-push-preview-1-25-1-25.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_25.png"", width: 80%),
+  caption: [Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5],
+) <fig-k1-port-security-push>
+#block[
+  #set par(justify: false)
+  @fig-k1-port-security-push thể hiện khối lệnh Port Security để quản trị viên kiểm tra trước khi đẩy xuống thiết bị:"
+00_book/figures/report/diagrams/switching-lab/1_26.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-26-1-26.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_27.png,terminal-evidence,evidence-terminal,switching-lab-switch-device-cli-verification-1-27-1-27.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_28.png,terminal-evidence,evidence-terminal,switching-lab-switch-device-cli-verification-1-28-1-28.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_29.png,terminal-evidence,evidence-terminal,switching-lab-switch-device-cli-verification-1-29-1-29.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_3.png,ui,ui-legacy,switching-lab-etherchannel-view-push-preview-1-3-1-3.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_3.png"", width: 80%),
+  caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
+) <fig-k1-etherchannel-push>
+@fig-k1-etherchannel-push thể hiện cấu hình cho từng cổng thành phần và cổng logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
+
+*Bước 4. Thiết lập DHCP Snooping và Dynamic ARP Inspection*"
+00_book/figures/report/diagrams/switching-lab/1_30.png,terminal-evidence,evidence-terminal,switching-lab-switch-device-cli-verification-1-30-1-30.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/switching-lab/1_30.png"", width: 85%),
+  caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua Terminal tích hợp],
+) <fig-k1-terminal-verify>
+Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
+
+Ngoài ra, người dùng kiểm tra trạng thái bảo mật cổng trên switch `SW5` qua lệnh `show port-security interface GigabitEthernet0/2`:"
+00_book/figures/report/diagrams/switching-lab/1_31.png,terminal-evidence,evidence-terminal,switching-lab-switch-device-cli-verification-1-31-1-31.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_32.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-32-1-32.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_33.png,terminal-evidence,evidence-terminal,switching-lab-switch-device-cli-verification-1-33-1-33.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_4.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-4-1-4.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_5.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-5-1-5.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_6.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-6-1-6.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_7.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-7-1-7.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_8.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-8-1-8.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/switching-lab/1_9.png,ui,ui-legacy,switching-lab-switch-port-inventory-editor-1-9-1-9.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png,ui,ui-legacy,01-syslog-configuration.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png"", width: 92%),
+  caption: [Giao diện quản lý Syslog Server trước khi tạo chính sách gửi log],
+) <fig-k4-syslog-config>
+
+@fig-k4-syslog-config thể hiện màn hình quản lý đích Syslog. Tại đây, người dùng có thể tạo cấu hình đơn lẻ, kiểm duyệt lệnh bằng *View & Push* hoặc áp dụng chính sách theo nhóm bằng *Syslog Group*.
+"
+00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png,ui,ui-legacy,02-syslog-select-hosts.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png"", width: 78%),
+  caption: [Bước Hosts của Syslog Group: chọn 4 thiết bị cùng tham gia chính sách gửi log],
+) <fig-k4-syslog-hosts>
+
+Việc nhóm nhiều thiết bị trong một quy trình giúp giảm thao tác lặp lại và duy trì thống nhất địa chỉ máy chủ, giao thức vận chuyển cùng mức độ nghiêm trọng cho toàn bộ nhóm.
+"
+00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png,ui,ui-legacy,03-syslog-source-interfaces.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png"", width: 78%),
+  caption: [Lựa chọn Source Interface cho từng Router và Switch trong Syslog Group],
+) <fig-k4-syslog-source>
+
+Cấu hình `logging source-interface` tạo địa chỉ nguồn ổn định cho các bản tin Syslog, nhờ đó CAMS có thể ánh xạ bản tin đến đúng thiết bị trong danh sách quản lý.
+"
+00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png,ui,ui-legacy,04-syslog-policy.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png"", width: 78%),
+  caption: [Thiết lập đích Syslog 192.168.122.1:5514/UDP và mức severity Notifications],
+) <fig-k4-syslog-policy>
+
+Với mức `notifications`, thiết bị gửi các bản tin có severity từ 0 đến 5 tới máy chủ Syslog. Phạm vi này phù hợp với bài thử vì bao gồm sự kiện thay đổi trạng thái cổng, thông báo cấu hình và các bản tin do người quản trị chủ động tạo.
+"
+00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png,ui,ui-legacy,05-syslog-config-preview.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png"", width: 82%),
+  caption: [Cửa sổ View & Push Syslog Group tổng hợp lệnh cho 4 thiết bị trước khi thực thi],
+) <fig-k4-syslog-preview>
+
+Với router, cửa sổ trong @fig-k4-syslog-preview hiển thị các lệnh tiêu biểu:
+```text"
+00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png,terminal-evidence,evidence-terminal,06-syslog-r1-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/06-syslog-r1-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Router R1],
+) <fig-k4-r1-verify>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png"", width: 88%),"
+00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png,terminal-evidence,evidence-terminal,07-syslog-r2-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/07-syslog-r2-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Router R2],
+) <fig-k4-r2-verify>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png"", width: 88%),"
+00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png,terminal-evidence,evidence-terminal,08-syslog-r3-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/08-syslog-r3-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Router R3],
+) <fig-k4-r3-verify>
+
+Trên switch `SW1`, cấu hình tương tự nhưng sử dụng `Vlan1` làm cổng nguồn.
+"
+00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png,terminal-evidence,evidence-terminal,09-syslog-sw1-verify.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/09-syslog-sw1-verify.png"", width: 88%),
+  caption: [Xác minh cấu hình Syslog trên Switch SW1 với Source Interface Vlan1],
+) <fig-k4-sw1-verify>
+
+Kết quả xác minh cho thấy cấu hình trên thiết bị khớp với nội dung đã xem trước. Qua đó, quy trình *Syslog Group $arrow$ View & Push $arrow$ Verify* được xác nhận hoạt động trên cả router và switch.
+"
+00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png,ui,ui-legacy,10-syslog-listener-before-start.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png"", width: 94%),
+  caption: [Màn hình System Logs trước khi khởi động Syslog Listener],
+) <fig-k4-listener-before>
+
+Sau khi nhấn *Start Listener*, dịch vụ chuyển sang trạng thái *Listener active* và lắng nghe trên `0.0.0.0:5514/UDP+TCP`. Khi các thiết bị phát sinh sự kiện, các bản tin được đưa trực tiếp vào bảng System Logs theo thời gian thực.
+"
+00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png,ui,ui-legacy,11-syslog-listener-receiving.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png"", width: 94%),
+  caption: [Syslog Listener đang hoạt động và tiếp nhận bản tin từ các thiết bị mạng],
+) <fig-k4-listener-active>
+
+Tại thời điểm ghi nhận trong @fig-k4-listener-active, hệ thống đã tiếp nhận `245` bản tin. Mỗi bản tin được phân tách thành các trường `Time`, `Host`, `Source IP`, `Facility/Severity`, `Mnemonic` và `Message`. Các sự kiện `LINK`, `LINEPROTO` và `SYS` được phân loại theo nguồn gửi và mã sự kiện.
+"
+00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png,ui,ui-legacy,12-syslog-message-detail.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png"", width: 68%),
+  caption: [Cửa sổ chi tiết một bản tin Syslog sau khi được phân tích],
+) <fig-k4-message-detail>
+
+Phần *Raw message* vẫn được giữ nguyên để phục vụ đối chiếu khi cần:
+```text"
+00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png,syslog-evidence,evidence-syslog,13-syslog-r1-device-logs.png,documentation_assets/evidence-syslog/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/13-syslog-r1-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R1],
+) <fig-k4-r1-device-logs>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png"", width: 94%),"
+00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png,syslog-evidence,evidence-syslog,14-syslog-r2-device-logs.png,documentation_assets/evidence-syslog/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/14-syslog-r2-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R2],
+) <fig-k4-r2-device-logs>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png"", width: 94%),"
+00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png,syslog-evidence,evidence-syslog,15-syslog-r3-device-logs.png,documentation_assets/evidence-syslog/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/15-syslog-r3-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Router R3],
+) <fig-k4-r3-device-logs>
+
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png"", width: 94%),"
+00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png,syslog-evidence,evidence-syslog,16-syslog-sw1-device-logs.png,documentation_assets/evidence-syslog/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/16-syslog-sw1-device-logs.png"", width: 94%),
+  caption: [Nhật ký sự kiện kiểm thử phát sinh trực tiếp trên Switch SW1],
+) <fig-k4-sw1-device-logs>
+
+Từ @fig-k4-r1-device-logs đến @fig-k4-sw1-device-logs trình bày chuỗi sự kiện ghi nhận trên bốn thiết bị. Khi thực hiện `shutdown` hoặc `no shutdown`, Cisco IOS phát sinh thông báo về trạng thái liên kết và giao thức đường truyền; các bản tin `USERLOG_*` đánh dấu từng chu kỳ thử nghiệm. Những sự kiện tương ứng xuất hiện trên *System Logs* và được gắn đúng nguồn gửi.
+"
+00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png,ui,ui-legacy,17-email-alert-settings.png,documentation_assets/ui-legacy/,medium,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png"", width: 96%),
+  caption: [Cấu hình mức cảnh báo, tài khoản SMTP và người nhận trên Email Alerts],
+) <fig-k4-email-settings>
+
+@fig-k4-email-settings cho thấy App Password chỉ xuất hiện dưới dạng ký tự che khuất. CAMS lưu giá trị này ở dạng mã hóa và không trả nội dung bí mật về giao diện. Nút *Send test email* cho phép kiểm tra cấu hình trước khi bật luồng cảnh báo thực tế.
+"
+00_book/figures/report/diagrams/syslog-lab/18-email-critical.png,syslog-evidence,evidence-syslog,18-email-critical.png,documentation_assets/evidence-syslog/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/18-email-critical.png"", width: 72%),
+  caption: [Email cảnh báo mức Critical cho sự kiện `%SYS-2-MALLOCFAIL`],
+) <fig-k4-email-critical>
+
+Thư mức Warning tại @fig-k4-email-warning giữ cùng cấu trúc nhưng thay đổi màu, nhãn, khuyến nghị xử lý và dữ liệu thiết bị theo severity. Mỗi thư chứa tên thiết bị, địa chỉ nguồn, thời điểm, số thứ tự, mã Cisco, giao thức, PRI/facility, nội dung đã phân tích và bản tin gốc.
+"
+00_book/figures/report/diagrams/syslog-lab/19-email-warning.png,syslog-evidence,evidence-syslog,19-email-warning.png,documentation_assets/evidence-syslog/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/19-email-warning.png"", width: 72%),
+  caption: [Email cảnh báo mức Warning cho sự kiện `%PM-4-ERR_DISABLE`],
+) <fig-k4-email-warning>
+
+Kết quả đầu ra của chương trình ghi nhận `2` thư đã được chuyển tới máy chủ SMTP để gửi đến địa chỉ nhận đã cấu hình. Phép thử xác nhận đường gửi SMTP và định dạng thư cho hai mức cảnh báo; việc đánh giá độ trễ, giới hạn lưu lượng hoặc tỷ lệ chuyển thư ở quy mô lớn chưa thuộc phạm vi kịch bản này.
+"
+00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png,network-diagram,diagram-network,syslog-lab-topology-report.png,documentation_assets/diagram-network/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png"", width: 92%),
+  caption: [Sơ đồ Kịch bản 4: Thu thập Syslog tập trung],
+) <fig-topo-scenario-4>
+
+Nguồn gửi và chính sách Syslog được trình bày trong bảng quy hoạch dưới đây.
+"
+00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology.svg,network-diagram,diagram-network,syslog-lab-topology.svg,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/diagrams/vlan.png,network-diagram,diagram-network,vlan.png,documentation_assets/diagram-network/,high,Inspected image content; 
+00_book/figures/report/misc/cams-screenshot-2026-09-13-18-17-17.png,terminal-evidence,evidence-terminal,cams-screenshot-2026-09-13-18-17-17.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_book/figures/report/misc/xxd-ntp.png,terminal-evidence,evidence-terminal,xxd-ntp.png,documentation_assets/evidence-terminal/,high,"Inspected image content; 
+#figure(
+  image(""/00_book/figures/report/misc/xxd-ntp.png"", width: 100%),
+  caption: [Phần đầu tệp dự án được bảo vệ, quan sát bằng công cụ xxd],
+) <fig-cams-encrypted-project>
+
+@fig-cams-encrypted-project cho thấy dấu nhận dạng `NTPAES1` và phần thông tin đầu tệp, gồm thuật toán AES-256-GCM, hàm dẫn xuất khóa Argon2id cùng các tham số liên quan. Phần thông tin này có thể đọc được để phục vụ xử lý tệp; ảnh minh họa cấu trúc lưu trữ, không thay thế kiểm thử mã hóa và giải mã. Chương 5 trình bày các kịch bản kiểm chứng chức năng."
+00_report/Tai_lieu_lab/LAB1/1.png,misc,misc,lab1-lab-instructions-page-1-1.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/10.png,misc,misc,lab1-lab-instructions-page-10-10.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/11.png,misc,misc,lab1-lab-instructions-page-11-11.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/12.png,misc,misc,lab1-lab-instructions-page-12-12.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/2.png,misc,misc,lab1-lab-instructions-page-2-2.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/3.png,misc,misc,lab1-lab-instructions-page-3-3.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/4.png,misc,misc,lab1-lab-instructions-page-4-4.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/5.png,misc,misc,lab1-lab-instructions-page-5-5.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/6.png,misc,misc,lab1-lab-instructions-page-6-6.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/7.png,misc,misc,lab1-lab-instructions-page-7-7.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/8.png,misc,misc,lab1-lab-instructions-page-8-8.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/9.png,misc,misc,lab1-lab-instructions-page-9-9.png,documentation_assets/misc/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/1.png,network-diagram,diagram-network,anh-cua-lab-lab-router-switch-management-topology-1.png,documentation_assets/diagram-network/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 10.png,terminal-evidence,evidence-terminal,anh-cua-lab-r2-interface-ip-configuration-verification-image-copy-10.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 11.png,ui,ui-legacy,anh-cua-lab-l2-security-static-mac-editor-image-copy-11.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 12.png,terminal-evidence,evidence-terminal,anh-cua-lab-r2-interface-status-verification-image-copy-12.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 13.png,ui,ui-legacy,anh-cua-lab-system-logs-filtered-messages-image-copy-13.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 14.png,ui,ui-legacy,anh-cua-lab-l2-security-view-push-dialog-image-copy-14.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 2.png,ui,ui-legacy,anh-cua-lab-router-interface-editor-image-copy-2.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 3.png,ui,ui-legacy,anh-cua-lab-dhcp-pool-editor-image-copy-3.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 4.png,ui,ui-legacy,anh-cua-lab-acl-standard-rule-editor-image-copy-4.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 5.png,ui,ui-legacy,anh-cua-lab-l2-security-port-security-editor-image-copy-5.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 6.png,ui,ui-legacy,anh-cua-lab-l2-security-editor-save-result-image-copy-6.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 7.png,ui,ui-legacy,anh-cua-lab-system-logs-receiving-messages-image-copy-7.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 8.png,ui,ui-legacy,anh-cua-lab-l2-security-view-push-overlay-image-copy-8.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 9.png,terminal-evidence,evidence-terminal,anh-cua-lab-r1-interface-ip-configuration-verification-image-copy-9.png,documentation_assets/evidence-terminal/,high,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy.png,ui,ui-legacy,anh-cua-lab-router-interface-physical-settings-image-copy.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
+00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image.png,ui,ui-legacy,anh-cua-lab-switch-ports-inventory-image.png,documentation_assets/ui-legacy/,medium,Inspected image content; 
