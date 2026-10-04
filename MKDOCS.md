@@ -6,8 +6,9 @@ MkDocs lấy nội dung từ `00_book` và tạo website tĩnh trong `site`. Cá
 
 ```bash
 python -m pip install -r requirements-docs.txt
-python scripts/validate_documentation_assets.py
+python scripts/validate_documentation_assets.py --manifest-only
 python scripts/sync_documentation_assets.py
+python scripts/validate_documentation_assets.py --check-staging
 mkdocs serve
 ```
 
@@ -16,9 +17,9 @@ Mở địa chỉ được MkDocs hiển thị, mặc định là <http://127.0.
 Kiểm tra bản build giống GitHub Actions:
 
 ```bash
-python scripts/validate_documentation_assets.py
+python scripts/validate_documentation_assets.py --manifest-only
 python scripts/sync_documentation_assets.py
-python scripts/sync_documentation_assets.py --check
+python scripts/validate_documentation_assets.py --check-staging
 mkdocs build --strict
 ```
 

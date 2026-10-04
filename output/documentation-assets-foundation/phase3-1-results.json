@@ -1,0 +1,65 @@
+{
+  "phase": "3.1",
+  "baseline_commit": "9dfb15d50b9707b8beb22b071e9d117214845bdf",
+  "ci_order": [
+    "validate --manifest-only",
+    "sync",
+    "validate --check-staging",
+    "mkdocs build --strict"
+  ],
+  "b02": {
+    "total": 39,
+    "safe_first": 5,
+    "review_remaining": 34,
+    "sub_batches": {
+      "B02A": 5,
+      "B02F": 2,
+      "B02B1": 5,
+      "B02C": 4,
+      "B02B2": 5,
+      "B02B3": 5,
+      "B02B4": 5,
+      "B02E1": 3,
+      "B02D": 2,
+      "B02E2": 3
+    },
+    "review_categories": {
+      "safe-first-migration": 5,
+      "unresolved": 2,
+      "safe-authored-svg": 20,
+      "raster-vector-pair-review": 4,
+      "legacy-raster-diagram": 6,
+      "lab-topology-review": 2
+    },
+    "transfers": 0
+  },
+  "validation": {
+    "pre_sync": "pass",
+    "sync": "pass; 178 selected, no staged changes",
+    "post_sync": "pass; 178 existing broken HTML occurrences remain baseline exceptions",
+    "asset_tests": "17 passed",
+    "destination_tests": "5 passed",
+    "mkdocs": "pass",
+    "book_typst": "unavailable",
+    "report_typst": "unavailable",
+    "fresh_checkout_regression": "pre-sync pass before staging; post-sync fail before sync, pass after sync, fail after staged-file removal",
+    "frozen_references": "pass"
+  },
+  "integrity": {
+    "source_images_unchanged": 407,
+    "frozen_images_unchanged": 62,
+    "staged_images_unchanged": 178,
+    "terminal_sources_unchanged": true,
+    "manifest_and_freeze_contracts_unchanged": true,
+    "canonical_images": 0,
+    "image_transfers": 0,
+    "image_render_commands": 0
+  },
+  "docshot": {
+    "strategy": "B",
+    "default_canonical_writes": "blocked until B03 manifest-backed semantic output map",
+    "planned_record_mismatches": 42,
+    "unmapped_dialog_outputs": 4,
+    "explicit_temporary_override": "preserved and tested"
+  }
+}

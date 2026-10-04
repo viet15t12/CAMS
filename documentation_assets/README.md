@@ -18,7 +18,8 @@ Six nonterminal exact-copy pairs retain distinct physical inventory records pend
 
 ```sh
 python -m pip install -r requirements-docs.txt
-python scripts/validate_documentation_assets.py
+python scripts/validate_documentation_assets.py --manifest-only
+python scripts/sync_documentation_assets.py
 python scripts/validate_documentation_assets.py --check-staging
 python scripts/validate_documentation_assets.py --strict-references
 ```
@@ -40,10 +41,10 @@ mkdocs build --strict
 
 The sync resolves this checkout independently of CWD, verifies source/destination hashes, copies bytes losslessly through temporary files and atomic replace, and uses deterministic JSON/order. Dry-run/check never write. A journal ledger owns intended outputs before copying so interrupted sync can retry; the completed ledger is written after successful cleanup. Unknown/unowned files, invalid ledgers, symlinks or modified stale files fail safely. Stale removal applies only to valid ledger-owned paths inside staging; source assets and arbitrary files are never deleted. The interrupted journal cannot pass `--check`.
 
-Default docshot output now lives under `documentation_assets/ui/docshot/` by workflow domain. `--output-dir` remains an exact explicit override, including chapter workflows. Existing renderer filenames remain unchanged in this foundation; semantic filename/output-map transition belongs to its future asset batch. No default render command is run during Phase 3.
+Default docshot output now lives under `documentation_assets/ui/docshot/` by workflow domain. `--output-dir` remains an exact explicit override, including chapter workflows. Existing renderer filenames remain unchanged in this foundation; semantic filename/output-map transition belongs to its future asset batch. Phase 3.1 strategy B blocks default writes until B03 implements a manifest-backed semantic output map; explicit `--output-dir` still works. See `output/documentation-assets-foundation/phase3-1.md` for the mismatch audit and release gate.
 
 ## CI and next batch
 
-Docs CI watches canonical metadata/source changes, asset scripts and book/config/dependencies. Order: validate → sync → check → MkDocs strict build. It publishes the website output, not this canonical root. Book Typst's image helper passes project-root `/...` paths through and preserves the old relative behavior; report's helper already supports its existing absolute paths, so it remains unchanged.
+Docs CI watches canonical metadata/source changes, asset scripts and book/config/dependencies. Order: pre-sync `--manifest-only` (current sources and frozen bytes/references) → sync → post-sync `--check-staging` (full references and freshness/hashes) → MkDocs strict build. Fresh checkout does not require generated files during pre-sync. It publishes the website output, not this canonical root. Book Typst's image helper passes project-root `/...` paths through and preserves the old relative behavior; report's helper already supports its existing absolute paths, so it remains unchanged.
 
 B02 (branding/vector) follows the Phase 2.1 atomic plan. Preserve SHA and captions, rewrite only assets in that batch, update manifest current/planned state and baseline exceptions, resync/check, then validate/build. Never include frozen terminals. Baseline/runtime test limitations and executed commands are recorded in `output/documentation-assets-foundation/README.md`.

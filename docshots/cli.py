@@ -81,6 +81,9 @@ def ensure_output_directory(path: Path) -> Path:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.output_dir is None:
+        print("docshots: default canonical writes are blocked until B03 supplies a manifest-backed semantic output map; use --output-dir for temporary rendering", file=sys.stderr)
+        return 1
     try:
         output_dir = resolve_output_directory(args.shot, args.output_dir)
     except ValueError as exc:

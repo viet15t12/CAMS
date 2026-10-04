@@ -167,5 +167,34 @@
     "e83f451ec1be45a1d55a5cb7766cb0efd0f993f9",
     "a15e7a42d03ea317f5ad5f1e7d8dbd849146167b"
   ],
-  "preexisting_main_markers": "present in c21c153 chapters08/09, removed by current e44ba4e upstream"
+  "preexisting_main_markers": "present in c21c153 chapters08/09, removed by current e44ba4e upstream",
+  "b02_execution_preflight": {
+    "phase": "3.1",
+    "total": 39,
+    "safe_first": 5,
+    "review_remaining": 34,
+    "sub_batches": {
+      "B02A": 5,
+      "B02F": 2,
+      "B02B1": 5,
+      "B02C": 4,
+      "B02B2": 5,
+      "B02B3": 5,
+      "B02B4": 5,
+      "B02E1": 3,
+      "B02D": 2,
+      "B02E2": 3
+    },
+    "classification_counts": {
+      "safe-first-migration": 5,
+      "unresolved": 2,
+      "safe-authored-svg": 20,
+      "raster-vector-pair-review": 4,
+      "legacy-raster-diagram": 6,
+      "lab-topology-review": 2
+    },
+    "metadata": "b02-preflight.csv",
+    "asset_transfers": 0,
+    "review_approval": "No review-required record auto-approved; historical Phase 2 count retained only as history."
+  }
 }

@@ -196,6 +196,63 @@ class DocumentationAssetTests(unittest.TestCase):
         self.assertEqual([r["line"] for r in refs], [1, 3, 2])
         self.assertTrue(all(not r["exists"] for r in refs))
 
+    def test_fresh_checkout_pre_sync_then_full_post_sync(self):
+        import yaml
+        from scripts.validate_documentation_assets import main
+        from contextlib import redirect_stdout
+        import io
+        (self.root / "documentation_assets/manifest.yaml").write_text(yaml.safe_dump(self.data))
+        book = self.root / "00_book/DOC/page.md"
+        book.parent.mkdir(parents=True)
+        book.write_text('![asset](../assets/ui/core/example.png)\n')
+        self.assertFalse((self.root / STAGE_ROOT).exists())
+        with redirect_stdout(io.StringIO()):
+            self.assertEqual(main(["--manifest-only"], root=self.root), 0)
+            self.assertEqual(main(["--check-staging"], root=self.root), 1)
+            sync(self.data, self.root)
+            self.assertEqual(main(["--check-staging"], root=self.root), 0)
+            (self.root / self.record["mkdocs_stage_path"]).unlink()
+            self.assertEqual(main(["--check-staging"], root=self.root), 1)
+
+    def test_pre_sync_keeps_frozen_reference_contract(self):
+        import yaml
+        from scripts.validate_documentation_assets import main
+        from contextlib import redirect_stdout
+        import io
+        (self.root / "documentation_assets/manifest.yaml").write_text(yaml.safe_dump(self.data))
+        self.contract["references"] = [dict(source_document="00_report/main.typ", referenced_path="/frozen.png", count=1)]
+        self.write_contract()
+        with redirect_stdout(io.StringIO()):
+            self.assertEqual(main(["--manifest-only"], root=self.root), 1)
+
+    def test_b02_preflight_partition_matches_manifest_without_approval(self):
+        import csv
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        records = {a["id"]: a for a in yaml.safe_load((root / "documentation_assets/manifest.yaml").read_text())["assets"]}
+        with (root / "output/documentation-assets-plan/b02-preflight.csv").open() as stream:
+            rows = list(csv.DictReader(stream))
+        with (root / "output/documentation-assets-plan/migration-batches.csv").open() as stream:
+            parent = next(r for r in csv.DictReader(stream) if r["batch_id"] == "B02")
+        self.assertEqual(len(rows), 39)
+        self.assertEqual({r["asset_id"] for r in rows}, set(json.loads(parent["asset_ids"])))
+        safe = {"branding.logos.cams", "diagrams.architecture.application-source-tree",
+                "diagrams.workflow.configuration-state-flow", "diagrams.architecture.cams-layered-system",
+                "diagrams.lab-topology.switching.layer-two-security"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02A"}, safe)
+        for row in rows:
+            asset = records[row["asset_id"]]
+            self.assertEqual(row["current_path"], asset["current_path"])
+            self.assertEqual(row["planned_canonical_path"], asset["planned_canonical_path"])
+            self.assertEqual(row["sha256"], asset["sha256"])
+            self.assertEqual(asset["migration_state"], "pending")
+            if row["asset_id"] in safe:
+                self.assertFalse(asset["review_required"])
+                self.assertEqual(asset["confidence"], "high")
+            else:
+                self.assertTrue(asset["review_required"])
+                self.assertEqual(row["review_approved"], "false")
+
 
 if __name__ == "__main__":
     unittest.main()

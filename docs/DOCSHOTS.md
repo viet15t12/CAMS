@@ -7,11 +7,11 @@
 From the repository root:
 
 ```bash
-uv run python scripts/docshots.py welcome
-uv run python scripts/docshots.py workspace
-uv run python scripts/docshots.py devices
-uv run python scripts/docshots.py vlan
-uv run python scripts/docshots.py all
+uv run python scripts/docshots.py welcome --output-dir /tmp/cams-docshot-welcome
+uv run python scripts/docshots.py workspace --output-dir /tmp/cams-docshot-workspace
+uv run python scripts/docshots.py devices --output-dir /tmp/cams-docshot-devices
+uv run python scripts/docshots.py vlan --output-dir /tmp/cams-docshot-vlan
+uv run python scripts/docshots.py all --output-dir /tmp/cams-docshot-all
 ```
 
 The defaults are a 1600 x 1000 logical QML layout, scale 2, and the light theme. The resulting PNG is 3200 x 2000 pixels. Qt Quick renders that target resolution directly with `QQuickItem.grabToImage()`; the tool does not resize a captured raster with Pillow.
@@ -26,7 +26,7 @@ Options:
 --output-dir PATH    destination directory
 ```
 
-The default destination is resolved from the repository location, not the current working directory:
+The reserved default destination is resolved from the repository location, independent of CWD. **Phase 3.1 strategy B blocks default writes:** rendering requires an explicit `--output-dir` until B03 introduces a manifest-backed semantic output map. The resolver layout below is not yet a supported canonical generation contract:
 
 ```text
 <repo-root>/documentation_assets/ui/docshot/
@@ -50,14 +50,14 @@ Existing files are replaced atomically and filenames never contain timestamps.
 Run the complete VLAN documentation sequence from the repository root:
 
 ```bash
-uv run python scripts/docshots.py vlan
+uv run python scripts/docshots.py vlan --output-dir /tmp/cams-docshot-vlan
 ```
 
 The workflow renders the production `Main`, `SwitchWorkspace`, `VlanPage`, and
-View & Push preview QML into:
+View & Push preview QML into the exact explicit temporary output directory:
 
 ```text
-<repo-root>/documentation_assets/ui/docshot/switching/vlan/
+/tmp/cams-docshot-vlan/
 ```
 
 It opens the documentation fixture `SW1` at `192.0.2.11` (Cisco IOS, role
@@ -103,13 +103,13 @@ uv run python -m unittest discover -s tests -v
 Chapter workflows are registered:
 
 ```sh
-uv run python scripts/docshots.py chapter-03
-uv run python scripts/docshots.py chapter-04
-uv run python scripts/docshots.py dialogs
+uv run python scripts/docshots.py chapter-03 --output-dir /tmp/cams-docshot-chapter-03
+uv run python scripts/docshots.py chapter-04 --output-dir /tmp/cams-docshot-chapter-04
+uv run python scripts/docshots.py dialogs --output-dir /tmp/cams-docshot-dialogs
 uv run python scripts/docshots.py chapter-03 --output-dir /tmp/cams-chapter03-check
 ```
 
-`--output-dir` is an **exact destination**, for every shot/workflow, including VLAN and chapters. Default `all` dispatches welcome/workspace/devices to their individual domains; an override keeps all three directly in that chosen directory. Defaults are checkout-relative, independent of CWD, and reject symlink escape; explicit one-off output may be outside the checkout. No command is forced back into canonical storage when an override is given.
+`--output-dir` is an **exact destination**, for every shot/workflow, including VLAN and chapters. Without an override the CLI fails before Qt/runtime initialization. With an override, `all` keeps all three shots directly in that chosen directory. Defaults are checkout-relative, independent of CWD, and reject symlink escape; explicit one-off output may be outside the checkout. No command is forced back into canonical storage when an override is given.
 
 This infrastructure change does not move/regenerate any existing screenshot. Renderer filenames/order stay unchanged until the later semantic output-map/asset batch; chapter numbers remain CLI workflow names, not proposed long-term asset taxonomy. Temporary test captures are isolated, never written over repository images. `00_book/assets/` is solely generated staging via `scripts/sync_documentation_assets.py`, never a docshot default. Terminal images and the terminal renderer are frozen external assets, outside docshot destination migration.
 
@@ -120,3 +120,9 @@ python -m unittest tests.test_docshot_destinations -v
 ```
 
 Full Qt/workflow repeatability tests require the project environment (`uv run ...`). The chapter-03 offline training-package test additionally requires `00_book/fixtures/chapter-03/build_fixture.py`. That builder is absent in the current checkout; this existing test prerequisite is reported rather than invented by the asset infrastructure phase.
+
+## B03 semantic output gate (Phase 3.1 strategy B)
+
+The reserved root alone does not make generated files canonical. Current chapter-03 output `core/01-workspace-overview.png` differs from manifest `core/workspace-overview.png`; chapter-04 `devices/01-devices-inventory.png` differs from `devices/inventory-waiting.png`; VLAN `switching/vlan/01-select-switch.png` differs from `switching/vlan/switch-selected.png`. Some chapter-03 outputs also require a different domain, and registered `workspace` currently resolves to project while its planned record is core. Dialog regression outputs do not yet have manifest identities.
+
+Strategy B is enforced now: no default canonical rendering until B03. B03 must add an explicit shot→logical ID→full semantic path map, validate selected IDs/paths and workflow coverage before any write, reject unmanaged outputs/collisions, reconcile the status-details workflow output missing from the registry tuple and decide dialog identities, and test that all default outputs exactly match manifest records. Only then may the guard be removed. Do not infer the mapping by stripping numeric prefixes. Keep temporary output overrides and terminal freeze. Full per-record audit: `output/documentation-assets-plan/docshot-output-preflight.csv`. No PNG is regenerated during this preflight.

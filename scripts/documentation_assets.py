@@ -258,6 +258,18 @@ def validate_references(root: Path = REPO_ROOT, strict: bool = False) -> tuple[l
         accepted += exempt
         if count > exempt:
             errors.append(f"broken image ({count-exempt}): {key[0]} -> {key[1]} resolves {key[3]}")
+    errors += validate_frozen_references(root, refs)
+    for r in refs:
+        if r["source_document"].startswith("00_report/") and (r["resolved_path"].startswith(STAGE_ROOT + "/") or "00_book/assets/" in r["referenced_path"]):
+            errors.append(f"report cannot reference MkDocs staging: {r['source_document']}:{r['line']}")
+    return errors, accepted
+
+
+def validate_frozen_references(root: Path = REPO_ROOT, refs: list[dict] | None = None) -> list[str]:
+    """Enforce immutable terminal uses without requiring generated staging."""
+    errors = []
+    if refs is None:
+        refs = image_references(root)
     # Frozen reference counts are a multiset; line shifts during future nonterminal edits are harmless.
     freeze = json.loads(repository_path(root, "documentation_assets/terminal-freeze.json").read_text())
     expected = collections.Counter({(r["source_document"], r["referenced_path"]): r["count"] for r in freeze["references"]})
@@ -265,7 +277,4 @@ def validate_references(root: Path = REPO_ROOT, strict: bool = False) -> tuple[l
     actual = collections.Counter((r["source_document"], r["referenced_path"]) for r in refs if r["resolved_path"] in frozen_paths)
     if expected != actual:
         errors.append(f"frozen terminal reference multiset changed: removed={dict(expected-actual)}, added={dict(actual-expected)}")
-    for r in refs:
-        if r["source_document"].startswith("00_report/") and (r["resolved_path"].startswith(STAGE_ROOT + "/") or "00_book/assets/" in r["referenced_path"]):
-            errors.append(f"report cannot reference MkDocs staging: {r['source_document']}:{r['line']}")
-    return errors, accepted
+    return errors

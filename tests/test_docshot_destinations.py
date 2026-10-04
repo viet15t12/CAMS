@@ -61,10 +61,12 @@ class DocshotDestinationTests(unittest.TestCase):
             finally:
                 os.chdir(previous)
 
-    def test_all_dispatches_to_domains(self):
-        calls = self.run_cli(['all'])
-        self.assertEqual([name for name, _ in calls], ['welcome', 'workspace', 'devices'])
-        self.assertEqual([r.output_dir for _, r in calls], [cli.DEFAULT_OUTPUT_DIR / d for d in ['core', 'project', 'devices']])
+    def test_default_canonical_writes_blocked_before_runtime_import(self):
+        with patch.object(cli, 'configure_qt_environment') as configure, patch('builtins.print') as message:
+            for name in cli.DEFAULT_DOMAINS:
+                self.assertEqual(cli.main([name]), 1)
+            configure.assert_not_called()
+            self.assertIn('semantic output map', message.call_args.args[0])
 
     def test_every_workflow_respects_exact_temporary_override(self):
         with tempfile.TemporaryDirectory() as directory:
