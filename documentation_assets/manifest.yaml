@@ -9782,14 +9782,14 @@ assets:
   domain: diagrams/network
   subject: nat-pat-internet-topology
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/09_nat_pat.svg
-  path: 00_book/figures/report/diagrams/09_nat_pat.svg
+  current_path: documentation_assets/diagrams/network/nat-pat-internet-topology.svg
+  path: documentation_assets/diagrams/network/nat-pat-internet-topology.svg
   planned_canonical_path: documentation_assets/diagrams/network/nat-pat-internet-topology.svg
   legacy_path: 00_book/figures/report/diagrams/09_nat_pat.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 2b53056aa4162191a2f4d71a916d359cfd76317df3f1dfbbe91a7586ba3c01e0
   provenance:
     assessment: unknown
@@ -9821,14 +9821,14 @@ assets:
   domain: diagrams/network
   subject: fhrp-virtual-gateway
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/10_fhrp_gateway.svg
-  path: 00_book/figures/report/diagrams/10_fhrp_gateway.svg
+  current_path: documentation_assets/diagrams/network/fhrp-virtual-gateway.svg
+  path: documentation_assets/diagrams/network/fhrp-virtual-gateway.svg
   planned_canonical_path: documentation_assets/diagrams/network/fhrp-virtual-gateway.svg
   legacy_path: 00_book/figures/report/diagrams/10_fhrp_gateway.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d3be707ec2bdafb2d9d565dac9f111c85508a290f79f0e3809b50c2317c94bbb
   provenance:
     assessment: unknown
@@ -9860,14 +9860,14 @@ assets:
   domain: diagrams/database
   subject: device-entity-relations
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/11_db_schema.svg
-  path: 00_book/figures/report/diagrams/11_db_schema.svg
+  current_path: documentation_assets/diagrams/database/device-entity-relations.svg
+  path: documentation_assets/diagrams/database/device-entity-relations.svg
   planned_canonical_path: documentation_assets/diagrams/database/device-entity-relations.svg
   legacy_path: 00_book/figures/report/diagrams/11_db_schema.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 04b583315e577bd5a22d9278f6ed7d16323624c2b43b3c3ebfbcdab113516c40
   provenance:
     assessment: unknown
@@ -9899,14 +9899,14 @@ assets:
   domain: diagrams/architecture
   subject: netmiko-ssh-stack
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/12_netmiko_stack.svg
-  path: 00_book/figures/report/diagrams/12_netmiko_stack.svg
+  current_path: documentation_assets/diagrams/architecture/netmiko-ssh-stack.svg
+  path: documentation_assets/diagrams/architecture/netmiko-ssh-stack.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/netmiko-ssh-stack.svg
   legacy_path: 00_book/figures/report/diagrams/12_netmiko_stack.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 45c43f585959167310e1b32820c462160f8683641875e21f6254c22e90d4622a
   provenance:
     assessment: unknown
@@ -9938,14 +9938,14 @@ assets:
   domain: diagrams/architecture
   subject: qtquick-component-tree
   source_kind: authored-svg
-  current_path: 00_book/figures/report/diagrams/13_qtquick_tree.svg
-  path: 00_book/figures/report/diagrams/13_qtquick_tree.svg
+  current_path: documentation_assets/diagrams/architecture/qtquick-component-tree.svg
+  path: documentation_assets/diagrams/architecture/qtquick-component-tree.svg
   planned_canonical_path: documentation_assets/diagrams/architecture/qtquick-component-tree.svg
   legacy_path: 00_book/figures/report/diagrams/13_qtquick_tree.svg
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 81a1a53810e29033833b03d72833b0228606c6dfe986a3ebd3e5ec88e45c6166
   provenance:
     assessment: unknown

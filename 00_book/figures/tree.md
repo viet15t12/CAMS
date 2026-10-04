@@ -217,11 +217,6 @@
 │   │   ├── 07_ospf_area.svg
 │   │   ├── 08_acl_packet_flow.jpg
 │   │   ├── 08_acl_packet_flow.svg
-│   │   ├── 09_nat_pat.svg
-│   │   ├── 10_fhrp_gateway.svg
-│   │   ├── 11_db_schema.svg
-│   │   ├── 12_netmiko_stack.svg
-│   │   ├── 13_qtquick_tree.svg
 │   │   ├── 14_qml_signal_slot.svg
 │   │   ├── 15_ui_thread_workers.svg
 │   │   ├── 16_host_lock.svg
@@ -363,5 +358,15 @@ B02B1 canonical orphan diagrams (outside this figures tree):
 - documentation_assets/diagrams/architecture/ssh-session-connection.svg
 - documentation_assets/diagrams/workflow/device-session-lifecycle.svg
 - documentation_assets/diagrams/workflow/dhcp-dora-sequence.svg
+
+These five diagrams remain unused/orphan-review and are not selected for MkDocs staging.
+
+B02B2 canonical orphan diagrams (outside this figures tree):
+
+- documentation_assets/diagrams/network/nat-pat-internet-topology.svg
+- documentation_assets/diagrams/network/fhrp-virtual-gateway.svg
+- documentation_assets/diagrams/database/device-entity-relations.svg
+- documentation_assets/diagrams/architecture/netmiko-ssh-stack.svg
+- documentation_assets/diagrams/architecture/qtquick-component-tree.svg
 
 These five diagrams remain unused/orphan-review and are not selected for MkDocs staging.

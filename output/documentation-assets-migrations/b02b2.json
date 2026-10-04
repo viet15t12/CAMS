@@ -1,0 +1,549 @@
+{
+  "batch": "B02B2",
+  "date": "2026-10-04",
+  "branch": "docs/pictures-sort",
+  "starting_commit": "595457a99a4907b48102bc412816c2d96af769bb",
+  "status": "PASS — all five APPROVED; local and fresh-checkout validation complete",
+  "review": [
+    {
+      "asset_id": "diagrams.network.nat-pat-internet-topology",
+      "decision": "APPROVE",
+      "content_summary": "PC1/PC2/PC3 (10.1.1.1–3) on inside 10.1.1.0/24 connect via PAT router, outside 37.3.1.0/30 and Internet to Google-labelled external host 8.8.8.8.",
+      "asset_class": "network-diagram",
+      "semantic_name_judgment": "nat-pat-internet-topology accurately describes the illustrated PAT inside/outside network, clients and Internet edge. Network is the appropriate directory.",
+      "current_semantic_review": "Illustrative historical topology; labels/addresses are not a current deployed network or live external-service inventory. No CAMS API/UI architecture claim.",
+      "repository_evidence": "00_report/contents/08_xay_dung_phan_mem.typ: ACL and NAT/PAT section",
+      "confidence": "high",
+      "reason": "Rendered meaning is clear, proposed ID/category/name fit the conceptual content, zero live image usage and no known unresolved duplicate or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of Inkscape PNG rendering, plus SVG XML/text inspection",
+        "preview": "/tmp/cams-b02b2/09_nat_pat.png"
+      },
+      "provenance_note": "Original author/exporter identity remains unestablished; authored SVG format is not a generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.network.fhrp-virtual-gateway",
+      "decision": "APPROVE",
+      "content_summary": "Virtual Gateway branches to R1 and R2.",
+      "asset_class": "network-diagram",
+      "semantic_name_judgment": "fhrp-virtual-gateway accurately identifies the shared virtual-gateway relationship; network directory fits.",
+      "current_semantic_review": "Conceptual gateway redundancy, not a claim of a specific FHRP protocol, exact state, priority, failover result or physical wiring. Compatible with the current report FHRP discussion.",
+      "repository_evidence": "00_report/contents/08_xay_dung_phan_mem.typ: Interfaces/DHCP/routing and FHRP discussion",
+      "confidence": "high",
+      "reason": "Rendered meaning is clear, proposed ID/category/name fit the conceptual content, zero live image usage and no known unresolved duplicate or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of Inkscape PNG rendering, plus SVG XML/text inspection",
+        "preview": "/tmp/cams-b02b2/10_fhrp_gateway.png"
+      },
+      "provenance_note": "Original author/exporter identity remains unestablished; authored SVG format is not a generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.database.device-entity-relations",
+      "decision": "APPROVE",
+      "content_summary": "Device has 1 — n relationships to Interface, Route, DHCP Pool, ACL and NAT Rule.",
+      "asset_class": "database-diagram",
+      "semantic_name_judgment": "device-entity-relations describes a selected conceptual device-centric entity relationship model. It deliberately does not promise a complete SQL schema.",
+      "current_semantic_review": "Current schemas associate these feature records with devices, sometimes through parent entities. This simplified model omits table names, keys, intermediary tables, observations DB and many other entities; no complete schema/DDL equivalence claim.",
+      "repository_evidence": "infrastructure/database/schemas/device_network/{02_interface_router_l3,03_dhcp_helper,04_routing,05_security_nat}.sql; 00_report/contents/07_phan_tich_thiet_ke.typ: current schema discussion",
+      "confidence": "high",
+      "reason": "Rendered meaning is clear, proposed ID/category/name fit the conceptual content, zero live image usage and no known unresolved duplicate or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of Inkscape PNG rendering, plus SVG XML/text inspection",
+        "preview": "/tmp/cams-b02b2/11_db_schema.png"
+      },
+      "provenance_note": "Original author/exporter identity remains unestablished; authored SVG format is not a generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    },
+    {
+      "asset_id": "diagrams.architecture.netmiko-ssh-stack",
+      "decision": "APPROVE",
+      "content_summary": "Python → Netmiko → Paramiko / SSH → Cisco IOS.",
+      "asset_class": "architecture-diagram",
+      "semantic_name_judgment": "netmiko-ssh-stack identifies the conceptual SSH software/transport stack for Cisco IOS; architecture directory fits.",
+      "current_semantic_review": "Still defensible for the SSH case: current factory imports ConnectHandler/CiscoIosSSH, CAMSCiscoIosSSH subclasses it, and the SSH adapter uses paramiko.Transport. It does not claim exhaustive transports, device families, version-specific internals or direct application dependence on every layer.",
+      "repository_evidence": "pyproject.toml:16-17; infrastructure/network/netmiko_factory.py; infrastructure/network/ssh_algorithms.py; Netmiko primary API source",
+      "confidence": "high",
+      "reason": "Rendered meaning is clear, proposed ID/category/name fit the conceptual content, zero live image usage and no known unresolved duplicate or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of Inkscape PNG rendering, plus SVG XML/text inspection",
+        "preview": "/tmp/cams-b02b2/12_netmiko_stack.png"
+      },
+      "provenance_note": "Original author/exporter identity remains unestablished; authored SVG format is not a generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "primary_source": {
+        "title": "Netmiko BaseConnection API source",
+        "url": "https://ktbyers.github.io/netmiko/docs/netmiko/base_connection.html",
+        "evidence": "SSH establish_connection constructs a Paramiko SSHClient and invokes an interactive shell; consistent with the conceptual transport layer."
+      }
+    },
+    {
+      "asset_id": "diagrams.architecture.qtquick-component-tree",
+      "decision": "APPROVE",
+      "content_summary": "ApplicationWindow branches to Header, Device Sidebar, Workspace and Status Bar.",
+      "asset_class": "architecture-diagram",
+      "semantic_name_judgment": "qtquick-component-tree is accurate for conceptual UI component groupings; it does not contain exact-runtime, object-id, source-file or generated-hierarchy wording.",
+      "current_semantic_review": "Main.qml uses StatefulWindow, which inherits ApplicationWindow. Current layout contains title/header, sidebar, workspaces and StatusBar. The simplified tree omits ActivityBar, loaders, nesting and optional views, so it is not an exact runtime QML object hierarchy. No rename is needed for the scoped conceptual interpretation.",
+      "repository_evidence": "UI/qml/app/Main.qml:10, mainWorkspace layout, sidebar/workspace and StatusBar; UI/qml/app/StatefulWindow.qml:8",
+      "confidence": "high",
+      "reason": "Rendered meaning is clear, proposed ID/category/name fit the conceptual content, zero live image usage and no known unresolved duplicate or canonical conflict.",
+      "visual_inspection": {
+        "method": "Direct visual inspection of Inkscape PNG rendering, plus SVG XML/text inspection",
+        "preview": "/tmp/cams-b02b2/13_qtquick_tree.png"
+      },
+      "provenance_note": "Original author/exporter identity remains unestablished; authored SVG format is not a generator claim.",
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": []
+    }
+  ],
+  "hash_authority": "Phase 3.3 exact repository-stored bytes",
+  "usage": "All five remain orphan-review; no live image references",
+  "manifest": {
+    "migrated": 15,
+    "pending": 330,
+    "frozen": 62
+  },
+  "metadata_policy": "Only current_path/path/migration_state/canonical change. Legacy_path, SHA, ID, subject, domain, classification, provenance and orphan/review/usage/staging metadata remain unchanged.",
+  "authority": {
+    "fetched_main": "e44ba4e79fb14031b89eeca68446109da3cbfb2e",
+    "ahead": 11,
+    "behind": 0
+  },
+  "migration": [
+    {
+      "asset_id": "diagrams.network.nat-pat-internet-topology",
+      "old_path": "00_book/figures/report/diagrams/09_nat_pat.svg",
+      "canonical_path": "documentation_assets/diagrams/network/nat-pat-internet-topology.svg",
+      "source_blob_sha": "2b53056aa4162191a2f4d71a916d359cfd76317df3f1dfbbe91a7586ba3c01e0",
+      "canonical_filesystem_sha": "2b53056aa4162191a2f4d71a916d359cfd76317df3f1dfbbe91a7586ba3c01e0",
+      "canonical_index_sha": "2b53056aa4162191a2f4d71a916d359cfd76317df3f1dfbbe91a7586ba3c01e0",
+      "manifest_sha": "2b53056aa4162191a2f4d71a916d359cfd76317df3f1dfbbe91a7586ba3c01e0",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.network.fhrp-virtual-gateway",
+      "old_path": "00_book/figures/report/diagrams/10_fhrp_gateway.svg",
+      "canonical_path": "documentation_assets/diagrams/network/fhrp-virtual-gateway.svg",
+      "source_blob_sha": "d3be707ec2bdafb2d9d565dac9f111c85508a290f79f0e3809b50c2317c94bbb",
+      "canonical_filesystem_sha": "d3be707ec2bdafb2d9d565dac9f111c85508a290f79f0e3809b50c2317c94bbb",
+      "canonical_index_sha": "d3be707ec2bdafb2d9d565dac9f111c85508a290f79f0e3809b50c2317c94bbb",
+      "manifest_sha": "d3be707ec2bdafb2d9d565dac9f111c85508a290f79f0e3809b50c2317c94bbb",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.database.device-entity-relations",
+      "old_path": "00_book/figures/report/diagrams/11_db_schema.svg",
+      "canonical_path": "documentation_assets/diagrams/database/device-entity-relations.svg",
+      "source_blob_sha": "04b583315e577bd5a22d9278f6ed7d16323624c2b43b3c3ebfbcdab113516c40",
+      "canonical_filesystem_sha": "04b583315e577bd5a22d9278f6ed7d16323624c2b43b3c3ebfbcdab113516c40",
+      "canonical_index_sha": "04b583315e577bd5a22d9278f6ed7d16323624c2b43b3c3ebfbcdab113516c40",
+      "manifest_sha": "04b583315e577bd5a22d9278f6ed7d16323624c2b43b3c3ebfbcdab113516c40",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.architecture.netmiko-ssh-stack",
+      "old_path": "00_book/figures/report/diagrams/12_netmiko_stack.svg",
+      "canonical_path": "documentation_assets/diagrams/architecture/netmiko-ssh-stack.svg",
+      "source_blob_sha": "45c43f585959167310e1b32820c462160f8683641875e21f6254c22e90d4622a",
+      "canonical_filesystem_sha": "45c43f585959167310e1b32820c462160f8683641875e21f6254c22e90d4622a",
+      "canonical_index_sha": "45c43f585959167310e1b32820c462160f8683641875e21f6254c22e90d4622a",
+      "manifest_sha": "45c43f585959167310e1b32820c462160f8683641875e21f6254c22e90d4622a",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    },
+    {
+      "asset_id": "diagrams.architecture.qtquick-component-tree",
+      "old_path": "00_book/figures/report/diagrams/13_qtquick_tree.svg",
+      "canonical_path": "documentation_assets/diagrams/architecture/qtquick-component-tree.svg",
+      "source_blob_sha": "81a1a53810e29033833b03d72833b0228606c6dfe986a3ebd3e5ec88e45c6166",
+      "canonical_filesystem_sha": "81a1a53810e29033833b03d72833b0228606c6dfe986a3ebd3e5ec88e45c6166",
+      "canonical_index_sha": "81a1a53810e29033833b03d72833b0228606c6dfe986a3ebd3e5ec88e45c6166",
+      "manifest_sha": "81a1a53810e29033833b03d72833b0228606c6dfe986a3ebd3e5ec88e45c6166",
+      "byte_equal": true,
+      "old_path_absent": true,
+      "usage_status": "orphan-review",
+      "used_by": [],
+      "targets": [],
+      "mkdocs_stage": false
+    }
+  ],
+  "conflict_usage_review": [
+    {
+      "asset_id": "diagrams.network.nat-pat-internet-topology",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/09_nat_pat.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.network.fhrp-virtual-gateway",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/10_fhrp_gateway.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.database.device-entity-relations",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/11_db_schema.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.architecture.netmiko-ssh-stack",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/12_netmiko_stack.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    },
+    {
+      "asset_id": "diagrams.architecture.qtquick-component-tree",
+      "exact_copies": [
+        "00_book/figures/report/diagrams/13_qtquick_tree.svg"
+      ],
+      "live_image_references": [],
+      "canonical_destination_absent": true
+    }
+  ],
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-0.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-1.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-2.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-3.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-4.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-5.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "/tmp/cams-b02a-docs/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-6.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-7.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-8.log",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "output/documentation-assets-migrations/b02b2-9.log",
+      "result": "PASS"
+    }
+  ],
+  "typst": [
+    {
+      "target": "report",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_report/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/report.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "baseline_sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_b02b1_b02a": true
+    },
+    {
+      "target": "book",
+      "command": [
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/bin/typst",
+        "compile",
+        "--root",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS",
+        "--font-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain/fonts",
+        "--ignore-system-fonts",
+        "--creation-timestamp",
+        "0",
+        "--package-cache-path",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/package-cache",
+        "--input",
+        "book-body-font=Liberation Serif",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/00_book/main.typ",
+        "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/book.pdf"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "baseline_sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_b02b1_b02a": true
+    }
+  ],
+  "manifest_before": {
+    "migrated": 10,
+    "pending": 335,
+    "frozen": 62
+  },
+  "other_manifest_records_unchanged": 402,
+  "mkdocs": {
+    "build": "PASS",
+    "selected_staged_assets": 178,
+    "b02b2_staged": 0,
+    "ownership_ledger_unchanged": true,
+    "staging_tracked": false
+  },
+  "terminal": {
+    "frozen_assets_unchanged": 62,
+    "contract_unchanged": true,
+    "reference_multiset_unchanged": true
+  },
+  "reference_baseline": {
+    "unchanged": true,
+    "existing_exceptions": 178
+  },
+  "scope": {
+    "new_transfers": 5,
+    "svg_blob_content_changes": 0,
+    "live_document_reference_changes": 0,
+    "other_batches_migrated": false,
+    "screenshot_renders": 0,
+    "runtime_assets_changed": false,
+    "docshot_mapping_changed": false
+  },
+  "delivery_policy": "Commit/push only after fresh-checkout PASS; immutable commit and verified remote SHA reported in final delivery message.",
+  "fresh_checkout": {
+    "filesystem_blob_manifest_matches": 407,
+    "counts": {
+      "pending": 330,
+      "migrated": 15,
+      "frozen": 62
+    },
+    "other_records_unchanged": 402,
+    "source_blob_canonical_equality": true,
+    "old_paths_absent": 5,
+    "canonical_paths_present": 5,
+    "orphan_usage_preserved": true,
+    "generated_assets_tracked": false,
+    "frozen_contract_and_reference_multiset_unchanged": true,
+    "pdfs_byte_identical_to_baseline": true,
+    "method": "Separate normal Linux clone of candidate Git commit, core.autocrlf=false, no generated staging before pre-sync",
+    "candidate_commit": "895e9fcf1d97bcdb0a5ab21dd551380022ec77c2",
+    "checks": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-0.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-1.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-2.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-3.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-4.log"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-5.log"
+      },
+      {
+        "command": [
+          "/tmp/cams-b02a-docs/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-6.log"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-7.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-8.log"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/cams-b02b2/clean-9.log"
+      }
+    ]
+  }
+}

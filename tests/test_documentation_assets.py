@@ -300,6 +300,14 @@ class DocumentationAssetTests(unittest.TestCase):
         review = json.loads((root / "output/documentation-assets-migrations/b02b1.json").read_text())["review"]
         self.assertEqual({r["asset_id"] for r in review}, reviewed_orphans)
         self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
+        second_orphans = {"diagrams.network.nat-pat-internet-topology", "diagrams.network.fhrp-virtual-gateway",
+                          "diagrams.database.device-entity-relations", "diagrams.architecture.netmiko-ssh-stack",
+                          "diagrams.architecture.qtquick-component-tree"}
+        self.assertEqual({r["asset_id"] for r in rows if r["sub_batch"] == "B02B2"}, second_orphans)
+        review = json.loads((root / "output/documentation-assets-migrations/b02b2.json").read_text())["review"]
+        self.assertEqual({r["asset_id"] for r in review}, second_orphans)
+        self.assertTrue(all(r["decision"] == "APPROVE" for r in review))
+        reviewed_orphans |= second_orphans
         for row in rows:
             asset = records[row["asset_id"]]
             # The historical plan retains the source path after migration.
