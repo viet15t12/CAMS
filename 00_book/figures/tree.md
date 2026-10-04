@@ -1,16 +1,6 @@
 .
 ├── gui
-│   ├── chapter-05
-│   │   ├── 01-router-interface-overview.png
-│   │   ├── 02-edit-physical-interface.png
-│   │   ├── 03-physical-interface-configured.png
-│   │   ├── 04-loopback-interface.png
-│   │   ├── 05-tunnel-interface.png
-│   │   ├── 06-subinterface.png
-│   │   └── 07-view-push-preview.png
 │   ├── chapter-06
-│   │   ├── 01-static-routes.png
-│   │   ├── 02-default-routes.png
 │   │   ├── 03-ospf-process.png
 │   │   ├── 04-ospf-networks.png
 │   │   ├── 05-ospf-areas.png
@@ -31,7 +21,6 @@
 │   │   ├── 20-routing-group-identity.png
 │   │   ├── 21-routing-group-common.png
 │   │   ├── 22-routing-group-networks.png
-│   │   ├── 23-static-view-push.png
 │   │   ├── 24-ospf-view-push.png
 │   │   ├── 25-eigrp-view-push.png
 │   │   └── 26-routing-group-view-push.png
@@ -420,3 +409,18 @@ B04 canonical legacy project/core UI (outside this figures tree):
 - documentation_assets/ui/legacy/project/workspace-ready.png
 
 Original legacy PNG bytes preserved; provenance remains unknown. MkDocs uses generated staging. Future regeneration is separate; no docshot workflow or output-map identity was added.
+
+B05A canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/routing/interfaces/physical-overview.png
+- documentation_assets/ui/legacy/routing/interfaces/physical-edit.png
+- documentation_assets/ui/legacy/routing/interfaces/physical-configured.png
+- documentation_assets/ui/legacy/routing/interfaces/loopback.png
+- documentation_assets/ui/legacy/routing/interfaces/tunnel.png
+- documentation_assets/ui/legacy/routing/interfaces/subinterface.png
+- documentation_assets/ui/legacy/routing/interfaces/view-push.png
+- documentation_assets/ui/legacy/routing/static/routes.png
+- documentation_assets/ui/legacy/routing/static/default-routes.png
+- documentation_assets/ui/legacy/routing/static/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

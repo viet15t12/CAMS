@@ -16,7 +16,7 @@ chọn biểu tượng **Interface**. Màn hình **Router Interfaces** mở ở 
 **Physical**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-05/01-router-interface-overview.png"
+<p><img src="../assets/ui/legacy/routing/interfaces/physical-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng quan tab Physical của Router Interface.</p></figcaption>
 </figure>
@@ -40,7 +40,7 @@ gõ tên mới hoặc xóa một cổng vật lý từ màn hình này. Chọn b
 phải `GigabitEthernet0/0` để nạp dữ liệu vào form.
 
 <figure>
-<p><img src="../../figures/gui/chapter-05/02-edit-physical-interface.png"
+<p><img src="../assets/ui/legacy/routing/interfaces/physical-edit.png"
 style="width:100.0%" /></p>
 <figcaption><p>Cấu hình đã lưu của GigabitEthernet0/0 được nạp vào form.</p></figcaption>
 </figure>
@@ -57,7 +57,7 @@ Trong ví dụ dưới đây, `GigabitEthernet0/0` được đổi thành địa
 `100000`. Kiểm tra lại địa chỉ, mask và cổng đích trước khi lưu.
 
 <figure>
-<p><img src="../../figures/gui/chapter-05/03-physical-interface-configured.png"
+<p><img src="../assets/ui/legacy/routing/interfaces/physical-configured.png"
 style="width:100.0%" /></p>
 <figcaption><p>Các giá trị chuẩn bị lưu cho interface vật lý.</p></figcaption>
 </figure>
@@ -83,7 +83,7 @@ tên canonical, ví dụ số `0` tạo `Loopback0`; người dùng không gõ t
 tự do. Sau đó nhập địa chỉ, mask và mô tả rồi chọn **Save Interface**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-05/04-loopback-interface.png"
+<p><img src="../assets/ui/legacy/routing/interfaces/loopback.png"
 style="width:100.0%" /></p>
 <figcaption><p>Loopback0 dùng địa chỉ /32 làm Router ID mẫu.</p></figcaption>
 </figure>
@@ -100,7 +100,7 @@ IPsec và GRE-IPsec trong form; việc thiết bị thực tế chấp nhận c�
 thuộc phiên bản IOS và cấu hình liên quan.
 
 <figure>
-<p><img src="../../figures/gui/chapter-05/05-tunnel-interface.png"
+<p><img src="../assets/ui/legacy/routing/interfaces/tunnel.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tunnel10 với source, destination, key và keepalive mẫu.</p></figcaption>
 </figure>
@@ -117,7 +117,7 @@ bộ, nhập Subinterface ID rồi chọn **Create Subinterface**. Với parent
 `GigabitEthernet0/0.20`.
 
 <figure>
-<p><img src="../../figures/gui/chapter-05/06-subinterface.png"
+<p><img src="../assets/ui/legacy/routing/interfaces/subinterface.png"
 style="width:100.0%" /></p>
 <figcaption><p>Subinterface .20 làm gateway cho VLAN 20.</p></figcaption>
 </figure>
@@ -132,7 +132,7 @@ Sau khi lưu các thay đổi cục bộ, chọn **View & Push**. CAMS dựng l�
 từ những bản ghi đang chờ và hiển thị host cùng từng interface trong preview.
 
 <figure>
-<p><img src="../../figures/gui/chapter-05/07-view-push-preview.png"
+<p><img src="../assets/ui/legacy/routing/interfaces/view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>Preview tổng hợp các tác vụ Router Interface đang chờ.</p></figcaption>
 </figure>

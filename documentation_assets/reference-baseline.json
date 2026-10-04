@@ -4,69 +4,6 @@
   "description": "Pre-existing image reference exceptions from Phase 3 bootstrap; remove individual entries as batches fix references. Never automatically refresh this baseline to hide new failures.",
   "broken_images": [
     {
-      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
-      "referenced_path": "../../figures/gui/chapter-05/01-router-interface-overview.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-05/01-router-interface-overview.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
-      "referenced_path": "../../figures/gui/chapter-05/02-edit-physical-interface.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-05/02-edit-physical-interface.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
-      "referenced_path": "../../figures/gui/chapter-05/03-physical-interface-configured.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-05/03-physical-interface-configured.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
-      "referenced_path": "../../figures/gui/chapter-05/04-loopback-interface.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-05/04-loopback-interface.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
-      "referenced_path": "../../figures/gui/chapter-05/05-tunnel-interface.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-05/05-tunnel-interface.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
-      "referenced_path": "../../figures/gui/chapter-05/06-subinterface.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-05/06-subinterface.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/05_cau_hinh_interface_router.md",
-      "referenced_path": "../../figures/gui/chapter-05/07-view-push-preview.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-05/07-view-push-preview.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/01-static-routes.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/01-static-routes.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/02-default-routes.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/02-default-routes.png",
-      "count": 1
-    },
-    {
       "source_document": "00_book/DOC/06_cau_hinh_routing.md",
       "referenced_path": "../../figures/gui/chapter-06/03-ospf-process.png",
       "reference_kind": "html-img",
@@ -204,13 +141,6 @@
       "referenced_path": "../../figures/gui/chapter-06/22-routing-group-networks.png",
       "reference_kind": "html-img",
       "resolved_path": "figures/gui/chapter-06/22-routing-group-networks.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/06_cau_hinh_routing.md",
-      "referenced_path": "../../figures/gui/chapter-06/23-static-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-06/23-static-view-push.png",
       "count": 1
     },
     {

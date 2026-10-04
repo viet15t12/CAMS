@@ -13,7 +13,7 @@ Các hình được chụp từ giao diện CAMS thật với dữ liệu lab c�
 
 Trong *Devices Sidebar*, chọn R1 để mở tab thiết bị. Trên *Feature Bar*, chọn biểu tượng *Interface*. Màn hình *Router Interfaces* mở ở tab con *Physical* như @fig:ch05-01-router-interface-overview.
 
-#insert-image("figures/gui/chapter-05/01-router-interface-overview.png",
+#insert-image("/documentation_assets/ui/legacy/routing/interfaces/physical-overview.png",
   caption: [Tổng quan tab Physical của Router Interface.], width: 100.0%) <fig:ch05-01-router-interface-overview>
 
 Màn hình gồm ba phần cần nhận biết:
@@ -34,7 +34,7 @@ Phần *Identity and addressing* hiển thị tên interface, profile, địa ch
 
 Trong ví dụ dưới đây, #raw("GigabitEthernet0/0") được đổi thành địa chỉ #raw("10.10.10.1/24"), mô tả #raw("Uplink to distribution router") và bandwidth #raw("100000"). Kiểm tra lại địa chỉ, mask và cổng đích trước khi lưu.
 
-#insert-image("figures/gui/chapter-05/03-physical-interface-configured.png",
+#insert-image("/documentation_assets/ui/legacy/routing/interfaces/physical-configured.png",
   caption: [Các giá trị chuẩn bị lưu cho interface vật lý.], width: 100.0%) <fig:ch05-03-physical-interface-configured>
 
 #report-note[Chọn *Update Interface* để lưu desired state vào Workspace. Bước này chưa gửi lệnh xuống router. Những trường đã thay đổi được CAMS đánh dấu nội bộ để dùng khi tạo preview.]
@@ -59,7 +59,7 @@ Các tùy chọn cần chú ý:
 
 Chọn tab *Loopback*, nhập hậu tố số rồi chọn *Create Loopback*. CAMS sinh tên canonical, ví dụ số #raw("0") tạo #raw("Loopback0"); người dùng không gõ tên interface tự do. Sau đó nhập địa chỉ, mask và mô tả rồi chọn *Save Interface*.
 
-#insert-image("figures/gui/chapter-05/04-loopback-interface.png",
+#insert-image("/documentation_assets/ui/legacy/routing/interfaces/loopback.png",
   caption: [Loopback0 dùng địa chỉ /32 làm Router ID mẫu.], width: 100.0%) <fig:ch05-04-loopback-interface>
 
 Loopback và các interface ảo có biểu tượng xóa trong danh sách. Xóa một interface ảo đã tồn tại trên thiết bị sẽ tạo desired state tương ứng với lệnh #raw("no interface"); thao tác vẫn cần được kiểm tra trong View & Push.
@@ -68,7 +68,7 @@ Loopback và các interface ảo có biểu tượng xóa trong danh sách. Xóa
 
 Chọn tab *Tunnel*, nhập số tunnel và chọn *Create Tunnel*. Cần có source và destination trước khi lưu. CAMS hiện hỗ trợ các lựa chọn mode GRE, IP-in-IP, IPsec và GRE-IPsec trong form; việc thiết bị thực tế chấp nhận cấu hình còn phụ thuộc phiên bản IOS và cấu hình liên quan.
 
-#insert-image("figures/gui/chapter-05/05-tunnel-interface.png",
+#insert-image("/documentation_assets/ui/legacy/routing/interfaces/tunnel.png",
   caption: [Tunnel10 với source, destination, key và keepalive mẫu.], width: 100.0%) <fig:ch05-05-tunnel-interface>
 
 Trong ví dụ, Tunnel10 dùng #raw("GigabitEthernet0/0") làm source, #raw("198.51.100.2") làm destination, key #raw("10") và keepalive #raw("10 3"). Source có thể là địa chỉ cục bộ hoặc tên interface phù hợp với IOS.
@@ -77,7 +77,7 @@ Trong ví dụ, Tunnel10 dùng #raw("GigabitEthernet0/0") làm source, #raw("198
 
 Chọn tab *Subinterface*. Chọn parent từ danh sách interface Physical đã đồng bộ, nhập Subinterface ID rồi chọn *Create Subinterface*. Với parent #raw("GigabitEthernet0/0") và ID #raw("20"), CAMS sinh tên #raw("GigabitEthernet0/0.20").
 
-#insert-image("figures/gui/chapter-05/06-subinterface.png",
+#insert-image("/documentation_assets/ui/legacy/routing/interfaces/subinterface.png",
   caption: [Subinterface .20 làm gateway cho VLAN 20.], width: 100.0%) <fig:ch05-06-subinterface>
 
 Nhập VLAN ID, địa chỉ IPv4, mask và mô tả. Chỉ bật *Native VLAN* khi thiết kế trunk yêu cầu và hai đầu liên kết dùng cùng quy ước. Subinterface thuộc Router Interface; SVI trên switch được quản lý trong phần Switching.
@@ -86,7 +86,7 @@ Nhập VLAN ID, địa chỉ IPv4, mask và mô tả. Chỉ bật *Native VLAN* 
 
 Sau khi lưu các thay đổi cục bộ, chọn *View & Push*. CAMS dựng lệnh Cisco IOS từ những bản ghi đang chờ và hiển thị host cùng từng interface trong preview.
 
-#insert-image("figures/gui/chapter-05/07-view-push-preview.png",
+#insert-image("/documentation_assets/ui/legacy/routing/interfaces/view-push.png",
   caption: [Preview tổng hợp các tác vụ Router Interface đang chờ.], width: 75.0%) <fig:ch05-07-view-push-preview>
 
 Đọc preview từ trên xuống và kiểm tra tối thiểu:

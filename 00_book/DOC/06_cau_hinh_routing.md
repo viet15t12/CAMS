@@ -21,7 +21,7 @@ Tab **Static** quản lý các route có destination cụ thể. Chọn **+ Add*
 Network, Subnet Mask, Next hop và AD rồi chọn **Save Static**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/01-static-routes.png"
+<p><img src="../assets/ui/legacy/routing/static/routes.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hai static route đã lưu cho R1.</p></figcaption>
 </figure>
@@ -43,7 +43,7 @@ Tab **Default** quản lý riêng các route `0.0.0.0/0` và cho phép khai báo
 next hop. Chọn **+ Add**, nhập gateway rồi chọn **Save Default**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/02-default-routes.png"
+<p><img src="../assets/ui/legacy/routing/static/default-routes.png"
 style="width:100.0%" /></p>
 <figcaption><p>Hai next hop cho default route của R1.</p></figcaption>
 </figure>
@@ -366,7 +366,7 @@ Các nút có vai trò khác nhau:
 | View & Push | Dựng preview từ các bản ghi pending và cho phép gửi lệnh. |
 
 <figure>
-<p><img src="../../figures/gui/chapter-06/23-static-view-push.png"
+<p><img src="../assets/ui/legacy/routing/static/view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>Preview Static gồm default route và static route đang chờ.</p></figcaption>
 </figure>

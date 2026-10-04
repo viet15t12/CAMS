@@ -17,7 +17,7 @@ Chọn R1 trong Devices Sidebar, sau đó chọn *Routing* trên Feature Bar. C�
 
 Tab *Static* quản lý các route có destination cụ thể. Chọn *+ Add*, nhập Network, Subnet Mask, Next hop và AD rồi chọn *Save Static*.
 
-#insert-image("figures/gui/chapter-06/01-static-routes.png",
+#insert-image("/documentation_assets/ui/legacy/routing/static/routes.png",
   caption: [Hai static route đã lưu cho R1.], width: 100.0%) <fig:ch06-01-static-routes>
 
 #report-table(

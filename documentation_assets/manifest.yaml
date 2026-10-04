@@ -2136,14 +2136,14 @@ assets:
   domain: routing/interfaces
   subject: physical-overview
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-05/01-router-interface-overview.png
-  path: 00_book/figures/gui/chapter-05/01-router-interface-overview.png
+  current_path: documentation_assets/ui/legacy/routing/interfaces/physical-overview.png
+  path: documentation_assets/ui/legacy/routing/interfaces/physical-overview.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/interfaces/physical-overview.png
   legacy_path: 00_book/figures/gui/chapter-05/01-router-interface-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 2e2310fce2f42b2afcc024cee26d5e486cf5481b56db3c1ea292da235d821509
   provenance:
     assessment: unknown
@@ -2161,11 +2161,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/05_cau_hinh_interface_router.md
     line: 19
-    referenced_path: ../../figures/gui/chapter-05/01-router-interface-overview.png
+    referenced_path: ../assets/ui/legacy/routing/interfaces/physical-overview.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/05_cau_hinh_interface_router.typ
     line: 16
-    referenced_path: figures/gui/chapter-05/01-router-interface-overview.png
+    referenced_path: /documentation_assets/ui/legacy/routing/interfaces/physical-overview.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2185,14 +2185,14 @@ assets:
   domain: routing/interfaces
   subject: physical-edit
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-05/02-edit-physical-interface.png
-  path: 00_book/figures/gui/chapter-05/02-edit-physical-interface.png
+  current_path: documentation_assets/ui/legacy/routing/interfaces/physical-edit.png
+  path: documentation_assets/ui/legacy/routing/interfaces/physical-edit.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/interfaces/physical-edit.png
   legacy_path: 00_book/figures/gui/chapter-05/02-edit-physical-interface.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1a9790a063d51cd57b0593b22918bee5b0feefec3a9b13e6236e804e3c89a16c
   provenance:
     assessment: unknown
@@ -2210,7 +2210,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/05_cau_hinh_interface_router.md
     line: 43
-    referenced_path: ../../figures/gui/chapter-05/02-edit-physical-interface.png
+    referenced_path: ../assets/ui/legacy/routing/interfaces/physical-edit.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -2229,14 +2229,14 @@ assets:
   domain: routing/interfaces
   subject: physical-configured
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-05/03-physical-interface-configured.png
-  path: 00_book/figures/gui/chapter-05/03-physical-interface-configured.png
+  current_path: documentation_assets/ui/legacy/routing/interfaces/physical-configured.png
+  path: documentation_assets/ui/legacy/routing/interfaces/physical-configured.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/interfaces/physical-configured.png
   legacy_path: 00_book/figures/gui/chapter-05/03-physical-interface-configured.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 09216d4d3ed7f35e976d757577f36b2b6241fb7ee2f536104547004bcf9bd8b4
   provenance:
     assessment: unknown
@@ -2254,11 +2254,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/05_cau_hinh_interface_router.md
     line: 60
-    referenced_path: ../../figures/gui/chapter-05/03-physical-interface-configured.png
+    referenced_path: ../assets/ui/legacy/routing/interfaces/physical-configured.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/05_cau_hinh_interface_router.typ
     line: 37
-    referenced_path: figures/gui/chapter-05/03-physical-interface-configured.png
+    referenced_path: /documentation_assets/ui/legacy/routing/interfaces/physical-configured.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2278,14 +2278,14 @@ assets:
   domain: routing/interfaces
   subject: loopback
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-05/04-loopback-interface.png
-  path: 00_book/figures/gui/chapter-05/04-loopback-interface.png
+  current_path: documentation_assets/ui/legacy/routing/interfaces/loopback.png
+  path: documentation_assets/ui/legacy/routing/interfaces/loopback.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/interfaces/loopback.png
   legacy_path: 00_book/figures/gui/chapter-05/04-loopback-interface.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 89d33ec99c36a9e31a03f71bad12cb5fae05239db690f616086c8a6f3e774e92
   provenance:
     assessment: unknown
@@ -2303,11 +2303,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/05_cau_hinh_interface_router.md
     line: 86
-    referenced_path: ../../figures/gui/chapter-05/04-loopback-interface.png
+    referenced_path: ../assets/ui/legacy/routing/interfaces/loopback.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/05_cau_hinh_interface_router.typ
     line: 62
-    referenced_path: figures/gui/chapter-05/04-loopback-interface.png
+    referenced_path: /documentation_assets/ui/legacy/routing/interfaces/loopback.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2327,14 +2327,14 @@ assets:
   domain: routing/interfaces
   subject: tunnel
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-05/05-tunnel-interface.png
-  path: 00_book/figures/gui/chapter-05/05-tunnel-interface.png
+  current_path: documentation_assets/ui/legacy/routing/interfaces/tunnel.png
+  path: documentation_assets/ui/legacy/routing/interfaces/tunnel.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/interfaces/tunnel.png
   legacy_path: 00_book/figures/gui/chapter-05/05-tunnel-interface.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 170165e3e3e7427fdf90f4b765353653d31b29e7df7f1486760399e262a067b5
   provenance:
     assessment: unknown
@@ -2352,11 +2352,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/05_cau_hinh_interface_router.md
     line: 103
-    referenced_path: ../../figures/gui/chapter-05/05-tunnel-interface.png
+    referenced_path: ../assets/ui/legacy/routing/interfaces/tunnel.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/05_cau_hinh_interface_router.typ
     line: 71
-    referenced_path: figures/gui/chapter-05/05-tunnel-interface.png
+    referenced_path: /documentation_assets/ui/legacy/routing/interfaces/tunnel.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2376,14 +2376,14 @@ assets:
   domain: routing/interfaces
   subject: subinterface
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-05/06-subinterface.png
-  path: 00_book/figures/gui/chapter-05/06-subinterface.png
+  current_path: documentation_assets/ui/legacy/routing/interfaces/subinterface.png
+  path: documentation_assets/ui/legacy/routing/interfaces/subinterface.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/interfaces/subinterface.png
   legacy_path: 00_book/figures/gui/chapter-05/06-subinterface.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: f618e2adefce7efc10a19521bf733e44a0668e1122ff7e947b2ea5687fbb6fd0
   provenance:
     assessment: unknown
@@ -2401,11 +2401,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/05_cau_hinh_interface_router.md
     line: 120
-    referenced_path: ../../figures/gui/chapter-05/06-subinterface.png
+    referenced_path: ../assets/ui/legacy/routing/interfaces/subinterface.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/05_cau_hinh_interface_router.typ
     line: 80
-    referenced_path: figures/gui/chapter-05/06-subinterface.png
+    referenced_path: /documentation_assets/ui/legacy/routing/interfaces/subinterface.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2425,14 +2425,14 @@ assets:
   domain: routing/interfaces
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-05/07-view-push-preview.png
-  path: 00_book/figures/gui/chapter-05/07-view-push-preview.png
+  current_path: documentation_assets/ui/legacy/routing/interfaces/view-push.png
+  path: documentation_assets/ui/legacy/routing/interfaces/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/interfaces/view-push.png
   legacy_path: 00_book/figures/gui/chapter-05/07-view-push-preview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 4416d22732ca55b909edd07c0f9f20d4ac9586aeb802a249735ae57232f8eb27
   provenance:
     assessment: unknown
@@ -2450,15 +2450,15 @@ assets:
   used_by:
   - source_document: 00_book/DOC/05_cau_hinh_interface_router.md
     line: 135
-    referenced_path: ../../figures/gui/chapter-05/07-view-push-preview.png
+    referenced_path: ../assets/ui/legacy/routing/interfaces/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/05_cau_hinh_interface_router.typ
     line: 89
-    referenced_path: figures/gui/chapter-05/07-view-push-preview.png
+    referenced_path: /documentation_assets/ui/legacy/routing/interfaces/view-push.png
     target_type: book-typst
   - source_document: 00_report/contents/08_xay_dung_phan_mem.typ
     line: 49
-    referenced_path: /00_book/figures/gui/chapter-05/07-view-push-preview.png
+    referenced_path: /documentation_assets/ui/legacy/routing/interfaces/view-push.png
     target_type: report-typst
   targets:
   - book-mkdocs
@@ -2479,14 +2479,14 @@ assets:
   domain: routing/static
   subject: routes
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/01-static-routes.png
-  path: 00_book/figures/gui/chapter-06/01-static-routes.png
+  current_path: documentation_assets/ui/legacy/routing/static/routes.png
+  path: documentation_assets/ui/legacy/routing/static/routes.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/static/routes.png
   legacy_path: 00_book/figures/gui/chapter-06/01-static-routes.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b4818caf697400f602a18232f758de3da68ab528ca7404c07ef91a00391ddaf8
   provenance:
     assessment: unknown
@@ -2504,11 +2504,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 24
-    referenced_path: ../../figures/gui/chapter-06/01-static-routes.png
+    referenced_path: ../assets/ui/legacy/routing/static/routes.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/06_cau_hinh_routing.typ
     line: 20
-    referenced_path: figures/gui/chapter-06/01-static-routes.png
+    referenced_path: /documentation_assets/ui/legacy/routing/static/routes.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -2528,14 +2528,14 @@ assets:
   domain: routing/static
   subject: default-routes
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/02-default-routes.png
-  path: 00_book/figures/gui/chapter-06/02-default-routes.png
+  current_path: documentation_assets/ui/legacy/routing/static/default-routes.png
+  path: documentation_assets/ui/legacy/routing/static/default-routes.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/static/default-routes.png
   legacy_path: 00_book/figures/gui/chapter-06/02-default-routes.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 2ec93b9225b828d2d5dd521489d21ac4b360c4dac4ab847ed26dd0fd8ffc2297
   provenance:
     assessment: unknown
@@ -2553,7 +2553,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 46
-    referenced_path: ../../figures/gui/chapter-06/02-default-routes.png
+    referenced_path: ../assets/ui/legacy/routing/static/default-routes.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -3512,14 +3512,14 @@ assets:
   domain: routing/static
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-06/23-static-view-push.png
-  path: 00_book/figures/gui/chapter-06/23-static-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/static/view-push.png
+  path: documentation_assets/ui/legacy/routing/static/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/static/view-push.png
   legacy_path: 00_book/figures/gui/chapter-06/23-static-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 82a3024cf56a4adde5eafd1e49dbf5707a0d13d388b99595e626fb11d529a3f7
   provenance:
     assessment: unknown
@@ -3537,7 +3537,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/06_cau_hinh_routing.md
     line: 369
-    referenced_path: ../../figures/gui/chapter-06/23-static-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/static/view-push.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
