@@ -522,3 +522,13 @@ B11A preserved switching-lab evidence (both legacy originals and canonical copie
 - 00_book/figures/report/diagrams/switching-lab/1_1.png (HOLD; legacy only, no canonical copy)
 - 00_book/figures/report/diagrams/switching-lab/1_18.png (HOLD; legacy only, no canonical copy)
 - 00_book/figures/report/diagrams/switching-lab/1_19.png (HOLD; legacy only, no canonical copy)
+
+B11B preserved switching-lab evidence (both legacy originals and canonical copies):
+
+- 00_book/figures/report/diagrams/switching-lab/1_2.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw1-lacp-port-channel-editing.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_3.png -> documentation_assets/evidence/ui-capture/original/switching-lab/etherchannel-view-push.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_4.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw3-lacp-inventory-reloaded.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_5.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw1-lacp-inventory-reloaded.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_7.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw2-pagp-synchronized.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_8.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw4-pagp-synchronized.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_9.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw1-port-mode-editing.png (exact copy; legacy retained)
