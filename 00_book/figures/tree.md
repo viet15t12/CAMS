@@ -30,17 +30,6 @@
 │   │   ├── 05-critical-filter-result.png
 │   │   ├── 06-smart-filter-builder.png
 │   │   └── 07-log-message-details.png
-│   ├── chapter-15
-│   │   ├── 04-etherchannel-form.png
-│   │   ├── 05-quick-etherchannel.png
-│   │   ├── 06-etherchannel-view-push.png
-│   │   ├── 07-stp-form.png
-│   │   ├── 08-stp-view-push.png
-│   │   ├── 09-vtp-group-top.png
-│   │   ├── 10-vtp-member-policy.png
-│   │   ├── 11-vtp-view-push.png
-│   │   ├── 12-quick-etherchannel-peer.png
-│   │   └── 13-quick-etherchannel-link-mode.png
 │   ├── chapter-16
 │   │   ├── 01-vlan-protection.png
 │   │   ├── 02-trusted-uplinks.png
@@ -447,5 +436,20 @@ B07A canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/switching/vlan/form.png
 - documentation_assets/ui/legacy/switching/vlan/overview.png
 - documentation_assets/ui/legacy/switching/vlan/view-push-users.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B07B canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/switching/etherchannel/form.png
+- documentation_assets/ui/legacy/switching/etherchannel/quick-link.png
+- documentation_assets/ui/legacy/switching/etherchannel/view-push.png
+- documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png
+- documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png
+- documentation_assets/ui/legacy/switching/stp/form.png
+- documentation_assets/ui/legacy/switching/stp/view-push.png
+- documentation_assets/ui/legacy/switching/vtp/group-top.png
+- documentation_assets/ui/legacy/switching/vtp/member-policy.png
+- documentation_assets/ui/legacy/switching/vtp/view-push.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

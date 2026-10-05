@@ -7205,14 +7205,14 @@ assets:
   domain: switching/etherchannel
   subject: form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/04-etherchannel-form.png
-  path: 00_book/figures/gui/chapter-15/04-etherchannel-form.png
+  current_path: documentation_assets/ui/legacy/switching/etherchannel/form.png
+  path: documentation_assets/ui/legacy/switching/etherchannel/form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/etherchannel/form.png
   legacy_path: 00_book/figures/gui/chapter-15/04-etherchannel-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 942c45f7fd1af0d8c7cf0a9fb78cc0f7f3563048e509f7f3946ea1a2f34fc23b
   provenance:
     assessment: unknown
@@ -7230,11 +7230,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 51
-    referenced_path: ../../figures/gui/chapter-15/04-etherchannel-form.png
+    referenced_path: ../assets/ui/legacy/switching/etherchannel/form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 42
-    referenced_path: figures/gui/chapter-15/04-etherchannel-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/etherchannel/form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7254,14 +7254,14 @@ assets:
   domain: switching/etherchannel
   subject: quick-link
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/05-quick-etherchannel.png
-  path: 00_book/figures/gui/chapter-15/05-quick-etherchannel.png
+  current_path: documentation_assets/ui/legacy/switching/etherchannel/quick-link.png
+  path: documentation_assets/ui/legacy/switching/etherchannel/quick-link.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/etherchannel/quick-link.png
   legacy_path: 00_book/figures/gui/chapter-15/05-quick-etherchannel.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 614ddce2d8885a3c91ad522238a04dd9cc6cdf75a25940fbf48da5c50e002a84
   provenance:
     assessment: unknown
@@ -7279,11 +7279,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 85
-    referenced_path: ../../figures/gui/chapter-15/05-quick-etherchannel.png
+    referenced_path: ../assets/ui/legacy/switching/etherchannel/quick-link.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 72
-    referenced_path: figures/gui/chapter-15/05-quick-etherchannel.png
+    referenced_path: /documentation_assets/ui/legacy/switching/etherchannel/quick-link.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7303,14 +7303,14 @@ assets:
   domain: switching/etherchannel
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/06-etherchannel-view-push.png
-  path: 00_book/figures/gui/chapter-15/06-etherchannel-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/etherchannel/view-push.png
+  path: documentation_assets/ui/legacy/switching/etherchannel/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/etherchannel/view-push.png
   legacy_path: 00_book/figures/gui/chapter-15/06-etherchannel-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: a0870e791020ff5edf0f53660b84f2823a56a5e2584d21f8b2cbf7636d1c7bd4
   provenance:
     assessment: unknown
@@ -7328,11 +7328,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 68
-    referenced_path: ../../figures/gui/chapter-15/06-etherchannel-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/etherchannel/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 61
-    referenced_path: figures/gui/chapter-15/06-etherchannel-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/etherchannel/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7352,14 +7352,14 @@ assets:
   domain: switching/stp
   subject: form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/07-stp-form.png
-  path: 00_book/figures/gui/chapter-15/07-stp-form.png
+  current_path: documentation_assets/ui/legacy/switching/stp/form.png
+  path: documentation_assets/ui/legacy/switching/stp/form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/stp/form.png
   legacy_path: 00_book/figures/gui/chapter-15/07-stp-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 5ad68bed64e8d932f4966a1cc7896c56f00e80300fcbb98ea2d8404983c0d1c4
   provenance:
     assessment: unknown
@@ -7377,11 +7377,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 129
-    referenced_path: ../../figures/gui/chapter-15/07-stp-form.png
+    referenced_path: ../assets/ui/legacy/switching/stp/form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 102
-    referenced_path: figures/gui/chapter-15/07-stp-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/stp/form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7401,14 +7401,14 @@ assets:
   domain: switching/stp
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/08-stp-view-push.png
-  path: 00_book/figures/gui/chapter-15/08-stp-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/stp/view-push.png
+  path: documentation_assets/ui/legacy/switching/stp/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/stp/view-push.png
   legacy_path: 00_book/figures/gui/chapter-15/08-stp-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 121aeff8b04645cf6267d3bf92e6dcb548bd616b20db645f820d0aee10bdb330
   provenance:
     assessment: unknown
@@ -7426,11 +7426,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 146
-    referenced_path: ../../figures/gui/chapter-15/08-stp-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/stp/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 120
-    referenced_path: figures/gui/chapter-15/08-stp-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/stp/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7450,14 +7450,14 @@ assets:
   domain: switching/vtp
   subject: group-top
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/09-vtp-group-top.png
-  path: 00_book/figures/gui/chapter-15/09-vtp-group-top.png
+  current_path: documentation_assets/ui/legacy/switching/vtp/group-top.png
+  path: documentation_assets/ui/legacy/switching/vtp/group-top.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/vtp/group-top.png
   legacy_path: 00_book/figures/gui/chapter-15/09-vtp-group-top.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 467bcec49ffde478b34fc916594e7a94d3c43af8718f4a5aa332f49c489de1b1
   provenance:
     assessment: unknown
@@ -7475,11 +7475,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 161
-    referenced_path: ../../figures/gui/chapter-15/09-vtp-group-top.png
+    referenced_path: ../assets/ui/legacy/switching/vtp/group-top.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 129
-    referenced_path: figures/gui/chapter-15/09-vtp-group-top.png
+    referenced_path: /documentation_assets/ui/legacy/switching/vtp/group-top.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7499,14 +7499,14 @@ assets:
   domain: switching/vtp
   subject: member-policy
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/10-vtp-member-policy.png
-  path: 00_book/figures/gui/chapter-15/10-vtp-member-policy.png
+  current_path: documentation_assets/ui/legacy/switching/vtp/member-policy.png
+  path: documentation_assets/ui/legacy/switching/vtp/member-policy.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/vtp/member-policy.png
   legacy_path: 00_book/figures/gui/chapter-15/10-vtp-member-policy.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ec69d8fba81b3d0cd22e9fb8d3721658d173bf2c43ee092fb03e3ec7ae4647b3
   provenance:
     assessment: unknown
@@ -7524,11 +7524,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 177
-    referenced_path: ../../figures/gui/chapter-15/10-vtp-member-policy.png
+    referenced_path: ../assets/ui/legacy/switching/vtp/member-policy.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 147
-    referenced_path: figures/gui/chapter-15/10-vtp-member-policy.png
+    referenced_path: /documentation_assets/ui/legacy/switching/vtp/member-policy.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7548,14 +7548,14 @@ assets:
   domain: switching/vtp
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/11-vtp-view-push.png
-  path: 00_book/figures/gui/chapter-15/11-vtp-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/vtp/view-push.png
+  path: documentation_assets/ui/legacy/switching/vtp/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/vtp/view-push.png
   legacy_path: 00_book/figures/gui/chapter-15/11-vtp-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 6a1a22d6318c29312e2456dbcb5f9b5c79f9ab3726e2cb1034a0fb91924863b2
   provenance:
     assessment: unknown
@@ -7573,11 +7573,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 194
-    referenced_path: ../../figures/gui/chapter-15/11-vtp-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/vtp/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 158
-    referenced_path: figures/gui/chapter-15/11-vtp-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/vtp/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7597,14 +7597,14 @@ assets:
   domain: switching/etherchannel
   subject: quick-link-peer
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/12-quick-etherchannel-peer.png
-  path: 00_book/figures/gui/chapter-15/12-quick-etherchannel-peer.png
+  current_path: documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png
+  path: documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png
   legacy_path: 00_book/figures/gui/chapter-15/12-quick-etherchannel-peer.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7f6a2cd987d280ce4bac9a25ef03cff6f6075dd50935c3fc702adffcef7d3c9c
   provenance:
     assessment: unknown
@@ -7622,11 +7622,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 97
-    referenced_path: ../../figures/gui/chapter-15/12-quick-etherchannel-peer.png
+    referenced_path: ../assets/ui/legacy/switching/etherchannel/quick-link-peer.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 81
-    referenced_path: figures/gui/chapter-15/12-quick-etherchannel-peer.png
+    referenced_path: /documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7646,14 +7646,14 @@ assets:
   domain: switching/etherchannel
   subject: quick-link-link-mode
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/13-quick-etherchannel-link-mode.png
-  path: 00_book/figures/gui/chapter-15/13-quick-etherchannel-link-mode.png
+  current_path: documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png
+  path: documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png
   legacy_path: 00_book/figures/gui/chapter-15/13-quick-etherchannel-link-mode.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 73ade767a40f219cd2591db2877759131f3690a5164321c142327a189027047c
   provenance:
     assessment: unknown
@@ -7671,11 +7671,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 109
-    referenced_path: ../../figures/gui/chapter-15/13-quick-etherchannel-link-mode.png
+    referenced_path: ../assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 88
-    referenced_path: figures/gui/chapter-15/13-quick-etherchannel-link-mode.png
+    referenced_path: /documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png
     target_type: book-typst
   targets:
   - book-mkdocs

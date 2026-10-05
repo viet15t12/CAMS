@@ -1,0 +1,772 @@
+{
+  "batch": "B07B",
+  "starting_commit": "9abb3c3e55b797b893eb9e9a53d331b7ce396bff",
+  "status": "PASS cheap gate; cumulative build/fresh gate deferred",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 10,
+    "dimensions_nonzero": true,
+    "chapter_context_agrees": true,
+    "terminal_or_evidence_or_runtime": false,
+    "target_collisions": false,
+    "provenance": "unknown retained; no reconstruction or new generator"
+  },
+  "assets": [
+    {
+      "asset_id": "ui.switching.etherchannel.form",
+      "old_path": "00_book/figures/gui/chapter-15/04-etherchannel-form.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/etherchannel/form.png",
+      "source_git_blob_sha": "942c45f7fd1af0d8c7cf0a9fb78cc0f7f3563048e509f7f3946ea1a2f34fc23b",
+      "canonical_filesystem_sha": "942c45f7fd1af0d8c7cf0a9fb78cc0f7f3563048e509f7f3946ea1a2f34fc23b",
+      "canonical_index_blob_sha": "942c45f7fd1af0d8c7cf0a9fb78cc0f7f3563048e509f7f3946ea1a2f34fc23b",
+      "manifest_sha": "942c45f7fd1af0d8c7cf0a9fb78cc0f7f3563048e509f7f3946ea1a2f34fc23b",
+      "staging_path": "00_book/assets/ui/legacy/switching/etherchannel/form.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 51,
+          "referenced_path": "../assets/ui/legacy/switching/etherchannel/form.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 42,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/etherchannel/form.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link",
+      "old_path": "00_book/figures/gui/chapter-15/05-quick-etherchannel.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/etherchannel/quick-link.png",
+      "source_git_blob_sha": "614ddce2d8885a3c91ad522238a04dd9cc6cdf75a25940fbf48da5c50e002a84",
+      "canonical_filesystem_sha": "614ddce2d8885a3c91ad522238a04dd9cc6cdf75a25940fbf48da5c50e002a84",
+      "canonical_index_blob_sha": "614ddce2d8885a3c91ad522238a04dd9cc6cdf75a25940fbf48da5c50e002a84",
+      "manifest_sha": "614ddce2d8885a3c91ad522238a04dd9cc6cdf75a25940fbf48da5c50e002a84",
+      "staging_path": "00_book/assets/ui/legacy/switching/etherchannel/quick-link.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 85,
+          "referenced_path": "../assets/ui/legacy/switching/etherchannel/quick-link.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 72,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/etherchannel/quick-link.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.view-push",
+      "old_path": "00_book/figures/gui/chapter-15/06-etherchannel-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/etherchannel/view-push.png",
+      "source_git_blob_sha": "a0870e791020ff5edf0f53660b84f2823a56a5e2584d21f8b2cbf7636d1c7bd4",
+      "canonical_filesystem_sha": "a0870e791020ff5edf0f53660b84f2823a56a5e2584d21f8b2cbf7636d1c7bd4",
+      "canonical_index_blob_sha": "a0870e791020ff5edf0f53660b84f2823a56a5e2584d21f8b2cbf7636d1c7bd4",
+      "manifest_sha": "a0870e791020ff5edf0f53660b84f2823a56a5e2584d21f8b2cbf7636d1c7bd4",
+      "staging_path": "00_book/assets/ui/legacy/switching/etherchannel/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 68,
+          "referenced_path": "../assets/ui/legacy/switching/etherchannel/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 61,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/etherchannel/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-peer",
+      "old_path": "00_book/figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png",
+      "source_git_blob_sha": "7f6a2cd987d280ce4bac9a25ef03cff6f6075dd50935c3fc702adffcef7d3c9c",
+      "canonical_filesystem_sha": "7f6a2cd987d280ce4bac9a25ef03cff6f6075dd50935c3fc702adffcef7d3c9c",
+      "canonical_index_blob_sha": "7f6a2cd987d280ce4bac9a25ef03cff6f6075dd50935c3fc702adffcef7d3c9c",
+      "manifest_sha": "7f6a2cd987d280ce4bac9a25ef03cff6f6075dd50935c3fc702adffcef7d3c9c",
+      "staging_path": "00_book/assets/ui/legacy/switching/etherchannel/quick-link-peer.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 97,
+          "referenced_path": "../assets/ui/legacy/switching/etherchannel/quick-link-peer.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 81,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-link-mode",
+      "old_path": "00_book/figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png",
+      "source_git_blob_sha": "73ade767a40f219cd2591db2877759131f3690a5164321c142327a189027047c",
+      "canonical_filesystem_sha": "73ade767a40f219cd2591db2877759131f3690a5164321c142327a189027047c",
+      "canonical_index_blob_sha": "73ade767a40f219cd2591db2877759131f3690a5164321c142327a189027047c",
+      "manifest_sha": "73ade767a40f219cd2591db2877759131f3690a5164321c142327a189027047c",
+      "staging_path": "00_book/assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 109,
+          "referenced_path": "../assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 88,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.stp.form",
+      "old_path": "00_book/figures/gui/chapter-15/07-stp-form.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/stp/form.png",
+      "source_git_blob_sha": "5ad68bed64e8d932f4966a1cc7896c56f00e80300fcbb98ea2d8404983c0d1c4",
+      "canonical_filesystem_sha": "5ad68bed64e8d932f4966a1cc7896c56f00e80300fcbb98ea2d8404983c0d1c4",
+      "canonical_index_blob_sha": "5ad68bed64e8d932f4966a1cc7896c56f00e80300fcbb98ea2d8404983c0d1c4",
+      "manifest_sha": "5ad68bed64e8d932f4966a1cc7896c56f00e80300fcbb98ea2d8404983c0d1c4",
+      "staging_path": "00_book/assets/ui/legacy/switching/stp/form.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 129,
+          "referenced_path": "../assets/ui/legacy/switching/stp/form.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 102,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/stp/form.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.stp.view-push",
+      "old_path": "00_book/figures/gui/chapter-15/08-stp-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/stp/view-push.png",
+      "source_git_blob_sha": "121aeff8b04645cf6267d3bf92e6dcb548bd616b20db645f820d0aee10bdb330",
+      "canonical_filesystem_sha": "121aeff8b04645cf6267d3bf92e6dcb548bd616b20db645f820d0aee10bdb330",
+      "canonical_index_blob_sha": "121aeff8b04645cf6267d3bf92e6dcb548bd616b20db645f820d0aee10bdb330",
+      "manifest_sha": "121aeff8b04645cf6267d3bf92e6dcb548bd616b20db645f820d0aee10bdb330",
+      "staging_path": "00_book/assets/ui/legacy/switching/stp/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 146,
+          "referenced_path": "../assets/ui/legacy/switching/stp/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 120,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/stp/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.vtp.group-top",
+      "old_path": "00_book/figures/gui/chapter-15/09-vtp-group-top.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/vtp/group-top.png",
+      "source_git_blob_sha": "467bcec49ffde478b34fc916594e7a94d3c43af8718f4a5aa332f49c489de1b1",
+      "canonical_filesystem_sha": "467bcec49ffde478b34fc916594e7a94d3c43af8718f4a5aa332f49c489de1b1",
+      "canonical_index_blob_sha": "467bcec49ffde478b34fc916594e7a94d3c43af8718f4a5aa332f49c489de1b1",
+      "manifest_sha": "467bcec49ffde478b34fc916594e7a94d3c43af8718f4a5aa332f49c489de1b1",
+      "staging_path": "00_book/assets/ui/legacy/switching/vtp/group-top.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 161,
+          "referenced_path": "../assets/ui/legacy/switching/vtp/group-top.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 129,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/vtp/group-top.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.vtp.member-policy",
+      "old_path": "00_book/figures/gui/chapter-15/10-vtp-member-policy.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/vtp/member-policy.png",
+      "source_git_blob_sha": "ec69d8fba81b3d0cd22e9fb8d3721658d173bf2c43ee092fb03e3ec7ae4647b3",
+      "canonical_filesystem_sha": "ec69d8fba81b3d0cd22e9fb8d3721658d173bf2c43ee092fb03e3ec7ae4647b3",
+      "canonical_index_blob_sha": "ec69d8fba81b3d0cd22e9fb8d3721658d173bf2c43ee092fb03e3ec7ae4647b3",
+      "manifest_sha": "ec69d8fba81b3d0cd22e9fb8d3721658d173bf2c43ee092fb03e3ec7ae4647b3",
+      "staging_path": "00_book/assets/ui/legacy/switching/vtp/member-policy.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 177,
+          "referenced_path": "../assets/ui/legacy/switching/vtp/member-policy.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 147,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/vtp/member-policy.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.vtp.view-push",
+      "old_path": "00_book/figures/gui/chapter-15/11-vtp-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/vtp/view-push.png",
+      "source_git_blob_sha": "6a1a22d6318c29312e2456dbcb5f9b5c79f9ab3726e2cb1034a0fb91924863b2",
+      "canonical_filesystem_sha": "6a1a22d6318c29312e2456dbcb5f9b5c79f9ab3726e2cb1034a0fb91924863b2",
+      "canonical_index_blob_sha": "6a1a22d6318c29312e2456dbcb5f9b5c79f9ab3726e2cb1034a0fb91924863b2",
+      "manifest_sha": "6a1a22d6318c29312e2456dbcb5f9b5c79f9ab3726e2cb1034a0fb91924863b2",
+      "staging_path": "00_book/assets/ui/legacy/switching/vtp/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 194,
+          "referenced_path": "../assets/ui/legacy/switching/vtp/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 158,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/vtp/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.switching.etherchannel.form",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 51,
+      "before": "../../figures/gui/chapter-15/04-etherchannel-form.png",
+      "after": "../assets/ui/legacy/switching/etherchannel/form.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 85,
+      "before": "../../figures/gui/chapter-15/05-quick-etherchannel.png",
+      "after": "../assets/ui/legacy/switching/etherchannel/quick-link.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.view-push",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 68,
+      "before": "../../figures/gui/chapter-15/06-etherchannel-view-push.png",
+      "after": "../assets/ui/legacy/switching/etherchannel/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-peer",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 97,
+      "before": "../../figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+      "after": "../assets/ui/legacy/switching/etherchannel/quick-link-peer.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-link-mode",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 109,
+      "before": "../../figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+      "after": "../assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.stp.form",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 129,
+      "before": "../../figures/gui/chapter-15/07-stp-form.png",
+      "after": "../assets/ui/legacy/switching/stp/form.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.stp.view-push",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 146,
+      "before": "../../figures/gui/chapter-15/08-stp-view-push.png",
+      "after": "../assets/ui/legacy/switching/stp/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.vtp.group-top",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 161,
+      "before": "../../figures/gui/chapter-15/09-vtp-group-top.png",
+      "after": "../assets/ui/legacy/switching/vtp/group-top.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.vtp.member-policy",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 177,
+      "before": "../../figures/gui/chapter-15/10-vtp-member-policy.png",
+      "after": "../assets/ui/legacy/switching/vtp/member-policy.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.vtp.view-push",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 194,
+      "before": "../../figures/gui/chapter-15/11-vtp-view-push.png",
+      "after": "../assets/ui/legacy/switching/vtp/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.form",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 42,
+      "before": "figures/gui/chapter-15/04-etherchannel-form.png",
+      "after": "/documentation_assets/ui/legacy/switching/etherchannel/form.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 72,
+      "before": "figures/gui/chapter-15/05-quick-etherchannel.png",
+      "after": "/documentation_assets/ui/legacy/switching/etherchannel/quick-link.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.view-push",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 61,
+      "before": "figures/gui/chapter-15/06-etherchannel-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/etherchannel/view-push.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-peer",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 81,
+      "before": "figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+      "after": "/documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-link-mode",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 88,
+      "before": "figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+      "after": "/documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.stp.form",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 102,
+      "before": "figures/gui/chapter-15/07-stp-form.png",
+      "after": "/documentation_assets/ui/legacy/switching/stp/form.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.stp.view-push",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 120,
+      "before": "figures/gui/chapter-15/08-stp-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/stp/view-push.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.vtp.group-top",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 129,
+      "before": "figures/gui/chapter-15/09-vtp-group-top.png",
+      "after": "/documentation_assets/ui/legacy/switching/vtp/group-top.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.vtp.member-policy",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 147,
+      "before": "figures/gui/chapter-15/10-vtp-member-policy.png",
+      "after": "/documentation_assets/ui/legacy/switching/vtp/member-policy.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.vtp.view-push",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 158,
+      "before": "figures/gui/chapter-15/11-vtp-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/vtp/view-push.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 20,
+  "baseline": {
+    "before": 57,
+    "resolved": 10,
+    "after": 47,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/04-etherchannel-form.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/04-etherchannel-form.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/05-quick-etherchannel.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/05-quick-etherchannel.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/06-etherchannel-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/06-etherchannel-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/07-stp-form.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/07-stp-form.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/08-stp-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/08-stp-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/09-vtp-group-top.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/09-vtp-group-top.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/10-vtp-member-policy.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/10-vtp-member-policy.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/11-vtp-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/11-vtp-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 179,
+    "pending": 166,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 179,
+      "pending": 166,
+      "frozen": 62
+    },
+    "b07_migrated": 19,
+    "b07_old_paths_absent": 19,
+    "b07_canonical_paths_present": 19,
+    "other_records_unchanged": 388,
+    "b06_hold_full_record_and_legacy_bytes_unchanged": true,
+    "b06_hold_planned_destination_absent": true,
+    "reference_edges_exact_current_lines": 37,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 47,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [],
+    "full_build_gate": "DEFERRED until cumulative B07R"
+  },
+  "typst": [],
+  "png_sanity": [
+    {
+      "asset_id": "ui.switching.etherchannel.form",
+      "width": 860,
+      "height": 1340,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link",
+      "width": 1616,
+      "height": 1396,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-peer",
+      "width": 1616,
+      "height": 1396,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.etherchannel.quick-link-link-mode",
+      "width": 1616,
+      "height": 1396,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.stp.form",
+      "width": 860,
+      "height": 1340,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.stp.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.vtp.group-top",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.vtp.member-policy",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.vtp.view-push",
+      "width": 1856,
+      "height": 1456,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ]
+}

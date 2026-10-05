@@ -39,7 +39,7 @@ Sau Save, chọn *View & Push VLAN*. Preview chỉ nên chứa VLAN đang chờ 
 
 EtherChannel gộp nhiều liên kết vật lý thành một Port-channel. Các member phải tương thích về speed, duplex, switchport mode, native VLAN và allowed VLANs.
 
-#insert-image("figures/gui/chapter-15/04-etherchannel-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/etherchannel/form.png",
   caption: [Port-channel10 dùng LACP active với hai member uplink.], width: 54.0%) <fig:ch15-04-etherchannel-form>
 
 #report-table(
@@ -58,7 +58,7 @@ EtherChannel gộp nhiều liên kết vật lý thành một Port-channel. Các
 
 Nút *Quick select available interfaces* chỉ liệt kê port phù hợp và chưa thuộc EtherChannel khác. Vẫn phải xác minh dây nối thực tế và cấu hình phía peer.
 
-#insert-image("figures/gui/chapter-15/06-etherchannel-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/etherchannel/view-push.png",
   caption: [View & Push EtherChannel gồm Port-channel và từng member interface.], width: 76.0%) <fig:ch15-06-etherchannel-view-push>
 
 Trong preview, kiểm tra cấu hình Port-channel trước, sau đó từng member và lệnh #raw("channel-group"). Protocol/mode ở hai đầu phải tạo được cặp hợp lệ; cấu hình VLAN của Port-channel và member phải đồng nhất.
@@ -69,7 +69,7 @@ Nút *Quick Link* tạo một cấu hình khớp nhau trên hai switch đang Con
 
 === Bước 1 — Local port
 
-#insert-image("figures/gui/chapter-15/05-quick-etherchannel.png",
+#insert-image("/documentation_assets/ui/legacy/switching/etherchannel/quick-link.png",
   caption: [Chọn member local, số Port-channel và giao thức.], width: 75.0%) <fig:ch15-05-quick-etherchannel>
 
 - *Local member port*: cổng vật lý trên switch hiện tại.
@@ -78,14 +78,14 @@ Nút *Quick Link* tạo một cấu hình khớp nhau trên hai switch đang Con
 
 === Bước 2 — Peer port
 
-#insert-image("figures/gui/chapter-15/12-quick-etherchannel-peer.png",
+#insert-image("/documentation_assets/ui/legacy/switching/etherchannel/quick-link-peer.png",
   caption: [Chọn switch peer và cổng nối đúng với local port.], width: 75.0%) <fig:ch15-12-quick-etherchannel-peer>
 
 *Connect to* là switch ở đầu kia; *Peer member port* phải là đầu nối vật lý tương ứng. CAMS không thể xác minh thay người dùng rằng hai cổng đang nối cùng một sợi/cặp liên kết.
 
 === Bước 3 — Link mode
 
-#insert-image("figures/gui/chapter-15/13-quick-etherchannel-link-mode.png",
+#insert-image("/documentation_assets/ui/legacy/switching/etherchannel/quick-link-link-mode.png",
   caption: [Đặt cùng Switchport mode và VLAN cho cả hai đầu.], width: 75.0%) <fig:ch15-13-quick-etherchannel-link-mode>
 
 - Chọn *Trunk* cho uplink mang nhiều VLAN; nhập Native VLAN và Allowed VLANs.
@@ -99,7 +99,7 @@ Quick EtherChannel tạo và preview cấu hình cho cả hai thiết bị. Nế
 
 Chọn *STP*, Add hoặc Edit policy theo VLAN.
 
-#insert-image("figures/gui/chapter-15/07-stp-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/stp/form.png",
   caption: [Rapid-PVST và vai trò Root Primary cho VLAN 10.], width: 54.0%) <fig:ch15-07-stp-form>
 
 #report-table(
@@ -117,7 +117,7 @@ Chọn *STP*, Add hoặc Edit policy theo VLAN.
 
 Không đặt Primary cho cùng VLAN trên nhiều switch. Một thiết kế phổ biến là distribution switch thứ nhất Primary và switch thứ hai Secondary, có đối chiếu đường đi thực tế của VLAN.
 
-#insert-image("figures/gui/chapter-15/08-stp-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/stp/view-push.png",
   caption: [View & Push STP với policy riêng cho VLAN 10 và VLAN 20.], width: 76.0%) <fig:ch15-08-stp-view-push>
 
 Kiểm tra #raw("spanning-tree mode"), từng VLAN và root role/priority. Sau Push, xem root bridge, root port, blocked/forwarding port và thử failover trong lab.
@@ -126,7 +126,7 @@ Kiểm tra #raw("spanning-tree mode"), từng VLAN và root role/priority. Sau P
 
 #report-note[VTP Group áp dụng một domain cho từ hai đến năm switch đang Connected. VTP có thể thay đổi VLAN database trên nhiều thiết bị, vì vậy chỉ dùng khi đã hiểu trạng thái revision/domain hiện tại và có bản sao lưu.]
 
-#insert-image("figures/gui/chapter-15/09-vtp-group-top.png",
+#insert-image("/documentation_assets/ui/legacy/switching/vtp/group-top.png",
   caption: [Domain CAMPUS, phiên bản 2 và hai switch tham gia.], width: 100.0%) <fig:ch15-09-vtp-group-top>
 
 #report-table(
@@ -144,7 +144,7 @@ Kiểm tra #raw("spanning-tree mode"), từng VLAN và root role/priority. Sau P
 
 Authentication và kích hoạt VTPv3 primary/MST nằm ngoài workflow không tương tác này.
 
-#insert-image("figures/gui/chapter-15/10-vtp-member-policy.png",
+#insert-image("/documentation_assets/ui/legacy/switching/vtp/member-policy.png",
   caption: [Member policy với SW1 Server, SW3 Client và Pruning.], width: 100.0%) <fig:ch15-10-vtp-member-policy>
 
 - *server* có thể cập nhật VLAN database và quảng bá thay đổi.
@@ -155,7 +155,7 @@ Authentication và kích hoạt VTPv3 primary/MST nằm ngoài workflow không t
 
 Nên có số lượng server phù hợp với thiết kế, không đặt mọi switch access thành server. Chọn *Save* để chỉ lưu hoặc *Save & Push* nếu muốn mở ngay preview.
 
-#insert-image("figures/gui/chapter-15/11-vtp-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/vtp/view-push.png",
   caption: [View & Push VTP tổng hợp preview riêng cho từng member.], width: 78.0%) <fig:ch15-11-vtp-view-push>
 
 Đọc từng khối #raw("# Device"), kiểm tra domain, version, mode và pruning của đúng host. Chỉ Push khi cả hai preview thành công. Sau Push, kiểm tra VTP status và VLAN database trên từng switch trước khi tạo hoặc xóa VLAN tiếp theo.
