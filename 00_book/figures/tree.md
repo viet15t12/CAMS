@@ -507,3 +507,18 @@ B10B canonical legacy System Logs viewer UI (outside this figures tree):
 - documentation_assets/ui/legacy/system-logs/message-details.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B11A preserved switching-lab evidence (both legacy originals and canonical copies):
+
+- 00_book/figures/report/diagrams/switching-lab/1_10.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw1-trunks-pending-apply.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_11.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw2-trunks-synchronized.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_12.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw3-trunks-synchronized.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_13.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw4-trunks-synchronized.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_14.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw5-trunks-synchronized.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_15.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw6-trunks-synchronized.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_16.png -> documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-identity.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_17.png -> documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-member-policy.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_20.png -> documentation_assets/evidence/ui-capture/original/switching-lab/vlan-view-push.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_1.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/switching-lab/1_18.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/switching-lab/1_19.png (HOLD; legacy only, no canonical copy)

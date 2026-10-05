@@ -12648,14 +12648,14 @@ assets:
   domain: switching-lab
   subject: sw1-trunks-pending-apply
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_10.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_10.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw1-trunks-pending-apply.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/sw1-trunks-pending-apply.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw1-trunks-pending-apply.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_10.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 22b8eac4767def77575fce18f21a827b1057d62327e51d22f0a62b4883752867
   provenance:
     assessment: manual-screenshot-probable
@@ -12688,14 +12688,14 @@ assets:
   domain: switching-lab
   subject: sw2-trunks-synchronized
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_11.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_11.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw2-trunks-synchronized.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/sw2-trunks-synchronized.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw2-trunks-synchronized.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_11.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 994ec1c65545ff08770796df0513d6d6f473fc035767ebd26297f600cdc23ce8
   provenance:
     assessment: manual-screenshot-probable
@@ -12728,14 +12728,14 @@ assets:
   domain: switching-lab
   subject: sw3-trunks-synchronized
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_12.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_12.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw3-trunks-synchronized.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/sw3-trunks-synchronized.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw3-trunks-synchronized.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_12.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 363d132d762906925b1b8e82ce040fd872b69bf16941b758e627f91ab5886326
   provenance:
     assessment: manual-screenshot-probable
@@ -12768,14 +12768,14 @@ assets:
   domain: switching-lab
   subject: sw4-trunks-synchronized
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_13.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_13.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw4-trunks-synchronized.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/sw4-trunks-synchronized.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw4-trunks-synchronized.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_13.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 428f51d0ea5c130979c39626153032448d5fa439e663990386db6dd249b66cd0
   provenance:
     assessment: manual-screenshot-probable
@@ -12808,14 +12808,14 @@ assets:
   domain: switching-lab
   subject: sw5-trunks-synchronized
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_14.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_14.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw5-trunks-synchronized.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/sw5-trunks-synchronized.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw5-trunks-synchronized.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_14.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: dde0547aa221edeea9b24ae52efbc5ee3aab750ee415a4083e33078844788b03
   provenance:
     assessment: manual-screenshot-probable
@@ -12848,14 +12848,14 @@ assets:
   domain: switching-lab
   subject: sw6-trunks-synchronized
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_15.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_15.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw6-trunks-synchronized.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/sw6-trunks-synchronized.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/sw6-trunks-synchronized.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_15.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: fe15e98c298f5c2004d792ea964455148c0051b3486fc0c7cc226260b29a0aa0
   provenance:
     assessment: manual-screenshot-probable
@@ -12888,14 +12888,14 @@ assets:
   domain: switching-lab
   subject: vtp-group-identity
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_16.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_16.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-identity.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-identity.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-identity.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_16.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 2809933f285b06a0e2a96f913e022893afea839028c0c4d832d264eee8426cdd
   provenance:
     assessment: manual-screenshot-probable
@@ -12928,14 +12928,14 @@ assets:
   domain: switching-lab
   subject: vtp-group-member-policy
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_17.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_17.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-member-policy.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-member-policy.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-member-policy.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_17.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 747af0238c071b00854d1b67e1199425a3b4026b19dd58dae185fee2080845df
   provenance:
     assessment: manual-screenshot-probable
@@ -13088,14 +13088,14 @@ assets:
   domain: switching-lab
   subject: vlan-view-push
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/switching-lab/1_20.png
-  path: 00_book/figures/report/diagrams/switching-lab/1_20.png
+  current_path: documentation_assets/evidence/ui-capture/original/switching-lab/vlan-view-push.png
+  path: documentation_assets/evidence/ui-capture/original/switching-lab/vlan-view-push.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/switching-lab/vlan-view-push.png
   legacy_path: 00_book/figures/report/diagrams/switching-lab/1_20.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 44583fe722181386d801d4d231944ea6062ac324b0b1083a90aa97829afafa68
   provenance:
     assessment: manual-screenshot-probable
