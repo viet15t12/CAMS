@@ -17,7 +17,7 @@ Các thao tác Access, Trunk, VLAN, EtherChannel, STP, VTP, L2 Security, Port Se
 
 Mở *Interfaces → Routed Ports*, chọn cổng rồi nhấn *Edit*. Nếu cổng đang là Access hoặc Trunk, có thể chuyển mode thành #raw("routed") từ *Switch Ports → Port Status*; sau khi Save, cổng xuất hiện trong danh sách Routed Ports.
 
-#insert-image("figures/gui/chapter-18/01-routed-port-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l3/routed-port-form.png",
   caption: [Các trường mode và trạng thái liên kết của Routed Port.], width: 55.0%) <fig:ch18-01-routed-port-form>
 
 #report-table(
@@ -43,7 +43,7 @@ Các chỉ số phía trên cho biết tổng routed port, số link up, số Ac
 
 Routed Port dùng chung controller *INTERFACES* với Switch Ports. Sau khi Save, quay lại *Switch Ports* và mở *View & Push* để kiểm tra lệnh #raw("no switchport") trên đúng cổng.
 
-#insert-image("figures/gui/chapter-18/03-interfaces-view-push-routed.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png",
   caption: [Preview Interfaces có lệnh chuyển GigabitEthernet0/1 thành routed port.], width: 78.0%) <fig:ch18-03-interfaces-view-push-routed>
 
 Trước khi Push, kiểm tra tên interface, description, speed, duplex, #raw("no switchport") và #raw("no shutdown"). Việc chuyển một trunk hoặc access port sang routed port sẽ loại bỏ VLAN forwarding trên cổng đó; nên có đường quản trị dự phòng nếu cổng đang mang lưu lượng quản trị.
@@ -52,7 +52,7 @@ Trước khi Push, kiểm tra tên interface, description, speed, duplex, #raw("
 
 SVI là interface logic gắn với một VLAN đã tồn tại. Mở *Interfaces → SVI*, nhấn *Add* để tạo mới hoặc chọn một hàng rồi nhấn *Edit*.
 
-#insert-image("figures/gui/chapter-18/04-svi-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l3/svi-form.png",
   caption: [Form SVI với VLAN ID, địa chỉ gateway, subnet mask và trạng thái quản trị.], width: 52.0%) <fig:ch18-04-svi-form>
 
 #report-table(
@@ -76,7 +76,7 @@ SVI chỉ có thể hoạt động khi VLAN tồn tại và có ít nhất một
 
 Nút *IP Routing* nằm trên thanh tiêu đề của tab SVI (xem @fig:ch18-05-svi-overview-ip-routing). Bật tùy chọn này khi SW3 cần định tuyến giữa các SVI hoặc giữa SVI và routed port. Nếu chỉ dùng switch như thiết bị Layer 2, có thể để tắt.
 
-#insert-image("figures/gui/chapter-18/05-svi-overview-ip-routing.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png",
   caption: [Ba SVI đã có địa chỉ và trạng thái IP Routing đang On.], width: 100.0%) <fig:ch18-05-svi-overview-ip-routing>
 
 Không bật IP Routing chỉ vì đã tạo SVI. Trước hết cần kiểm tra sơ đồ địa chỉ, VLAN membership, default gateway của client, route mặc định/upstream và ACL áp dụng trên các SVI.
@@ -85,7 +85,7 @@ Không bật IP Routing chỉ vì đã tạo SVI. Trước hết cần kiểm tr
 
 SVI có nút *View & Push* riêng. Nút này dựng lệnh IP Routing và toàn bộ SVI đang chờ, không trộn với View & Push Interfaces hoặc VLAN.
 
-#insert-image("figures/gui/chapter-18/06-svi-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l3/svi-view-push.png",
   caption: [Preview riêng của SVI gồm #raw("ip routing") và từng #raw("interface Vlan").], width: 78.0%) <fig:ch18-06-svi-view-push>
 
 Kiểm tra các điểm sau trước khi Push:

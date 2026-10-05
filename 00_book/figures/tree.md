@@ -37,25 +37,9 @@
 │   │   ├── 04-l2-security-view-push.png
 │   │   ├── 05-port-security-form.png
 │   │   └── 07-port-security-view-push.png
-│   ├── chapter-17
+│   └── chapter-17
 │   │   ├── 01-port-counters.png
 │   │   └── 02-mac-address-table.png
-│   ├── chapter-18
-│   │   ├── 01-routed-port-form.png
-│   │   ├── 02-routed-ports-overview.png
-│   │   ├── 03-interfaces-view-push-routed.png
-│   │   ├── 04-svi-form.png
-│   │   ├── 05-svi-overview-ip-routing.png
-│   │   └── 06-svi-view-push.png
-│   ├── chapter-19
-│   │   ├── 01-dhcp-pool-form.png
-│   │   ├── 02-dhcp-server-overview.png
-│   │   ├── 03-dhcp-server-view-push.png
-│   │   ├── 04-dhcp-relay-form.png
-│   │   ├── 05-dhcp-relay-view-push.png
-│   │   ├── 06-acl-extended-form.png
-│   │   ├── 07-acl-bindings.png
-│   │   └── 08-acl-view-push.png
 ├── icons
 │   └── ptit-logo.svg
 ├── report
@@ -451,5 +435,24 @@ B07B canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/switching/vtp/group-top.png
 - documentation_assets/ui/legacy/switching/vtp/member-policy.png
 - documentation_assets/ui/legacy/switching/vtp/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B07C canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/switching/interfaces-l3/routed-port-form.png
+- documentation_assets/ui/legacy/switching/interfaces-l3/routed-ports-overview.png
+- documentation_assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png
+- documentation_assets/ui/legacy/switching/interfaces-l3/svi-form.png
+- documentation_assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png
+- documentation_assets/ui/legacy/switching/interfaces-l3/svi-view-push.png
+- documentation_assets/ui/legacy/switching/dhcp/pool-form.png
+- documentation_assets/ui/legacy/switching/dhcp/server-overview.png
+- documentation_assets/ui/legacy/switching/dhcp/server-view-push.png
+- documentation_assets/ui/legacy/switching/dhcp/relay-form.png
+- documentation_assets/ui/legacy/switching/dhcp/relay-view-push.png
+- documentation_assets/ui/legacy/switching/acl/extended-form.png
+- documentation_assets/ui/legacy/switching/acl/bindings.png
+- documentation_assets/ui/legacy/switching/acl/view-push.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

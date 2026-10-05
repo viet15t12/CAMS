@@ -8092,14 +8092,14 @@ assets:
   domain: switching/interfaces-l3
   subject: routed-port-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-18/01-routed-port-form.png
-  path: 00_book/figures/gui/chapter-18/01-routed-port-form.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l3/routed-port-form.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l3/routed-port-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l3/routed-port-form.png
   legacy_path: 00_book/figures/gui/chapter-18/01-routed-port-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 00c0952ae5375c2051fd7acf4532cb0aaec58bb37f16d2c64350835b54edae48
   provenance:
     assessment: unknown
@@ -8117,11 +8117,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/18_interface_switch_l3.md
     line: 26
-    referenced_path: ../../figures/gui/chapter-18/01-routed-port-form.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l3/routed-port-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/18_interface_switch_l3.typ
     line: 20
-    referenced_path: figures/gui/chapter-18/01-routed-port-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l3/routed-port-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8141,14 +8141,14 @@ assets:
   domain: switching/interfaces-l3
   subject: routed-ports-overview
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-18/02-routed-ports-overview.png
-  path: 00_book/figures/gui/chapter-18/02-routed-ports-overview.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l3/routed-ports-overview.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l3/routed-ports-overview.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l3/routed-ports-overview.png
   legacy_path: 00_book/figures/gui/chapter-18/02-routed-ports-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: f3d43b41cd0f06b91366258299e1e99da1afc5c113e78e6aaffdb9fef8d6b1a8
   provenance:
     assessment: unknown
@@ -8166,7 +8166,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/18_interface_switch_l3.md
     line: 48
-    referenced_path: ../../figures/gui/chapter-18/02-routed-ports-overview.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l3/routed-ports-overview.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -8185,14 +8185,14 @@ assets:
   domain: switching/interfaces-l3
   subject: interfaces-view-push-routed
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-18/03-interfaces-view-push-routed.png
-  path: 00_book/figures/gui/chapter-18/03-interfaces-view-push-routed.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png
   legacy_path: 00_book/figures/gui/chapter-18/03-interfaces-view-push-routed.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3df8cac43797c64df368b4c0c607e1895fbbd7ddf26848b65b286d407b1eef37
   provenance:
     assessment: unknown
@@ -8210,11 +8210,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/18_interface_switch_l3.md
     line: 64
-    referenced_path: ../../figures/gui/chapter-18/03-interfaces-view-push-routed.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/18_interface_switch_l3.typ
     line: 46
-    referenced_path: figures/gui/chapter-18/03-interfaces-view-push-routed.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8234,14 +8234,14 @@ assets:
   domain: switching/interfaces-l3
   subject: svi-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-18/04-svi-form.png
-  path: 00_book/figures/gui/chapter-18/04-svi-form.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-form.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-form.png
   legacy_path: 00_book/figures/gui/chapter-18/04-svi-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 608bbe7541bc2b14d91254f15519aced5ea724cf312240e724ed8a23fcbda706
   provenance:
     assessment: unknown
@@ -8259,11 +8259,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/18_interface_switch_l3.md
     line: 80
-    referenced_path: ../../figures/gui/chapter-18/04-svi-form.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l3/svi-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/18_interface_switch_l3.typ
     line: 55
-    referenced_path: figures/gui/chapter-18/04-svi-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l3/svi-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8283,14 +8283,14 @@ assets:
   domain: switching/interfaces-l3
   subject: svi-overview-ip-routing
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-18/05-svi-overview-ip-routing.png
-  path: 00_book/figures/gui/chapter-18/05-svi-overview-ip-routing.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png
   legacy_path: 00_book/figures/gui/chapter-18/05-svi-overview-ip-routing.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3163df212bbed606b3b0f96a4cceacaae1521846f4776ddd5ccf0e265692daca
   provenance:
     assessment: unknown
@@ -8308,11 +8308,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/18_interface_switch_l3.md
     line: 107
-    referenced_path: ../../figures/gui/chapter-18/05-svi-overview-ip-routing.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/18_interface_switch_l3.typ
     line: 79
-    referenced_path: figures/gui/chapter-18/05-svi-overview-ip-routing.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8332,14 +8332,14 @@ assets:
   domain: switching/interfaces-l3
   subject: svi-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-18/06-svi-view-push.png
-  path: 00_book/figures/gui/chapter-18/06-svi-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-view-push.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l3/svi-view-push.png
   legacy_path: 00_book/figures/gui/chapter-18/06-svi-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b674498b75f4aa2838a53046939bf85cb02d4cb5e6ca56d965401f44bed02d40
   provenance:
     assessment: unknown
@@ -8357,11 +8357,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/18_interface_switch_l3.md
     line: 122
-    referenced_path: ../../figures/gui/chapter-18/06-svi-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l3/svi-view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/18_interface_switch_l3.typ
     line: 88
-    referenced_path: figures/gui/chapter-18/06-svi-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l3/svi-view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8381,14 +8381,14 @@ assets:
   domain: switching/dhcp
   subject: pool-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/01-dhcp-pool-form.png
-  path: 00_book/figures/gui/chapter-19/01-dhcp-pool-form.png
+  current_path: documentation_assets/ui/legacy/switching/dhcp/pool-form.png
+  path: documentation_assets/ui/legacy/switching/dhcp/pool-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/dhcp/pool-form.png
   legacy_path: 00_book/figures/gui/chapter-19/01-dhcp-pool-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 77ff69b42cfaad25d1309f34c7dca5ba530b59b6e36256a43d2144bfe7964e51
   provenance:
     assessment: unknown
@@ -8406,11 +8406,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 17
-    referenced_path: ../../figures/gui/chapter-19/01-dhcp-pool-form.png
+    referenced_path: ../assets/ui/legacy/switching/dhcp/pool-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/19_dhcp_acl_switch_l3.typ
     line: 16
-    referenced_path: figures/gui/chapter-19/01-dhcp-pool-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/dhcp/pool-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8430,14 +8430,14 @@ assets:
   domain: switching/dhcp
   subject: server-overview
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/02-dhcp-server-overview.png
-  path: 00_book/figures/gui/chapter-19/02-dhcp-server-overview.png
+  current_path: documentation_assets/ui/legacy/switching/dhcp/server-overview.png
+  path: documentation_assets/ui/legacy/switching/dhcp/server-overview.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/dhcp/server-overview.png
   legacy_path: 00_book/figures/gui/chapter-19/02-dhcp-server-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 87819b297a88d60d364fa8154692d2f4bb4b3af92395869cd5cf5754b132083a
   provenance:
     assessment: unknown
@@ -8455,7 +8455,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 36
-    referenced_path: ../../figures/gui/chapter-19/02-dhcp-server-overview.png
+    referenced_path: ../assets/ui/legacy/switching/dhcp/server-overview.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -8474,14 +8474,14 @@ assets:
   domain: switching/dhcp
   subject: server-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/03-dhcp-server-view-push.png
-  path: 00_book/figures/gui/chapter-19/03-dhcp-server-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/dhcp/server-view-push.png
+  path: documentation_assets/ui/legacy/switching/dhcp/server-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/dhcp/server-view-push.png
   legacy_path: 00_book/figures/gui/chapter-19/03-dhcp-server-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 383298790e2b2384d6268079de27b915b7d139ab2228591464748266cbc0b469
   provenance:
     assessment: unknown
@@ -8499,11 +8499,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 53
-    referenced_path: ../../figures/gui/chapter-19/03-dhcp-server-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/dhcp/server-view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/19_dhcp_acl_switch_l3.typ
     line: 44
-    referenced_path: figures/gui/chapter-19/03-dhcp-server-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/dhcp/server-view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8523,14 +8523,14 @@ assets:
   domain: switching/dhcp
   subject: relay-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/04-dhcp-relay-form.png
-  path: 00_book/figures/gui/chapter-19/04-dhcp-relay-form.png
+  current_path: documentation_assets/ui/legacy/switching/dhcp/relay-form.png
+  path: documentation_assets/ui/legacy/switching/dhcp/relay-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/dhcp/relay-form.png
   legacy_path: 00_book/figures/gui/chapter-19/04-dhcp-relay-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1ef568cec41217727e17e4ab7790ab81626609e8d5fdd737a90c750ab533d75f
   provenance:
     assessment: unknown
@@ -8548,11 +8548,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 69
-    referenced_path: ../../figures/gui/chapter-19/04-dhcp-relay-form.png
+    referenced_path: ../assets/ui/legacy/switching/dhcp/relay-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/19_dhcp_acl_switch_l3.typ
     line: 53
-    referenced_path: figures/gui/chapter-19/04-dhcp-relay-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/dhcp/relay-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8572,14 +8572,14 @@ assets:
   domain: switching/dhcp
   subject: relay-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/05-dhcp-relay-view-push.png
-  path: 00_book/figures/gui/chapter-19/05-dhcp-relay-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/dhcp/relay-view-push.png
+  path: documentation_assets/ui/legacy/switching/dhcp/relay-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/dhcp/relay-view-push.png
   legacy_path: 00_book/figures/gui/chapter-19/05-dhcp-relay-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 83f237120029d3266c4eaebde7250df405f7f3e0cd336ff2b768ae523704d65f
   provenance:
     assessment: unknown
@@ -8597,11 +8597,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 86
-    referenced_path: ../../figures/gui/chapter-19/05-dhcp-relay-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/dhcp/relay-view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/19_dhcp_acl_switch_l3.typ
     line: 71
-    referenced_path: figures/gui/chapter-19/05-dhcp-relay-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/dhcp/relay-view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8621,14 +8621,14 @@ assets:
   domain: switching/acl
   subject: extended-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/06-acl-extended-form.png
-  path: 00_book/figures/gui/chapter-19/06-acl-extended-form.png
+  current_path: documentation_assets/ui/legacy/switching/acl/extended-form.png
+  path: documentation_assets/ui/legacy/switching/acl/extended-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/acl/extended-form.png
   legacy_path: 00_book/figures/gui/chapter-19/06-acl-extended-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7e1632315b0e4e4a57875fe5d7e945e9e8576522109db47e46957393c89a322e
   provenance:
     assessment: unknown
@@ -8646,11 +8646,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 103
-    referenced_path: ../../figures/gui/chapter-19/06-acl-extended-form.png
+    referenced_path: ../assets/ui/legacy/switching/acl/extended-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/19_dhcp_acl_switch_l3.typ
     line: 80
-    referenced_path: figures/gui/chapter-19/06-acl-extended-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/acl/extended-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8670,14 +8670,14 @@ assets:
   domain: switching/acl
   subject: bindings
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/07-acl-bindings.png
-  path: 00_book/figures/gui/chapter-19/07-acl-bindings.png
+  current_path: documentation_assets/ui/legacy/switching/acl/bindings.png
+  path: documentation_assets/ui/legacy/switching/acl/bindings.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/acl/bindings.png
   legacy_path: 00_book/figures/gui/chapter-19/07-acl-bindings.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 56c41fcac5c3fdbd48f9494b784725b0f378c68395b1291ff0c0580e6a3001ae
   provenance:
     assessment: unknown
@@ -8695,11 +8695,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 128
-    referenced_path: ../../figures/gui/chapter-19/07-acl-bindings.png
+    referenced_path: ../assets/ui/legacy/switching/acl/bindings.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/19_dhcp_acl_switch_l3.typ
     line: 107
-    referenced_path: figures/gui/chapter-19/07-acl-bindings.png
+    referenced_path: /documentation_assets/ui/legacy/switching/acl/bindings.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8719,14 +8719,14 @@ assets:
   domain: switching/acl
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-19/08-acl-view-push.png
-  path: 00_book/figures/gui/chapter-19/08-acl-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/acl/view-push.png
+  path: documentation_assets/ui/legacy/switching/acl/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/acl/view-push.png
   legacy_path: 00_book/figures/gui/chapter-19/08-acl-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b9ba271648c09b02f828ab7ebf1f5f440bcb3d5e7dfd3a58bdfedf9afb6dda15
   provenance:
     assessment: unknown
@@ -8744,11 +8744,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/19_dhcp_acl_switch_l3.md
     line: 145
-    referenced_path: ../../figures/gui/chapter-19/08-acl-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/acl/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/19_dhcp_acl_switch_l3.typ
     line: 118
-    referenced_path: figures/gui/chapter-19/08-acl-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/acl/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs

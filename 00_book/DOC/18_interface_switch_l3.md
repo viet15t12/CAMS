@@ -23,7 +23,7 @@ Access hoặc Trunk, có thể chuyển mode thành `routed` từ **Switch Ports
 Status**; sau khi Save, cổng xuất hiện trong danh sách Routed Ports.
 
 <figure>
-<p><img src="../../figures/gui/chapter-18/01-routed-port-form.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l3/routed-port-form.png"
 style="width:55.0%" /></p>
 <figcaption><p>Form Routed Port được phóng lớn để đọc rõ từng trường.</p></figcaption>
 </figure>
@@ -45,7 +45,7 @@ workflow đồng bộ interface của hệ thống đã hỗ trợ thiết bị 
 dùng.
 
 <figure>
-<p><img src="../../figures/gui/chapter-18/02-routed-ports-overview.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l3/routed-ports-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Danh sách Routed Ports và trạng thái link của SW3.</p></figcaption>
 </figure>
@@ -61,7 +61,7 @@ quay lại **Switch Ports** và mở **View & Push** để kiểm tra lệnh `no
 trên đúng cổng.
 
 <figure>
-<p><img src="../../figures/gui/chapter-18/03-interfaces-view-push-routed.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l3/interfaces-view-push-routed.png"
 style="width:78.0%" /></p>
 <figcaption><p>Preview Interfaces có lệnh chuyển GigabitEthernet0/1 thành routed port.</p></figcaption>
 </figure>
@@ -77,7 +77,7 @@ SVI là interface logic gắn với một VLAN đã tồn tại. Mở **Interfac
 **Add** để tạo mới hoặc chọn một hàng rồi nhấn **Edit**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-18/04-svi-form.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l3/svi-form.png"
 style="width:52.0%" /></p>
 <figcaption><p>Form SVI với VLAN ID, địa chỉ gateway, subnet mask và trạng thái quản trị.</p></figcaption>
 </figure>
@@ -104,7 +104,7 @@ cần định tuyến giữa các SVI hoặc giữa SVI và routed port. Nếu c
 như thiết bị Layer 2, có thể để tắt.
 
 <figure>
-<p><img src="../../figures/gui/chapter-18/05-svi-overview-ip-routing.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l3/svi-overview-ip-routing.png"
 style="width:100.0%" /></p>
 <figcaption><p>Ba SVI đã có địa chỉ và trạng thái IP Routing đang On.</p></figcaption>
 </figure>
@@ -119,7 +119,7 @@ SVI có nút **View & Push** riêng. Nút này dựng lệnh IP Routing và toà
 chờ, không trộn với View & Push Interfaces hoặc VLAN.
 
 <figure>
-<p><img src="../../figures/gui/chapter-18/06-svi-view-push.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l3/svi-view-push.png"
 style="width:78.0%" /></p>
 <figcaption><p>Preview riêng của SVI gồm `ip routing` và từng `interface Vlan`.</p></figcaption>
 </figure>

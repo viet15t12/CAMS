@@ -14,7 +14,7 @@ Mở **Services → DHCP Server → Pool**. Mỗi pool phục vụ một subnet;
 thường là địa chỉ SVI của chính VLAN đó.
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/01-dhcp-pool-form.png"
+<p><img src="../assets/ui/legacy/switching/dhcp/pool-form.png"
 style="width:58.0%" /></p>
 <figcaption><p>Form DHCP Pool được phóng lớn với dữ liệu của VLAN 10.</p></figcaption>
 </figure>
@@ -33,7 +33,7 @@ state. Có thể dùng **Edit** để nạp pool vào form và **Delete** để 
 bỏ. Network, mask, Default Router và SVI phải cùng thiết kế subnet.
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/02-dhcp-server-overview.png"
+<p><img src="../assets/ui/legacy/switching/dhcp/server-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể DHCP Server với hai pool cho VLAN 10 và VLAN 20.</p></figcaption>
 </figure>
@@ -50,7 +50,7 @@ trong subnet đang cấp phát và End IP không được nhỏ hơn Start IP.
 Sau khi Save Pool và Excluded Address, mở **View & Push** từ DHCP Server.
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/03-dhcp-server-view-push.png"
+<p><img src="../assets/ui/legacy/switching/dhcp/server-view-push.png"
 style="width:76.0%" /></p>
 <figcaption><p>Preview chỉ gồm Excluded Address và hai DHCP Pool của SW3.</p></figcaption>
 </figure>
@@ -66,7 +66,7 @@ Dùng Relay khi DHCP server nằm ở mạng khác. Mở **Services → DHCP Rel
 unicast tới Helper IP.
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/04-dhcp-relay-form.png"
+<p><img src="../assets/ui/legacy/switching/dhcp/relay-form.png"
 style="width:55.0%" /></p>
 <figcaption><p>Helper Address trên SVI Vlan99 trỏ tới DHCP server 192.0.2.50.</p></figcaption>
 </figure>
@@ -83,7 +83,7 @@ interface hướng về DHCP server nếu broadcast của client đi vào SVI kh
 ### View & Push DHCP Relay
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/05-dhcp-relay-view-push.png"
+<p><img src="../assets/ui/legacy/switching/dhcp/relay-view-push.png"
 style="width:76.0%" /></p>
 <figcaption><p>Preview riêng của DHCP Relay với `ip helper-address` dưới Vlan99.</p></figcaption>
 </figure>
@@ -100,7 +100,7 @@ chung cách tạo rule đã trình bày ở [Chương 8](08_cau_hinh_acl.md). Tr
 soát lưu lượng giữa các VLAN.
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/06-acl-extended-form.png"
+<p><img src="../assets/ui/legacy/switching/acl/extended-form.png"
 style="width:58.0%" /></p>
 <figcaption><p>Form Extended ACL USERS_TO_SERVERS và Rule Builder.</p></figcaption>
 </figure>
@@ -125,7 +125,7 @@ cuối; một ACL chỉ có rule Permit chưa chắc cho phép các luồng qu�
 Mở tab **Bindings**, chọn ACL, interface và direction rồi chọn **Add** và **Save**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/07-acl-bindings.png"
+<p><img src="../assets/ui/legacy/switching/acl/bindings.png"
 style="width:100.0%" /></p>
 <figcaption><p>ACL USERS_TO_SERVERS được gắn chiều IN trên Vlan10.</p></figcaption>
 </figure>
@@ -142,7 +142,7 @@ style="width:100.0%" /></p>
 ACL dùng nút **View & Push** riêng trong trang Access Control Lists.
 
 <figure>
-<p><img src="../../figures/gui/chapter-19/08-acl-view-push.png"
+<p><img src="../assets/ui/legacy/switching/acl/view-push.png"
 style="width:76.0%" /></p>
 <figcaption><p>Preview ACL gồm rule và lệnh `ip access-group` trên Vlan10.</p></figcaption>
 </figure>

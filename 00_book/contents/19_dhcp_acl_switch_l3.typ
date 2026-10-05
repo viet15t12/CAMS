@@ -13,7 +13,7 @@ Role *SW3* có nhóm *Services* gồm *DHCP Server* và *DHCP Relay*, đồng th
 
 Mở *Services → DHCP Server → Pool*. Mỗi pool phục vụ một subnet; Default Router thường là địa chỉ SVI của chính VLAN đó.
 
-#insert-image("figures/gui/chapter-19/01-dhcp-pool-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/dhcp/pool-form.png",
   caption: [Các tham số DHCP Pool cho VLAN 10.], width: 58.0%) <fig:ch19-01-dhcp-pool-form>
 
 #report-table(
@@ -41,7 +41,7 @@ Trong *DHCP Server*, mở tab *Excluded* để loại gateway, server, access po
 
 Sau khi Save Pool và Excluded Address, mở *View & Push* từ DHCP Server.
 
-#insert-image("figures/gui/chapter-19/03-dhcp-server-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/dhcp/server-view-push.png",
   caption: [Preview chỉ gồm Excluded Address và hai DHCP Pool của SW3.], width: 76.0%) <fig:ch19-03-dhcp-server-view-push>
 
 Kiểm tra #raw("ip dhcp excluded-address"), tên từng #raw("ip dhcp pool"), network/mask, #raw("default-router"), #raw("dns-server") và #raw("lease"). Sau Push, thử client trong từng VLAN, kiểm tra địa chỉ nhận được, gateway, DNS và DHCP binding trên switch.
@@ -50,7 +50,7 @@ Kiểm tra #raw("ip dhcp excluded-address"), tên từng #raw("ip dhcp pool"), n
 
 Dùng Relay khi DHCP server nằm ở mạng khác. Mở *Services → DHCP Relay*; CAMS đưa thẳng tới tab Helper. Broadcast DHCP nhận trên interface được chuyển thành unicast tới Helper IP.
 
-#insert-image("figures/gui/chapter-19/04-dhcp-relay-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/dhcp/relay-form.png",
   caption: [Helper Address trên SVI Vlan99 trỏ tới DHCP server 192.0.2.50.], width: 55.0%) <fig:ch19-04-dhcp-relay-form>
 
 #report-table(
@@ -68,7 +68,7 @@ Chọn *Add Locally*, sau đó *Save*. Có thể thêm nhiều Helper IP trên c
 
 === View & Push DHCP Relay
 
-#insert-image("figures/gui/chapter-19/05-dhcp-relay-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/dhcp/relay-view-push.png",
   caption: [Preview riêng của DHCP Relay với #raw("ip helper-address") dưới Vlan99.], width: 76.0%) <fig:ch19-05-dhcp-relay-view-push>
 
 Kiểm tra #raw("interface Vlan99") và #raw("ip helper-address 192.0.2.50") nằm cùng một khối. Sau Push, kiểm tra route hai chiều giữa SW3 và server, DHCP scope cho subnet của client, gateway trong offer và ACL trên đường đi.
@@ -77,7 +77,7 @@ Kiểm tra #raw("interface Vlan99") và #raw("ip helper-address 192.0.2.50") n�
 
 Mở *Security → ACL*. Các tab Standard, Extended, Dynamic, Reflexive và MAC dùng chung cách tạo rule đã trình bày ở @ch08. Trên SW3, điểm cần chú ý nhất là gắn IP ACL vào đúng SVI hoặc interface Layer 3 để kiểm soát lưu lượng giữa các VLAN.
 
-#insert-image("figures/gui/chapter-19/06-acl-extended-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/acl/extended-form.png",
   caption: [Form Extended ACL USERS\_TO\_SERVERS và Rule Builder.], width: 58.0%) <fig:ch19-06-acl-extended-form>
 
 Các trường cơ bản của Extended ACL:
@@ -104,7 +104,7 @@ Thêm rule Permit cần thiết trước rule Deny rộng. ACL luôn có implici
 
 Mở tab *Bindings*, chọn ACL, interface và direction rồi chọn *Add* và *Save*.
 
-#insert-image("figures/gui/chapter-19/07-acl-bindings.png",
+#insert-image("/documentation_assets/ui/legacy/switching/acl/bindings.png",
   caption: [ACL USERS\_TO\_SERVERS được gắn chiều IN trên Vlan10.], width: 100.0%) <fig:ch19-07-acl-bindings>
 
 - *IN* lọc gói ngay khi đi vào SVI. Với #raw("Vlan10 IN"), policy kiểm soát lưu lượng do client VLAN 10 gửi vào quá trình định tuyến;
@@ -115,7 +115,7 @@ Mở tab *Bindings*, chọn ACL, interface và direction rồi chọn *Add* và 
 
 ACL dùng nút *View & Push* riêng trong trang Access Control Lists.
 
-#insert-image("figures/gui/chapter-19/08-acl-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/acl/view-push.png",
   caption: [Preview ACL gồm rule và lệnh #raw("ip access-group") trên Vlan10.], width: 76.0%) <fig:ch19-08-acl-view-push>
 
 Đọc theo thứ tự sequence và kiểm tra action, protocol, source, wildcard, destination, port, interface cùng direction của #raw("ip access-group"). Trước khi Push qua SSH, bảo đảm địa chỉ quản trị vẫn được Permit hoặc có console/đường dự phòng.
