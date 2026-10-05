@@ -551,3 +551,21 @@ B11R unresolved/semantic-name HOLD sources (legacy only; no canonical copy):
 - 00_book/figures/report/diagrams/switching-lab/1_22.png (HOLD; original preserved)
 - 00_book/figures/report/diagrams/switching-lab/1_32.png (HOLD; original preserved)
 - 00_book/figures/report/diagrams/switching-lab/1_6.png (HOLD; original preserved)
+
+B12 preserved routing-ospf-lab evidence (both legacy originals and canonical copies):
+
+- 00_book/figures/report/diagrams/routing-ospf-lab/1.png -> documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/routing-ospf-lab/10.png -> documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/routing-ospf-lab/11.png -> documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/routing-ospf-lab/13.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/14.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/15.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/16.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/2.png -> documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-editor-dark.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/routing-ospf-lab/3.png -> documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-addresses-dark.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/routing-ospf-lab/4.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/5.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/6.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/7.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/8.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/routing-ospf-lab/9.png -> documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-process-overview-dark.png (exact copy; legacy retained)

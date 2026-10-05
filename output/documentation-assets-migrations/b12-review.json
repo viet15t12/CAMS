@@ -1,0 +1,519 @@
+{
+  "task": "B12 routing OSPF original evidence",
+  "starting_commit": "fdea75e0ec7b0cd473911fc6ec981461d11ccc27",
+  "review_fixed_before_any_copy": true,
+  "approved_copy_count": 6,
+  "hold_count": 9,
+  "decisions": [
+    {
+      "asset_id": "evidence.routing-ospf.router-interfaces-overview",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/1.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png",
+      "decision": "APPROVE_COPY",
+      "visible_device_page_state": "R1 / 192.168.122.101; Router Interfaces > Physical, light theme. Eight physical interfaces; GigabitEthernet0/1 selected, 10.1.12.1 / 255.255.255.0, Link_To_R2, L3 profile. Layer 3 fields/options and Update Interface button visible.",
+      "semantic_id_and_filename_judgment": "Generic router-interfaces-overview ID and filename accurately describe this inventory/editor state. Device/interface details distinguish it from unselected dark editor 2 and R2 inventory 3.",
+      "report_or_usage_observation": "Report overview on R1 is consistent with the visible identity.",
+      "source_sha256": "98426b2a12db4173473253eb032d97d61995349bfb5660b686b0dadec6c68b28",
+      "current_live_reference_count": 1,
+      "current_live_usage": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 77,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/1.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-hosts",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/10.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png",
+      "decision": "APPROVE_COPY",
+      "visible_device_page_state": "Routing Group · OSPF dialog, light theme; Step 1 Hosts. R1/R2/R3/ISP1/ISP2/R6 (.101-.106) listed with all six checkboxes unchecked. Heading says Select participating hosts (2–5 devices).",
+      "semantic_id_and_filename_judgment": "routing-group-hosts is generic and accurate without claiming selected hosts or applied configuration; distinct from Networks step 11.",
+      "report_or_usage_observation": "Report lines 88/90 say six routers selected, but screenshot shows none checked; UI limit text says 2–5 despite six listed. Record only; no UI/prose correction.",
+      "source_sha256": "3a5bb49ff629e349cc22076db1e5ea41ab9d877e9cd30c9ffd7e47ce137d74bb",
+      "current_live_reference_count": 1,
+      "current_live_usage": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 87,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/10.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-networks",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/11.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png",
+      "decision": "APPROVE_COPY",
+      "visible_device_page_state": "Routing Group · OSPF dialog, light theme; Step 4 Networks. Connected networks/interfaces grouped under .101 and .102; visible checkboxes unchecked and Area fields all 0, including 10.1.12.0/24, 10.1.13.0/24 and 10.1.23.0/24.",
+      "semantic_id_and_filename_judgment": "Generic routing-group-networks identifies actual UI state regardless of intended Area values. Does not assert correctness, selection, applied topology or resolution of the known group issue.",
+      "report_or_usage_observation": "Report table lines 106–110 assigns Area 1 to these internal links while visible fields are 0. B12 leaves Area assertions and production workflow unchanged.",
+      "source_sha256": "20a3ce2f004c74f6f5abcc65b7467d0ab15de9483ab800926fd3c364c80b3fff",
+      "current_live_reference_count": 1,
+      "current_live_usage": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 95,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/11.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.r1-process-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/13.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/r1-process-dark.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "R2 / .102 selected, dark Routing > OSPF > Redistribute. One process, three networks, SYNC; process .102/PID 1, protocol static, Subnets checked; Add Redistribute.",
+      "semantic_id_and_filename_judgment": "R2 Redistribute form contradicts r1-process-dark device and Process-page subject. No corrected name invented.",
+      "report_or_usage_observation": "Actual current usage is empty; starting HEAD already has used_by=[] and targets=[] (the historical 14 cross-wire is absent).",
+      "source_sha256": "ee6d2598a92e0bd90edc49ffc052f798bd99353095602bfb09696e75e903c377",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-push-progress",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/14.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-push-progress.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "Light View & Push OSPF dialog for .102/R2. Prepared one routing task, Pushing in progress, OSPF setup/network area 1 and redistribute connected subnets CLI preview.",
+      "semantic_id_and_filename_judgment": "routing-group-push-progress is unproven: single-host generic dialog has no explicit Routing Group identity; report places it in R2 redistribution section. Screenshot alone cannot establish a group push origin.",
+      "report_or_usage_observation": "Live report line 142 remains at legacy path; caption describes R2 View & Push redistribution. Preview shows no route-map filter although surrounding paragraph discusses one; record only, no correction.",
+      "source_sha256": "065c74740c78dc733b43ee1988871a0323f1caad082cc8d9508aa15fe7924489",
+      "current_live_reference_count": 1,
+      "current_live_usage": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 142,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/14.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "confidence": "medium",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.r1-view-push-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/15.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/r1-view-push-dark.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "Dark View & Push OSPF dialog, host .103/R3, background R3 OSPF > Redistribute. Prepared one task, Pushing, router-id 3.3.3.3, area 1 networks and redistribute connected subnets; toast says saved for .103.",
+      "semantic_id_and_filename_judgment": "R3 target directly contradicts r1-view-push-dark. This is CAMS UI command preview, not terminal verification or proof of completed push.",
+      "report_or_usage_observation": "Actual usage empty; starting HEAD already has used_by=[] and targets=[] (historical 16 cross-wire absent).",
+      "source_sha256": "ee6f2ccd24b40a51839de0202e0c2c0edb91efd9aae1e1db97159c9b856f67a2",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.r2-process",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/16.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/r2-process.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "ISP1 / 192.168.122.104 selected in tab/sidebar/Host card, light Routing > OSPF > Redistribute. Process 1, networks 3, SYNC; .104/PID 1, protocol static, Subnets checked, Add Redistribute.",
+      "semantic_id_and_filename_judgment": "ISP1 identity and Redistribute page contradict r2-process ID/name. Do not silently identify as R2 or R6, or invent ISP1 canonical name.",
+      "report_or_usage_observation": "Live line 129 caption/prose lines 130/132 claim R6, contradicted by ISP1/.104. Existing evidence/content discrepancy remains untouched; reference stays legacy.",
+      "source_sha256": "37519446cc4abc8f75b64f03ba9781b7eec4dab0b517da642cc5bb1230dadabb",
+      "current_live_reference_count": 1,
+      "current_live_usage": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 129,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/16.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-editor-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/2.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-editor-dark.png",
+      "decision": "APPROVE_COPY",
+      "visible_device_page_state": "R1 / .101; Router Interfaces > Physical, dark theme. Eight-interface inventory shows management and routed IPv4 addresses; right pane says Select a physical interface with unbound Identity and addressing / Layer 3 form, disabled Save Interface.",
+      "semantic_id_and_filename_judgment": "Generic router-interface-editor-dark is valid for the editor view without a selected editable interface; it does not assert saved/actively edited input. Distinct from selected light interface 1.",
+      "report_or_usage_observation": "No live usage.",
+      "source_sha256": "e67bf4ab1c89813323bfae2e089b0811a82b64bd27fe7b4feadbb7c330dbfe9f",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-addresses-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/3.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-addresses-dark.png",
+      "decision": "APPROVE_COPY",
+      "visible_device_page_state": "R2 / .102; Router Interfaces > Physical, dark theme. Eight interfaces include .102 management, 10.1.12.2 on Gi0/1, 10.1.23.1 on Gi0/3 and 192.168.10.1 on Gi0/4; right editor remains unselected.",
+      "semantic_id_and_filename_judgment": "router-interface-addresses-dark accurately identifies visible interface IPv4 inventory. Distinct device/address set from R1 capture 2.",
+      "report_or_usage_observation": "No live usage.",
+      "source_sha256": "86643a83be2ae67f2d69a2fb24903bcc3cd38814e7bd448b5be567dee9ff51b4",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-policy-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/4.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-policy-dark.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "R3 / .103; Router Interfaces > Physical, dark theme. Gi0/1 row highlighted with No IPv4 address; right pane still says Select a physical interface and shows unbound standard addressing/L3 fields.",
+      "semantic_id_and_filename_judgment": "router-interface-policy-dark does not identify a distinct visible policy. Current InterfaceEditorPane.qml labels the same form Identity and addressing / Layer 3 options, not a policy page. No repository evidence establishes the planned policy-specific subject.",
+      "report_or_usage_observation": "No live usage; preserve legacy only, no new semantic name.",
+      "source_sha256": "24f016f0b5616d0ca43205ba6a21fd7f9be403e2d4a6a318adb60055dd06f533",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interfaces-inventory-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/5.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-inventory-dark.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "SW9 / .109; Switching > Switch Ports > Access, dark theme. Ten ports/up, nine access, one trunk; Gi0/0 read-only selected Access VLAN 99, other ports include VLAN 30/40; applied two switching tasks.",
+      "semantic_id_and_filename_judgment": "Visible switching inventory contradicts routing-ospf router-interfaces-inventory-dark ID/domain/name. Do not invent a switching canonical identity in B12.",
+      "report_or_usage_observation": "Cross-domain capture; no live usage.",
+      "source_sha256": "a8ed481f986f55dcc980e01237a56e61316eee7f0583de797d91bab9c7e221b0",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interfaces-selected-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/6.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-selected-dark.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "SW8 / .108; Switching > Switch Ports > Access, dark theme. Ten ports/up/access, zero trunks; Gi0/0 read-only Access VLAN 99 selected, Gi0/2 Access VLAN 20.",
+      "semantic_id_and_filename_judgment": "Switch-port selection contradicts router-interfaces-selected-dark identity; distinct switch/count/VLAN state from SW9 5 and SW7 7.",
+      "report_or_usage_observation": "Cross-domain capture; no live usage.",
+      "source_sha256": "abcd6a0193d81de9914c664fda62eff319cf7d7883bbec1dd5296c7500849b10",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-edit-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/7.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-edit-dark.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "SW7 / .107; Switching > Switch Ports > Access, dark theme. Ten ports/up/access, zero trunks; Gi0/0 read-only Access VLAN 99, Gi0/2 Access VLAN 10.",
+      "semantic_id_and_filename_judgment": "No router-interface editor shown; router-interface-edit-dark identity contradicted. Read-only switch-port details are not an active router edit.",
+      "report_or_usage_observation": "Cross-domain capture; no live usage.",
+      "source_sha256": "27f5ce0fd345aa2a75fc522e646bb0ce532636fa3a1cb79d6186ddc84703eb30",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-counters-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/8.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-counters-dark.png",
+      "decision": "HOLD",
+      "visible_device_page_state": "R1 / .101; Routing > Info > Overview, dark theme. Routing Information counters Routes/Visible/Best/Protocols all zero; no routing entries.",
+      "semantic_id_and_filename_judgment": "Routing information counters are not router-interface counters. Planned router-interface-counters-dark identity is unsupported. Distinct page from OSPF process 9.",
+      "report_or_usage_observation": "No live usage; preserve original without corrected-name copy.",
+      "source_sha256": "6c9868113f76ae48569d11d9e2ed40466c7352e55a0e2944afdfd8f3708ef838",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-process-overview-dark",
+      "source_path": "00_book/figures/report/diagrams/routing-ospf-lab/9.png",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-process-overview-dark.png",
+      "decision": "APPROVE_COPY",
+      "visible_device_page_state": "R1 / .101; Routing > OSPF > Process, dark theme. OSPF PROCESS 0, NETWORKS 0, state SYNC; No OSPF process saved, Add Process visible.",
+      "semantic_id_and_filename_judgment": "Generic router-process-overview-dark describes empty OSPF process overview accurately. No configured/successful process claim; distinguish from Routing Info 8 and R2 Redistribute 13.",
+      "report_or_usage_observation": "No live usage.",
+      "source_sha256": "614946c0b125eedc2654d2a62a9253f6c15ef5e17ca73fa284e2f6a25af1d0e5",
+      "current_live_reference_count": 0,
+      "current_live_usage": [],
+      "confidence": "high",
+      "inspection": "full original-resolution visual inspection; no OCR",
+      "preserve_original": true,
+      "no_recreation": true
+    }
+  ],
+  "usage_reconciliation": [
+    {
+      "asset_id": "evidence.routing-ospf.router-interfaces-overview",
+      "used_by_before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 77,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/1.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "actual_used_by": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 77,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/1.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "targets_before": [
+        "report-typst"
+      ],
+      "actual_targets": [
+        "report-typst"
+      ],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-hosts",
+      "used_by_before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 87,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/10.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "actual_used_by": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 87,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/10.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "targets_before": [
+        "report-typst"
+      ],
+      "actual_targets": [
+        "report-typst"
+      ],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-networks",
+      "used_by_before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 95,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/11.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "actual_used_by": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 95,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/11.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "targets_before": [
+        "report-typst"
+      ],
+      "actual_targets": [
+        "report-typst"
+      ],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.r1-process-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-push-progress",
+      "used_by_before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 142,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/14.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "actual_used_by": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 142,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/14.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "targets_before": [
+        "report-typst"
+      ],
+      "actual_targets": [
+        "report-typst"
+      ],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.r1-view-push-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.r2-process",
+      "used_by_before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 129,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/16.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "actual_used_by": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 129,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/16.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "targets_before": [
+        "report-typst"
+      ],
+      "actual_targets": [
+        "report-typst"
+      ],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-editor-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-addresses-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-policy-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interfaces-inventory-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interfaces-selected-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-edit-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interface-counters-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-process-overview-dark",
+      "used_by_before": [],
+      "actual_used_by": [],
+      "targets_before": [],
+      "actual_targets": [],
+      "objectively_stale_at_start": false,
+      "correction_required": false
+    }
+  ],
+  "usage_findings": "All 15 starting used_by/targets already match the current repository. Historical 13→14 and 15→16 cross-wires are not present at this HEAD. After approved path rewrites, only three actual used_by referenced_path values need refreshing; no manufactured metadata corrections.",
+  "policy": "All originals preserved; planned names/IDs/provenance unchanged; no corrected names, image recreation, report-claim or production fixes.",
+  "expected_final_manifest": {
+    "total": 455,
+    "migrated": 253,
+    "pending": 127,
+    "frozen": 75
+  }
+}

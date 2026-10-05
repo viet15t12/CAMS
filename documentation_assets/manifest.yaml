@@ -11506,14 +11506,14 @@ assets:
   domain: routing-ospf-lab
   subject: router-interfaces-overview
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/routing-ospf-lab/1.png
-  path: 00_book/figures/report/diagrams/routing-ospf-lab/1.png
+  current_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png
+  path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png
   legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/1.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 98426b2a12db4173473253eb032d97d61995349bfb5660b686b0dadec6c68b28
   provenance:
     assessment: manual-screenshot-probable
@@ -11531,7 +11531,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
     line: 77
-    referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/1.png
+    referenced_path: /documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png
     target_type: report-typst
   targets:
   - report-typst
@@ -11550,14 +11550,14 @@ assets:
   domain: routing-ospf-lab
   subject: routing-group-hosts
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/routing-ospf-lab/10.png
-  path: 00_book/figures/report/diagrams/routing-ospf-lab/10.png
+  current_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png
+  path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png
   legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/10.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3a5bb49ff629e349cc22076db1e5ea41ab9d877e9cd30c9ffd7e47ce137d74bb
   provenance:
     assessment: manual-screenshot-probable
@@ -11575,7 +11575,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
     line: 87
-    referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/10.png
+    referenced_path: /documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png
     target_type: report-typst
   targets:
   - report-typst
@@ -11594,14 +11594,14 @@ assets:
   domain: routing-ospf-lab
   subject: routing-group-networks
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/routing-ospf-lab/11.png
-  path: 00_book/figures/report/diagrams/routing-ospf-lab/11.png
+  current_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png
+  path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png
   legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/11.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 20a3ce2f004c74f6f5abcc65b7467d0ab15de9483ab800926fd3c364c80b3fff
   provenance:
     assessment: manual-screenshot-probable
@@ -11619,7 +11619,7 @@ assets:
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
     line: 95
-    referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/11.png
+    referenced_path: /documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png
     target_type: report-typst
   targets:
   - report-typst
@@ -11968,14 +11968,14 @@ assets:
   domain: routing-ospf-lab
   subject: router-interface-editor-dark
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/routing-ospf-lab/2.png
-  path: 00_book/figures/report/diagrams/routing-ospf-lab/2.png
+  current_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-editor-dark.png
+  path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-editor-dark.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-editor-dark.png
   legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/2.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e67bf4ab1c89813323bfae2e089b0811a82b64bd27fe7b4feadbb7c330dbfe9f
   provenance:
     assessment: manual-screenshot-probable
@@ -12335,14 +12335,14 @@ assets:
   domain: routing-ospf-lab
   subject: router-interface-addresses-dark
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/routing-ospf-lab/3.png
-  path: 00_book/figures/report/diagrams/routing-ospf-lab/3.png
+  current_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-addresses-dark.png
+  path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-addresses-dark.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interface-addresses-dark.png
   legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/3.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 86643a83be2ae67f2d69a2fb24903bcc3cd38814e7bd448b5be567dee9ff51b4
   provenance:
     assessment: manual-screenshot-probable
@@ -12569,14 +12569,14 @@ assets:
   domain: routing-ospf-lab
   subject: router-process-overview-dark
   source_kind: manual-cams-screenshot
-  current_path: 00_book/figures/report/diagrams/routing-ospf-lab/9.png
-  path: 00_book/figures/report/diagrams/routing-ospf-lab/9.png
+  current_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-process-overview-dark.png
+  path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-process-overview-dark.png
   planned_canonical_path: documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-process-overview-dark.png
   legacy_path: 00_book/figures/report/diagrams/routing-ospf-lab/9.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: original-evidence
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 614946c0b125eedc2654d2a62a9253f6c15ef5e17ca73fa284e2f6a25af1d0e5
   provenance:
     assessment: manual-screenshot-probable

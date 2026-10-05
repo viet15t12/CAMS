@@ -74,7 +74,7 @@ Mô hình được chia thành các phân vùng định tuyến và dải địa
 Trước khi triển khai định tuyến, quản trị viên mở *Interfaces* trên CAMS để thiết lập địa chỉ IP, subnet mask và đưa các cổng vật lý (`GigabitEthernet`) vào trạng thái hoạt động.
 
 #figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/1.png", width: 85%),
+  image("/documentation_assets/evidence/ui-capture/original/routing-ospf-lab/router-interfaces-overview.png", width: 85%),
   caption: [Giao diện quản lý và cấu hình tham số Lớp 3 cho các cổng router],
 ) <fig-k2-interfaces>
 @fig-k2-interfaces thể hiện trạng thái IP của các cổng trên `R1`. Ngăn thuộc tính cho phép khai báo địa chỉ IP, subnet mask, mô tả và trạng thái hoạt động của từng cổng.
@@ -84,7 +84,7 @@ Trước khi triển khai định tuyến, quản trị viên mở *Interfaces* 
 Quản trị viên sử dụng *Routing Group - OSPF* để cấu hình đồng thời sáu router `R1`, `R2`, `R3`, `ISP1`, `ISP2` và `R6`.
 
 #figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/10.png", width: 80%),
+  image("/documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-hosts.png", width: 80%),
   caption: [Cửa sổ Routing Group - OSPF (Bước 1: Chọn sáu router tham gia cấu hình nhóm)],
 ) <fig-k2-group-hosts>
 Trong @fig-k2-group-hosts, các router được chọn từ không gian làm việc `LAB_KICH_BAN_2`. CAMS sử dụng thông tin của các cổng và địa chỉ IP của từng thiết bị làm dữ liệu đầu vào cho các bước tiếp theo.
@@ -92,7 +92,7 @@ Trong @fig-k2-group-hosts, các router được chọn từ không gian làm vi�
 Tại bước *Networks*, quản trị viên gán các mạng kết nối trực tiếp vào vùng định tuyến tương ứng: Area 0 cho các liên kết đường trục ISP và Area 1 cho các liên kết nội bộ của Chi nhánh A.
 
 #figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/11.png", width: 80%),
+  image("/documentation_assets/evidence/ui-capture/original/routing-ospf-lab/routing-group-networks.png", width: 80%),
   caption: [Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)],
 ) <fig-k2-group-networks>
 #block[
