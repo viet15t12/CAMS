@@ -1,40 +1,82 @@
 #import "../config/tables.typ": report-table
 
+// Chỉ cắt vùng hiển thị khi dàn trang; ảnh gốc không bị thay đổi.
+#let snooping-terminal-crop(y, h) = layout(size => {
+  let source-width = 2560
+  let source-height = 1600
+  let x = 0
+  let w = 1500
+  let scale = size.width / w
+  block(width: size.width, height: scale * h, clip: true,
+    place(top + left, dx: -x * scale, dy: -y * scale,
+      box(width: source-width * scale, height: source-height * scale,
+        image(
+          "/00_book/figures/report/diagrams/dhcp-snooping-lab/show-snooping-state.png",
+          width: 100%, height: 100%, fit: "stretch",
+        ))))
+})
+
+#let client-result-crop(path) = layout(size => {
+  let source-width = 2560
+  let source-height = 1600
+  let x = 470
+  let y = 285
+  let w = 700
+  let h = 520
+  let scale = size.width / w
+  block(width: size.width, height: scale * h, clip: true,
+    place(top + left, dx: -x * scale, dy: -y * scale,
+      box(width: source-width * scale, height: source-height * scale,
+        image(path, width: 100%, height: 100%, fit: "stretch"))))
+})
+
 === Kịch bản 1: Kiểm thử DHCP Snooping và Dynamic ARP Inspection
 
 ==== Mô hình Lab 1 và mục tiêu kiểm thử DHCP Snooping
 
-Kịch bản kiểm tra khả năng áp dụng chính sách DHCP Snooping từ CAMS xuống switch và đối chiếu nguồn cấp địa chỉ của máy khách khi thay đổi cổng tin cậy (trusted). Hai DHCP server sử dụng hai dải địa chỉ khác nhau để nhận diện nguồn cấp phát: R1 cung cấp mạng `192.168.10.0/24`, còn FAKE_DHCP cung cấp mạng `192.168.66.0/24`. R2 đóng vai trò DHCP client. Tiêu chí kiểm thử là địa chỉ R2 nhận được phải thuộc dải của server nối vào cổng được trust trong từng trạng thái.
+Kịch bản kiểm tra trực tiếp trạng thái DHCP Snooping trên SW1 và nguồn cấp địa chỉ cho R2 khi thay đổi cổng tin cậy. R1 cấp dải `192.168.10.0/24`, FAKE_DHCP cấp dải `192.168.66.0/24`, còn R2 đóng vai trò DHCP client. Tiêu chí đạt là lệnh `show` xác nhận dịch vụ hoạt động trên VLAN 10 và địa chỉ R2 nhận được thuộc dải của server nằm sau cổng DHCP trusted.
 
 #figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png", width: 100%), caption: [Mô hình Lab 1 với hai DHCP server, switch SW1 và client R2.]) <fig-k1-topology>
 
-Trong @fig-k1-topology, thiết bị có nhãn Switch tương ứng với SW1 trong CAMS. Các liên kết thử nghiệm đi qua VLAN 10; mạng ManagementM phục vụ quản trị thiết bị. Tên FAKE_DHCP được giữ theo mô hình lab. Ở trạng thái thứ hai, cổng nối thiết bị này được chủ động cấp quyền trusted để kiểm tra việc chuyển chính sách.
+Trong @fig-k1-topology, R1 nối SW1 qua Gi0/1, R2 qua Gi0/2 và FAKE_DHCP qua Gi0/3. Gi0/2 luôn là cổng untrusted; phép thử lần lượt trust Gi0/1 rồi Gi0/3 để đối chiếu nguồn cấp phát. DAI được tắt trong toàn bộ phần này và được kiểm thử riêng ở mục kế tiếp.
 
 #report-table(
- columns: (18%, 25%, 25%, 32%),
- header: ([Thiết bị], [Vai trò], [Kết nối thử nghiệm], [Địa chỉ / dải cấp phát]),
+ columns: (18%, 24%, 24%, 34%),
+ header: ([Thiết bị], [Vai trò], [Cổng dữ liệu], [Địa chỉ / dải cấp phát]),
  rows: (
-  ([SW1], [DHCP Snooping trên VLAN 10], [Gi0/1, Gi0/2, Gi0/3], [Quản trị: 192.168.122.101]),
-  ([R1], [DHCP server thứ nhất], [Gi0/1 nối SW1 Gi0/1], [192.168.10.0/24]),
+  ([SW1], [DHCP Snooping VLAN 10], [Gi0/1, Gi0/2, Gi0/3], [Quản trị: 192.168.122.101]),
+  ([R1], [DHCP server hợp lệ], [Gi0/1 nối SW1 Gi0/1], [192.168.10.0/24]),
   ([R2], [DHCP client], [Gi0/2 nối SW1 Gi0/2], [Địa chỉ nhận động]),
   ([FAKE\_DHCP], [DHCP server thứ hai], [Gi0/1 nối SW1 Gi0/3], [192.168.66.0/24]),
- ), caption: [Thành phần và kết nối của bài kiểm thử DHCP Snooping.],
+ ), caption: [Thành phần của bài kiểm thử DHCP Snooping.],
 ) <tab-k1-topology>
 
-==== Thiết lập chính sách và tiêu chí đối chiếu
+==== Cấu hình tối thiểu và bộ lệnh kiểm tra
 
-Trên CAMS, mục *Security → L2 Security → VLAN Protection* hiển thị DHCP Snooping ở trạng thái Enabled trên VLAN 10, còn DAI ở trạng thái Disabled (@fig-k1-vlan). Giai đoạn này đánh giá DHCP Snooping với DAI tắt. Phần kiểm thử DAI trên cùng mô hình được trình bày ở các mục tiếp theo của Lab 1.
+Thao tác trên CAMS được rút gọn còn ba việc: bật DHCP Snooping cho VLAN 10, giữ DAI ở trạng thái tắt và chọn đúng một cổng nối DHCP server làm trusted. Sau khi *View & Push* hoàn tất, việc đánh giá chuyển sang terminal bằng các lệnh sau:
 
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png", width: 100%), caption: [DHCP Snooping được bật trên VLAN 10; DAI không tham gia bài kiểm thử.]) <fig-k1-vlan>
+```text
+show ip dhcp snooping
+show running-config interface GigabitEthernet0/1
+show running-config interface GigabitEthernet0/3
+show ip dhcp snooping statistics
+show ip dhcp snooping binding
+```
 
-R1 sử dụng pool VLAN10, mạng `192.168.10.0`, mặt nạ `255.255.255.0` và gateway `192.168.10.1` như @fig-k1-pool. Server FAKE_DHCP sử dụng pool FAKE_TEST thuộc mạng `192.168.66.0/24`. Hai dải địa chỉ phân biệt giúp đối chiếu kết quả cấp phát mà không phụ thuộc vào số thứ tự địa chỉ thuê trong mỗi pool.
+Ảnh terminal tại @fig-k1-show-baseline ghi nhận một mốc trước khi cấp trust cho cổng server. `show ip dhcp snooping` xác nhận chức năng đã được bật, VLAN 10 ở trạng thái configured và operational, đồng thời Option 82 bị tắt. Danh sách trusted trong kết quả còn trống; `show running-config interface GigabitEthernet0/1` chưa có lệnh `ip dhcp snooping trust`. Tại cùng mốc, thống kê ghi nhận 8 gói được chuyển tiếp và 160 gói bị loại bỏ từ các cổng untrusted.
 
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png", width: 100%), caption: [Pool DHCP trên R1 dùng làm nguồn cấp phát ở trạng thái A.]) <fig-k1-pool>
+#figure(
+  stack(dir: ttb, spacing: 8pt,
+    snooping-terminal-crop(340, 540),
+    snooping-terminal-crop(1180, 135),
+  ),
+  caption: [Kết quả lệnh show trên SW1 trước khi cấp trust: DHCP Snooping hoạt động trên VLAN 10, chưa có cổng trusted và bộ đếm drop từ cổng untrusted đã tăng.],
+) <fig-k1-show-baseline>
 
-Quy trình gồm hai trạng thái liên tiếp. Ở mỗi trạng thái, chỉ một cổng nối server được đặt DHCP trust; cổng Gi0/2 nối client giữ untrusted. Sau khi áp dụng chính sách, R2 yêu cầu cấp địa chỉ DHCP và trạng thái giao diện được đối chiếu trên CAMS. Khi chuyển trạng thái, cần thực hiện lại việc xin địa chỉ, tránh dùng địa chỉ thuê cũ làm kết quả kiểm thử.
+Số 160 là bộ đếm tích lũy tại thời điểm chụp, không đồng nhất với số lần R2 yêu cầu địa chỉ và không dùng để khẳng định từng gói đến từ server nào. Giá trị này chỉ chứng minh SW1 đã loại bỏ lưu lượng DHCP đi vào cổng untrusted. Việc xác định server được chấp nhận được thực hiện bằng hai trạng thái dưới đây.
 
 #report-table(
- columns: (14%, 24%, 24%, 38%),
+ columns: (14%, 23%, 23%, 40%),
  header: ([Trạng thái], [SW1 Gi0/1 → R1], [SW1 Gi0/3 → FAKE\_DHCP], [Kết quả mong đợi tại R2]),
  rows: (
   ([A], [Trusted], [Untrusted], [Địa chỉ thuộc 192.168.10.0/24]),
@@ -42,41 +84,57 @@ Quy trình gồm hai trạng thái liên tiếp. Ở mỗi trạng thái, chỉ 
  ), caption: [Hai trạng thái chính sách dùng để đối chiếu nguồn cấp DHCP.],
 ) <tab-k1-policy>
 
-==== Trạng thái A: Trust cổng nối R1
+==== Trạng thái A: Trust Gi0/1 nối R1
 
-Danh sách *Trusted Uplinks* sau đồng bộ trong @fig-k1-trust-a chỉ có `GigabitEthernet0/1` với điều khiển *DHCP trust*. Bộ đếm DAI VLANs bằng 0. Đây là cấu hình cho phép nguồn DHCP phía R1 tham gia cấp phát trong bài kiểm thử.
+CAMS được dùng để đặt DHCP trust cho Gi0/1. Sau khi đẩy cấu hình, các lệnh trọng tâm là:
 
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png", width: 100%), caption: [Trạng thái A: SW1 chỉ trust DHCP trên Gi0/1 nối R1.]) <fig-k1-trust-a>
+```text
+SW1# show running-config interface GigabitEthernet0/1
+SW1# show ip dhcp snooping
+SW1# show ip dhcp snooping binding
+R2#  show ip interface brief | include GigabitEthernet0/2
+```
 
-Kết quả trên giao diện R2 cho thấy `GigabitEthernet0/2` có địa chỉ `192.168.10.5` (@fig-k1-address-a), thuộc dải cấp phát của R1. Địa chỉ quản trị `192.168.122.103` vẫn nằm trên Gi0/0 và được phân biệt với địa chỉ dùng trong thử nghiệm.
+Kết quả cần đối chiếu theo thứ tự là: cấu hình Gi0/1 có `ip dhcp snooping trust`; VLAN 10 vẫn operational; bảng binding có bản ghi của R2 trên VLAN 10, cổng Gi0/2; và R2 có địa chỉ DHCP thuộc mạng `192.168.10.0/24`. Ảnh terminal @fig-k1-client-a ghi nhận Gi0/2 của R2 nhận `192.168.10.4`, phương thức `DHCP`, trạng thái `up/up`. Trong một lần cấp lại khác của cùng trạng thái, CAMS đồng bộ địa chỉ `192.168.10.5`; cả hai đều thuộc pool của R1, vì vậy số host cụ thể không phải tiêu chí của phép thử.
 
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png", width: 100%), caption: [R2 nhận địa chỉ 192.168.10.5 khi cổng nối R1 được trust.]) <fig-k1-address-a>
+#figure(
+  image("/00_book/figures/report/diagrams/dhcp-snooping-lab/r2_dhcp_success.png", width: 92%),
+  caption: [Kết quả show ip interface brief trên R2: Gi0/2 nhận địa chỉ 192.168.10.4 bằng DHCP và ở trạng thái up/up.],
+) <fig-k1-client-a>
 
-==== Trạng thái B: Chuyển trust sang cổng nối FAKE_DHCP
+Khi cần kiểm tra sâu hơn, `show ip dhcp snooping binding` phải cho thấy MAC của R2, địa chỉ cấp phát, VLAN 10 và cổng `GigabitEthernet0/2`. Đây là bằng chứng quan trọng hơn ảnh nhập liệu vì nó xác nhận switch đã học liên kết DHCP thực tế, không chỉ lưu cấu hình mong muốn trong CAMS.
 
-Chính sách được thay đổi bằng cách bỏ DHCP trust trên Gi0/1 và đặt DHCP trust trên Gi0/3. @fig-k1-trust-b hiển thị duy nhất `GigabitEthernet0/3` trong danh sách trusted, đồng thời thông báo đã áp dụng hai tác vụ switching. Việc chuyển quyền được thực hiện theo cổng; tên thiết bị FAKE_DHCP không quyết định quyền cấp phát.
+==== Trạng thái B: Chuyển trust sang Gi0/3 nối FAKE_DHCP
 
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png", width: 100%), caption: [Trạng thái B: chuyển DHCP trust từ Gi0/1 sang Gi0/3.]) <fig-k1-trust-b>
+Chính sách được đổi bằng cách bỏ trust trên Gi0/1 và đặt trust trên Gi0/3; Gi0/2 của client vẫn untrusted. R2 được yêu cầu cấp lại địa chỉ để tránh dùng lease cũ. Bộ lệnh đối chiếu không thay đổi, chỉ chuyển cổng cần kiểm tra từ Gi0/1 sang Gi0/3:
 
-Trên R2, cửa sổ *View & Push* trong @fig-k1-request hiển thị lệnh `ip address dhcp` cho `GigabitEthernet0/2`. Ảnh này ghi nhận bước cấu hình client; kết quả cấp phát được đối chiếu riêng ở @fig-k1-address-b.
+```text
+SW1# show running-config interface GigabitEthernet0/1
+SW1# show running-config interface GigabitEthernet0/3
+SW1# show ip dhcp snooping
+SW1# show ip dhcp snooping binding
+R2#  show ip interface brief | include GigabitEthernet0/2
+```
 
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png", width: 100%), caption: [CAMS chuẩn bị cấu hình DHCP client trên Gi0/2 của R2 sau khi chuyển trust.]) <fig-k1-request>
+Kết quả đồng bộ tại @fig-k1-client-b cho thấy Gi0/2 của R2 nhận `192.168.66.100/24`. Địa chỉ này thuộc pool `FAKE_TEST` của FAKE_DHCP, phù hợp với việc Gi0/3 đã trở thành cổng trusted. Tên FAKE_DHCP chỉ dùng để nhận diện thiết bị thử nghiệm; quyết định chuyển tiếp của switch phụ thuộc vào trạng thái trust của cổng.
 
-Sau lần yêu cầu DHCP tiếp theo, giao diện Gi0/2 của R2 hiển thị `192.168.66.100`. Địa chỉ này thuộc dải của FAKE_DHCP, khác dải `192.168.10.0/24` ở trạng thái A. Kết quả phù hợp với việc cổng Gi0/3 đã được chuyển sang trusted.
-
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png", width: 100%), caption: [R2 nhận địa chỉ 192.168.66.100 sau khi trust cổng nối FAKE_DHCP.]) <fig-k1-address-b>
+#figure(
+  client-result-crop("/00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png"),
+  caption: [Kết quả sau khi chuyển trust: Gi0/2 của R2 nhận địa chỉ 192.168.66.100/24 từ server nối Gi0/3.],
+) <fig-k1-client-b>
 
 ==== Tổng hợp kết quả DHCP Snooping
 
 #report-table(
- columns: (15%, 24%, 27%, 34%),
- header: ([Trạng thái], [Cổng DHCP trusted], [Địa chỉ R2 quan sát được], [Đối chiếu]),
+ columns: (14%, 23%, 25%, 38%),
+ header: ([Trạng thái], [Cổng DHCP trusted], [Địa chỉ R2 quan sát được], [Đối chiếu bằng lệnh show]),
  rows: (
-  ([A], [Gi0/1 nối R1], [192.168.10.5], [Thuộc pool của R1; phù hợp tiêu chí]),
-  ([B], [Gi0/3 nối FAKE\_DHCP], [192.168.66.100], [Thuộc pool của FAKE\_DHCP; phù hợp tiêu chí]),
- ), caption: [Kết quả kiểm thử chuyển đổi cổng DHCP trusted trong Lab 1.],
+  ([Ban đầu], [Không có], [Không dùng làm tiêu chí], [`show ip dhcp snooping`: VLAN 10 operational; 160 drop từ untrusted]),
+  ([A], [Gi0/1 nối R1], [192.168.10.4; lần cấp khác .5], [IP thuộc pool R1; binding nằm ở VLAN 10, Gi0/2]),
+  ([B], [Gi0/3 nối FAKE\_DHCP], [192.168.66.100], [IP thuộc pool FAKE\_TEST sau khi yêu cầu DHCP lại]),
+ ), caption: [Kết quả kiểm thử DHCP Snooping theo ba mốc đối chiếu.],
 ) <tab-k1-results>
 
-Hai trạng thái quan sát cho thấy nguồn cấp địa chỉ cho R2 thay đổi tương ứng với cổng được cấp DHCP trust trên SW1. Kết quả hỗ trợ đánh giá chức năng cấu hình DHCP Snooping của CAMS theo chuỗi thao tác thiết lập chính sách, áp dụng xuống thiết bị và đối chiếu trạng thái client. Trong hai lần kiểm thử được ghi nhận, địa chỉ nhận được đều thuộc dải của server ở phía cổng trusted.
+Chuỗi lệnh `show` tách ba lớp bằng chứng: dịch vụ trên VLAN, trạng thái trust của cổng và địa chỉ/binding của client. Khi chưa có cổng trusted, bộ đếm drop tăng; khi trust Gi0/1 hoặc Gi0/3, R2 lần lượt nhận địa chỉ thuộc dải của server nối cổng đó.
 
-Phạm vi kết luận là kết quả cấp phát khi chuyển chính sách giữa hai cổng. Các ảnh trên không xác định từng gói DHCP bị loại bỏ và không được dùng làm bằng chứng đã nhận Syslog cảnh báo DHCP server giả mạo. Kết quả DAI được đánh giá riêng bằng binding, lưu lượng ARP, bộ đếm loại bỏ và Syslog trong phần tiếp theo.
+Kết luận chỉ dựa trên cấu hình, bộ đếm và địa chỉ/binding đã ghi nhận. Số 160 không được gán cho một server cụ thể và không chứng minh có Syslog rogue DHCP. Phần DAI tiếp theo giữ nguyên, được đánh giá riêng bằng ARP, bộ đếm và Syslog.
