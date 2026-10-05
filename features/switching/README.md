@@ -44,6 +44,11 @@ MAC; các bảng desired state cũ được giữ nguyên và được bổ sung
 Global Settings lưu DHCP Option 82 vào `t06_security_global` và tạo task riêng
 trong View & Push của L2 Security, kể cả khi không đổi VLAN/trusted uplink.
 Save chỉ lưu cấu hình chờ áp dụng; Push thành công mới đánh dấu synchronized.
+Trusted Uplinks giữ `trust_dhcp` và `trust_arp` độc lập khi Save, Preview/Push
+và đọc lại running-config. Chỉ chọn DHCP trust sinh `ip dhcp snooping trust`
+và `no ip arp inspection trust`; lựa chọn ARP trust hoạt động tương tự.
+Khi chỉ có `show ip dhcp snooping`, sync không suy diễn ARP trust: giữ giá trị
+đã biết của cổng cũ và để ARP trust tắt cho cổng mới.
 Task VLAN, trusted uplink, static MAC và Port Security không tự đổi Option 82.
 Ba chế độ cấu hình đầy đủ cả insertion và allow-untrusted để chuyển chế độ
 không giữ lại trạng thái cũ. Chọn Disable Option 82 sẽ sinh
@@ -63,9 +68,17 @@ UI. Detach dùng transparent, xác minh trước khi xóa membership và không 
 tạo lại group từ domain còn lưu trên switch. Xem [luồng VTP](../../docs/VTP_GROUP.md).
 
 Schema nằm ở `infrastructure/database/schemas/device_network/06_l2_switching.sql`
-và `09_vtp.sql`. `ensure_switch_schema()` chỉ bổ sung các cột lifecycle còn
+và `09_vtp.sql`. `ensure_switch_schema()` bổ sung các cột lifecycle và DAI logging còn
 thiếu, không dựng lại database. Bảng hash của project cũ (nếu có) không còn
 được đọc hoặc ghi.
+
+VLAN Protection có **DAI logging** theo VLAN: `deny` (mặc định), `all` (permit
+và deny cho báo cáo), `permit`, `none`. Policy lưu ở `t06_security_l2.dai_log_mode`
+và được giữ trong Preview/Push/pull running-config. Startup và schema guard
+migrate database cũ về `deny` mà không xóa policy. DAI log-buffer được cấu hình
+128 entries, tối đa 10 log mỗi giây; đây là cấu hình xuất log, không đổi ngưỡng
+rate-limit ARP. Syslog Server phải được cấu hình riêng với severity 6 để nhận permit.
+Xem [lab Syslog an ninh lớp 2](../../docs/L2_SECURITY_SYSLOG_LAB.md).
 
 Hỗ trợ push và pull-sync nêu trên: Cisco IOS qua SSH/Telnet. Các giới hạn chưa thể tích hợp
 an toàn được ghi tại [INTEGRATION_LIMITATIONS.md](INTEGRATION_LIMITATIONS.md).

@@ -6,6 +6,32 @@
 │   └── ptit-logo.svg
 ├── report
 │   ├── diagrams
+│   │   ├── dai-lab
+│   │   │   ├── README.md
+│   │   │   ├── baseline-binding-trust.png
+│   │   │   ├── cams-static-ip-input.png
+│   │   │   ├── cams-syslog-alert.png
+│   │   │   ├── ping-before-after.png
+│   │   │   ├── recovered-binding.png
+│   │   │   ├── recovered-ping.png
+│   │   │   └── switch-drops-syslog.png
+│   │   ├── dhcp-snooping-lab
+│   │   │   ├── README.md
+│   │   │   ├── cams_r1_dhcp_pool.png
+│   │   │   ├── cams_sw1_l2_push.png
+│   │   │   ├── cams_sw1_ports.png
+│   │   │   ├── cams_sw1_trusted_uplink.png
+│   │   │   ├── cams_syslog_dhcp_assign.png
+│   │   │   ├── r1-pool.png
+│   │   │   ├── r2-address-fake.png
+│   │   │   ├── r2-address-r1.png
+│   │   │   ├── r2-request-dhcp.png
+│   │   │   ├── r2_dhcp_success.png
+│   │   │   ├── topo_dhcp_snooping.png
+│   │   │   ├── topology.png
+│   │   │   ├── trust-gi01.png
+│   │   │   ├── trust-gi03.png
+│   │   │   └── vlan10-snooping.png
 │   │   ├── fhrp-nat-dhcp-lab
 │   │   │   ├── 01-nat-interfaces.png
 │   │   │   ├── 02-nat-acl.png

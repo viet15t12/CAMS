@@ -310,6 +310,71 @@
       "id": "terminal.capture.lab5.vpc9-telnet-permitted",
       "path": "00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/9.png",
       "sha256": "1f54d3fa9c74a6b8e3c0075a3a30e33a61b28b945e86d691aa7243ab1685e5b0"
+    },
+    {
+      "id": "evidence.lab1.curated.dai.baseline-binding-trust",
+      "path": "00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png",
+      "sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923"
+    },
+    {
+      "id": "evidence.lab1.curated.dai.ping-before-after",
+      "path": "00_book/figures/report/diagrams/dai-lab/ping-before-after.png",
+      "sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c"
+    },
+    {
+      "id": "evidence.lab1.curated.dai.recovered-binding",
+      "path": "00_book/figures/report/diagrams/dai-lab/recovered-binding.png",
+      "sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661"
+    },
+    {
+      "id": "evidence.lab1.curated.dai.recovered-ping",
+      "path": "00_book/figures/report/diagrams/dai-lab/recovered-ping.png",
+      "sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f"
+    },
+    {
+      "id": "evidence.lab1.curated.dai.switch-drops-syslog",
+      "path": "00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png",
+      "sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d"
+    },
+    {
+      "id": "evidence.lab1.raw.sw1-snooping-statistics-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 26.png",
+      "sha256": "db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff"
+    },
+    {
+      "id": "evidence.lab1.raw.fake-dhcp-pool-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 30.png",
+      "sha256": "a3a74caf524ae54ed8cb8ec854b67d8e05de5bc2ae2968d96573c9cf67dfc33e"
+    },
+    {
+      "id": "evidence.lab1.raw.sw1-dai-baseline-binding-trust-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png",
+      "sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923"
+    },
+    {
+      "id": "evidence.lab1.raw.r2-dhcp-address-ping-baseline-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 41.png",
+      "sha256": "29797a3f53fe20b44e0ad150bd2adac9a3f4b780cc3d2fbcb445538f0b677ebb"
+    },
+    {
+      "id": "evidence.lab1.raw.r2-ping-dhcp-versus-static-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png",
+      "sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c"
+    },
+    {
+      "id": "evidence.lab1.raw.sw1-dai-drops-syslog-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 44.png",
+      "sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d"
+    },
+    {
+      "id": "evidence.lab1.raw.sw1-recovered-dhcp-binding-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png",
+      "sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661"
+    },
+    {
+      "id": "evidence.lab1.raw.r2-recovered-gateway-ping-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png",
+      "sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f"
     }
   ],
   "references": [
@@ -317,6 +382,31 @@
       "source_document": "00_report/contents/08_xay_dung_phan_mem.typ",
       "referenced_path": "/00_book/figures/report/misc/xxd-ntp.png",
       "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png",
+      "count": 2
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/dai-lab/ping-before-after.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/dai-lab/recovered-binding.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/dai-lab/recovered-ping.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png",
+      "count": 2
     },
     {
       "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
@@ -421,11 +511,6 @@
     {
       "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
       "referenced_path": "/00_book/figures/report/terminal-generated/r2-glbp.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
-      "referenced_path": "/00_book/figures/report/terminal-generated/sw3-vlan-vtp.png",
       "count": 1
     },
     {

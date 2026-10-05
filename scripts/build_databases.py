@@ -330,11 +330,13 @@ def _repair_device_network_feature_schema(db_path: Path) -> list[str]:
     from features.fhrp.schema import ensure_schema as ensure_fhrp_schema
     from features.interfaces.schema import ensure_schema as ensure_interface_schema
     from features.routing.ospf.schema import ensure_schema as ensure_ospf_schema
+    from features.switching.schema import ensure_security_logging_schema
 
     with closing(sqlite3.connect(db_path)) as connection:
         changes = ensure_interface_schema(connection)
         changes.extend(ensure_fhrp_schema(connection))
         changes.extend(ensure_ospf_schema(connection))
+        changes.extend(ensure_security_logging_schema(connection))
         return changes
 
 

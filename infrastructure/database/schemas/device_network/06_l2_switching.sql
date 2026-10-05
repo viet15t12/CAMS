@@ -135,6 +135,8 @@ CREATE TABLE IF NOT EXISTS t06_security_l2 (
     vlan_id       INTEGER NOT NULL CHECK(vlan_id BETWEEN 1 AND 4094),
     dhcp_snooping INTEGER NOT NULL DEFAULT 0 CHECK(dhcp_snooping IN (0,1)),
     dai_enabled   INTEGER NOT NULL DEFAULT 0 CHECK(dai_enabled   IN (0,1)),
+    dai_log_mode  TEXT NOT NULL DEFAULT 'deny'
+                      CHECK(dai_log_mode IN ('deny','all','permit','none')),
     success       TEXT    NOT NULL DEFAULT 'pending_apply'
                           CHECK(success IN ('pending_apply','pending_delete','synchronized','skipped')),
     UNIQUE(host, vlan_id)

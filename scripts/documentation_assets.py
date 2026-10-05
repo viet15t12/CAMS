@@ -187,6 +187,38 @@ def selected_assets(data: dict) -> list[dict]:
     return sorted((a for a in data["assets"] if a["mkdocs_stage"] and a["migration_state"] != "frozen"), key=lambda a: a["mkdocs_stage_path"])
 
 
+def typst_named_image_references(text: str):
+    """Resolve literal calls to local helpers using prefix + first argument + suffix.
+
+    This is deliberately not a Typst evaluator. Only brace-bodied helpers and
+    constant string call arguments are supported; each call remains one use.
+    """
+    header = r'\b(?:let)\s+([\w-]+)\(\s*(\w+)\b[^)\n]*\)\s*=\s*[^\n{]*\{'
+    for definition in re.finditer(header, text):
+        depth, end = 1, definition.end()
+        # Quoted strings and comments cannot terminate the helper body.
+        token = re.compile(r'"(?:\\.|[^"\\])*"|//[^\n]*|/\*.*?\*/|[{}]', re.S)
+        for part in token.finditer(text, end):
+            if part[0] == "{":
+                depth += 1
+            elif part[0] == "}":
+                depth -= 1
+            if depth == 0:
+                end = part.start()
+                break
+        else:
+            continue
+        expression = (r'\bimage\s*\(\s*"([^"\n]*)"\s*\+\s*'
+                      + re.escape(definition[2]) + r'\s*\+\s*"([^"\n]*)"\s*(?=[,)])')
+        templates = list(re.finditer(expression, text[definition.end():end]))
+        call = r'(?<![\w-])' + re.escape(definition[1]) + r'\s*\(\s*"([^"\n]+)"\s*(?=[,)])'
+        for use in re.finditer(call, text):
+            if definition.start() <= use.start() <= end:
+                continue
+            for template in templates:
+                yield use.start(), template[1] + use[1] + template[2]
+
+
 def image_references(root: Path = REPO_ROOT) -> list[dict]:
     """Read actual source syntax; do not scan output/audit prose or treat generator examples as uses."""
     refs = []
@@ -222,6 +254,8 @@ def image_references(root: Path = REPO_ROOT) -> list[dict]:
                 searchable = re.sub(r"(?m)^([ \t]*)//[^\n]*", "", text)
                 for m in re.finditer(r'\b(image|insert-image)\s*\(\s*"([^"\n]+)"', searchable):
                     add(source, searchable.count("\n", 0, m.start()) + 1, m[2], "typst-helper" if m[1] == "insert-image" else "typst-image")
+                for offset, literal in typst_named_image_references(searchable):
+                    add(source, searchable.count("\n", 0, offset) + 1, literal, "typst-named-image-helper")
             else:
                 for m in re.finditer(r'<img\b[^>]*\bsrc\s*=\s*["\']([^"\']+)', text, re.I):
                     add(source, text.count("\n", 0, m.start()) + 1, m[1], "html-img")

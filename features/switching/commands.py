@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from .interface_commands import render_interfaces
+from .security_logging import dai_log_mode
 
 
 def _interface_header(name: str) -> list[str]:
@@ -131,13 +132,17 @@ def render_security(payload: dict[str, Any]) -> list[str]:
     dai_vlans = [str(row["vlan_id"]) for row in payload["vlans"] if row["dai_enabled"]]
     if dai_vlans:
         commands.append(f"ip arp inspection vlan {','.join(dai_vlans)}")
-        # IOS permits disabling per-VLAN DAI logs independently of inspection.
-        # Reset both policies to the documented default: log denied packets.
-        commands.extend([
-            f"no ip arp inspection vlan {','.join(dai_vlans)} logging dhcp-bindings",
-            f"no ip arp inspection vlan {','.join(dai_vlans)} logging acl-match",
-        ])
-        commands.append("ip arp inspection log-buffer logs 1024 interval 10")
+        # ARP ACLs are not managed here; keep their documented deny default.
+        commands.append(f"no ip arp inspection vlan {','.join(dai_vlans)} logging acl-match")
+        for item in payload["vlans"]:
+            if not item["dai_enabled"]:
+                continue
+            mode = dai_log_mode(item.get("dai_log_mode"))
+            prefix = f"ip arp inspection vlan {item['vlan_id']} logging dhcp-bindings"
+            commands.append(f"no {prefix}" if mode == "deny" else f"{prefix} {mode}")
+        # Bounded output with enough room for a small report/lab demonstration.
+        commands.append("ip arp inspection log-buffer entries 128")
+        commands.append("ip arp inspection log-buffer logs 10 interval 1")
     for item in payload["vlans"]:
         if not item["dai_enabled"]:
             commands.append(f"no ip arp inspection vlan {item['vlan_id']}")

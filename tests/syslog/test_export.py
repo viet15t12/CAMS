@@ -61,8 +61,28 @@ class SyslogExcelExportTests(unittest.TestCase):
                 text = sheet.decode("utf-8")
                 self.assertIn("CAMS Syslog Export", text)
                 self.assertIn("last:20 severity:error,notice", text)
-                self.assertIn('autoFilter ref="A6:L8"', text)
+                self.assertIn('autoFilter ref="A6:N8"', text)
                 self.assertIn("Interface Loopback99 changed state to down", text)
+
+    def test_exports_dai_permit_and_deny_labels_from_unannotated_rows(self) -> None:
+        rows = [
+            {"cisco_facility": "SW_DAI", "mnemonic": mnemonic,
+             "severity": severity, "message": message}
+            for mnemonic, severity, message in (
+                ("DHCP_SNOOPING_PERMIT", 6, "1 ARPs (Req) on Gi0/1"),
+                ("DHCP_SNOOPING_DENY", 4, "1 Invalid ARPs (Req) on Gi0/1"),
+            )
+        ]
+        with tempfile.TemporaryDirectory() as temporary:
+            result = export_logs_xlsx(Path(temporary) / "dai.xlsx", rows, {})
+            with zipfile.ZipFile(result) as workbook:
+                sheet = ElementTree.fromstring(workbook.read("xl/worksheets/sheet1.xml"))
+                ns = {"s": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+                cells = {cell.attrib["r"]: cell.findtext("s:is/s:t", namespaces=ns)
+                         for cell in sheet.findall(".//s:c", ns)}
+                self.assertEqual(cells["M7"], "Dynamic ARP Inspection")
+                self.assertEqual(cells["N7"], "Permitted")
+                self.assertEqual(cells["N8"], "Denied")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,3340 @@
+{
+  "task": "MAIN RECONCILIATION GATE BEFORE B11",
+  "branch": "docs/pictures-sort",
+  "branch_before": "0c78a299dc0841bdf9512234a14ebce365c50a6b",
+  "main_merged": "289568fecdcd6fa61564f897cd2ed996ad7fd1c0",
+  "status": "PASS_WITH_RUNTIME_TESTS_UNAVAILABLE",
+  "manifest_before": {
+    "total": 407,
+    "migrated": 226,
+    "pending": 119,
+    "frozen": 62
+  },
+  "manifest_after": {
+    "total": 455,
+    "migrated": 226,
+    "pending": 154,
+    "frozen": 75
+  },
+  "new_assets_count": 48,
+  "new_classification": {
+    "terminal-evidence": 13,
+    "ui": 32,
+    "network-diagram": 3
+  },
+  "newly_frozen": 13,
+  "existing_frozen_asset_records_unchanged": true,
+  "terminal_reference_delta": {
+    "removed": [
+      {
+        "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+        "referenced_path": "/00_book/figures/report/terminal-generated/sw3-vlan-vtp.png",
+        "count": 1,
+        "reason": "origin/main intentionally removes old Lab1 section; frozen source record and bytes unchanged"
+      }
+    ],
+    "added": [
+      {
+        "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+        "referenced_path": "/00_book/figures/report/diagrams/dai-lab/recovered-ping.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+        "referenced_path": "/00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png",
+        "count": 2
+      },
+      {
+        "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+        "referenced_path": "/00_book/figures/report/diagrams/dai-lab/ping-before-after.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+        "referenced_path": "/00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png",
+        "count": 2
+      },
+      {
+        "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+        "referenced_path": "/00_book/figures/report/diagrams/dai-lab/recovered-binding.png",
+        "count": 1
+      }
+    ]
+  },
+  "verified_pairs": [
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 27.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png",
+      "sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 19.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png",
+      "sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 29.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png",
+      "sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 31.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png",
+      "sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 28.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png",
+      "sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 32.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png",
+      "sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 33.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png",
+      "sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 34.png",
+      "curated_path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png",
+      "sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png",
+      "curated_path": "00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png",
+      "sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 42.png",
+      "curated_path": "00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png",
+      "sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png",
+      "curated_path": "00_book/figures/report/diagrams/dai-lab/ping-before-after.png",
+      "sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 44.png",
+      "curated_path": "00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png",
+      "sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 45.png",
+      "curated_path": "00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png",
+      "sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png",
+      "curated_path": "00_book/figures/report/diagrams/dai-lab/recovered-binding.png",
+      "sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    },
+    {
+      "raw_path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png",
+      "curated_path": "00_book/figures/report/diagrams/dai-lab/recovered-ping.png",
+      "sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "relationship": "duplicate_exact",
+      "evidence": "README source table + SHA equality",
+      "confidence": "high"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "evidence.lab1.curated.dai.baseline-binding-trust",
+      "path": "00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png",
+      "sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "filesystem_sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "main_git_blob_sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "index_sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "size_bytes": 201467,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "SW1 CLI: DAI VLAN 10 enabled/active, initial drops 0; Gi0/1 ARP trusted, Gi0/2 untrusted; DHCP binding 192.168.10.4 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 31,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        },
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 32,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        }
+      ],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dai.cams-static-ip-input",
+      "path": "00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png",
+      "sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "filesystem_sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "main_git_blob_sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "index_sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "size_bytes": 339781,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 42.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 Physical Gi0/2: form 192.168.10.250/24, inventory still .4. Input preparation only, not proof of applied device state.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 44,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DAI presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/r2-static-address-input-before-apply-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dai.cams-syslog-alert",
+      "path": "00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png",
+      "sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "filesystem_sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "main_git_blob_sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "index_sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "size_bytes": 587761,
+      "width": 2560,
+      "height": 1161,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 45.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS System Logs: SW_DAI / 4 Warning events and CAMS / 3 Error DAI_ARP_SPOOF possible-ARP-spoofing alert (5 packets in 4 events). Application UI, not standalone terminal/syslog capture; does not prove an attack.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 96,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        },
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 98,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        }
+      ],
+      "future_migration_policy": "preserve exact presentation copy and raw relation; dedicated Syslog/security UI evidence review",
+      "suggested_future_batch": "DAI System Logs/security evidence supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/cams-dai-system-log-alert-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dai.ping-before-after",
+      "path": "00_book/figures/report/diagrams/dai-lab/ping-before-after.png",
+      "sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "filesystem_sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "main_git_blob_sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "index_sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "size_bytes": 104566,
+      "width": 2560,
+      "height": 781,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "R2 CLI ping comparison: source .4 succeeds 5/5; source .250 fails 0/5 to same gateway/interface.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 51,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/ping-before-after.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        }
+      ],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dai.recovered-binding",
+      "path": "00_book/figures/report/diagrams/dai-lab/recovered-binding.png",
+      "sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "filesystem_sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "main_git_blob_sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "index_sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "size_bytes": 26638,
+      "width": 2560,
+      "height": 278,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "SW1 CLI show ip dhcp snooping binding: 192.168.10.5 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 113,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/recovered-binding.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        }
+      ],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dai.recovered-ping",
+      "path": "00_book/figures/report/diagrams/dai-lab/recovered-ping.png",
+      "sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "filesystem_sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "main_git_blob_sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "index_sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "size_bytes": 32565,
+      "width": 933,
+      "height": 306,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "R2 CLI clear arp-cache and ping gateway: source 192.168.10.5 succeeds 5/5.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 114,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/recovered-ping.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dai.switch-drops-syslog",
+      "path": "00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png",
+      "sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "filesystem_sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "main_git_blob_sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "index_sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "size_bytes": 134932,
+      "width": 2560,
+      "height": 793,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 44.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "SW1 CLI: DAI Dropped=9 and DHCP Drops=9 plus SW_DAI denial logs for .250 on Gi0/2. These are ARP counts, not ICMP/DHCP packet counts.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 63,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        },
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_dai.typ",
+          "line": 64,
+          "referenced_path": "/00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-named-image-helper"
+        }
+      ],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.r1-pool",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png",
+      "sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "filesystem_sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "main_git_blob_sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "index_sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "size_bytes": 256171,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 29.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R1 DHCP Pool VLAN10: network 192.168.10.0, /24 mask, gateway 192.168.10.1, lease 1.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 32,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/r1-vlan-ten-dhcp-pool-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.r2-address-fake",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png",
+      "sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "filesystem_sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "main_git_blob_sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "index_sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "size_bytes": 337659,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 34.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 Physical Gi0/2: actual inventory address 192.168.66.100.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 67,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/r2-address-from-fake-dhcp-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.r2-address-r1",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png",
+      "sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "filesystem_sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "main_git_blob_sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "index_sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "size_bytes": 351418,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 28.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 Physical Gi0/2: actual inventory address 192.168.10.5; capture notification.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 53,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/r2-address-from-r1-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.r2-request-dhcp",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png",
+      "sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "filesystem_sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "main_git_blob_sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "index_sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "size_bytes": 449834,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 33.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 View & Push ALL: Gi0/2 ip address dhcp, completed notification.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 63,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/r2-dhcp-request-view-push-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.topology",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png",
+      "sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "filesystem_sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "main_git_blob_sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "index_sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "size_bytes": 133600,
+      "width": 1570,
+      "height": 881,
+      "image_mode": "RGBA",
+      "asset_class": "network-diagram",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 27.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "EVE-NG topology: R1, Switch, R2, FAKE_DHCP and Management; Gi0/1, Gi0/2, Gi0/3 links. README identifies the two-server test.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 9,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/diagrams/lab-topology/lab1/dhcp-two-server-lab-topology-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.trust-gi01",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png",
+      "sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "filesystem_sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "main_git_blob_sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "index_sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "size_bytes": 304006,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 31.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS SW1 Trusted Uplinks: Gi0/1 DHCP trust in configured list (selector and list differ).",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 49,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/sw1-dhcp-trust-gi-zero-one-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.trust-gi03",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png",
+      "sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "filesystem_sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "main_git_blob_sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "index_sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "size_bytes": 343153,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 32.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS SW1 Trusted Uplinks: Gi0/3 DHCP trust, two switch tasks applied.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 59,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/sw1-dhcp-trust-gi-zero-three-applied-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.curated.dhcp-snooping.vlan10-snooping",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png",
+      "sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "filesystem_sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "main_git_blob_sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "index_sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "size_bytes": 366784,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "verified-presentation-copy",
+      "original_evidence": false,
+      "copy_counterparts": [
+        "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 19.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS SW1 Security L2: VLAN 10 snooping Enabled, DAI Disabled, synchronized; trusted ports 0.",
+      "classification_confidence": "high",
+      "provenance_confidence": "high",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+          "line": 28,
+          "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png",
+          "target_type": "report-typst",
+          "reference_kind": "typst-image"
+        }
+      ],
+      "future_migration_policy": "preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence review",
+      "suggested_future_batch": "DHCP Snooping presentation supplemental (new batch)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/presentation/lab1/sw1-vlan-ten-snooping-enabled-presentation.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-dhcp-view-push-prepared",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 17.png",
+      "sha256": "ba9be24ff8503d29e1bc07d511c9b43eedba1d9eb2e82683306586285adfe019",
+      "filesystem_sha256": "ba9be24ff8503d29e1bc07d511c9b43eedba1d9eb2e82683306586285adfe019",
+      "main_git_blob_sha256": "ba9be24ff8503d29e1bc07d511c9b43eedba1d9eb2e82683306586285adfe019",
+      "index_sha256": "ba9be24ff8503d29e1bc07d511c9b43eedba1d9eb2e82683306586285adfe019",
+      "size_bytes": 429111,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 Physical Gi0/2; View & Push has ip address dhcp, one prepared router task.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-view-push-prepared.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-physical-no-address-inventory",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 18.png",
+      "sha256": "50eb28a9d92c81f27c7b1db3ac14ba23669006c7d163933abaefa1605421af9f",
+      "filesystem_sha256": "50eb28a9d92c81f27c7b1db3ac14ba23669006c7d163933abaefa1605421af9f",
+      "main_git_blob_sha256": "50eb28a9d92c81f27c7b1db3ac14ba23669006c7d163933abaefa1605421af9f",
+      "index_sha256": "50eb28a9d92c81f27c7b1db3ac14ba23669006c7d163933abaefa1605421af9f",
+      "size_bytes": 352100,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 Physical inventory: Gi0/2 without an IPv4 address.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-physical-no-address-inventory.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-vlan-ten-snooping-enabled",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 19.png",
+      "sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "filesystem_sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "main_git_blob_sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "index_sha256": "1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8",
+      "size_bytes": 366784,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS SW1 Security L2: VLAN 10 snooping Enabled, DAI Disabled, synchronized; trusted ports 0.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/sw1-vlan-ten-snooping-enabled.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-dhcp-trust-gi-zero-one-applied",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 20.png",
+      "sha256": "687dcaed827020f075c7f5e92aab948ae84ff107eb66a823ff1d0aba87b61126",
+      "filesystem_sha256": "687dcaed827020f075c7f5e92aab948ae84ff107eb66a823ff1d0aba87b61126",
+      "main_git_blob_sha256": "687dcaed827020f075c7f5e92aab948ae84ff107eb66a823ff1d0aba87b61126",
+      "index_sha256": "687dcaed827020f075c7f5e92aab948ae84ff107eb66a823ff1d0aba87b61126",
+      "size_bytes": 343972,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS SW1 Trusted Uplinks: Gi0/1 DHCP trust, ARP trust unchecked; one task applied.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-gi-zero-one-applied.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-dhcp-interface-input",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 21.png",
+      "sha256": "a1d747edb894b806b67e25c753583422773497f58246af7a78eafc9e3af9aed2",
+      "filesystem_sha256": "a1d747edb894b806b67e25c753583422773497f58246af7a78eafc9e3af9aed2",
+      "main_git_blob_sha256": "a1d747edb894b806b67e25c753583422773497f58246af7a78eafc9e3af9aed2",
+      "index_sha256": "a1d747edb894b806b67e25c753583422773497f58246af7a78eafc9e3af9aed2",
+      "size_bytes": 329710,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 Physical Gi0/2: dhcp entered in IPv4 field; left inventory has no address.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-interface-input.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.cams-r2-dhcp-assignment-system-logs",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 22.png",
+      "sha256": "bd8a3851c241a069fd33e16b34cff389df4d71618ec5d54720f5a61c2e7a43b8",
+      "filesystem_sha256": "bd8a3851c241a069fd33e16b34cff389df4d71618ec5d54720f5a61c2e7a43b8",
+      "main_git_blob_sha256": "bd8a3851c241a069fd33e16b34cff389df4d71618ec5d54720f5a61c2e7a43b8",
+      "index_sha256": "bd8a3851c241a069fd33e16b34cff389df4d71618ec5d54720f5a61c2e7a43b8",
+      "size_bytes": 709856,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS System Logs: R2 ADDRESS_ASSIGN 192.168.10.4 alongside configuration events, listener active.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/cams-r2-dhcp-assignment-system-logs.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-dhcp-trust-removal-preview",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 23.png",
+      "sha256": "064b352a725b4c5d4947d840463b20e118822b41e52974ab23ec18d1d78cbd61",
+      "filesystem_sha256": "064b352a725b4c5d4947d840463b20e118822b41e52974ab23ec18d1d78cbd61",
+      "main_git_blob_sha256": "064b352a725b4c5d4947d840463b20e118822b41e52974ab23ec18d1d78cbd61",
+      "index_sha256": "064b352a725b4c5d4947d840463b20e118822b41e52974ab23ec18d1d78cbd61",
+      "size_bytes": 450008,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS SW1 View & Push L2_SECURITY: no ip dhcp snooping trust on Gi0/1, marked for removal.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-removal-preview.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-remove-ip-address-preview",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 24.png",
+      "sha256": "541e5dc6df7cab09e07a4db8913d20a5c487c43e49ad057ac253d05e096d609b",
+      "filesystem_sha256": "541e5dc6df7cab09e07a4db8913d20a5c487c43e49ad057ac253d05e096d609b",
+      "main_git_blob_sha256": "541e5dc6df7cab09e07a4db8913d20a5c487c43e49ad057ac253d05e096d609b",
+      "index_sha256": "541e5dc6df7cab09e07a4db8913d20a5c487c43e49ad057ac253d05e096d609b",
+      "size_bytes": 439805,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 View & Push ALL: Gi0/2 no ip address.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-remove-ip-address-preview.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-dhcp-request-applied",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 25.png",
+      "sha256": "e4eef460033b134330d650c127492b85eace8dbb97b56f8886562495995dd629",
+      "filesystem_sha256": "e4eef460033b134330d650c127492b85eace8dbb97b56f8886562495995dd629",
+      "main_git_blob_sha256": "e4eef460033b134330d650c127492b85eace8dbb97b56f8886562495995dd629",
+      "index_sha256": "e4eef460033b134330d650c127492b85eace8dbb97b56f8886562495995dd629",
+      "size_bytes": 451236,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 View & Push ALL: Gi0/2 ip address dhcp; push-completed notification.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-request-applied.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-snooping-statistics-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 26.png",
+      "sha256": "db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff",
+      "filesystem_sha256": "db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff",
+      "main_git_blob_sha256": "db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff",
+      "index_sha256": "db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff",
+      "size_bytes": 297507,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "SW1 CLI: snooping VLAN 10 enabled; forwarding/drop statistics and historical SW_DAI messages. Mnemonic alone does not prove rogue DHCP detection.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.raw.dhcp-two-server-lab-topology",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 27.png",
+      "sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "filesystem_sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "main_git_blob_sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "index_sha256": "9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455",
+      "size_bytes": 133600,
+      "width": 1570,
+      "height": 881,
+      "image_mode": "RGBA",
+      "asset_class": "network-diagram",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "EVE-NG topology: R1, Switch, R2, FAKE_DHCP and Management; Gi0/1, Gi0/2, Gi0/3 links. README identifies the two-server test.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/diagrams/lab-topology/lab1/dhcp-two-server-lab-topology.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-address-from-r1",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 28.png",
+      "sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "filesystem_sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "main_git_blob_sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "index_sha256": "1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14",
+      "size_bytes": 351418,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 Physical Gi0/2: actual inventory address 192.168.10.5; capture notification.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-address-from-r1.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r1-vlan-ten-dhcp-pool",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 29.png",
+      "sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "filesystem_sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "main_git_blob_sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "index_sha256": "7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8",
+      "size_bytes": 256171,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R1 DHCP Pool VLAN10: network 192.168.10.0, /24 mask, gateway 192.168.10.1, lease 1.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r1-vlan-ten-dhcp-pool.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.fake-dhcp-pool-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 30.png",
+      "sha256": "a3a74caf524ae54ed8cb8ec854b67d8e05de5bc2ae2968d96573c9cf67dfc33e",
+      "filesystem_sha256": "a3a74caf524ae54ed8cb8ec854b67d8e05de5bc2ae2968d96573c9cf67dfc33e",
+      "main_git_blob_sha256": "a3a74caf524ae54ed8cb8ec854b67d8e05de5bc2ae2968d96573c9cf67dfc33e",
+      "index_sha256": "a3a74caf524ae54ed8cb8ec854b67d8e05de5bc2ae2968d96573c9cf67dfc33e",
+      "size_bytes": 575913,
+      "width": 2560,
+      "height": 364,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "FAKE_DHCP CLI show ip dhcp pool: FAKE_TEST range 192.168.66.1..254, zero leases. Transparent terminal over desktop wallpaper; legibility acceptable, preserve.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-dhcp-trust-gi-zero-one",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 31.png",
+      "sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "filesystem_sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "main_git_blob_sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "index_sha256": "01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec",
+      "size_bytes": 304006,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS SW1 Trusted Uplinks: Gi0/1 DHCP trust in configured list (selector and list differ).",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-gi-zero-one.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-dhcp-trust-gi-zero-three-applied",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 32.png",
+      "sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "filesystem_sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "main_git_blob_sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "index_sha256": "829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f",
+      "size_bytes": 343153,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS SW1 Trusted Uplinks: Gi0/3 DHCP trust, two switch tasks applied.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-gi-zero-three-applied.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-dhcp-request-view-push",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 33.png",
+      "sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "filesystem_sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "main_git_blob_sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "index_sha256": "1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996",
+      "size_bytes": 449834,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 View & Push ALL: Gi0/2 ip address dhcp, completed notification.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-request-view-push.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-address-from-fake-dhcp",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 34.png",
+      "sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "filesystem_sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "main_git_blob_sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "index_sha256": "0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57",
+      "size_bytes": 337659,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 Physical Gi0/2: actual inventory address 192.168.66.100.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-address-from-fake-dhcp.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r1-switch-r2-management-topology",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 35.png",
+      "sha256": "02c48718e88aedca01d59d646b98157b7a78435bad2da7d463b481191ce126f2",
+      "filesystem_sha256": "02c48718e88aedca01d59d646b98157b7a78435bad2da7d463b481191ce126f2",
+      "main_git_blob_sha256": "02c48718e88aedca01d59d646b98157b7a78435bad2da7d463b481191ce126f2",
+      "index_sha256": "02c48718e88aedca01d59d646b98157b7a78435bad2da7d463b481191ce126f2",
+      "size_bytes": 90972,
+      "width": 1645,
+      "height": 566,
+      "image_mode": "RGBA",
+      "asset_class": "network-diagram",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "EVE-NG topology: R1--Switch--R2 and Management M; no FAKE_DHCP node.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/diagrams/lab-topology/lab1/r1-switch-r2-management-topology.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-snooping-dai-policy-pending",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 36.png",
+      "sha256": "fb0a5a8e9f805fc1618ea27689aadb9854802972275fed0498d6da4b6dbe3397",
+      "filesystem_sha256": "fb0a5a8e9f805fc1618ea27689aadb9854802972275fed0498d6da4b6dbe3397",
+      "main_git_blob_sha256": "fb0a5a8e9f805fc1618ea27689aadb9854802972275fed0498d6da4b6dbe3397",
+      "index_sha256": "fb0a5a8e9f805fc1618ea27689aadb9854802972275fed0498d6da4b6dbe3397",
+      "size_bytes": 362150,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS SW1 Security L2: VLAN 10 snooping and DAI Enabled, policy pending application.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/sw1-snooping-dai-policy-pending.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-dhcp-arp-trust-uplink-applied",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 37.png",
+      "sha256": "d3a5c4fd039355e905813878b8415eab339bf4a25e2c1df2100abccb396ac5d0",
+      "filesystem_sha256": "d3a5c4fd039355e905813878b8415eab339bf4a25e2c1df2100abccb396ac5d0",
+      "main_git_blob_sha256": "d3a5c4fd039355e905813878b8415eab339bf4a25e2c1df2100abccb396ac5d0",
+      "index_sha256": "d3a5c4fd039355e905813878b8415eab339bf4a25e2c1df2100abccb396ac5d0",
+      "size_bytes": 345264,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS SW1 Trusted Uplinks: Gi0/1 DHCP and ARP trust, two switch tasks applied.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-arp-trust-uplink-applied.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-physical-no-address-before-dai",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 38.png",
+      "sha256": "d5326fce7b73cdcbb797300e1371a569d80fa5d1f035f2b420dc4434443dca01",
+      "filesystem_sha256": "d5326fce7b73cdcbb797300e1371a569d80fa5d1f035f2b420dc4434443dca01",
+      "main_git_blob_sha256": "d5326fce7b73cdcbb797300e1371a569d80fa5d1f035f2b420dc4434443dca01",
+      "index_sha256": "d5326fce7b73cdcbb797300e1371a569d80fa5d1f035f2b420dc4434443dca01",
+      "size_bytes": 341920,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 Physical Gi0/2 with no IPv4 address.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-physical-no-address-before-dai.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-dhcp-request-in-progress",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 39.png",
+      "sha256": "6aaece0c77dc5b1c0f0331a331b3ec7c81e1b8cd7c5b0b89ae1bd014bc9a585e",
+      "filesystem_sha256": "6aaece0c77dc5b1c0f0331a331b3ec7c81e1b8cd7c5b0b89ae1bd014bc9a585e",
+      "main_git_blob_sha256": "6aaece0c77dc5b1c0f0331a331b3ec7c81e1b8cd7c5b0b89ae1bd014bc9a585e",
+      "index_sha256": "6aaece0c77dc5b1c0f0331a331b3ec7c81e1b8cd7c5b0b89ae1bd014bc9a585e",
+      "size_bytes": 435105,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 View & Push ALL: ip address dhcp, pushing progress visible.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-request-in-progress.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-dai-baseline-binding-trust-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png",
+      "sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "filesystem_sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "main_git_blob_sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "index_sha256": "66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923",
+      "size_bytes": 201467,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "SW1 CLI: DAI VLAN 10 enabled/active, initial drops 0; Gi0/1 ARP trusted, Gi0/2 untrusted; DHCP binding 192.168.10.4 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-dhcp-address-ping-baseline-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 41.png",
+      "sha256": "29797a3f53fe20b44e0ad150bd2adac9a3f4b780cc3d2fbcb445538f0b677ebb",
+      "filesystem_sha256": "29797a3f53fe20b44e0ad150bd2adac9a3f4b780cc3d2fbcb445538f0b677ebb",
+      "main_git_blob_sha256": "29797a3f53fe20b44e0ad150bd2adac9a3f4b780cc3d2fbcb445538f0b677ebb",
+      "index_sha256": "29797a3f53fe20b44e0ad150bd2adac9a3f4b780cc3d2fbcb445538f0b677ebb",
+      "size_bytes": 72785,
+      "width": 2560,
+      "height": 542,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "R2 CLI: clear arp-cache then ping 192.168.10.1 sourced from Gi0/2 / 192.168.10.4 succeeds 5/5.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-static-address-input-before-apply",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 42.png",
+      "sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "filesystem_sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "main_git_blob_sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "index_sha256": "875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa",
+      "size_bytes": 339781,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS R2 Physical Gi0/2: form 192.168.10.250/24, inventory still .4. Input preparation only, not proof of applied device state.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-static-address-input-before-apply.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-ping-dhcp-versus-static-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png",
+      "sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "filesystem_sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "main_git_blob_sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "index_sha256": "4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c",
+      "size_bytes": 104566,
+      "width": 2560,
+      "height": 781,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dai-lab/ping-before-after.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "R2 CLI ping comparison: source .4 succeeds 5/5; source .250 fails 0/5 to same gateway/interface.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-dai-drops-syslog-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 44.png",
+      "sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "filesystem_sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "main_git_blob_sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "index_sha256": "64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d",
+      "size_bytes": 134932,
+      "width": 2560,
+      "height": 793,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "SW1 CLI: DAI Dropped=9 and DHCP Drops=9 plus SW_DAI denial logs for .250 on Gi0/2. These are ARP counts, not ICMP/DHCP packet counts.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.raw.cams-dai-system-log-alert",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 45.png",
+      "sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "filesystem_sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "main_git_blob_sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "index_sha256": "6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500",
+      "size_bytes": 587761,
+      "width": 2560,
+      "height": 1161,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "CAMS System Logs: SW_DAI / 4 Warning events and CAMS / 3 Error DAI_ARP_SPOOF possible-ARP-spoofing alert (5 packets in 4 events). Application UI, not standalone terminal/syslog capture; does not prove an attack.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/cams-dai-system-log-alert.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-dhcp-view-push-detail",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 46.png",
+      "sha256": "480cadca50a4635e1502ab3ec2a62766d016ccfb560afa58e86a8113e7728ae1",
+      "filesystem_sha256": "480cadca50a4635e1502ab3ec2a62766d016ccfb560afa58e86a8113e7728ae1",
+      "main_git_blob_sha256": "480cadca50a4635e1502ab3ec2a62766d016ccfb560afa58e86a8113e7728ae1",
+      "index_sha256": "480cadca50a4635e1502ab3ec2a62766d016ccfb560afa58e86a8113e7728ae1",
+      "size_bytes": 54287,
+      "width": 1148,
+      "height": 845,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "Existing narrow CAMS View & Push capture: R2 Gi0/2 ip address dhcp. Source crop already present; no new cropping.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-view-push-detail.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-restored-dhcp-address-inventory",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 47.png",
+      "sha256": "d3bc9658e6183ef5c33783653b2b826a1f2c716298f6001c244317b1675beff8",
+      "filesystem_sha256": "d3bc9658e6183ef5c33783653b2b826a1f2c716298f6001c244317b1675beff8",
+      "main_git_blob_sha256": "d3bc9658e6183ef5c33783653b2b826a1f2c716298f6001c244317b1675beff8",
+      "index_sha256": "d3bc9658e6183ef5c33783653b2b826a1f2c716298f6001c244317b1675beff8",
+      "size_bytes": 340429,
+      "width": 2560,
+      "height": 1600,
+      "image_mode": "RGBA",
+      "asset_class": "ui",
+      "terminal": false,
+      "migration_state": "pending",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [],
+      "copy_relationship": null,
+      "classification_evidence": "CAMS R2 Physical Gi0/2 inventory address 192.168.10.5, empty editing form.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "preserve raw evidence; dedicated supplemental review before any future transfer/recreation",
+      "suggested_future_batch": "LAB1 raw evidence supplemental (new batch, outside historical B13/B15 counts)",
+      "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/lab1/r2-restored-dhcp-address-inventory.png"
+    },
+    {
+      "asset_id": "evidence.lab1.raw.sw1-recovered-dhcp-binding-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png",
+      "sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "filesystem_sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "main_git_blob_sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "index_sha256": "ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661",
+      "size_bytes": 26638,
+      "width": 2560,
+      "height": 278,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dai-lab/recovered-binding.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "SW1 CLI show ip dhcp snooping binding: 192.168.10.5 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    },
+    {
+      "asset_id": "evidence.lab1.raw.r2-recovered-gateway-ping-cli",
+      "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png",
+      "sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "filesystem_sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "main_git_blob_sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "index_sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f",
+      "size_bytes": 32565,
+      "width": 933,
+      "height": 306,
+      "image_mode": "RGBA",
+      "asset_class": "terminal-evidence",
+      "terminal": true,
+      "migration_state": "frozen",
+      "provenance_role": "raw-evidence-candidate",
+      "original_evidence": true,
+      "copy_counterparts": [
+        "00_book/figures/report/diagrams/dai-lab/recovered-ping.png"
+      ],
+      "copy_relationship": "duplicate_exact",
+      "classification_evidence": "R2 CLI clear arp-cache and ping gateway: source 192.168.10.5 succeeds 5/5.",
+      "classification_confidence": "high",
+      "provenance_confidence": "medium",
+      "visual_inspection": "original-resolution; no OCR",
+      "report_usage": [],
+      "future_migration_policy": "freeze-current-path: no transfer, rename, crop, recreation, staging or later reference rewrite",
+      "suggested_future_batch": "terminal-freeze (excluded from migration batches)",
+      "planned_canonical_path": null
+    }
+  ],
+  "b11": {
+    "total": 27,
+    "live_reference_count": 0,
+    "usage_updates": [
+      "evidence.switching.vtp-group-identity",
+      "evidence.switching.vlan-view-push",
+      "evidence.switching.vlan-security-policy",
+      "evidence.switching.port-security-view-push",
+      "evidence.switching.etherchannel-view-push"
+    ],
+    "records": [
+      {
+        "asset_id": "evidence.switching.sw1-vlan-ten-access-assignments",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_1.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw1-vlan-ten-access-assignments.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw1-trunks-pending-apply",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_10.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw1-trunks-pending-apply.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw2-trunks-synchronized",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_11.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw2-trunks-synchronized.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw3-trunks-synchronized",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_12.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw3-trunks-synchronized.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw4-trunks-synchronized",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_13.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw4-trunks-synchronized.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw5-trunks-synchronized",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_14.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw5-trunks-synchronized.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw6-trunks-synchronized",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_15.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw6-trunks-synchronized.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.vtp-group-identity",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_16.png",
+        "before_references": [
+          {
+            "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+            "line": 56,
+            "referenced_path": "/00_book/figures/report/diagrams/switching-lab/1_16.png",
+            "target_type": "report-typst"
+          }
+        ],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-identity.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.vtp-group-member-policy",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_17.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/vtp-group-member-policy.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw1-vlan-five-access-assignments",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_18.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw1-vlan-five-access-assignments.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw1-vlan-data-network-selected",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_19.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw1-vlan-data-network-selected.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw1-lacp-port-channel-editing",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_2.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw1-lacp-port-channel-editing.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.vlan-view-push",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_20.png",
+        "before_references": [
+          {
+            "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+            "line": 66,
+            "referenced_path": "/00_book/figures/report/diagrams/switching-lab/1_20.png",
+            "target_type": "report-typst"
+          }
+        ],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/vlan-view-push.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.vlan-security-policy",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_21.png",
+        "before_references": [
+          {
+            "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+            "line": 86,
+            "referenced_path": "/00_book/figures/report/diagrams/switching-lab/1_21.png",
+            "target_type": "report-typst"
+          }
+        ],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/vlan-security-policy.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.trusted-uplinks",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_22.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/trusted-uplinks.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.l2-security-view-push",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_23.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/l2-security-view-push.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.port-security-editor",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_24.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/port-security-editor.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.port-security-view-push",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_25.png",
+        "before_references": [
+          {
+            "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+            "line": 96,
+            "referenced_path": "/00_book/figures/report/diagrams/switching-lab/1_25.png",
+            "target_type": "report-typst"
+          }
+        ],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/port-security-view-push.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.port-security-configured",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_26.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/port-security-configured.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.etherchannel-view-push",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_3.png",
+        "before_references": [
+          {
+            "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+            "line": 76,
+            "referenced_path": "/00_book/figures/report/diagrams/switching-lab/1_3.png",
+            "target_type": "report-typst"
+          }
+        ],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/etherchannel-view-push.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.mac-address-table",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_32.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/mac-address-table.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw3-lacp-inventory-reloaded",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_4.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw3-lacp-inventory-reloaded.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw1-lacp-inventory-reloaded",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_5.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw1-lacp-inventory-reloaded.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw3-lacp-later-capture",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_6.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": null,
+        "preserve_original": true,
+        "review_status": "unresolved",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw2-pagp-synchronized",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_7.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw2-pagp-synchronized.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw4-pagp-synchronized",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_8.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw4-pagp-synchronized.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      },
+      {
+        "asset_id": "evidence.switching.sw1-port-mode-editing",
+        "current_path": "00_book/figures/report/diagrams/switching-lab/1_9.png",
+        "before_references": [],
+        "current_references": [],
+        "targets": [],
+        "planned_canonical_path": "documentation_assets/evidence/ui-capture/original/switching-lab/sw1-port-mode-editing.png",
+        "preserve_original": true,
+        "review_status": "preserve-original",
+        "review_required": true
+      }
+    ],
+    "migration_performed": false
+  },
+  "reference_baseline_unchanged": true,
+  "broken_images": 0,
+  "scope": {
+    "new_assets_migrated": 0,
+    "images_copied_by_reconciliation": 0,
+    "images_deleted": 0,
+    "b11_started": false,
+    "runtime_changes": "origin/main accepted without additional edits",
+    "docshot_rendered": false
+  },
+  "validation": {
+    "local": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-1.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-2.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-3.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-4.log",
+        "test_count": 22
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-5.log",
+        "test_count": 17
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-6.log",
+        "test_count": 3
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_switch_security_logging",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/local-7.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'peewee'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_switching_view_push",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/local-8.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'peewee'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.syslog.test_security_monitoring",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/local-9.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'jinja2'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.syslog.test_export",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/local-10.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'jinja2'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-11.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-12.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-13.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-14.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/local-15.log",
+        "test_count": null
+      }
+    ],
+    "fresh": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-1.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-2.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-3.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-4.log",
+        "test_count": 22
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-5.log",
+        "test_count": 17
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-6.log",
+        "test_count": 3
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_switch_security_logging",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/fresh-7.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'peewee'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_switching_view_push",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/fresh-8.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'peewee'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.syslog.test_security_monitoring",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/fresh-9.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'jinja2'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.syslog.test_export",
+          "-v"
+        ],
+        "exit_code": 1,
+        "status": "SKIPPED/UNAVAILABLE",
+        "log": "/tmp/cams-main-289568f/fresh-10.log",
+        "test_count": 0,
+        "reason": "ModuleNotFoundError: No module named 'jinja2'",
+        "tests_executed": 0
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-11.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-12.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-13.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-14.log",
+        "test_count": null
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "log": "/tmp/cams-main-289568f/fresh-15.log",
+        "test_count": null
+      }
+    ],
+    "documentation_tests_per_checkout": 42,
+    "runtime_tests_executed": 0,
+    "qml": {
+      "command": "QT_QPA_PLATFORM=offscreen python -m unittest tests.syslog.test_qml_syslog -v",
+      "status": "SKIPPED/UNAVAILABLE",
+      "reason": "Import blocked by application bootstrap: ModuleNotFoundError: No module named 'jinja2'",
+      "tests_executed": 0,
+      "log": "/tmp/cams-main-289568f/local-qml.log"
+    }
+  },
+  "builds": {
+    "toolchain": "repository-pinned Typst 0.14.2, pinned font bundle, creation timestamp 0, no system fonts",
+    "before": {
+      "report": {
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "authority": "historical pre-main B10B; no longer authoritative"
+      },
+      "book": {
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442"
+      }
+    },
+    "after": {
+      "report": {
+        "path": "output/typst/report.pdf",
+        "sha256": "a78c673bb8730c28fe807601434dd1d1632466ef8f252f9d113936ba26c64985",
+        "pages": 117,
+        "size_bytes": 16660766
+      },
+      "book": {
+        "path": "output/typst/book.pdf",
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "pages": 170,
+        "size_bytes": 16558742
+      }
+    },
+    "local_builds": [
+      {
+        "report": {
+          "path": "output/typst/report.pdf",
+          "sha256": "a78c673bb8730c28fe807601434dd1d1632466ef8f252f9d113936ba26c64985",
+          "pages": 117,
+          "size_bytes": 16660766
+        },
+        "book": {
+          "path": "output/typst/book.pdf",
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "pages": 170,
+          "size_bytes": 16558742
+        }
+      },
+      {
+        "report": {
+          "path": "output/typst/report.pdf",
+          "sha256": "a78c673bb8730c28fe807601434dd1d1632466ef8f252f9d113936ba26c64985",
+          "pages": 117,
+          "size_bytes": 16660766
+        },
+        "book": {
+          "path": "output/typst/book.pdf",
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "pages": 170,
+          "size_bytes": 16558742
+        }
+      }
+    ],
+    "fresh_builds": [
+      {
+        "report": {
+          "path": "output/typst/report.pdf",
+          "sha256": "a78c673bb8730c28fe807601434dd1d1632466ef8f252f9d113936ba26c64985",
+          "pages": 117,
+          "size_bytes": 16660766
+        },
+        "book": {
+          "path": "output/typst/book.pdf",
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "pages": 170,
+          "size_bytes": 16558742
+        }
+      },
+      {
+        "report": {
+          "path": "output/typst/report.pdf",
+          "sha256": "a78c673bb8730c28fe807601434dd1d1632466ef8f252f9d113936ba26c64985",
+          "pages": 117,
+          "size_bytes": 16660766
+        },
+        "book": {
+          "path": "output/typst/book.pdf",
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "pages": 170,
+          "size_bytes": 16558742
+        }
+      }
+    ],
+    "deterministic_local": true,
+    "deterministic_fresh": true,
+    "new_baseline_for_b11": true,
+    "tracked_main_report_pdf": {
+      "path": "00_report/main.pdf",
+      "sha256": "b75eea8c97e88583bf903a03dab497cee2b384d2cc9baf75ea5892bff0463358",
+      "pages": 117,
+      "unchanged_from_main": true,
+      "role": "Main-provided tracked PDF; pinned tooling generates ignored output/typst/report.pdf instead"
+    }
+  },
+  "fresh_checkout": {
+    "status": "PASS",
+    "path": "/tmp/cams-main-289568f/fresh-checkout",
+    "candidate_commit": "c24f47116f717030777b5da22fb41f8f644e96f6",
+    "main_ancestor": "289568fecdcd6fa61564f897cd2ed996ad7fd1c0",
+    "behind": 0,
+    "clean": true,
+    "setup_note": "Initial clone failed disk quota before checkout creation; two verified-clean prior B09/B10 temporary validation clones were removed; one successful candidate checkout was then created.",
+    "report_finalization_policy": "Validate one two-parent candidate checkout before committing the pending merge. Final report-only completion records that validation; compare all non-report index/blob paths against validated candidate, then inspect report diff and both whitespace checks. No functional changes after fresh validation."
+  },
+  "other_nonterminal_usage_metadata_updates": [
+    {
+      "asset_id": "diagrams.lab-topology.routing-ospf.multi-area-branches-raster",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 153,
+          "referenced_path": "/documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 44,
+          "referenced_path": "/documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "diagrams.lab-topology.switching.layer-two-security",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 41,
+          "referenced_path": "/documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.nat-interfaces",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 372,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 263,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.nat-acl",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 383,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 274,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.nat-config-preview",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 390,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 281,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.nat-pat",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 406,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 297,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.nat-pat-preview",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 413,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 304,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.glbp-setup",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 444,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 335,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.glbp-member-policy",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 451,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 342,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.glbp-config-preview",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 458,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 349,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.dhcp-pool",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 469,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 360,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.fhrp-nat-dhcp.dhcp-config-preview",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 476,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 367,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "diagrams.lab-topology.fhrp-nat-dhcp.glbp-dhcp-pat-raster",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 337,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 228,
+          "referenced_path": "/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.routing-ospf.router-interfaces-overview",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 186,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/1.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 77,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/1.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-hosts",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 196,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/10.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 87,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/10.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-networks",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 204,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/11.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 95,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/11.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.routing-ospf.routing-group-push-progress",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 251,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/14.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 142,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/14.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.routing-ospf.r2-process",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 238,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/16.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 129,
+          "referenced_path": "/00_book/figures/report/diagrams/routing-ospf-lab/16.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.configuration",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 575,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 466,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.select-hosts",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 586,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 477,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.source-interfaces",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 597,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 488,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.policy",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 608,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 499,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.config-preview",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 619,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 510,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.listener-before-start",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 666,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 557,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.listener-receiving",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 673,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 564,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.message-detail",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 684,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 575,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.email-alert-settings",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 726,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 617,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "diagrams.lab-topology.syslog.centralized-logging-raster",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 528,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 419,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.email-error-sw1-gmail",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 739,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/lv3.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 630,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/lv3.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.syslog.email-warning-r1-gmail",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 746,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/lv4.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 637,
+          "referenced_path": "/00_book/figures/report/diagrams/syslog-lab/lv4.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "evidence.lab5.acl-system-logs-full",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+          "line": 107,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/12.png",
+          "target_type": "report-typst"
+        },
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 861,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/12.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+          "line": 107,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/12.png",
+          "target_type": "report-typst"
+        },
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 752,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/12.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    },
+    {
+      "asset_id": "diagrams.lab5.acl-lab-topology",
+      "before": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+          "line": 16,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png",
+          "target_type": "report-typst"
+        },
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 770,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "after": [
+        {
+          "source_document": "00_report/contents/09_kich_ban_5_acl.typ",
+          "line": 16,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png",
+          "target_type": "report-typst"
+        },
+        {
+          "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+          "line": 661,
+          "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "reason": "main Lab1 replacement removes use or shifts report line numbers"
+    }
+  ],
+  "existing_frozen_manifest_usage_note": "All 62 prior frozen manifest records remain unchanged, including historical used_by line metadata. Current uses are enforced by the reconciled freeze reference multiset. SW3 VLAN/VTP now has zero live uses; its old used_by entry is historical, not current usage.",
+  "proof": {
+    "local": {
+      "status": "PASS",
+      "managed_sha_contracts": 455,
+      "tracked_physical_images": 457,
+      "retained_b02_original_copies": [
+        "00_book/figures/report/diagrams/review-core-erd.svg",
+        "00_book/figures/report/diagrams/review-syslog-sequence.svg"
+      ],
+      "exhaustive_coverage": true,
+      "all_407_prior_image_bytes_paths_unchanged": true,
+      "all_48_main_added_image_bytes_paths_unchanged": true,
+      "new_image_migrations": 0,
+      "nonterminal_usage_metadata_updates": 37,
+      "original_62_frozen_manifest_and_registry_asset_records_unchanged": true,
+      "new_frozen_records": 13,
+      "current_frozen_records": 75,
+      "old_terminal_reference_removals": 1,
+      "new_terminal_reference_occurrences": 7,
+      "terminal_reference_removal_reason": "main deliberately replaces old Lab1; no terminal asset/ref rename",
+      "b11_records": 27,
+      "b11_live_references": 0,
+      "b11_canonical_copies": 0,
+      "reference_baseline_unchanged": true,
+      "broken_images": 0,
+      "accepted_main_runtime_files": 24,
+      "accepted_main_runtime_index_blobs_exact": true,
+      "new_report_modules_match_main": true,
+      "main_lab1_content_preserved": true,
+      "all_still_valid_canonical_report_references_preserved": true,
+      "historical_planning_unchanged": true,
+      "docshot_mapping_unchanged": true,
+      "staging_tracked": false,
+      "staged_source_count": 178,
+      "no_new_asset_selected_for_staging": true,
+      "pdf_builds_deterministic": true,
+      "pdfs": {
+        "report": {
+          "path": "output/typst/report.pdf",
+          "sha256": "a78c673bb8730c28fe807601434dd1d1632466ef8f252f9d113936ba26c64985",
+          "pages": 117,
+          "size_bytes": 16660766
+        },
+        "book": {
+          "path": "output/typst/book.pdf",
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "pages": 170,
+          "size_bytes": 16558742
+        }
+      },
+      "tracked_report_pdf": {
+        "path": "00_report/main.pdf",
+        "sha256": "b75eea8c97e88583bf903a03dab497cee2b384d2cc9baf75ea5892bff0463358",
+        "pages": 117,
+        "unchanged_from_main": true,
+        "role": "Main-provided tracked PDF; pinned tooling generates ignored output/typst/report.pdf instead"
+      },
+      "main_is_ancestor": "merge pending; verified in candidate checkout"
+    },
+    "fresh": {
+      "status": "PASS",
+      "managed_sha_contracts": 455,
+      "tracked_physical_images": 457,
+      "retained_b02_original_copies": [
+        "00_book/figures/report/diagrams/review-core-erd.svg",
+        "00_book/figures/report/diagrams/review-syslog-sequence.svg"
+      ],
+      "exhaustive_coverage": true,
+      "all_407_prior_image_bytes_paths_unchanged": true,
+      "all_48_main_added_image_bytes_paths_unchanged": true,
+      "new_image_migrations": 0,
+      "nonterminal_usage_metadata_updates": 37,
+      "original_62_frozen_manifest_and_registry_asset_records_unchanged": true,
+      "new_frozen_records": 13,
+      "current_frozen_records": 75,
+      "old_terminal_reference_removals": 1,
+      "new_terminal_reference_occurrences": 7,
+      "terminal_reference_removal_reason": "main deliberately replaces old Lab1; no terminal asset/ref rename",
+      "b11_records": 27,
+      "b11_live_references": 0,
+      "b11_canonical_copies": 0,
+      "reference_baseline_unchanged": true,
+      "broken_images": 0,
+      "accepted_main_runtime_files": 24,
+      "accepted_main_runtime_index_blobs_exact": true,
+      "new_report_modules_match_main": true,
+      "main_lab1_content_preserved": true,
+      "all_still_valid_canonical_report_references_preserved": true,
+      "historical_planning_unchanged": true,
+      "docshot_mapping_unchanged": true,
+      "staging_tracked": false,
+      "staged_source_count": 178,
+      "no_new_asset_selected_for_staging": true,
+      "pdf_builds_deterministic": true,
+      "pdfs": {
+        "report": {
+          "path": "output/typst/report.pdf",
+          "sha256": "a78c673bb8730c28fe807601434dd1d1632466ef8f252f9d113936ba26c64985",
+          "pages": 117,
+          "size_bytes": 16660766
+        },
+        "book": {
+          "path": "output/typst/book.pdf",
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "pages": 170,
+          "size_bytes": 16558742
+        }
+      },
+      "tracked_report_pdf": {
+        "path": "00_report/main.pdf",
+        "sha256": "b75eea8c97e88583bf903a03dab497cee2b384d2cc9baf75ea5892bff0463358",
+        "pages": 117,
+        "unchanged_from_main": true,
+        "role": "Main-provided tracked PDF; pinned tooling generates ignored output/typst/report.pdf instead"
+      },
+      "main_is_ancestor": true
+    }
+  },
+  "merge_resolution": {
+    "file": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+    "rule": "main new DHCP Snooping/DAI Lab1 retained; all still-valid migrated canonical references substituted into the main text",
+    "canonical_ospf_reference": "/documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png",
+    "no_old_switching_lab_restored": true,
+    "report_module_bytes_match_main": true
+  },
+  "git_pdf_contract": {
+    "path": "00_report/main.pdf",
+    "attribute": "/00_report/main.pdf binary",
+    "reason": "main PDF has textual-looking initial bytes; Git autodetection treated compressed streams as text and diff --cached --check reported binary whitespace. Explicit binary attribute prevents normalization/text diff; PDF bytes remain identical to main.",
+    "global_whitespace_checks_unchanged": true
+  },
+  "inventory_coverage": {
+    "logical_records": 455,
+    "tracked_physical_images": 457,
+    "retained_original_copies": [
+      "00_book/figures/report/diagrams/review-core-erd.svg",
+      "00_book/figures/report/diagrams/review-syslog-sequence.svg"
+    ],
+    "coverage": "455 managed current paths plus two existing B02B4 preserved original SVG copies. No unmanaged new image.",
+    "all_sha_contracts": "manifest == filesystem == Git index == authoritative parent blob (407 branch-before, 48 main)"
+  },
+  "future_batch_policy": "Create separate supplemental owners for LAB1 raw evidence, DHCP Snooping presentation, DAI presentation and System Logs/security UI evidence. Terminal-freeze excluded. Historical B13/B15 counts are not rewritten. Recommendations are not execution approval."
+}

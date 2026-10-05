@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import subprocess
 import tempfile
@@ -76,6 +77,32 @@ class DocumentationAssetTests(unittest.TestCase):
                 self.assertEqual((attribute, value), ("text", "unset"))
         runtime = subprocess.check_output(["git", "check-attr", "text", "--", "UI/resources/brand/logo.svg"], cwd=root, text=True)
         self.assertEqual(runtime.strip().rsplit(": ", 1)[1], "auto")
+        pdf = subprocess.check_output(["git", "check-attr", "-z", "text", "diff", "--", "00_report/main.pdf"], cwd=root)
+        values = pdf.decode().strip("\0").split("\0")
+        self.assertEqual(values[2::3], ["unset", "unset"])
+
+    def test_repository_inventory_covers_tracked_images_and_exact_git_bytes(self):
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        records = yaml.safe_load((root / "documentation_assets/manifest.yaml").read_text())["assets"]
+        tracked = set(subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode().split("\0"))
+        images = {p for p in tracked if p.startswith(("00_book/", "00_report/", "documentation_assets/"))
+                  and Path(p).suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}}
+        current = {a["current_path"] for a in records}
+        self.assertEqual(len(current), len(records))
+        # B02B4 deliberately retained two original SVGs; these are physical copies
+        # of managed records, not independent logical assets or blanket exclusions.
+        retained = {a["legacy_path"]: a for a in records
+                    if a["migration_state"] == "migrated" and a["preserve_original"]
+                    and a.get("legacy_path") in tracked and a["legacy_path"] != a["current_path"]}
+        self.assertEqual(images, current | retained.keys())
+        self.assertFalse(any(p.startswith(STAGE_ROOT + "/") for p in tracked))
+        sources = [(a["current_path"], a) for a in records] + list(retained.items())
+        for path, a in sources:
+            with self.subTest(path=path):
+                blob = subprocess.check_output(["git", "cat-file", "blob", f":{path}"], cwd=root)
+                self.assertEqual(hashlib.sha256(blob).hexdigest(), a["sha256"])
+                self.assertEqual(digest(root / path), a["sha256"])
 
     def test_svg_repository_bytes_survive_autocrlf_and_validator_checks_exact_bytes(self):
         root = Path(__file__).resolve().parents[1]
@@ -246,6 +273,38 @@ class DocumentationAssetTests(unittest.TestCase):
         self.assertEqual(len(refs), 3)
         self.assertEqual([r["line"] for r in refs], [1, 3, 2])
         self.assertTrue(all(not r["exists"] for r in refs))
+
+    def test_named_typst_helper_checks_each_literal_use_and_freeze_count(self):
+        from scripts.documentation_assets import image_references
+        report = self.root / "00_report/main.typ"
+        report.parent.mkdir(parents=True)
+        report.write_text(
+            '#let crop(name, width) = layout(size => {\n'
+            '  let nested = { "brace-in-string": "}" }\n'
+            '  image("/00_book/figures/" + name + ".png", width: width)\n'
+            '})\n'
+            '// crop("ignored", 100%)\n'
+            '#crop("example", 100%)\n'
+            '#crop(\n "example", 50%)\n'
+            '#crop(variable, 100%)\n')
+        refs = image_references(self.root)
+        self.assertEqual([r["line"] for r in refs], [6, 7])
+        self.assertEqual([r["resolved_path"] for r in refs], [self.record["current_path"]] * 2)
+        self.contract["assets"] = [dict(id="terminal.capture.example", path=self.record["current_path"], sha256=self.record["sha256"])]
+        self.contract["references"] = [dict(source_document="00_report/main.typ", referenced_path="/00_book/figures/example.png", count=2)]
+        self.write_contract()
+        self.assertEqual(validate_references(self.root), ([], 0))
+        report.write_text(report.read_text() + '#crop("missing", 100%)\n')
+        self.assertTrue(any("broken image" in error for error in validate_references(self.root)[0]))
+        report.write_text(report.read_text().replace('#crop("example", 100%)', ''))
+        self.assertTrue(any("frozen terminal reference multiset" in error for error in validate_references(self.root)[0]))
+
+    def test_named_typst_helper_does_not_infer_unrelated_variable_templates(self):
+        from scripts.documentation_assets import image_references
+        report = self.root / "00_report/main.typ"
+        report.parent.mkdir(parents=True)
+        report.write_text('#let crop(name, width) = {\n image("/00_book/figures/" + other + ".png")\n}\n#crop("missing", 100%)\n')
+        self.assertEqual(image_references(self.root), [])
 
     def test_fresh_checkout_pre_sync_then_full_post_sync(self):
         import yaml

@@ -11,11 +11,13 @@ from urllib.parse import unquote, urlparse
 from xml.sax.saxutils import escape
 import zipfile
 
+from .security import annotate_security
 
 _HEADERS = (
     "Received at", "Device time", "Host", "Source IP", "Protocol",
     "Severity", "Facility", "Mnemonic", "Message", "Raw message",
     "Sequence", "Parse status",
+    "Security feature", "Outcome",
 )
 _SEVERITY_NAMES = (
     "Emergency", "Alert", "Critical", "Error",
@@ -158,6 +160,7 @@ def _sheet_xml(rows: Sequence[Mapping[str, object]], filters: Mapping[str, objec
     sheet_rows.append(f'<row r="6" ht="24" customHeight="1">{header_cells}</row>')
 
     for row_number, row in enumerate(rows, start=7):
+        row = annotate_security(row)
         severity, severity_label = _severity_value(row)
         sequence = row.get("sequence_number")
         try:
@@ -179,6 +182,8 @@ def _sheet_xml(rows: Sequence[Mapping[str, object]], filters: Mapping[str, objec
             row.get("raw_message", ""),
             sequence_value,
             row.get("parse_status", ""),
+            row.get("security_label", ""),
+            row.get("security_outcome_label", ""),
         )
         cells: list[str] = []
         for column_index, value in enumerate(values, start=1):
@@ -196,10 +201,11 @@ def _sheet_xml(rows: Sequence[Mapping[str, object]], filters: Mapping[str, objec
         sheet_rows.append(f'<row r="{row_number}">{"".join(cells)}</row>')
 
     last_row = max(6, len(rows) + 6)
+    last_column = _column_name(len(_HEADERS))
     return f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
   <sheetPr><pageSetUpPr fitToPage="1" autoPageBreaks="0"/></sheetPr>
-  <dimension ref="A1:L{last_row}"/>
+  <dimension ref="A1:{last_column}{last_row}"/>
   <sheetViews><sheetView workbookViewId="0" showGridLines="0">
     <pane ySplit="6" topLeftCell="A7" activePane="bottomLeft" state="frozen"/>
     <selection pane="bottomLeft" activeCell="A7" sqref="A7"/>
@@ -210,10 +216,11 @@ def _sheet_xml(rows: Sequence[Mapping[str, object]], filters: Mapping[str, objec
     <col min="5" max="5" width="11" customWidth="1"/><col min="6" max="6" width="18" customWidth="1"/>
     <col min="7" max="8" width="18" customWidth="1"/><col min="9" max="10" width="52" customWidth="1"/>
     <col min="11" max="11" width="12" customWidth="1"/><col min="12" max="12" width="16" customWidth="1"/>
+    <col min="13" max="13" width="24" customWidth="1"/><col min="14" max="14" width="18" customWidth="1"/>
   </cols>
   <sheetData>{''.join(sheet_rows)}</sheetData>
-  <mergeCells count="3"><mergeCell ref="A1:L1"/><mergeCell ref="B2:L2"/><mergeCell ref="B4:L4"/></mergeCells>
-  <autoFilter ref="A6:L{last_row}"/>
+  <mergeCells count="3"><mergeCell ref="A1:{last_column}1"/><mergeCell ref="B2:{last_column}2"/><mergeCell ref="B4:{last_column}4"/></mergeCells>
+  <autoFilter ref="A6:{last_column}{last_row}"/>
   <pageMargins left="0.3" right="0.3" top="0.5" bottom="0.5" header="0.2" footer="0.2"/>
   <printOptions horizontalCentered="1"/>
   <pageSetup paperSize="9" orientation="landscape" fitToWidth="1" fitToHeight="0"/>

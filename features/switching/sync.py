@@ -195,7 +195,9 @@ def parse_running_config_security(config_text: str) -> dict[str, Any]:
     text = str(config_text or "")
     dhcp_vlans: set[int] = set()
     dai_vlans: set[int] = set()
+    dai_log_modes: dict[int, str] = {}
     trust_ports: set[str] = set()
+    trust_controls: dict[str, dict[str, bool]] = {}
 
     for match in re.finditer(
         r"(?im)^\s*ip\s+dhcp\s+snooping\s+vlan\s+([0-9,\-\s]+)", text
@@ -203,9 +205,18 @@ def parse_running_config_security(config_text: str) -> dict[str, Any]:
         dhcp_vlans.update(_parse_vlan_list(match.group(1)))
 
     for match in re.finditer(
-        r"(?im)^\s*ip\s+arp\s+inspection\s+vlan\s+([0-9,\-\s]+)", text
+        r"(?im)^[ \t]*ip\s+arp\s+inspection\s+vlan[ \t]+([0-9, \t-]+)[ \t\r]*$", text
     ):
         dai_vlans.update(_parse_vlan_list(match.group(1)))
+
+    dai_log_modes = dict.fromkeys(dai_vlans, "deny")
+    for match in re.finditer(
+        r"(?im)^[ \t]*ip\s+arp\s+inspection\s+vlan[ \t]+([0-9, \t-]+)"
+        r"[ \t]+logging[ \t]+dhcp-bindings[ \t]+(all|permit|none)[ \t\r]*$",
+        text,
+    ):
+        for vlan_id in _parse_vlan_list(match.group(1)):
+            dai_log_modes[vlan_id] = match.group(2).lower()
 
     iface_blocks = re.finditer(
         rf"(?ms)^\s*interface\s+({INTERFACE_NAME_PATTERN})\s*\n(.*?)(?=^\s*interface\b|^\s*!\s*$|\Z)",
@@ -214,15 +225,18 @@ def parse_running_config_security(config_text: str) -> dict[str, Any]:
     for match in iface_blocks:
         if_name = normalize_interface_name(match.group(1))
         block = match.group(2)
-        if re.search(r"(?im)^\s*ip\s+dhcp\s+snooping\s+trust\b", block) or re.search(
-            r"(?im)^\s*ip\s+arp\s+inspection\s+trust\b", block
-        ):
+        trust_dhcp = bool(re.search(r"(?im)^\s*ip\s+dhcp\s+snooping\s+trust\b", block))
+        trust_arp = bool(re.search(r"(?im)^\s*ip\s+arp\s+inspection\s+trust\b", block))
+        if trust_dhcp or trust_arp:
             trust_ports.add(if_name)
+            trust_controls[if_name] = {"trust_dhcp": trust_dhcp, "trust_arp": trust_arp}
 
     return {
         "dhcp_vlans": dhcp_vlans,
         "dai_vlans": dai_vlans,
+        "dai_log_modes": dai_log_modes,
         "trust_ports": trust_ports,
+        "trust_controls": trust_controls,
     }
 
 
@@ -230,23 +244,31 @@ def parse_l2_security(snapshot: dict[str, str]) -> dict[str, Any]:
     """Combine L2 security operational state from show commands and running config."""
     dhcp_vlans: set[int] = set()
     dai_vlans: set[int] = set()
+    dai_log_modes: dict[int, str] = {}
     trust_ports: set[str] = set()
+    trust_controls: dict[str, dict[str, Any]] = {}
 
     if "dhcp_snooping" in snapshot and snapshot["dhcp_snooping"]:
         cmd_result = parse_dhcp_snooping(snapshot["dhcp_snooping"])
         dhcp_vlans.update(cmd_result["dhcp_vlans"])
         trust_ports.update(cmd_result["trust_ports"])
+        trust_controls.update({name: {"trust_dhcp": True, "trust_arp": None}
+                               for name in cmd_result["trust_ports"]})
 
     if "running_config" in snapshot and snapshot["running_config"]:
         cfg_result = parse_running_config_security(snapshot["running_config"])
         dhcp_vlans.update(cfg_result["dhcp_vlans"])
         dai_vlans.update(cfg_result["dai_vlans"])
-        trust_ports.update(cfg_result["trust_ports"])
+        dai_log_modes.update(cfg_result["dai_log_modes"])
+        trust_ports = cfg_result["trust_ports"]
+        trust_controls = cfg_result["trust_controls"]
 
     return {
         "dhcp_vlans": dhcp_vlans,
         "dai_vlans": dai_vlans,
+        "dai_log_modes": dai_log_modes,
         "trust_ports": trust_ports,
+        "trust_controls": trust_controls,
     }
 
 
@@ -478,7 +500,9 @@ def _sync_security(
 ) -> dict[str, int]:
     dhcp_vlans = set(security_data.get("dhcp_vlans") or ())
     dai_vlans = set(security_data.get("dai_vlans") or ())
+    dai_log_modes = security_data.get("dai_log_modes") or {}
     trust_ports = set(security_data.get("trust_ports") or ())
+    trust_controls = security_data.get("trust_controls") or {}
     protected_vlans = dhcp_vlans | dai_vlans
     force = mode == "force_device_state"
 
@@ -507,11 +531,12 @@ def _sync_security(
         conn.execute(
             """
             INSERT INTO t06_security_l2(
-                host, vlan_id, dhcp_snooping, dai_enabled, success
-            ) VALUES (?, ?, ?, ?, 'synchronized')
+                host, vlan_id, dhcp_snooping, dai_enabled, dai_log_mode, success
+            ) VALUES (?, ?, ?, ?, ?, 'synchronized')
             ON CONFLICT(host, vlan_id) DO UPDATE SET
                 dhcp_snooping = excluded.dhcp_snooping,
                 dai_enabled = excluded.dai_enabled,
+                dai_log_mode = COALESCE(?, t06_security_l2.dai_log_mode),
                 success = 'synchronized';
             """,
             (
@@ -519,6 +544,8 @@ def _sync_security(
                 vlan_id,
                 1 if vlan_id in dhcp_vlans else 0,
                 1 if vlan_id in dai_vlans else 0,
+                dai_log_modes.get(vlan_id, "deny"),
+                dai_log_modes.get(vlan_id),
             ),
         )
 
@@ -543,14 +570,19 @@ def _sync_security(
         )
 
     for if_name in sorted(trust_ports):
+        controls = trust_controls.get(if_name, {})
+        trust_dhcp = controls.get("trust_dhcp")
+        trust_arp = controls.get("trust_arp")
         conn.execute(
             """
-            INSERT INTO t06_dhcp_trust_ports(host, if_name, success)
-            VALUES (?, ?, 'synchronized')
+            INSERT INTO t06_dhcp_trust_ports(host, if_name, success, trust_dhcp, trust_arp)
+            VALUES (?, ?, 'synchronized', COALESCE(?, 0), COALESCE(?, 0))
             ON CONFLICT(host, if_name) DO UPDATE SET
+                trust_dhcp = COALESCE(?, t06_dhcp_trust_ports.trust_dhcp),
+                trust_arp = COALESCE(?, t06_dhcp_trust_ports.trust_arp),
                 success = 'synchronized';
             """,
-            (host, if_name),
+            (host, if_name, trust_dhcp, trust_arp, trust_dhcp, trust_arp),
         )
 
     return {"security_vlans": len(protected_vlans), "trust_ports": len(trust_ports)}

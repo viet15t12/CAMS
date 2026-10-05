@@ -81,8 +81,15 @@ CAMS quản lý.
 
 Security events phân loại ACL, DHCP Snooping, DAI, Port Security, xác thực,
 STP Protection và cảnh báo theo ngưỡng CAMS cho cả log lưu trữ và log trực tiếp.
+Cột message và chi tiết hiển thị outcome Permitted/Denied/Violation/Recovered/
+Operational. Excel thêm Security feature và Outcome sau các cột log gốc.
+Permit DAI, thông báo vận hành Snooping và Port Security recovery không tính
+vào ngưỡng vi phạm; log DAI tổng hợp dùng số packet trong message, giữ riêng
+số log event. PM err-disable/recovery được phân loại theo nguyên nhân DAI,
+DHCP rate-limit, STP Guard hoặc Port Security.
 Cấu hình destination vẫn thực hiện riêng từng thiết bị.
 Xem [giám sát an ninh](../../docs/SECURITY_MONITORING.md).
+Lab vIOS L2: [permit/deny và rogue DHCP](../../docs/L2_SECURITY_SYSLOG_LAB.md).
 
 Chưa hỗ trợ RFC6587 octet-counting, TLS hoặc nhiều bind endpoint/port.
 Chi tiết vận hành: [`../../docs/SYSTEM_LOGS.md`](../../docs/SYSTEM_LOGS.md).

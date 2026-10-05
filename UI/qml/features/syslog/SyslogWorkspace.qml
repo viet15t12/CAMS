@@ -176,7 +176,9 @@ Rectangle {
             protocol: String(row.protocol || "").toLowerCase(),
             parse_status: String(row.parse_status || "raw"),
             security_feature: String(row.security_feature || ""),
-            security_label: String(row.security_label || "")
+            security_label: String(row.security_label || ""),
+            security_outcome: String(row.security_outcome || ""),
+            security_outcome_label: String(row.security_outcome_label || "")
         }
     }
 

@@ -9375,7 +9375,8 @@ assets:
   review_required: true
   canonical_group_id: null
   duplicate_resolution: null
-  unresolved_reason: "Hybrid SVG renders PTIT in pinned Typst but local Inkscape renders a missing-image placeholder; cross-renderer compatibility remains unresolved."
+  unresolved_reason: Hybrid SVG renders PTIT in pinned Typst but local Inkscape renders
+    a missing-image placeholder; cross-renderer compatibility remains unresolved.
   notes: Subject/source evidence supports domain and semantic filename; preserves
     unique logical asset.
 - id: diagrams.architecture.application-source-tree
@@ -10439,7 +10440,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 153
+    line: 44
     referenced_path: /documentation_assets/diagrams/lab-topology/routing-ospf/multi-area-branches-raster.png
     target_type: report-typst
   targets:
@@ -10521,13 +10522,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 41
-    referenced_path: /documentation_assets/diagrams/lab-topology/switching/layer-two-security.svg
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: active
@@ -10723,7 +10719,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 372
+    line: 263
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/01-nat-interfaces.png
     target_type: report-typst
   targets:
@@ -10767,7 +10763,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 383
+    line: 274
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png
     target_type: report-typst
   targets:
@@ -10811,7 +10807,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 390
+    line: 281
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/03-nat-config-preview.png
     target_type: report-typst
   targets:
@@ -10855,7 +10851,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 406
+    line: 297
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/04-nat-pat.png
     target_type: report-typst
   targets:
@@ -10899,7 +10895,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 413
+    line: 304
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/05-nat-pat-preview.png
     target_type: report-typst
   targets:
@@ -11025,7 +11021,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 444
+    line: 335
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/08-glbp-setup.png
     target_type: report-typst
   targets:
@@ -11069,7 +11065,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 451
+    line: 342
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/09-glbp-member-policy.png
     target_type: report-typst
   targets:
@@ -11113,7 +11109,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 458
+    line: 349
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/10-glbp-config-preview.png
     target_type: report-typst
   targets:
@@ -11157,7 +11153,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 469
+    line: 360
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/11-dhcp-pool.png
     target_type: report-typst
   targets:
@@ -11201,7 +11197,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 476
+    line: 367
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/13-dhcp-config-preview.png
     target_type: report-typst
   targets:
@@ -11368,7 +11364,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 337
+    line: 228
     referenced_path: /00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png
     target_type: report-typst
   targets:
@@ -11499,7 +11495,9 @@ assets:
   review_required: true
   canonical_group_id: null
   duplicate_resolution: null
-  unresolved_reason: "Rendered topology is clear, but current repository context does not verify its branch-routing purpose or precise scenario identity; retain legacy source pending semantic review."
+  unresolved_reason: Rendered topology is clear, but current repository context does
+    not verify its branch-routing purpose or precise scenario identity; retain legacy
+    source pending semantic review.
   notes: Authored SVG describes existing source format; exporter/author identity not
     established.; Historical lab_4 identifier does not establish scenario purpose;
     topology name is provisional.
@@ -11532,7 +11530,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 186
+    line: 77
     referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/1.png
     target_type: report-typst
   targets:
@@ -11576,7 +11574,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 196
+    line: 87
     referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/10.png
     target_type: report-typst
   targets:
@@ -11620,7 +11618,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 204
+    line: 95
     referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/11.png
     target_type: report-typst
   targets:
@@ -11744,7 +11742,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 251
+    line: 142
     referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/14.png
     target_type: report-typst
   targets:
@@ -11827,7 +11825,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 238
+    line: 129
     referenced_path: /00_book/figures/report/diagrams/routing-ospf-lab/16.png
     target_type: report-typst
   targets:
@@ -12912,13 +12910,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 56
-    referenced_path: /00_book/figures/report/diagrams/switching-lab/1_16.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-original
@@ -13117,13 +13110,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 66
-    referenced_path: /00_book/figures/report/diagrams/switching-lab/1_20.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-original
@@ -13162,13 +13150,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 86
-    referenced_path: /00_book/figures/report/diagrams/switching-lab/1_21.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-original
@@ -13327,13 +13310,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 96
-    referenced_path: /00_book/figures/report/diagrams/switching-lab/1_25.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-original
@@ -13535,13 +13513,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 76
-    referenced_path: /00_book/figures/report/diagrams/switching-lab/1_3.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-original
@@ -13991,7 +13964,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 575
+    line: 466
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/01-syslog-configuration.png
     target_type: report-typst
   targets:
@@ -14035,7 +14008,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 586
+    line: 477
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/02-syslog-select-hosts.png
     target_type: report-typst
   targets:
@@ -14079,7 +14052,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 597
+    line: 488
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/03-syslog-source-interfaces.png
     target_type: report-typst
   targets:
@@ -14123,7 +14096,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 608
+    line: 499
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png
     target_type: report-typst
   targets:
@@ -14167,7 +14140,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 619
+    line: 510
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/05-syslog-config-preview.png
     target_type: report-typst
   targets:
@@ -14395,7 +14368,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 666
+    line: 557
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/10-syslog-listener-before-start.png
     target_type: report-typst
   targets:
@@ -14439,7 +14412,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 673
+    line: 564
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/11-syslog-listener-receiving.png
     target_type: report-typst
   targets:
@@ -14483,7 +14456,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 684
+    line: 575
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png
     target_type: report-typst
   targets:
@@ -14711,7 +14684,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 726
+    line: 617
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/17-email-alert-settings.png
     target_type: report-typst
   targets:
@@ -14836,7 +14809,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 528
+    line: 419
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png
     target_type: report-typst
   targets:
@@ -16542,7 +16515,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 739
+    line: 630
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/lv3.png
     target_type: report-typst
   targets:
@@ -16586,7 +16559,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 746
+    line: 637
     referenced_path: /00_book/figures/report/diagrams/syslog-lab/lv4.png
     target_type: report-typst
   targets:
@@ -17521,11 +17494,10 @@ assets:
     referenced_path: /00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/12.png
     target_type: report-typst
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 861
+    line: 752
     referenced_path: /00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/12.png
     target_type: report-typst
   targets:
-  - lab-source
   - report-typst
   mkdocs_stage: false
   mkdocs_stage_path: null
@@ -18026,11 +17998,10 @@ assets:
     referenced_path: /00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png
     target_type: report-typst
   - source_document: 00_report/contents/09_thu_nghiem_danh_gia.typ
-    line: 770
+    line: 661
     referenced_path: /00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png
     target_type: report-typst
   targets:
-  - lab-source
   - report-typst
   mkdocs_stage: false
   mkdocs_stage_path: null
@@ -18378,3 +18349,2257 @@ assets:
   notes: Inspected current-main delta. Photographed/scanned source document page,
     including embedded command excerpts; raw page context retained, not a terminal
     screenshot or reconstruction. Heading/source order require review.
+- id: evidence.lab1.curated.dai.baseline-binding-trust
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dai-baseline-binding-trust-cli
+  source_kind: terminal-capture
+  current_path: 00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png
+  path: 00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png
+  planned_canonical_path: null
+  legacy_path: 00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: 66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: SW1 CLI: DAI VLAN 10 enabled/active,
+      initial drops 0; Gi0/1 ARP trusted, Gi0/2 untrusted; DHCP binding 192.168.10.4
+      / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 40.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 31
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png
+    target_type: report-typst
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 32
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI: DAI VLAN 10 enabled/active, initial drops 0; Gi0/1 ARP trusted,
+    Gi0/2 untrusted; DHCP binding 192.168.10.4 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.
+    Presentation copy is not an independent observation. Byte-identical counterpart:
+    00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png. Future policy: freeze-current-path:
+    no transfer, rename, crop, recreation, staging or later reference rewrite. No
+    migration in this reconciliation.'
+- id: evidence.lab1.curated.dai.cams-static-ip-input
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-static-address-input-before-apply
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png
+  path: 00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/r2-static-address-input-before-apply-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2: form 192.168.10.250/24,
+      inventory still .4. Input preparation only, not proof of applied device state.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 42.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.r2-static-address-input-before-apply
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 44
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2: form 192.168.10.250/24, inventory still .4. Input
+    preparation only, not proof of applied device state. Presentation copy is not
+    an independent observation. Byte-identical counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+    copy 42.png. Future policy: preserve presentation copy and exact raw relation;
+    dedicated DHCP Snooping/DAI evidence review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dai.cams-syslog-alert
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: cams-dai-system-log-alert
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png
+  path: 00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/cams-dai-system-log-alert-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS System Logs: SW_DAI / 4 Warning
+      events and CAMS / 3 Error DAI_ARP_SPOOF possible-ARP-spoofing alert (5 packets
+      in 4 events). Application UI, not standalone terminal/syslog capture; does not
+      prove an attack.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 45.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.cams-dai-system-log-alert
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 96
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png
+    target_type: report-typst
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 98
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS System Logs: SW_DAI / 4 Warning events and CAMS / 3 Error DAI_ARP_SPOOF
+    possible-ARP-spoofing alert (5 packets in 4 events). Application UI, not standalone
+    terminal/syslog capture; does not prove an attack. Presentation copy is not an
+    independent observation. Byte-identical counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+    copy 45.png. Future policy: preserve exact presentation copy and raw relation;
+    dedicated Syslog/security UI evidence review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dai.ping-before-after
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-ping-dhcp-versus-static-cli
+  source_kind: terminal-capture
+  current_path: 00_book/figures/report/diagrams/dai-lab/ping-before-after.png
+  path: 00_book/figures/report/diagrams/dai-lab/ping-before-after.png
+  planned_canonical_path: null
+  legacy_path: 00_book/figures/report/diagrams/dai-lab/ping-before-after.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: 4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: R2 CLI ping comparison: source .4
+      succeeds 5/5; source .250 fails 0/5 to same gateway/interface.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 43.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 51
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/ping-before-after.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'R2 CLI ping comparison: source .4 succeeds 5/5; source .250 fails 0/5 to
+    same gateway/interface. Presentation copy is not an independent observation. Byte-identical
+    counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png. Future
+    policy: freeze-current-path: no transfer, rename, crop, recreation, staging or
+    later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dai.recovered-binding
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-recovered-dhcp-binding-cli
+  source_kind: terminal-capture
+  current_path: 00_book/figures/report/diagrams/dai-lab/recovered-binding.png
+  path: 00_book/figures/report/diagrams/dai-lab/recovered-binding.png
+  planned_canonical_path: null
+  legacy_path: 00_book/figures/report/diagrams/dai-lab/recovered-binding.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: SW1 CLI show ip dhcp snooping binding:
+      192.168.10.5 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 48.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 113
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/recovered-binding.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI show ip dhcp snooping binding: 192.168.10.5 / 50:00:00:03:00:02
+    / VLAN 10 / Gi0/2. Presentation copy is not an independent observation. Byte-identical
+    counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png. Future
+    policy: freeze-current-path: no transfer, rename, crop, recreation, staging or
+    later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dai.recovered-ping
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-recovered-gateway-ping-cli
+  source_kind: terminal-capture
+  current_path: 00_book/figures/report/diagrams/dai-lab/recovered-ping.png
+  path: 00_book/figures/report/diagrams/dai-lab/recovered-ping.png
+  planned_canonical_path: null
+  legacy_path: 00_book/figures/report/diagrams/dai-lab/recovered-ping.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: R2 CLI clear arp-cache and ping gateway:
+      source 192.168.10.5 succeeds 5/5.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 49.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 114
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/recovered-ping.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'R2 CLI clear arp-cache and ping gateway: source 192.168.10.5 succeeds 5/5.
+    Presentation copy is not an independent observation. Byte-identical counterpart:
+    00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png. Future policy: freeze-current-path:
+    no transfer, rename, crop, recreation, staging or later reference rewrite. No
+    migration in this reconciliation.'
+- id: evidence.lab1.curated.dai.switch-drops-syslog
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dai-drops-syslog-cli
+  source_kind: terminal-capture
+  current_path: 00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png
+  path: 00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png
+  planned_canonical_path: null
+  legacy_path: 00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: 64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: SW1 CLI: DAI Dropped=9 and DHCP Drops=9
+      plus SW_DAI denial logs for .250 on Gi0/2. These are ARP counts, not ICMP/DHCP
+      packet counts.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 44.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 63
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png
+    target_type: report-typst
+  - source_document: 00_report/contents/09_kich_ban_1_dai.typ
+    line: 64
+    referenced_path: /00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI: DAI Dropped=9 and DHCP Drops=9 plus SW_DAI denial logs for .250
+    on Gi0/2. These are ARP counts, not ICMP/DHCP packet counts. Presentation copy
+    is not an independent observation. Byte-identical counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+    copy 44.png. Future policy: freeze-current-path: no transfer, rename, crop, recreation,
+    staging or later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.r1-pool
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r1-vlan-ten-dhcp-pool
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/r1-vlan-ten-dhcp-pool-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R1 DHCP Pool VLAN10: network
+      192.168.10.0, /24 mask, gateway 192.168.10.1, lease 1.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 29.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.r1-vlan-ten-dhcp-pool
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 32
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R1 DHCP Pool VLAN10: network 192.168.10.0, /24 mask, gateway 192.168.10.1,
+    lease 1. Presentation copy is not an independent observation. Byte-identical counterpart:
+    00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 29.png. Future policy: preserve
+    presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence
+    review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.r2-address-fake
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-address-from-fake-dhcp
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/r2-address-from-fake-dhcp-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2: actual inventory
+      address 192.168.66.100.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 34.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.r2-address-from-fake-dhcp
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 67
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2: actual inventory address 192.168.66.100. Presentation
+    copy is not an independent observation. Byte-identical counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+    copy 34.png. Future policy: preserve presentation copy and exact raw relation;
+    dedicated DHCP Snooping/DAI evidence review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.r2-address-r1
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-address-from-r1
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/r2-address-from-r1-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2: actual inventory
+      address 192.168.10.5; capture notification.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 28.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.r2-address-from-r1
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 53
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2: actual inventory address 192.168.10.5; capture notification.
+    Presentation copy is not an independent observation. Byte-identical counterpart:
+    00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 28.png. Future policy: preserve
+    presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence
+    review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.r2-request-dhcp
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-request-view-push
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/r2-dhcp-request-view-push-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 View & Push ALL: Gi0/2 ip
+      address dhcp, completed notification.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 33.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.r2-dhcp-request-view-push
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 63
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 View & Push ALL: Gi0/2 ip address dhcp, completed notification.
+    Presentation copy is not an independent observation. Byte-identical counterpart:
+    00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 33.png. Future policy: preserve
+    presentation copy and exact raw relation; dedicated DHCP Snooping/DAI evidence
+    review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.topology
+  asset_class: network-diagram
+  domain: lab1-dhcp-snooping-dai
+  subject: dhcp-two-server-lab-topology
+  source_kind: external-tool-capture
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png
+  planned_canonical_path: documentation_assets/diagrams/lab-topology/lab1/dhcp-two-server-lab-topology-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: EVE-NG topology: R1, Switch, R2,
+      FAKE_DHCP and Management; Gi0/1, Gi0/2, Gi0/3 links. README identifies the two-server
+      test.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 27.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.dhcp-two-server-lab-topology
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 9
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'EVE-NG topology: R1, Switch, R2, FAKE_DHCP and Management; Gi0/1, Gi0/2,
+    Gi0/3 links. README identifies the two-server test. Presentation copy is not an
+    independent observation. Byte-identical counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+    copy 27.png. Future policy: preserve presentation copy and exact raw relation;
+    dedicated DHCP Snooping/DAI evidence review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.trust-gi01
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dhcp-trust-gi-zero-one
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/sw1-dhcp-trust-gi-zero-one-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Trusted Uplinks: Gi0/1 DHCP
+      trust in configured list (selector and list differ).'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 31.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.sw1-dhcp-trust-gi-zero-one
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 49
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Trusted Uplinks: Gi0/1 DHCP trust in configured list (selector
+    and list differ). Presentation copy is not an independent observation. Byte-identical
+    counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 31.png. Future
+    policy: preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI
+    evidence review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.trust-gi03
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dhcp-trust-gi-zero-three-applied
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/sw1-dhcp-trust-gi-zero-three-applied-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Trusted Uplinks: Gi0/3 DHCP
+      trust, two switch tasks applied.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 32.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.sw1-dhcp-trust-gi-zero-three-applied
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 59
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Trusted Uplinks: Gi0/3 DHCP trust, two switch tasks applied. Presentation
+    copy is not an independent observation. Byte-identical counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+    copy 32.png. Future policy: preserve presentation copy and exact raw relation;
+    dedicated DHCP Snooping/DAI evidence review. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.vlan10-snooping
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-vlan-ten-snooping-enabled
+  source_kind: manual-cams-screenshot
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/presentation/lab1/sw1-vlan-ten-snooping-enabled-presentation.png
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png
+  migration_state: pending
+  migration_role: presentation-copy
+  canonical_migration: true
+  canonical: false
+  sha256: 1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Security L2: VLAN 10 snooping
+      Enabled, DAI Disabled, synchronized; trusted ports 0.'
+    - 'Verified README copy relationship and identical SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 19.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: evidence.lab1.raw.sw1-vlan-ten-snooping-enabled
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 28
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-presentation-copy
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Security L2: VLAN 10 snooping Enabled, DAI Disabled, synchronized;
+    trusted ports 0. Presentation copy is not an independent observation. Byte-identical
+    counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 19.png. Future
+    policy: preserve presentation copy and exact raw relation; dedicated DHCP Snooping/DAI
+    evidence review. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-dhcp-view-push-prepared
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-view-push-prepared
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 17.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 17.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-view-push-prepared.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 17.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: ba9be24ff8503d29e1bc07d511c9b43eedba1d9eb2e82683306586285adfe019
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2; View & Push
+      has ip address dhcp, one prepared router task.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2; View & Push has ip address dhcp, one prepared router
+    task. Candidate raw/source evidence; original capture author, time, tool and chain
+    of custody are not confirmed.  Future policy: preserve raw evidence; dedicated
+    supplemental review before any future transfer/recreation. No migration in this
+    reconciliation.'
+- id: evidence.lab1.raw.r2-physical-no-address-inventory
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-physical-no-address-inventory
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 18.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 18.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-physical-no-address-inventory.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 18.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 50eb28a9d92c81f27c7b1db3ac14ba23669006c7d163933abaefa1605421af9f
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical inventory: Gi0/2
+      without an IPv4 address.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical inventory: Gi0/2 without an IPv4 address. Candidate raw/source
+    evidence; original capture author, time, tool and chain of custody are not confirmed.  Future
+    policy: preserve raw evidence; dedicated supplemental review before any future
+    transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-vlan-ten-snooping-enabled
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-vlan-ten-snooping-enabled
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 19.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 19.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/sw1-vlan-ten-snooping-enabled.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 19.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 1a61a66657667f734adaf7f87cf977525f08a34b98bb367ff3bbed6448586bf8
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Security L2: VLAN 10 snooping
+      Enabled, DAI Disabled, synchronized; trusted ports 0.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Security L2: VLAN 10 snooping Enabled, DAI Disabled, synchronized;
+    trusted ports 0. Candidate raw/source evidence; original capture author, time,
+    tool and chain of custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-dhcp-trust-gi-zero-one-applied
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dhcp-trust-gi-zero-one-applied
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 20.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 20.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-gi-zero-one-applied.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 20.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 687dcaed827020f075c7f5e92aab948ae84ff107eb66a823ff1d0aba87b61126
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Trusted Uplinks: Gi0/1 DHCP
+      trust, ARP trust unchecked; one task applied.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Trusted Uplinks: Gi0/1 DHCP trust, ARP trust unchecked; one task
+    applied. Candidate raw/source evidence; original capture author, time, tool and
+    chain of custody are not confirmed.  Future policy: preserve raw evidence; dedicated
+    supplemental review before any future transfer/recreation. No migration in this
+    reconciliation.'
+- id: evidence.lab1.raw.r2-dhcp-interface-input
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-interface-input
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 21.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 21.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-interface-input.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 21.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: a1d747edb894b806b67e25c753583422773497f58246af7a78eafc9e3af9aed2
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2: dhcp entered
+      in IPv4 field; left inventory has no address.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2: dhcp entered in IPv4 field; left inventory has no
+    address. Candidate raw/source evidence; original capture author, time, tool and
+    chain of custody are not confirmed.  Future policy: preserve raw evidence; dedicated
+    supplemental review before any future transfer/recreation. No migration in this
+    reconciliation.'
+- id: evidence.lab1.raw.cams-r2-dhcp-assignment-system-logs
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: cams-r2-dhcp-assignment-system-logs
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 22.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 22.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/cams-r2-dhcp-assignment-system-logs.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 22.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: bd8a3851c241a069fd33e16b34cff389df4d71618ec5d54720f5a61c2e7a43b8
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS System Logs: R2 ADDRESS_ASSIGN
+      192.168.10.4 alongside configuration events, listener active.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS System Logs: R2 ADDRESS_ASSIGN 192.168.10.4 alongside configuration
+    events, listener active. Candidate raw/source evidence; original capture author,
+    time, tool and chain of custody are not confirmed.  Future policy: preserve raw
+    evidence; dedicated supplemental review before any future transfer/recreation.
+    No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-dhcp-trust-removal-preview
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dhcp-trust-removal-preview
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 23.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 23.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-removal-preview.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 23.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 064b352a725b4c5d4947d840463b20e118822b41e52974ab23ec18d1d78cbd61
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 View & Push L2_SECURITY:
+      no ip dhcp snooping trust on Gi0/1, marked for removal.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 View & Push L2_SECURITY: no ip dhcp snooping trust on Gi0/1, marked
+    for removal. Candidate raw/source evidence; original capture author, time, tool
+    and chain of custody are not confirmed.  Future policy: preserve raw evidence;
+    dedicated supplemental review before any future transfer/recreation. No migration
+    in this reconciliation.'
+- id: evidence.lab1.raw.r2-remove-ip-address-preview
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-remove-ip-address-preview
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 24.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 24.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-remove-ip-address-preview.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 24.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 541e5dc6df7cab09e07a4db8913d20a5c487c43e49ad057ac253d05e096d609b
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 View & Push ALL: Gi0/2 no
+      ip address.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 View & Push ALL: Gi0/2 no ip address. Candidate raw/source evidence;
+    original capture author, time, tool and chain of custody are not confirmed.  Future
+    policy: preserve raw evidence; dedicated supplemental review before any future
+    transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-dhcp-request-applied
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-request-applied
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 25.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 25.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-request-applied.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 25.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: e4eef460033b134330d650c127492b85eace8dbb97b56f8886562495995dd629
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 View & Push ALL: Gi0/2 ip
+      address dhcp; push-completed notification.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 View & Push ALL: Gi0/2 ip address dhcp; push-completed notification.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed.  Future policy: preserve raw evidence; dedicated supplemental
+    review before any future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-snooping-statistics-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-snooping-statistics-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 26.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 26.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 26.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: SW1 CLI: snooping VLAN 10 enabled;
+      forwarding/drop statistics and historical SW_DAI messages. Mnemonic alone does
+      not prove rogue DHCP detection.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI: snooping VLAN 10 enabled; forwarding/drop statistics and historical
+    SW_DAI messages. Mnemonic alone does not prove rogue DHCP detection. Candidate
+    raw/source evidence; original capture author, time, tool and chain of custody
+    are not confirmed.  Future policy: freeze-current-path: no transfer, rename, crop,
+    recreation, staging or later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.raw.dhcp-two-server-lab-topology
+  asset_class: network-diagram
+  domain: lab1-dhcp-snooping-dai
+  subject: dhcp-two-server-lab-topology
+  source_kind: external-tool-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 27.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 27.png
+  planned_canonical_path: documentation_assets/diagrams/lab-topology/lab1/dhcp-two-server-lab-topology.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 27.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 9089f9b728473e5c1303f49f5a2ba9577bf1d9ffdea3f33e8e08b252014ab455
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: EVE-NG topology: R1, Switch, R2,
+      FAKE_DHCP and Management; Gi0/1, Gi0/2, Gi0/3 links. README identifies the two-server
+      test.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'EVE-NG topology: R1, Switch, R2, FAKE_DHCP and Management; Gi0/1, Gi0/2,
+    Gi0/3 links. README identifies the two-server test. Candidate raw/source evidence;
+    original capture author, time, tool and chain of custody are not confirmed. Byte-identical
+    counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png. Future
+    policy: preserve raw evidence; dedicated supplemental review before any future
+    transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-address-from-r1
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-address-from-r1
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 28.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 28.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-address-from-r1.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 28.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 1131c71a29aa9db69ab9e4f088bd6223be83a9c01951148e432ed91e13e20e14
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2: actual inventory
+      address 192.168.10.5; capture notification.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2: actual inventory address 192.168.10.5; capture notification.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r1-vlan-ten-dhcp-pool
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r1-vlan-ten-dhcp-pool
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 29.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 29.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r1-vlan-ten-dhcp-pool.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 29.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 7bc650ec93401fc539549b421ec2514f30fbed8d41fc61e853d3356ba6df2eb8
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R1 DHCP Pool VLAN10: network
+      192.168.10.0, /24 mask, gateway 192.168.10.1, lease 1.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R1 DHCP Pool VLAN10: network 192.168.10.0, /24 mask, gateway 192.168.10.1,
+    lease 1. Candidate raw/source evidence; original capture author, time, tool and
+    chain of custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.fake-dhcp-pool-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: fake-dhcp-pool-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 30.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 30.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 30.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: a3a74caf524ae54ed8cb8ec854b67d8e05de5bc2ae2968d96573c9cf67dfc33e
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: FAKE_DHCP CLI show ip dhcp pool:
+      FAKE_TEST range 192.168.66.1..254, zero leases. Transparent terminal over desktop
+      wallpaper; legibility acceptable, preserve.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'FAKE_DHCP CLI show ip dhcp pool: FAKE_TEST range 192.168.66.1..254, zero
+    leases. Transparent terminal over desktop wallpaper; legibility acceptable, preserve.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed.  Future policy: freeze-current-path: no transfer, rename,
+    crop, recreation, staging or later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-dhcp-trust-gi-zero-one
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dhcp-trust-gi-zero-one
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 31.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 31.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-gi-zero-one.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 31.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 01ac4a51a76728debabe56ab90cbe4291fafcf4ab02b0c88961d3de4b6eaa1ec
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Trusted Uplinks: Gi0/1 DHCP
+      trust in configured list (selector and list differ).'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Trusted Uplinks: Gi0/1 DHCP trust in configured list (selector
+    and list differ). Candidate raw/source evidence; original capture author, time,
+    tool and chain of custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-dhcp-trust-gi-zero-three-applied
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dhcp-trust-gi-zero-three-applied
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 32.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 32.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-trust-gi-zero-three-applied.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 32.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 829197fed2817418712f1ad9758d350b3104a81ee4cd671a3b97e455398c1b7f
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Trusted Uplinks: Gi0/3 DHCP
+      trust, two switch tasks applied.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Trusted Uplinks: Gi0/3 DHCP trust, two switch tasks applied. Candidate
+    raw/source evidence; original capture author, time, tool and chain of custody
+    are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-dhcp-request-view-push
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-request-view-push
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 33.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 33.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-request-view-push.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 33.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 1bbc1de2a750aa088cd108859db408b0a3c0e9b383990a3a8b4c9893d9c15996
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 View & Push ALL: Gi0/2 ip
+      address dhcp, completed notification.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 View & Push ALL: Gi0/2 ip address dhcp, completed notification.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-address-from-fake-dhcp
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-address-from-fake-dhcp
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 34.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 34.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-address-from-fake-dhcp.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 34.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 0de66c5bfdf0c70d3a74ebad35641f1ab42d881ad4984606f4a7fd5688f06e57
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2: actual inventory
+      address 192.168.66.100.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2: actual inventory address 192.168.66.100. Candidate
+    raw/source evidence; original capture author, time, tool and chain of custody
+    are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r1-switch-r2-management-topology
+  asset_class: network-diagram
+  domain: lab1-dhcp-snooping-dai
+  subject: r1-switch-r2-management-topology
+  source_kind: external-tool-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 35.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 35.png
+  planned_canonical_path: documentation_assets/diagrams/lab-topology/lab1/r1-switch-r2-management-topology.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 35.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 02c48718e88aedca01d59d646b98157b7a78435bad2da7d463b481191ce126f2
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: EVE-NG topology: R1--Switch--R2 and
+      Management M; no FAKE_DHCP node.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'EVE-NG topology: R1--Switch--R2 and Management M; no FAKE_DHCP node. Candidate
+    raw/source evidence; original capture author, time, tool and chain of custody
+    are not confirmed.  Future policy: preserve raw evidence; dedicated supplemental
+    review before any future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-snooping-dai-policy-pending
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-snooping-dai-policy-pending
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 36.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 36.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/sw1-snooping-dai-policy-pending.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 36.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: fb0a5a8e9f805fc1618ea27689aadb9854802972275fed0498d6da4b6dbe3397
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Security L2: VLAN 10 snooping
+      and DAI Enabled, policy pending application.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Security L2: VLAN 10 snooping and DAI Enabled, policy pending application.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed.  Future policy: preserve raw evidence; dedicated supplemental
+    review before any future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-dhcp-arp-trust-uplink-applied
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dhcp-arp-trust-uplink-applied
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 37.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 37.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/sw1-dhcp-arp-trust-uplink-applied.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 37.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: d3a5c4fd039355e905813878b8415eab339bf4a25e2c1df2100abccb396ac5d0
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS SW1 Trusted Uplinks: Gi0/1 DHCP
+      and ARP trust, two switch tasks applied.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS SW1 Trusted Uplinks: Gi0/1 DHCP and ARP trust, two switch tasks applied.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed.  Future policy: preserve raw evidence; dedicated supplemental
+    review before any future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-physical-no-address-before-dai
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-physical-no-address-before-dai
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 38.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 38.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-physical-no-address-before-dai.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 38.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: d5326fce7b73cdcbb797300e1371a569d80fa5d1f035f2b420dc4434443dca01
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2 with no IPv4
+      address.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2 with no IPv4 address. Candidate raw/source evidence;
+    original capture author, time, tool and chain of custody are not confirmed.  Future
+    policy: preserve raw evidence; dedicated supplemental review before any future
+    transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-dhcp-request-in-progress
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-request-in-progress
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 39.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 39.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-request-in-progress.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 39.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 6aaece0c77dc5b1c0f0331a331b3ec7c81e1b8cd7c5b0b89ae1bd014bc9a585e
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 View & Push ALL: ip address
+      dhcp, pushing progress visible.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 View & Push ALL: ip address dhcp, pushing progress visible. Candidate
+    raw/source evidence; original capture author, time, tool and chain of custody
+    are not confirmed.  Future policy: preserve raw evidence; dedicated supplemental
+    review before any future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-dai-baseline-binding-trust-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dai-baseline-binding-trust-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 40.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: 66c10c0590e9bf2f29cfd28108d237dbb87f5e34242b03aba3fdd2228b912923
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: SW1 CLI: DAI VLAN 10 enabled/active,
+      initial drops 0; Gi0/1 ARP trusted, Gi0/2 untrusted; DHCP binding 192.168.10.4
+      / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI: DAI VLAN 10 enabled/active, initial drops 0; Gi0/1 ARP trusted,
+    Gi0/2 untrusted; DHCP binding 192.168.10.4 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dai-lab/baseline-binding-trust.png.
+    Future policy: freeze-current-path: no transfer, rename, crop, recreation, staging
+    or later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-dhcp-address-ping-baseline-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-address-ping-baseline-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 41.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 41.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 41.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: 29797a3f53fe20b44e0ad150bd2adac9a3f4b780cc3d2fbcb445538f0b677ebb
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: R2 CLI: clear arp-cache then ping
+      192.168.10.1 sourced from Gi0/2 / 192.168.10.4 succeeds 5/5.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'R2 CLI: clear arp-cache then ping 192.168.10.1 sourced from Gi0/2 / 192.168.10.4
+    succeeds 5/5. Candidate raw/source evidence; original capture author, time, tool
+    and chain of custody are not confirmed.  Future policy: freeze-current-path: no
+    transfer, rename, crop, recreation, staging or later reference rewrite. No migration
+    in this reconciliation.'
+- id: evidence.lab1.raw.r2-static-address-input-before-apply
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-static-address-input-before-apply
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 42.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 42.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-static-address-input-before-apply.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 42.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 875a5ecc594f922d855ebd04a2aa826547e083bddcdc1167603fa3047f688faa
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2: form 192.168.10.250/24,
+      inventory still .4. Input preparation only, not proof of applied device state.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2: form 192.168.10.250/24, inventory still .4. Input
+    preparation only, not proof of applied device state. Candidate raw/source evidence;
+    original capture author, time, tool and chain of custody are not confirmed. Byte-identical
+    counterpart: 00_book/figures/report/diagrams/dai-lab/cams-static-ip-input.png.
+    Future policy: preserve raw evidence; dedicated supplemental review before any
+    future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-ping-dhcp-versus-static-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-ping-dhcp-versus-static-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 43.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: 4f67755bfe5b5a2896d81743978aaf6af049802edcd3653324098a52a7e4312c
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: R2 CLI ping comparison: source .4
+      succeeds 5/5; source .250 fails 0/5 to same gateway/interface.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dai-lab/ping-before-after.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'R2 CLI ping comparison: source .4 succeeds 5/5; source .250 fails 0/5 to
+    same gateway/interface. Candidate raw/source evidence; original capture author,
+    time, tool and chain of custody are not confirmed. Byte-identical counterpart:
+    00_book/figures/report/diagrams/dai-lab/ping-before-after.png. Future policy:
+    freeze-current-path: no transfer, rename, crop, recreation, staging or later reference
+    rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-dai-drops-syslog-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-dai-drops-syslog-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 44.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 44.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 44.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: 64bc9560c6432efe46d73a7a9536c348162ae4dd553a4ea684416f8e1b61ad2d
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: SW1 CLI: DAI Dropped=9 and DHCP Drops=9
+      plus SW_DAI denial logs for .250 on Gi0/2. These are ARP counts, not ICMP/DHCP
+      packet counts.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI: DAI Dropped=9 and DHCP Drops=9 plus SW_DAI denial logs for .250
+    on Gi0/2. These are ARP counts, not ICMP/DHCP packet counts. Candidate raw/source
+    evidence; original capture author, time, tool and chain of custody are not confirmed.
+    Byte-identical counterpart: 00_book/figures/report/diagrams/dai-lab/switch-drops-syslog.png.
+    Future policy: freeze-current-path: no transfer, rename, crop, recreation, staging
+    or later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.raw.cams-dai-system-log-alert
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: cams-dai-system-log-alert
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 45.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 45.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/cams-dai-system-log-alert.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 45.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 6ded01932b3fa33d1dfc939418624010cbee8d3585a99dddfcbd03b3c94fd500
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS System Logs: SW_DAI / 4 Warning
+      events and CAMS / 3 Error DAI_ARP_SPOOF possible-ARP-spoofing alert (5 packets
+      in 4 events). Application UI, not standalone terminal/syslog capture; does not
+      prove an attack.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS System Logs: SW_DAI / 4 Warning events and CAMS / 3 Error DAI_ARP_SPOOF
+    possible-ARP-spoofing alert (5 packets in 4 events). Application UI, not standalone
+    terminal/syslog capture; does not prove an attack. Candidate raw/source evidence;
+    original capture author, time, tool and chain of custody are not confirmed. Byte-identical
+    counterpart: 00_book/figures/report/diagrams/dai-lab/cams-syslog-alert.png. Future
+    policy: preserve raw evidence; dedicated supplemental review before any future
+    transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-dhcp-view-push-detail
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-dhcp-view-push-detail
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 46.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 46.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-dhcp-view-push-detail.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 46.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: 480cadca50a4635e1502ab3ec2a62766d016ccfb560afa58e86a8113e7728ae1
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: Existing narrow CAMS View & Push
+      capture: R2 Gi0/2 ip address dhcp. Source crop already present; no new cropping.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'Existing narrow CAMS View & Push capture: R2 Gi0/2 ip address dhcp. Source
+    crop already present; no new cropping. Candidate raw/source evidence; original
+    capture author, time, tool and chain of custody are not confirmed.  Future policy:
+    preserve raw evidence; dedicated supplemental review before any future transfer/recreation.
+    No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-restored-dhcp-address-inventory
+  asset_class: ui
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-restored-dhcp-address-inventory
+  source_kind: manual-cams-screenshot
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 47.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 47.png
+  planned_canonical_path: documentation_assets/evidence/ui-capture/original/lab1/r2-restored-dhcp-address-inventory.png
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 47.png
+  migration_state: pending
+  migration_role: original-evidence
+  canonical_migration: true
+  canonical: false
+  sha256: d3bc9658e6183ef5c33783653b2b826a1f2c716298f6001c244317b1675beff8
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: CAMS R2 Physical Gi0/2 inventory
+      address 192.168.10.5, empty editing form.'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: preserve-original
+  confidence: high
+  review_required: true
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'CAMS R2 Physical Gi0/2 inventory address 192.168.10.5, empty editing form.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed.  Future policy: preserve raw evidence; dedicated supplemental
+    review before any future transfer/recreation. No migration in this reconciliation.'
+- id: evidence.lab1.raw.sw1-recovered-dhcp-binding-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-recovered-dhcp-binding-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 48.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: ac7031a3bb6889c5d70204c60f376f2530978e60ea8074dc98f6ff3117f25661
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: SW1 CLI show ip dhcp snooping binding:
+      192.168.10.5 / 50:00:00:03:00:02 / VLAN 10 / Gi0/2.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dai-lab/recovered-binding.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI show ip dhcp snooping binding: 192.168.10.5 / 50:00:00:03:00:02
+    / VLAN 10 / Gi0/2. Candidate raw/source evidence; original capture author, time,
+    tool and chain of custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dai-lab/recovered-binding.png.
+    Future policy: freeze-current-path: no transfer, rename, crop, recreation, staging
+    or later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.raw.r2-recovered-gateway-ping-cli
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: r2-recovered-gateway-ping-cli
+  source_kind: terminal-capture
+  current_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png
+  path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png
+  planned_canonical_path: null
+  legacy_path: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f
+  provenance:
+    assessment: raw-evidence-candidate
+    evidence:
+    - Added by main 289568fecdcd6fa61564f897cd2ed996ad7fd1c0
+    - 'Visual inspection at original resolution: R2 CLI clear arp-cache and ping gateway:
+      source 192.168.10.5 succeeds 5/5.'
+    - 'Verified README copy relationship and identical SHA-256: 00_book/figures/report/diagrams/dai-lab/recovered-ping.png'
+  provenance_confidence: medium
+  original_evidence: true
+  preserve_original: true
+  preferred_for_presentation: false
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by: []
+  targets: []
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'R2 CLI clear arp-cache and ping gateway: source 192.168.10.5 succeeds 5/5.
+    Candidate raw/source evidence; original capture author, time, tool and chain of
+    custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dai-lab/recovered-ping.png.
+    Future policy: freeze-current-path: no transfer, rename, crop, recreation, staging
+    or later reference rewrite. No migration in this reconciliation.'

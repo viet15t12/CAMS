@@ -5,6 +5,23 @@ from contextlib import closing
 from typing import Any
 
 
+def ensure_security_logging_schema(conn: sqlite3.Connection) -> list[str]:
+    """Upgrade existing VLAN policies without changing their logging behavior."""
+    exists = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 't06_security_l2';"
+    ).fetchone()
+    if exists is None:
+        return []
+    names = {row[1] for row in conn.execute("PRAGMA table_info(t06_security_l2);")}
+    if "dai_log_mode" in names:
+        return []
+    conn.execute(
+        "ALTER TABLE t06_security_l2 ADD COLUMN dai_log_mode TEXT NOT NULL DEFAULT 'deny' "
+        "CHECK(dai_log_mode IN ('deny','all','permit','none'));"
+    )
+    return ["t06_security_l2.dai_log_mode"]
+
+
 _SUCCESS_TABLES = (
     "t06_vlan_db",
     "t06_interface_l2",
@@ -35,6 +52,7 @@ def ensure_switch_schema(db: Any) -> None:
     all_success_tables_present = False
     with closing(db._connect()) as conn:
         with conn:
+            ensure_security_logging_schema(conn)
             def table_exists(table: str) -> bool:
                 return conn.execute(
                     "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?;",

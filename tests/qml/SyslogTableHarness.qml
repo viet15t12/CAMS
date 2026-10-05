@@ -5,6 +5,11 @@ Item {
     width: 1000
     height: 400
 
+    function showDaiPermit() {
+        details.rowData = ({ security_label: "Dynamic ARP Inspection",
+                             security_outcome: "permit", security_outcome_label: "Permitted" })
+    }
+
     function churnRows() {
         for (let i = 0; i < 80; ++i) {
             rows.append({

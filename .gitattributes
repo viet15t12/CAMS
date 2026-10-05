@@ -1,6 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
+# The main-provided report PDF is binary even when its first bytes look textual.
+/00_report/main.pdf binary
+
 # Documentation images preserve exact repository bytes on every platform.
 # Application/runtime assets retain the default text policy.
 /00_book/figures/**/*.svg -text

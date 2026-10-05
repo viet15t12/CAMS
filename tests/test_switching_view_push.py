@@ -20,6 +20,7 @@ from features.switching import (  # noqa: E402
     delete_vlan,
     save_vlan,
     save_l2_security_global,
+    add_l2_trust_port,
 )
 from scripts.build_databases import combine_sql  # noqa: E402
 
@@ -875,6 +876,41 @@ VTP Pruning Mode : Disabled
             conn.commit()
         self.assertTrue(save_l2_security_global(self.db, "other.local", {"dhcp_option_82": "disable"})["ok"])
         self.assertFalse(any(task["entity_key"] == "global:dhcp_option_82" for task in self.controller.collect_pending_tasks("sw2.local", "all")))
+
+    def test_trust_checkboxes_survive_save_preview_and_push(self) -> None:
+        from features.switching.commands import render_security
+        from features.switching.desired_state import collect_desired_state
+        for dhcp, arp in ((True, False), (False, True), (True, True), (False, False)):
+            with self.subTest(dhcp=dhcp, arp=arp):
+                result = add_l2_trust_port(self.db, "sw2.local", "GigabitEthernet0/1", dhcp, arp)
+                self.assertTrue(result["ok"], result)
+                tasks = [task for task in self.controller.collect_pending_tasks("sw2.local", "l2_security")
+                         if task["entity_key"] == "trust:GigabitEthernet0/1"]
+                expected = ["interface GigabitEthernet0/1",
+                            " ip dhcp snooping trust" if dhcp else " no ip dhcp snooping trust",
+                            " ip arp inspection trust" if arp else " no ip arp inspection trust",
+                            " exit"]
+                self.assertEqual(len(tasks), 1)
+                self.assertEqual(tasks[0]["commands"], expected)
+                desired = render_security(collect_desired_state(self.db, "sw2.local", "security"))
+                self.assertIn(expected[1], desired)
+                self.assertIn(expected[2], desired)
+                self.connector.connection.commands.clear()
+                self.assertTrue(self.controller.push_tasks("sw2.local", "l2_security", tasks)["ok"])
+                self.assertEqual(self.connector.connection.commands, expected)
+                with closing(self.db._connect()) as conn:
+                    row = conn.execute("SELECT trust_dhcp, trust_arp FROM t06_dhcp_trust_ports "
+                                       "WHERE host='sw2.local' AND if_name='GigabitEthernet0/1'").fetchone()
+                self.assertEqual(tuple(row), (int(dhcp), int(arp)))
+
+    def test_delete_dhcp_only_trust_does_not_remove_arp_trust(self) -> None:
+        saved = add_l2_trust_port(self.db, "sw2.local", "GigabitEthernet0/1", True, False)
+        self.assertTrue(saved["ok"], saved)
+        self.assertTrue(delete_l2_trust_port(self.db, "sw2.local", saved["id"])["ok"])
+        task = next(task for task in self.controller.collect_pending_tasks("sw2.local", "l2_security")
+                    if task["entity_key"] == "trust:GigabitEthernet0/1")
+        self.assertEqual(task["commands"], ["interface GigabitEthernet0/1",
+                                          " no ip dhcp snooping trust", " exit"])
 
     def test_failed_device_output_does_not_mark_payload(self) -> None:
         self.connector.connection.send_config_set = (

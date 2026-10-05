@@ -91,6 +91,8 @@ DataTableRow {
             primary: true
             text: (root.rowValue("security_label", "") !== ""
                    ? "[" + root.rowValue("security_label", "") + "] " : "")
+                  + (root.rowValue("security_outcome_label", "") !== ""
+                     ? "[" + root.rowValue("security_outcome_label", "") + "] " : "")
                   + String(root.rowValue("message", "") || "—")
         }
     }

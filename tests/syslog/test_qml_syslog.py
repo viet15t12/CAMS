@@ -1,7 +1,8 @@
 import unittest
+import tempfile
 from pathlib import Path
 
-from PyQt6.QtCore import QMetaObject, QObject, QUrl, pyqtSignal, pyqtSlot
+from PyQt6.QtCore import Q_ARG, QMetaObject, QObject, QUrl, pyqtSignal, pyqtSlot
 from PyQt6.QtQml import QQmlApplicationEngine, QQmlComponent, QQmlEngine, QQmlExpression
 from PyQt6.QtWidgets import QApplication
 
@@ -65,6 +66,32 @@ class _InterfaceInventoryBackend(QObject):
         return False
 
 
+class _SecurityPolicyBackend(QObject):
+    runningConfigUpdated = pyqtSignal(str)
+
+    def __init__(self):
+        super().__init__()
+        self.policy = {"id": 1, "vlan_id": 10, "vlan_name": "LAB",
+                       "dhcp_snooping": True, "dai_enabled": True,
+                       "dai_log_mode": "deny", "success": "pending_apply"}
+        self.saved_payload = None
+
+    @pyqtSlot(str, result="QVariant")
+    def getSwitchL2Security(self, _host):
+        return {"vlans": [self.policy], "trust_ports": [], "static_macs": [],
+                "interfaces": [], "global_config": {"dhcp_option_82": "insert"}}
+
+    @pyqtSlot(str, "QVariant", result="QVariant")
+    def saveSwitchL2VlanSecurity(self, _host, payload):
+        self.saved_payload = _variant_dict(payload)
+        self.policy = dict(self.saved_payload)
+        return {"ok": True, "message": "saved"}
+
+    @pyqtSlot(str, str, str, result=bool)
+    def hasPendingViewPush(self, _controller, _host, _module):
+        return False
+
+
 class SyslogQmlTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -99,6 +126,44 @@ class SyslogQmlTests(unittest.TestCase):
             "tests/qml/SyslogTableHarness.qml"
         )
         try:
+            self.assertEqual(warnings, [])
+        finally:
+            instance.deleteLater()
+            engine.deleteLater()
+
+    def test_dai_logging_choice_survives_save_and_reload(self) -> None:
+        backend = _SecurityPolicyBackend()
+        engine, page, warnings = self._create(
+            "UI/qml/features/switching/security/L2SecurityPage.qml",
+            context={"dbManager": backend},
+            properties={"host": "switch-1", "width": 1200, "height": 900},
+        )
+        try:
+            combo = page.findChild(QObject, "l2DaiLogModeCombo")
+            self.assertIsNotNone(combo)
+            self.assertEqual(combo.property("currentIndex"), 0)
+            combo.setProperty("currentIndex", 1)
+            QMetaObject.invokeMethod(combo, "activated", Q_ARG(int, 1))
+            QMetaObject.invokeMethod(page, "savePolicy")
+            self.app.processEvents()
+            self.assertEqual(backend.saved_payload["dai_log_mode"], "all")
+            self.assertEqual(combo.property("currentIndex"), 1)
+            self.assertFalse(page.property("policyDirty"))
+            page.setProperty("width", 760)
+            self.app.processEvents()
+            self.assertTrue(page.property("compactLayout"))
+            self.assertEqual(warnings, [])
+        finally:
+            page.deleteLater()
+            engine.deleteLater()
+
+    def test_dai_permit_outcome_is_visible_in_message_details(self) -> None:
+        engine, instance, warnings = self._create("tests/qml/SyslogTableHarness.qml")
+        try:
+            QMetaObject.invokeMethod(instance, "showDaiPermit")
+            self.app.processEvents()
+            outcome = instance.findChild(QObject, "syslogSecurityOutcome")
+            self.assertEqual(outcome.property("text"), "Permitted")
             self.assertEqual(warnings, [])
         finally:
             instance.deleteLater()
@@ -167,7 +232,9 @@ class SyslogQmlTests(unittest.TestCase):
                     engine.deleteLater()
 
     def test_syslog_settings_spinboxes_do_not_create_binding_loops(self) -> None:
-        settings = SyslogSettings()
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        settings = SyslogSettings(settings_path=Path(temporary.name) / "syslog.json")
         engine, instance, warnings = self._create(
             "UI/qml/features/syslog/SyslogServerSettings.qml",
             {"syslogSettings": settings, "syslogManager": None},

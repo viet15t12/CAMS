@@ -22,6 +22,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from ..domain.models import SyslogMessage
+from ..security import security_outcome
 
 
 ALERT_FACILITY = "CAMS"
@@ -42,6 +43,7 @@ _ACL_RE = re.compile(
 _TOKEN_RE = re.compile(r"[0-9A-Fa-f:.]+")
 _PORT_RE = re.compile(r"\((\d+)\)")
 _DHCP_SERVER_MESSAGE_RE = re.compile(r"\bDHCP(?:OFFER|ACK|NAK)\b", re.IGNORECASE)
+_DAI_COUNT_RE = re.compile(r"\b(\d+)\s+Invalid\s+ARPs?\b", re.IGNORECASE)
 
 
 @dataclass(frozen=True, slots=True)
@@ -69,7 +71,7 @@ DEFAULT_RULES: dict[str, DetectionRule] = {
     # Many other snooping drops from one source: starvation / spoofing.
     "DHCP_SNOOPING_FLOOD": DetectionRule("DHCP_SNOOPING_FLOOD", 3, 60, 10),
     # Repeated invalid ARP from one sender/interface: ARP spoofing.
-    "DAI_ARP_SPOOF": DetectionRule("DAI_ARP_SPOOF", 3, 60, 5),
+    "DAI_ARP_SPOOF": DetectionRule("DAI_ARP_SPOOF", 3, 60, 5, 5),
     # Repeated violations on one port: unauthorised device or MAC flooding.
     "PORT_SECURITY_REPEAT": DetectionRule("PORT_SECURITY_REPEAT", 2, 60, 3),
 }
@@ -143,6 +145,8 @@ def _classify_acl(row: dict[str, Any]) -> SecurityEvent | None:
 def _classify_dhcp_snooping(row: dict[str, Any]) -> SecurityEvent | None:
     if _facility(row) != "DHCP_SNOOPING" and not "DHCP_SNOOPING" in _text(row):
         return None
+    if security_outcome(row, "dhcp_snooping") != "deny":
+        return None
     text = _text(row)
     mac = re.search(r"MAC sa:\s*" + _MAC_RE.pattern, text, re.IGNORECASE)
     offender_mac = mac.group(1).lower() if mac else ""
@@ -163,16 +167,20 @@ def _classify_dhcp_snooping(row: dict[str, Any]) -> SecurityEvent | None:
 
 
 def _classify_dai(row: dict[str, Any]) -> SecurityEvent | None:
-    if _facility(row) != "SW_DAI":
+    if _facility(row) not in {"SW_DAI", "DAI"}:
+        return None
+    if security_outcome(row, "dai") != "deny":
         return None
     text = _text(row)
     mac = _MAC_RE.search(text)
     interface = _interface(text)
+    count = _DAI_COUNT_RE.search(text)
     key = mac.group(1).lower() if mac else (interface or str(row.get("device_host") or ""))
     return SecurityEvent(
         rule="DAI_ARP_SPOOF",
         key=key,
         description="Dynamic ARP Inspection",
+        packets=max(1, int(count.group(1))) if count else 1,
         target=interface,
     )
 
@@ -180,6 +188,8 @@ def _classify_dai(row: dict[str, Any]) -> SecurityEvent | None:
 def _classify_port_security(row: dict[str, Any]) -> SecurityEvent | None:
     facility = _facility(row)
     text = _text(row)
+    if security_outcome(row, "port_security") != "violation":
+        return None
     if facility == "PM" and "psecure-violation" in text.lower():
         interface = _interface(text)
         return SecurityEvent(
@@ -323,13 +333,14 @@ class SecurityEventDetector:
             )
         elif rule.name == "DHCP_SNOOPING_FLOOD":
             message = (
-                f"Repeated DHCP Snooping violations: {events} drop(s) from "
+                f"Repeated DHCP Snooping violations: {events} drop log event(s) from "
                 f"{event.key} within {seconds}s on {device} "
                 "(possible DHCP starvation or spoofing)"
             )
         elif rule.name == "DAI_ARP_SPOOF":
             message = (
-                f"Possible ARP spoofing: {events} invalid ARP packet(s) from "
+                f"Possible ARP spoofing: {packets} invalid ARP packet(s) in "
+                f"{events} log event(s) from "
                 f"{event.key} dropped by Dynamic ARP Inspection within {seconds}s "
                 f"on {device}" + (f" (port {targets})" if targets else "")
             )
