@@ -532,3 +532,13 @@ B11B preserved switching-lab evidence (both legacy originals and canonical copie
 - 00_book/figures/report/diagrams/switching-lab/1_7.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw2-pagp-synchronized.png (exact copy; legacy retained)
 - 00_book/figures/report/diagrams/switching-lab/1_8.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw4-pagp-synchronized.png (exact copy; legacy retained)
 - 00_book/figures/report/diagrams/switching-lab/1_9.png -> documentation_assets/evidence/ui-capture/original/switching-lab/sw1-port-mode-editing.png (exact copy; legacy retained)
+
+B11C preserved switching-lab evidence (both legacy originals and canonical copies):
+
+- 00_book/figures/report/diagrams/switching-lab/1_21.png -> documentation_assets/evidence/ui-capture/original/switching-lab/vlan-security-policy.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_23.png -> documentation_assets/evidence/ui-capture/original/switching-lab/l2-security-view-push.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_24.png -> documentation_assets/evidence/ui-capture/original/switching-lab/port-security-editor.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_25.png -> documentation_assets/evidence/ui-capture/original/switching-lab/port-security-view-push.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_26.png -> documentation_assets/evidence/ui-capture/original/switching-lab/port-security-configured.png (exact copy; legacy retained)
+- 00_book/figures/report/diagrams/switching-lab/1_22.png (HOLD; legacy only, no canonical copy)
+- 00_book/figures/report/diagrams/switching-lab/1_32.png (HOLD; legacy only, no canonical copy)
