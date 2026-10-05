@@ -13,7 +13,7 @@ Security trên access port → kiểm tra hai cửa sổ View & Push riêng.
 Mở **Security → L2 Security → VLAN Protection**, chọn VLAN cần bảo vệ.
 
 <figure>
-<p><img src="../../figures/gui/chapter-16/01-vlan-protection.png"
+<p><img src="../assets/ui/legacy/switching/security/vlan-protection.png"
 style="width:100.0%" /></p>
 <figcaption><p>DHCP Snooping và Dynamic ARP Inspection theo từng VLAN.</p></figcaption>
 </figure>
@@ -36,7 +36,7 @@ binding phù hợp trước khi DAI có hiệu lực.
 Chuyển sang **Trusted Uplinks**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-16/02-trusted-uplinks.png"
+<p><img src="../assets/ui/legacy/switching/security/trusted-uplinks.png"
 style="width:100.0%" /></p>
 <figcaption><p>Danh sách uplink tin cậy và form chọn Layer 2 interface.</p></figcaption>
 </figure>
@@ -56,7 +56,7 @@ port nối người dùng**. Kiểm tra description, dây nối và neighbor tr�
 Chuyển sang **Static MAC**, chọn **Add** hoặc Edit binding hiện có.
 
 <figure>
-<p><img src="../../figures/gui/chapter-16/03-static-mac-form.png"
+<p><img src="../assets/ui/legacy/switching/security/static-mac-form.png"
 style="width:52.0%" /></p>
 <figcaption><p>Binding cố định MAC–VLAN–Interface cho một thiết bị.</p></figcaption>
 </figure>
@@ -76,7 +76,7 @@ VLAN Protection, Trusted Uplinks và Static MAC dùng chung một preview
 **L2_SECURITY**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-16/04-l2-security-view-push.png"
+<p><img src="../assets/ui/legacy/switching/security/view-push.png"
 style="width:76.0%" /></p>
 <figcaption><p>Preview Snooping, DAI, trust port và Static MAC.</p></figcaption>
 </figure>
@@ -97,7 +97,7 @@ Mở **Security → Port Security**, chọn access port rồi nhấn **Edit**. C
 cho áp dụng profile này lên routed/trunk port trong workflow SW2.
 
 <figure>
-<p><img src="../../figures/gui/chapter-16/05-port-security-form.png"
+<p><img src="../assets/ui/legacy/switching/security/port-security-form.png"
 style="width:55.0%" /></p>
 <figcaption><p>Port Security cho GigabitEthernet0/1.</p></figcaption>
 </figure>
@@ -128,7 +128,7 @@ có quy trình xóa secure MAC cũ.
 Port Security có cửa sổ push riêng, không gộp vào L2 Security hoặc Interfaces.
 
 <figure>
-<p><img src="../../figures/gui/chapter-16/07-port-security-view-push.png"
+<p><img src="../assets/ui/legacy/switching/security/port-security-view-push.png"
 style="width:76.0%" /></p>
 <figcaption><p>Preview PORT_SECURITY cho một access port.</p></figcaption>
 </figure>

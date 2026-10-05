@@ -1,0 +1,756 @@
+{
+  "batch": "B08",
+  "starting_commit": "01eb6f22c69fa50a8e8051c67372bf772cf5abd8",
+  "status": "PASS full local and clean checkout",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 6,
+    "dimensions_nonzero": true,
+    "chapter_context_agrees": true,
+    "terminal_or_evidence_or_runtime": false,
+    "target_collisions": false,
+    "provenance": "unknown retained; no reconstruction or new generator"
+  },
+  "assets": [
+    {
+      "asset_id": "ui.switching.security.vlan-protection",
+      "old_path": "00_book/figures/gui/chapter-16/01-vlan-protection.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/security/vlan-protection.png",
+      "source_git_blob_sha": "08055981a5058e6cc64d0f72b0a6674fdb3cd5c0403f6a9a31baf2e8b4c756d7",
+      "canonical_filesystem_sha": "08055981a5058e6cc64d0f72b0a6674fdb3cd5c0403f6a9a31baf2e8b4c756d7",
+      "canonical_index_blob_sha": "08055981a5058e6cc64d0f72b0a6674fdb3cd5c0403f6a9a31baf2e8b4c756d7",
+      "manifest_sha": "08055981a5058e6cc64d0f72b0a6674fdb3cd5c0403f6a9a31baf2e8b4c756d7",
+      "staging_path": "00_book/assets/ui/legacy/switching/security/vlan-protection.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+          "line": 16,
+          "referenced_path": "../assets/ui/legacy/switching/security/vlan-protection.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+          "line": 16,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/security/vlan-protection.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "08055981a5058e6cc64d0f72b0a6674fdb3cd5c0403f6a9a31baf2e8b4c756d7"
+    },
+    {
+      "asset_id": "ui.switching.security.trusted-uplinks",
+      "old_path": "00_book/figures/gui/chapter-16/02-trusted-uplinks.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/security/trusted-uplinks.png",
+      "source_git_blob_sha": "ee45d6bf7df83ed73ee8f8f9736272d0a4e5a040b9b0f12fd7c6e01abd209b24",
+      "canonical_filesystem_sha": "ee45d6bf7df83ed73ee8f8f9736272d0a4e5a040b9b0f12fd7c6e01abd209b24",
+      "canonical_index_blob_sha": "ee45d6bf7df83ed73ee8f8f9736272d0a4e5a040b9b0f12fd7c6e01abd209b24",
+      "manifest_sha": "ee45d6bf7df83ed73ee8f8f9736272d0a4e5a040b9b0f12fd7c6e01abd209b24",
+      "staging_path": "00_book/assets/ui/legacy/switching/security/trusted-uplinks.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+          "line": 39,
+          "referenced_path": "../assets/ui/legacy/switching/security/trusted-uplinks.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+          "line": 29,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/security/trusted-uplinks.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "ee45d6bf7df83ed73ee8f8f9736272d0a4e5a040b9b0f12fd7c6e01abd209b24"
+    },
+    {
+      "asset_id": "ui.switching.security.static-mac-form",
+      "old_path": "00_book/figures/gui/chapter-16/03-static-mac-form.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/security/static-mac-form.png",
+      "source_git_blob_sha": "91810f4d8405dc6507cff1225e9f709cd117f596349abd01ba928f08f6b55596",
+      "canonical_filesystem_sha": "91810f4d8405dc6507cff1225e9f709cd117f596349abd01ba928f08f6b55596",
+      "canonical_index_blob_sha": "91810f4d8405dc6507cff1225e9f709cd117f596349abd01ba928f08f6b55596",
+      "manifest_sha": "91810f4d8405dc6507cff1225e9f709cd117f596349abd01ba928f08f6b55596",
+      "staging_path": "00_book/assets/ui/legacy/switching/security/static-mac-form.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+          "line": 59,
+          "referenced_path": "../assets/ui/legacy/switching/security/static-mac-form.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+          "line": 51,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/security/static-mac-form.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "91810f4d8405dc6507cff1225e9f709cd117f596349abd01ba928f08f6b55596"
+    },
+    {
+      "asset_id": "ui.switching.security.view-push",
+      "old_path": "00_book/figures/gui/chapter-16/04-l2-security-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/security/view-push.png",
+      "source_git_blob_sha": "1365ebb5ce66547a679f1bf353f3e2c29021b632faea0731969afbe5d39d3d01",
+      "canonical_filesystem_sha": "1365ebb5ce66547a679f1bf353f3e2c29021b632faea0731969afbe5d39d3d01",
+      "canonical_index_blob_sha": "1365ebb5ce66547a679f1bf353f3e2c29021b632faea0731969afbe5d39d3d01",
+      "manifest_sha": "1365ebb5ce66547a679f1bf353f3e2c29021b632faea0731969afbe5d39d3d01",
+      "staging_path": "00_book/assets/ui/legacy/switching/security/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+          "line": 79,
+          "referenced_path": "../assets/ui/legacy/switching/security/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+          "line": 72,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/security/view-push.png",
+          "target_type": "book-typst"
+        },
+        {
+          "source_document": "00_report/contents/08_xay_dung_phan_mem.typ",
+          "line": 103,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/security/view-push.png",
+          "target_type": "report-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "1365ebb5ce66547a679f1bf353f3e2c29021b632faea0731969afbe5d39d3d01"
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-form",
+      "old_path": "00_book/figures/gui/chapter-16/05-port-security-form.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/security/port-security-form.png",
+      "source_git_blob_sha": "8136393fa2e89d817449aa17c9d2b4796ae556c28b564f924679fe45f73d73f3",
+      "canonical_filesystem_sha": "8136393fa2e89d817449aa17c9d2b4796ae556c28b564f924679fe45f73d73f3",
+      "canonical_index_blob_sha": "8136393fa2e89d817449aa17c9d2b4796ae556c28b564f924679fe45f73d73f3",
+      "manifest_sha": "8136393fa2e89d817449aa17c9d2b4796ae556c28b564f924679fe45f73d73f3",
+      "staging_path": "00_book/assets/ui/legacy/switching/security/port-security-form.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+          "line": 100,
+          "referenced_path": "../assets/ui/legacy/switching/security/port-security-form.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+          "line": 88,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/security/port-security-form.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "8136393fa2e89d817449aa17c9d2b4796ae556c28b564f924679fe45f73d73f3"
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-view-push",
+      "old_path": "00_book/figures/gui/chapter-16/07-port-security-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/security/port-security-view-push.png",
+      "source_git_blob_sha": "52dd47fc6484f3d4c6c45b10eefec52b642c10428f01213cc78e4127b2321e54",
+      "canonical_filesystem_sha": "52dd47fc6484f3d4c6c45b10eefec52b642c10428f01213cc78e4127b2321e54",
+      "canonical_index_blob_sha": "52dd47fc6484f3d4c6c45b10eefec52b642c10428f01213cc78e4127b2321e54",
+      "manifest_sha": "52dd47fc6484f3d4c6c45b10eefec52b642c10428f01213cc78e4127b2321e54",
+      "staging_path": "00_book/assets/ui/legacy/switching/security/port-security-view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+          "line": 131,
+          "referenced_path": "../assets/ui/legacy/switching/security/port-security-view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+          "line": 118,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/security/port-security-view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "52dd47fc6484f3d4c6c45b10eefec52b642c10428f01213cc78e4127b2321e54"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.switching.security.vlan-protection",
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "line": 16,
+      "before": "../../figures/gui/chapter-16/01-vlan-protection.png",
+      "after": "../assets/ui/legacy/switching/security/vlan-protection.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.security.trusted-uplinks",
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "line": 39,
+      "before": "../../figures/gui/chapter-16/02-trusted-uplinks.png",
+      "after": "../assets/ui/legacy/switching/security/trusted-uplinks.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.security.static-mac-form",
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "line": 59,
+      "before": "../../figures/gui/chapter-16/03-static-mac-form.png",
+      "after": "../assets/ui/legacy/switching/security/static-mac-form.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.security.view-push",
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "line": 79,
+      "before": "../../figures/gui/chapter-16/04-l2-security-view-push.png",
+      "after": "../assets/ui/legacy/switching/security/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-form",
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "line": 100,
+      "before": "../../figures/gui/chapter-16/05-port-security-form.png",
+      "after": "../assets/ui/legacy/switching/security/port-security-form.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-view-push",
+      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+      "line": 131,
+      "before": "../../figures/gui/chapter-16/07-port-security-view-push.png",
+      "after": "../assets/ui/legacy/switching/security/port-security-view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.security.vlan-protection",
+      "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+      "line": 16,
+      "before": "figures/gui/chapter-16/01-vlan-protection.png",
+      "after": "/documentation_assets/ui/legacy/switching/security/vlan-protection.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.security.trusted-uplinks",
+      "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+      "line": 29,
+      "before": "figures/gui/chapter-16/02-trusted-uplinks.png",
+      "after": "/documentation_assets/ui/legacy/switching/security/trusted-uplinks.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.security.static-mac-form",
+      "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+      "line": 51,
+      "before": "figures/gui/chapter-16/03-static-mac-form.png",
+      "after": "/documentation_assets/ui/legacy/switching/security/static-mac-form.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.security.view-push",
+      "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+      "line": 72,
+      "before": "figures/gui/chapter-16/04-l2-security-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/security/view-push.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-form",
+      "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+      "line": 88,
+      "before": "figures/gui/chapter-16/05-port-security-form.png",
+      "after": "/documentation_assets/ui/legacy/switching/security/port-security-form.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-view-push",
+      "source_document": "00_book/contents/16_bao_mat_switch_l2.typ",
+      "line": 118,
+      "before": "figures/gui/chapter-16/07-port-security-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/security/port-security-view-push.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.security.view-push",
+      "source_document": "00_report/contents/08_xay_dung_phan_mem.typ",
+      "line": 103,
+      "before": "/00_book/figures/gui/chapter-16/04-l2-security-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/security/view-push.png",
+      "target_type": "report-typst"
+    }
+  ],
+  "reference_rewrite_count": 13,
+  "baseline": {
+    "before": 31,
+    "resolved": 6,
+    "after": 25,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-16/01-vlan-protection.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-16/01-vlan-protection.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-16/02-trusted-uplinks.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-16/02-trusted-uplinks.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-16/03-static-mac-form.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-16/03-static-mac-form.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-16/04-l2-security-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-16/04-l2-security-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-16/05-port-security-form.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-16/05-port-security-form.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-16/07-port-security-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-16/07-port-security-view-push.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 201,
+    "pending": 144,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "branch": "docs/pictures-sort",
+  "initial_main_behind": 0,
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 201,
+      "pending": 144,
+      "frozen": 62
+    },
+    "b08_migrated": 6,
+    "b08_old_paths_absent": 6,
+    "b08_canonical_paths_present": 6,
+    "other_records_unchanged": 401,
+    "b06_hold_full_record_and_legacy_bytes_unchanged": true,
+    "b06_hold_planned_destination_absent": true,
+    "reference_edges_exact_current_lines": 13,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 25,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [
+      {
+        "target": "report",
+        "result": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_starting_baseline": true
+      },
+      {
+        "target": "book",
+        "result": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_starting_baseline": true
+      }
+    ],
+    "full_build_gate": "PASS"
+  },
+  "typst": [
+    {
+      "target": "report",
+      "result": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_starting_baseline": true
+    },
+    {
+      "target": "book",
+      "result": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_starting_baseline": true
+    }
+  ],
+  "png_sanity": [
+    {
+      "asset_id": "ui.switching.security.vlan-protection",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.security.trusted-uplinks",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.security.static-mac-form",
+      "width": 840,
+      "height": 1260,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.security.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-form",
+      "width": 880,
+      "height": 1340,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.security.port-security-view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ],
+  "scope": "Exactly six B08 assets; one atomic commit; no B09+",
+  "transition_policy": {
+    "replacement_policy": "regenerate-canonical",
+    "needs_new_workflow": true,
+    "unchanged": true
+  },
+  "clean_checkout": {
+    "status": "PASS",
+    "candidate_commit": "8a922efa07358a8f640c731a0d1bf32ca3e77c6d",
+    "candidate_tree": "7178656ec500063f90f9bbb786bf99e7d6f33ed6",
+    "actual_test_count": 39,
+    "validation": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 19
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 17
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 3
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "proof": {
+      "status": "PASS",
+      "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+      "manifest": {
+        "migrated": 201,
+        "pending": 144,
+        "frozen": 62
+      },
+      "b08_migrated": 6,
+      "b08_old_paths_absent": 6,
+      "b08_canonical_paths_present": 6,
+      "other_records_unchanged": 401,
+      "b06_hold_full_record_and_legacy_bytes_unchanged": true,
+      "b06_hold_planned_destination_absent": true,
+      "reference_edges_exact_current_lines": 13,
+      "document_prose_captions_widths_order_labels_unchanged": true,
+      "provenance_and_replacement_intent_unchanged": true,
+      "baseline_only_resolved_entries_removed": true,
+      "baseline_remaining": 25,
+      "b02_holds_unchanged": true,
+      "b03_42_bytes_metadata_and_output_map_unchanged": true,
+      "dialog_policy_unchanged": true,
+      "terminal_freeze_and_reference_multiset_unchanged": true,
+      "runtime_assets_unchanged": true,
+      "retained_b02_copies_unchanged": true,
+      "staging_assets": 178,
+      "staging_hashes_correct": true,
+      "staging_ignored": true,
+      "staging_tracked": false,
+      "regeneration_occurred": false,
+      "typst": [
+        {
+          "target": "report",
+          "result": "PASS",
+          "pages": 110,
+          "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+          "byte_identical_to_starting_baseline": true
+        },
+        {
+          "target": "book",
+          "result": "PASS",
+          "pages": 170,
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "byte_identical_to_starting_baseline": true
+        }
+      ],
+      "full_build_gate": "PASS"
+    },
+    "completion_note": "Only b08.md and b08.json execution-report completion follows validated candidate; source/config/assets identical."
+  }
+}

@@ -7695,14 +7695,14 @@ assets:
   domain: switching/security
   subject: vlan-protection
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-16/01-vlan-protection.png
-  path: 00_book/figures/gui/chapter-16/01-vlan-protection.png
+  current_path: documentation_assets/ui/legacy/switching/security/vlan-protection.png
+  path: documentation_assets/ui/legacy/switching/security/vlan-protection.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/security/vlan-protection.png
   legacy_path: 00_book/figures/gui/chapter-16/01-vlan-protection.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 08055981a5058e6cc64d0f72b0a6674fdb3cd5c0403f6a9a31baf2e8b4c756d7
   provenance:
     assessment: unknown
@@ -7720,11 +7720,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/16_bao_mat_switch_l2.md
     line: 16
-    referenced_path: ../../figures/gui/chapter-16/01-vlan-protection.png
+    referenced_path: ../assets/ui/legacy/switching/security/vlan-protection.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/16_bao_mat_switch_l2.typ
     line: 16
-    referenced_path: figures/gui/chapter-16/01-vlan-protection.png
+    referenced_path: /documentation_assets/ui/legacy/switching/security/vlan-protection.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7744,14 +7744,14 @@ assets:
   domain: switching/security
   subject: trusted-uplinks
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-16/02-trusted-uplinks.png
-  path: 00_book/figures/gui/chapter-16/02-trusted-uplinks.png
+  current_path: documentation_assets/ui/legacy/switching/security/trusted-uplinks.png
+  path: documentation_assets/ui/legacy/switching/security/trusted-uplinks.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/security/trusted-uplinks.png
   legacy_path: 00_book/figures/gui/chapter-16/02-trusted-uplinks.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ee45d6bf7df83ed73ee8f8f9736272d0a4e5a040b9b0f12fd7c6e01abd209b24
   provenance:
     assessment: unknown
@@ -7769,11 +7769,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/16_bao_mat_switch_l2.md
     line: 39
-    referenced_path: ../../figures/gui/chapter-16/02-trusted-uplinks.png
+    referenced_path: ../assets/ui/legacy/switching/security/trusted-uplinks.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/16_bao_mat_switch_l2.typ
     line: 29
-    referenced_path: figures/gui/chapter-16/02-trusted-uplinks.png
+    referenced_path: /documentation_assets/ui/legacy/switching/security/trusted-uplinks.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7793,14 +7793,14 @@ assets:
   domain: switching/security
   subject: static-mac-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-16/03-static-mac-form.png
-  path: 00_book/figures/gui/chapter-16/03-static-mac-form.png
+  current_path: documentation_assets/ui/legacy/switching/security/static-mac-form.png
+  path: documentation_assets/ui/legacy/switching/security/static-mac-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/security/static-mac-form.png
   legacy_path: 00_book/figures/gui/chapter-16/03-static-mac-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 91810f4d8405dc6507cff1225e9f709cd117f596349abd01ba928f08f6b55596
   provenance:
     assessment: unknown
@@ -7818,11 +7818,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/16_bao_mat_switch_l2.md
     line: 59
-    referenced_path: ../../figures/gui/chapter-16/03-static-mac-form.png
+    referenced_path: ../assets/ui/legacy/switching/security/static-mac-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/16_bao_mat_switch_l2.typ
     line: 51
-    referenced_path: figures/gui/chapter-16/03-static-mac-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/security/static-mac-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7842,14 +7842,14 @@ assets:
   domain: switching/security
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-16/04-l2-security-view-push.png
-  path: 00_book/figures/gui/chapter-16/04-l2-security-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/security/view-push.png
+  path: documentation_assets/ui/legacy/switching/security/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/security/view-push.png
   legacy_path: 00_book/figures/gui/chapter-16/04-l2-security-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1365ebb5ce66547a679f1bf353f3e2c29021b632faea0731969afbe5d39d3d01
   provenance:
     assessment: unknown
@@ -7867,15 +7867,15 @@ assets:
   used_by:
   - source_document: 00_book/DOC/16_bao_mat_switch_l2.md
     line: 79
-    referenced_path: ../../figures/gui/chapter-16/04-l2-security-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/security/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/16_bao_mat_switch_l2.typ
     line: 72
-    referenced_path: figures/gui/chapter-16/04-l2-security-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/security/view-push.png
     target_type: book-typst
   - source_document: 00_report/contents/08_xay_dung_phan_mem.typ
     line: 103
-    referenced_path: /00_book/figures/gui/chapter-16/04-l2-security-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/security/view-push.png
     target_type: report-typst
   targets:
   - book-mkdocs
@@ -7896,14 +7896,14 @@ assets:
   domain: switching/security
   subject: port-security-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-16/05-port-security-form.png
-  path: 00_book/figures/gui/chapter-16/05-port-security-form.png
+  current_path: documentation_assets/ui/legacy/switching/security/port-security-form.png
+  path: documentation_assets/ui/legacy/switching/security/port-security-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/security/port-security-form.png
   legacy_path: 00_book/figures/gui/chapter-16/05-port-security-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 8136393fa2e89d817449aa17c9d2b4796ae556c28b564f924679fe45f73d73f3
   provenance:
     assessment: unknown
@@ -7921,11 +7921,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/16_bao_mat_switch_l2.md
     line: 100
-    referenced_path: ../../figures/gui/chapter-16/05-port-security-form.png
+    referenced_path: ../assets/ui/legacy/switching/security/port-security-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/16_bao_mat_switch_l2.typ
     line: 88
-    referenced_path: figures/gui/chapter-16/05-port-security-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/security/port-security-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7945,14 +7945,14 @@ assets:
   domain: switching/security
   subject: port-security-view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-16/07-port-security-view-push.png
-  path: 00_book/figures/gui/chapter-16/07-port-security-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/security/port-security-view-push.png
+  path: documentation_assets/ui/legacy/switching/security/port-security-view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/security/port-security-view-push.png
   legacy_path: 00_book/figures/gui/chapter-16/07-port-security-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 52dd47fc6484f3d4c6c45b10eefec52b642c10428f01213cc78e4127b2321e54
   provenance:
     assessment: unknown
@@ -7970,11 +7970,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/16_bao_mat_switch_l2.md
     line: 131
-    referenced_path: ../../figures/gui/chapter-16/07-port-security-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/security/port-security-view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/16_bao_mat_switch_l2.typ
     line: 118
-    referenced_path: figures/gui/chapter-16/07-port-security-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/security/port-security-view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs

@@ -100,7 +100,7 @@ Ngoài nhật ký, dữ liệu quan sát như bảng định tuyến, DHCP bindi
 CAMS cung cấp biểu mẫu Port Security để đặt giới hạn MAC, chế độ học và hành động khi vi phạm. Với DHCP Snooping và DAI, người dùng chọn VLAN áp dụng cùng cổng tin cậy theo mô hình mạng. Các thay đổi được lưu ở trạng thái chờ và kiểm duyệt trước khi gửi, như @fig-cams-l2-security.
 
 #figure(
-  image("/00_book/figures/gui/chapter-16/04-l2-security-view-push.png", width: 100%),
+  image("/documentation_assets/ui/legacy/switching/security/view-push.png", width: 100%),
   caption: [Xem trước chính sách bảo vệ Lớp 2 trước khi áp dụng],
 ) <fig-cams-l2-security>
 

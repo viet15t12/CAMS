@@ -13,7 +13,7 @@ Thứ tự khuyến nghị: hoàn thành VLAN và Interface → xác định upl
 
 Mở *Security → L2 Security → VLAN Protection*, chọn VLAN cần bảo vệ.
 
-#insert-image("figures/gui/chapter-16/01-vlan-protection.png",
+#insert-image("/documentation_assets/ui/legacy/switching/security/vlan-protection.png",
   caption: [DHCP Snooping và Dynamic ARP Inspection theo từng VLAN.], width: 100.0%) <fig:ch16-01-vlan-protection>
 
 - *Enable DHCP Snooping* kiểm tra bản tin DHCP trên VLAN và tạo cơ sở dữ liệu binding IP–MAC–port. Xác định trusted uplink trước khi triển khai để không chặn phản hồi từ DHCP server hợp lệ.
@@ -26,7 +26,7 @@ Không bật đồng loạt trên VLAN production khi chưa xác định đườ
 
 Chuyển sang *Trusted Uplinks*.
 
-#insert-image("figures/gui/chapter-16/02-trusted-uplinks.png",
+#insert-image("/documentation_assets/ui/legacy/switching/security/trusted-uplinks.png",
   caption: [Danh sách uplink tin cậy và form chọn Layer 2 interface.], width: 100.0%) <fig:ch16-02-trusted-uplinks>
 
 #report-table(
@@ -48,7 +48,7 @@ Chuyển sang *Trusted Uplinks*.
 
 Chuyển sang *Static MAC*, chọn *Add* hoặc Edit binding hiện có.
 
-#insert-image("figures/gui/chapter-16/03-static-mac-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/security/static-mac-form.png",
   caption: [Binding cố định MAC–VLAN–Interface cho một thiết bị.], width: 52.0%) <fig:ch16-03-static-mac-form>
 
 #report-table(
@@ -69,7 +69,7 @@ Static MAC phù hợp máy in, camera, server hoặc host IP tĩnh cần binding
 
 VLAN Protection, Trusted Uplinks và Static MAC dùng chung một preview *L2\_SECURITY*.
 
-#insert-image("figures/gui/chapter-16/04-l2-security-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/security/view-push.png",
   caption: [Preview Snooping, DAI, trust port và Static MAC.], width: 76.0%) <fig:ch16-04-l2-security-view-push>
 
 Kiểm tra theo thứ tự:
@@ -85,7 +85,7 @@ Sau Push, thử DHCP trên một client hợp lệ, kiểm tra Snooping binding,
 
 Mở *Security → Port Security*, chọn access port rồi nhấn *Edit*. CAMS không cho áp dụng profile này lên routed/trunk port trong workflow SW2.
 
-#insert-image("figures/gui/chapter-16/05-port-security-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/security/port-security-form.png",
   caption: [Port Security cho GigabitEthernet0/1.], width: 55.0%) <fig:ch16-05-port-security-form>
 
 #report-table(
@@ -115,7 +115,7 @@ Với port có IP phone và PC phía sau, Maximum MAC phải đủ cho số đ�
 
 Port Security có cửa sổ push riêng, không gộp vào L2 Security hoặc Interfaces.
 
-#insert-image("figures/gui/chapter-16/07-port-security-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/security/port-security-view-push.png",
   caption: [Preview PORT\_SECURITY cho một access port.], width: 76.0%) <fig:ch16-07-port-security-view-push>
 
 Xác nhận đúng interface, mode access, maximum, violation, sticky và aging. Sau Push, kiểm tra secure MAC table, violation counter và trạng thái err-disabled. Chỉ thử MAC vi phạm trong môi trường lab hoặc thời gian bảo trì đã được phép.

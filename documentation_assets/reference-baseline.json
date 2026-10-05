@@ -177,48 +177,6 @@
       "reference_kind": "html-img",
       "resolved_path": "figures/gui/chapter-13/07-log-message-details.png",
       "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-16/01-vlan-protection.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-16/01-vlan-protection.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-16/02-trusted-uplinks.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-16/02-trusted-uplinks.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-16/03-static-mac-form.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-16/03-static-mac-form.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-16/04-l2-security-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-16/04-l2-security-view-push.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-16/05-port-security-form.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-16/05-port-security-form.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/16_bao_mat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-16/07-port-security-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-16/07-port-security-view-push.png",
-      "count": 1
     }
   ]
 }
