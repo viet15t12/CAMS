@@ -6416,14 +6416,14 @@ assets:
   domain: system-logs
   subject: overview
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-13/01-system-logs-overview.png
-  path: 00_book/figures/gui/chapter-13/01-system-logs-overview.png
+  current_path: documentation_assets/ui/legacy/system-logs/overview.png
+  path: documentation_assets/ui/legacy/system-logs/overview.png
   planned_canonical_path: documentation_assets/ui/legacy/system-logs/overview.png
   legacy_path: 00_book/figures/gui/chapter-13/01-system-logs-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7aad4c0b82115780bd325b98846e5a6f6f8cf5a2cf35fcffe9802436c8fedc44
   provenance:
     assessment: unknown
@@ -6441,15 +6441,15 @@ assets:
   used_by:
   - source_document: 00_book/DOC/13_xem_system_logs.md
     line: 37
-    referenced_path: ../../figures/gui/chapter-13/01-system-logs-overview.png
+    referenced_path: ../assets/ui/legacy/system-logs/overview.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/13_xem_system_logs.typ
     line: 29
-    referenced_path: figures/gui/chapter-13/01-system-logs-overview.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/overview.png
     target_type: book-typst
   - source_document: 00_report/contents/08_xay_dung_phan_mem.typ
     line: 84
-    referenced_path: /00_book/figures/gui/chapter-13/01-system-logs-overview.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/overview.png
     target_type: report-typst
   targets:
   - book-mkdocs
@@ -6470,14 +6470,14 @@ assets:
   domain: system-logs
   subject: listener-status
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-13/02-listener-status.png
-  path: 00_book/figures/gui/chapter-13/02-listener-status.png
+  current_path: documentation_assets/ui/legacy/system-logs/listener-status.png
+  path: documentation_assets/ui/legacy/system-logs/listener-status.png
   planned_canonical_path: documentation_assets/ui/legacy/system-logs/listener-status.png
   legacy_path: 00_book/figures/gui/chapter-13/02-listener-status.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 971289795b5b5438e3ee32a6a46f7e2a3867cc63fe999eada3211c52433a4e6f
   provenance:
     assessment: unknown
@@ -6495,11 +6495,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/13_xem_system_logs.md
     line: 13
-    referenced_path: ../../figures/gui/chapter-13/02-listener-status.png
+    referenced_path: ../assets/ui/legacy/system-logs/listener-status.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/13_xem_system_logs.typ
     line: 14
-    referenced_path: figures/gui/chapter-13/02-listener-status.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/listener-status.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6519,14 +6519,14 @@ assets:
   domain: system-logs
   subject: filter-bar
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-13/03-log-filter-bar.png
-  path: 00_book/figures/gui/chapter-13/03-log-filter-bar.png
+  current_path: documentation_assets/ui/legacy/system-logs/filter-bar.png
+  path: documentation_assets/ui/legacy/system-logs/filter-bar.png
   planned_canonical_path: documentation_assets/ui/legacy/system-logs/filter-bar.png
   legacy_path: 00_book/figures/gui/chapter-13/03-log-filter-bar.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0e8a5faed5aa396d684d78a56f603f2126316037430e3efae8f4a63056655243
   provenance:
     assessment: unknown
@@ -6544,11 +6544,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/13_xem_system_logs.md
     line: 87
-    referenced_path: ../../figures/gui/chapter-13/03-log-filter-bar.png
+    referenced_path: ../assets/ui/legacy/system-logs/filter-bar.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/13_xem_system_logs.typ
     line: 67
-    referenced_path: figures/gui/chapter-13/03-log-filter-bar.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/filter-bar.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6568,14 +6568,14 @@ assets:
   domain: system-logs
   subject: severity-levels
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-13/04-severity-levels.png
-  path: 00_book/figures/gui/chapter-13/04-severity-levels.png
+  current_path: documentation_assets/ui/legacy/system-logs/severity-levels.png
+  path: documentation_assets/ui/legacy/system-logs/severity-levels.png
   planned_canonical_path: documentation_assets/ui/legacy/system-logs/severity-levels.png
   legacy_path: 00_book/figures/gui/chapter-13/04-severity-levels.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: a1cca606a6b41a0af2c0d1c7d9433958a49214ffcbdf714cee7b7342fdede644
   provenance:
     assessment: unknown
@@ -6593,11 +6593,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/13_xem_system_logs.md
     line: 66
-    referenced_path: ../../figures/gui/chapter-13/04-severity-levels.png
+    referenced_path: ../assets/ui/legacy/system-logs/severity-levels.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/13_xem_system_logs.typ
     line: 55
-    referenced_path: figures/gui/chapter-13/04-severity-levels.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/severity-levels.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6617,14 +6617,14 @@ assets:
   domain: system-logs
   subject: critical-filter-result
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-13/05-critical-filter-result.png
-  path: 00_book/figures/gui/chapter-13/05-critical-filter-result.png
+  current_path: documentation_assets/ui/legacy/system-logs/critical-filter-result.png
+  path: documentation_assets/ui/legacy/system-logs/critical-filter-result.png
   planned_canonical_path: documentation_assets/ui/legacy/system-logs/critical-filter-result.png
   legacy_path: 00_book/figures/gui/chapter-13/05-critical-filter-result.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 3af5f3a82cf14ed45d6f674e73e9f94c38545a76945fd9ca3400ad937e0a0454
   provenance:
     assessment: unknown
@@ -6642,15 +6642,15 @@ assets:
   used_by:
   - source_document: 00_book/DOC/13_xem_system_logs.md
     line: 79
-    referenced_path: ../../figures/gui/chapter-13/05-critical-filter-result.png
+    referenced_path: ../assets/ui/legacy/system-logs/critical-filter-result.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/13_xem_system_logs.typ
     line: 62
-    referenced_path: figures/gui/chapter-13/05-critical-filter-result.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/critical-filter-result.png
     target_type: book-typst
   - source_document: 00_report/contents/08_xay_dung_phan_mem.typ
     line: 114
-    referenced_path: /00_book/figures/gui/chapter-13/05-critical-filter-result.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/critical-filter-result.png
     target_type: report-typst
   targets:
   - book-mkdocs
@@ -6671,14 +6671,14 @@ assets:
   domain: system-logs
   subject: smart-filter-builder
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-13/06-smart-filter-builder.png
-  path: 00_book/figures/gui/chapter-13/06-smart-filter-builder.png
+  current_path: documentation_assets/ui/legacy/system-logs/smart-filter-builder.png
+  path: documentation_assets/ui/legacy/system-logs/smart-filter-builder.png
   planned_canonical_path: documentation_assets/ui/legacy/system-logs/smart-filter-builder.png
   legacy_path: 00_book/figures/gui/chapter-13/06-smart-filter-builder.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 665b32e0c820cbfa3fc3aedcdf5b4f8dcb85da53ff633f3f89e643faf8eba4d5
   provenance:
     assessment: unknown
@@ -6696,11 +6696,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/13_xem_system_logs.md
     line: 112
-    referenced_path: ../../figures/gui/chapter-13/06-smart-filter-builder.png
+    referenced_path: ../assets/ui/legacy/system-logs/smart-filter-builder.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/13_xem_system_logs.typ
     line: 93
-    referenced_path: figures/gui/chapter-13/06-smart-filter-builder.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/smart-filter-builder.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6720,14 +6720,14 @@ assets:
   domain: system-logs
   subject: message-details
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-13/07-log-message-details.png
-  path: 00_book/figures/gui/chapter-13/07-log-message-details.png
+  current_path: documentation_assets/ui/legacy/system-logs/message-details.png
+  path: documentation_assets/ui/legacy/system-logs/message-details.png
   planned_canonical_path: documentation_assets/ui/legacy/system-logs/message-details.png
   legacy_path: 00_book/figures/gui/chapter-13/07-log-message-details.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 1e4ac6e63479e22bbdbfe154d76279945b0a91c9d8f041c832e69d70d0b23926
   provenance:
     assessment: unknown
@@ -6745,11 +6745,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/13_xem_system_logs.md
     line: 141
-    referenced_path: ../../figures/gui/chapter-13/07-log-message-details.png
+    referenced_path: ../assets/ui/legacy/system-logs/message-details.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/13_xem_system_logs.typ
     line: 119
-    referenced_path: figures/gui/chapter-13/07-log-message-details.png
+    referenced_path: /documentation_assets/ui/legacy/system-logs/message-details.png
     target_type: book-typst
   targets:
   - book-mkdocs

@@ -81,7 +81,7 @@ Chức năng Syslog gồm hai phần: cấu hình đích gửi trên thiết b�
 Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi dữ liệu vào SQLite, sau đó chuyển sự kiện qua cầu nối Python để cập nhật QML. Đây là luồng xử lý chính; bộ nhận Python được giữ lại để tương thích và kiểm thử. Hệ thống lưu bản tin gốc cùng trạng thái phân tích theo các trường của Syslog @rfc5424. Hai chỉ số `received` và `dropped` hỗ trợ theo dõi khả năng tiếp nhận khi lưu lượng tăng.
 
 #figure(
-  image("/00_book/figures/gui/chapter-13/01-system-logs-overview.png", width: 100%),
+  image("/documentation_assets/ui/legacy/system-logs/overview.png", width: 100%),
   caption: [System Logs tập trung nhật ký từ thiết bị mạng],
 ) <fig-cams-system-logs>
 
@@ -111,7 +111,7 @@ Thiết bị mạng thực thi chính sách và có thể phát sinh nhật ký 
 System Logs cho phép tập trung các sự kiện cần chú ý bằng cách chọn mức độ và điều kiện lọc. @fig-cams-critical-log minh họa kết quả lọc các mức 0, 1, 2 và 3. Kết quả này thể hiện khả năng truy vấn nhật ký, nhưng không đủ để kết luận phần mềm đã phát hiện một cuộc tấn công.
 
 #figure(
-  image("/00_book/figures/gui/chapter-13/05-critical-filter-result.png", width: 100%),
+  image("/documentation_assets/ui/legacy/system-logs/critical-filter-result.png", width: 100%),
   caption: [Lọc các bản tin có severity từ 0 đến 3 trên System Logs],
 ) <fig-cams-critical-log>
 

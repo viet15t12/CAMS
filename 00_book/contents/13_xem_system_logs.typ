@@ -11,7 +11,7 @@ Mở *System Logs* trên Activity Bar hoặc nhấn #raw("Ctrl+Alt+L").
 
 == Khởi động bộ nhận log
 
-#insert-image("figures/gui/chapter-13/02-listener-status.png",
+#insert-image("/documentation_assets/ui/legacy/system-logs/listener-status.png",
   caption: [Listener đang nhận Syslog qua UDP và TCP.], width: 100.0%) <fig:ch13-02-listener-status>
 
 Thanh trạng thái cho biết:
@@ -26,7 +26,7 @@ Chọn *Start Listener* để bắt đầu nhận hoặc *Stop Listener* khi c�
 
 == Đọc bảng log
 
-#insert-image("figures/gui/chapter-13/01-system-logs-overview.png",
+#insert-image("/documentation_assets/ui/legacy/system-logs/overview.png",
   caption: [Tổng thể System Logs với đủ tám mức severity từ 0 đến 7.], width: 100.0%) <fig:ch13-01-system-logs-overview>
 
 Mỗi dòng thể hiện thời điểm nhận, thiết bị nguồn, giao thức, severity, Cisco facility/mnemonic và nội dung bản tin. Có thể chọn một host ở panel bên trái để tập trung vào thiết bị đó, để giới hạn phạm vi phân tích log.
@@ -52,19 +52,19 @@ Cisco Syslog có *8 mức severity*, được đánh số từ #raw("0") đến 
   figure-label: <tab:ch13-table-1>,
 )
 
-#insert-image("figures/gui/chapter-13/04-severity-levels.png",
+#insert-image("/documentation_assets/ui/legacy/system-logs/severity-levels.png",
   caption: [Bộ lọc cho phép chọn chính xác từng mức severity 0–7.], width: 48.0%) <fig:ch13-04-severity-levels>
 
 #report-note[*Phân biệt mức gửi và bộ lọc xem*
 
 Trên router, cấu hình mức trap #raw("5") thường có nghĩa là gửi mức #raw("0") đến #raw("5"), tức mức đã chọn và mọi mức nghiêm trọng hơn. Trong trang System Logs, đánh dấu riêng mức #raw("5") chỉ hiển thị bản ghi có severity đúng bằng #raw("5"). Muốn xem nhóm sự cố nghiêm trọng từ Emergency đến Error, chọn đồng thời #raw("0"), #raw("1"), #raw("2") và #raw("3").]
 
-#insert-image("figures/gui/chapter-13/05-critical-filter-result.png",
+#insert-image("/documentation_assets/ui/legacy/system-logs/critical-filter-result.png",
   caption: [Kết quả khi lọc đồng thời bốn mức nghiêm trọng 0, 1, 2 và 3.], width: 100.0%) <fig:ch13-05-critical-filter-result>
 
 == Lọc log trên thanh công cụ
 
-#insert-image("figures/gui/chapter-13/03-log-filter-bar.png",
+#insert-image("/documentation_assets/ui/legacy/system-logs/filter-bar.png",
   caption: [Các điều kiện lọc nhanh trước khi đọc hoặc xuất log.], width: 100.0%) <fig:ch13-03-log-filter-bar>
 
 #report-table(
@@ -90,7 +90,7 @@ Nên lọc theo khoảng thời gian và host trước, sau đó thêm severity 
 
 Nhấp vào ô *Click to build a Smart Filter…* để mở biểu mẫu. Chỉ nhập những điều kiện cần thiết; CAMS tự tạo biểu thức ở cuối cửa sổ.
 
-#insert-image("figures/gui/chapter-13/06-smart-filter-builder.png",
+#insert-image("/documentation_assets/ui/legacy/system-logs/smart-filter-builder.png",
   caption: [Smart Filter kết hợp host, severity, facility, mnemonic và thời gian.], width: 78.0%) <fig:ch13-06-smart-filter-builder>
 
 #report-table(
@@ -116,7 +116,7 @@ Nhấp vào ô *Click to build a Smart Filter…* để mở biểu mẫu. Chỉ
 
 Nhấp đúp một dòng log để mở cửa sổ chi tiết tại @fig:ch13-07-log-message-details.
 
-#insert-image("figures/gui/chapter-13/07-log-message-details.png",
+#insert-image("/documentation_assets/ui/legacy/system-logs/message-details.png",
   caption: [Thông tin đã phân tích và raw message của một sự kiện Cisco.], width: 78.0%) <fig:ch13-07-log-message-details>
 
 #report-table(

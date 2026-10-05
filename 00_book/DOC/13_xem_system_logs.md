@@ -10,7 +10,7 @@ Mở **System Logs** trên Activity Bar hoặc nhấn `Ctrl+Alt+L`.
 ## Khởi động bộ nhận log
 
 <figure>
-<p><img src="../../figures/gui/chapter-13/02-listener-status.png"
+<p><img src="../assets/ui/legacy/system-logs/listener-status.png"
 style="width:100.0%" /></p>
 <figcaption><p>Listener đang nhận Syslog qua UDP và TCP.</p></figcaption>
 </figure>
@@ -34,7 +34,7 @@ port và giao thức.
 ## Đọc bảng log
 
 <figure>
-<p><img src="../../figures/gui/chapter-13/01-system-logs-overview.png"
+<p><img src="../assets/ui/legacy/system-logs/overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể System Logs với đủ tám mức severity từ 0 đến 7.</p></figcaption>
 </figure>
@@ -63,7 +63,7 @@ sự kiện càng nghiêm trọng. Giao diện CAMS dùng tên **Notice** ở m�
 | **7** | Debug | Debugging | Dữ liệu chẩn đoán rất chi tiết; chỉ bật khi cần vì có thể tạo nhiều log. |
 
 <figure>
-<p><img src="../../figures/gui/chapter-13/04-severity-levels.png"
+<p><img src="../assets/ui/legacy/system-logs/severity-levels.png"
 style="width:48.0%" /></p>
 <figcaption><p>Bộ lọc cho phép chọn chính xác từng mức severity 0–7.</p></figcaption>
 </figure>
@@ -76,7 +76,7 @@ style="width:48.0%" /></p>
     và `3`.
 
 <figure>
-<p><img src="../../figures/gui/chapter-13/05-critical-filter-result.png"
+<p><img src="../assets/ui/legacy/system-logs/critical-filter-result.png"
 style="width:100.0%" /></p>
 <figcaption><p>Kết quả khi lọc đồng thời bốn mức nghiêm trọng 0, 1, 2 và 3.</p></figcaption>
 </figure>
@@ -84,7 +84,7 @@ style="width:100.0%" /></p>
 ## Lọc log trên thanh công cụ
 
 <figure>
-<p><img src="../../figures/gui/chapter-13/03-log-filter-bar.png"
+<p><img src="../assets/ui/legacy/system-logs/filter-bar.png"
 style="width:100.0%" /></p>
 <figcaption><p>Các điều kiện lọc nhanh trước khi đọc hoặc xuất log.</p></figcaption>
 </figure>
@@ -109,7 +109,7 @@ Nhấp vào ô **Click to build a Smart Filter…** để mở biểu mẫu. Ch�
 điều kiện cần thiết; CAMS tự tạo biểu thức ở cuối cửa sổ.
 
 <figure>
-<p><img src="../../figures/gui/chapter-13/06-smart-filter-builder.png"
+<p><img src="../assets/ui/legacy/system-logs/smart-filter-builder.png"
 style="width:78.0%" /></p>
 <figcaption><p>Smart Filter kết hợp host, severity, facility, mnemonic và thời gian.</p></figcaption>
 </figure>
@@ -138,7 +138,7 @@ trước khi chọn **Apply Filter**.
 Nhấp đúp một dòng log để mở cửa sổ chi tiết.
 
 <figure>
-<p><img src="../../figures/gui/chapter-13/07-log-message-details.png"
+<p><img src="../assets/ui/legacy/system-logs/message-details.png"
 style="width:78.0%" /></p>
 <figcaption><p>Thông tin đã phân tích và raw message của một sự kiện Cisco.</p></figcaption>
 </figure>

@@ -2,55 +2,5 @@
   "version": 1,
   "source_commit": "ab9a407",
   "description": "Pre-existing image reference exceptions from Phase 3 bootstrap; remove individual entries as batches fix references. Never automatically refresh this baseline to hide new failures.",
-  "broken_images": [
-    {
-      "source_document": "00_book/DOC/13_xem_system_logs.md",
-      "referenced_path": "../../figures/gui/chapter-13/01-system-logs-overview.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-13/01-system-logs-overview.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/13_xem_system_logs.md",
-      "referenced_path": "../../figures/gui/chapter-13/02-listener-status.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-13/02-listener-status.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/13_xem_system_logs.md",
-      "referenced_path": "../../figures/gui/chapter-13/03-log-filter-bar.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-13/03-log-filter-bar.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/13_xem_system_logs.md",
-      "referenced_path": "../../figures/gui/chapter-13/04-severity-levels.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-13/04-severity-levels.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/13_xem_system_logs.md",
-      "referenced_path": "../../figures/gui/chapter-13/05-critical-filter-result.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-13/05-critical-filter-result.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/13_xem_system_logs.md",
-      "referenced_path": "../../figures/gui/chapter-13/06-smart-filter-builder.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-13/06-smart-filter-builder.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/13_xem_system_logs.md",
-      "referenced_path": "../../figures/gui/chapter-13/07-log-message-details.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-13/07-log-message-details.png",
-      "count": 1
-    }
-  ]
+  "broken_images": []
 }

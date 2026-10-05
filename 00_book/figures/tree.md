@@ -2,14 +2,6 @@
 ├── gui
 │   ├── chapter-09
 │   │   └── 02-hsrp-authentication-timers.png
-│   ├── chapter-13
-│   │   ├── 01-system-logs-overview.png
-│   │   ├── 02-listener-status.png
-│   │   ├── 03-log-filter-bar.png
-│   │   ├── 04-severity-levels.png
-│   │   ├── 05-critical-filter-result.png
-│   │   ├── 06-smart-filter-builder.png
-│   │   └── 07-log-message-details.png
 ├── icons
 │   └── ptit-logo.svg
 ├── report
@@ -475,5 +467,17 @@ B10A canonical legacy Syslog configuration UI (outside this figures tree):
 - documentation_assets/ui/legacy/routing/syslog/group-interfaces.png
 - documentation_assets/ui/legacy/routing/syslog/group-policy.png
 - documentation_assets/ui/legacy/routing/syslog/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B10B canonical legacy System Logs viewer UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/system-logs/overview.png
+- documentation_assets/ui/legacy/system-logs/listener-status.png
+- documentation_assets/ui/legacy/system-logs/filter-bar.png
+- documentation_assets/ui/legacy/system-logs/severity-levels.png
+- documentation_assets/ui/legacy/system-logs/critical-filter-result.png
+- documentation_assets/ui/legacy/system-logs/smart-filter-builder.png
+- documentation_assets/ui/legacy/system-logs/message-details.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
