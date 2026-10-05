@@ -1,0 +1,433 @@
+{
+  "batch": "B09",
+  "starting_commit": "b7c6b2897cd2840654d6917a27fa4b685d233c9e",
+  "branch": "docs/pictures-sort",
+  "main_behind": 0,
+  "status": "ALL 12 REVIEW DECISIONS COMPLETE BEFORE ANY FILE MOVE",
+  "approve_migration": 12,
+  "hold_migration": 0,
+  "fixed_execution_packs": {
+    "B09A": [
+      "ui.transfer.sftp.connection-form",
+      "ui.transfer.sftp.workspace-overview",
+      "ui.transfer.sftp.connection-bar",
+      "ui.transfer.sftp.local-files",
+      "ui.transfer.sftp.remote-files",
+      "ui.transfer.sftp.transfer-queue",
+      "ui.transfer.sftp.host-key-confirmation",
+      "ui.transfer.sftp.connection-paths",
+      "ui.transfer.scp.workspace"
+    ],
+    "B09B": [
+      "ui.transfer.snapshots.sync-notifications",
+      "ui.transfer.snapshots.running-config-history",
+      "ui.transfer.snapshots.running-config-diff"
+    ]
+  },
+  "provenance_policy": "Visible fixture-like values are consistent with illustrative documentation state, not generator/origin proof; unknown provenance retained.",
+  "regeneration_policy": "Successful byte-preserving legacy relocation does not resolve investigate-first or approve regeneration/replacement.",
+  "regeneration_occurred": false,
+  "network_or_device_action": false,
+  "records": [
+    {
+      "asset_id": "ui.transfer.sftp.connection-form",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/01-sftp-connection-form.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/connection-form.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Edit SFTP/SCP connection form: Backup Server, SFTP mode, host/port/username/password/private-key controls.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 presents profile configuration and authentication fields, not an observed server result.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 27,
+          "referenced_path": "../../figures/gui/chapter-12/01-sftp-connection-form.png",
+          "target_type": "book-mkdocs",
+          "context_start": 24,
+          "context": "tin m\u00e1y ch\u1ee7 nh\u01b0 h\u00ecnh d\u01b0\u1edbi.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/01-sftp-connection-form.png\"\nstyle=\"width:72.0%\" /></p>\n<figcaption><p>Th\u00f4ng tin x\u00e1c th\u1ef1c v\u00e0 tr\u01b0\u1eddng Transfer mode c\u1ee7a profile SFTP/SCP.</p></figcaption>\n</figure>\n\n| Tr\u01b0\u1eddng | C\u00e1ch nh\u1eadp |\n|---|---|\n| **Display name** | T\u00ean g\u1ee3i nh\u1edb hi\u1ec3n th\u1ecb trong danh s\u00e1ch k\u1ebft n\u1ed1i, v\u00ed d\u1ee5 `Backup Server`. |"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 31,
+          "referenced_path": "figures/gui/chapter-12/01-sftp-connection-form.png",
+          "target_type": "book-typst",
+          "context_start": 28,
+          "context": "\nCh\u1ecdn n\u00fat th\u00eam k\u1ebft n\u1ed1i trong panel *SFTP/SCP CONNECTIONS*. CAMS m\u1edf bi\u1ec3u m\u1eabu th\u00f4ng tin m\u00e1y ch\u1ee7 t\u1ea1i @fig:ch12-01-sftp-connection-form.\n\n#insert-image(\"figures/gui/chapter-12/01-sftp-connection-form.png\",\n  caption: [Th\u00f4ng tin x\u00e1c th\u1ef1c v\u00e0 tr\u01b0\u1eddng Transfer mode c\u1ee7a profile SFTP/SCP.], width: 72.0%) <fig:ch12-01-sftp-connection-form>\n\n#report-table(\n  columns: (1.15fr, 2.85fr),\n  header: ([Tr\u01b0\u1eddng], [C\u00e1ch nh\u1eadp]),\n  rows: (\n    ([*Display name*], [T\u00ean g\u1ee3i nh\u1edb hi\u1ec3n th\u1ecb trong danh s\u00e1ch k\u1ebft n\u1ed1i, v\u00ed d\u1ee5 #raw(\"Backup Server\").]),"
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.sftp.workspace-overview",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/02-sftp-workspace-overview.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/workspace-overview.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Connected SFTP workspace: connection bar, LOCAL and REMOTE panels, file listing and transfer queue.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 presents workspace layout and queue controls, not a throughput measurement.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 164,
+          "referenced_path": "../../figures/gui/chapter-12/02-sftp-workspace-overview.png",
+          "target_type": "book-mkdocs",
+          "context_start": 161,
+          "context": "r\u1ed9ng panel n\u00e0y khi thao t\u00e1c t\u1ec7p.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/02-sftp-workspace-overview.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>T\u1ed5ng th\u1ec3 Workspace SFTP v\u1edbi hai panel v\u00e0 h\u00e0ng \u0111\u1ee3i truy\u1ec1n t\u1ec7p.</p></figcaption>\n</figure>\n\nM\u1ed7i l\u1ea7n Upload ho\u1eb7c Download b\u1eb1ng SFTP hay SCP t\u1ea1o m\u1ed9t m\u1ee5c trong **FILE TRANSFER\nQUEUE**.\n"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 114,
+          "referenced_path": "figures/gui/chapter-12/02-sftp-workspace-overview.png",
+          "target_type": "book-typst",
+          "context_start": 111,
+          "context": "\nSau khi k\u1ebft n\u1ed1i, hai panel local v\u00e0 remote n\u1eb1m c\u1ea1nh nhau \u0111\u1ec3 d\u1ec5 \u0111\u1ed1i chi\u1ebfu ngu\u1ed3n v\u1edbi \u0111\u00edch. Danh s\u00e1ch profile c\u00f3 th\u1ec3 \u0111\u01b0\u1ee3c gi\u1eef \u1edf b\u00ean tr\u00e1i; kh\u00f4ng b\u1eaft bu\u1ed9c ph\u1ea3i m\u1edf r\u1ed9ng panel n\u00e0y khi thao t\u00e1c t\u1ec7p.\n\n#insert-image(\"figures/gui/chapter-12/02-sftp-workspace-overview.png\",\n  caption: [T\u1ed5ng th\u1ec3 Workspace SFTP v\u1edbi hai panel v\u00e0 h\u00e0ng \u0111\u1ee3i truy\u1ec1n t\u1ec7p.], width: 100.0%) <fig:ch12-02-sftp-workspace-overview>\n\nM\u1ed7i l\u1ea7n Upload ho\u1eb7c Download b\u1eb1ng SFTP hay SCP t\u1ea1o m\u1ed9t m\u1ee5c trong *FILE TRANSFER QUEUE*.\n\n#insert-image(\"figures/gui/chapter-12/06-sftp-transfer-queue.png\",\n  caption: [Ti\u1ebfn \u0111\u1ed9 Upload, Download v\u00e0 tr\u1ea1ng th\u00e1i ho\u00e0n th\u00e0nh.], width: 100.0%) <fig:ch12-06-sftp-transfer-queue>\n"
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.sftp.connection-bar",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/03-sftp-connection-bar.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/connection-bar.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Quick connection bar: host 198.51.100.20, port 22, netbackup, SFTP mode, key selector and Disconnect.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 explains direct connection controls and mode selection.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 72,
+          "referenced_path": "../../figures/gui/chapter-12/03-sftp-connection-bar.png",
+          "target_type": "book-mkdocs",
+          "context_start": 69,
+          "context": "l\u1ea1i bi\u1ec3u m\u1eabu profile.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/03-sftp-connection-bar.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Thanh k\u1ebft n\u1ed1i nhanh c\u00f3 th\u00eam l\u1ef1a ch\u1ecdn Mode SFTP ho\u1eb7c SCP.</p></figcaption>\n</figure>\n\nNh\u1eadp **Host/IP**, **Port**, **Username**, ch\u1ecdn **Mode**, ch\u1ecdn **Private key** n\u1ebfu\nc\u00f3, r\u1ed3i nh\u1ea5n **Connect**. Mode ch\u1ec9 \u0111\u1ed5i \u0111\u01b0\u1ee3c khi ch\u01b0a k\u1ebft n\u1ed1i. Khi phi\u00ean \u0111\u00e3 ho\u1ea1t\n\u0111\u1ed9ng, n\u00fat n\u00e0y chuy\u1ec3n th\u00e0nh **Disconnect**. N\u1ebfu"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 67,
+          "referenced_path": "figures/gui/chapter-12/03-sftp-connection-bar.png",
+          "target_type": "book-typst",
+          "context_start": 64,
+          "context": "\nThanh ph\u00eda tr\u00ean Workspace cho ph\u00e9p nh\u1eadp nhanh th\u00f4ng tin k\u1ebft n\u1ed1i m\u00e0 kh\u00f4ng c\u1ea7n m\u1edf l\u1ea1i bi\u1ec3u m\u1eabu profile.\n\n#insert-image(\"figures/gui/chapter-12/03-sftp-connection-bar.png\",\n  caption: [Thanh k\u1ebft n\u1ed1i nhanh c\u00f3 th\u00eam l\u1ef1a ch\u1ecdn Mode SFTP ho\u1eb7c SCP.], width: 100.0%) <fig:ch12-03-sftp-connection-bar>\n\nNh\u1eadp *Host/IP*, *Port*, *Username*, ch\u1ecdn *Mode*, ch\u1ecdn *Private key* n\u1ebfu c\u00f3, r\u1ed3i nh\u1ea5n *Connect*. Mode ch\u1ec9 \u0111\u1ed5i \u0111\u01b0\u1ee3c khi ch\u01b0a k\u1ebft n\u1ed1i. Khi phi\u00ean \u0111\u00e3 ho\u1ea1t \u0111\u1ed9ng, n\u00fat n\u00e0y chuy\u1ec3n th\u00e0nh *Disconnect*. N\u1ebfu server y\u00eau c\u1ea7u m\u1eadt kh\u1ea9u nh\u01b0ng profile kh\u00f4ng l\u01b0u m\u1eadt kh\u1ea9u, CAMS s\u1ebd y\u00eau c\u1ea7u nh\u1eadp th\u00f4ng tin x\u00e1c th\u1ef1c trong qu\u00e1 tr\u00ecnh k\u1ebft n\u1ed1i.\n\n=== X\u00e1c minh host key l\u1ea7n \u0111\u1ea7u\n\nKhi g\u1eb7p server ch\u01b0a t\u1eebng \u0111\u01b0\u1ee3c tin c\u1eady, CAMS hi\u1ec3n th\u1ecb fingerprint c\u1ee7a SSH host key tr\u01b0\u1edbc khi ti\u1ebfp t\u1ee5c."
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.sftp.local-files",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/04-sftp-local-files.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/local-files.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "LOCAL filesystem panel: temporary /tmp/cams-docshots-.../sftp path, navigation, listing and upload controls.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes local file browsing operations; no experimental claim. Actual current usage is Markdown-only.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 107,
+          "referenced_path": "../../figures/gui/chapter-12/04-sftp-local-files.png",
+          "target_type": "book-mkdocs",
+          "context_start": 104,
+          "context": "Panel **LOCAL FILES** hi\u1ec3n th\u1ecb n\u1ed9i dung tr\u00ean m\u00e1y ch\u1ea1y CAMS.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/04-sftp-local-files.png\"\nstyle=\"width:72.0%\" /></p>\n<figcaption><p>Panel local v\u1edbi \u0111\u01b0\u1eddng d\u1eabn, \u0111i\u1ec1u h\u01b0\u1edbng v\u00e0 c\u00e1c thao t\u00e1c t\u1ec7p.</p></figcaption>\n</figure>\n\n- Nh\u1eadp \u0111\u01b0\u1eddng d\u1eabn ho\u1eb7c d\u00f9ng **Back**, **Forward**, **Up**, **Refresh** \u0111\u1ec3 \u0111i\u1ec1u\n  h\u01b0\u1edbng.\n- Nh\u1ea5p \u0111\u00fap th\u01b0 m\u1ee5c \u0111\u1ec3 m\u1edf. Ch\u1ecdn m\u1ed9t hay nhi\u1ec1u t\u1ec7p r\u1ed3i nh\u1ea5n **Upload** \u0111\u1ec3 \u0111\u01b0a l\u00ean"
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.sftp.remote-files",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/05-sftp-remote-files.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/remote-files.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "REMOTE SFTP filesystem panel: /network/configs, archive/config/export rows, navigation and download controls.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes remote file browsing operations; no production-server evidence claim. Actual current usage is Markdown-only.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 124,
+          "referenced_path": "../../figures/gui/chapter-12/05-sftp-remote-files.png",
+          "target_type": "book-mkdocs",
+          "context_start": 121,
+          "context": "Panel **REMOTE FILES** ch\u1ec9 s\u1eb5n s\u00e0ng sau khi k\u1ebft n\u1ed1i th\u00e0nh c\u00f4ng.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/05-sftp-remote-files.png\"\nstyle=\"width:72.0%\" /></p>\n<figcaption><p>Panel remote t\u1ea1i th\u01b0 m\u1ee5c l\u01b0u c\u1ea5u h\u00ecnh m\u1ea1ng tr\u00ean SFTP server.</p></figcaption>\n</figure>\n\n- **Download** t\u1ea3i m\u1ee5c \u0111ang ch\u1ecdn v\u1ec1 th\u01b0 m\u1ee5c local \u0111ang m\u1edf.\n- **New folder**, **Rename** v\u00e0 **Delete** th\u1ef1c hi\u1ec7n tr\u00ean server v\u00e0 ph\u1ee5 thu\u1ed9c\n  quy\u1ec1n c\u1ee7a t\u00e0i kho\u1ea3n SFTP."
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.sftp.transfer-queue",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/06-sftp-transfer-queue.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/transfer-queue.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "FILE TRANSFER QUEUE: uploading/transferring and completed download rows, progress, size/speed text, Cancel/Clear finished.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Caption describes Upload/Download progress and completion. Speeds, sizes and timestamps illustrate UI states; no performance-results claim.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 173,
+          "referenced_path": "../../figures/gui/chapter-12/06-sftp-transfer-queue.png",
+          "target_type": "book-mkdocs",
+          "context_start": 170,
+          "context": "QUEUE**.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/06-sftp-transfer-queue.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Ti\u1ebfn \u0111\u1ed9 Upload, Download v\u00e0 tr\u1ea1ng th\u00e1i ho\u00e0n th\u00e0nh.</p></figcaption>\n</figure>\n\n- Bi\u1ec3u t\u01b0\u1ee3ng v\u00e0 c\u1ed9t t\u00ean cho bi\u1ebft t\u1ec7p c\u00f9ng chi\u1ec1u **upload/download**.\n- Thanh ti\u1ebfn \u0111\u1ed9, tr\u1ea1ng th\u00e1i v\u00e0 ph\u1ea7n m\u00f4 t\u1ea3 gi\u00fap theo d\u00f5i t\u1eebng t\u00e1c v\u1ee5.\n- **Cancel** ch\u1ec9 kh\u1ea3 d\u1ee5ng khi t\u00e1c v\u1ee5 \u0111ang ch\u1edd ho\u1eb7c \u0111ang truy\u1ec1n."
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 119,
+          "referenced_path": "figures/gui/chapter-12/06-sftp-transfer-queue.png",
+          "target_type": "book-typst",
+          "context_start": 116,
+          "context": "\nM\u1ed7i l\u1ea7n Upload ho\u1eb7c Download b\u1eb1ng SFTP hay SCP t\u1ea1o m\u1ed9t m\u1ee5c trong *FILE TRANSFER QUEUE*.\n\n#insert-image(\"figures/gui/chapter-12/06-sftp-transfer-queue.png\",\n  caption: [Ti\u1ebfn \u0111\u1ed9 Upload, Download v\u00e0 tr\u1ea1ng th\u00e1i ho\u00e0n th\u00e0nh.], width: 100.0%) <fig:ch12-06-sftp-transfer-queue>\n\n- Bi\u1ec3u t\u01b0\u1ee3ng v\u00e0 c\u1ed9t t\u00ean cho bi\u1ebft t\u1ec7p c\u00f9ng chi\u1ec1u *upload/download*.\n- Thanh ti\u1ebfn \u0111\u1ed9, tr\u1ea1ng th\u00e1i v\u00e0 ph\u1ea7n m\u00f4 t\u1ea3 gi\u00fap theo d\u00f5i t\u1eebng t\u00e1c v\u1ee5.\n- *Cancel* ch\u1ec9 kh\u1ea3 d\u1ee5ng khi t\u00e1c v\u1ee5 \u0111ang ch\u1edd ho\u1eb7c \u0111ang truy\u1ec1n.\n- *Clear finished* x\u00f3a c\u00e1c m\u1ee5c \u0111\u00e3 ho\u00e0n th\u00e0nh kh\u1ecfi h\u00e0ng \u0111\u1ee3i, kh\u00f4ng x\u00f3a t\u1ec7p \u0111\u00e3 truy\u1ec1n.\n"
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.sftp.host-key-confirmation",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "CAMS Confirm SSH Host Key application dialog: host, ssh-ed25519, example-key fingerprint, Cancel/Trust and Connect.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes first-use host-key confirmation. This is CAMS UI, not a terminal/native OS dialog or external verification artifact.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 89,
+          "referenced_path": "../../figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
+          "target_type": "book-mkdocs",
+          "context_start": 86,
+          "context": "key tr\u01b0\u1edbc khi ti\u1ebfp t\u1ee5c.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/07-sftp-host-key-confirmation.png\"\nstyle=\"width:66.0%\" /></p>\n<figcaption><p>X\u00e1c nh\u1eadn fingerprint c\u1ee7a SFTP server tr\u01b0\u1edbc l\u1ea7n k\u1ebft n\u1ed1i \u0111\u1ea7u ti\u00ean.</p></figcaption>\n</figure>\n\nH\u1ed9p x\u00e1c nh\u1eadn n\u00e0y d\u00f9ng cho c\u1ea3 SFTP v\u00e0 SCP. \u0110\u1ed1i chi\u1ebfu fingerprint v\u1edbi qu\u1ea3n tr\u1ecb\nvi\u00ean ho\u1eb7c m\u1ed9t k\u00eanh tin c\u1eady kh\u00e1c. Ch\u1ec9 ch\u1ecdn\n**Trust and Connect** khi fingerprint tr\u00f9ng kh\u1edbp. N\u1ebfu host key c\u1ee7a m\u1ed9t server \u0111\u00e3"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 76,
+          "referenced_path": "figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
+          "target_type": "book-typst",
+          "context_start": 73,
+          "context": "\nKhi g\u1eb7p server ch\u01b0a t\u1eebng \u0111\u01b0\u1ee3c tin c\u1eady, CAMS hi\u1ec3n th\u1ecb fingerprint c\u1ee7a SSH host key tr\u01b0\u1edbc khi ti\u1ebfp t\u1ee5c.\n\n#insert-image(\"figures/gui/chapter-12/07-sftp-host-key-confirmation.png\",\n  caption: [X\u00e1c nh\u1eadn fingerprint c\u1ee7a SFTP server tr\u01b0\u1edbc l\u1ea7n k\u1ebft n\u1ed1i \u0111\u1ea7u ti\u00ean.], width: 66.0%) <fig:ch12-07-sftp-host-key-confirmation>\n\n#report-note[H\u1ed9p x\u00e1c nh\u1eadn n\u00e0y d\u00f9ng cho c\u1ea3 SFTP v\u00e0 SCP. \u0110\u1ed1i chi\u1ebfu fingerprint v\u1edbi qu\u1ea3n tr\u1ecb vi\u00ean ho\u1eb7c m\u1ed9t k\u00eanh tin c\u1eady kh\u00e1c. Ch\u1ec9 ch\u1ecdn *Trust and Connect* khi fingerprint tr\u00f9ng kh\u1edbp. N\u1ebfu host key c\u1ee7a m\u1ed9t server \u0111\u00e3 bi\u1ebft \u0111\u1ed9t ng\u1ed9t thay \u0111\u1ed5i, d\u1eebng k\u1ebft n\u1ed1i v\u00e0 x\u00e1c minh nguy\u00ean nh\u00e2n thay v\u00ec ch\u1ea5p nh\u1eadn ngay.]\n\n== Truy\u1ec1n t\u1ec7p b\u1eb1ng SFTP\n\n=== Qu\u1ea3n l\u00fd t\u1ec7p local"
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.sftp.connection-paths",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/08-sftp-connection-paths.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/sftp/connection-paths.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Edit connection form initial paths: /home/user/CAMS-Backups and /network/configs plus SSH details.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes initial directories and mode-dependent path fields.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 49,
+          "referenced_path": "../../figures/gui/chapter-12/08-sftp-connection-paths.png",
+          "target_type": "book-mkdocs",
+          "context_start": 46,
+          "context": "Cu\u1ed9n xu\u1ed1ng ph\u1ea7n cu\u1ed1i bi\u1ec3u m\u1eabu \u0111\u1ec3 \u0111\u1eb7t th\u01b0 m\u1ee5c m\u1edf ban \u0111\u1ea7u.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/08-sftp-connection-paths.png\"\nstyle=\"width:72.0%\" /></p>\n<figcaption><p>\u0110\u01b0\u1eddng d\u1eabn local v\u00e0 remote \u0111\u01b0\u1ee3c m\u1edf sau khi k\u1ebft n\u1ed1i.</p></figcaption>\n</figure>\n\n- **Initial local directory**: th\u01b0 m\u1ee5c tr\u00ean m\u00e1y ch\u1ea1y CAMS, v\u00ed d\u1ee5\n  `/home/user/CAMS-Backups`.\n- V\u1edbi **SFTP**, **Initial remote directory** l\u00e0 th\u01b0 m\u1ee5c \u0111\u01b0\u1ee3c m\u1edf sau khi k\u1ebft n\u1ed1i,"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 54,
+          "referenced_path": "figures/gui/chapter-12/08-sftp-connection-paths.png",
+          "target_type": "book-typst",
+          "context_start": 51,
+          "context": "\nCu\u1ed9n xu\u1ed1ng ph\u1ea7n cu\u1ed1i bi\u1ec3u m\u1eabu \u0111\u1ec3 \u0111\u1eb7t th\u01b0 m\u1ee5c m\u1edf ban \u0111\u1ea7u.\n\n#insert-image(\"figures/gui/chapter-12/08-sftp-connection-paths.png\",\n  caption: [\u0110\u01b0\u1eddng d\u1eabn local v\u00e0 remote \u0111\u01b0\u1ee3c m\u1edf sau khi k\u1ebft n\u1ed1i.], width: 72.0%) <fig:ch12-08-sftp-connection-paths>\n\n- *Initial local directory*: th\u01b0 m\u1ee5c tr\u00ean m\u00e1y ch\u1ea1y CAMS, v\u00ed d\u1ee5 #raw(\"/home/user/CAMS-Backups\").\n- V\u1edbi *SFTP*, *Initial remote directory* l\u00e0 th\u01b0 m\u1ee5c \u0111\u01b0\u1ee3c m\u1edf sau khi k\u1ebft n\u1ed1i, v\u00ed d\u1ee5 #raw(\"/network/configs\").\n- V\u1edbi *SCP*, tr\u01b0\u1eddng n\u00e0y \u0111\u1ed5i th\u00e0nh *Remote upload/download path*. Nh\u1eadp \u0111\u01b0\u1eddng d\u1eabn remote c\u1ee5 th\u1ec3, v\u00ed d\u1ee5 #raw(\"/network/incoming/R1.cfg\") ho\u1eb7c th\u01b0 m\u1ee5c \u0111\u00edch \u0111\u01b0\u1ee3c server cho ph\u00e9p.\n\nCh\u1ecdn *Save* \u0111\u1ec3 l\u01b0u profile. Tr\u01b0\u1edbc khi d\u00f9ng tr\u00ean h\u1ec7 th\u1ed1ng th\u1eadt, ki\u1ec3m tra Transfer mode, Host/IP, username, kh\u00f3a ri\u00eang v\u00e0 hai \u0111\u01b0\u1eddng d\u1eabn; kh\u00f4ng \u0111\u01b0a m\u1eadt kh\u1ea9u ho\u1eb7c kh\u00f3a ri\u00eang v\u00e0o t\u00e0i li\u1ec7u d\u00f9ng chung."
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.scp.workspace",
+      "pack": "B09A",
+      "old_path": "00_book/figures/gui/chapter-12/09-scp-workspace.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/scp/workspace.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "SCP workspace: explicit REMOTE SCP PATH /network/incoming/R1.cfg, Download path, local panel and queue.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes SCP explicit remote path behavior, distinct from SFTP browsing.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 143,
+          "referenced_path": "../../figures/gui/chapter-12/09-scp-workspace.png",
+          "target_type": "book-mkdocs",
+          "context_start": 140,
+          "context": "s\u00e1ch filesystem.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/09-scp-workspace.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Workspace SCP v\u1edbi \u0111\u01b0\u1eddng d\u1eabn remote nh\u1eadp tr\u1ef1c ti\u1ebfp.</p></figcaption>\n</figure>\n\n\u0110\u1ec3 upload, nh\u1eadp th\u01b0 m\u1ee5c ho\u1eb7c \u0111\u01b0\u1eddng d\u1eabn \u0111\u00edch \u1edf panel ph\u1ea3i, ch\u1ecdn m\u1ee5c \u1edf panel local\nr\u1ed3i nh\u1ea5n **Upload**. \u0110\u1ec3 download, nh\u1eadp \u0111\u1ea7y \u0111\u1ee7 \u0111\u01b0\u1eddng d\u1eabn file/th\u01b0 m\u1ee5c remote r\u1ed3i\nnh\u1ea5n **Download path**. Ki\u1ec3m tra d\u1ea5u `/`, t\u00ean t\u1ec7p, quy\u1ec1n ghi v\u00e0 quy t\u1eafc \u0111\u01b0\u1eddng d\u1eabn"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 103,
+          "referenced_path": "figures/gui/chapter-12/09-scp-workspace.png",
+          "target_type": "book-typst",
+          "context_start": 100,
+          "context": "\nCh\u1ecdn Mode *SCP* tr\u01b0\u1edbc khi Connect. Panel local v\u1eabn cho ph\u00e9p ch\u1ecdn t\u1ec7p ho\u1eb7c th\u01b0 m\u1ee5c, nh\u01b0ng panel remote chuy\u1ec3n th\u00e0nh *REMOTE SCP PATH* v\u00e0 kh\u00f4ng hi\u1ec3n th\u1ecb danh s\u00e1ch filesystem.\n\n#insert-image(\"figures/gui/chapter-12/09-scp-workspace.png\",\n  caption: [Workspace SCP v\u1edbi \u0111\u01b0\u1eddng d\u1eabn remote nh\u1eadp tr\u1ef1c ti\u1ebfp.], width: 100.0%) <fig:ch12-09-scp-workspace>\n\n\u0110\u1ec3 upload, nh\u1eadp th\u01b0 m\u1ee5c ho\u1eb7c \u0111\u01b0\u1eddng d\u1eabn \u0111\u00edch \u1edf panel ph\u1ea3i, ch\u1ecdn m\u1ee5c \u1edf panel local r\u1ed3i nh\u1ea5n *Upload*. \u0110\u1ec3 download, nh\u1eadp \u0111\u1ea7y \u0111\u1ee7 \u0111\u01b0\u1eddng d\u1eabn file/th\u01b0 m\u1ee5c remote r\u1ed3i nh\u1ea5n *Download path*. Ki\u1ec3m tra d\u1ea5u #raw(\"/\"), t\u00ean t\u1ec7p, quy\u1ec1n ghi v\u00e0 quy t\u1eafc \u0111\u01b0\u1eddng d\u1eabn c\u1ee7a server tr\u01b0\u1edbc khi b\u1eaft \u0111\u1ea7u.\n\nSCP kh\u00f4ng c\u00f3 c\u00e1c thao t\u00e1c duy\u1ec7t, Refresh, New folder, Rename ho\u1eb7c Delete \u1edf ph\u00eda remote. N\u1ebfu ch\u01b0a ch\u1eafc \u0111\u01b0\u1eddng d\u1eabn t\u1ed3n t\u1ea1i, chuy\u1ec3n sang SFTP \u0111\u1ec3 ki\u1ec3m tra ho\u1eb7c x\u00e1c minh b\u1eb1ng c\u00f4ng c\u1ee5 qu\u1ea3n tr\u1ecb server.\n\n== Giao di\u1ec7n t\u1ed5ng th\u1ec3 v\u00e0 h\u00e0ng \u0111\u1ee3i truy\u1ec1n t\u1ec7p"
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.snapshots.sync-notifications",
+      "pack": "B09B",
+      "old_path": "00_book/figures/gui/chapter-12/10-sync-notifications.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Notification center: Getting running-config, snapshot saved and background synchronization completed for 192.0.2.1.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes notification states and their meaning, not a measured synchronization experiment.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 206,
+          "referenced_path": "../../figures/gui/chapter-12/10-sync-notifications.png",
+          "target_type": "book-mkdocs",
+          "context_start": 203,
+          "context": "th\u1ec3 ho\u00e0n t\u1ea5t \u1edf c\u00e1c th\u1eddi \u0111i\u1ec3m kh\u00e1c nhau.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/10-sync-notifications.png\"\nstyle=\"width:52.0%\" /></p>\n<figcaption><p>Th\u00f4ng b\u00e1o l\u1ea7n l\u01b0\u1ee3t khi l\u1ea5y running-config, l\u01b0u snapshot v\u00e0 ho\u00e0n t\u1ea5t \u0111\u1ed3ng b\u1ed9 n\u1ec1n.</p></figcaption>\n</figure>\n\n- Th\u00f4ng b\u00e1o **Getting running-config\u2026** cho bi\u1ebft t\u00e1c v\u1ee5 \u0111\u00e3 b\u1eaft \u0111\u1ea7u, ch\u01b0a ph\u1ea3i k\u1ebft\n  qu\u1ea3 th\u00e0nh c\u00f4ng.\n- **Running-config snapshot saved\u2026** x\u00e1c nh\u1eadn b\u1ea3n c\u1ea5u h\u00ecnh \u0111\u00e3 \u0111\u01b0\u1ee3c l\u01b0u v\u00e0o l\u1ecbch"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 138,
+          "referenced_path": "figures/gui/chapter-12/10-sync-notifications.png",
+          "target_type": "book-typst",
+          "context_start": 135,
+          "context": "\nKhi t\u00e1c v\u1ee5 ch\u1ea1y, theo d\u00f5i Status Bar v\u00e0 Notification Center. Kh\u00f4ng ch\u1ea1y l\u1ea1i li\u00ean t\u1ee5c ch\u1ec9 v\u00ec ch\u01b0a th\u1ea5y d\u1eef li\u1ec7u m\u1edbi; qu\u00e1 tr\u00ecnh thu th\u1eadp, l\u01b0u snapshot v\u00e0 \u0111\u1ed3ng b\u1ed9 c\u00f3 th\u1ec3 ho\u00e0n t\u1ea5t \u1edf c\u00e1c th\u1eddi \u0111i\u1ec3m kh\u00e1c nhau.\n\n#insert-image(\"figures/gui/chapter-12/10-sync-notifications.png\",\n  caption: [Th\u00f4ng b\u00e1o l\u1ea7n l\u01b0\u1ee3t khi l\u1ea5y running-config, l\u01b0u snapshot v\u00e0 ho\u00e0n t\u1ea5t \u0111\u1ed3ng b\u1ed9 n\u1ec1n.], width: 52.0%) <fig:ch12-10-sync-notifications>\n\n- Th\u00f4ng b\u00e1o *Getting running-config\u2026* cho bi\u1ebft t\u00e1c v\u1ee5 \u0111\u00e3 b\u1eaft \u0111\u1ea7u, ch\u01b0a ph\u1ea3i k\u1ebft qu\u1ea3 th\u00e0nh c\u00f4ng.\n- *Running-config snapshot saved\u2026* x\u00e1c nh\u1eadn b\u1ea3n c\u1ea5u h\u00ecnh \u0111\u00e3 \u0111\u01b0\u1ee3c l\u01b0u v\u00e0o l\u1ecbch s\u1eed c\u1ee7a host.\n- *Background synchronization completed\u2026* x\u00e1c nh\u1eadn b\u01b0\u1edbc c\u1eadp nh\u1eadt database \u0111\u00e3 ho\u00e0n t\u1ea5t.\n- N\u1ebfu backup th\u00e0nh c\u00f4ng nh\u01b0ng sync th\u1ea5t b\u1ea1i, snapshot v\u1eabn c\u00f3 th\u1ec3 xem \u0111\u01b0\u1ee3c; \u0111\u1ecdc c\u1ea3nh b\u00e1o v\u00e0 x\u1eed l\u00fd nguy\u00ean nh\u00e2n \u0111\u1ed3ng b\u1ed9 ri\u00eang.\n"
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.snapshots.running-config-history",
+      "pack": "B09B",
+      "old_path": "00_book/figures/gui/chapter-12/11-running-config-history.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Information/Snapshot UI: selected dated config version, configuration viewer, Copy/Export and temporary backup path.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes browsing saved config versions in Snapshot. Visible configuration/time/version data are illustrative UI state in this context.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 228,
+          "referenced_path": "../../figures/gui/chapter-12/11-running-config-history.png",
+          "target_type": "book-mkdocs",
+          "context_start": 225,
+          "context": "b\u1ecb.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/11-running-config-history.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Snapshot m\u1edbi nh\u1ea5t v\u00e0 danh s\u00e1ch c\u00e1c phi\u00ean b\u1ea3n running-config.</p></figcaption>\n</figure>\n\n**Copy All** sao ch\u00e9p ph\u1ea7n \u0111ang hi\u1ec3n th\u1ecb. **Export CFG** xu\u1ea5t snapshot \u0111\u01b0\u1ee3c ch\u1ecdn\nth\u00e0nh t\u1ec7p `.cfg`; n\u00fat n\u00e0y ch\u1ec9 ho\u1ea1t \u0111\u1ed9ng trong ch\u1ebf \u0111\u1ed9 Snapshot, kh\u00f4ng xu\u1ea5t tr\u1ef1c\nti\u1ebfp n\u1ed9i dung Diff."
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 150,
+          "referenced_path": "figures/gui/chapter-12/11-running-config-history.png",
+          "target_type": "book-typst",
+          "context_start": 147,
+          "context": "\nM\u1edf tab thi\u1ebft b\u1ecb \u2192 *Information* \u2192 *Snapshot*. Danh s\u00e1ch *Version* ch\u1ee9a t\u1ed1i \u0111a 100 m\u1ed1c m\u1edbi nh\u1ea5t theo host. Ch\u1ecdn m\u1ed9t m\u1ed1c \u0111\u1ec3 \u0111\u1ecdc \u0111\u00fang n\u1ed9i dung \u0111\u00e3 l\u01b0u t\u1ea1i th\u1eddi \u0111i\u1ec3m \u0111\u00f3; thao t\u00e1c n\u00e0y kh\u00f4ng checkout repository v\u00e0 kh\u00f4ng thay \u0111\u1ed5i c\u1ea5u h\u00ecnh thi\u1ebft b\u1ecb.\n\n#insert-image(\"figures/gui/chapter-12/11-running-config-history.png\",\n  caption: [Snapshot m\u1edbi nh\u1ea5t v\u00e0 danh s\u00e1ch c\u00e1c phi\u00ean b\u1ea3n running-config.], width: 100.0%) <fig:ch12-11-running-config-history>\n\n*Copy All* sao ch\u00e9p ph\u1ea7n \u0111ang hi\u1ec3n th\u1ecb. *Export CFG* xu\u1ea5t snapshot \u0111\u01b0\u1ee3c ch\u1ecdn th\u00e0nh t\u1ec7p #raw(\".cfg\"); n\u00fat n\u00e0y ch\u1ec9 ho\u1ea1t \u0111\u1ed9ng trong ch\u1ebf \u0111\u1ed9 Snapshot, kh\u00f4ng xu\u1ea5t tr\u1ef1c ti\u1ebfp n\u1ed9i dung Diff.\n\n== So s\u00e1nh c\u1ea5u h\u00ecnh b\u1eb1ng Diff\n\nKhi c\u00f3 \u00edt nh\u1ea5t hai phi\u00ean b\u1ea3n, ch\u1ecdn *Compare*. Ch\u1ecdn *Original (older)* v\u00e0 *Modified (newer)*; hai m\u1ed1c kh\u00f4ng c\u1ea7n li\u1ec1n k\u1ec1, v\u00ec CAMS c\u00f3 th\u1ec3 t\u1ea1o diff t\u00edch l\u0169y cho to\u00e0n b\u1ed9 kho\u1ea3ng phi\u00ean b\u1ea3n gi\u1eefa ch\u00fang."
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.transfer.snapshots.running-config-diff",
+      "pack": "B09B",
+      "old_path": "00_book/figures/gui/chapter-12/12-running-config-diff.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Information/Compare UI: Original (older)/Modified (newer), two versions, +4/-1 counts and colored config diff.",
+      "ui_vs_evidence": "CAMS application UI illustration; no raw-experiment assertion in current surrounding documentation",
+      "reason": "Chapter 12 describes comparing config versions; report section describes synchronization/history UI and captions two stored versions. Neither asserts visible config is an experimental result.",
+      "review_method": "Visual inspection of original PNG plus current complete chapter-12 Markdown/Typst and report figure context; no OCR or network actions",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "investigate-first",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
+          "line": 244,
+          "referenced_path": "../../figures/gui/chapter-12/12-running-config-diff.png",
+          "target_type": "book-mkdocs",
+          "context_start": 241,
+          "context": "cho to\u00e0n b\u1ed9 kho\u1ea3ng phi\u00ean b\u1ea3n gi\u1eefa ch\u00fang.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-12/12-running-config-diff.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Diff gi\u1eefa hai phi\u00ean b\u1ea3n v\u1edbi s\u1ed1 d\u00f2ng th\u00eam v\u00e0 x\u00f3a.</p></figcaption>\n</figure>\n\n- D\u00f2ng b\u1eaft \u0111\u1ea7u b\u1eb1ng `-` l\u00e0 n\u1ed9i dung c\u00f3 trong b\u1ea3n c\u0169 nh\u01b0ng kh\u00f4ng c\u00f2n \u1edf b\u1ea3n m\u1edbi.\n- D\u00f2ng b\u1eaft \u0111\u1ea7u b\u1eb1ng `+` l\u00e0 n\u1ed9i dung \u0111\u01b0\u1ee3c th\u00eam v\u00e0o b\u1ea3n m\u1edbi.\n- C\u00e1c badge `+N` v\u00e0 `\u2212N` cho bi\u1ebft t\u1ed5ng s\u1ed1 d\u00f2ng th\u00eam/x\u00f3a; s\u1ed1 **versions** cho bi\u1ebft"
+        },
+        {
+          "source_document": "00_book/contents/12_truyen_tep_sftp.typ",
+          "line": 159,
+          "referenced_path": "figures/gui/chapter-12/12-running-config-diff.png",
+          "target_type": "book-typst",
+          "context_start": 156,
+          "context": "\nKhi c\u00f3 \u00edt nh\u1ea5t hai phi\u00ean b\u1ea3n, ch\u1ecdn *Compare*. Ch\u1ecdn *Original (older)* v\u00e0 *Modified (newer)*; hai m\u1ed1c kh\u00f4ng c\u1ea7n li\u1ec1n k\u1ec1, v\u00ec CAMS c\u00f3 th\u1ec3 t\u1ea1o diff t\u00edch l\u0169y cho to\u00e0n b\u1ed9 kho\u1ea3ng phi\u00ean b\u1ea3n gi\u1eefa ch\u00fang.\n\n#insert-image(\"figures/gui/chapter-12/12-running-config-diff.png\",\n  caption: [Diff gi\u1eefa hai phi\u00ean b\u1ea3n v\u1edbi s\u1ed1 d\u00f2ng th\u00eam v\u00e0 x\u00f3a.], width: 100.0%) <fig:ch12-12-running-config-diff>\n\n- D\u00f2ng b\u1eaft \u0111\u1ea7u b\u1eb1ng #raw(\"-\") l\u00e0 n\u1ed9i dung c\u00f3 trong b\u1ea3n c\u0169 nh\u01b0ng kh\u00f4ng c\u00f2n \u1edf b\u1ea3n m\u1edbi.\n- D\u00f2ng b\u1eaft \u0111\u1ea7u b\u1eb1ng #raw(\"+\") l\u00e0 n\u1ed9i dung \u0111\u01b0\u1ee3c th\u00eam v\u00e0o b\u1ea3n m\u1edbi.\n- C\u00e1c badge #raw(\"+N\") v\u00e0 #raw(\"\u2212N\") cho bi\u1ebft t\u1ed5ng s\u1ed1 d\u00f2ng th\u00eam/x\u00f3a; s\u1ed1 *versions* cho bi\u1ebft kho\u1ea3ng l\u1ecbch s\u1eed \u0111ang \u0111\u01b0\u1ee3c so s\u00e1nh.\n- N\u1ebfu hai endpoint c\u00f3 n\u1ed9i dung gi\u1ed1ng nhau, v\u00f9ng diff b\u00e1o kh\u00f4ng c\u00f3 kh\u00e1c bi\u1ec7t.\n"
+        },
+        {
+          "source_document": "00_report/contents/08_xay_dung_phan_mem.typ",
+          "line": 36,
+          "referenced_path": "/00_book/figures/gui/chapter-12/12-running-config-diff.png",
+          "target_type": "report-typst",
+          "context_start": 33,
+          "context": "Ch\u1ee9c n\u0103ng \u0111\u1ed3ng b\u1ed9 thu th\u1eadp `running-config`, l\u01b0u b\u1ea3n sao, ph\u00e2n t\u00edch c\u00e1c ph\u1ea7n \u0111\u01b0\u1ee3c h\u1ed7 tr\u1ee3 r\u1ed3i c\u1eadp nh\u1eadt c\u01a1 s\u1edf d\u1eef li\u1ec7u. Dulwich qu\u1ea3n l\u00fd l\u1ecbch s\u1eed c\u00e1c b\u1ea3n sao trong kho Git c\u1ee5c b\u1ed9. Ng\u01b0\u1eddi qu\u1ea3n tr\u1ecb c\u00f3 th\u1ec3 xem t\u1eebng phi\u00ean b\u1ea3n v\u00e0 ph\u1ea7n kh\u00e1c bi\u1ec7t \u0111\u1ec3 truy v\u1ebft thay \u0111\u1ed5i, nh\u01b0 @fig-cams-config-diff.\n\n#figure(\n  image(\"/00_book/figures/gui/chapter-12/12-running-config-diff.png\", width: 100%),\n  caption: [So s\u00e1nh hai phi\u00ean b\u1ea3n c\u1ea5u h\u00ecnh \u0111\u00e3 l\u01b0u],\n) <fig-cams-config-diff>\n\nL\u1ecbch s\u1eed n\u00e0y cung c\u1ea5p d\u1eef li\u1ec7u tham chi\u1ebfu khi ki\u1ec3m tra s\u1ef1 c\u1ed1. Vi\u1ec7c kh\u00f4i ph\u1ee5c c\u1ea5u h\u00ecnh thi\u1ebft b\u1ecb v\u1eabn c\u1ea7n l\u1ef1a ch\u1ecdn n\u1ed9i dung ph\u00f9 h\u1ee3p, tri\u1ec3n khai v\u00e0 x\u00e1c minh l\u1ea1i, thay v\u00ec ch\u1ec9 m\u1edf phi\u00ean b\u1ea3n c\u0169 trong \u1ee9ng d\u1ee5ng.\n\n== Hi\u1ec7n th\u1ef1c t\u1ef1 \u0111\u1ed9ng h\u00f3a c\u1ea5u h\u00ecnh v\u00e0 ch\u00ednh s\u00e1ch\n"
+        }
+      ]
+    }
+  ]
+}

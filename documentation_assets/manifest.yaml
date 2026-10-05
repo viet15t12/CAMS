@@ -5833,14 +5833,14 @@ assets:
   domain: transfer/sftp
   subject: connection-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/01-sftp-connection-form.png
-  path: 00_book/figures/gui/chapter-12/01-sftp-connection-form.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/connection-form.png
+  path: documentation_assets/ui/legacy/transfer/sftp/connection-form.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/connection-form.png
   legacy_path: 00_book/figures/gui/chapter-12/01-sftp-connection-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 9c55cfd14a7971abf99250d062b0ab902a871b6d86d66e47d2bd19d7fae0b017
   provenance:
     assessment: unknown
@@ -5858,11 +5858,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 27
-    referenced_path: ../../figures/gui/chapter-12/01-sftp-connection-form.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/connection-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 31
-    referenced_path: figures/gui/chapter-12/01-sftp-connection-form.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/sftp/connection-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -5882,14 +5882,14 @@ assets:
   domain: transfer/sftp
   subject: workspace-overview
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/02-sftp-workspace-overview.png
-  path: 00_book/figures/gui/chapter-12/02-sftp-workspace-overview.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/workspace-overview.png
+  path: documentation_assets/ui/legacy/transfer/sftp/workspace-overview.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/workspace-overview.png
   legacy_path: 00_book/figures/gui/chapter-12/02-sftp-workspace-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ae918986fe845d6a950a2bdbc7a60e71f993fd72580d450c54df12669c561f3a
   provenance:
     assessment: unknown
@@ -5907,11 +5907,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 164
-    referenced_path: ../../figures/gui/chapter-12/02-sftp-workspace-overview.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/workspace-overview.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 114
-    referenced_path: figures/gui/chapter-12/02-sftp-workspace-overview.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/sftp/workspace-overview.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -5931,14 +5931,14 @@ assets:
   domain: transfer/sftp
   subject: connection-bar
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/03-sftp-connection-bar.png
-  path: 00_book/figures/gui/chapter-12/03-sftp-connection-bar.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/connection-bar.png
+  path: documentation_assets/ui/legacy/transfer/sftp/connection-bar.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/connection-bar.png
   legacy_path: 00_book/figures/gui/chapter-12/03-sftp-connection-bar.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: dc2f894c01f78d4463fad6c30ee2543d481021da2cdcdc11d928df919edea133
   provenance:
     assessment: unknown
@@ -5956,11 +5956,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 72
-    referenced_path: ../../figures/gui/chapter-12/03-sftp-connection-bar.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/connection-bar.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 67
-    referenced_path: figures/gui/chapter-12/03-sftp-connection-bar.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/sftp/connection-bar.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -5980,14 +5980,14 @@ assets:
   domain: transfer/sftp
   subject: local-files
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/04-sftp-local-files.png
-  path: 00_book/figures/gui/chapter-12/04-sftp-local-files.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/local-files.png
+  path: documentation_assets/ui/legacy/transfer/sftp/local-files.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/local-files.png
   legacy_path: 00_book/figures/gui/chapter-12/04-sftp-local-files.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 38e559b1d671cfed250e90bc7b19702ae3688c30ccce50ff1ee1027c9ad31770
   provenance:
     assessment: unknown
@@ -6005,7 +6005,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 107
-    referenced_path: ../../figures/gui/chapter-12/04-sftp-local-files.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/local-files.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -6024,14 +6024,14 @@ assets:
   domain: transfer/sftp
   subject: remote-files
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/05-sftp-remote-files.png
-  path: 00_book/figures/gui/chapter-12/05-sftp-remote-files.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/remote-files.png
+  path: documentation_assets/ui/legacy/transfer/sftp/remote-files.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/remote-files.png
   legacy_path: 00_book/figures/gui/chapter-12/05-sftp-remote-files.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 13962ec5e4f79da3be794f18ce99e837c2f5393b695c984c83a8cb5bc0c5a478
   provenance:
     assessment: unknown
@@ -6049,7 +6049,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 124
-    referenced_path: ../../figures/gui/chapter-12/05-sftp-remote-files.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/remote-files.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -6068,14 +6068,14 @@ assets:
   domain: transfer/sftp
   subject: transfer-queue
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/06-sftp-transfer-queue.png
-  path: 00_book/figures/gui/chapter-12/06-sftp-transfer-queue.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/transfer-queue.png
+  path: documentation_assets/ui/legacy/transfer/sftp/transfer-queue.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/transfer-queue.png
   legacy_path: 00_book/figures/gui/chapter-12/06-sftp-transfer-queue.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 95c37b1114d82f89144b94689cbc51f09cba7214b1afe4d18634ff2e5f4692d0
   provenance:
     assessment: unknown
@@ -6093,11 +6093,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 173
-    referenced_path: ../../figures/gui/chapter-12/06-sftp-transfer-queue.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/transfer-queue.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 119
-    referenced_path: figures/gui/chapter-12/06-sftp-transfer-queue.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/sftp/transfer-queue.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6117,14 +6117,14 @@ assets:
   domain: transfer/sftp
   subject: host-key-confirmation
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/07-sftp-host-key-confirmation.png
-  path: 00_book/figures/gui/chapter-12/07-sftp-host-key-confirmation.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png
+  path: documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png
   legacy_path: 00_book/figures/gui/chapter-12/07-sftp-host-key-confirmation.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 88a5d8a1909a0946099726a2e6a7aaf1612bd49dae8717da64353d034765ff09
   provenance:
     assessment: unknown
@@ -6142,11 +6142,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 89
-    referenced_path: ../../figures/gui/chapter-12/07-sftp-host-key-confirmation.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/host-key-confirmation.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 76
-    referenced_path: figures/gui/chapter-12/07-sftp-host-key-confirmation.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6166,14 +6166,14 @@ assets:
   domain: transfer/sftp
   subject: connection-paths
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/08-sftp-connection-paths.png
-  path: 00_book/figures/gui/chapter-12/08-sftp-connection-paths.png
+  current_path: documentation_assets/ui/legacy/transfer/sftp/connection-paths.png
+  path: documentation_assets/ui/legacy/transfer/sftp/connection-paths.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/sftp/connection-paths.png
   legacy_path: 00_book/figures/gui/chapter-12/08-sftp-connection-paths.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d494d8f2364ff1c690a1090db687823981a855018abbdff13b5cad5d534b1ae3
   provenance:
     assessment: unknown
@@ -6191,11 +6191,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 49
-    referenced_path: ../../figures/gui/chapter-12/08-sftp-connection-paths.png
+    referenced_path: ../assets/ui/legacy/transfer/sftp/connection-paths.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 54
-    referenced_path: figures/gui/chapter-12/08-sftp-connection-paths.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/sftp/connection-paths.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6215,14 +6215,14 @@ assets:
   domain: transfer/scp
   subject: workspace
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/09-scp-workspace.png
-  path: 00_book/figures/gui/chapter-12/09-scp-workspace.png
+  current_path: documentation_assets/ui/legacy/transfer/scp/workspace.png
+  path: documentation_assets/ui/legacy/transfer/scp/workspace.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/scp/workspace.png
   legacy_path: 00_book/figures/gui/chapter-12/09-scp-workspace.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: e05ab05ea95d662f9ef0f41db7a00a39ef3f7f1e99ffcdd86c20c2b35a0d9f43
   provenance:
     assessment: unknown
@@ -6240,11 +6240,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 143
-    referenced_path: ../../figures/gui/chapter-12/09-scp-workspace.png
+    referenced_path: ../assets/ui/legacy/transfer/scp/workspace.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 103
-    referenced_path: figures/gui/chapter-12/09-scp-workspace.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/scp/workspace.png
     target_type: book-typst
   targets:
   - book-mkdocs

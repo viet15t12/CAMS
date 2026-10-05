@@ -10,15 +10,6 @@
 │   │   ├── 05-syslog-group-policy.png
 │   │   └── 06-syslog-view-push.png
 │   ├── chapter-12
-│   │   ├── 01-sftp-connection-form.png
-│   │   ├── 02-sftp-workspace-overview.png
-│   │   ├── 03-sftp-connection-bar.png
-│   │   ├── 04-sftp-local-files.png
-│   │   ├── 05-sftp-remote-files.png
-│   │   ├── 06-sftp-transfer-queue.png
-│   │   ├── 07-sftp-host-key-confirmation.png
-│   │   ├── 08-sftp-connection-paths.png
-│   │   ├── 09-scp-workspace.png
 │   │   ├── 10-sync-notifications.png
 │   │   ├── 11-running-config-history.png
 │   │   └── 12-running-config-diff.png
@@ -462,5 +453,19 @@ B08 canonical legacy switching security UI (outside this figures tree):
 - documentation_assets/ui/legacy/switching/security/view-push.png
 - documentation_assets/ui/legacy/switching/security/port-security-form.png
 - documentation_assets/ui/legacy/switching/security/port-security-view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B09A canonical legacy transfer UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/transfer/sftp/connection-form.png
+- documentation_assets/ui/legacy/transfer/sftp/workspace-overview.png
+- documentation_assets/ui/legacy/transfer/sftp/connection-bar.png
+- documentation_assets/ui/legacy/transfer/sftp/local-files.png
+- documentation_assets/ui/legacy/transfer/sftp/remote-files.png
+- documentation_assets/ui/legacy/transfer/sftp/transfer-queue.png
+- documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png
+- documentation_assets/ui/legacy/transfer/sftp/connection-paths.png
+- documentation_assets/ui/legacy/transfer/scp/workspace.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

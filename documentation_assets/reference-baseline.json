@@ -47,69 +47,6 @@
     },
     {
       "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/01-sftp-connection-form.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/01-sftp-connection-form.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/02-sftp-workspace-overview.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/02-sftp-workspace-overview.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/03-sftp-connection-bar.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/03-sftp-connection-bar.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/04-sftp-local-files.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/04-sftp-local-files.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/05-sftp-remote-files.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/05-sftp-remote-files.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/06-sftp-transfer-queue.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/06-sftp-transfer-queue.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/08-sftp-connection-paths.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/08-sftp-connection-paths.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/09-scp-workspace.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/09-scp-workspace.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
       "referenced_path": "../../figures/gui/chapter-12/10-sync-notifications.png",
       "reference_kind": "html-img",
       "resolved_path": "figures/gui/chapter-12/10-sync-notifications.png",

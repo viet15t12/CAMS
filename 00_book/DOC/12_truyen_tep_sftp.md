@@ -24,7 +24,7 @@ Chọn nút thêm kết nối trong panel **SFTP/SCP CONNECTIONS**. CAMS mở bi
 tin máy chủ như hình dưới.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/01-sftp-connection-form.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/connection-form.png"
 style="width:72.0%" /></p>
 <figcaption><p>Thông tin xác thực và trường Transfer mode của profile SFTP/SCP.</p></figcaption>
 </figure>
@@ -46,7 +46,7 @@ sẽ bị vô hiệu hóa; người dùng cần nhập mật khẩu khi kết n�
 Cuộn xuống phần cuối biểu mẫu để đặt thư mục mở ban đầu.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/08-sftp-connection-paths.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/connection-paths.png"
 style="width:72.0%" /></p>
 <figcaption><p>Đường dẫn local và remote được mở sau khi kết nối.</p></figcaption>
 </figure>
@@ -69,7 +69,7 @@ Thanh phía trên Workspace cho phép nhập nhanh thông tin kết nối mà kh
 lại biểu mẫu profile.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/03-sftp-connection-bar.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/connection-bar.png"
 style="width:100.0%" /></p>
 <figcaption><p>Thanh kết nối nhanh có thêm lựa chọn Mode SFTP hoặc SCP.</p></figcaption>
 </figure>
@@ -86,7 +86,7 @@ Khi gặp server chưa từng được tin cậy, CAMS hiển thị fingerprint 
 key trước khi tiếp tục.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/07-sftp-host-key-confirmation.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/host-key-confirmation.png"
 style="width:66.0%" /></p>
 <figcaption><p>Xác nhận fingerprint của SFTP server trước lần kết nối đầu tiên.</p></figcaption>
 </figure>
@@ -104,7 +104,7 @@ ngay.
 Panel **LOCAL FILES** hiển thị nội dung trên máy chạy CAMS.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/04-sftp-local-files.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/local-files.png"
 style="width:72.0%" /></p>
 <figcaption><p>Panel local với đường dẫn, điều hướng và các thao tác tệp.</p></figcaption>
 </figure>
@@ -121,7 +121,7 @@ style="width:72.0%" /></p>
 Panel **REMOTE FILES** chỉ sẵn sàng sau khi kết nối thành công.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/05-sftp-remote-files.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/remote-files.png"
 style="width:72.0%" /></p>
 <figcaption><p>Panel remote tại thư mục lưu cấu hình mạng trên SFTP server.</p></figcaption>
 </figure>
@@ -140,7 +140,7 @@ mục, nhưng panel remote chuyển thành **REMOTE SCP PATH** và không hiển
 sách filesystem.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/09-scp-workspace.png"
+<p><img src="../assets/ui/legacy/transfer/scp/workspace.png"
 style="width:100.0%" /></p>
 <figcaption><p>Workspace SCP với đường dẫn remote nhập trực tiếp.</p></figcaption>
 </figure>
@@ -161,7 +161,7 @@ với đích. Danh sách profile có thể được giữ ở bên trái; không
 rộng panel này khi thao tác tệp.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/02-sftp-workspace-overview.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/workspace-overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể Workspace SFTP với hai panel và hàng đợi truyền tệp.</p></figcaption>
 </figure>
@@ -170,7 +170,7 @@ Mỗi lần Upload hoặc Download bằng SFTP hay SCP tạo một mục trong *
 QUEUE**.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/06-sftp-transfer-queue.png"
+<p><img src="../assets/ui/legacy/transfer/sftp/transfer-queue.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tiến độ Upload, Download và trạng thái hoàn thành.</p></figcaption>
 </figure>

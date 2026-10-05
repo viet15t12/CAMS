@@ -28,7 +28,7 @@ Việc chọn SCP không làm panel remote hoạt động như SFTP. Nếu cần
 
 Chọn nút thêm kết nối trong panel *SFTP/SCP CONNECTIONS*. CAMS mở biểu mẫu thông tin máy chủ tại @fig:ch12-01-sftp-connection-form.
 
-#insert-image("figures/gui/chapter-12/01-sftp-connection-form.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/sftp/connection-form.png",
   caption: [Thông tin xác thực và trường Transfer mode của profile SFTP/SCP.], width: 72.0%) <fig:ch12-01-sftp-connection-form>
 
 #report-table(
@@ -51,7 +51,7 @@ Nên ưu tiên *private key* hoặc SSH agent thay cho lưu mật khẩu. Nếu 
 
 Cuộn xuống phần cuối biểu mẫu để đặt thư mục mở ban đầu.
 
-#insert-image("figures/gui/chapter-12/08-sftp-connection-paths.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/sftp/connection-paths.png",
   caption: [Đường dẫn local và remote được mở sau khi kết nối.], width: 72.0%) <fig:ch12-08-sftp-connection-paths>
 
 - *Initial local directory*: thư mục trên máy chạy CAMS, ví dụ #raw("/home/user/CAMS-Backups").
@@ -64,7 +64,7 @@ Chọn *Save* để lưu profile. Trước khi dùng trên hệ thống thật, 
 
 Thanh phía trên Workspace cho phép nhập nhanh thông tin kết nối mà không cần mở lại biểu mẫu profile.
 
-#insert-image("figures/gui/chapter-12/03-sftp-connection-bar.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/sftp/connection-bar.png",
   caption: [Thanh kết nối nhanh có thêm lựa chọn Mode SFTP hoặc SCP.], width: 100.0%) <fig:ch12-03-sftp-connection-bar>
 
 Nhập *Host/IP*, *Port*, *Username*, chọn *Mode*, chọn *Private key* nếu có, rồi nhấn *Connect*. Mode chỉ đổi được khi chưa kết nối. Khi phiên đã hoạt động, nút này chuyển thành *Disconnect*. Nếu server yêu cầu mật khẩu nhưng profile không lưu mật khẩu, CAMS sẽ yêu cầu nhập thông tin xác thực trong quá trình kết nối.
@@ -73,7 +73,7 @@ Nhập *Host/IP*, *Port*, *Username*, chọn *Mode*, chọn *Private key* nếu 
 
 Khi gặp server chưa từng được tin cậy, CAMS hiển thị fingerprint của SSH host key trước khi tiếp tục.
 
-#insert-image("figures/gui/chapter-12/07-sftp-host-key-confirmation.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png",
   caption: [Xác nhận fingerprint của SFTP server trước lần kết nối đầu tiên.], width: 66.0%) <fig:ch12-07-sftp-host-key-confirmation>
 
 #report-note[Hộp xác nhận này dùng cho cả SFTP và SCP. Đối chiếu fingerprint với quản trị viên hoặc một kênh tin cậy khác. Chỉ chọn *Trust and Connect* khi fingerprint trùng khớp. Nếu host key của một server đã biết đột ngột thay đổi, dừng kết nối và xác minh nguyên nhân thay vì chấp nhận ngay.]
@@ -100,7 +100,7 @@ Panel *REMOTE FILES* chỉ sẵn sàng sau khi kết nối thành công.
 
 Chọn Mode *SCP* trước khi Connect. Panel local vẫn cho phép chọn tệp hoặc thư mục, nhưng panel remote chuyển thành *REMOTE SCP PATH* và không hiển thị danh sách filesystem.
 
-#insert-image("figures/gui/chapter-12/09-scp-workspace.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/scp/workspace.png",
   caption: [Workspace SCP với đường dẫn remote nhập trực tiếp.], width: 100.0%) <fig:ch12-09-scp-workspace>
 
 Để upload, nhập thư mục hoặc đường dẫn đích ở panel phải, chọn mục ở panel local rồi nhấn *Upload*. Để download, nhập đầy đủ đường dẫn file/thư mục remote rồi nhấn *Download path*. Kiểm tra dấu #raw("/"), tên tệp, quyền ghi và quy tắc đường dẫn của server trước khi bắt đầu.
@@ -111,12 +111,12 @@ SCP không có các thao tác duyệt, Refresh, New folder, Rename hoặc Delete
 
 Sau khi kết nối, hai panel local và remote nằm cạnh nhau để dễ đối chiếu nguồn với đích. Danh sách profile có thể được giữ ở bên trái; không bắt buộc phải mở rộng panel này khi thao tác tệp.
 
-#insert-image("figures/gui/chapter-12/02-sftp-workspace-overview.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/sftp/workspace-overview.png",
   caption: [Tổng thể Workspace SFTP với hai panel và hàng đợi truyền tệp.], width: 100.0%) <fig:ch12-02-sftp-workspace-overview>
 
 Mỗi lần Upload hoặc Download bằng SFTP hay SCP tạo một mục trong *FILE TRANSFER QUEUE*.
 
-#insert-image("figures/gui/chapter-12/06-sftp-transfer-queue.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/sftp/transfer-queue.png",
   caption: [Tiến độ Upload, Download và trạng thái hoàn thành.], width: 100.0%) <fig:ch12-06-sftp-transfer-queue>
 
 - Biểu tượng và cột tên cho biết tệp cùng chiều *upload/download*.
