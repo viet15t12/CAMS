@@ -13,7 +13,7 @@ Chọn switch trong danh sách thiết bị, mở *Interface*, sau đó đồng 
 
 Mở tab *Access*, chọn port rồi nhấn *Edit*. Access port mang một VLAN dữ liệu không gắn thẻ và có thể có thêm Voice VLAN cho điện thoại IP.
 
-#insert-image("figures/gui/chapter-14/02-access-port-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png",
   caption: [Form Access Port với VLAN dữ liệu và Voice VLAN.], width: 55.0%) <fig:ch14-02-access-port-form>
 
 #report-table(
@@ -37,7 +37,7 @@ Mở tab *Access*, chọn port rồi nhấn *Edit*. Access port mang một VLAN 
 
 Cuộn xuống phần *Loop protection* để đặt cơ chế bảo vệ STP theo port.
 
-#insert-image("figures/gui/chapter-14/03-access-loop-protection.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png",
   caption: [PortFast và BPDU Guard trên port nối thiết bị đầu cuối.], width: 55.0%) <fig:ch14-03-access-loop-protection>
 
 - *PortFast* bỏ qua thời gian hội tụ STP ban đầu. Chỉ bật trên port nối máy trạm, server hoặc điện thoại; không bật trên liên kết giữa hai switch.
@@ -52,7 +52,7 @@ Cuộn xuống phần *Loop protection* để đặt cơ chế bảo vệ STP th
 
 Mở tab *Trunk*, chọn đường uplink rồi nhấn *Edit*. Trunk vận chuyển nhiều VLAN giữa switch, router-on-a-stick, firewall hoặc hypervisor.
 
-#insert-image("figures/gui/chapter-14/04-trunk-port-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png",
   caption: [Form Trunk với danh sách VLAN được phép đi qua liên kết.], width: 55.0%) <fig:ch14-04-trunk-port-form>
 
 #report-table(
@@ -73,7 +73,7 @@ Danh sách checkbox được lấy từ VLAN Database của switch. Nếu không
 
 === Loop protection cho Trunk
 
-#insert-image("figures/gui/chapter-14/05-trunk-loop-protection.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png",
   caption: [Root Guard trên một uplink cần ngăn superior root.], width: 55.0%) <fig:ch14-05-trunk-loop-protection>
 
 Trunk giữa hai switch thường không bật PortFast hoặc BPDU Guard. Chọn *Root Guard* ở nhánh không được phép trở thành đường về root; chọn *Loop Guard* ở liên kết dự phòng cần bảo vệ trước lỗi mất BPDU. Không dùng cả hai theo thói quen: vai trò topology của port quyết định cơ chế phù hợp.
@@ -82,7 +82,7 @@ Trunk giữa hai switch thường không bật PortFast hoặc BPDU Guard. Chọ
 
 Tab *Port Status* cho phép xem đồng thời mode, VLAN membership, description và trạng thái link. Chọn một hàng để đọc thông tin ở inspector bên phải; nút Edit trong tab này chỉ phù hợp khi cần chuyển mode Access/Trunk, còn tham số chi tiết nên sửa trong tab tương ứng.
 
-#insert-image("figures/gui/chapter-14/01-switch-ports-overview.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l2/overview.png",
   caption: [Tổng thể Switch Ports với hai Access Port và hai Trunk Port.], width: 100.0%) <fig:ch14-01-switch-ports-overview>
 
 Các chỉ số phía trên cho biết tổng switchport, số link up, số Access và số Trunk. Trạng thái *Link Up* chỉ xác nhận liên kết vật lý đang hoạt động; vẫn cần kiểm tra VLAN, STP và lưu lượng thực tế.
@@ -91,7 +91,7 @@ Các chỉ số phía trên cho biết tổng switchport, số link up, số Acc
 
 Sau khi Save các thay đổi, chọn *View & Push* trong trang Switch Ports.
 
-#insert-image("figures/gui/chapter-14/06-interfaces-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png",
   caption: [Preview riêng của Interfaces trước khi áp dụng lên SW2.], width: 78.0%) <fig:ch14-06-interfaces-view-push>
 
 Kiểm tra từng khối #raw("interface") và đặc biệt các lệnh sau:

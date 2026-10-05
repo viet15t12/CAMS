@@ -179,69 +179,6 @@
       "count": 1
     },
     {
-      "source_document": "00_book/DOC/14_interface_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-14/01-switch-ports-overview.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-14/01-switch-ports-overview.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/14_interface_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-14/02-access-port-form.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-14/02-access-port-form.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/14_interface_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-14/03-access-loop-protection.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-14/03-access-loop-protection.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/14_interface_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-14/04-trunk-port-form.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-14/04-trunk-port-form.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/14_interface_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-14/05-trunk-loop-protection.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-14/05-trunk-loop-protection.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/14_interface_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-14/06-interfaces-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-14/06-interfaces-view-push.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
-      "referenced_path": "../../figures/gui/chapter-15/01-vlan-form.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-15/01-vlan-form.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
-      "referenced_path": "../../figures/gui/chapter-15/02-vlan-overview.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-15/02-vlan-overview.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
-      "referenced_path": "../../figures/gui/chapter-15/03-vlan-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-15/03-vlan-view-push.png",
-      "count": 1
-    },
-    {
       "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
       "referenced_path": "../../figures/gui/chapter-15/04-etherchannel-form.png",
       "reference_kind": "html-img",

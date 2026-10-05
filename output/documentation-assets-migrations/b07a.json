@@ -1,0 +1,696 @@
+{
+  "batch": "B07A",
+  "starting_commit": "964745b724e1ecd44748aafadd420d62f040bf1e",
+  "status": "PASS cheap gate; cumulative build/fresh gate deferred",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 9,
+    "dimensions_nonzero": true,
+    "chapter_context_agrees": true,
+    "terminal_or_evidence_or_runtime": false,
+    "target_collisions": false,
+    "provenance": "unknown retained; no reconstruction or new generator"
+  },
+  "assets": [
+    {
+      "asset_id": "ui.switching.interfaces-l2.overview",
+      "old_path": "00_book/figures/gui/chapter-14/01-switch-ports-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/interfaces-l2/overview.png",
+      "source_git_blob_sha": "ee9c060c5627f5efd574324714294e05f350eba73176061798988fab2ccb4822",
+      "canonical_filesystem_sha": "ee9c060c5627f5efd574324714294e05f350eba73176061798988fab2ccb4822",
+      "canonical_index_blob_sha": "ee9c060c5627f5efd574324714294e05f350eba73176061798988fab2ccb4822",
+      "manifest_sha": "ee9c060c5627f5efd574324714294e05f350eba73176061798988fab2ccb4822",
+      "staging_path": "00_book/assets/ui/legacy/switching/interfaces-l2/overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/14_interface_switch_l2.md",
+          "line": 99,
+          "referenced_path": "../assets/ui/legacy/switching/interfaces-l2/overview.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/14_interface_switch_l2.typ",
+          "line": 85,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/interfaces-l2/overview.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-port-form",
+      "old_path": "00_book/figures/gui/chapter-14/02-access-port-form.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png",
+      "source_git_blob_sha": "d8af8a6d546913cc1c332aed53b9fad022a68476feacee416f09f5ca401a0a4a",
+      "canonical_filesystem_sha": "d8af8a6d546913cc1c332aed53b9fad022a68476feacee416f09f5ca401a0a4a",
+      "canonical_index_blob_sha": "d8af8a6d546913cc1c332aed53b9fad022a68476feacee416f09f5ca401a0a4a",
+      "manifest_sha": "d8af8a6d546913cc1c332aed53b9fad022a68476feacee416f09f5ca401a0a4a",
+      "staging_path": "00_book/assets/ui/legacy/switching/interfaces-l2/access-port-form.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/14_interface_switch_l2.md",
+          "line": 17,
+          "referenced_path": "../assets/ui/legacy/switching/interfaces-l2/access-port-form.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/14_interface_switch_l2.typ",
+          "line": 16,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-loop-protection",
+      "old_path": "00_book/figures/gui/chapter-14/03-access-loop-protection.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png",
+      "source_git_blob_sha": "c3cfc6239a4610a417849460c1b0b4976b1e50d5a359edee95ebfc58c13a60fa",
+      "canonical_filesystem_sha": "c3cfc6239a4610a417849460c1b0b4976b1e50d5a359edee95ebfc58c13a60fa",
+      "canonical_index_blob_sha": "c3cfc6239a4610a417849460c1b0b4976b1e50d5a359edee95ebfc58c13a60fa",
+      "manifest_sha": "c3cfc6239a4610a417849460c1b0b4976b1e50d5a359edee95ebfc58c13a60fa",
+      "staging_path": "00_book/assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/14_interface_switch_l2.md",
+          "line": 38,
+          "referenced_path": "../assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/14_interface_switch_l2.typ",
+          "line": 40,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-port-form",
+      "old_path": "00_book/figures/gui/chapter-14/04-trunk-port-form.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png",
+      "source_git_blob_sha": "7d7a9f9dcd06102e8f754432257f27ce9cf9f48d50acb7ec55e149a057b86c19",
+      "canonical_filesystem_sha": "7d7a9f9dcd06102e8f754432257f27ce9cf9f48d50acb7ec55e149a057b86c19",
+      "canonical_index_blob_sha": "7d7a9f9dcd06102e8f754432257f27ce9cf9f48d50acb7ec55e149a057b86c19",
+      "manifest_sha": "7d7a9f9dcd06102e8f754432257f27ce9cf9f48d50acb7ec55e149a057b86c19",
+      "staging_path": "00_book/assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/14_interface_switch_l2.md",
+          "line": 62,
+          "referenced_path": "../assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/14_interface_switch_l2.typ",
+          "line": 55,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-loop-protection",
+      "old_path": "00_book/figures/gui/chapter-14/05-trunk-loop-protection.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png",
+      "source_git_blob_sha": "934cbe5a165ae84eb3c50c6b383aae9470637587a84279c692ed03293dece1d5",
+      "canonical_filesystem_sha": "934cbe5a165ae84eb3c50c6b383aae9470637587a84279c692ed03293dece1d5",
+      "canonical_index_blob_sha": "934cbe5a165ae84eb3c50c6b383aae9470637587a84279c692ed03293dece1d5",
+      "manifest_sha": "934cbe5a165ae84eb3c50c6b383aae9470637587a84279c692ed03293dece1d5",
+      "staging_path": "00_book/assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/14_interface_switch_l2.md",
+          "line": 81,
+          "referenced_path": "../assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/14_interface_switch_l2.typ",
+          "line": 76,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.view-push",
+      "old_path": "00_book/figures/gui/chapter-14/06-interfaces-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png",
+      "source_git_blob_sha": "528c00145cb9a1cc009cab42f1eb48add115a6beb3281f37f7e4dd71062c750a",
+      "canonical_filesystem_sha": "528c00145cb9a1cc009cab42f1eb48add115a6beb3281f37f7e4dd71062c750a",
+      "canonical_index_blob_sha": "528c00145cb9a1cc009cab42f1eb48add115a6beb3281f37f7e4dd71062c750a",
+      "manifest_sha": "528c00145cb9a1cc009cab42f1eb48add115a6beb3281f37f7e4dd71062c750a",
+      "staging_path": "00_book/assets/ui/legacy/switching/interfaces-l2/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/14_interface_switch_l2.md",
+          "line": 113,
+          "referenced_path": "../assets/ui/legacy/switching/interfaces-l2/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/14_interface_switch_l2.typ",
+          "line": 94,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.vlan.form",
+      "old_path": "00_book/figures/gui/chapter-15/01-vlan-form.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/vlan/form.png",
+      "source_git_blob_sha": "62b08fedbcc42246e6152d1cb25777d6a794f9457e7ca6317756599c11e31c4a",
+      "canonical_filesystem_sha": "62b08fedbcc42246e6152d1cb25777d6a794f9457e7ca6317756599c11e31c4a",
+      "canonical_index_blob_sha": "62b08fedbcc42246e6152d1cb25777d6a794f9457e7ca6317756599c11e31c4a",
+      "manifest_sha": "62b08fedbcc42246e6152d1cb25777d6a794f9457e7ca6317756599c11e31c4a",
+      "staging_path": "00_book/assets/ui/legacy/switching/vlan/form.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 16,
+          "referenced_path": "../assets/ui/legacy/switching/vlan/form.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 16,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/vlan/form.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.vlan.overview",
+      "old_path": "00_book/figures/gui/chapter-15/02-vlan-overview.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/vlan/overview.png",
+      "source_git_blob_sha": "b381146e88fa99867d9f2577a43396e27710d519dde932f429618aab445bd7f5",
+      "canonical_filesystem_sha": "b381146e88fa99867d9f2577a43396e27710d519dde932f429618aab445bd7f5",
+      "canonical_index_blob_sha": "b381146e88fa99867d9f2577a43396e27710d519dde932f429618aab445bd7f5",
+      "manifest_sha": "b381146e88fa99867d9f2577a43396e27710d519dde932f429618aab445bd7f5",
+      "staging_path": "00_book/assets/ui/legacy/switching/vlan/overview.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 31,
+          "referenced_path": "../assets/ui/legacy/switching/vlan/overview.png",
+          "target_type": "book-mkdocs"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.vlan.view-push-users",
+      "old_path": "00_book/figures/gui/chapter-15/03-vlan-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/vlan/view-push-users.png",
+      "source_git_blob_sha": "f225b6528b1d29ed4a56e64547623a5d5de0854e6909365133fb8bc7e953a6df",
+      "canonical_filesystem_sha": "f225b6528b1d29ed4a56e64547623a5d5de0854e6909365133fb8bc7e953a6df",
+      "canonical_index_blob_sha": "f225b6528b1d29ed4a56e64547623a5d5de0854e6909365133fb8bc7e953a6df",
+      "manifest_sha": "f225b6528b1d29ed4a56e64547623a5d5de0854e6909365133fb8bc7e953a6df",
+      "staging_path": "00_book/assets/ui/legacy/switching/vlan/view-push-users.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+          "line": 40,
+          "referenced_path": "../assets/ui/legacy/switching/vlan/view-push-users.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+          "line": 35,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/vlan/view-push-users.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.switching.interfaces-l2.overview",
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "line": 99,
+      "before": "../../figures/gui/chapter-14/01-switch-ports-overview.png",
+      "after": "../assets/ui/legacy/switching/interfaces-l2/overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-port-form",
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "line": 17,
+      "before": "../../figures/gui/chapter-14/02-access-port-form.png",
+      "after": "../assets/ui/legacy/switching/interfaces-l2/access-port-form.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-loop-protection",
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "line": 38,
+      "before": "../../figures/gui/chapter-14/03-access-loop-protection.png",
+      "after": "../assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-port-form",
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "line": 62,
+      "before": "../../figures/gui/chapter-14/04-trunk-port-form.png",
+      "after": "../assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-loop-protection",
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "line": 81,
+      "before": "../../figures/gui/chapter-14/05-trunk-loop-protection.png",
+      "after": "../assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.view-push",
+      "source_document": "00_book/DOC/14_interface_switch_l2.md",
+      "line": 113,
+      "before": "../../figures/gui/chapter-14/06-interfaces-view-push.png",
+      "after": "../assets/ui/legacy/switching/interfaces-l2/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.vlan.form",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 16,
+      "before": "../../figures/gui/chapter-15/01-vlan-form.png",
+      "after": "../assets/ui/legacy/switching/vlan/form.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.vlan.overview",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 31,
+      "before": "../../figures/gui/chapter-15/02-vlan-overview.png",
+      "after": "../assets/ui/legacy/switching/vlan/overview.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.vlan.view-push-users",
+      "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+      "line": 40,
+      "before": "../../figures/gui/chapter-15/03-vlan-view-push.png",
+      "after": "../assets/ui/legacy/switching/vlan/view-push-users.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.overview",
+      "source_document": "00_book/contents/14_interface_switch_l2.typ",
+      "line": 85,
+      "before": "figures/gui/chapter-14/01-switch-ports-overview.png",
+      "after": "/documentation_assets/ui/legacy/switching/interfaces-l2/overview.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-port-form",
+      "source_document": "00_book/contents/14_interface_switch_l2.typ",
+      "line": 16,
+      "before": "figures/gui/chapter-14/02-access-port-form.png",
+      "after": "/documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-loop-protection",
+      "source_document": "00_book/contents/14_interface_switch_l2.typ",
+      "line": 40,
+      "before": "figures/gui/chapter-14/03-access-loop-protection.png",
+      "after": "/documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-port-form",
+      "source_document": "00_book/contents/14_interface_switch_l2.typ",
+      "line": 55,
+      "before": "figures/gui/chapter-14/04-trunk-port-form.png",
+      "after": "/documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-loop-protection",
+      "source_document": "00_book/contents/14_interface_switch_l2.typ",
+      "line": 76,
+      "before": "figures/gui/chapter-14/05-trunk-loop-protection.png",
+      "after": "/documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.view-push",
+      "source_document": "00_book/contents/14_interface_switch_l2.typ",
+      "line": 94,
+      "before": "figures/gui/chapter-14/06-interfaces-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.vlan.form",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 16,
+      "before": "figures/gui/chapter-15/01-vlan-form.png",
+      "after": "/documentation_assets/ui/legacy/switching/vlan/form.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.vlan.view-push-users",
+      "source_document": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+      "line": 35,
+      "before": "figures/gui/chapter-15/03-vlan-view-push.png",
+      "after": "/documentation_assets/ui/legacy/switching/vlan/view-push-users.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 17,
+  "baseline": {
+    "before": 66,
+    "resolved": 9,
+    "after": 57,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/14_interface_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-14/01-switch-ports-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-14/01-switch-ports-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/14_interface_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-14/02-access-port-form.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-14/02-access-port-form.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/14_interface_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-14/03-access-loop-protection.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-14/03-access-loop-protection.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/14_interface_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-14/04-trunk-port-form.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-14/04-trunk-port-form.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/14_interface_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-14/05-trunk-loop-protection.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-14/05-trunk-loop-protection.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/14_interface_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-14/06-interfaces-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-14/06-interfaces-view-push.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/01-vlan-form.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/01-vlan-form.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/02-vlan-overview.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/02-vlan-overview.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+        "referenced_path": "../../figures/gui/chapter-15/03-vlan-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-15/03-vlan-view-push.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 169,
+    "pending": 176,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 169,
+      "pending": 176,
+      "frozen": 62
+    },
+    "b07_migrated": 9,
+    "b07_old_paths_absent": 9,
+    "b07_canonical_paths_present": 9,
+    "other_records_unchanged": 398,
+    "b06_hold_full_record_and_legacy_bytes_unchanged": true,
+    "b06_hold_planned_destination_absent": true,
+    "reference_edges_exact_current_lines": 17,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 57,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [],
+    "full_build_gate": "DEFERRED until cumulative B07R"
+  },
+  "typst": [],
+  "png_sanity": [
+    {
+      "asset_id": "ui.switching.interfaces-l2.overview",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-port-form",
+      "width": 880,
+      "height": 1316,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.access-loop-protection",
+      "width": 880,
+      "height": 1316,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-port-form",
+      "width": 880,
+      "height": 1316,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.trunk-loop-protection",
+      "width": 880,
+      "height": 1316,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.interfaces-l2.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.vlan.form",
+      "width": 840,
+      "height": 1340,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.vlan.overview",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.vlan.view-push-users",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ]
+}

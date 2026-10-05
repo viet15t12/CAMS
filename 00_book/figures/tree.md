@@ -30,17 +30,7 @@
 │   │   ├── 05-critical-filter-result.png
 │   │   ├── 06-smart-filter-builder.png
 │   │   └── 07-log-message-details.png
-│   ├── chapter-14
-│   │   ├── 01-switch-ports-overview.png
-│   │   ├── 02-access-port-form.png
-│   │   ├── 03-access-loop-protection.png
-│   │   ├── 04-trunk-port-form.png
-│   │   ├── 05-trunk-loop-protection.png
-│   │   └── 06-interfaces-view-push.png
 │   ├── chapter-15
-│   │   ├── 01-vlan-form.png
-│   │   ├── 02-vlan-overview.png
-│   │   ├── 03-vlan-view-push.png
 │   │   ├── 04-etherchannel-form.png
 │   │   ├── 05-quick-etherchannel.png
 │   │   ├── 06-etherchannel-view-push.png
@@ -443,5 +433,19 @@ B06C canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/routing/nat/route-map-form-detail.png
 - documentation_assets/ui/legacy/routing/nat/route-map-overview.png
 - documentation_assets/ui/legacy/routing/nat/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B07A canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/switching/interfaces-l2/overview.png
+- documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png
+- documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png
+- documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png
+- documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png
+- documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png
+- documentation_assets/ui/legacy/switching/vlan/form.png
+- documentation_assets/ui/legacy/switching/vlan/overview.png
+- documentation_assets/ui/legacy/switching/vlan/view-push-users.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

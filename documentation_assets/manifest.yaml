@@ -6769,14 +6769,14 @@ assets:
   domain: switching/interfaces-l2
   subject: overview
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-14/01-switch-ports-overview.png
-  path: 00_book/figures/gui/chapter-14/01-switch-ports-overview.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l2/overview.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l2/overview.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l2/overview.png
   legacy_path: 00_book/figures/gui/chapter-14/01-switch-ports-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ee9c060c5627f5efd574324714294e05f350eba73176061798988fab2ccb4822
   provenance:
     assessment: unknown
@@ -6794,11 +6794,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/14_interface_switch_l2.md
     line: 99
-    referenced_path: ../../figures/gui/chapter-14/01-switch-ports-overview.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l2/overview.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/14_interface_switch_l2.typ
     line: 85
-    referenced_path: figures/gui/chapter-14/01-switch-ports-overview.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l2/overview.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6818,14 +6818,14 @@ assets:
   domain: switching/interfaces-l2
   subject: access-port-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-14/02-access-port-form.png
-  path: 00_book/figures/gui/chapter-14/02-access-port-form.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png
   legacy_path: 00_book/figures/gui/chapter-14/02-access-port-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: d8af8a6d546913cc1c332aed53b9fad022a68476feacee416f09f5ca401a0a4a
   provenance:
     assessment: unknown
@@ -6843,11 +6843,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/14_interface_switch_l2.md
     line: 17
-    referenced_path: ../../figures/gui/chapter-14/02-access-port-form.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l2/access-port-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/14_interface_switch_l2.typ
     line: 16
-    referenced_path: figures/gui/chapter-14/02-access-port-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l2/access-port-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6867,14 +6867,14 @@ assets:
   domain: switching/interfaces-l2
   subject: access-loop-protection
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-14/03-access-loop-protection.png
-  path: 00_book/figures/gui/chapter-14/03-access-loop-protection.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png
   legacy_path: 00_book/figures/gui/chapter-14/03-access-loop-protection.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: c3cfc6239a4610a417849460c1b0b4976b1e50d5a359edee95ebfc58c13a60fa
   provenance:
     assessment: unknown
@@ -6892,11 +6892,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/14_interface_switch_l2.md
     line: 38
-    referenced_path: ../../figures/gui/chapter-14/03-access-loop-protection.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/14_interface_switch_l2.typ
     line: 40
-    referenced_path: figures/gui/chapter-14/03-access-loop-protection.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6916,14 +6916,14 @@ assets:
   domain: switching/interfaces-l2
   subject: trunk-port-form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-14/04-trunk-port-form.png
-  path: 00_book/figures/gui/chapter-14/04-trunk-port-form.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png
   legacy_path: 00_book/figures/gui/chapter-14/04-trunk-port-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 7d7a9f9dcd06102e8f754432257f27ce9cf9f48d50acb7ec55e149a057b86c19
   provenance:
     assessment: unknown
@@ -6941,11 +6941,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/14_interface_switch_l2.md
     line: 62
-    referenced_path: ../../figures/gui/chapter-14/04-trunk-port-form.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/14_interface_switch_l2.typ
     line: 55
-    referenced_path: figures/gui/chapter-14/04-trunk-port-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6965,14 +6965,14 @@ assets:
   domain: switching/interfaces-l2
   subject: trunk-loop-protection
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-14/05-trunk-loop-protection.png
-  path: 00_book/figures/gui/chapter-14/05-trunk-loop-protection.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png
   legacy_path: 00_book/figures/gui/chapter-14/05-trunk-loop-protection.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 934cbe5a165ae84eb3c50c6b383aae9470637587a84279c692ed03293dece1d5
   provenance:
     assessment: unknown
@@ -6990,11 +6990,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/14_interface_switch_l2.md
     line: 81
-    referenced_path: ../../figures/gui/chapter-14/05-trunk-loop-protection.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/14_interface_switch_l2.typ
     line: 76
-    referenced_path: figures/gui/chapter-14/05-trunk-loop-protection.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7014,14 +7014,14 @@ assets:
   domain: switching/interfaces-l2
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-14/06-interfaces-view-push.png
-  path: 00_book/figures/gui/chapter-14/06-interfaces-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png
+  path: documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png
   legacy_path: 00_book/figures/gui/chapter-14/06-interfaces-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 528c00145cb9a1cc009cab42f1eb48add115a6beb3281f37f7e4dd71062c750a
   provenance:
     assessment: unknown
@@ -7039,11 +7039,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/14_interface_switch_l2.md
     line: 113
-    referenced_path: ../../figures/gui/chapter-14/06-interfaces-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/interfaces-l2/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/14_interface_switch_l2.typ
     line: 94
-    referenced_path: figures/gui/chapter-14/06-interfaces-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/interfaces-l2/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7063,14 +7063,14 @@ assets:
   domain: switching/vlan
   subject: form
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/01-vlan-form.png
-  path: 00_book/figures/gui/chapter-15/01-vlan-form.png
+  current_path: documentation_assets/ui/legacy/switching/vlan/form.png
+  path: documentation_assets/ui/legacy/switching/vlan/form.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/vlan/form.png
   legacy_path: 00_book/figures/gui/chapter-15/01-vlan-form.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 62b08fedbcc42246e6152d1cb25777d6a794f9457e7ca6317756599c11e31c4a
   provenance:
     assessment: unknown
@@ -7088,11 +7088,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 16
-    referenced_path: ../../figures/gui/chapter-15/01-vlan-form.png
+    referenced_path: ../assets/ui/legacy/switching/vlan/form.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 16
-    referenced_path: figures/gui/chapter-15/01-vlan-form.png
+    referenced_path: /documentation_assets/ui/legacy/switching/vlan/form.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -7112,14 +7112,14 @@ assets:
   domain: switching/vlan
   subject: overview
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/02-vlan-overview.png
-  path: 00_book/figures/gui/chapter-15/02-vlan-overview.png
+  current_path: documentation_assets/ui/legacy/switching/vlan/overview.png
+  path: documentation_assets/ui/legacy/switching/vlan/overview.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/vlan/overview.png
   legacy_path: 00_book/figures/gui/chapter-15/02-vlan-overview.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: b381146e88fa99867d9f2577a43396e27710d519dde932f429618aab445bd7f5
   provenance:
     assessment: unknown
@@ -7137,7 +7137,7 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 31
-    referenced_path: ../../figures/gui/chapter-15/02-vlan-overview.png
+    referenced_path: ../assets/ui/legacy/switching/vlan/overview.png
     target_type: book-mkdocs
   targets:
   - book-mkdocs
@@ -7156,14 +7156,14 @@ assets:
   domain: switching/vlan
   subject: view-push-users
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-15/03-vlan-view-push.png
-  path: 00_book/figures/gui/chapter-15/03-vlan-view-push.png
+  current_path: documentation_assets/ui/legacy/switching/vlan/view-push-users.png
+  path: documentation_assets/ui/legacy/switching/vlan/view-push-users.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/vlan/view-push-users.png
   legacy_path: 00_book/figures/gui/chapter-15/03-vlan-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: f225b6528b1d29ed4a56e64547623a5d5de0854e6909365133fb8bc7e953a6df
   provenance:
     assessment: unknown
@@ -7181,11 +7181,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/15_vlan_etherchannel_stp_vtp.md
     line: 40
-    referenced_path: ../../figures/gui/chapter-15/03-vlan-view-push.png
+    referenced_path: ../assets/ui/legacy/switching/vlan/view-push-users.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/15_vlan_etherchannel_stp_vtp.typ
     line: 35
-    referenced_path: figures/gui/chapter-15/03-vlan-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/switching/vlan/view-push-users.png
     target_type: book-typst
   targets:
   - book-mkdocs

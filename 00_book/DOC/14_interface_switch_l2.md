@@ -14,7 +14,7 @@ Mở tab **Access**, chọn port rồi nhấn **Edit**. Access port mang một V
 không gắn thẻ và có thể có thêm Voice VLAN cho điện thoại IP.
 
 <figure>
-<p><img src="../../figures/gui/chapter-14/02-access-port-form.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l2/access-port-form.png"
 style="width:55.0%" /></p>
 <figcaption><p>Form Access Port với VLAN dữ liệu và Voice VLAN.</p></figcaption>
 </figure>
@@ -35,7 +35,7 @@ style="width:55.0%" /></p>
 Cuộn xuống phần **Loop protection** để đặt cơ chế bảo vệ STP theo port.
 
 <figure>
-<p><img src="../../figures/gui/chapter-14/03-access-loop-protection.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l2/access-loop-protection.png"
 style="width:55.0%" /></p>
 <figcaption><p>PortFast và BPDU Guard trên port nối thiết bị đầu cuối.</p></figcaption>
 </figure>
@@ -59,7 +59,7 @@ Mở tab **Trunk**, chọn đường uplink rồi nhấn **Edit**. Trunk vận c
 VLAN giữa switch, router-on-a-stick, firewall hoặc hypervisor.
 
 <figure>
-<p><img src="../../figures/gui/chapter-14/04-trunk-port-form.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l2/trunk-port-form.png"
 style="width:55.0%" /></p>
 <figcaption><p>Form Trunk với danh sách VLAN được phép đi qua liên kết.</p></figcaption>
 </figure>
@@ -78,7 +78,7 @@ cần dùng, tạo và Save VLAN trước rồi quay lại form trunk.
 ### Loop protection cho Trunk
 
 <figure>
-<p><img src="../../figures/gui/chapter-14/05-trunk-loop-protection.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l2/trunk-loop-protection.png"
 style="width:55.0%" /></p>
 <figcaption><p>Root Guard trên một uplink cần ngăn superior root.</p></figcaption>
 </figure>
@@ -96,7 +96,7 @@ trong tab này chỉ phù hợp khi cần chuyển mode Access/Trunk, còn tham 
 nên sửa trong tab tương ứng.
 
 <figure>
-<p><img src="../../figures/gui/chapter-14/01-switch-ports-overview.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l2/overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>Tổng thể Switch Ports với hai Access Port và hai Trunk Port.</p></figcaption>
 </figure>
@@ -110,7 +110,7 @@ kiểm tra VLAN, STP và lưu lượng thực tế.
 Sau khi Save các thay đổi, chọn **View & Push** trong trang Switch Ports.
 
 <figure>
-<p><img src="../../figures/gui/chapter-14/06-interfaces-view-push.png"
+<p><img src="../assets/ui/legacy/switching/interfaces-l2/view-push.png"
 style="width:78.0%" /></p>
 <figcaption><p>Preview riêng của Interfaces trước khi áp dụng lên SW2.</p></figcaption>
 </figure>

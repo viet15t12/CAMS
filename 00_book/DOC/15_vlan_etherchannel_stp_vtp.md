@@ -13,7 +13,7 @@ hình của tab khác.
 Chọn **Switching → VLAN**, chọn một VLAN để Edit hoặc nhấn **Add** để tạo mới.
 
 <figure>
-<p><img src="../../figures/gui/chapter-15/01-vlan-form.png"
+<p><img src="../assets/ui/legacy/switching/vlan/form.png"
 style="width:52.0%" /></p>
 <figcaption><p>Form VLAN ID 10 dành cho người dùng.</p></figcaption>
 </figure>
@@ -28,7 +28,7 @@ Không xóa VLAN khi vẫn được Access Port, Voice VLAN, trunk, STP hoặc p
 mật tham chiếu. Chuyển các phụ thuộc trước rồi mới xóa.
 
 <figure>
-<p><img src="../../figures/gui/chapter-15/02-vlan-overview.png"
+<p><img src="../assets/ui/legacy/switching/vlan/overview.png"
 style="width:100.0%" /></p>
 <figcaption><p>VLAN inventory, trạng thái và số Access Port đang sử dụng.</p></figcaption>
 </figure>
@@ -37,7 +37,7 @@ Sau Save, chọn **View & Push VLAN**. Preview chỉ nên chứa VLAN đang ch�
 hoặc xóa.
 
 <figure>
-<p><img src="../../figures/gui/chapter-15/03-vlan-view-push.png"
+<p><img src="../assets/ui/legacy/switching/vlan/view-push-users.png"
 style="width:76.0%" /></p>
 <figcaption><p>Preview tạo VLAN 10, đặt tên Users và trạng thái active.</p></figcaption>
 </figure>

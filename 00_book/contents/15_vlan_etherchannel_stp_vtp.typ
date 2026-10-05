@@ -13,7 +13,7 @@ Mỗi tab có desired state và View & Push riêng. Save ở một tab không t�
 
 Chọn *Switching → VLAN*, chọn một VLAN để Edit hoặc nhấn *Add* để tạo mới.
 
-#insert-image("figures/gui/chapter-15/01-vlan-form.png",
+#insert-image("/documentation_assets/ui/legacy/switching/vlan/form.png",
   caption: [Form VLAN ID 10 dành cho người dùng.], width: 52.0%) <fig:ch15-01-vlan-form>
 
 #report-table(
@@ -32,7 +32,7 @@ Không xóa VLAN khi vẫn được Access Port, Voice VLAN, trunk, STP hoặc p
 
 Sau Save, chọn *View & Push VLAN*. Preview chỉ nên chứa VLAN đang chờ áp dụng hoặc xóa.
 
-#insert-image("figures/gui/chapter-15/03-vlan-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/switching/vlan/view-push-users.png",
   caption: [Preview tạo VLAN 10, đặt tên Users và trạng thái active.], width: 76.0%) <fig:ch15-03-vlan-view-push>
 
 == EtherChannel thủ công
