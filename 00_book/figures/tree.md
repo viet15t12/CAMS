@@ -2,13 +2,6 @@
 ├── gui
 │   ├── chapter-09
 │   │   └── 02-hsrp-authentication-timers.png
-│   ├── chapter-10
-│   │   ├── 01-syslog-destinations.png
-│   │   ├── 02-syslog-server-editor.png
-│   │   ├── 03-syslog-group-hosts.png
-│   │   ├── 04-syslog-group-interfaces.png
-│   │   ├── 05-syslog-group-policy.png
-│   │   └── 06-syslog-view-push.png
 │   ├── chapter-13
 │   │   ├── 01-system-logs-overview.png
 │   │   ├── 02-listener-status.png
@@ -471,5 +464,16 @@ B09B canonical legacy transfer UI (outside this figures tree):
 - documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png
 - documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png
 - documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B10A canonical legacy Syslog configuration UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/routing/syslog/destinations.png
+- documentation_assets/ui/legacy/routing/syslog/server-editor.png
+- documentation_assets/ui/legacy/routing/syslog/group-hosts.png
+- documentation_assets/ui/legacy/routing/syslog/group-interfaces.png
+- documentation_assets/ui/legacy/routing/syslog/group-policy.png
+- documentation_assets/ui/legacy/routing/syslog/view-push.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

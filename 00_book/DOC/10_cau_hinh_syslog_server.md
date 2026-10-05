@@ -15,7 +15,7 @@ Chọn router rồi chọn **Syslog Server** trên Feature Bar. Khu vực **Sysl
 destinations** hiển thị các máy thu đã lưu cho thiết bị hiện tại.
 
 <figure>
-<p><img src="../../figures/gui/chapter-10/01-syslog-destinations.png"
+<p><img src="../assets/ui/legacy/routing/syslog/destinations.png"
 style="width:100.0%" /></p>
 <figcaption><p>Danh sách destination và trạng thái cấu hình Syslog của router.</p></figcaption>
 </figure>
@@ -28,7 +28,7 @@ Trạng thái `pending_apply` là đang chờ áp dụng, `pending_delete` là c
 ## Thêm hoặc sửa Syslog server
 
 <figure>
-<p><img src="../../figures/gui/chapter-10/02-syslog-server-editor.png"
+<p><img src="../assets/ui/legacy/routing/syslog/server-editor.png"
 style="width:100.0%" /></p>
 <figcaption><p>Biểu mẫu destination với địa chỉ máy thu, transport, port và policy log.</p></figcaption>
 </figure>
@@ -55,7 +55,7 @@ router. Quy trình gồm ba bước.
 ### Bước 1 — Hosts
 
 <figure>
-<p><img src="../../figures/gui/chapter-10/03-syslog-group-hosts.png"
+<p><img src="../assets/ui/legacy/routing/syslog/group-hosts.png"
 style="width:82.0%" /></p>
 <figcaption><p>Chọn các router Connected đã có dữ liệu interface trong inventory.</p></figcaption>
 </figure>
@@ -67,7 +67,7 @@ Syslog Group.
 ### Bước 2 — Interfaces
 
 <figure>
-<p><img src="../../figures/gui/chapter-10/04-syslog-group-interfaces.png"
+<p><img src="../assets/ui/legacy/routing/syslog/group-interfaces.png"
 style="width:82.0%" /></p>
 <figcaption><p>Chọn một source interface riêng cho từng router.</p></figcaption>
 </figure>
@@ -79,7 +79,7 @@ quảng bá Loopback, hãy chọn management interface hoặc SVI reachable.
 ### Bước 3 — Policy
 
 <figure>
-<p><img src="../../figures/gui/chapter-10/05-syslog-group-policy.png"
+<p><img src="../assets/ui/legacy/routing/syslog/group-policy.png"
 style="width:82.0%" /></p>
 <figcaption><p>Nhập destination và chính sách thông báo dùng chung cho cả nhóm.</p></figcaption>
 </figure>
@@ -94,7 +94,7 @@ và môi trường cần kiểm soát, nên Save trước và xem preview độc
 Sau khi Save, chọn **View & Push** trong tab Syslog Server.
 
 <figure>
-<p><img src="../../figures/gui/chapter-10/06-syslog-view-push.png"
+<p><img src="../assets/ui/legacy/routing/syslog/view-push.png"
 style="width:75.0%" /></p>
 <figcaption><p>View & Push SYSLOG tổng hợp lệnh riêng cho R1 và R2.</p></figcaption>
 </figure>

@@ -4,48 +4,6 @@
   "description": "Pre-existing image reference exceptions from Phase 3 bootstrap; remove individual entries as batches fix references. Never automatically refresh this baseline to hide new failures.",
   "broken_images": [
     {
-      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
-      "referenced_path": "../../figures/gui/chapter-10/01-syslog-destinations.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-10/01-syslog-destinations.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
-      "referenced_path": "../../figures/gui/chapter-10/02-syslog-server-editor.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-10/02-syslog-server-editor.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
-      "referenced_path": "../../figures/gui/chapter-10/03-syslog-group-hosts.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-10/03-syslog-group-hosts.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
-      "referenced_path": "../../figures/gui/chapter-10/04-syslog-group-interfaces.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-10/04-syslog-group-interfaces.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
-      "referenced_path": "../../figures/gui/chapter-10/05-syslog-group-policy.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-10/05-syslog-group-policy.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
-      "referenced_path": "../../figures/gui/chapter-10/06-syslog-view-push.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-10/06-syslog-view-push.png",
-      "count": 1
-    },
-    {
       "source_document": "00_book/DOC/13_xem_system_logs.md",
       "referenced_path": "../../figures/gui/chapter-13/01-system-logs-overview.png",
       "reference_kind": "html-img",

@@ -1,0 +1,949 @@
+{
+  "batch": "B10A",
+  "starting_commit": "bfa01c456b1d35ec9f7e3779f9ae59e76c66ba63",
+  "status": "PASS cheap local gate",
+  "review_gate": {
+    "result": "PASS",
+    "all_13_decisions_before_move": true,
+    "pack_decisions": [
+      {
+        "asset_id": "ui.routing.syslog.destinations",
+        "pack": "B10A",
+        "old_path": "00_book/figures/gui/chapter-10/01-syslog-destinations.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/destinations.png",
+        "migration_safety": "APPROVE_MIGRATION",
+        "semantic_summary": "Syslog Servers destinations list and pending-apply summary with selected destination details.",
+        "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+        "reason": "Chapter 10 presents destination management and pending states, not experimental evidence.",
+        "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+        "current_provenance": "unknown",
+        "provenance_confidence": "low",
+        "future_replacement_policy": "regenerate-canonical",
+        "needs_new_workflow": true,
+        "future_regeneration_approved": false,
+        "used_by_context": [
+          {
+            "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+            "line": 18,
+            "referenced_path": "../../figures/gui/chapter-10/01-syslog-destinations.png",
+            "target_type": "book-mkdocs",
+            "context_start": 15,
+            "context": "destinations** hi\u1ec3n th\u1ecb c\u00e1c m\u00e1y thu \u0111\u00e3 l\u01b0u cho thi\u1ebft b\u1ecb hi\u1ec7n t\u1ea1i.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/01-syslog-destinations.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Danh s\u00e1ch destination v\u00e0 tr\u1ea1ng th\u00e1i c\u1ea5u h\u00ecnh Syslog c\u1ee7a router.</p></figcaption>\n</figure>\n\nCh\u1ecdn **Add server** \u0111\u1ec3 t\u1ea1o m\u1edbi. **View** ch\u1ec9 xem, **Edit** c\u1eadp nh\u1eadt v\u00e0 **Delete**\n\u0111\u00e1nh d\u1ea5u destination c\u1ea7n x\u00f3a; thay \u0111\u1ed5i ch\u1ec9 t\u1edbi thi\u1ebft b\u1ecb khi th\u1ef1c hi\u1ec7n Push.\nTr\u1ea1ng th\u00e1i `pending_apply` l\u00e0 \u0111ang ch\u1edd \u00e1p d\u1ee5ng, `pending_delete` l\u00e0 ch\u1edd x\u00f3a,"
+          },
+          {
+            "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+            "line": 16,
+            "referenced_path": "figures/gui/chapter-10/01-syslog-destinations.png",
+            "target_type": "book-typst",
+            "context_start": 13,
+            "context": "\nCh\u1ecdn router r\u1ed3i ch\u1ecdn *Syslog Server* tr\u00ean Feature Bar. Khu v\u1ef1c *Syslog destinations* hi\u1ec3n th\u1ecb c\u00e1c m\u00e1y thu \u0111\u00e3 l\u01b0u cho thi\u1ebft b\u1ecb hi\u1ec7n t\u1ea1i.\n\n#insert-image(\"figures/gui/chapter-10/01-syslog-destinations.png\",\n  caption: [Danh s\u00e1ch destination v\u00e0 tr\u1ea1ng th\u00e1i c\u1ea5u h\u00ecnh Syslog c\u1ee7a router.], width: 100.0%) <fig:ch10-01-syslog-destinations>\n\nCh\u1ecdn *Add server* \u0111\u1ec3 t\u1ea1o m\u1edbi. *View* ch\u1ec9 xem, *Edit* c\u1eadp nh\u1eadt v\u00e0 *Delete* \u0111\u00e1nh d\u1ea5u destination c\u1ea7n x\u00f3a; thay \u0111\u1ed5i ch\u1ec9 t\u1edbi thi\u1ebft b\u1ecb khi th\u1ef1c hi\u1ec7n Push. Tr\u1ea1ng th\u00e1i #raw(\"pending_apply\") l\u00e0 \u0111ang ch\u1edd \u00e1p d\u1ee5ng, #raw(\"pending_delete\") l\u00e0 ch\u1edd x\u00f3a, #raw(\"synchronized\") l\u00e0 \u0111\u00e3 kh\u1edbp v\u1edbi thi\u1ebft b\u1ecb v\u00e0 #raw(\"skipped\") l\u00e0 ch\u1ee7 \u0111\u1ed9ng b\u1ecf qua.\n\n== Th\u00eam ho\u1eb7c s\u1eeda Syslog server\n\n#insert-image(\"figures/gui/chapter-10/02-syslog-server-editor.png\","
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.routing.syslog.server-editor",
+        "pack": "B10A",
+        "old_path": "00_book/figures/gui/chapter-10/02-syslog-server-editor.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/server-editor.png",
+        "migration_safety": "APPROVE_MIGRATION",
+        "semantic_summary": "Destination editing UI: server IP, protocol/port, source interface, trap severity, timestamp/sequence controls.",
+        "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+        "reason": "Chapter 10 presents destination form fields; semantic ID matches the editing UI.",
+        "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+        "current_provenance": "unknown",
+        "provenance_confidence": "low",
+        "future_replacement_policy": "regenerate-canonical",
+        "needs_new_workflow": true,
+        "future_regeneration_approved": false,
+        "used_by_context": [
+          {
+            "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+            "line": 31,
+            "referenced_path": "../../figures/gui/chapter-10/02-syslog-server-editor.png",
+            "target_type": "book-mkdocs",
+            "context_start": 28,
+            "context": "## Th\u00eam ho\u1eb7c s\u1eeda Syslog server\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/02-syslog-server-editor.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Bi\u1ec3u m\u1eabu destination v\u1edbi \u0111\u1ecba ch\u1ec9 m\u00e1y thu, transport, port v\u00e0 policy log.</p></figcaption>\n</figure>\n\n| Tham s\u1ed1 | C\u00e1ch nh\u1eadp v\u00e0 \u00fd ngh\u0129a |\n|---|---|\n| **Server IP** | IPv4 ho\u1eb7c IPv6 c\u1ee7a m\u00e1y thu Syslog, ph\u1ea3i reachable t\u1eeb router. Kh\u00f4ng nh\u1eadp \u0111\u1ecba ch\u1ec9 ch\u1ec9 d\u00f9ng \u0111\u1ec3 bind c\u1ee5c b\u1ed9 n\u1ebfu router kh\u00f4ng th\u1ec3 \u0111i t\u1edbi \u0111\u1ecba ch\u1ec9 \u0111\u00f3. |"
+          },
+          {
+            "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+            "line": 23,
+            "referenced_path": "figures/gui/chapter-10/02-syslog-server-editor.png",
+            "target_type": "book-typst",
+            "context_start": 20,
+            "context": "\n== Th\u00eam ho\u1eb7c s\u1eeda Syslog server\n\n#insert-image(\"figures/gui/chapter-10/02-syslog-server-editor.png\",\n  caption: [Bi\u1ec3u m\u1eabu destination v\u1edbi \u0111\u1ecba ch\u1ec9 m\u00e1y thu, transport, port v\u00e0 policy log.], width: 100.0%) <fig:ch10-02-syslog-server-editor>\n\n#report-table(\n  breakable: true,\n  columns: (1.15fr, 2.85fr),\n  header: ([Tham s\u1ed1], [C\u00e1ch nh\u1eadp v\u00e0 \u00fd ngh\u0129a]),\n  rows: ("
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.routing.syslog.group-hosts",
+        "pack": "B10A",
+        "old_path": "00_book/figures/gui/chapter-10/03-syslog-group-hosts.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-hosts.png",
+        "migration_safety": "APPROVE_MIGRATION",
+        "semantic_summary": "Syslog Group Hosts step: two selected routers and an inventory-required device.",
+        "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+        "reason": "Chapter 10 presents host selection for grouped configuration.",
+        "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+        "current_provenance": "unknown",
+        "provenance_confidence": "low",
+        "future_replacement_policy": "regenerate-canonical",
+        "needs_new_workflow": true,
+        "future_regeneration_approved": false,
+        "used_by_context": [
+          {
+            "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+            "line": 58,
+            "referenced_path": "../../figures/gui/chapter-10/03-syslog-group-hosts.png",
+            "target_type": "book-mkdocs",
+            "context_start": 55,
+            "context": "### B\u01b0\u1edbc 1 \u2014 Hosts\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/03-syslog-group-hosts.png\"\nstyle=\"width:82.0%\" /></p>\n<figcaption><p>Ch\u1ecdn c\u00e1c router Connected \u0111\u00e3 c\u00f3 d\u1eef li\u1ec7u interface trong inventory.</p></figcaption>\n</figure>\n\nCh\u1ecdn t\u1eeb hai \u0111\u1ebfn n\u0103m host. Thi\u1ebft b\u1ecb c\u00f3 nh\u00e3n **Inventory required** ch\u01b0a \u0111\u1ee7 d\u1eef\nli\u1ec7u interface v\u00e0 kh\u00f4ng th\u1ec3 tham gia; h\u00e3y \u0111\u1ed3ng b\u1ed9 thi\u1ebft b\u1ecb tr\u01b0\u1edbc r\u1ed3i m\u1edf l\u1ea1i\nSyslog Group."
+          },
+          {
+            "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+            "line": 51,
+            "referenced_path": "figures/gui/chapter-10/03-syslog-group-hosts.png",
+            "target_type": "book-typst",
+            "context_start": 48,
+            "context": "\n=== B\u01b0\u1edbc 1 \u2014 Hosts\n\n#insert-image(\"figures/gui/chapter-10/03-syslog-group-hosts.png\",\n  caption: [Ch\u1ecdn c\u00e1c router Connected \u0111\u00e3 c\u00f3 d\u1eef li\u1ec7u interface trong inventory.], width: 82.0%) <fig:ch10-03-syslog-group-hosts>\n\nCh\u1ecdn t\u1eeb hai \u0111\u1ebfn n\u0103m host. Thi\u1ebft b\u1ecb c\u00f3 nh\u00e3n *Inventory required* ch\u01b0a \u0111\u1ee7 d\u1eef li\u1ec7u interface v\u00e0 kh\u00f4ng th\u1ec3 tham gia; h\u00e3y \u0111\u1ed3ng b\u1ed9 thi\u1ebft b\u1ecb tr\u01b0\u1edbc r\u1ed3i m\u1edf l\u1ea1i Syslog Group.\n\n=== B\u01b0\u1edbc 2 \u2014 Interfaces\n\n#insert-image(\"figures/gui/chapter-10/04-syslog-group-interfaces.png\","
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.routing.syslog.group-interfaces",
+        "pack": "B10A",
+        "old_path": "00_book/figures/gui/chapter-10/04-syslog-group-interfaces.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-interfaces.png",
+        "migration_safety": "APPROVE_MIGRATION",
+        "semantic_summary": "Syslog Group Interfaces step: per-host source-interface selections.",
+        "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+        "reason": "Chapter 10 presents one source interface per host.",
+        "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+        "current_provenance": "unknown",
+        "provenance_confidence": "low",
+        "future_replacement_policy": "regenerate-canonical",
+        "needs_new_workflow": true,
+        "future_regeneration_approved": false,
+        "used_by_context": [
+          {
+            "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+            "line": 70,
+            "referenced_path": "../../figures/gui/chapter-10/04-syslog-group-interfaces.png",
+            "target_type": "book-mkdocs",
+            "context_start": 67,
+            "context": "### B\u01b0\u1edbc 2 \u2014 Interfaces\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/04-syslog-group-interfaces.png\"\nstyle=\"width:82.0%\" /></p>\n<figcaption><p>Ch\u1ecdn m\u1ed9t source interface ri\u00eang cho t\u1eebng router.</p></figcaption>\n</figure>\n\nM\u1ed7i host c\u00f3 th\u1ec3 d\u00f9ng interface kh\u00e1c nhau nh\u01b0ng t\u1ea5t c\u1ea3 interface \u0111\u00e3 ch\u1ecdn ph\u1ea3i c\u00f3\n\u0111\u01b0\u1eddng t\u1edbi m\u00e1y thu. Loopback th\u01b0\u1eddng l\u00e0 l\u1ef1a ch\u1ecdn \u1ed5n \u0111\u1ecbnh nh\u1ea5t; n\u1ebfu routing ch\u01b0a\nqu\u1ea3ng b\u00e1 Loopback, h\u00e3y ch\u1ecdn management interface ho\u1eb7c SVI reachable."
+          },
+          {
+            "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+            "line": 58,
+            "referenced_path": "figures/gui/chapter-10/04-syslog-group-interfaces.png",
+            "target_type": "book-typst",
+            "context_start": 55,
+            "context": "\n=== B\u01b0\u1edbc 2 \u2014 Interfaces\n\n#insert-image(\"figures/gui/chapter-10/04-syslog-group-interfaces.png\",\n  caption: [Ch\u1ecdn m\u1ed9t source interface ri\u00eang cho t\u1eebng router.], width: 82.0%) <fig:ch10-04-syslog-group-interfaces>\n\nM\u1ed7i host c\u00f3 th\u1ec3 d\u00f9ng interface kh\u00e1c nhau nh\u01b0ng t\u1ea5t c\u1ea3 interface \u0111\u00e3 ch\u1ecdn ph\u1ea3i c\u00f3 \u0111\u01b0\u1eddng t\u1edbi m\u00e1y thu. Loopback th\u01b0\u1eddng l\u00e0 l\u1ef1a ch\u1ecdn \u1ed5n \u0111\u1ecbnh nh\u1ea5t; n\u1ebfu routing ch\u01b0a qu\u1ea3ng b\u00e1 Loopback, h\u00e3y ch\u1ecdn management interface ho\u1eb7c SVI reachable.\n\n=== B\u01b0\u1edbc 3 \u2014 Policy\n\n#insert-image(\"figures/gui/chapter-10/05-syslog-group-policy.png\","
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.routing.syslog.group-policy",
+        "pack": "B10A",
+        "old_path": "00_book/figures/gui/chapter-10/05-syslog-group-policy.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-policy.png",
+        "migration_safety": "APPROVE_MIGRATION",
+        "semantic_summary": "Syslog Group Policy step: shared destination/transport/port/severity and timestamp/sequence settings.",
+        "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+        "reason": "Chapter 10 presents shared Syslog message policy settings.",
+        "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+        "current_provenance": "unknown",
+        "provenance_confidence": "low",
+        "future_replacement_policy": "regenerate-canonical",
+        "needs_new_workflow": true,
+        "future_regeneration_approved": false,
+        "used_by_context": [
+          {
+            "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+            "line": 82,
+            "referenced_path": "../../figures/gui/chapter-10/05-syslog-group-policy.png",
+            "target_type": "book-mkdocs",
+            "context_start": 79,
+            "context": "### B\u01b0\u1edbc 3 \u2014 Policy\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/05-syslog-group-policy.png\"\nstyle=\"width:82.0%\" /></p>\n<figcaption><p>Nh\u1eadp destination v\u00e0 ch\u00ednh s\u00e1ch th\u00f4ng b\u00e1o d\u00f9ng chung cho c\u1ea3 nh\u00f3m.</p></figcaption>\n</figure>\n\nNh\u1eadp **Server IP**, **Transport**, **Port** v\u00e0 **Trap severity** d\u00f9ng chung. B\u1eadt\ntimestamp v\u00e0 sequence number n\u1ebfu c\u1ea7n \u0111\u1ed1i chi\u1ebfu s\u1ef1 ki\u1ec7n. **Save** ch\u1ec9 l\u01b0u c\u1ea5u h\u00ecnh\n\u0111ang ch\u1edd; **Save & Push** l\u01b0u r\u1ed3i b\u1eaft \u0111\u1ea7u quy tr\u00ecnh \u00e1p d\u1ee5ng cho nh\u00f3m. V\u1edbi t\u00e0i li\u1ec7u"
+          },
+          {
+            "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+            "line": 65,
+            "referenced_path": "figures/gui/chapter-10/05-syslog-group-policy.png",
+            "target_type": "book-typst",
+            "context_start": 62,
+            "context": "\n=== B\u01b0\u1edbc 3 \u2014 Policy\n\n#insert-image(\"figures/gui/chapter-10/05-syslog-group-policy.png\",\n  caption: [Nh\u1eadp destination v\u00e0 ch\u00ednh s\u00e1ch th\u00f4ng b\u00e1o d\u00f9ng chung cho c\u1ea3 nh\u00f3m.], width: 82.0%) <fig:ch10-05-syslog-group-policy>\n\nNh\u1eadp *Server IP*, *Transport*, *Port* v\u00e0 *Trap severity* d\u00f9ng chung. B\u1eadt timestamp v\u00e0 sequence number n\u1ebfu c\u1ea7n \u0111\u1ed1i chi\u1ebfu s\u1ef1 ki\u1ec7n. *Save* ch\u1ec9 l\u01b0u c\u1ea5u h\u00ecnh \u0111ang ch\u1edd; *Save & Push* l\u01b0u r\u1ed3i b\u1eaft \u0111\u1ea7u quy tr\u00ecnh \u00e1p d\u1ee5ng cho nh\u00f3m. V\u1edbi t\u00e0i li\u1ec7u v\u00e0 m\u00f4i tr\u01b0\u1eddng c\u1ea7n ki\u1ec3m so\u00e1t, n\u00ean Save tr\u01b0\u1edbc v\u00e0 xem preview \u0111\u1ed9c l\u1eadp.\n\n== View & Push SYSLOG\n\nSau khi Save, ch\u1ecdn *View & Push* trong tab Syslog Server."
+          }
+        ]
+      },
+      {
+        "asset_id": "ui.routing.syslog.view-push",
+        "pack": "B10A",
+        "old_path": "00_book/figures/gui/chapter-10/06-syslog-view-push.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/view-push.png",
+        "migration_safety": "APPROVE_MIGRATION",
+        "semantic_summary": "View & Push SYSLOG application preview of prepared logging commands with Refresh/Push controls.",
+        "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+        "reason": "Chapter 10 presents an application command preview; this is not terminal output or device-verification evidence.",
+        "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+        "current_provenance": "unknown",
+        "provenance_confidence": "low",
+        "future_replacement_policy": "regenerate-canonical",
+        "needs_new_workflow": true,
+        "future_regeneration_approved": false,
+        "used_by_context": [
+          {
+            "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+            "line": 97,
+            "referenced_path": "../../figures/gui/chapter-10/06-syslog-view-push.png",
+            "target_type": "book-mkdocs",
+            "context_start": 94,
+            "context": "Sau khi Save, ch\u1ecdn **View & Push** trong tab Syslog Server.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/06-syslog-view-push.png\"\nstyle=\"width:75.0%\" /></p>\n<figcaption><p>View & Push SYSLOG t\u1ed5ng h\u1ee3p l\u1ec7nh ri\u00eang cho R1 v\u00e0 R2.</p></figcaption>\n</figure>\n\nX\u00e1c nh\u1eadn ti\u00eau \u0111\u1ec1 l\u00e0 **View & Push SYSLOG** v\u00e0 ki\u1ec3m tra t\u1eebng host, server IP,\ntransport, port, source interface, severity, timestamp v\u00e0 sequence number. N\u1ebfu\npreview ch\u1ee9a l\u1ec7nh `no logging host`, ki\u1ec3m tra l\u1ea1i destination \u0111ang x\u00f3a tr\u01b0\u1edbc khi"
+          },
+          {
+            "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+            "line": 74,
+            "referenced_path": "figures/gui/chapter-10/06-syslog-view-push.png",
+            "target_type": "book-typst",
+            "context_start": 71,
+            "context": "\nSau khi Save, ch\u1ecdn *View & Push* trong tab Syslog Server.\n\n#insert-image(\"figures/gui/chapter-10/06-syslog-view-push.png\",\n  caption: [View & Push SYSLOG t\u1ed5ng h\u1ee3p l\u1ec7nh ri\u00eang cho R1 v\u00e0 R2.], width: 75.0%) <fig:ch10-06-syslog-view-push>\n\nX\u00e1c nh\u1eadn ti\u00eau \u0111\u1ec1 l\u00e0 *View & Push SYSLOG* v\u00e0 ki\u1ec3m tra t\u1eebng host, server IP, transport, port, source interface, severity, timestamp v\u00e0 sequence number. N\u1ebfu preview ch\u1ee9a l\u1ec7nh #raw(\"no logging host\"), ki\u1ec3m tra l\u1ea1i destination \u0111ang x\u00f3a tr\u01b0\u1edbc khi Push.\n\nSau Push, x\u00e1c nh\u1eadn listener \u0111ang ch\u1ea1y \u0111\u00fang IP/port/transport, t\u1ea1o m\u1ed9t s\u1ef1 ki\u1ec7n th\u1eed tr\u00ean router v\u00e0 ki\u1ec3m tra log \u0111\u1ebfn t\u1eeb \u0111\u00fang source address. N\u1ebfu kh\u00f4ng nh\u1eadn \u0111\u01b0\u1ee3c log, ki\u1ec3m tra route, ACL/firewall, port listener v\u00e0 m\u1ee9c severity tr\u01b0\u1edbc khi thay \u0111\u1ed5i c\u1ea5u h\u00ecnh l\u1ea7n n\u1eefa."
+          }
+        ]
+      }
+    ],
+    "fixed_execution_scope": true,
+    "provenance": "unknown retained",
+    "future_replacement_policy": "regenerate-canonical",
+    "future_regeneration_approved": false
+  },
+  "assets": [
+    {
+      "asset_id": "ui.routing.syslog.destinations",
+      "old_path": "00_book/figures/gui/chapter-10/01-syslog-destinations.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/syslog/destinations.png",
+      "source_git_blob_sha": "732d1c80dd41b96d234ab154af34d3215c9e3e3fd99a80b50843a566c517526a",
+      "canonical_filesystem_sha": "732d1c80dd41b96d234ab154af34d3215c9e3e3fd99a80b50843a566c517526a",
+      "canonical_index_blob_sha": "732d1c80dd41b96d234ab154af34d3215c9e3e3fd99a80b50843a566c517526a",
+      "manifest_sha": "732d1c80dd41b96d234ab154af34d3215c9e3e3fd99a80b50843a566c517526a",
+      "staging_path": "00_book/assets/ui/legacy/routing/syslog/destinations.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 18,
+          "referenced_path": "../assets/ui/legacy/routing/syslog/destinations.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 16,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/syslog/destinations.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "732d1c80dd41b96d234ab154af34d3215c9e3e3fd99a80b50843a566c517526a"
+    },
+    {
+      "asset_id": "ui.routing.syslog.server-editor",
+      "old_path": "00_book/figures/gui/chapter-10/02-syslog-server-editor.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/syslog/server-editor.png",
+      "source_git_blob_sha": "0a96b7578eddc654194957eecd17785490ff61db443c9e0d567ae92a6a319cbd",
+      "canonical_filesystem_sha": "0a96b7578eddc654194957eecd17785490ff61db443c9e0d567ae92a6a319cbd",
+      "canonical_index_blob_sha": "0a96b7578eddc654194957eecd17785490ff61db443c9e0d567ae92a6a319cbd",
+      "manifest_sha": "0a96b7578eddc654194957eecd17785490ff61db443c9e0d567ae92a6a319cbd",
+      "staging_path": "00_book/assets/ui/legacy/routing/syslog/server-editor.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 31,
+          "referenced_path": "../assets/ui/legacy/routing/syslog/server-editor.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 23,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/syslog/server-editor.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "0a96b7578eddc654194957eecd17785490ff61db443c9e0d567ae92a6a319cbd"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-hosts",
+      "old_path": "00_book/figures/gui/chapter-10/03-syslog-group-hosts.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-hosts.png",
+      "source_git_blob_sha": "119b6f6b56a56be80cf0e4d5dbf87584e29453cdb92c4d6af1c289290c2a7775",
+      "canonical_filesystem_sha": "119b6f6b56a56be80cf0e4d5dbf87584e29453cdb92c4d6af1c289290c2a7775",
+      "canonical_index_blob_sha": "119b6f6b56a56be80cf0e4d5dbf87584e29453cdb92c4d6af1c289290c2a7775",
+      "manifest_sha": "119b6f6b56a56be80cf0e4d5dbf87584e29453cdb92c4d6af1c289290c2a7775",
+      "staging_path": "00_book/assets/ui/legacy/routing/syslog/group-hosts.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 58,
+          "referenced_path": "../assets/ui/legacy/routing/syslog/group-hosts.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 51,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/syslog/group-hosts.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "119b6f6b56a56be80cf0e4d5dbf87584e29453cdb92c4d6af1c289290c2a7775"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-interfaces",
+      "old_path": "00_book/figures/gui/chapter-10/04-syslog-group-interfaces.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-interfaces.png",
+      "source_git_blob_sha": "0cee4ad8e56e47cf6d7d181f83073252a31f014227ffa5cc7ecae235d3c5b971",
+      "canonical_filesystem_sha": "0cee4ad8e56e47cf6d7d181f83073252a31f014227ffa5cc7ecae235d3c5b971",
+      "canonical_index_blob_sha": "0cee4ad8e56e47cf6d7d181f83073252a31f014227ffa5cc7ecae235d3c5b971",
+      "manifest_sha": "0cee4ad8e56e47cf6d7d181f83073252a31f014227ffa5cc7ecae235d3c5b971",
+      "staging_path": "00_book/assets/ui/legacy/routing/syslog/group-interfaces.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 70,
+          "referenced_path": "../assets/ui/legacy/routing/syslog/group-interfaces.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 58,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/syslog/group-interfaces.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "0cee4ad8e56e47cf6d7d181f83073252a31f014227ffa5cc7ecae235d3c5b971"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-policy",
+      "old_path": "00_book/figures/gui/chapter-10/05-syslog-group-policy.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-policy.png",
+      "source_git_blob_sha": "084c5636472f801bfa1ffa354b7da005a34b46eba26dad1e217e6794cd4f0202",
+      "canonical_filesystem_sha": "084c5636472f801bfa1ffa354b7da005a34b46eba26dad1e217e6794cd4f0202",
+      "canonical_index_blob_sha": "084c5636472f801bfa1ffa354b7da005a34b46eba26dad1e217e6794cd4f0202",
+      "manifest_sha": "084c5636472f801bfa1ffa354b7da005a34b46eba26dad1e217e6794cd4f0202",
+      "staging_path": "00_book/assets/ui/legacy/routing/syslog/group-policy.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 82,
+          "referenced_path": "../assets/ui/legacy/routing/syslog/group-policy.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 65,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/syslog/group-policy.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "084c5636472f801bfa1ffa354b7da005a34b46eba26dad1e217e6794cd4f0202"
+    },
+    {
+      "asset_id": "ui.routing.syslog.view-push",
+      "old_path": "00_book/figures/gui/chapter-10/06-syslog-view-push.png",
+      "canonical_path": "documentation_assets/ui/legacy/routing/syslog/view-push.png",
+      "source_git_blob_sha": "22b193933a166ab35e89587c66b7c114d1531cca987024857ba2781beed11665",
+      "canonical_filesystem_sha": "22b193933a166ab35e89587c66b7c114d1531cca987024857ba2781beed11665",
+      "canonical_index_blob_sha": "22b193933a166ab35e89587c66b7c114d1531cca987024857ba2781beed11665",
+      "manifest_sha": "22b193933a166ab35e89587c66b7c114d1531cca987024857ba2781beed11665",
+      "staging_path": "00_book/assets/ui/legacy/routing/syslog/view-push.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 97,
+          "referenced_path": "../assets/ui/legacy/routing/syslog/view-push.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 74,
+          "referenced_path": "/documentation_assets/ui/legacy/routing/syslog/view-push.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate",
+      "staged_sha256": "22b193933a166ab35e89587c66b7c114d1531cca987024857ba2781beed11665"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.routing.syslog.destinations",
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "line": 18,
+      "before": "../../figures/gui/chapter-10/01-syslog-destinations.png",
+      "after": "../assets/ui/legacy/routing/syslog/destinations.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.syslog.server-editor",
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "line": 31,
+      "before": "../../figures/gui/chapter-10/02-syslog-server-editor.png",
+      "after": "../assets/ui/legacy/routing/syslog/server-editor.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-hosts",
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "line": 58,
+      "before": "../../figures/gui/chapter-10/03-syslog-group-hosts.png",
+      "after": "../assets/ui/legacy/routing/syslog/group-hosts.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-interfaces",
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "line": 70,
+      "before": "../../figures/gui/chapter-10/04-syslog-group-interfaces.png",
+      "after": "../assets/ui/legacy/routing/syslog/group-interfaces.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-policy",
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "line": 82,
+      "before": "../../figures/gui/chapter-10/05-syslog-group-policy.png",
+      "after": "../assets/ui/legacy/routing/syslog/group-policy.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.syslog.view-push",
+      "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+      "line": 97,
+      "before": "../../figures/gui/chapter-10/06-syslog-view-push.png",
+      "after": "../assets/ui/legacy/routing/syslog/view-push.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.routing.syslog.destinations",
+      "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+      "line": 16,
+      "before": "figures/gui/chapter-10/01-syslog-destinations.png",
+      "after": "/documentation_assets/ui/legacy/routing/syslog/destinations.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.syslog.server-editor",
+      "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+      "line": 23,
+      "before": "figures/gui/chapter-10/02-syslog-server-editor.png",
+      "after": "/documentation_assets/ui/legacy/routing/syslog/server-editor.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-hosts",
+      "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+      "line": 51,
+      "before": "figures/gui/chapter-10/03-syslog-group-hosts.png",
+      "after": "/documentation_assets/ui/legacy/routing/syslog/group-hosts.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-interfaces",
+      "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+      "line": 58,
+      "before": "figures/gui/chapter-10/04-syslog-group-interfaces.png",
+      "after": "/documentation_assets/ui/legacy/routing/syslog/group-interfaces.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-policy",
+      "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+      "line": 65,
+      "before": "figures/gui/chapter-10/05-syslog-group-policy.png",
+      "after": "/documentation_assets/ui/legacy/routing/syslog/group-policy.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.routing.syslog.view-push",
+      "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+      "line": 74,
+      "before": "figures/gui/chapter-10/06-syslog-view-push.png",
+      "after": "/documentation_assets/ui/legacy/routing/syslog/view-push.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 12,
+  "baseline": {
+    "before": 13,
+    "resolved": 6,
+    "after": 7,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+        "referenced_path": "../../figures/gui/chapter-10/01-syslog-destinations.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-10/01-syslog-destinations.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+        "referenced_path": "../../figures/gui/chapter-10/02-syslog-server-editor.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-10/02-syslog-server-editor.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+        "referenced_path": "../../figures/gui/chapter-10/03-syslog-group-hosts.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-10/03-syslog-group-hosts.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+        "referenced_path": "../../figures/gui/chapter-10/04-syslog-group-interfaces.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-10/04-syslog-group-interfaces.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+        "referenced_path": "../../figures/gui/chapter-10/05-syslog-group-policy.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-10/05-syslog-group-policy.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+        "referenced_path": "../../figures/gui/chapter-10/06-syslog-view-push.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-10/06-syslog-view-push.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 219,
+    "pending": 126,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "branch": "docs/pictures-sort",
+  "initial_main_behind": 0,
+  "validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "proof": {
+    "status": "PASS",
+    "all_7_system_logs_decisions_complete_before_moves": true,
+    "future_replacement_policies_unchanged": true,
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 219,
+      "pending": 126,
+      "frozen": 62
+    },
+    "b10_migrated": 6,
+    "b10_old_paths_absent": 6,
+    "b10_canonical_paths_present": 6,
+    "other_records_unchanged": 401,
+    "b06_hold_full_record_and_legacy_bytes_unchanged": true,
+    "b06_hold_planned_destination_absent": true,
+    "reference_edges_exact_current_lines": 12,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 7,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [],
+    "full_build_gate": "NOT RUN for B10A cheap gate"
+  },
+  "png_sanity": [
+    {
+      "asset_id": "ui.routing.syslog.destinations",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.syslog.server-editor",
+      "width": 2502,
+      "height": 1888,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-hosts",
+      "width": 1816,
+      "height": 1536,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-interfaces",
+      "width": 1816,
+      "height": 1536,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-policy",
+      "width": 1816,
+      "height": 1536,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.routing.syslog.view-push",
+      "width": 1816,
+      "height": 1376,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ],
+  "migration_decisions": [
+    {
+      "asset_id": "ui.routing.syslog.destinations",
+      "pack": "B10A",
+      "old_path": "00_book/figures/gui/chapter-10/01-syslog-destinations.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/destinations.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Syslog Servers destinations list and pending-apply summary with selected destination details.",
+      "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+      "reason": "Chapter 10 presents destination management and pending states, not experimental evidence.",
+      "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "regenerate-canonical",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 18,
+          "referenced_path": "../../figures/gui/chapter-10/01-syslog-destinations.png",
+          "target_type": "book-mkdocs",
+          "context_start": 15,
+          "context": "destinations** hi\u1ec3n th\u1ecb c\u00e1c m\u00e1y thu \u0111\u00e3 l\u01b0u cho thi\u1ebft b\u1ecb hi\u1ec7n t\u1ea1i.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/01-syslog-destinations.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Danh s\u00e1ch destination v\u00e0 tr\u1ea1ng th\u00e1i c\u1ea5u h\u00ecnh Syslog c\u1ee7a router.</p></figcaption>\n</figure>\n\nCh\u1ecdn **Add server** \u0111\u1ec3 t\u1ea1o m\u1edbi. **View** ch\u1ec9 xem, **Edit** c\u1eadp nh\u1eadt v\u00e0 **Delete**\n\u0111\u00e1nh d\u1ea5u destination c\u1ea7n x\u00f3a; thay \u0111\u1ed5i ch\u1ec9 t\u1edbi thi\u1ebft b\u1ecb khi th\u1ef1c hi\u1ec7n Push.\nTr\u1ea1ng th\u00e1i `pending_apply` l\u00e0 \u0111ang ch\u1edd \u00e1p d\u1ee5ng, `pending_delete` l\u00e0 ch\u1edd x\u00f3a,"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 16,
+          "referenced_path": "figures/gui/chapter-10/01-syslog-destinations.png",
+          "target_type": "book-typst",
+          "context_start": 13,
+          "context": "\nCh\u1ecdn router r\u1ed3i ch\u1ecdn *Syslog Server* tr\u00ean Feature Bar. Khu v\u1ef1c *Syslog destinations* hi\u1ec3n th\u1ecb c\u00e1c m\u00e1y thu \u0111\u00e3 l\u01b0u cho thi\u1ebft b\u1ecb hi\u1ec7n t\u1ea1i.\n\n#insert-image(\"figures/gui/chapter-10/01-syslog-destinations.png\",\n  caption: [Danh s\u00e1ch destination v\u00e0 tr\u1ea1ng th\u00e1i c\u1ea5u h\u00ecnh Syslog c\u1ee7a router.], width: 100.0%) <fig:ch10-01-syslog-destinations>\n\nCh\u1ecdn *Add server* \u0111\u1ec3 t\u1ea1o m\u1edbi. *View* ch\u1ec9 xem, *Edit* c\u1eadp nh\u1eadt v\u00e0 *Delete* \u0111\u00e1nh d\u1ea5u destination c\u1ea7n x\u00f3a; thay \u0111\u1ed5i ch\u1ec9 t\u1edbi thi\u1ebft b\u1ecb khi th\u1ef1c hi\u1ec7n Push. Tr\u1ea1ng th\u00e1i #raw(\"pending_apply\") l\u00e0 \u0111ang ch\u1edd \u00e1p d\u1ee5ng, #raw(\"pending_delete\") l\u00e0 ch\u1edd x\u00f3a, #raw(\"synchronized\") l\u00e0 \u0111\u00e3 kh\u1edbp v\u1edbi thi\u1ebft b\u1ecb v\u00e0 #raw(\"skipped\") l\u00e0 ch\u1ee7 \u0111\u1ed9ng b\u1ecf qua.\n\n== Th\u00eam ho\u1eb7c s\u1eeda Syslog server\n\n#insert-image(\"figures/gui/chapter-10/02-syslog-server-editor.png\","
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.routing.syslog.server-editor",
+      "pack": "B10A",
+      "old_path": "00_book/figures/gui/chapter-10/02-syslog-server-editor.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/server-editor.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Destination editing UI: server IP, protocol/port, source interface, trap severity, timestamp/sequence controls.",
+      "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+      "reason": "Chapter 10 presents destination form fields; semantic ID matches the editing UI.",
+      "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "regenerate-canonical",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 31,
+          "referenced_path": "../../figures/gui/chapter-10/02-syslog-server-editor.png",
+          "target_type": "book-mkdocs",
+          "context_start": 28,
+          "context": "## Th\u00eam ho\u1eb7c s\u1eeda Syslog server\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/02-syslog-server-editor.png\"\nstyle=\"width:100.0%\" /></p>\n<figcaption><p>Bi\u1ec3u m\u1eabu destination v\u1edbi \u0111\u1ecba ch\u1ec9 m\u00e1y thu, transport, port v\u00e0 policy log.</p></figcaption>\n</figure>\n\n| Tham s\u1ed1 | C\u00e1ch nh\u1eadp v\u00e0 \u00fd ngh\u0129a |\n|---|---|\n| **Server IP** | IPv4 ho\u1eb7c IPv6 c\u1ee7a m\u00e1y thu Syslog, ph\u1ea3i reachable t\u1eeb router. Kh\u00f4ng nh\u1eadp \u0111\u1ecba ch\u1ec9 ch\u1ec9 d\u00f9ng \u0111\u1ec3 bind c\u1ee5c b\u1ed9 n\u1ebfu router kh\u00f4ng th\u1ec3 \u0111i t\u1edbi \u0111\u1ecba ch\u1ec9 \u0111\u00f3. |"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 23,
+          "referenced_path": "figures/gui/chapter-10/02-syslog-server-editor.png",
+          "target_type": "book-typst",
+          "context_start": 20,
+          "context": "\n== Th\u00eam ho\u1eb7c s\u1eeda Syslog server\n\n#insert-image(\"figures/gui/chapter-10/02-syslog-server-editor.png\",\n  caption: [Bi\u1ec3u m\u1eabu destination v\u1edbi \u0111\u1ecba ch\u1ec9 m\u00e1y thu, transport, port v\u00e0 policy log.], width: 100.0%) <fig:ch10-02-syslog-server-editor>\n\n#report-table(\n  breakable: true,\n  columns: (1.15fr, 2.85fr),\n  header: ([Tham s\u1ed1], [C\u00e1ch nh\u1eadp v\u00e0 \u00fd ngh\u0129a]),\n  rows: ("
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-hosts",
+      "pack": "B10A",
+      "old_path": "00_book/figures/gui/chapter-10/03-syslog-group-hosts.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-hosts.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Syslog Group Hosts step: two selected routers and an inventory-required device.",
+      "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+      "reason": "Chapter 10 presents host selection for grouped configuration.",
+      "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "regenerate-canonical",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 58,
+          "referenced_path": "../../figures/gui/chapter-10/03-syslog-group-hosts.png",
+          "target_type": "book-mkdocs",
+          "context_start": 55,
+          "context": "### B\u01b0\u1edbc 1 \u2014 Hosts\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/03-syslog-group-hosts.png\"\nstyle=\"width:82.0%\" /></p>\n<figcaption><p>Ch\u1ecdn c\u00e1c router Connected \u0111\u00e3 c\u00f3 d\u1eef li\u1ec7u interface trong inventory.</p></figcaption>\n</figure>\n\nCh\u1ecdn t\u1eeb hai \u0111\u1ebfn n\u0103m host. Thi\u1ebft b\u1ecb c\u00f3 nh\u00e3n **Inventory required** ch\u01b0a \u0111\u1ee7 d\u1eef\nli\u1ec7u interface v\u00e0 kh\u00f4ng th\u1ec3 tham gia; h\u00e3y \u0111\u1ed3ng b\u1ed9 thi\u1ebft b\u1ecb tr\u01b0\u1edbc r\u1ed3i m\u1edf l\u1ea1i\nSyslog Group."
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 51,
+          "referenced_path": "figures/gui/chapter-10/03-syslog-group-hosts.png",
+          "target_type": "book-typst",
+          "context_start": 48,
+          "context": "\n=== B\u01b0\u1edbc 1 \u2014 Hosts\n\n#insert-image(\"figures/gui/chapter-10/03-syslog-group-hosts.png\",\n  caption: [Ch\u1ecdn c\u00e1c router Connected \u0111\u00e3 c\u00f3 d\u1eef li\u1ec7u interface trong inventory.], width: 82.0%) <fig:ch10-03-syslog-group-hosts>\n\nCh\u1ecdn t\u1eeb hai \u0111\u1ebfn n\u0103m host. Thi\u1ebft b\u1ecb c\u00f3 nh\u00e3n *Inventory required* ch\u01b0a \u0111\u1ee7 d\u1eef li\u1ec7u interface v\u00e0 kh\u00f4ng th\u1ec3 tham gia; h\u00e3y \u0111\u1ed3ng b\u1ed9 thi\u1ebft b\u1ecb tr\u01b0\u1edbc r\u1ed3i m\u1edf l\u1ea1i Syslog Group.\n\n=== B\u01b0\u1edbc 2 \u2014 Interfaces\n\n#insert-image(\"figures/gui/chapter-10/04-syslog-group-interfaces.png\","
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-interfaces",
+      "pack": "B10A",
+      "old_path": "00_book/figures/gui/chapter-10/04-syslog-group-interfaces.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-interfaces.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Syslog Group Interfaces step: per-host source-interface selections.",
+      "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+      "reason": "Chapter 10 presents one source interface per host.",
+      "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "regenerate-canonical",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 70,
+          "referenced_path": "../../figures/gui/chapter-10/04-syslog-group-interfaces.png",
+          "target_type": "book-mkdocs",
+          "context_start": 67,
+          "context": "### B\u01b0\u1edbc 2 \u2014 Interfaces\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/04-syslog-group-interfaces.png\"\nstyle=\"width:82.0%\" /></p>\n<figcaption><p>Ch\u1ecdn m\u1ed9t source interface ri\u00eang cho t\u1eebng router.</p></figcaption>\n</figure>\n\nM\u1ed7i host c\u00f3 th\u1ec3 d\u00f9ng interface kh\u00e1c nhau nh\u01b0ng t\u1ea5t c\u1ea3 interface \u0111\u00e3 ch\u1ecdn ph\u1ea3i c\u00f3\n\u0111\u01b0\u1eddng t\u1edbi m\u00e1y thu. Loopback th\u01b0\u1eddng l\u00e0 l\u1ef1a ch\u1ecdn \u1ed5n \u0111\u1ecbnh nh\u1ea5t; n\u1ebfu routing ch\u01b0a\nqu\u1ea3ng b\u00e1 Loopback, h\u00e3y ch\u1ecdn management interface ho\u1eb7c SVI reachable."
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 58,
+          "referenced_path": "figures/gui/chapter-10/04-syslog-group-interfaces.png",
+          "target_type": "book-typst",
+          "context_start": 55,
+          "context": "\n=== B\u01b0\u1edbc 2 \u2014 Interfaces\n\n#insert-image(\"figures/gui/chapter-10/04-syslog-group-interfaces.png\",\n  caption: [Ch\u1ecdn m\u1ed9t source interface ri\u00eang cho t\u1eebng router.], width: 82.0%) <fig:ch10-04-syslog-group-interfaces>\n\nM\u1ed7i host c\u00f3 th\u1ec3 d\u00f9ng interface kh\u00e1c nhau nh\u01b0ng t\u1ea5t c\u1ea3 interface \u0111\u00e3 ch\u1ecdn ph\u1ea3i c\u00f3 \u0111\u01b0\u1eddng t\u1edbi m\u00e1y thu. Loopback th\u01b0\u1eddng l\u00e0 l\u1ef1a ch\u1ecdn \u1ed5n \u0111\u1ecbnh nh\u1ea5t; n\u1ebfu routing ch\u01b0a qu\u1ea3ng b\u00e1 Loopback, h\u00e3y ch\u1ecdn management interface ho\u1eb7c SVI reachable.\n\n=== B\u01b0\u1edbc 3 \u2014 Policy\n\n#insert-image(\"figures/gui/chapter-10/05-syslog-group-policy.png\","
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.routing.syslog.group-policy",
+      "pack": "B10A",
+      "old_path": "00_book/figures/gui/chapter-10/05-syslog-group-policy.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/group-policy.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "Syslog Group Policy step: shared destination/transport/port/severity and timestamp/sequence settings.",
+      "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+      "reason": "Chapter 10 presents shared Syslog message policy settings.",
+      "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "regenerate-canonical",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 82,
+          "referenced_path": "../../figures/gui/chapter-10/05-syslog-group-policy.png",
+          "target_type": "book-mkdocs",
+          "context_start": 79,
+          "context": "### B\u01b0\u1edbc 3 \u2014 Policy\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/05-syslog-group-policy.png\"\nstyle=\"width:82.0%\" /></p>\n<figcaption><p>Nh\u1eadp destination v\u00e0 ch\u00ednh s\u00e1ch th\u00f4ng b\u00e1o d\u00f9ng chung cho c\u1ea3 nh\u00f3m.</p></figcaption>\n</figure>\n\nNh\u1eadp **Server IP**, **Transport**, **Port** v\u00e0 **Trap severity** d\u00f9ng chung. B\u1eadt\ntimestamp v\u00e0 sequence number n\u1ebfu c\u1ea7n \u0111\u1ed1i chi\u1ebfu s\u1ef1 ki\u1ec7n. **Save** ch\u1ec9 l\u01b0u c\u1ea5u h\u00ecnh\n\u0111ang ch\u1edd; **Save & Push** l\u01b0u r\u1ed3i b\u1eaft \u0111\u1ea7u quy tr\u00ecnh \u00e1p d\u1ee5ng cho nh\u00f3m. V\u1edbi t\u00e0i li\u1ec7u"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 65,
+          "referenced_path": "figures/gui/chapter-10/05-syslog-group-policy.png",
+          "target_type": "book-typst",
+          "context_start": 62,
+          "context": "\n=== B\u01b0\u1edbc 3 \u2014 Policy\n\n#insert-image(\"figures/gui/chapter-10/05-syslog-group-policy.png\",\n  caption: [Nh\u1eadp destination v\u00e0 ch\u00ednh s\u00e1ch th\u00f4ng b\u00e1o d\u00f9ng chung cho c\u1ea3 nh\u00f3m.], width: 82.0%) <fig:ch10-05-syslog-group-policy>\n\nNh\u1eadp *Server IP*, *Transport*, *Port* v\u00e0 *Trap severity* d\u00f9ng chung. B\u1eadt timestamp v\u00e0 sequence number n\u1ebfu c\u1ea7n \u0111\u1ed1i chi\u1ebfu s\u1ef1 ki\u1ec7n. *Save* ch\u1ec9 l\u01b0u c\u1ea5u h\u00ecnh \u0111ang ch\u1edd; *Save & Push* l\u01b0u r\u1ed3i b\u1eaft \u0111\u1ea7u quy tr\u00ecnh \u00e1p d\u1ee5ng cho nh\u00f3m. V\u1edbi t\u00e0i li\u1ec7u v\u00e0 m\u00f4i tr\u01b0\u1eddng c\u1ea7n ki\u1ec3m so\u00e1t, n\u00ean Save tr\u01b0\u1edbc v\u00e0 xem preview \u0111\u1ed9c l\u1eadp.\n\n== View & Push SYSLOG\n\nSau khi Save, ch\u1ecdn *View & Push* trong tab Syslog Server."
+        }
+      ]
+    },
+    {
+      "asset_id": "ui.routing.syslog.view-push",
+      "pack": "B10A",
+      "old_path": "00_book/figures/gui/chapter-10/06-syslog-view-push.png",
+      "planned_canonical_path": "documentation_assets/ui/legacy/routing/syslog/view-push.png",
+      "migration_safety": "APPROVE_MIGRATION",
+      "semantic_summary": "View & Push SYSLOG application preview of prepared logging commands with Refresh/Push controls.",
+      "ui_vs_evidence": "CAMS application UI illustration in current documentation; no asserted original experimental result",
+      "reason": "Chapter 10 presents an application command preview; this is not terminal output or device-verification evidence.",
+      "review_method": "Fast PNG/hash/context sanity for B10A; aggregate visual inspection plus full book chapter 13/report context for B10B; no deep provenance investigation or OCR",
+      "current_provenance": "unknown",
+      "provenance_confidence": "low",
+      "future_replacement_policy": "regenerate-canonical",
+      "needs_new_workflow": true,
+      "future_regeneration_approved": false,
+      "used_by_context": [
+        {
+          "source_document": "00_book/DOC/10_cau_hinh_syslog_server.md",
+          "line": 97,
+          "referenced_path": "../../figures/gui/chapter-10/06-syslog-view-push.png",
+          "target_type": "book-mkdocs",
+          "context_start": 94,
+          "context": "Sau khi Save, ch\u1ecdn **View & Push** trong tab Syslog Server.\n\n<figure>\n<p><img src=\"../../figures/gui/chapter-10/06-syslog-view-push.png\"\nstyle=\"width:75.0%\" /></p>\n<figcaption><p>View & Push SYSLOG t\u1ed5ng h\u1ee3p l\u1ec7nh ri\u00eang cho R1 v\u00e0 R2.</p></figcaption>\n</figure>\n\nX\u00e1c nh\u1eadn ti\u00eau \u0111\u1ec1 l\u00e0 **View & Push SYSLOG** v\u00e0 ki\u1ec3m tra t\u1eebng host, server IP,\ntransport, port, source interface, severity, timestamp v\u00e0 sequence number. N\u1ebfu\npreview ch\u1ee9a l\u1ec7nh `no logging host`, ki\u1ec3m tra l\u1ea1i destination \u0111ang x\u00f3a tr\u01b0\u1edbc khi"
+        },
+        {
+          "source_document": "00_book/contents/10_cau_hinh_syslog_server.typ",
+          "line": 74,
+          "referenced_path": "figures/gui/chapter-10/06-syslog-view-push.png",
+          "target_type": "book-typst",
+          "context_start": 71,
+          "context": "\nSau khi Save, ch\u1ecdn *View & Push* trong tab Syslog Server.\n\n#insert-image(\"figures/gui/chapter-10/06-syslog-view-push.png\",\n  caption: [View & Push SYSLOG t\u1ed5ng h\u1ee3p l\u1ec7nh ri\u00eang cho R1 v\u00e0 R2.], width: 75.0%) <fig:ch10-06-syslog-view-push>\n\nX\u00e1c nh\u1eadn ti\u00eau \u0111\u1ec1 l\u00e0 *View & Push SYSLOG* v\u00e0 ki\u1ec3m tra t\u1eebng host, server IP, transport, port, source interface, severity, timestamp v\u00e0 sequence number. N\u1ebfu preview ch\u1ee9a l\u1ec7nh #raw(\"no logging host\"), ki\u1ec3m tra l\u1ea1i destination \u0111ang x\u00f3a tr\u01b0\u1edbc khi Push.\n\nSau Push, x\u00e1c nh\u1eadn listener \u0111ang ch\u1ea1y \u0111\u00fang IP/port/transport, t\u1ea1o m\u1ed9t s\u1ef1 ki\u1ec7n th\u1eed tr\u00ean router v\u00e0 ki\u1ec3m tra log \u0111\u1ebfn t\u1eeb \u0111\u00fang source address. N\u1ebfu kh\u00f4ng nh\u1eadn \u0111\u01b0\u1ee3c log, ki\u1ec3m tra route, ACL/firewall, port listener v\u00e0 m\u1ee9c severity tr\u01b0\u1edbc khi thay \u0111\u1ed5i c\u1ea5u h\u00ecnh l\u1ea7n n\u1eefa."
+        }
+      ]
+    }
+  ],
+  "holds": [],
+  "future_replacement_policy": "regenerate-canonical",
+  "needs_new_workflow": true,
+  "future_regeneration_approved": false,
+  "network_or_syslog_action": false
+}

@@ -13,14 +13,14 @@ Trước khi cấu hình, xác định địa chỉ máy thu, giao thức UDP/TC
 
 Chọn router rồi chọn *Syslog Server* trên Feature Bar. Khu vực *Syslog destinations* hiển thị các máy thu đã lưu cho thiết bị hiện tại.
 
-#insert-image("figures/gui/chapter-10/01-syslog-destinations.png",
+#insert-image("/documentation_assets/ui/legacy/routing/syslog/destinations.png",
   caption: [Danh sách destination và trạng thái cấu hình Syslog của router.], width: 100.0%) <fig:ch10-01-syslog-destinations>
 
 Chọn *Add server* để tạo mới. *View* chỉ xem, *Edit* cập nhật và *Delete* đánh dấu destination cần xóa; thay đổi chỉ tới thiết bị khi thực hiện Push. Trạng thái #raw("pending_apply") là đang chờ áp dụng, #raw("pending_delete") là chờ xóa, #raw("synchronized") là đã khớp với thiết bị và #raw("skipped") là chủ động bỏ qua.
 
 == Thêm hoặc sửa Syslog server
 
-#insert-image("figures/gui/chapter-10/02-syslog-server-editor.png",
+#insert-image("/documentation_assets/ui/legacy/routing/syslog/server-editor.png",
   caption: [Biểu mẫu destination với địa chỉ máy thu, transport, port và policy log.], width: 100.0%) <fig:ch10-02-syslog-server-editor>
 
 #report-table(
@@ -48,21 +48,21 @@ Chọn *Syslog Group* để tạo cùng một destination và message policy cho
 
 === Bước 1 — Hosts
 
-#insert-image("figures/gui/chapter-10/03-syslog-group-hosts.png",
+#insert-image("/documentation_assets/ui/legacy/routing/syslog/group-hosts.png",
   caption: [Chọn các router Connected đã có dữ liệu interface trong inventory.], width: 82.0%) <fig:ch10-03-syslog-group-hosts>
 
 Chọn từ hai đến năm host. Thiết bị có nhãn *Inventory required* chưa đủ dữ liệu interface và không thể tham gia; hãy đồng bộ thiết bị trước rồi mở lại Syslog Group.
 
 === Bước 2 — Interfaces
 
-#insert-image("figures/gui/chapter-10/04-syslog-group-interfaces.png",
+#insert-image("/documentation_assets/ui/legacy/routing/syslog/group-interfaces.png",
   caption: [Chọn một source interface riêng cho từng router.], width: 82.0%) <fig:ch10-04-syslog-group-interfaces>
 
 Mỗi host có thể dùng interface khác nhau nhưng tất cả interface đã chọn phải có đường tới máy thu. Loopback thường là lựa chọn ổn định nhất; nếu routing chưa quảng bá Loopback, hãy chọn management interface hoặc SVI reachable.
 
 === Bước 3 — Policy
 
-#insert-image("figures/gui/chapter-10/05-syslog-group-policy.png",
+#insert-image("/documentation_assets/ui/legacy/routing/syslog/group-policy.png",
   caption: [Nhập destination và chính sách thông báo dùng chung cho cả nhóm.], width: 82.0%) <fig:ch10-05-syslog-group-policy>
 
 Nhập *Server IP*, *Transport*, *Port* và *Trap severity* dùng chung. Bật timestamp và sequence number nếu cần đối chiếu sự kiện. *Save* chỉ lưu cấu hình đang chờ; *Save & Push* lưu rồi bắt đầu quy trình áp dụng cho nhóm. Với tài liệu và môi trường cần kiểm soát, nên Save trước và xem preview độc lập.
@@ -71,7 +71,7 @@ Nhập *Server IP*, *Transport*, *Port* và *Trap severity* dùng chung. Bật t
 
 Sau khi Save, chọn *View & Push* trong tab Syslog Server.
 
-#insert-image("figures/gui/chapter-10/06-syslog-view-push.png",
+#insert-image("/documentation_assets/ui/legacy/routing/syslog/view-push.png",
   caption: [View & Push SYSLOG tổng hợp lệnh riêng cho R1 và R2.], width: 75.0%) <fig:ch10-06-syslog-view-push>
 
 Xác nhận tiêu đề là *View & Push SYSLOG* và kiểm tra từng host, server IP, transport, port, source interface, severity, timestamp và sequence number. Nếu preview chứa lệnh #raw("no logging host"), kiểm tra lại destination đang xóa trước khi Push.

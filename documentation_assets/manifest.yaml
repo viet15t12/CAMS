@@ -4883,14 +4883,14 @@ assets:
   domain: routing/syslog
   subject: destinations
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-10/01-syslog-destinations.png
-  path: 00_book/figures/gui/chapter-10/01-syslog-destinations.png
+  current_path: documentation_assets/ui/legacy/routing/syslog/destinations.png
+  path: documentation_assets/ui/legacy/routing/syslog/destinations.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/syslog/destinations.png
   legacy_path: 00_book/figures/gui/chapter-10/01-syslog-destinations.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 732d1c80dd41b96d234ab154af34d3215c9e3e3fd99a80b50843a566c517526a
   provenance:
     assessment: unknown
@@ -4908,11 +4908,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/10_cau_hinh_syslog_server.md
     line: 18
-    referenced_path: ../../figures/gui/chapter-10/01-syslog-destinations.png
+    referenced_path: ../assets/ui/legacy/routing/syslog/destinations.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/10_cau_hinh_syslog_server.typ
     line: 16
-    referenced_path: figures/gui/chapter-10/01-syslog-destinations.png
+    referenced_path: /documentation_assets/ui/legacy/routing/syslog/destinations.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4932,14 +4932,14 @@ assets:
   domain: routing/syslog
   subject: server-editor
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-10/02-syslog-server-editor.png
-  path: 00_book/figures/gui/chapter-10/02-syslog-server-editor.png
+  current_path: documentation_assets/ui/legacy/routing/syslog/server-editor.png
+  path: documentation_assets/ui/legacy/routing/syslog/server-editor.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/syslog/server-editor.png
   legacy_path: 00_book/figures/gui/chapter-10/02-syslog-server-editor.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0a96b7578eddc654194957eecd17785490ff61db443c9e0d567ae92a6a319cbd
   provenance:
     assessment: unknown
@@ -4957,11 +4957,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/10_cau_hinh_syslog_server.md
     line: 31
-    referenced_path: ../../figures/gui/chapter-10/02-syslog-server-editor.png
+    referenced_path: ../assets/ui/legacy/routing/syslog/server-editor.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/10_cau_hinh_syslog_server.typ
     line: 23
-    referenced_path: figures/gui/chapter-10/02-syslog-server-editor.png
+    referenced_path: /documentation_assets/ui/legacy/routing/syslog/server-editor.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -4981,14 +4981,14 @@ assets:
   domain: routing/syslog
   subject: group-hosts
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-10/03-syslog-group-hosts.png
-  path: 00_book/figures/gui/chapter-10/03-syslog-group-hosts.png
+  current_path: documentation_assets/ui/legacy/routing/syslog/group-hosts.png
+  path: documentation_assets/ui/legacy/routing/syslog/group-hosts.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/syslog/group-hosts.png
   legacy_path: 00_book/figures/gui/chapter-10/03-syslog-group-hosts.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 119b6f6b56a56be80cf0e4d5dbf87584e29453cdb92c4d6af1c289290c2a7775
   provenance:
     assessment: unknown
@@ -5006,11 +5006,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/10_cau_hinh_syslog_server.md
     line: 58
-    referenced_path: ../../figures/gui/chapter-10/03-syslog-group-hosts.png
+    referenced_path: ../assets/ui/legacy/routing/syslog/group-hosts.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/10_cau_hinh_syslog_server.typ
     line: 51
-    referenced_path: figures/gui/chapter-10/03-syslog-group-hosts.png
+    referenced_path: /documentation_assets/ui/legacy/routing/syslog/group-hosts.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -5030,14 +5030,14 @@ assets:
   domain: routing/syslog
   subject: group-interfaces
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-10/04-syslog-group-interfaces.png
-  path: 00_book/figures/gui/chapter-10/04-syslog-group-interfaces.png
+  current_path: documentation_assets/ui/legacy/routing/syslog/group-interfaces.png
+  path: documentation_assets/ui/legacy/routing/syslog/group-interfaces.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/syslog/group-interfaces.png
   legacy_path: 00_book/figures/gui/chapter-10/04-syslog-group-interfaces.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 0cee4ad8e56e47cf6d7d181f83073252a31f014227ffa5cc7ecae235d3c5b971
   provenance:
     assessment: unknown
@@ -5055,11 +5055,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/10_cau_hinh_syslog_server.md
     line: 70
-    referenced_path: ../../figures/gui/chapter-10/04-syslog-group-interfaces.png
+    referenced_path: ../assets/ui/legacy/routing/syslog/group-interfaces.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/10_cau_hinh_syslog_server.typ
     line: 58
-    referenced_path: figures/gui/chapter-10/04-syslog-group-interfaces.png
+    referenced_path: /documentation_assets/ui/legacy/routing/syslog/group-interfaces.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -5079,14 +5079,14 @@ assets:
   domain: routing/syslog
   subject: group-policy
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-10/05-syslog-group-policy.png
-  path: 00_book/figures/gui/chapter-10/05-syslog-group-policy.png
+  current_path: documentation_assets/ui/legacy/routing/syslog/group-policy.png
+  path: documentation_assets/ui/legacy/routing/syslog/group-policy.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/syslog/group-policy.png
   legacy_path: 00_book/figures/gui/chapter-10/05-syslog-group-policy.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 084c5636472f801bfa1ffa354b7da005a34b46eba26dad1e217e6794cd4f0202
   provenance:
     assessment: unknown
@@ -5104,11 +5104,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/10_cau_hinh_syslog_server.md
     line: 82
-    referenced_path: ../../figures/gui/chapter-10/05-syslog-group-policy.png
+    referenced_path: ../assets/ui/legacy/routing/syslog/group-policy.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/10_cau_hinh_syslog_server.typ
     line: 65
-    referenced_path: figures/gui/chapter-10/05-syslog-group-policy.png
+    referenced_path: /documentation_assets/ui/legacy/routing/syslog/group-policy.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -5128,14 +5128,14 @@ assets:
   domain: routing/syslog
   subject: view-push
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-10/06-syslog-view-push.png
-  path: 00_book/figures/gui/chapter-10/06-syslog-view-push.png
+  current_path: documentation_assets/ui/legacy/routing/syslog/view-push.png
+  path: documentation_assets/ui/legacy/routing/syslog/view-push.png
   planned_canonical_path: documentation_assets/ui/legacy/routing/syslog/view-push.png
   legacy_path: 00_book/figures/gui/chapter-10/06-syslog-view-push.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 22b193933a166ab35e89587c66b7c114d1531cca987024857ba2781beed11665
   provenance:
     assessment: unknown
@@ -5153,11 +5153,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/10_cau_hinh_syslog_server.md
     line: 97
-    referenced_path: ../../figures/gui/chapter-10/06-syslog-view-push.png
+    referenced_path: ../assets/ui/legacy/routing/syslog/view-push.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/10_cau_hinh_syslog_server.typ
     line: 74
-    referenced_path: figures/gui/chapter-10/06-syslog-view-push.png
+    referenced_path: /documentation_assets/ui/legacy/routing/syslog/view-push.png
     target_type: book-typst
   targets:
   - book-mkdocs
