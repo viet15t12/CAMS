@@ -16344,8 +16344,13 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by: []
-  targets: []
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 101
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r2_dhcp_success.png
+    target_type: report-typst
+  targets:
+  - report-typst
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: frozen
@@ -18755,13 +18760,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 32
-    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r1-pool.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-presentation-copy
@@ -18808,7 +18808,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 67
+    line: 122
     referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-fake.png
     target_type: report-typst
   targets:
@@ -18856,13 +18856,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 53
-    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r2-address-r1.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-presentation-copy
@@ -18907,13 +18902,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 63
-    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/r2-request-dhcp.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-presentation-copy
@@ -18961,7 +18951,7 @@ assets:
   generator_command: null
   used_by:
   - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 9
+    line: 39
     referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/topology.png
     target_type: report-typst
   targets:
@@ -19010,13 +19000,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 49
-    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi01.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-presentation-copy
@@ -19061,13 +19046,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 59
-    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/trust-gi03.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-presentation-copy
@@ -19111,13 +19091,8 @@ assets:
   reconstruction_method: null
   reconstruction_confidence: null
   generator_command: null
-  used_by:
-  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
-    line: 28
-    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/vlan10-snooping.png
-    target_type: report-typst
-  targets:
-  - report-typst
+  used_by: []
+  targets: []
   mkdocs_stage: false
   mkdocs_stage_path: null
   status: preserve-presentation-copy
@@ -20603,3 +20578,61 @@ assets:
     custody are not confirmed. Byte-identical counterpart: 00_book/figures/report/diagrams/dai-lab/recovered-ping.png.
     Future policy: freeze-current-path: no transfer, rename, crop, recreation, staging
     or later reference rewrite. No migration in this reconciliation.'
+- id: evidence.lab1.curated.dhcp-snooping.show-snooping-state
+  asset_class: terminal-evidence
+  domain: lab1-dhcp-snooping-dai
+  subject: sw1-snooping-statistics-cli
+  source_kind: terminal-capture
+  current_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/show-snooping-state.png
+  path: 00_book/figures/report/diagrams/dhcp-snooping-lab/show-snooping-state.png
+  planned_canonical_path: null
+  legacy_path: 00_book/figures/report/diagrams/dhcp-snooping-lab/show-snooping-state.png
+  migration_state: frozen
+  migration_role: frozen
+  canonical_migration: false
+  canonical: false
+  sha256: db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff
+  provenance:
+    assessment: verified-presentation-copy
+    evidence:
+    - Added by main 1701be97bde9348f2c27e1a39c071c1442069d27
+    - 'Full-image visual inspection of original 2560x1600 source: SW1 CLI: DHCP Snooping
+      enabled, VLAN 10 configured/operational, Option 82 disabled, trusted interface
+      list empty; Gi0/1 running-config lacks DHCP trust; 8 forwarded packets and 160
+      dropped from untrusted ports; historical SW_DAI invalid-ARP logs are not proof
+      of rogue DHCP detection.'
+    - 'Verified README copy relationship and identical Git blob/SHA-256: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+      copy 26.png'
+  provenance_confidence: high
+  original_evidence: false
+  preserve_original: true
+  preferred_for_presentation: true
+  derived_from: null
+  recreates_evidence_asset: null
+  reconstruction_method: null
+  reconstruction_confidence: null
+  generator_command: null
+  used_by:
+  - source_document: 00_report/contents/09_kich_ban_1_snooping.typ
+    line: 13
+    referenced_path: /00_book/figures/report/diagrams/dhcp-snooping-lab/show-snooping-state.png
+    target_type: report-typst
+  targets:
+  - report-typst
+  mkdocs_stage: false
+  mkdocs_stage_path: null
+  status: frozen-external
+  confidence: high
+  review_required: false
+  canonical_group_id: null
+  duplicate_resolution: null
+  unresolved_reason: null
+  notes: 'SW1 CLI: DHCP Snooping enabled, VLAN 10 configured/operational, Option 82
+    disabled, trusted interface list empty; Gi0/1 running-config lacks DHCP trust;
+    8 forwarded packets and 160 dropped from untrusted ports; historical SW_DAI invalid-ARP
+    logs are not proof of rogue DHCP detection. Presentation copy is not an independent
+    observation; byte-identical counterpart: 00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image
+    copy 26.png. Capture author/time/tool/chain of custody unconfirmed. Freeze current
+    path: no transfer, rename, crop, recreation, staging or later reference rewrite.
+    Main supplies existing layout viewports; reconciliation does not alter image or
+    layout bytes.'

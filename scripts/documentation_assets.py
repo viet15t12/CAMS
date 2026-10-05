@@ -188,7 +188,7 @@ def selected_assets(data: dict) -> list[dict]:
 
 
 def typst_named_image_references(text: str):
-    """Resolve literal calls to local helpers using prefix + first argument + suffix.
+    """Resolve literal calls to local helpers using their first image argument.
 
     This is deliberately not a Typst evaluator. Only brace-bodied helpers and
     constant string call arguments are supported; each call remains one use.
@@ -210,13 +210,18 @@ def typst_named_image_references(text: str):
             continue
         expression = (r'\bimage\s*\(\s*"([^"\n]*)"\s*\+\s*'
                       + re.escape(definition[2]) + r'\s*\+\s*"([^"\n]*)"\s*(?=[,)])')
-        templates = list(re.finditer(expression, text[definition.end():end]))
+        body = text[definition.end():end]
+        templates = [(m[1], m[2]) for m in re.finditer(expression, body)]
+        # Main's client-result-crop passes the literal path straight to image(path).
+        # Match only the first parameter itself, never arbitrary expressions.
+        direct = r'\bimage\s*\(\s*' + re.escape(definition[2]) + r'\s*(?=[,)])'
+        templates += [("", "") for _ in re.finditer(direct, body)]
         call = r'(?<![\w-])' + re.escape(definition[1]) + r'\s*\(\s*"([^"\n]+)"\s*(?=[,)])'
         for use in re.finditer(call, text):
             if definition.start() <= use.start() <= end:
                 continue
-            for template in templates:
-                yield use.start(), template[1] + use[1] + template[2]
+            for prefix, suffix in templates:
+                yield use.start(), prefix + use[1] + suffix
 
 
 def image_references(root: Path = REPO_ROOT) -> list[dict]:

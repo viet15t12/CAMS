@@ -303,8 +303,32 @@ class DocumentationAssetTests(unittest.TestCase):
         from scripts.documentation_assets import image_references
         report = self.root / "00_report/main.typ"
         report.parent.mkdir(parents=True)
-        report.write_text('#let crop(name, width) = {\n image("/00_book/figures/" + other + ".png")\n}\n#crop("missing", 100%)\n')
+        report.write_text('#let crop(name, width) = {\n image("/00_book/figures/" + other + ".png")\n image(other)\n image(name + unknown)\n}\n#crop("missing", 100%)\n')
         self.assertEqual(image_references(self.root), [])
+
+    def test_direct_path_typst_helper_checks_literal_calls_and_frozen_references(self):
+        from scripts.documentation_assets import image_references
+        report = self.root / "00_report/main.typ"
+        report.parent.mkdir(parents=True)
+        report.write_text(
+            '#let client-result-crop(path) = layout(size => {\n'
+            '  box(width: size.width, image(path, width: 100%))\n'
+            '})\n'
+            '// client-result-crop("/ignored.png")\n'
+            '#client-result-crop("/00_book/figures/example.png")\n'
+            '#client-result-crop(\n "/00_book/figures/example.png")\n'
+            '#client-result-crop(variable)\n')
+        refs = image_references(self.root)
+        self.assertEqual([r["line"] for r in refs], [5, 6])
+        self.assertEqual([r["resolved_path"] for r in refs], [self.record["current_path"]] * 2)
+        self.contract["assets"] = [dict(id="terminal.capture.example", path=self.record["current_path"], sha256=self.record["sha256"])]
+        self.contract["references"] = [dict(source_document="00_report/main.typ", referenced_path="/00_book/figures/example.png", count=2)]
+        self.write_contract()
+        self.assertEqual(validate_references(self.root), ([], 0))
+        report.write_text(report.read_text() + '#client-result-crop("/missing.png")\n')
+        self.assertTrue(any("broken image" in e for e in validate_references(self.root)[0]))
+        report.write_text(report.read_text().replace('#client-result-crop("/00_book/figures/example.png")', ''))
+        self.assertTrue(any("frozen terminal reference multiset" in e for e in validate_references(self.root)[0]))
 
     def test_fresh_checkout_pre_sync_then_full_post_sync(self):
         import yaml

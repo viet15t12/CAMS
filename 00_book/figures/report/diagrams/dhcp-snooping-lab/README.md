@@ -1,6 +1,6 @@
 # Ảnh minh chứng Lab 1 — DHCP Snooping
 
-Nguồn: `00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/`. Đã rà soát 37 ảnh; chọn 8 ảnh gốc, không sửa nội dung.
+Nguồn: `00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/`. Đã rà soát 37 ảnh; chọn 9 ảnh gốc, không sửa nội dung.
 
 | Ảnh gốc | Tệp báo cáo | Mục đích |
 |---|---|---|
@@ -12,5 +12,6 @@ Nguồn: `00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/`. Đã rà soát 37 ảnh; ch
 | image copy 32.png | trust-gi03.png | Trust Gi0/3 |
 | image copy 33.png | r2-request-dhcp.png | Client ip address dhcp |
 | image copy 34.png | r2-address-fake.png | R2 nhận 192.168.66.100 |
+| image copy 26.png | show-snooping-state.png | Lệnh show trạng thái, running-config và thống kê DHCP Snooping |
 
 Các ảnh còn lại: ảnh thiết lập/kiểm tra lặp lại, mô hình cũ chưa có server thứ hai, log DHCP client các lần trước, hoặc giai đoạn chẩn đoán DAI/debug/drop. Không dùng để suy diễn kết quả chặn OFFER hoặc Syslog Snooping. `image copy 30.png` thể hiện pool FAKE_TEST nhưng nền terminal khó đọc; thông số pool được mô tả trong bài, không thêm ảnh gây loãng.

@@ -375,6 +375,11 @@
       "id": "evidence.lab1.raw.r2-recovered-gateway-ping-cli",
       "path": "00_report/Tai_lieu_lab/LAB1/ANH_CUA_LAB/image copy 49.png",
       "sha256": "ade32e7aaddf26bc6bffe72a4671a9d9eb4a13aacce9909b5654eda2296e153f"
+    },
+    {
+      "id": "evidence.lab1.curated.dhcp-snooping.show-snooping-state",
+      "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/show-snooping-state.png",
+      "sha256": "db85db157228775b5bc7ba91ec01a0772dc6b33d43f8e1b2d2facc33526ce0ff"
     }
   ],
   "references": [
@@ -546,6 +551,16 @@
     {
       "source_document": "00_report/contents/09_thu_nghiem_danh_gia.typ",
       "referenced_path": "/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/7.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/r2_dhcp_success.png",
+      "count": 1
+    },
+    {
+      "source_document": "00_report/contents/09_kich_ban_1_snooping.typ",
+      "referenced_path": "/00_book/figures/report/diagrams/dhcp-snooping-lab/show-snooping-state.png",
       "count": 1
     }
   ]
