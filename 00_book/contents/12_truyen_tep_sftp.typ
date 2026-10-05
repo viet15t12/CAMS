@@ -135,7 +135,7 @@ Lấy running-config là chức năng quản lý thiết bị, không phải tha
 
 Khi tác vụ chạy, theo dõi Status Bar và Notification Center. Không chạy lại liên tục chỉ vì chưa thấy dữ liệu mới; quá trình thu thập, lưu snapshot và đồng bộ có thể hoàn tất ở các thời điểm khác nhau.
 
-#insert-image("figures/gui/chapter-12/10-sync-notifications.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png",
   caption: [Thông báo lần lượt khi lấy running-config, lưu snapshot và hoàn tất đồng bộ nền.], width: 52.0%) <fig:ch12-10-sync-notifications>
 
 - Thông báo *Getting running-config…* cho biết tác vụ đã bắt đầu, chưa phải kết quả thành công.
@@ -147,7 +147,7 @@ Khi tác vụ chạy, theo dõi Status Bar và Notification Center. Không chạ
 
 Mở tab thiết bị → *Information* → *Snapshot*. Danh sách *Version* chứa tối đa 100 mốc mới nhất theo host. Chọn một mốc để đọc đúng nội dung đã lưu tại thời điểm đó; thao tác này không checkout repository và không thay đổi cấu hình thiết bị.
 
-#insert-image("figures/gui/chapter-12/11-running-config-history.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png",
   caption: [Snapshot mới nhất và danh sách các phiên bản running-config.], width: 100.0%) <fig:ch12-11-running-config-history>
 
 *Copy All* sao chép phần đang hiển thị. *Export CFG* xuất snapshot được chọn thành tệp #raw(".cfg"); nút này chỉ hoạt động trong chế độ Snapshot, không xuất trực tiếp nội dung Diff.
@@ -156,7 +156,7 @@ Mở tab thiết bị → *Information* → *Snapshot*. Danh sách *Version* ch�
 
 Khi có ít nhất hai phiên bản, chọn *Compare*. Chọn *Original (older)* và *Modified (newer)*; hai mốc không cần liền kề, vì CAMS có thể tạo diff tích lũy cho toàn bộ khoảng phiên bản giữa chúng.
 
-#insert-image("figures/gui/chapter-12/12-running-config-diff.png",
+#insert-image("/documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png",
   caption: [Diff giữa hai phiên bản với số dòng thêm và xóa.], width: 100.0%) <fig:ch12-12-running-config-diff>
 
 - Dòng bắt đầu bằng #raw("-") là nội dung có trong bản cũ nhưng không còn ở bản mới.

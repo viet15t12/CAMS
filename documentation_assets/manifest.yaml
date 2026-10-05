@@ -6264,14 +6264,14 @@ assets:
   domain: transfer/snapshots
   subject: sync-notifications
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/10-sync-notifications.png
-  path: 00_book/figures/gui/chapter-12/10-sync-notifications.png
+  current_path: documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png
+  path: documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png
   legacy_path: 00_book/figures/gui/chapter-12/10-sync-notifications.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 2f5bef377ace7f3e995cebae215326d315b8da3c755233035ce2dd71894fe4d8
   provenance:
     assessment: unknown
@@ -6289,11 +6289,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 206
-    referenced_path: ../../figures/gui/chapter-12/10-sync-notifications.png
+    referenced_path: ../assets/ui/legacy/transfer/snapshots/sync-notifications.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 138
-    referenced_path: figures/gui/chapter-12/10-sync-notifications.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6313,14 +6313,14 @@ assets:
   domain: transfer/snapshots
   subject: running-config-history
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/11-running-config-history.png
-  path: 00_book/figures/gui/chapter-12/11-running-config-history.png
+  current_path: documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png
+  path: documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png
   legacy_path: 00_book/figures/gui/chapter-12/11-running-config-history.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: ccfde9059620f47c32c6627b20f1a6940853c4db04965b6f2e985bbea3dbb2f2
   provenance:
     assessment: unknown
@@ -6338,11 +6338,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 228
-    referenced_path: ../../figures/gui/chapter-12/11-running-config-history.png
+    referenced_path: ../assets/ui/legacy/transfer/snapshots/running-config-history.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 150
-    referenced_path: figures/gui/chapter-12/11-running-config-history.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -6362,14 +6362,14 @@ assets:
   domain: transfer/snapshots
   subject: running-config-diff
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-12/12-running-config-diff.png
-  path: 00_book/figures/gui/chapter-12/12-running-config-diff.png
+  current_path: documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png
+  path: documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png
   planned_canonical_path: documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png
   legacy_path: 00_book/figures/gui/chapter-12/12-running-config-diff.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 98b1064a3c3262d8053914bbf329c7ab772536467aef2ed87f9be9645ef3daee
   provenance:
     assessment: unknown
@@ -6387,15 +6387,15 @@ assets:
   used_by:
   - source_document: 00_book/DOC/12_truyen_tep_sftp.md
     line: 244
-    referenced_path: ../../figures/gui/chapter-12/12-running-config-diff.png
+    referenced_path: ../assets/ui/legacy/transfer/snapshots/running-config-diff.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/12_truyen_tep_sftp.typ
     line: 159
-    referenced_path: figures/gui/chapter-12/12-running-config-diff.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png
     target_type: book-typst
   - source_document: 00_report/contents/08_xay_dung_phan_mem.typ
     line: 36
-    referenced_path: /00_book/figures/gui/chapter-12/12-running-config-diff.png
+    referenced_path: /documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png
     target_type: report-typst
   targets:
   - book-mkdocs

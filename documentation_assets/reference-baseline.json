@@ -46,27 +46,6 @@
       "count": 1
     },
     {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/10-sync-notifications.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/10-sync-notifications.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/11-running-config-history.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/11-running-config-history.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/12_truyen_tep_sftp.md",
-      "referenced_path": "../../figures/gui/chapter-12/12-running-config-diff.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-12/12-running-config-diff.png",
-      "count": 1
-    },
-    {
       "source_document": "00_book/DOC/13_xem_system_logs.md",
       "referenced_path": "../../figures/gui/chapter-13/01-system-logs-overview.png",
       "reference_kind": "html-img",

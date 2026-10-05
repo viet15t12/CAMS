@@ -9,10 +9,6 @@
 │   │   ├── 04-syslog-group-interfaces.png
 │   │   ├── 05-syslog-group-policy.png
 │   │   └── 06-syslog-view-push.png
-│   ├── chapter-12
-│   │   ├── 10-sync-notifications.png
-│   │   ├── 11-running-config-history.png
-│   │   └── 12-running-config-diff.png
 │   ├── chapter-13
 │   │   ├── 01-system-logs-overview.png
 │   │   ├── 02-listener-status.png
@@ -467,5 +463,13 @@ B09A canonical legacy transfer UI (outside this figures tree):
 - documentation_assets/ui/legacy/transfer/sftp/host-key-confirmation.png
 - documentation_assets/ui/legacy/transfer/sftp/connection-paths.png
 - documentation_assets/ui/legacy/transfer/scp/workspace.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B09B canonical legacy transfer UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/transfer/snapshots/sync-notifications.png
+- documentation_assets/ui/legacy/transfer/snapshots/running-config-history.png
+- documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

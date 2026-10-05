@@ -33,7 +33,7 @@ Giao diện Inventory lưu mã định danh, địa chỉ quản trị, tham s�
 Chức năng đồng bộ thu thập `running-config`, lưu bản sao, phân tích các phần được hỗ trợ rồi cập nhật cơ sở dữ liệu. Dulwich quản lý lịch sử các bản sao trong kho Git cục bộ. Người quản trị có thể xem từng phiên bản và phần khác biệt để truy vết thay đổi, như @fig-cams-config-diff.
 
 #figure(
-  image("/00_book/figures/gui/chapter-12/12-running-config-diff.png", width: 100%),
+  image("/documentation_assets/ui/legacy/transfer/snapshots/running-config-diff.png", width: 100%),
   caption: [So sánh hai phiên bản cấu hình đã lưu],
 ) <fig-cams-config-diff>
 

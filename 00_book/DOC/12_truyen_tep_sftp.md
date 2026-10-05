@@ -203,7 +203,7 @@ tục chỉ vì chưa thấy dữ liệu mới; quá trình thu thập, lưu sna
 thể hoàn tất ở các thời điểm khác nhau.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/10-sync-notifications.png"
+<p><img src="../assets/ui/legacy/transfer/snapshots/sync-notifications.png"
 style="width:52.0%" /></p>
 <figcaption><p>Thông báo lần lượt khi lấy running-config, lưu snapshot và hoàn tất đồng bộ nền.</p></figcaption>
 </figure>
@@ -225,7 +225,7 @@ Mở tab thiết bị → **Information** → **Snapshot**. Danh sách **Version
 bị.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/11-running-config-history.png"
+<p><img src="../assets/ui/legacy/transfer/snapshots/running-config-history.png"
 style="width:100.0%" /></p>
 <figcaption><p>Snapshot mới nhất và danh sách các phiên bản running-config.</p></figcaption>
 </figure>
@@ -241,7 +241,7 @@ Khi có ít nhất hai phiên bản, chọn **Compare**. Chọn **Original (olde
 cho toàn bộ khoảng phiên bản giữa chúng.
 
 <figure>
-<p><img src="../../figures/gui/chapter-12/12-running-config-diff.png"
+<p><img src="../assets/ui/legacy/transfer/snapshots/running-config-diff.png"
 style="width:100.0%" /></p>
 <figcaption><p>Diff giữa hai phiên bản với số dòng thêm và xóa.</p></figcaption>
 </figure>
