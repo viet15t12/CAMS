@@ -24,7 +24,7 @@ StandardDialog {
     }
 
     preferredWidth: 780
-    height: Math.min(560, parent.height - Theme.spacing24 * 2)
+    height: Math.min(600, parent.height - Theme.spacing24 * 2)
     title: "System Log Message"
     subtitle: String(root.rowValue("device_host", "")
                      || root.rowValue("source_ip", "") || "Unknown host")
@@ -41,6 +41,17 @@ StandardDialog {
 
             Text { text: "Security feature"; color: Theme.textSecondary; font.family: Theme.fontFamily; font.pixelSize: Theme.fontSizeSmall }
             Text { Layout.fillWidth: true; Layout.columnSpan: 3; text: String(root.rowValue("security_label", "") || "General system event"); color: Theme.accentColor; font.family: Theme.fontFamily }
+
+            Text { text: "Outcome"; color: Theme.textSecondary; font.family: Theme.fontFamily; font.pixelSize: Theme.fontSizeSmall }
+            Text {
+                objectName: "syslogSecurityOutcome"
+                Layout.fillWidth: true
+                Layout.columnSpan: 3
+                text: String(root.rowValue("security_outcome_label", "") || "—")
+                color: root.rowValue("security_outcome", "") === "permit"
+                       ? Theme.alertSuccess : Theme.textPrimary
+                font.family: Theme.fontFamily
+            }
 
             Text { text: "Source"; color: Theme.textSecondary; font.family: Theme.fontFamily; font.pixelSize: Theme.fontSizeSmall }
             Text { Layout.fillWidth: true; text: String(root.rowValue("source_ip", "") || "—"); color: Theme.textPrimary; font.family: Theme.monoFontFamily; elide: Text.ElideRight }

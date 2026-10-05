@@ -159,22 +159,19 @@ def collect_security_state(conn: Any, host: str) -> dict[str, Any]:
         "vlans": _rows(
             conn,
             """
-            SELECT vlan_id, dhcp_snooping, dai_enabled
+            SELECT vlan_id, dhcp_snooping, dai_enabled, dai_log_mode
             FROM t06_security_l2 WHERE host = ? ORDER BY vlan_id;
             """,
             host,
         ),
-        "trust_ports": [
-            row["if_name"]
-            for row in _rows(
-                conn,
-                """
-                SELECT if_name FROM t06_dhcp_trust_ports
-                WHERE host = ? ORDER BY if_name COLLATE NOCASE;
-                """,
-                host,
-            )
-        ],
+        "trust_ports": _rows(
+            conn,
+            """
+            SELECT if_name, trust_dhcp, trust_arp FROM t06_dhcp_trust_ports
+            WHERE host = ? ORDER BY if_name COLLATE NOCASE;
+            """,
+            host,
+        ),
         "ports": _rows(
             conn,
             """

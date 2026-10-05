@@ -62,8 +62,8 @@ Router, switch Layer 2 và switch Layer 3 dùng tab **Syslog Server** trong
 workspace thiết bị. Một host có thể quản lý nhiều destination; Add/Edit/Delete/
 Reload chỉ thay đổi desired state, còn **View & Push** preview rồi áp dụng toàn bộ
 row `pending_apply`/`pending_delete`. Cấu hình mới mặc định dùng UDP/5514 và
-`logging trap notifications` (severity 5), vì `warnings` (severity 4) không gửi
-message `%SYS-5-CONFIG_I`. Màn System Logs ở activity bar không cấu hình thiết
+`logging trap informational` (severity 6), để nhận ACL/DAI permit severity 6
+và message `%SYS-5-CONFIG_I`. Màn System Logs ở activity bar không cấu hình thiết
 bị: màn này bật/tắt một listener logic nhận đồng thời UDP+TCP, chọn host và lọc
 theo nội dung, khoảng thời gian, severity hoặc transport trước khi xem log. Có
 thể giới hạn N log gần nhất cho từng host, dùng Smart filter với cú pháp

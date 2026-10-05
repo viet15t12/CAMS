@@ -1,9 +1,10 @@
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 
-from features.syslog.application.security_events import SecurityEventDetector
+from features.syslog.application.security_events import SecurityEventDetector, classify_security_event
 from features.syslog.device_config.commands import build_enable_commands
 from features.syslog.parser import parse_message
 from features.syslog.persistence.device_lookup_repository import DeviceLookupRepository
@@ -103,3 +104,73 @@ class SecurityMonitoringTests(unittest.TestCase):
         detector.process([rows[-1]] * 30)
         self.assertLessEqual(len(detector._windows), 3)
         self.assertTrue(all(len(window.hits) <= 4 for window in detector._windows.values()))
+
+    def test_permit_operational_and_recovery_messages_do_not_trigger_violation_alerts(self):
+        rows = [
+            {"cisco_facility": "SW_DAI", "mnemonic": "DHCP_SNOOPING_PERMIT",
+             "message": "1 ARPs (Req) on Gi0/1, vlan 10.([1234.4567.abcd/192.0.2.10])"},
+            {"cisco_facility": "SW_DAI", "mnemonic": "INVALID_PARAMETER",
+             "message": "Invalid ARP inspection configuration parameter"},
+            {"cisco_facility": "DHCP_SNOOPING", "mnemonic": "AGENT_OPERATION_SUCCEEDED",
+             "message": "DHCP snooping database write succeeded"},
+            {"cisco_facility": "DHCP_SNOOPING", "mnemonic": "AGENT_OPERATION_FAILED",
+             "message": "DHCP snooping database write failed"},
+            {"cisco_facility": "PM", "mnemonic": "ERR_RECOVER",
+             "message": "Attempting to recover from psecure-violation on Gi0/1"},
+            {"cisco_facility": "PORT_SECURITY", "mnemonic": "PSECURE_VIOLATION_RECOVER",
+             "message": "Recovered port Gi0/1"},
+        ]
+        detector = SecurityEventDetector()
+        for row in rows:
+            with self.subTest(mnemonic=row["mnemonic"]):
+                self.assertIsNone(classify_security_event(row))
+                self.assertEqual(detector.process([row] * 30), [])
+        self.assertEqual(annotate_security(rows[0])["security_outcome"], "permit")
+        self.assertEqual(annotate_security(rows[-1])["security_outcome"], "recovery")
+
+    def test_aggregated_dai_log_uses_packet_count_and_keeps_original_message(self):
+        raw = (
+            "%SW_DAI-4-DHCP_SNOOPING_DENY: 7 Invalid ARPs (Req) on Gi0/1, "
+            "vlan 10.([1234.4567.abcd/192.0.2.99/0000.0000.0000/192.0.2.1])"
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "info.db"
+            with closing(sqlite3.connect(path)):
+                pass
+            repository = MessageRepository(path)
+            stored = repository.insert_messages([parse_message(raw.encode(), "192.0.2.2", "udp")])
+            self.assertEqual(stored[0]["security_outcome"], "deny")
+            self.assertEqual(stored[0]["raw_message"], raw)
+            event = classify_security_event(stored[0])
+            self.assertEqual((event.packets, event.target), (7, "Gi0/1"))
+            alerts = SecurityEventDetector().process(stored)
+            self.assertEqual(len(alerts), 1)
+            self.assertIn("7 invalid ARP packet(s) in 1 log event(s)", alerts[0].message)
+
+    def test_dhcp_rogue_alert_requires_real_drop_and_observes_cooldown(self):
+        row = {
+            "device_host": "switch-1", "cisco_facility": "DHCP_SNOOPING",
+            "mnemonic": "DHCP_SNOOPING_UNTRUSTED_PORT",
+            "message": "drop message on untrusted port, message type: DHCPOFFER, MAC sa: 1234.4567.abcd",
+        }
+        detector = SecurityEventDetector()
+        self.assertEqual(detector.process([row] * 2), [])
+        alerts = detector.process([row])
+        self.assertEqual([alert.mnemonic for alert in alerts], ["DHCP_ROGUE_SERVER"])
+        self.assertEqual(detector.process([row] * 10), [])
+
+    def test_errdisable_categories_agree_for_live_and_stored_queries(self):
+        causes = {"arp-inspection": "dai", "dhcp-rate-limit": "dhcp_snooping",
+                  "bpduguard": "stp_guard", "psecure-violation": "port_security"}
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "info.db"
+            with closing(sqlite3.connect(path)):
+                pass
+            repository = MessageRepository(path)
+            for cause, feature in causes.items():
+                raw = f"%PM-4-ERR_DISABLE: {cause} error detected on Gi0/1"
+                stored = repository.insert_messages([parse_message(raw.encode(), "192.0.2.2", "udp")])
+                self.assertEqual(stored[0]["security_feature"], feature)
+                self.assertEqual(stored[0]["security_outcome"], "violation")
+                matching = repository.query_messages({"security": feature})
+                self.assertIn(stored[0]["id"], {row["id"] for row in matching})

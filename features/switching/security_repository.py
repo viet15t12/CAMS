@@ -15,6 +15,7 @@ from typing import Any
 from .common import boolean, failed, integer, ok, text
 from .entity_rules import require_active_vlan
 from .schema import ensure_switch_schema
+from .security_logging import dai_log_mode
 
 
 def _canonical_mac(value: Any) -> str:
@@ -41,6 +42,7 @@ def get_l2_security(db: Any, host: str) -> dict[str, Any]:
             SELECT COALESCE(s.id, 0) AS id, v.vlan_id, v.vlan_name,
                    COALESCE(s.dhcp_snooping, 0) AS dhcp_snooping,
                    COALESCE(s.dai_enabled, 0) AS dai_enabled,
+                   COALESCE(s.dai_log_mode, 'deny') AS dai_log_mode,
                    COALESCE(s.success, 'skipped') AS success
             FROM t06_vlan_db AS v
             LEFT JOIN t06_security_l2 AS s
@@ -118,6 +120,7 @@ def save_l2_vlan_security(db: Any, host: str, payload: dict[str, Any]) -> dict[s
         vlan_id = integer(payload.get("vlan_id"), "VLAN ID", 1, 4094)
         snooping = boolean(payload.get("dhcp_snooping"))
         dai = boolean(payload.get("dai_enabled"))
+        logging_mode = dai_log_mode(payload.get("dai_log_mode"))
         if dai and not snooping:
             raise ValueError(
                 "Enable DHCP Snooping before Dynamic ARP Inspection; "
@@ -129,14 +132,15 @@ def save_l2_vlan_security(db: Any, host: str, payload: dict[str, Any]) -> dict[s
                 conn.execute(
                     """
                     INSERT INTO t06_security_l2(
-                        host, vlan_id, dhcp_snooping, dai_enabled
-                    ) VALUES (?, ?, ?, ?)
+                        host, vlan_id, dhcp_snooping, dai_enabled, dai_log_mode
+                    ) VALUES (?, ?, ?, ?, ?)
                     ON CONFLICT(host, vlan_id) DO UPDATE SET
                         dhcp_snooping = excluded.dhcp_snooping,
                         dai_enabled = excluded.dai_enabled,
+                        dai_log_mode = excluded.dai_log_mode,
                         success = 'pending_apply';
                     """,
-                    (target, vlan_id, snooping, dai),
+                    (target, vlan_id, snooping, dai, logging_mode),
                 )
                 saved = conn.execute(
                     "SELECT id FROM t06_security_l2 WHERE host = ? AND vlan_id = ?;",

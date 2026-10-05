@@ -11,6 +11,10 @@ nhận là baseline phát triển đầu tiên, không phải tuyên bố sẵn 
 
 ### Added
 
+- DAI logging theo VLAN với lựa chọn permit/deny cho báo cáo, migration giữ policy
+  cũ, Preview/Push/pull giữ đúng mode; nhãn outcome trên Syslog và Excel, lab vIOS L2.
+- Phân loại PM err-disable/recovery theo nguyên nhân an ninh lớp 2; detector bỏ
+  DAI permit, DHCP operational và Port Security recovery, đọc count trong log ARP tổng hợp.
 - Bổ sung quy trình Windows 11 x64 dùng PyInstaller one-folder và Inno Setup:
   bộ cài per-user, Start Menu/Desktop shortcut, liên kết `.ntp`, metadata/icon,
   smoke test QML, checksum SHA-256, ký Authenticode tùy chọn và GitHub Actions.
@@ -121,6 +125,8 @@ nhận là baseline phát triển đầu tiên, không phải tuyên bố sẵn 
 
 ### Fixed
 
+- Trusted Uplinks không còn tự bật cả DHCP và ARP trust khi chỉ chọn một;
+  Preview/Push, desired state và đồng bộ thiết bị giữ riêng hai lựa chọn.
 - Khắc phục EVE-NG/PNETLab chạy trong VMware hoặc VirtualBox bị giữ ở trạng thái
   **Starting** khi web server đã sẵn sàng nhưng trang đăng nhập mới không còn
   HTML fingerprint cũ; IP guest do hypervisor xác nhận nay được probe như hint

@@ -94,7 +94,7 @@ def build_security_tasks(
             ).fetchone()
             vlan_rows = conn.execute(
                 """
-                SELECT id, vlan_id, dhcp_snooping, dai_enabled, success
+                SELECT id, vlan_id, dhcp_snooping, dai_enabled, dai_log_mode, success
                 FROM t06_security_l2
                 WHERE host = ? AND (
                     success IN ('pending_apply','pending_delete') OR success IS NULL
@@ -105,7 +105,7 @@ def build_security_tasks(
             ).fetchall()
             trust_rows = conn.execute(
                 """
-                SELECT id, if_name, success FROM t06_dhcp_trust_ports
+                SELECT id, if_name, trust_dhcp, trust_arp, success FROM t06_dhcp_trust_ports
                 WHERE host = ? AND (
                     success IN ('pending_apply','pending_delete') OR success IS NULL
                 )
@@ -201,9 +201,9 @@ def _l2_security_tasks(
         row_id = int(row.pop("id"))
         success = str(row.pop("success") or "pending_apply")
         if_name = str(row["if_name"])
-        entry: str | dict[str, str] = if_name
+        entry = row
         if success == "pending_delete":
-            entry = {"if_name": if_name, "action": "remove"}
+            entry["action"] = "remove"
         payload = {"vlans": [], "trust_ports": [entry], "ports": [], "static_macs": []}
         tasks.append(_policy_task(
             task_factory, host, module, f"trust:{if_name}",

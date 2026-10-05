@@ -30,7 +30,7 @@ message, severity, IP nguồn và raw message. Nhãn an ninh được tính khi 
 | --- | --- |
 | IP ACL | Rule standard/extended/dynamic hỗ trợ có `log`; rule cuối `2147483647 deny any log` hoặc `deny ip any any log` ghi nhận implicit deny. Sequence này dành cho CAMS. Facility `SEC`, mnemonic `IPACCESSLOG*` / `ACCESSLOG*`. |
 | DHCP Snooping | IOS tự phát log cho các vi phạm được hỗ trợ, như server message trên cổng untrusted, MAC mismatch hoặc rate limit; facility `DHCP_SNOOPING`. Không bật debug DHCP trong production. |
-| DAI | CAMS reset policy log `dhcp-bindings` và `acl-match` về mặc định log gói bị từ chối, rồi cấu hình log-buffer; facility `SW_DAI`. |
+| DAI | Chọn DAI logging theo VLAN: Deny only, Permit and deny (report), Permit only hoặc Disabled. CAMS giữ lựa chọn khi lưu/push/pull, cấu hình log-buffer 128 entries/10 log mỗi giây. ARP ACL logging vẫn dùng mặc định deny; facility `SW_DAI`. |
 | Port Security | Chọn `restrict` hoặc `shutdown`. `protect` drop im lặng, không có Syslog nên CAMS chặn lưu/push policy đang bật chế độ này và yêu cầu chọn rõ chế độ khác. Facility `PORT_SECURITY` hoặc `PM` với `psecure`. |
 | Xác thực | Nhận các sự kiện `SEC_LOGIN`, `AAA`, `AUTHMGR`, `DOT1X`, `MAB`, `SSH` mà thiết bị phát. Bộ lọc không tự bật các cơ chế xác thực. |
 | Bảo vệ STP | Nhận `SPANTREE` với các mnemonic BLOCK, ROOTGUARD, LOOPGUARD, BPDU. |
@@ -43,6 +43,19 @@ CAMS cũng giữ bộ phát hiện theo ngưỡng cho ACL deny flood, rogue DHCP
 DHCP drop lặp lại, ARP invalid lặp lại và Port Security violation lặp lại.
 Các cảnh báo `%CAMS-...` được lưu và hiển thị với nhãn **Security Alert**;
 đây là dấu hiệu cần điều tra, không phải kết luận chắc chắn có tấn công.
+
+Outcome Permitted/Denied/Violation/Recovered/Operational được tính từ log gốc
+và hiển thị trên bảng, dialog chi tiết, Excel (cột Security feature và Outcome).
+DAI permit và DHCP database operation không tăng bộ đếm vi phạm. DAI đạt ngưỡng
+khi có ít nhất 5 packet invalid hoặc 5 log deny trong 60 giây; log tổng hợp
+dùng số packet có trong message, không coi một dòng là một packet. Các log
+PM err-disable/recovery được gắn nhóm theo `arp-inspection`, `dhcp-rate-limit`,
+`bpduguard`/`rootguard`/`loopguard` hoặc `psecure`. Recovery không tăng bộ đếm.
+
+Để làm báo cáo trên EVE-NG, xem [kịch bản lab vIOS L2](L2_SECURITY_SYSLOG_LAB.md).
+Smart Filter `security:dai mnemonic:PERMIT` và `security:dai mnemonic:DENY`
+giúp chụp/export từng trường hợp. Không tạo log DHCP permit giả để mô phỏng
+hành vi của ACL; dùng binding và kiểm chứng DHCP thành công làm bằng chứng hợp lệ.
 
 ## Giới hạn và kiểm chứng trên thiết bị
 

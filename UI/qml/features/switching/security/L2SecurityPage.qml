@@ -82,6 +82,7 @@ Item {
                        ? "" : String(source.vlan_name),
             dhcp_snooping: Boolean(source.dhcp_snooping),
             dai_enabled: Boolean(source.dai_enabled),
+            dai_log_mode: String(source.dai_log_mode || "deny"),
             success: String(source.success || "skipped")
         }
     }
@@ -512,7 +513,7 @@ Item {
                     SwitchInspectorSection {
                         Layout.fillWidth: true
                         title: "Dynamic ARP Inspection"
-                        helpText: "DAI validates ARP packets against DHCP Snooping or static bindings to prevent spoofing. CAMS enables logging for denied ARP packets. Configure the Syslog destination separately for this device. DHCP Snooping must be enabled for dynamically learned clients, and uplinks toward legitimate infrastructure must be trusted."
+                        helpText: "DAI validates ARP packets against DHCP Snooping bindings. Deny only is the default logging policy. Permit and deny also logs valid ARP packets for a lab report. Configure the device Syslog destination at Informational (6) to receive permit messages. Device support and log rate limits still apply."
                         description: "Validate ARP packets against trusted bindings on untrusted access ports."
                         showDivider: false
                         StandardToggleButton {
@@ -528,6 +529,34 @@ Item {
                                 if (checked && !Boolean(root.policyDraft.dhcp_snooping))
                                     root.updatePolicy("dhcp_snooping", true)
                             }
+                        }
+                        StandardComboBox {
+                            id: daiLogModeCombo
+                            objectName: "l2DaiLogModeCombo"
+                            Layout.fillWidth: true
+                            labelText: "DAI logging"
+                            enabled: Boolean(root.policyDraft.dai_enabled) && !root.saving
+                            model: ["Deny only (default)", "Permit and deny (report)",
+                                    "Permit only", "Disabled"]
+                            readonly property var modeValues: ["deny", "all", "permit", "none"]
+                            currentIndex: root.comboIndex(daiLogModeCombo.modeValues,
+                                                          root.policyDraft.dai_log_mode || "deny")
+                            onActivated: function(index) {
+                                root.updatePolicy("dai_log_mode", daiLogModeCombo.modeValues[index])
+                            }
+                        }
+                        Text {
+                            Layout.fillWidth: true
+                            text: root.policyDraft.dai_log_mode === "all"
+                                  ? "Valid and rejected ARP packets are logged. Use Informational (6) in Syslog Server."
+                                  : root.policyDraft.dai_log_mode === "permit"
+                                    || root.policyDraft.dai_log_mode === "none"
+                                  ? "This logging mode excludes rejected ARP packets from DHCP binding checks."
+                                  : "Rejected ARP packets are logged. Configure Syslog Server to send them to CAMS."
+                            wrapMode: Text.WordWrap
+                            color: Theme.textSecondary
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeSmall
                         }
                         RowLayout {
                             Layout.fillWidth: true

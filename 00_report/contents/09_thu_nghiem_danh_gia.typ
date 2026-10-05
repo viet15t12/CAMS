@@ -25,123 +25,14 @@ Quá trình đo đạc, kiểm thử và thực nghiệm được tiến hành t
 
 == Kịch bản kiểm thử thực nghiệm trong phòng lab
 
-Phần thực nghiệm gồm năm kịch bản: hạ tầng chuyển mạch và bảo mật Lớp 2; định tuyến OSPF đa vùng; phối hợp GLBP–DHCP–NAT/PAT; thu thập và phân tích nhật ký Syslog; và kiểm thử cơ chế an ninh phân quyền cùng bảo mật dữ liệu lưu trữ. Mỗi kịch bản được thực hiện theo ba giai đoạn:
+Phần thực nghiệm gồm năm kịch bản: DHCP Snooping và DAI trong bảo mật Lớp 2; định tuyến OSPF đa vùng; phối hợp GLBP–DHCP–NAT/PAT; thu thập và phân tích nhật ký Syslog; và kiểm thử cơ chế an ninh phân quyền cùng bảo mật dữ liệu lưu trữ. Mỗi kịch bản được thực hiện theo ba giai đoạn:
 
 1. *Thiết lập và xem trước trên giao diện:* người dùng nhập tham số trên biểu mẫu nghiệp vụ. Dữ liệu được lưu ở trạng thái mong muốn (Desired State) và chuyển thành tập lệnh CLI để kiểm tra trong cửa sổ *View & Push*.
 2. *Đẩy cấu hình bất đồng bộ:* tác vụ nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua SSH.
 3. *Xác minh trạng thái:* người quản trị đối chiếu phản hồi của hệ thống, kiểm tra trực tiếp bằng terminal tích hợp và đánh giá lưu lượng thực tế.
 
-=== Kịch bản 1: Cấu hình hạ tầng chuyển mạch và bảo mật Lớp 2 (Switching & L2 Security)
-
-==== Mục tiêu và quy hoạch
-
-Kịch bản 1 thiết lập hạ tầng chuyển mạch đa tầng trên môi trường lab, gồm khởi tạo VLAN, đồng bộ qua VTP, gom kênh EtherChannel bằng LACP và triển khai các cơ chế bảo vệ Lớp 2 gồm DHCP Snooping, Dynamic ARP Inspection và Port Security.
-
-#figure(
-  image("/00_book/figures/report/diagrams/LAB_KICH_BAN_1.svg", width: 90%),
-  caption: [Sơ đồ Topo Kịch bản 1: Hạ tầng Chuyển mạch và Bảo mật Lớp 2],
-) <fig-topo-scenario-1>
-
-==== Quy trình triển khai trên phần mềm CAMS
-
-Căn cứ vào sơ đồ mạng của kịch bản 1, tám thiết bị gồm hai router và sáu switch được nạp vào không gian làm việc `LAB_KICH_BAN_1`. Các thiết bị sử dụng dải IP quản trị từ `192.168.122.101` đến `192.168.122.108` và hiển thị trạng thái kết nối *CONNECTED* trên thanh bên.
-
-Quá trình cấu hình hạ tầng Lớp 2 được thực hiện qua sáu bước sau.
-
-*Bước 1. Thiết lập nhóm VTP và đồng bộ miền VTP trên toàn mạng*
-
-Người dùng mở chức năng *Switching*, chọn thẻ *VTP* và sử dụng *VTP Group*. Miền `PTIT_LAB`, phiên bản VTP 2, được áp dụng đồng thời cho năm thiết bị từ `SW1` đến `SW5`; `SW1` giữ vai trò VTP Server, còn các switch khác hoạt động ở chế độ VTP Client.
-
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_16.png", width: 85%),
-  caption: [Giao diện cấu hình nhóm VTP Group quản lý đồng bộ 5 Switch trong miền PTIT_LAB],
-) <fig-k1-vtp-group>
-@fig-k1-vtp-group thể hiện sáu switch đang kết nối, năm thiết bị được chọn và miền VTP đã lưu. Sau khi kiểm tra danh sách, quản trị viên sử dụng *Save & Push* để áp dụng cấu hình theo nhóm.
-
-*Bước 2. Khởi tạo VLAN và kiểm duyệt tập lệnh*
-
-Tại switch trung tâm `SW1` (VTP Server, IP: `192.168.122.101`), người dùng chuyển sang thẻ *VLAN* để khởi tạo các phân vùng mạng nghiệp vụ: `VLAN 10` (Tên: `IT_VLAN`) và `VLAN 20` (Tên: `HR_VLAN`). Sau khi lưu vào trạng thái mong muốn (`Desired State`), người dùng nhấn nút *View & Push* để mở cửa sổ duyệt trước mã lệnh.
-
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_20.png", width: 80%),
-  caption: [Cửa sổ View & Push kiểm duyệt tập lệnh cấu hình VLAN tự động sinh cho SW1],
-) <fig-k1-vlan-push>
-@fig-k1-vlan-push cho thấy khối lệnh Cisco IOS được sinh từ dữ liệu trên giao diện, gồm các lệnh tạo VLAN và đặt tên tương ứng. Người dùng kiểm tra từng dòng trước khi nhấn *Push* để gửi cấu hình qua SSH.
-
-*Bước 3. Cấu hình gom kênh EtherChannel bằng LACP*
-
-Nhằm tăng băng thông và đảm bảo tính dự phòng cho đường truyền Trunk giữa `SW1` và `SW3`, người dùng truy cập thẻ *EtherChannel* trên tab `SW1`. Tại đây, người dùng gom 2 cổng vật lý `GigabitEthernet1/0` và `GigabitEthernet1/1` vào nhóm logic `Port-channel1` với giao thức LACP (`mode active`) và gán nhãn mô tả `Link_To_SW3`.
-
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_3.png", width: 80%),
-  caption: [Cửa sổ View & Push cấu hình gom kênh EtherChannel LACP cho liên kết SW1 -- SW3],
-) <fig-k1-etherchannel-push>
-@fig-k1-etherchannel-push thể hiện cấu hình cho từng cổng thành phần và cổng logic `Port-channel1`. Việc xem trước giúp người quản trị đối chiếu chế độ LACP và mô tả liên kết trước khi áp dụng.
-
-*Bước 4. Thiết lập DHCP Snooping và Dynamic ARP Inspection*
-
-Để ngăn chặn các cuộc tấn công mạng Lớp 2 (DHCP Rogue Server, Man-in-the-Middle và ARP Spoofing), người dùng chuyển sang *Security* $arrow$ thẻ *L2 Security*.
-
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_21.png", width: 85%),
-  caption: [Giao diện quản trị an ninh Layer 2: Thiết lập DHCP Snooping và Dynamic ARP Inspection],
-) <fig-k1-l2-security>
-@fig-k1-l2-security thể hiện chính sách bảo vệ cho VLAN 1, 10, 20 và 99. Quản trị viên bật DHCP Snooping, DAI và chỉ định các đường trunk làm *Trusted Uplinks* để tiếp nhận lưu lượng DHCP và ARP hợp lệ.
-
-*Bước 5. Cấu hình Port Security trên switch truy cập SW5*
-
-Trên switch truy cập `SW5` (IP: `192.168.122.105`), người dùng chuyển sang thẻ *Port Security* để bảo vệ các cổng kết nối đến người dùng cuối. Với cổng `GigabitEthernet0/2`, người dùng thiết lập số lượng địa chỉ MAC tối đa là `4`, kích hoạt học địa chỉ tự động (`mac-address sticky`), thời gian lưu vết `5 phút` và cơ chế xử lý vi phạm là ngắt cổng tức thì (`violation shutdown`).
-
-#figure(
-  image("/00_book/figures/report/diagrams/switching-lab/1_25.png", width: 80%),
-  caption: [Cửa sổ View & Push áp dụng chính sách Port Security bảo vệ cổng truy cập trên SW5],
-) <fig-k1-port-security-push>
-#block[
-  #set par(justify: false)
-  @fig-k1-port-security-push thể hiện khối lệnh Port Security để quản trị viên kiểm tra trước khi đẩy xuống thiết bị:
-]
-
-```text
-switchport mode access
-switchport port-security
-switchport port-security maximum 4
-switchport port-security violation shutdown
-switchport port-security mac-address sticky
-switchport port-security aging time 5
-```
-
-*Bước 6. Xác minh cấu hình qua terminal tích hợp*
-
-Sau khi hoàn tất quá trình đẩy cấu hình từ phần mềm, người dùng nhấp vào biểu tượng terminal trên thanh công cụ của CAMS để mở cửa sổ điều khiển trực tiếp tới thiết bị và thực hiện các câu lệnh kiểm tra trạng thái thực tế.
-
-#figure(
-  image("/00_book/figures/report/terminal-generated/sw3-vlan-vtp.png", width: 80%),
-  caption: [Kiểm tra trạng thái VLAN và VTP trên Switch Client SW3 thông qua terminal tích hợp],
-) <fig-k1-terminal-verify>
-Kết quả trong @fig-k1-terminal-verify cho thấy `SW3` đã nhận các VLAN 10, 20 và 99. Lệnh `show vtp status` xác nhận thiết bị hoạt động ở chế độ Client, thuộc miền `PTIT_LAB`, sử dụng VTP phiên bản 2 và có `Configuration Revision` bằng 12.
-
-Ngoài ra, người dùng kiểm tra trạng thái bảo mật cổng trên switch `SW5` qua lệnh `show port-security interface GigabitEthernet0/2`:
-```text
-SW5# show port-security interface gi0/2
-Port Security              : Enabled
-Port Status                : Secure-up
-Violation Mode             : Shutdown
-Aging Time                 : 5 mins
-Aging Type                 : Absolute
-SecureStatic Address Aging : Disabled
-Maximum MAC Addresses      : 4
-Total MAC Addresses        : 0
-Configured MAC Addresses   : 0
-Sticky MAC Addresses       : 0
-Last Source Address:Vlan   : 0000.0000.0000:0
-Security Violation Count   : 0
-```
-
-==== Đánh giá kết quả
-
-Các cấu hình VLAN, VTP, EtherChannel LACP, DHCP Snooping, DAI và Port Security được áp dụng đúng trên hệ thống switch của phòng lab. Kết quả kiểm tra trực tiếp trên thiết bị phù hợp với cấu hình đã thiết lập trên CAMS; các hạng mục của kịch bản 1 đều hoàn thành và phần VLAN/trunk được đối chiếu theo nguyên tắc IEEE 802.1Q @ieee8021q.
-
-
+#include "09_kich_ban_1_snooping.typ"
+#include "09_kich_ban_1_dai.typ"
 
 === Kịch bản 2: Định tuyến động đa vùng và tái phân phối tuyến liên chi nhánh (OSPF Group & Route Redistribution)
 

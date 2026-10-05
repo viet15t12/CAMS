@@ -14,6 +14,7 @@ nhầm kế hoạch lịch sử hoặc tài liệu của mã bên thứ ba.
 | Phát triển QML/UI | [`UI_COMPONENTS.md`](UI_COMPONENTS.md), [`../UI/README.md`](../UI/README.md) |
 | Viết hoặc review code | [`CODING_STANDARDS.md`](CODING_STANDARDS.md), [`../CONTRIBUTING.md`](../CONTRIBUTING.md) |
 | Vận hành Syslog | [`SYSTEM_LOGS.md`](SYSTEM_LOGS.md) |
+| Lab DAI permit/deny và DHCP Snooping trên EVE-NG | [`L2_SECURITY_SYSLOG_LAB.md`](L2_SECURITY_SYSLOG_LAB.md), [`SECURITY_MONITORING.md`](SECURITY_MONITORING.md) |
 | Vận hành SFTP | [`SFTP.md`](SFTP.md) |
 | Terminal companion | [`decisions/0001-external-networktools-terminal.md`](decisions/0001-external-networktools-terminal.md), [`../features/terminal/README.md`](../features/terminal/README.md) |
 | Xem rủi ro và mức kiểm chứng | [`CODE_AUDIT.md`](CODE_AUDIT.md), [`BACKEND_APP_PARITY.md`](BACKEND_APP_PARITY.md) |
