@@ -9,7 +9,7 @@
 
 == Port Counters
 
-#insert-image("figures/gui/chapter-17/01-port-counters.png",
+#insert-image("/documentation_assets/ui/legacy/switching/monitoring/port-counters.png",
   caption: [Lưu lượng, lỗi, discard và lần link flap gần nhất theo port.], width: 100.0%) <fig:ch17-01-port-counters>
 
 #report-table(
@@ -31,7 +31,7 @@ Thanh tổng quan cho biết số port, link Up, tổng traffic và tổng Error
 
 == MAC Address Table
 
-#insert-image("figures/gui/chapter-17/02-mac-address-table.png",
+#insert-image("/documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png",
   caption: [Địa chỉ MAC đã học theo VLAN, interface và loại entry.], width: 100.0%) <fig:ch17-02-mac-address-table>
 
 #report-table(

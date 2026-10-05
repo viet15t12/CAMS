@@ -7,7 +7,7 @@ sau khi thiết bị được đồng bộ để nạp lại dữ liệu hiển 
 ## Port Counters
 
 <figure>
-<p><img src="../../figures/gui/chapter-17/01-port-counters.png"
+<p><img src="../assets/ui/legacy/switching/monitoring/port-counters.png"
 style="width:100.0%" /></p>
 <figcaption><p>Lưu lượng, lỗi, discard và lần link flap gần nhất theo port.</p></figcaption>
 </figure>
@@ -28,7 +28,7 @@ Dùng ô lọc để tìm interface. Counter là giá trị tích lũy, nên m�
 ## MAC Address Table
 
 <figure>
-<p><img src="../../figures/gui/chapter-17/02-mac-address-table.png"
+<p><img src="../assets/ui/legacy/switching/monitoring/mac-address-table.png"
 style="width:100.0%" /></p>
 <figcaption><p>Địa chỉ MAC đã học theo VLAN, interface và loại entry.</p></figcaption>
 </figure>

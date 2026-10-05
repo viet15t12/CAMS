@@ -7994,14 +7994,14 @@ assets:
   domain: switching/monitoring
   subject: port-counters
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-17/01-port-counters.png
-  path: 00_book/figures/gui/chapter-17/01-port-counters.png
+  current_path: documentation_assets/ui/legacy/switching/monitoring/port-counters.png
+  path: documentation_assets/ui/legacy/switching/monitoring/port-counters.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/monitoring/port-counters.png
   legacy_path: 00_book/figures/gui/chapter-17/01-port-counters.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 2ac571be779a5c38669e5921f7b8143c2a56b7bb8213356ba6925b5a0a35f30c
   provenance:
     assessment: unknown
@@ -8019,11 +8019,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/17_giam_sat_switch_l2.md
     line: 10
-    referenced_path: ../../figures/gui/chapter-17/01-port-counters.png
+    referenced_path: ../assets/ui/legacy/switching/monitoring/port-counters.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/17_giam_sat_switch_l2.typ
     line: 12
-    referenced_path: figures/gui/chapter-17/01-port-counters.png
+    referenced_path: /documentation_assets/ui/legacy/switching/monitoring/port-counters.png
     target_type: book-typst
   targets:
   - book-mkdocs
@@ -8043,14 +8043,14 @@ assets:
   domain: switching/monitoring
   subject: mac-address-table
   source_kind: unknown
-  current_path: 00_book/figures/gui/chapter-17/02-mac-address-table.png
-  path: 00_book/figures/gui/chapter-17/02-mac-address-table.png
+  current_path: documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png
+  path: documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png
   planned_canonical_path: documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png
   legacy_path: 00_book/figures/gui/chapter-17/02-mac-address-table.png
-  migration_state: pending
+  migration_state: migrated
   migration_role: canonical
   canonical_migration: true
-  canonical: false
+  canonical: true
   sha256: 289db01405922fbd58c774c5b70918c70c075bb2a3fbc5757fed6c7d8dc5ada9
   provenance:
     assessment: unknown
@@ -8068,11 +8068,11 @@ assets:
   used_by:
   - source_document: 00_book/DOC/17_giam_sat_switch_l2.md
     line: 31
-    referenced_path: ../../figures/gui/chapter-17/02-mac-address-table.png
+    referenced_path: ../assets/ui/legacy/switching/monitoring/mac-address-table.png
     target_type: book-mkdocs
   - source_document: 00_book/contents/17_giam_sat_switch_l2.typ
     line: 34
-    referenced_path: figures/gui/chapter-17/02-mac-address-table.png
+    referenced_path: /documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png
     target_type: book-typst
   targets:
   - book-mkdocs

@@ -1,0 +1,924 @@
+{
+  "batch": "B07R",
+  "starting_commit": "fef194fff22590b8bff2d65f48cd97f947941c79",
+  "status": "PASS full cumulative local and clean checkout",
+  "aggregate_sanity": {
+    "result": "PASS",
+    "valid_pngs": 2,
+    "dimensions_nonzero": true,
+    "chapter_context_agrees": true,
+    "terminal_or_evidence_or_runtime": false,
+    "target_collisions": false,
+    "provenance": "unknown retained; no reconstruction or new generator"
+  },
+  "assets": [
+    {
+      "asset_id": "ui.switching.monitoring.port-counters",
+      "old_path": "00_book/figures/gui/chapter-17/01-port-counters.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/monitoring/port-counters.png",
+      "source_git_blob_sha": "2ac571be779a5c38669e5921f7b8143c2a56b7bb8213356ba6925b5a0a35f30c",
+      "canonical_filesystem_sha": "2ac571be779a5c38669e5921f7b8143c2a56b7bb8213356ba6925b5a0a35f30c",
+      "canonical_index_blob_sha": "2ac571be779a5c38669e5921f7b8143c2a56b7bb8213356ba6925b5a0a35f30c",
+      "manifest_sha": "2ac571be779a5c38669e5921f7b8143c2a56b7bb8213356ba6925b5a0a35f30c",
+      "staging_path": "00_book/assets/ui/legacy/switching/monitoring/port-counters.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+          "line": 10,
+          "referenced_path": "../assets/ui/legacy/switching/monitoring/port-counters.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+          "line": 12,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/monitoring/port-counters.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    },
+    {
+      "asset_id": "ui.switching.monitoring.mac-address-table",
+      "old_path": "00_book/figures/gui/chapter-17/02-mac-address-table.png",
+      "canonical_path": "documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png",
+      "source_git_blob_sha": "289db01405922fbd58c774c5b70918c70c075bb2a3fbc5757fed6c7d8dc5ada9",
+      "canonical_filesystem_sha": "289db01405922fbd58c774c5b70918c70c075bb2a3fbc5757fed6c7d8dc5ada9",
+      "canonical_index_blob_sha": "289db01405922fbd58c774c5b70918c70c075bb2a3fbc5757fed6c7d8dc5ada9",
+      "manifest_sha": "289db01405922fbd58c774c5b70918c70c075bb2a3fbc5757fed6c7d8dc5ada9",
+      "staging_path": "00_book/assets/ui/legacy/switching/monitoring/mac-address-table.png",
+      "used_by": [
+        {
+          "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+          "line": 31,
+          "referenced_path": "../assets/ui/legacy/switching/monitoring/mac-address-table.png",
+          "target_type": "book-mkdocs"
+        },
+        {
+          "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+          "line": 34,
+          "referenced_path": "/documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png",
+          "target_type": "book-typst"
+        }
+      ],
+      "provenance": {
+        "assessment": "unknown",
+        "evidence": [
+          "Phase 1/2 unchanged"
+        ]
+      },
+      "source_kind": "unknown",
+      "status": "replacement-candidate"
+    }
+  ],
+  "references": [
+    {
+      "asset_id": "ui.switching.monitoring.port-counters",
+      "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+      "line": 10,
+      "before": "../../figures/gui/chapter-17/01-port-counters.png",
+      "after": "../assets/ui/legacy/switching/monitoring/port-counters.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.monitoring.mac-address-table",
+      "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+      "line": 31,
+      "before": "../../figures/gui/chapter-17/02-mac-address-table.png",
+      "after": "../assets/ui/legacy/switching/monitoring/mac-address-table.png",
+      "target_type": "book-mkdocs"
+    },
+    {
+      "asset_id": "ui.switching.monitoring.port-counters",
+      "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+      "line": 12,
+      "before": "figures/gui/chapter-17/01-port-counters.png",
+      "after": "/documentation_assets/ui/legacy/switching/monitoring/port-counters.png",
+      "target_type": "book-typst"
+    },
+    {
+      "asset_id": "ui.switching.monitoring.mac-address-table",
+      "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+      "line": 34,
+      "before": "figures/gui/chapter-17/02-mac-address-table.png",
+      "after": "/documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png",
+      "target_type": "book-typst"
+    }
+  ],
+  "reference_rewrite_count": 4,
+  "baseline": {
+    "before": 33,
+    "resolved": 2,
+    "after": 31,
+    "removed_entries": [
+      {
+        "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-17/01-port-counters.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-17/01-port-counters.png",
+        "count": 1
+      },
+      {
+        "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+        "referenced_path": "../../figures/gui/chapter-17/02-mac-address-table.png",
+        "reference_kind": "html-img",
+        "resolved_path": "figures/gui/chapter-17/02-mac-address-table.png",
+        "count": 1
+      }
+    ]
+  },
+  "manifest": {
+    "migrated": 195,
+    "pending": 150,
+    "frozen": 62
+  },
+  "regeneration_occurred": false,
+  "local_validation": [
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--manifest-only"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/sync_documentation_assets.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_documentation_assets.py",
+        "--check-staging"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_documentation_assets",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 19
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_docshot_destinations",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 17
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "tests.test_typst_tooling",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "test_count": 3
+    },
+    {
+      "command": [
+        "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/build_typst.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "actual_test_count": 39,
+  "local_proof": {
+    "status": "PASS",
+    "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+    "manifest": {
+      "migrated": 195,
+      "pending": 150,
+      "frozen": 62
+    },
+    "b07_migrated": 35,
+    "b07_old_paths_absent": 35,
+    "b07_canonical_paths_present": 35,
+    "other_records_unchanged": 372,
+    "b06_hold_full_record_and_legacy_bytes_unchanged": true,
+    "b06_hold_planned_destination_absent": true,
+    "reference_edges_exact_current_lines": 67,
+    "document_prose_captions_widths_order_labels_unchanged": true,
+    "provenance_and_replacement_intent_unchanged": true,
+    "baseline_only_resolved_entries_removed": true,
+    "baseline_remaining": 31,
+    "b02_holds_unchanged": true,
+    "b03_42_bytes_metadata_and_output_map_unchanged": true,
+    "dialog_policy_unchanged": true,
+    "terminal_freeze_and_reference_multiset_unchanged": true,
+    "runtime_assets_unchanged": true,
+    "retained_b02_copies_unchanged": true,
+    "staging_assets": 178,
+    "staging_hashes_correct": true,
+    "staging_ignored": true,
+    "staging_tracked": false,
+    "regeneration_occurred": false,
+    "typst": [
+      {
+        "target": "report",
+        "result": "PASS",
+        "pages": 110,
+        "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+        "byte_identical_to_starting_baseline": true
+      },
+      {
+        "target": "book",
+        "result": "PASS",
+        "pages": 170,
+        "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+        "byte_identical_to_starting_baseline": true
+      }
+    ],
+    "full_build_gate": "PASS"
+  },
+  "typst": [
+    {
+      "target": "report",
+      "result": "PASS",
+      "pages": 110,
+      "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+      "byte_identical_to_starting_baseline": true
+    },
+    {
+      "target": "book",
+      "result": "PASS",
+      "pages": 170,
+      "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+      "byte_identical_to_starting_baseline": true
+    }
+  ],
+  "png_sanity": [
+    {
+      "asset_id": "ui.switching.monitoring.port-counters",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    },
+    {
+      "asset_id": "ui.switching.monitoring.mac-address-table",
+      "width": 2502,
+      "height": 1746,
+      "mode": "RGB",
+      "valid_png": true
+    }
+  ],
+  "review": {
+    "batch": "B07R",
+    "decisions": [
+      {
+        "asset_id": "ui.switching.monitoring.port-counters",
+        "decision": "APPROVE_MIGRATION",
+        "decision_confidence": "high",
+        "semantic_identity": "port-counters",
+        "visual_observations": [
+          "Port Counters tab/title; Reload UI; refreshed banner",
+          "4 monitored ports and 4 links up; total traffic 11.3 GB; errors + discards 6",
+          "Interface telemetry table: interface/link/inbound/outbound/errors/discards/last flap",
+          "GigabitEthernet0/1, /2, /23, /24, timestamps and never-flapped entries"
+        ],
+        "visual_method": "direct original PNG inspection; no OCR/crop/overlay/regeneration",
+        "width": 2502,
+        "height": 1746,
+        "reason": "Visible application UI/title/columns match the semantic name. Current chapter 17 teaches interpretation/filtering/reloading collected UI state, without a claimed experimental result for these values. Current live uses are only the book guide Markdown and Typst, not report/lab experimental evidence. Relocation preserves every byte, caption, geometry and semantic usage; no raw source/provenance is replaced.",
+        "evidence": [
+          {
+            "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+            "line": 3,
+            "excerpt": "Nh\u00f3m **Monitoring** c\u1ee7a SW2 g\u1ed3m **Port Counters** v\u00e0 **MAC Table**. Hai tab n\u00e0y"
+          },
+          {
+            "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+            "line": 8,
+            "excerpt": "#report-note[Nh\u00f3m *Monitoring* c\u1ee7a SW2 g\u1ed3m *Port Counters* v\u00e0 *MAC Table*. Hai tab n\u00e0y ch\u1ec9 \u0111\u1ecdc d\u1eef li\u1ec7u \u0111\u00e3 thu th\u1eadp; kh\u00f4ng c\u00f3 Save ho\u1eb7c View & Push. Ch\u1ecdn *Reload UI* sau khi thi\u1ebft b\u1ecb \u0111\u01b0\u1ee3c \u0111\u1ed3ng b\u1ed9 \u0111\u1ec3 n\u1ea1p l\u1ea1i d\u1eef li\u1ec7u hi\u1ec3n th\u1ecb.]"
+          },
+          {
+            "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+            "line": 12,
+            "excerpt": "<figcaption><p>L\u01b0u l\u01b0\u1ee3ng, l\u1ed7i, discard v\u00e0 l\u1ea7n link flap g\u1ea7n nh\u1ea5t theo port.</p></figcaption>"
+          },
+          {
+            "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+            "line": 13,
+            "excerpt": "caption: [L\u01b0u l\u01b0\u1ee3ng, l\u1ed7i, discard v\u00e0 l\u1ea7n link flap g\u1ea7n nh\u1ea5t theo port.], width: 100.0%) <fig:ch17-01-port-counters>"
+          },
+          {
+            "source_document": "UI/qml/features/switching/monitoring/SwitchMonitoringPage.qml",
+            "line": 22,
+            "excerpt": "readonly property string pageTitle: showingMacTable ? \"MAC Address Table\" : \"Port Counters\""
+          },
+          {
+            "source_document": "features/switching/monitoring_repository.py",
+            "line": 9,
+            "excerpt": "def get_port_counters(db: Any, host: str) -> list[dict[str, Any]]:"
+          }
+        ],
+        "live_references_before": [
+          {
+            "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+            "line": 10,
+            "referenced_path": "../../figures/gui/chapter-17/01-port-counters.png",
+            "reference_kind": "html-img",
+            "resolved_path": "figures/gui/chapter-17/01-port-counters.png",
+            "exists": false
+          },
+          {
+            "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+            "line": 12,
+            "referenced_path": "figures/gui/chapter-17/01-port-counters.png",
+            "reference_kind": "typst-helper",
+            "resolved_path": "00_book/figures/gui/chapter-17/01-port-counters.png",
+            "exists": true
+          }
+        ],
+        "old_path": "00_book/figures/gui/chapter-17/01-port-counters.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/switching/monitoring/port-counters.png",
+        "source_sha": "2ac571be779a5c38669e5921f7b8143c2a56b7bb8213356ba6925b5a0a35f30c",
+        "original_evidence": false,
+        "preserve_original": false,
+        "provenance": {
+          "assessment": "unknown",
+          "evidence": [
+            "Phase 1/2 unchanged"
+          ]
+        },
+        "source_kind": "unknown",
+        "replacement_policy": "investigate-first",
+        "future_recreation": "remains investigate-first; no synthetic/real telemetry claim, generator proof or reproducibility proof is supplied or required for this relocation",
+        "scope": "ui/legacy byte-preserving migration only; not ui/docshot"
+      },
+      {
+        "asset_id": "ui.switching.monitoring.mac-address-table",
+        "decision": "APPROVE_MIGRATION",
+        "decision_confidence": "high",
+        "semantic_identity": "mac-address-table",
+        "visual_observations": [
+          "MAC Table tab / MAC Address Table title; Reload UI; refreshed banner",
+          "5 learned entries; 2 VLANs; 3 interfaces; 4 dynamic",
+          "Forwarding entries: MAC/VLAN/interface/type/learned-at",
+          "VLAN 10 and 20 entries with static/dynamic types and learned-at timestamps"
+        ],
+        "visual_method": "direct original PNG inspection; no OCR/crop/overlay/regeneration",
+        "width": 2502,
+        "height": 1746,
+        "reason": "Visible application UI/title/columns match the semantic name. Current chapter 17 teaches interpretation/filtering/reloading collected UI state, without a claimed experimental result for these values. Current live uses are only the book guide Markdown and Typst, not report/lab experimental evidence. Relocation preserves every byte, caption, geometry and semantic usage; no raw source/provenance is replaced.",
+        "evidence": [
+          {
+            "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+            "line": 3,
+            "excerpt": "Nh\u00f3m **Monitoring** c\u1ee7a SW2 g\u1ed3m **Port Counters** v\u00e0 **MAC Table**. Hai tab n\u00e0y"
+          },
+          {
+            "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+            "line": 8,
+            "excerpt": "#report-note[Nh\u00f3m *Monitoring* c\u1ee7a SW2 g\u1ed3m *Port Counters* v\u00e0 *MAC Table*. Hai tab n\u00e0y ch\u1ec9 \u0111\u1ecdc d\u1eef li\u1ec7u \u0111\u00e3 thu th\u1eadp; kh\u00f4ng c\u00f3 Save ho\u1eb7c View & Push. Ch\u1ecdn *Reload UI* sau khi thi\u1ebft b\u1ecb \u0111\u01b0\u1ee3c \u0111\u1ed3ng b\u1ed9 \u0111\u1ec3 n\u1ea1p l\u1ea1i d\u1eef li\u1ec7u hi\u1ec3n th\u1ecb.]"
+          },
+          {
+            "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+            "line": 33,
+            "excerpt": "<figcaption><p>\u0110\u1ecba ch\u1ec9 MAC \u0111\u00e3 h\u1ecdc theo VLAN, interface v\u00e0 lo\u1ea1i entry.</p></figcaption>"
+          },
+          {
+            "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+            "line": 35,
+            "excerpt": "caption: [\u0110\u1ecba ch\u1ec9 MAC \u0111\u00e3 h\u1ecdc theo VLAN, interface v\u00e0 lo\u1ea1i entry.], width: 100.0%) <fig:ch17-02-mac-address-table>"
+          },
+          {
+            "source_document": "UI/qml/features/switching/monitoring/SwitchMonitoringPage.qml",
+            "line": 22,
+            "excerpt": "readonly property string pageTitle: showingMacTable ? \"MAC Address Table\" : \"Port Counters\""
+          },
+          {
+            "source_document": "features/switching/monitoring_repository.py",
+            "line": 32,
+            "excerpt": "def get_mac_table(db: Any, host: str) -> list[dict[str, Any]]:"
+          }
+        ],
+        "live_references_before": [
+          {
+            "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
+            "line": 31,
+            "referenced_path": "../../figures/gui/chapter-17/02-mac-address-table.png",
+            "reference_kind": "html-img",
+            "resolved_path": "figures/gui/chapter-17/02-mac-address-table.png",
+            "exists": false
+          },
+          {
+            "source_document": "00_book/contents/17_giam_sat_switch_l2.typ",
+            "line": 34,
+            "referenced_path": "figures/gui/chapter-17/02-mac-address-table.png",
+            "reference_kind": "typst-helper",
+            "resolved_path": "00_book/figures/gui/chapter-17/02-mac-address-table.png",
+            "exists": true
+          }
+        ],
+        "old_path": "00_book/figures/gui/chapter-17/02-mac-address-table.png",
+        "planned_canonical_path": "documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png",
+        "source_sha": "289db01405922fbd58c774c5b70918c70c075bb2a3fbc5757fed6c7d8dc5ada9",
+        "original_evidence": false,
+        "preserve_original": false,
+        "provenance": {
+          "assessment": "unknown",
+          "evidence": [
+            "Phase 1/2 unchanged"
+          ]
+        },
+        "source_kind": "unknown",
+        "replacement_policy": "investigate-first",
+        "future_recreation": "remains investigate-first; no synthetic/real telemetry claim, generator proof or reproducibility proof is supplied or required for this relocation",
+        "scope": "ui/legacy byte-preserving migration only; not ui/docshot"
+      }
+    ],
+    "migration_approved": 2,
+    "holds": 0,
+    "meaning_preserved": true,
+    "no_generator_provenance_invented": true,
+    "no_reproducibility_proof_required": true,
+    "no_monitoring_data_synthesized": true
+  },
+  "post_fast_lane_commit_validation": [
+    {
+      "batch": "B07A",
+      "status": "PASS",
+      "actual_test_count": 39,
+      "validation": [
+        {
+          "command": [
+            "python",
+            "scripts/validate_documentation_assets.py",
+            "--manifest-only"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "scripts/sync_documentation_assets.py"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "scripts/validate_documentation_assets.py",
+            "--check-staging"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_documentation_assets",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 19
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_docshot_destinations",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 17
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_typst_tooling",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 3
+        },
+        {
+          "command": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "git",
+            "diff",
+            "--cached",
+            "--check"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "batch": "B07B",
+      "status": "PASS",
+      "actual_test_count": 39,
+      "validation": [
+        {
+          "command": [
+            "python",
+            "scripts/validate_documentation_assets.py",
+            "--manifest-only"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "scripts/sync_documentation_assets.py"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "scripts/validate_documentation_assets.py",
+            "--check-staging"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_documentation_assets",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 19
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_docshot_destinations",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 17
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_typst_tooling",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 3
+        },
+        {
+          "command": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "git",
+            "diff",
+            "--cached",
+            "--check"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "batch": "B07C",
+      "status": "PASS",
+      "actual_test_count": 39,
+      "validation": [
+        {
+          "command": [
+            "python",
+            "scripts/validate_documentation_assets.py",
+            "--manifest-only"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "scripts/sync_documentation_assets.py"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "scripts/validate_documentation_assets.py",
+            "--check-staging"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_documentation_assets",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 19
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_docshot_destinations",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 17
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_typst_tooling",
+            "-v"
+          ],
+          "exit_code": 0,
+          "status": "PASS",
+          "test_count": 3
+        },
+        {
+          "command": [
+            "git",
+            "diff",
+            "--check"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "git",
+            "diff",
+            "--cached",
+            "--check"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ]
+    }
+  ],
+  "transition_policy_counts": {
+    "regenerate_canonical": 33,
+    "investigate_first": 2
+  },
+  "investigate_first_unchanged": true,
+  "clean_checkout": {
+    "status": "PASS",
+    "candidate_commit": "56c0a0e4df95fc12b557ff5d776c5834c2eb6c00",
+    "candidate_tree": "13d6ad4ef1003d88ec70d2e920f0c208fdfa6d69",
+    "actual_test_count": 39,
+    "validation": [
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--manifest-only"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/sync_documentation_assets.py"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/validate_documentation_assets.py",
+          "--check-staging"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_documentation_assets",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 19
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_docshot_destinations",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 17
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_typst_tooling",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "test_count": 3
+      },
+      {
+        "command": [
+          "/tmp/cams-b02b4/docs-venv/bin/mkdocs",
+          "build",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "python",
+          "scripts/build_typst.py",
+          "--toolchain-dir",
+          "/home/ntdatphu/Data/Workspace/Repository/CAMS/output/typst/toolchain"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "proof": {
+      "status": "PASS",
+      "all_407_source_git_filesystem_index_manifest_sha_contracts": true,
+      "manifest": {
+        "migrated": 195,
+        "pending": 150,
+        "frozen": 62
+      },
+      "b07_migrated": 35,
+      "b07_old_paths_absent": 35,
+      "b07_canonical_paths_present": 35,
+      "other_records_unchanged": 372,
+      "b06_hold_full_record_and_legacy_bytes_unchanged": true,
+      "b06_hold_planned_destination_absent": true,
+      "reference_edges_exact_current_lines": 67,
+      "document_prose_captions_widths_order_labels_unchanged": true,
+      "provenance_and_replacement_intent_unchanged": true,
+      "baseline_only_resolved_entries_removed": true,
+      "baseline_remaining": 31,
+      "b02_holds_unchanged": true,
+      "b03_42_bytes_metadata_and_output_map_unchanged": true,
+      "dialog_policy_unchanged": true,
+      "terminal_freeze_and_reference_multiset_unchanged": true,
+      "runtime_assets_unchanged": true,
+      "retained_b02_copies_unchanged": true,
+      "staging_assets": 178,
+      "staging_hashes_correct": true,
+      "staging_ignored": true,
+      "staging_tracked": false,
+      "regeneration_occurred": false,
+      "typst": [
+        {
+          "target": "report",
+          "result": "PASS",
+          "pages": 110,
+          "sha256": "627d59abb47e831782a5cd401b5317d85e04169092596951b132df63b3871576",
+          "byte_identical_to_starting_baseline": true
+        },
+        {
+          "target": "book",
+          "result": "PASS",
+          "pages": 170,
+          "sha256": "aa4203a6d8ec73764857603c383cb40c80cf9aaa04fbf804b85a14eabc418442",
+          "byte_identical_to_starting_baseline": true
+        }
+      ],
+      "full_build_gate": "PASS"
+    },
+    "completion_note": "Only b07r.md, b07r.json and b07-closure.md execution-report completion follows the validated candidate; no asset/source/config change."
+  }
+}

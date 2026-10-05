@@ -30,16 +30,13 @@
 │   │   ├── 05-critical-filter-result.png
 │   │   ├── 06-smart-filter-builder.png
 │   │   └── 07-log-message-details.png
-│   ├── chapter-16
+│   └── chapter-16
 │   │   ├── 01-vlan-protection.png
 │   │   ├── 02-trusted-uplinks.png
 │   │   ├── 03-static-mac-form.png
 │   │   ├── 04-l2-security-view-push.png
 │   │   ├── 05-port-security-form.png
 │   │   └── 07-port-security-view-push.png
-│   └── chapter-17
-│   │   ├── 01-port-counters.png
-│   │   └── 02-mac-address-table.png
 ├── icons
 │   └── ptit-logo.svg
 ├── report
@@ -454,5 +451,12 @@ B07C canonical legacy routing UI (outside this figures tree):
 - documentation_assets/ui/legacy/switching/acl/extended-form.png
 - documentation_assets/ui/legacy/switching/acl/bindings.png
 - documentation_assets/ui/legacy/switching/acl/view-push.png
+
+Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.
+
+B07R canonical legacy routing UI (outside this figures tree):
+
+- documentation_assets/ui/legacy/switching/monitoring/port-counters.png
+- documentation_assets/ui/legacy/switching/monitoring/mac-address-table.png
 
 Original PNG bytes and unknown provenance preserved. MkDocs uses generated staging; future regeneration stays separate.

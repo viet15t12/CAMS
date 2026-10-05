@@ -219,20 +219,6 @@
       "reference_kind": "html-img",
       "resolved_path": "figures/gui/chapter-16/07-port-security-view-push.png",
       "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-17/01-port-counters.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-17/01-port-counters.png",
-      "count": 1
-    },
-    {
-      "source_document": "00_book/DOC/17_giam_sat_switch_l2.md",
-      "referenced_path": "../../figures/gui/chapter-17/02-mac-address-table.png",
-      "reference_kind": "html-img",
-      "resolved_path": "figures/gui/chapter-17/02-mac-address-table.png",
-      "count": 1
     }
   ]
 }
