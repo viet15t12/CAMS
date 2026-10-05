@@ -542,3 +542,12 @@ B11C preserved switching-lab evidence (both legacy originals and canonical copie
 - 00_book/figures/report/diagrams/switching-lab/1_26.png -> documentation_assets/evidence/ui-capture/original/switching-lab/port-security-configured.png (exact copy; legacy retained)
 - 00_book/figures/report/diagrams/switching-lab/1_22.png (HOLD; legacy only, no canonical copy)
 - 00_book/figures/report/diagrams/switching-lab/1_32.png (HOLD; legacy only, no canonical copy)
+
+B11R unresolved/semantic-name HOLD sources (legacy only; no canonical copy):
+
+- 00_book/figures/report/diagrams/switching-lab/1_1.png (HOLD; original preserved)
+- 00_book/figures/report/diagrams/switching-lab/1_18.png (HOLD; original preserved)
+- 00_book/figures/report/diagrams/switching-lab/1_19.png (HOLD; original preserved)
+- 00_book/figures/report/diagrams/switching-lab/1_22.png (HOLD; original preserved)
+- 00_book/figures/report/diagrams/switching-lab/1_32.png (HOLD; original preserved)
+- 00_book/figures/report/diagrams/switching-lab/1_6.png (HOLD; original preserved)
