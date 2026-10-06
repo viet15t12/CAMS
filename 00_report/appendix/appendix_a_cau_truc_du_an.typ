@@ -19,31 +19,44 @@ Mã nguồn ứng dụng desktop CAMS được tổ chức tại thư mục gố
 ) <fig-appendix-project-structure>
 
 #pagebreak(weak: true)
-#appendix-section[A.2.][Bảng ánh xạ luồng thành phần toàn hệ thống]
+#appendix-section[A.2.][Ánh xạ các thành phần đại diện theo mã nguồn]
 
-Bảng dưới đây mô tả chuỗi liên kết từ thành phần giao diện QML, qua lớp cầu nối PyQt6, đến tầng lưu trữ SQLite và các tác vụ hoặc mẫu Jinja2 dùng để thực thi cấu hình mạng.
+Các bảng dưới đây sử dụng tên tệp và mô-đun có trong kho mã nguồn khi biên tập. Mỗi hàng liệt kê thành phần đại diện, không khẳng định một biểu mẫu chỉ dùng đúng một repository hoặc mọi bảng đều có trong tất cả workspace. Đường dẫn mô-đun được tính từ thư mục gốc dự án; tên mẫu Jinja2 được ghi ngắn để dễ đọc.
 
 #report-table(
-  columns: (18%, 17%, 21%, 18%, 26%),
-  text-size: 8.5pt,
+  columns: (23%, 26%, 25%, 26%),
+  text-size: 9pt,
   cell-inset: (x: 3pt, y: 4pt),
-  header: ([Thành phần QML], [Bridge / Facade], [Dịch vụ & Repo], [Bảng SQLite], [Worker / Template]),
+  header: ([Thành phần QML], [Mô-đun nghiệp vụ / điều phối], [Bảng dữ liệu đại diện], [Tác vụ / mẫu lệnh]),
   rows: (
-    ([#table-code("DeviceTabs.qml")], [#table-code("cli / dbManager")], [#table-code("DeviceRepository")], [#table-code("t01_devices")], [#table-code("DeviceSessionRegistry")]),
-    ([#table-code("InterfacesView.qml")], [#table-code("dbManager")], [#table-code("InterfaceRepository")], [#table-code("t02_router_iface_*")], [#table-code("router_interface.j2")]),
-    ([#table-code("DhcpView.qml")], [#table-code("dbManager")], [#table-code("DhcpRepository")], [#table-code("t03_dhcp_*")], [#table-code("dhcp_worker.py / dhcp.j2")]),
-    ([#table-code("StaticRouting.qml")], [#table-code("dbManager")], [#table-code("RoutingRepository")], [#table-code("t04_static_routing")], [#table-code("routing_worker.py / static_route.j2")]),
-    ([#table-code("OspfEditor.qml")], [#table-code("dbManager")], [#table-code("RoutingRepository")], [#table-code("t04_ospf_*")], [#table-code("routing_worker.py / ospf.j2")]),
-    ([#table-code("EigrpEditor.qml")], [#table-code("dbManager")], [#table-code("RoutingRepository")], [#table-code("t04_eigrp_*")], [#table-code("routing_worker.py / eigrp.j2")]),
-    ([#table-code("AclEditor.qml")], [#table-code("dbManager")], [#table-code("AclRepository")], [#table-code("t05_acl_*")], [#table-code("acl_worker.py / acl.j2")]),
-    ([#table-code("NatEditor.qml")], [#table-code("dbManager")], [#table-code("NatRepository")], [#table-code("t05_nat_*")], [#table-code("nat_worker.py / nat.j2")]),
-    ([#table-code("SwitchingView.qml")], [#table-code("dbManager")], [#table-code("SwitchingRepository")], [#table-code("t06_switch_*")], [#table-code("switching_worker.py / switching.j2")]),
-    ([#table-code("FhrpEditor.qml")], [#table-code("dbManager")], [#table-code("FhrpRepository")], [#table-code("t08_fhrp_*")], [#table-code("fhrp.j2")]),
-    ([#table-code("VtpEditor.qml")], [#table-code("dbManager")], [#table-code("SwitchingRepository")], [#table-code("t09_vtp_*")], [#table-code("vtp.j2")]),
-    ([#table-code("SyslogView.qml")], [#table-code("syslogManager")], [#table-code("SyslogRepository")], [#table-code("t12_syslog_*")], [#table-code("SyslogListener (UDP/TCP)")]),
-    ([#table-code("SftpView.qml")], [#table-code("sftpController")], [#table-code("SftpClientService")], [Hàng đợi bộ nhớ], [#table-code("ParamikoSFTPWorker")]),
-    ([#table-code("TerminalHost.qml")], [#table-code("cli")], [#table-code("TerminalManager")], [Socket IPC NTTP/1], [#table-code("cams-terminal")]),
-    ([#table-code("DatabaseBrowser.qml")], [#table-code("dbManager")], [#table-code("DatabaseBrowserService")], [Tất cả 93 bảng], [#table-code("sqlite3 query engine")]),
+    ([#table-code("DeviceTabs.qml", size: 8.5pt)], [#table-code("features/devices/repository.py", size: 8.5pt)], [#table-code("t01_devices", size: 8.5pt)], [#table-code("infrastructure/network/session_registry.py", size: 8.5pt)]),
+    ([#table-code("InterfaceView.qml", size: 8.5pt)], [#table-code("features/interfaces/repository.py", size: 8.5pt)], [#table-code("t02_interface_name; t02_router_iface_l3", size: 8.5pt)], [#table-code("features/interfaces/worker.py; commands.py", size: 8.5pt)]),
+    ([#table-code("DhcpView.qml", size: 8.5pt)], [#table-code("features/dhcp/pool.py", size: 8.5pt)], [#table-code("t03_dhcp_pool; t03_excluded_address", size: 8.5pt)], [#table-code("features/dhcp/worker.py; dhcp_config.j2", size: 8.5pt)]),
+    ([#table-code("StaticRoutingForm.qml", size: 8.5pt)], [#table-code("features/routing/static_route.py", size: 8.5pt)], [#table-code("t04_static_routes; t04_static_default_routes", size: 8.5pt)], [#table-code("features/routing/worker.py; static.j2", size: 8.5pt)]),
+    ([#table-code("OspfRoutingForm.qml", size: 8.5pt)], [#table-code("features/routing/ospf/", size: 8.5pt)], [#table-code("t04_ospf_processes; t04_ospf_networks", size: 8.5pt)], [#table-code("features/routing/ospf/worker.py; ospf.j2", size: 8.5pt)]),
+    ([#table-code("EigrpRoutingForm.qml", size: 8.5pt)], [#table-code("features/routing/", size: 8.5pt)], [#table-code("t04_eigrp_processes; t04_eigrp_networks", size: 8.5pt)], [#table-code("features/routing/worker.py; eigrp.j2", size: 8.5pt)]),
+    ([#table-code("AclView.qml", size: 8.5pt)], [#table-code("features/acl/", size: 8.5pt)], [#table-code("t05_ACL_DB; t05_extended_acl_rules", size: 8.5pt)], [#table-code("features/acl/worker.py; standard.j2; extended.j2", size: 8.5pt)]),
   ),
-  caption: [Ánh xạ thành phần từ giao diện QML đến cơ sở dữ liệu và tác vụ thực thi],
+  caption: [Ánh xạ giao diện, mô-đun và lưu trữ theo mã nguồn hiện tại],
 ) <tab-system-component-mapping>
+
+#pagebreak(weak: true)
+
+#report-table(
+  columns: (23%, 26%, 25%, 26%),
+  text-size: 9pt,
+  cell-inset: (x: 3pt, y: 4pt),
+  header: ([Thành phần QML], [Mô-đun nghiệp vụ / điều phối], [Bảng dữ liệu đại diện], [Tác vụ / mẫu lệnh]),
+  rows: (
+    ([#table-code("NatView.qml", size: 8.5pt)], [#table-code("features/nat/", size: 8.5pt)], [#table-code("t05_NAT_DB; t05_nat_interfaces", size: 8.5pt)], [#table-code("features/nat/worker.py; nat.j2", size: 8.5pt)]),
+    ([#table-code("SwitchWorkspace.qml", size: 8.5pt)], [#table-code("features/switching/", size: 8.5pt)], [#table-code("t06_vlan_db; t06_interface_l2", size: 8.5pt)], [#table-code("features/switching/worker.py", size: 8.5pt)]),
+    ([#table-code("FhrpView.qml", size: 8.5pt)], [#table-code("features/fhrp/repository.py", size: 8.5pt)], [#table-code("t08_fhrp_groups; t08_fhrp_members", size: 8.5pt)], [#table-code("features/fhrp/worker.py; fhrp.j2", size: 8.5pt)]),
+    ([#table-code("VtpPage.qml", size: 8.5pt)], [#table-code("features/switching/", size: 8.5pt)], [#table-code("t09_vtp_domains; t09_vtp_switches", size: 8.5pt)], [#table-code("features/switching/worker.py", size: 8.5pt)]),
+    ([#table-code("SyslogWorkspace.qml", size: 8.5pt)], [#table-code("features/syslog/qt/manager.py", size: 8.5pt)], [#table-code("t10_syslog_servers; t12_syslog_messages", size: 8.5pt)], [#table-code("features/syslog/transport/receiver.py", size: 8.5pt)]),
+    ([#table-code("SftpView.qml", size: 8.5pt)], [#table-code("features/sftp/controller.py", size: 8.5pt)], [#table-code("Hàng đợi phiên, không phải bảng cấu hình mạng", size: 8.5pt)], [#table-code("features/sftp/sftp_service.py", size: 8.5pt)]),
+    ([#table-code("DatabaseBrowserView.qml", size: 8.5pt)], [#table-code("core/external_tools.py", size: 8.5pt)], [#table-code("Các bảng có trong workspace được mở", size: 8.5pt)], [#table-code("infrastructure/database/browser/", size: 8.5pt)]),
+  ),
+  caption: [Ánh xạ giao diện, mô-đun và lưu trữ theo mã nguồn hiện tại],
+) <tab-system-component-mapping-continued>
+
+Terminal đồng hành được tổ chức trong `features/terminal/`, gồm `launcher.py`, `ipc_server.py` và `managed_manager.py`. Terminal giao tiếp với ứng dụng chính qua IPC. Bộ duyệt dữ liệu được mở qua `core/external_tools.py`; bảng dữ liệu khả dụng phụ thuộc workspace, không mặc định luôn có 93 bảng.

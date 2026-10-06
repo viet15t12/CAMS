@@ -6,227 +6,66 @@
 
 == Mục tiêu và môi trường thử nghiệm
 
-Chương này đánh giá CAMS qua năm kịch bản triển khai mạng trên EVE-NG và thực nghiệm an ninh hệ thống. Các kịch bản tập trung xác minh quy trình cấu hình, phản hồi của thiết bị, cơ chế phân quyền, an toàn mật mã dữ liệu và giám sát nhật ký an ninh trong điều kiện phòng lab.
+Chương này đánh giá CAMS qua năm kịch bản mạng trên EVE-NG: bảo vệ Lớp 2, định tuyến, dịch vụ Lớp 3, Syslog và chính sách ACL. Bằng chứng gồm ảnh giao diện, cấu hình đang chạy, kết quả lệnh kiểm tra và phép thử lưu lượng. Các cơ chế phân quyền, mã hóa và SFTP được mô tả theo mã nguồn ở Chương 3–4; năm lab dưới đây không thay thế kiểm thử riêng cho các cơ chế đó.
 
 === Môi trường thử nghiệm phần mềm và phần cứng
 
-Quá trình đo đạc, kiểm thử và thực nghiệm được tiến hành trong môi trường gồm ba nhóm thành phần:
+Các kịch bản được thực hiện trên hai môi trường độc lập. Lab 1, 2 và 5 do Nguyễn Phan Kiên thực hiện; Lab 3 và 4 do Nguyễn Quốc Việt thực hiện trên máy trạm và máy EVE-NG khác. Việc dùng cùng dải quản trị hoặc cùng tên router không có nghĩa các lab dùng chung thiết bị hay tài nguyên máy chủ.
 
-- *Máy trạm chạy ứng dụng CAMS (Host):*
-  - Hệ điều hành: Linux (Fedora 44 hoặc Ubuntu 24.04 LTS).
-  - Phần cứng: CPU AMD Ryzen 7 hoặc Intel Core i7, RAM 16 GB.
-  - Nền tảng phần mềm: Python 3.11+, PyQt 6.10, Qt 6.10 và SQLite 3 nhúng.
-  - Công cụ quản lý phụ thuộc và môi trường thực thi: `uv`.
-- *Hạ tầng ảo hóa mạng (Virtual Lab):*
-  - Máy chủ ảo hóa: EVE-NG Professional phiên bản 5.0.
-  - Bộ định tuyến: Cisco vIOS-L3, Cisco IOS Software phiên bản 15.9(3)M.
-  - Thiết bị chuyển mạch: Cisco vIOS-L2, Cisco IOS Software phiên bản 15.2.
-- *Mạng quản trị ngoại băng (Out-of-band Management Network):* Các cổng quản trị của router và switch được kết nối vào phân mạng `192.168.122.0/24` (có thể thay đổi tùy theo cấu hình của người thực hành). CAMS sử dụng SSH hoặc Telnet trên mạng này để thu thập trạng thái và đẩy cấu hình xuống thiết bị.
+#report-table(
+  columns: (22%, 42%, 36%),
+  header: ([Thành phần], [Lab 1, 2 và 5], [Lab 3 và 4]),
+  rows: (
+    ([Nguồn thực nghiệm], [Nguyễn Phan Kiên], [Nguyễn Quốc Việt]),
+    ([Máy trạm CAMS], [Fedora Linux 44 Workstation; Intel Core i7-14650HX; 16 lõi, 24 luồng; RAM 16 GB danh nghĩa.], [Máy trạm riêng; chưa có thông tin xác nhận hệ điều hành, CPU và RAM.]),
+    ([Môi trường Python/Qt], [Python 3.14.7; PyQt 6.10.2; Qt 6.10.0 trong môi trường hiện tại.], [Chưa xác nhận phiên bản thực tế của từng lần chạy.]),
+    ([Máy EVE-NG], [Địa chỉ truy cập 192.168.122.64 trong ảnh; chưa xác nhận phiên bản, bản Community/Professional và vCPU/RAM cấp cho máy ảo.], [Máy EVE-NG khác; chưa xác nhận phiên bản, địa chỉ truy cập và vCPU/RAM.]),
+    ([Thiết bị Cisco], [Router và switch Cisco IOS ảo; running-config Lab 2 ghi version 15.5.], [Thiết bị Cisco IOS ảo theo cấu hình và ảnh thực nghiệm; chưa xác nhận bản IOS đầy đủ.]),
+  ),
+  text-size: 9.5pt,
+  caption: [Môi trường thực nghiệm theo nguồn của từng nhóm lab],
+) <tab-lab-environments>
+
+Thông số máy trạm và phiên bản Python/Qt ở cột Lab 1, 2 và 5 được đối chiếu trên máy hiện tại ngày 06/10/2026. Đây là thông tin môi trường khi biên tập, không chứng minh mọi ảnh chụp trước đó sử dụng đúng các phiên bản này. Tài nguyên máy trạm không được xem là tài nguyên đã cấp cho máy EVE-NG. Trường `version 15.5` trong running-config cũng không thay thế kết quả `show version` để xác định image và bản dựng IOS.
+
+Các lab sử dụng mạng quản trị `192.168.122.0/24` để CAMS kết nối SSH hoặc Telnet với thiết bị. Báo cáo gọi đây là mạng quản trị riêng; chưa có minh chứng về VRF hoặc cách ly đường định tuyến để khẳng định quản trị ngoại băng hoàn toàn. Bảng địa chỉ trong từng lab là nguồn đối chiếu chính: chẳng hạn R1 của Lab 2 có IP quản trị `.101`, còn R1 của Lab 5 có IP `.104`.
+
+#report-table(
+  columns: (12%, 45%, 43%),
+  header: ([Lab], [Nội dung], [Quy mô và phạm vi minh chứng]),
+  rows: (
+    ([1], [DHCP Snooping và DAI], [Ba router (gồm client R2 và FAKE_DHCP), một switch; kiểm tra nguồn cấp DHCP và ARP không khớp binding.]),
+    ([2], [OSPF một vùng], [Năm router, hai switch, bốn VPC; output của cả năm router và sáu loạt ping hai chiều.]),
+    ([3], [GLBP, DHCP và NAT/PAT], [Sơ đồ có bốn router và một switch; minh chứng DHCP/traceroute trên PC1, cấu hình GLBP và PAT trên router.]),
+    ([4], [Syslog và cảnh báo email], [Ba router, một switch; ảnh bộ nhận 245 bản tin tại một thời điểm và hai mẫu cảnh báo email.]),
+    ([5], [ACL và nhật ký an ninh], [Ba router, ba switch; phép thử chính sách trên VPC7, VPC8 và VPC9.]),
+  ),
+  text-size: 9.5pt,
+  caption: [Tổng quan năm kịch bản thực nghiệm độc lập],
+) <tab-lab-scope>
 
 == Kịch bản kiểm thử thực nghiệm trong phòng lab
 
-Phần thực nghiệm gồm năm kịch bản: DHCP Snooping và DAI trong bảo mật Lớp 2; định tuyến OSPF đa vùng; phối hợp GLBP–DHCP–NAT/PAT; thu thập và phân tích nhật ký Syslog; và kiểm thử cơ chế an ninh phân quyền cùng bảo mật dữ liệu lưu trữ. Mỗi kịch bản được thực hiện theo ba giai đoạn:
+Phần thực nghiệm gồm năm kịch bản: DHCP Snooping và DAI trong bảo mật Lớp 2; định tuyến OSPF một vùng trên năm router; phối hợp GLBP–DHCP–NAT/PAT; thu thập và phân tích nhật ký Syslog; và kiểm chứng chính sách ACL cùng nhật ký an ninh tập trung. Mỗi kịch bản được thực hiện theo ba giai đoạn:
 
 1. *Thiết lập và xem trước trên giao diện:* người dùng nhập tham số trên biểu mẫu nghiệp vụ. Dữ liệu được lưu ở trạng thái mong muốn (Desired State) và chuyển thành tập lệnh CLI để kiểm tra trong cửa sổ *View & Push*.
-2. *Đẩy cấu hình bất đồng bộ:* tác vụ nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua SSH.
+2. *Đẩy cấu hình bất đồng bộ:* tác vụ nền lấy thông tin truy cập, áp dụng khóa thiết bị (Host Lock) để tránh tranh chấp luồng lệnh, sau đó gửi tập lệnh qua giao thức SSH hoặc Telnet của phiên thiết bị.
 3. *Xác minh trạng thái:* người quản trị đối chiếu phản hồi của hệ thống, kiểm tra trực tiếp bằng terminal tích hợp và đánh giá lưu lượng thực tế.
 
 #include "09_kich_ban_1_snooping.typ"
 #include "09_kich_ban_1_dai.typ"
 
-=== Kịch bản 2: Định tuyến động đa vùng và tái phân phối tuyến liên chi nhánh (OSPF Group & Route Redistribution)
-
-==== Mục tiêu và quy hoạch địa chỉ IP
-
-Kịch bản 1 thiết lập OSPFv2 đa vùng để kết nối Chi nhánh A với Chi nhánh B qua đường trục ISP thuộc Backbone Area 0. Tính năng *Routing Group - OSPF* cấu hình đồng thời sáu router `R1`, `R2`, `R3`, `ISP1`, `ISP2` và `R6`; cơ chế tái phân phối đưa các mạng LAN cục bộ vào miền OSPF.
-
-#figure(
-  image("/00_book/figures/report/diagrams/LAB_2-report.png", width: 95%),
-  caption: [Sơ đồ Kịch bản 1: Định tuyến OSPF đa vùng giữa hai chi nhánh],
-) <fig-topo-scenario-2>
-
-Mô hình được chia thành các phân vùng định tuyến và dải địa chỉ như trình bày trong bảng quy hoạch dưới đây.
-
-#report-table(
-  columns: (20%, 20%, 25%, 35%),
-  header: ([Phân vùng mạng], [Thiết bị / Node], [Dải IP / Subnet], [Ghi chú kiến trúc]),
-  rows: (
-    ([Chi nhánh A], [VPC11 (A1_VLAN)], [192.168.10.10/24], [Gateway: 192.168.10.1 (R2 Gi0/4)]),
-    ([Chi nhánh A], [VPC12 (A2_VLAN)], [192.168.20.10/24], [Gateway: 192.168.20.1 (R3 Gi0/4)]),
-    ([Chi nhánh A], [R1, R2, R3], [10.1.12.0/24, 10.1.13.0/24, 10.1.23.0/24], [Miền định tuyến OSPF Area 1]),
-    (
-      [Đường trục ISP],
-      [R1, ISP1, ISP2, R6],
-      [10.0.0.0/24, 10.0.1.0/24, 10.0.2.0/24, 10.0.3.0/24],
-      [Miền đường trục OSPF Backbone Area 0],
-    ),
-    ([Chi nhánh B], [VPC14 (B1_VLAN)], [192.168.30.10/24], [Gateway: 192.168.30.1 (R6 Gi0/1.30)]),
-    ([Chi nhánh B], [VPC15 (B2_VLAN)], [192.168.40.10/24], [Gateway: 192.168.40.1 (R6 Gi0/1.40)]),
-    ([Mạng Quản trị], [Toàn bộ Router/SW], [192.168.122.101 -- 109/24], [Kênh Out-of-Band kết nối CAMS]),
-  ),
-  caption: [Bảng quy hoạch địa chỉ IP và phân vùng OSPF cho Kịch bản 1],
-) <tab-ip-planning-lab2>
-
-==== Quy trình triển khai trên phần mềm CAMS
-
-#step-title[Bước 1. Cấu hình interface Lớp 3 và gán địa chỉ IP]
-
-Trước khi triển khai định tuyến, quản trị viên mở *Interfaces* trên CAMS để thiết lập địa chỉ IP, subnet mask và đưa các cổng vật lý (`GigabitEthernet`) vào trạng thái hoạt động.
-
-#figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/1.png", width: 85%),
-  caption: [Giao diện quản lý và cấu hình tham số Lớp 3 cho các cổng router],
-) <fig-k2-interfaces>
-@fig-k2-interfaces thể hiện trạng thái IP của các cổng trên `R1`. Ngăn thuộc tính cho phép khai báo địa chỉ IP, subnet mask, mô tả và trạng thái hoạt động của từng cổng.
-
-#step-title[Bước 2. Cấu hình OSPF theo nhóm bằng Routing Group]
-
-Quản trị viên sử dụng *Routing Group - OSPF* để cấu hình đồng thời sáu router `R1`, `R2`, `R3`, `ISP1`, `ISP2` và `R6`.
-
-#figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/10.png", width: 80%),
-  caption: [Cửa sổ Routing Group - OSPF (Bước 1: Chọn sáu router tham gia cấu hình nhóm)],
-) <fig-k2-group-hosts>
-Trong @fig-k2-group-hosts, các router được chọn từ không gian làm việc `LAB_KICH_BAN_2`. CAMS sử dụng thông tin của các cổng và địa chỉ IP của từng thiết bị làm dữ liệu đầu vào cho các bước tiếp theo.
-
-Tại bước *Networks*, quản trị viên gán các mạng kết nối trực tiếp vào vùng định tuyến tương ứng: Area 0 cho các liên kết đường trục ISP và Area 1 cho các liên kết nội bộ của Chi nhánh A.
-
-#figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/11.png", width: 80%),
-  caption: [Cửa sổ Routing Group - OSPF (Bước 4: Khai báo phân vùng mạng và gán OSPF Area tương ứng)],
-) <fig-k2-group-networks>
-#block[
-  #set par(justify: false)
-  @fig-k2-group-networks thể hiện các cổng được nhóm theo từng router và ánh xạ mỗi dải mạng vào vùng OSPF tương ứng:
-]
-
-#report-table(
-  columns: (18%, 52%, 30%),
-  header: ([Router], [Dải mạng], [Vùng OSPF]),
-  rows: (
-    (table.cell(rowspan: 3)[*R1*], [#table-code("10.1.12.0/24")], [Area 1]),
-    ([#table-code("10.1.13.0/24")], [Area 1]),
-    ([#table-code("10.0.0.0/24")], [Area 0 (Backbone)]),
-    (table.cell(rowspan: 2)[*R2*], [#table-code("10.1.12.0/24")], [Area 1]),
-    ([#table-code("10.1.23.0/24")], [Area 1]),
-  ),
-  cell-align: (center + horizon, left + horizon, center + horizon),
-  width: 88%,
-  text-size: 10.5pt,
-  cell-inset: (x: 7pt, y: 6pt),
-)
-
-#block[
-  #set par(justify: false)
-  Sau khi kiểm tra các ánh xạ, quản trị viên nhấn *Save & Push*. Hệ thống sau đó đẩy cấu hình song song xuống toàn bộ router đã chọn.
-]
-
-#step-title[Bước 3. Cấu hình tái phân phối tuyến cho mạng LAN]
-
-Để quảng bá các mạng người dùng của hai chi nhánh qua OSPF mà không làm rò rỉ mạng quản trị (Out-of-band), quản trị viên cấu hình *Redistribute Connected Subnets* kết hợp với *Route-Map* trên các router biên `R2`, `R3` và `R6`. Việc sử dụng `route-map` đảm bảo chỉ các mạng LAN (`192.168.10.0/24`, `192.168.20.0/24`, `192.168.30.0/24` và `192.168.40.0/24`) được đưa vào miền OSPF, ngăn chặn rủi ro quảng bá sai mạng quản trị `192.168.122.0/24`.
-
-#figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/16.png", width: 85%),
-  caption: [Giao diện thiết lập tham số Tái phân phối tuyến (OSPF Redistribute) trên Router biên R6],
-) <fig-k2-redistribute-gui>
-Tại tab `R6`, quản trị viên mở *Routing*, chọn *OSPF* và mục *Redistribute*. Các tham số được thiết lập như sau:
-
-- Tiến trình OSPF: `1`. (Lưu ý: Không điền Process ID cho nguồn `connected` vì mạng kết nối trực tiếp không có tiến trình định tuyến).
-- Nguồn tái phân phối: `connected`.
-- Route-Map áp dụng: `LAN_ONLY`.
-- Tùy chọn `Subnets`: cho phép quảng bá các mạng con VLSM.
-
-Sau khi kiểm tra tham số, người dùng chọn *+ Add Redistribute* để lưu cấu hình ở trạng thái chờ, rồi mở *View & Push* để kiểm duyệt khối lệnh trước khi gửi xuống router.
-
-#figure(
-  image("/00_book/figures/report/diagrams/routing-ospf-lab/14.png", width: 80%),
-  caption: [Cửa sổ View & Push OSPF tự động sinh khối lệnh tái phân phối tuyến cho Router R2],
-) <fig-k2-redistribute-push>
-Cửa sổ kiểm duyệt trong @fig-k2-redistribute-push hiển thị khối lệnh Cisco IOS được sinh cho router `R2`:
-```text
-# Cấu hình OSPF và Redistribution sinh tự động cho R2
-ip prefix-list LAN_NETS permit 192.168.0.0/16 le 24
-route-map LAN_ONLY permit 10
- match ip address prefix-list LAN_NETS
- exit
-router ospf 1
- router-id 2.2.2.2
- network 10.1.12.0 0.0.0.255 area 1
- network 10.1.23.0 0.0.0.255 area 1
- network 2.2.2.0 0.0.0.255 area 1
- redistribute connected subnets route-map LAN_ONLY
- exit
-```
-Trong kiến trúc OSPF đa vùng này, router trung tâm `R1` đóng vai trò là ABR (Area Border Router) vì nó kết nối trực tiếp Area 0 và Area 1. Các router `R2`, `R3` và `R6` đóng vai trò là ASBR (Autonomous System Boundary Router) do chúng thực hiện tái phân phối (redistribute) mạng LAN ngoại vi vào tiến trình OSPF. Các mạng LAN này sẽ xuất hiện trên bảng định tuyến của các thiết bị khác dưới dạng tuyến ngoại vi OSPF External Type 2 (`O E2`), thể hiện qua các gói tin LSA Type 5 do ASBR tạo ra.
-
-#step-title[Bước 4. Xác minh cấu hình OSPF trên các thiết bị]
-
-Sau khi đẩy cấu hình, quản trị viên mở các cửa sổ terminal tích hợp để kiểm tra trực tiếp cấu hình đang chạy trên cả sáu router.
-
-#figure(
-  image("/00_book/figures/report/terminal-generated/ospf-six-routers.png", width: 96%),
-  caption: [Xác minh cấu hình OSPF trên sáu router qua terminal nhúng],
-) <fig-k2-multi-terminal-ospf>
-Kết quả lệnh `show run | section ospf` trong @fig-k2-multi-terminal-ospf xác nhận cả sáu router đã nhận tiến trình OSPF 1, router ID từ `1.1.1.1` đến `6.6.6.6` và các mạng thuộc Area 0 hoặc Area 1 theo quy hoạch.
-
-#step-title[Bước 5. Kiểm tra bảng định tuyến OSPF]
-
-Quản trị viên thực hiện lệnh `show ip route` trên router trung tâm `R1` để kiểm tra khả năng hội tụ của hệ thống định tuyến:
-
-#figure(
-  image("/00_book/figures/report/terminal-generated/r1-ospf-routes.png", width: 94%),
-  caption: [Bảng định tuyến trên Router R1 hiển thị đầy đủ các tuyến nội vùng và tuyến ngoại vi O E2],
-) <fig-k2-route-table-r1>
-Theo @fig-k2-route-table-r1, bảng định tuyến của `R1` ghi nhận:
-- Các tuyến nội vùng OSPF (`O`): `2.2.2.2/32`, `3.3.3.3/32`, `4.4.4.4/32`, `5.5.5.5/32`, `6.6.6.6/32` và các mạng liên kết `10.0.2.0/24`, `10.0.3.0/24`, `10.1.23.0/24`.
-- Cả bốn mạng LAN của hai chi nhánh được học qua cơ chế tái phân phối tuyến ngoại vi:
-  - `O E2 192.168.10.0/24 [110/20] via 10.1.12.2 (R2)`
-  - `O E2 192.168.20.0/24 [110/20] via 10.1.13.2 (R3)`
-  - `O E2 192.168.30.0/24 [110/20] via 10.0.0.2 (ISP1 -> R6)`
-  - `O E2 192.168.40.0/24 [110/20] via 10.0.0.2 (ISP1 -> R6)`
-
-#step-title[Bước 6. Kiểm tra truyền thông liên chi nhánh bằng ICMP]
-
-Quản trị viên mở terminal trên các máy trạm VPC và thực hiện ping chéo giữa hai chi nhánh.
-
-#figure(
-  image("/00_book/figures/report/terminal-generated/vpc11-ping.png", width: 82%),
-  caption: [Kết quả ping từ VPC11 sang VPC14 với tỷ lệ thành công 100%],
-) <fig-k2-ping-vpc11-vpc14>
-Kết quả trong @fig-k2-ping-vpc11-vpc14 cho thấy `VPC11` (`192.168.10.10`) gửi thành công 5/5 gói tin tới `VPC14` (`192.168.30.10`). Độ trễ trung bình là khoảng `6,9 ms`; giá trị `ttl=59` cho thấy gói tin đi qua năm hop định tuyến.
-
-Phép thử từ `VPC15` (`192.168.40.10`, thuộc `B2_VLAN` tại Chi nhánh B) đến hai máy trạm ở Chi nhánh A cũng ghi nhận đầy đủ phản hồi:
-```text
-VPCS> ping 192.168.10.10
-84 bytes from 192.168.10.10 icmp_seq=1 ttl=59 time=8.198 ms
-84 bytes from 192.168.10.10 icmp_seq=2 ttl=59 time=12.808 ms
-84 bytes from 192.168.10.10 icmp_seq=3 ttl=59 time=7.955 ms
-84 bytes from 192.168.10.10 icmp_seq=4 ttl=59 time=12.856 ms
-84 bytes from 192.168.10.10 icmp_seq=5 ttl=59 time=6.671 ms
-
-VPCS> ping 192.168.20.10
-84 bytes from 192.168.20.10 icmp_seq=1 ttl=59 time=9.799 ms
-84 bytes from 192.168.20.10 icmp_seq=2 ttl=59 time=8.915 ms
-84 bytes from 192.168.20.10 icmp_seq=3 ttl=59 time=6.835 ms
-84 bytes from 192.168.20.10 icmp_seq=4 ttl=59 time=6.497 ms
-84 bytes from 192.168.20.10 icmp_seq=5 ttl=59 time=10.691 ms
-```
-
-==== Đánh giá kết quả
-
-Mô hình OSPFv2 đa vùng và cơ chế tái phân phối tuyến được triển khai đồng bộ bằng *Routing Group*. Các router nhận đúng cấu hình theo quy hoạch OSPFv2 @rfc2328, bảng định tuyến có các tuyến nội vùng và ngoại vi cần thiết, đồng thời các phép thử ICMP được ghi nhận đều thành công.
-
-
+#include "09_kich_ban_2_ospf.typ"
 
 === Kịch bản 3: Tích hợp cổng dự phòng GLBP, cấp phát DHCP và chuyển đổi địa chỉ NAT/PAT
 
 ==== Mục tiêu và quy hoạch thiết bị
 
-Kịch bản 2 xây dựng mạng LAN có khả năng cấp phát địa chỉ IP tự động, sử dụng GLBP để cung cấp cổng mặc định dự phòng và cân bằng tải, đồng thời triển khai NAT/PAT cho lưu lượng đi ra mạng ngoài. Kịch bản nhằm kiểm tra khả năng phối hợp nhiều chức năng Lớp 3 trong cùng một quy trình cấu hình bằng CAMS và xác minh trực tiếp trên thiết bị.
+Kịch bản 3 xây dựng mạng LAN có khả năng cấp phát địa chỉ IP tự động, sử dụng GLBP để cung cấp cổng mặc định dự phòng và cân bằng tải, đồng thời triển khai NAT/PAT cho lưu lượng đi ra mạng ngoài. Kịch bản nhằm kiểm tra khả năng phối hợp nhiều chức năng Lớp 3 trong cùng một quy trình cấu hình bằng CAMS và xác minh trực tiếp trên thiết bị.
 
 #figure(
   image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/fhrp-nat-dhcp-report.png", width: 95%),
-  caption: [Sơ đồ Kịch bản 2: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN],
+  caption: [Sơ đồ Kịch bản 3: Tích hợp GLBP, DHCP và NAT/PAT cho mạng LAN],
 ) <fig-topo-scenario-3>
 
 Địa chỉ và vai trò của từng thiết bị được trình bày trong bảng quy hoạch dưới đây.
@@ -250,7 +89,7 @@ Kịch bản 2 xây dựng mạng LAN có khả năng cấp phát địa chỉ I
     ([NAT], [#table-code("Gi0/2 - 10.0.10.2/24")], [NAT Outside], [Kết nối tới mạng ISP / upstream]),
     ([PC1], [DHCP], [Máy trạm kiểm thử], [Nhận IP động và sử dụng gateway `192.168.4.1`]),
   ),
-  caption: [Bảng quy hoạch địa chỉ và vai trò thiết bị trong Kịch bản 2],
+  caption: [Bảng quy hoạch địa chỉ và vai trò thiết bị trong Kịch bản 3],
 ) <tab-ip-planning-lab3>
 
 ==== Quy trình triển khai trên phần mềm CAMS
@@ -268,7 +107,7 @@ Trên thiết bị `NAT` có địa chỉ quản trị `192.168.122.103`, quản
 
 #step-title[Bước 2. Tạo Access Control List cho dải địa chỉ được phép NAT]
 
-Tại thẻ *ACL* của nhóm NAT, quản trị viên tạo ACL chuẩn có tên `NAT_demo`, hành động `permit`, áp dụng cho mạng nguồn `192.168.0.0` với wildcard mask `0.0.7.255`. Dải này bao phủ các mạng nội bộ được sử dụng trong mô hình thử nghiệm.
+Tại thẻ *ACL* của nhóm NAT, quản trị viên tạo ACL chuẩn có tên `NAT_demo`, hành động `permit`, áp dụng cho mạng nguồn `192.168.0.0` với wildcard mask `0.0.7.255`. Wildcard này tương ứng với prefix `192.168.0.0/21`, bao phủ LAN `192.168.4.0/24` và các mạng nội bộ `.1.0/24`, `.2.0/24`; không bao phủ mạng quản trị `192.168.122.0/24`.
 
 #figure(
   image("/00_book/figures/report/diagrams/fhrp-nat-dhcp-lab/02-nat-acl.png", width: 90%),
@@ -375,7 +214,7 @@ ip dhcp pool LAN_R1
  exit
 ```
 
-Với cấu hình này, máy trạm sử dụng cổng mặc định logic `192.168.4.1` do GLBP quản lý thay vì phụ thuộc vào địa chỉ vật lý của riêng `R1` hoặc `R2`.
+Với cấu hình này, máy trạm được cấp cổng mặc định logic `192.168.4.1` của nhóm GLBP. Khối lệnh được chụp chưa thể hiện `ip dhcp excluded-address`, `dns-server` hoặc `lease`; bộ minh chứng này chưa xác nhận cấu hình các tham số đó. Phạm vi loại trừ VIP và IP tĩnh của gateway cần được kiểm tra khi hoàn thiện lab. Kết quả client `.4` dưới đây thuộc cấu hình đã chụp, chưa xác minh cấp phát sau khi điều chỉnh dải loại trừ.
 
 #step-title[Bước 7. Xác minh DHCP và GLBP trên R1, R2]
 
@@ -386,7 +225,7 @@ Trên `R1`, lệnh `show ip dhcp pool` xác nhận pool `LAN_R1` đã được t
   caption: [Xác minh DHCP Pool và cấu hình GLBP trên Router R1],
 ) <fig-k3-r1-verify>
 
-Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, đảm bảo hai router cùng cung cấp dịch vụ gateway cho một mạng LAN.
+Trên `R2`, cổng `Gi0/0` mang địa chỉ `192.168.4.3/24` và tham gia cùng GLBP Group `113` với Virtual IP `192.168.4.1`, xác nhận hai router đã được khai báo cùng nhóm gateway ảo trên một mạng LAN.
 
 #figure(
   image("/00_book/figures/report/terminal-generated/r2-glbp.png", width: 84%),
@@ -402,12 +241,14 @@ Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng đ�
   caption: [Kiểm tra PC1 nhận DHCP và truy vết đường đi qua GLBP Gateway tới Router NAT và mạng upstream],
 ) <fig-k3-client-test>
 
-Kết quả lệnh `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận chặng đầu tiên là `192.168.4.2` (`R1`), tiếp theo là `192.168.1.2` (router NAT) và `10.0.10.1` (gateway phía ngoài). Thiết bị phía ngoài trả về ICMP `Destination port unreachable`; vì vậy, phép thử chỉ xác minh đường đi từ mạng LAN tới biên ngoài của mô hình lab, không chứng minh kết nối hoàn chỉnh tới `1.1.1.1`.
+Kết quả lệnh `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận chặng đầu tiên là `192.168.4.2` (`R1`), tiếp theo là `192.168.1.2` (router NAT) và `10.0.10.1` (gateway phía ngoài). Hop cuối trả về ICMP Type 3 Code 3 (`Destination port unreachable`), là phản hồi kết thúc bình thường của traceroute UDP khi probe tới thiết bị đích @ciscoTracerouteGuide. Địa chỉ phản hồi `10.0.10.1` khác địa chỉ được truy vết `1.1.1.1`; cần đối chiếu địa chỉ loopback/cổng của router upstream hoặc bổ sung ping cùng đích để xác nhận quan hệ này. Không xem riêng thông báo port unreachable là lỗi định tuyến.
 
 ==== Đánh giá kết quả
 
 CAMS đã triển khai chuỗi chức năng DHCP, GLBP và NAT/PAT trên nhiều thiết bị. Máy trạm nhận địa chỉ `192.168.4.4/24` và cổng mặc định ảo `192.168.4.1`; `R1` và `R2` cùng tham gia GLBP Group 113; router NAT nhận đúng vai trò Inside/Outside, ACL và cấu hình PAT Overload theo cơ chế chuyển đổi địa chỉ và cổng @rfc3022. Kết quả truy vết xác nhận lưu lượng đi từ LAN qua `R1`, router NAT và tới gateway upstream `10.0.10.1`.
 
+
+Minh chứng hiện có xác nhận cấu hình GLBP trên R1/R2 và cấp phát DHCP trên PC1; chưa có output trạng thái AVG/AVF, phép ngắt gateway hoặc kiểm tra phân bố tải. DHCP được cấu hình trên R1, chưa chứng minh dự phòng DHCP trên R2. Cấu hình PAT đã có trong running-config, nhưng chưa có bảng `show ip nat translations` hoặc thống kê phiên để định lượng hoạt động chuyển đổi. Vì vậy, không kết luận đã kiểm chứng chuyển đổi gateway, cân bằng tải hoặc toàn bộ phiên NAT chỉ từ các ảnh cấu hình.
 
 === Kịch bản 4: Thu thập, giám sát và phân tích nhật ký tập trung bằng Syslog Server
 
@@ -493,7 +334,7 @@ Cấu hình `logging source-interface` tạo địa chỉ nguồn ổn định c
 
 #step-title[Bước 4. Khai báo chính sách Syslog dùng chung]
 
-Tại bước *Policy*, quản trị viên nhập địa chỉ máy chủ `192.168.122.1`, chọn giao thức `UDP`, cổng `5514` và đặt *Trap severity* là `5 - Notifications`. Hai tùy chọn *Include millisecond log timestamps* và *Include sequence numbers* được bật để hỗ trợ sắp xếp và đối chiếu sự kiện chính xác hơn. CAMS sử dụng cổng `5514` thay vì cổng Syslog chuẩn `514/UDP` vì trên Linux, các cổng dưới 1024 yêu cầu quyền root để lắng nghe; cổng 5514 cho phép dịch vụ chạy ở quyền người dùng thông thường mà không cần cấu hình đặc biệt.
+Tại bước *Policy*, quản trị viên nhập địa chỉ máy chủ `192.168.122.1`, chọn giao thức `UDP`, cổng `5514` và đặt *Trap severity* là `5 - Notifications`. Hai tùy chọn *Include millisecond log timestamps* và *Include sequence numbers* được bật để hỗ trợ sắp xếp và đối chiếu sự kiện chính xác hơn. CAMS sử dụng cổng `5514` thay vì cổng Syslog chuẩn `514/UDP` để tránh phụ thuộc vào quyền bind cổng đặc quyền của hệ điều hành. Địa chỉ, giao thức và cổng ở phía thiết bị phải khớp với bộ nhận; số cổng này là cấu hình của lab, không thay đổi cổng chuẩn của giao thức.
 
 #figure(
   image("/00_book/figures/report/diagrams/syslog-lab/04-syslog-policy.png", width: 78%),
@@ -569,7 +410,7 @@ Tại thời điểm ghi nhận trong @fig-k4-listener-active, hệ thống đã
 
 #step-title[Bước 8. Kiểm tra khả năng phân tích một bản tin Syslog]
 
-Khi chọn một dòng log, CAMS mở cửa sổ *System Log Message* để hiển thị dữ liệu đã phân tích cùng bản tin nguyên gốc. Với mẫu từ `192.168.122.101`, hệ thống nhận dạng giao thức `UDP`, facility `LINEPROTO`, severity `5`, mnemonic `UPDOWN`, số thứ tự `104` và trạng thái phân tích `parsed`.
+Khi chọn một dòng log, CAMS mở cửa sổ *System Log Message* để hiển thị dữ liệu đã phân tích cùng bản tin nguyên gốc. Mẫu từ `192.168.122.101` có giao thức `UDP`, PRI `189`, Syslog facility `23` (local7), Cisco facility `LINEPROTO`, severity `5` và mnemonic `UPDOWN`. Hai trường facility có ý nghĩa khác nhau: facility của Syslog được tính từ PRI, còn Cisco facility xác định phân hệ sinh sự kiện. Ảnh giao diện ghi số thứ tự `104` và trạng thái `parsed`; bản tin gốc còn có tiền tố `000108` nên phải giữ đủ nội dung khi đối chiếu.
 
 #figure(
   image("/00_book/figures/report/diagrams/syslog-lab/12-syslog-message-detail.png", width: 68%),
@@ -578,10 +419,10 @@ Khi chọn một dòng log, CAMS mở cửa sổ *System Log Message* để hi�
 
 Phần *Raw message* vẫn được giữ nguyên để phục vụ đối chiếu khi cần:
 ```text
-<189>104: *Aug 29 20:25:44.323: %LINEPROTO-5-UPDOWN:
+<189>104: 000108: *Aug 29 20:25:44.323: %LINEPROTO-5-UPDOWN:
 Line protocol on Interface Loopback99, changed state to down
 ```
-Việc lưu đồng thời các trường đã chuẩn hóa và nội dung gốc hỗ trợ cả giám sát lẫn đối chiếu dữ liệu.
+Dấu `*` trước thời gian Cisco cho biết đồng hồ chưa được đặt hoặc chưa đồng bộ với máy chủ NTP đã cấu hình @ciscoTimestampGuide. @fig-k4-message-detail lại hiển thị `synchronized`, không nhất quán với bản tin gốc; đây là sai lệch của phiên bản giao diện được chụp, không được dùng làm bằng chứng đồng hồ đã đồng bộ. Các ảnh email phía sau hiển thị trạng thái chưa đồng bộ. Việc giữ raw message giúp phát hiện sai lệch phân tích này; nhãn `parsed` không chứng minh tất cả trường đều đúng.
 
 #step-title[Bước 9. Tạo sự kiện kiểm thử và đối chiếu với Syslog Server]
 
@@ -655,7 +496,7 @@ Phép thử được thiết kế theo cặp đối chứng. Mỗi chính sách 
 
 ==== Mô hình và quy hoạch địa chỉ
 
-@fig-k5-topology trình bày mô hình thực nghiệm. `R1` thực hiện định tuyến giữa VLAN theo mô hình router-on-a-stick trên `GigabitEthernet0/1`; `R2` là bộ định tuyến biên thực hiện NAT; `R3` đóng vai trò ISP và cung cấp dịch vụ HTTP trên `Loopback0`. Ba máy trạm `VPC7`, `VPC8` và `VPC9` lần lượt thuộc VLAN 10, VLAN 20 và VLAN 30. Các liên kết kép giữa ba bộ chuyển mạch được gom kênh; nội dung này tạo hạ tầng kết nối nhưng không phải đối tượng đánh giá của kịch bản ACL.
+@fig-k5-topology trình bày mô hình thực nghiệm. `R1` thực hiện định tuyến giữa VLAN theo mô hình router-on-a-stick trên `GigabitEthernet0/1`; `R2` là bộ định tuyến biên thực hiện NAT; `R3` đóng vai trò ISP và cung cấp dịch vụ HTTP trên `Loopback0`. Ba máy trạm `VPC7`, `VPC8` và `VPC9` lần lượt thuộc VLAN 10, VLAN 20 và VLAN 30. Sơ đồ thể hiện các liên kết kép giữa ba bộ chuyển mạch; phần thực nghiệm ACL không cung cấp output xác minh EtherChannel, nên không kết luận trạng thái gom kênh từ riêng sơ đồ.
 
 #figure(
   image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png", width: 92%),
@@ -776,6 +617,24 @@ Kết quả cho thấy hai ACL được áp dụng đúng chiều trên ba subin
 
 == Đánh giá tổng hợp
 
+=== Phạm vi kết quả đã kiểm chứng
+
+#report-table(
+  columns: (12%, 48%, 40%),
+  header: ([Lab], [Kết quả có bằng chứng], [Giới hạn của kết luận]),
+  rows: (
+    ([1], [Nguồn cấp DHCP thay đổi theo cổng trusted; DAI ghi nhận ARP không khớp binding bị chặn.], [Không đánh giá Port Security hay mọi hình thức tấn công Lớp 2.]),
+    ([2], [Cấu hình OSPF trên năm router; neighbor FULL, tuyến nội vùng; sáu loạt ping đều 5/5 và trace tới VPC10.], [Không phải tỷ lệ thành công triển khai; chưa đo thời gian CLI/CAMS hoặc thời gian hội tụ khi mất link.]),
+    ([3], [PC1 nhận 192.168.4.4/24 và gateway 192.168.4.1; xác nhận cấu hình GLBP, PAT và đường đi qua NAT.], [Chưa thử chuyển đổi gateway; chưa có bảng phiên NAT.]),
+    ([4], [Ảnh bộ nhận có 245 bản tin; hai mẫu email ở mức Critical và Warning.], [Bộ đếm là ảnh thời điểm; một trường Clock ở ảnh cũ sai; chưa đo tỷ lệ mất log hay độ trễ email.]),
+    ([5], [Ba loại lưu lượng bị ACL chặn, có lưu lượng đối chứng được phép và nhật ký tương ứng.], [Chưa đo thông lượng, tải cao hoặc tỷ lệ mất log.]),
+  ),
+  text-size: 9.5pt,
+  caption: [Tổng hợp kết quả và giới hạn kiểm chứng của năm lab],
+) <tab-all-lab-results>
+
+Các số bộ đếm ở các lab là những lần quan sát độc lập. Không cộng số bản tin Syslog thành thông lượng và không dùng số gói ping làm số lần triển khai. So sánh thao tác ở Lab 2 là ước tính theo cấu hình; nhận xét về tính thuận tiện dựa trên các bước và thông tin hiển thị, chưa phải kết quả đo thời gian hay khảo sát người dùng.
+
 === Ưu điểm nổi bật
 
 - *Giao diện quản lý tập trung:* CAMS cung cấp một không gian làm việc thống nhất cho các chức năng mạng Lớp 2 và Lớp 3, qua đó giảm số thao tác CLI trực tiếp trên từng thiết bị.
@@ -783,8 +642,8 @@ Kết quả cho thấy hai ACL được áp dụng đúng chiều trên ba subin
 - *Khả năng xử lý nhiều thiết bị:* `Host Lock` tuần tự hóa các lệnh trên cùng một thiết bị, trong khi `BatchExecutor` cho phép xử lý song song các thiết bị độc lập.
 - *Các tiện ích hỗ trợ vận hành:* Hệ thống tích hợp sao lưu phiên bản bằng Dulwich, Syslog Server, cảnh báo Syslog qua email, SFTP và terminal nhúng.
 
-=== Hạn chế thực tế cần cải tiến
+=== Hạn chế của thực nghiệm
 
-- *Phạm vi thiết bị:* Hệ thống hiện được tối ưu cho các thiết bị chạy Cisco IOS; chưa hỗ trợ đầy đủ thiết bị của các hãng khác như Juniper, MikroTik và Arista.
-
-- *Cơ chế hoàn tác tự động:* Khi quá trình thực thi chỉ thành công một phần, hệ thống giữ cấu hình ở trạng thái `Pending` để người dùng xử lý thủ công; chưa có cơ chế tự động sinh lệnh phủ định (`no ...`) để hoàn tác.
+- *Mẫu thử và điều kiện chạy:* các kết quả được lấy từ những loạt thử cụ thể trên hai môi trường lab độc lập. Phiên bản IOS đầy đủ và tài nguyên EVE-NG chưa được ghi nhận cho mọi lab; chưa dùng các kết quả này để so sánh hiệu năng giữa hai máy.
+- *Đánh giá thời gian và khả năng chịu tải:* chưa có phép đo tái lập thời gian CLI/CAMS, thời gian hội tụ, thông lượng Syslog, tỷ lệ mất bản tin hoặc độ trễ cảnh báo email. RTT biến động trong Lab 2 nên không được dùng kết luận độ trễ ổn định.
+- *Kịch bản sự cố:* DAI và ACL đã có lưu lượng vi phạm cùng đối chứng. Chưa có ca thử mất kết nối khi Push, sai thông tin xác thực, thay đổi cấu hình một phần hay ngắt gateway GLBP. Khi lỗi thực thi xảy ra, cần đối chiếu phản hồi và đồng bộ lại; hủy tác vụ không tự hoàn tác lệnh đã gửi. Hạn chế sản phẩm và hướng phát triển được tổng hợp ở Chương 6.

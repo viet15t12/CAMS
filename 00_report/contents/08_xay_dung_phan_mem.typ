@@ -5,7 +5,7 @@
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn phát triển bằng Python 3.11+, sử dụng Qt Quick/QML và PyQt6 cho giao diện @qtQuickDocs @pyqt6Docs, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
+CAMS là ứng dụng máy tính để bàn có yêu cầu Python từ 3.11 trở lên theo cấu hình dự án, sử dụng Qt Quick/QML và PyQt6 cho giao diện @qtQuickDocs @pyqt6Docs, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
 
 Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và các thành phần dùng chung; `core/` chứa đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và quản lý không gian làm việc. Tệp `main.py` khởi tạo ứng dụng và liên kết các thành phần. Cấu trúc chi tiết được trình bày trong phụ lục; chương này tập trung vào cách hiện thực các chức năng chính.
 
@@ -125,7 +125,9 @@ SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy c
 
 Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. 
 
-Ở phiên bản nâng cấp, cơ chế mã hóa cơ sở dữ liệu tĩnh (At-Rest) được nâng cấp lên định dạng `ENC\$v2\$` với chuỗi xác thực gắn kết bản ghi Record-Bound AAD (`host:column`), giúp phát hiện và chặn đứng các nỗ lực tấn công hoán đổi bản mã (Ciphertext Swapping). Thuật toán dẫn xuất khóa Argon2id được tinh chỉnh đạt chuẩn RFC 9106 và tích hợp cơ chế thu hẹp cửa sổ lưu vết RAM bằng cách ghi đè mảng byte. Ngoài ra, các bề mặt phụ trợ như file cấu hình cảnh báo Email Alert (`alert_settings.json`) cũng được áp dụng mã hóa AES-256-GCM cho mật khẩu ứng dụng (`sender_app_password`) với phân quyền file nghiêm ngặt (`0600`) @cryptographyAeadDocs @rfc9106 @nistSp80038d. Cơ chế mã hóa chỉ áp dụng cho gói được bảo vệ; việc khôi phục không gian làm việc không tự động hoàn tác cấu hình trên thiết bị.
+Các trường mật khẩu thiết bị được bảo vệ theo định dạng `ENC$v2$` với AES-256-GCM và AAD gắn ngữ cảnh `host:column`. Với bản ghi phiên bản 2, hoán đổi bản mã sang ngữ cảnh khác làm xác minh thẻ thất bại. Khi có mật khẩu dự án, khóa được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn; khi không có mật khẩu, mã nguồn sử dụng khóa HKDF từ dữ liệu cục bộ nên không có cùng mức bảo vệ dựa trên bí mật người dùng. Ghi đè mảng byte khi hủy khóa không bảo đảm xóa được mọi bản sao trong bộ nhớ @cryptographyAeadDocs @rfc9106 @nistSp80038d.
+
+Mật khẩu ứng dụng email (`sender_app_password`) trong `alert_settings.json` cũng có cơ chế mã hóa AES-256-GCM và phân quyền tệp `0600`. Mã hóa trường xác thực khác với tùy chọn mã hóa toàn gói `.ntp`: gói chỉ được mã hóa khi người dùng chọn bảo vệ bằng mật khẩu. `.ntp` là phần mở rộng dự án của CAMS, không phải giao thức đồng bộ thời gian NTP. Khôi phục workspace không tự động hoàn tác cấu hình thiết bị; các lab ở Chương 5 chưa kiểm thử riêng toàn bộ cơ chế mật mã này.
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),

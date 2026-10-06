@@ -111,7 +111,7 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
   header: ([Tính năng], [Công nghệ & Thuật toán], [Cơ chế hoạt động]),
   rows: (
     ([Kiểm tra đặc quyền], [Phân tích mức quyền, Netmiko `enable`], [Đọc mức quyền, nâng quyền khi cần và kiểm tra lại; còn nhánh dự phòng dấu nhắc ở lần kiểm tra ban đầu.]),
-    ([Mã hóa At-Rest (`ENC\$v2\$`)], [Argon2id (RFC 9106), AES-256-GCM], [Lưu bản mã cấu trúc `ENC\$v2\$...`. Sử dụng Record-Bound AAD để chống tráo đổi. Ghi đè bộ nhớ khi hủy khóa.]),
+    ([Mã hóa At-Rest (`ENC$v2$`)], [Argon2id (RFC 9106), AES-256-GCM], [Lưu bản mã cấu trúc `ENC$v2$...`. Sử dụng Record-Bound AAD để chống tráo đổi. Ghi đè bộ nhớ khi hủy khóa.]),
     ([Nhật ký ACL], [Jinja2, Cisco IOS logging], [Sinh tùy chọn ghi nhật ký cho các quy tắc hỗ trợ; thiết bị phải có đích Syslog và ngưỡng gửi phù hợp.]),
   ),
   caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
@@ -123,21 +123,7 @@ CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu
 
 Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã thiết bị. Trước khi ghi dữ liệu, tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và các quan hệ phụ thuộc. Những bản ghi tham gia luồng View \& Push còn có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại để xác nhận cấu hình thực tế trên thiết bị @elmasri2016database.
 
-Để hệ thống hóa cấu trúc dữ liệu, hệ thống bao gồm 93 bảng nghiệp vụ khác nhau. Dưới đây là lược đồ các bảng chính yếu đại diện cho các phân hệ cốt lõi:
-
-#report-table(
-  columns: (25%, 35%, 40%),
-  header: ([Tên bảng (Table)], [Khóa chính / Khóa ngoại], [Vai trò và dữ liệu lưu trữ]),
-  rows: (
-    ([#table-code("t01_devices")], [PK: #table-code("host")], [Lưu định danh, thông tin kết nối, OS và `enable_password` (ENC\$v2\$)]),
-    ([#table-code("t02_interfaces")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý cấu hình cổng L3, L2, trạng thái UP/DOWN và mô tả]),
-    ([#table-code("t03_routing_ospf")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu thông tin tiến trình OSPF, vùng Area, Router ID]),
-    ([#table-code("t04_acl_rules")], [PK: #table-code("id") / FK: #table-code("host")], [Lưu danh sách kiểm soát truy cập, thứ tự, hành động và từ khóa `log`]),
-    ([#table-code("t05_nat_pat")], [PK: #table-code("id") / FK: #table-code("host")], [Quản lý danh sách ánh xạ địa chỉ biên (NAT/PAT), Inside/Outside]),
-    ([#table-code("t06_syslog_events")], [PK: #table-code("id")], [Nằm trong `info_collected.db`: Lưu trữ bản tin Syslog gốc, phân loại RFC 5424]),
-  ),
-  caption: [Lược đồ thực thể - quan hệ (ERD) các bảng nghiệp vụ cốt lõi của CAMS],
-) <tab-core-erd-summary>
+Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 19 tên bảng trong nhóm `info_collected`, tổng cộng 93 tên bảng. Đây là số đếm của lược đồ nguồn, không khẳng định mọi workspace đang chạy đều có đúng 93 bảng.
 
 Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/database/schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
 

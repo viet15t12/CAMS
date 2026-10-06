@@ -35,14 +35,14 @@ Mục tiêu tổng quát là xây dựng hệ thống hỗ trợ quản lý hạ
   header: ([Nhóm chức năng], [Nội dung triển khai], [Đầu ra cần kiểm chứng]),
   rows: (
     ([Quản lý], [Tập trung danh mục thiết bị, phiên kết nối, cấu hình và lịch sử sao lưu.], [Tra cứu thiết bị và đồng bộ thành công cấu hình (running-config).]),
-    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách.], [Mục tiêu: 100% ca kiểm thử sinh lệnh đúng; triển khai nhóm 6 thiết bị trong tối đa 30 giây, tính từ khi chọn Push đến phản hồi cuối.]),
-    ([Giám sát], [Thu thập trạng thái vận hành và tiếp nhận Syslog tập trung.], [Mục tiêu: phân tích đúng ít nhất 99% bản tin thuộc tập định dạng hỗ trợ; đối chiếu riêng số bản tin nhận và bị loại bỏ.]),
+    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách.], [Đối chiếu lệnh sinh với cấu hình đang chạy; kiểm tra neighbor, bảng tuyến và truyền thông sau triển khai nhóm năm router ở Lab 2.]),
+    ([Giám sát], [Thu thập trạng thái vận hành và tiếp nhận Syslog tập trung.], [Đối chiếu nguồn, PRI, mức độ, mã sự kiện và nội dung gốc trên mẫu Syslog; kiểm tra cảnh báo email ở Lab 4.]),
     ([Bảo mật], [Cấu hình ACL, bảo vệ Lớp 2 và khai thác cảnh báo do thiết bị gửi về.], [Kiểm tra chính sách chặn lưu lượng và phản hồi sự kiện trên Syslog.]),
   ),
   caption: [Mục tiêu phát triển],
 ) <tab-objectives>
 
-Các ngưỡng tại @tab-objectives là mục tiêu đánh giá, chưa phải số đo đạt được. Tỷ lệ sinh lệnh đúng được tính trên tập ca có đầu vào và lệnh kỳ vọng; tỷ lệ phân tích đúng được tính trên bản tin đã gán nhãn nguồn, mức độ và mã sự kiện. Khi đo thời gian cần ghi số thiết bị, trạng thái phiên kết nối ban đầu, số lệnh, số lần lặp và cấu hình máy thử. Chương 6 chỉ kết luận trong phạm vi minh chứng hiện có.
+Các tiêu chí tại @tab-objectives được đối chiếu với minh chứng ở Chương 5. Báo cáo không đặt ngưỡng thời gian hoặc tỷ lệ phân tích đúng khi chưa có tập đo tái lập. Ước tính thao tác ở Lab 2 được ghi riêng, không thay thế số đo; Chương 6 chỉ kết luận trong phạm vi đã kiểm chứng.
 
 == Đối tượng và phạm vi nghiên cứu
 
