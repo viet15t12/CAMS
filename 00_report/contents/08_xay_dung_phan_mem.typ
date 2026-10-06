@@ -24,7 +24,7 @@ Các bộ điều khiển dữ liệu, Syslog, SFTP và không gian làm việc 
 
 === Danh mục thiết bị và phiên kết nối
 
-Giao diện Inventory lưu mã định danh, địa chỉ quản trị, tham số kết nối và vai trò router, switch L2 hoặc switch L3. Người dùng có thể thêm từng thiết bị hoặc nhập danh sách từ JSON/Excel, tìm kiếm và chọn các thiết bị cần thao tác. Danh mục này liên kết phiên làm việc với dữ liệu cấu hình và thông tin thu thập của từng thiết bị.
+Giao diện *Inventory* lưu mã định danh, địa chỉ quản trị, tham số kết nối và vai trò bộ định tuyến, bộ chuyển mạch Lớp 2 hoặc bộ chuyển mạch Lớp 3. Người dùng có thể thêm từng thiết bị hoặc nhập danh sách từ JSON/Excel, tìm kiếm và chọn các thiết bị cần thao tác. Danh mục này liên kết phiên làm việc với dữ liệu cấu hình và thông tin thu thập của từng thiết bị.
 
 `DeviceSessionRegistry` quản lý các phiên kết nối và cho phép tái sử dụng phiên đang hoạt động. Khóa `operation_lock` điều phối những tác vụ cùng truy cập phiên; `BatchExecutor` hỗ trợ thực hiện trên nhiều thiết bị với kết quả tách riêng. Cách tổ chức này hạn chế việc gửi lệnh đan xen trên một kênh CLI và giúp xác định thiết bị gặp lỗi trong tác vụ hàng loạt.
 
@@ -41,38 +41,38 @@ Lịch sử này cung cấp dữ liệu tham chiếu khi kiểm tra sự cố. V
 
 == Hiện thực tự động hóa cấu hình và chính sách
 
-=== Quy trình View & Push dùng chung
+=== Quy trình *View & Push* dùng chung
 
-Các chức năng thực hiện cùng một quy trình: kiểm tra dữ liệu biểu mẫu, lưu cấu hình chờ, lấy bản ghi cần thay đổi, kết xuất mẫu Jinja2 và mở cửa sổ xem trước. Khi người dùng chọn Push, tác vụ nền gửi lệnh qua phiên thiết bị, xử lý phản hồi và cập nhật kết quả. Với bản ghi chờ xóa, mẫu sinh lệnh gỡ bỏ tương ứng.
+Các chức năng thực hiện cùng một quy trình: kiểm tra dữ liệu biểu mẫu, lưu cấu hình chờ, lấy bản ghi cần thay đổi, kết xuất mẫu Jinja2 và mở cửa sổ xem trước. Khi người dùng chọn *Push*, tác vụ nền gửi lệnh qua phiên thiết bị, xử lý phản hồi và cập nhật kết quả. Với bản ghi chờ xóa, mẫu sinh lệnh gỡ bỏ tương ứng.
 
 #figure(
   image("/00_book/figures/gui/chapter-05/07-view-push-preview.png", width: 100%),
-  caption: [Kiểm duyệt lệnh cấu hình cổng (interface) trước khi triển khai],
+  caption: [Kiểm duyệt lệnh cấu hình cổng mạng trước khi triển khai],
 ) <fig-cams-view-push>
 
 @fig-cams-view-push cho thấy bước kiểm duyệt nằm giữa thao tác lưu dữ liệu và triển khai lên thiết bị. Quy trình này được dùng chung cho các nhóm nghiệp vụ, giúp thống nhất thao tác và cách trình bày trạng thái. Khi thực thi gặp lỗi, người dùng cần xem phản hồi và đồng bộ lại trước khi quyết định gửi lại lệnh.
 
-=== Quản lý cổng (Interfaces), DHCP và định tuyến
+=== Quản lý cổng mạng, DHCP và định tuyến
 
-Chức năng quản lý cổng (Interfaces) quản lý IPv4, mô tả và trạng thái cổng; hỗ trợ các cổng logic như Loopback, Subinterface và GRE Tunnel. Cổng vật lý được lấy từ thiết bị để chỉnh sửa thông số; các cổng logic được tạo hoặc gỡ theo nghiệp vụ tương ứng.
+Chức năng *Interfaces* quản lý địa chỉ IPv4, mô tả và trạng thái cổng; đồng thời hỗ trợ các cổng logic như Loopback, cổng con và đường hầm GRE. Cổng vật lý được lấy từ thiết bị để chỉnh sửa thông số; các cổng logic được tạo hoặc gỡ theo nghiệp vụ tương ứng.
 
-DHCP quản lý pool, dải địa chỉ loại trừ và relay. Định tuyến cung cấp tuyến tĩnh, tuyến mặc định, OSPFv2 và EIGRP. Các nhóm biểu mẫu phản ánh quan hệ giữa tiến trình, mạng quảng bá và tham số cổng (interface). Routing Group hỗ trợ chuẩn bị cấu hình cho nhóm router, giảm việc nhập lặp; kết quả vẫn cần kiểm tra trên từng thiết bị.
+DHCP quản lý vùng cấp phát, dải địa chỉ loại trừ và tác nhân chuyển tiếp. Định tuyến cung cấp tuyến tĩnh, tuyến mặc định, OSPFv2 và EIGRP. Các nhóm biểu mẫu phản ánh quan hệ giữa tiến trình, mạng quảng bá và tham số cổng. Chức năng *Routing Group* hỗ trợ chuẩn bị cấu hình cho nhóm bộ định tuyến nhằm giảm thao tác nhập lặp; kết quả vẫn cần được kiểm tra trên từng thiết bị.
 
-Các biểu mẫu FHRP hỗ trợ khai báo gateway dự phòng và tham số thành viên cho HSRP, VRRP, GLBP. Việc đánh giá chuyển đổi gateway thuộc kịch bản thực nghiệm, không được suy ra chỉ từ việc sinh đúng lệnh cấu hình.
+Các biểu mẫu FHRP hỗ trợ khai báo cổng mặc định dự phòng và tham số thành viên cho HSRP, VRRP, GLBP. Việc đánh giá chuyển đổi cổng mặc định thuộc kịch bản thử nghiệm, không được suy ra chỉ từ việc sinh đúng lệnh cấu hình.
 
 === ACL và NAT/PAT
 
-Chức năng ACL cung cấp biểu mẫu cho Standard, Extended, Dynamic, Reflexive và MAC ACL theo khả năng của loại thiết bị. Quy tắc được quản lý theo thứ tự, kèm cổng áp dụng và chiều áp dụng. 
+Chức năng ACL cung cấp biểu mẫu cho ACL chuẩn, mở rộng, động, phản xạ và ACL theo địa chỉ MAC, tùy theo khả năng của thiết bị. Quy tắc được quản lý theo thứ tự, kèm cổng và chiều áp dụng.
 
-Để hiện thực hóa cơ chế giám sát an ninh mạng chủ động, các mẫu Jinja2 sinh tập lệnh ACL được cải tiến để tự động gắn từ khóa `log` vào cuối các quy tắc lọc. Khi thiết bị phát hiện lưu lượng khớp với danh sách kiểm soát, bản tin Syslog (ví dụ `%SEC-6-IPACCESSLOGP`) sẽ được sinh ra và đẩy về CAMS Syslog Server, cho phép giám sát trực tiếp mà không cần cấu hình thủ công. Điểm cần kiểm soát là thứ tự khớp luật và chính sách cho phép/từ chối; sau triển khai phải thử cả lưu lượng được phép và lưu lượng bị chặn.
+Các mẫu Jinja2 sinh tập lệnh ACL tự động gắn từ khóa `log` vào cuối những quy tắc được hỗ trợ. Khi lưu lượng khớp với danh sách kiểm soát, thiết bị tạo bản tin Syslog, chẳng hạn `%SEC-6-IPACCESSLOGP`, rồi gửi về bộ thu nhận của CAMS. Cơ chế này hỗ trợ giám sát mà không cần bổ sung thủ công từ khóa ghi nhật ký cho từng quy tắc. Sau khi triển khai, người quản trị phải kiểm tra thứ tự khớp luật và thử cả lưu lượng được phép lẫn lưu lượng bị chặn.
 
-NAT/PAT quản lý ánh xạ tĩnh, pool động, chế độ overload, vai trò inside/outside của cổng và điều kiện chọn lưu lượng. Dữ liệu từ bảng chuyển đổi địa chỉ giúp đối chiếu cấu hình với các phiên thực tế. NAT được xem là chức năng chuyển đổi địa chỉ, không thay thế cơ chế lọc truy cập.
+NAT/PAT quản lý ánh xạ tĩnh, vùng địa chỉ động, chế độ quá tải, vai trò phía trong hoặc phía ngoài của cổng và điều kiện chọn lưu lượng. Dữ liệu từ bảng chuyển đổi địa chỉ giúp đối chiếu cấu hình với các phiên thực tế. NAT là chức năng chuyển đổi địa chỉ, không thay thế cơ chế lọc truy cập.
 
 === Chuyển mạch và cập nhật chính sách Lớp 2
 
-Chức năng chuyển mạch quản lý VLAN, access/trunk, EtherChannel, STP và VTP. Trên switch L3, SVI và định tuyến liên VLAN được cấu hình theo vai trò thiết bị. Mẫu lệnh giữ quan hệ giữa VLAN, cổng vật lý và cổng logic, đồng thời dùng chung bước xem trước để người quản trị kiểm tra phạm vi tác động.
+Chức năng chuyển mạch quản lý VLAN, cổng truy cập, đường trung kế, EtherChannel, STP và VTP. Trên bộ chuyển mạch Lớp 3, SVI và định tuyến liên VLAN được cấu hình theo vai trò thiết bị. Mẫu lệnh giữ quan hệ giữa VLAN, cổng vật lý và cổng logic, đồng thời dùng chung bước xem trước để người quản trị kiểm tra phạm vi tác động.
 
-Port Security, DHCP Snooping và DAI được trình bày trong nhóm bảo mật ở phần sau. Các chính sách này cũng được triển khai qua View & Push để duy trì cùng cơ chế kiểm duyệt và ghi nhận kết quả.
+Port Security, DHCP Snooping và DAI được trình bày trong nhóm bảo mật ở phần sau. Các chính sách này cũng được triển khai qua *View & Push* để duy trì cùng cơ chế kiểm duyệt và ghi nhận kết quả.
 
 == Hiện thực giám sát và thu thập nhật ký
 
@@ -85,26 +85,26 @@ Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi d�
   caption: [System Logs tập trung nhật ký từ thiết bị mạng],
 ) <fig-cams-system-logs>
 
-Giao diện tại @fig-cams-system-logs hỗ trợ lọc theo thiết bị, mức độ nghiêm trọng, giao thức, khoảng thời gian và nội dung. Smart Filter kết hợp điều kiện theo facility, mnemonic và từ khóa; cửa sổ chi tiết cho phép đối chiếu thời gian nhận với thời gian trên thiết bị và đọc bản tin gốc. Chức năng Export Excel xuất các dòng sau khi lọc để phục vụ phân tích.
+Giao diện tại @fig-cams-system-logs hỗ trợ lọc theo thiết bị, mức độ nghiêm trọng, giao thức, khoảng thời gian và nội dung. Chức năng *Smart Filter* kết hợp điều kiện theo nhóm nguồn Syslog, mã sự kiện và từ khóa; cửa sổ chi tiết cho phép đối chiếu thời gian nhận với thời gian trên thiết bị và đọc bản tin gốc. Chức năng *Export Excel* xuất các dòng sau khi lọc để phục vụ phân tích.
 
 Sau khi lưu bản tin, `SyslogManager` đồng thời chuyển bản ghi tới `EmailAlertService`. Dịch vụ chỉ tiếp nhận các mức độ nghiêm trọng đã chọn, loại bản tin trùng theo cặp thiết bị–mã Cisco trong khoảng chống gửi lặp và có thể gom nhiều bản tin trong một cửa sổ thời gian. Hàng đợi cùng một luồng gửi riêng tách thao tác SMTP khỏi luồng nhận Syslog, nhờ đó thời gian kết nối máy chủ thư không chặn bộ thu nhận nhật ký.
 
-Màn hình *Email Alerts* cho phép khai báo máy chủ và cổng SMTP, tài khoản gửi, danh sách người nhận, các mức Syslog cần cảnh báo, thời gian chống gửi trùng và thời gian gom bản tin. Mỗi thư gồm cả nội dung văn bản thuần và HTML; màu, tiêu đề cùng khuyến nghị xử lý thay đổi theo severity. Với Gmail, CAMS dùng kết nối SMTP qua TLS ngầm định trên cổng `465` và App Password. Giá trị bí mật được mã hóa khi lưu, không được trả về QML và chỉ hiển thị dưới dạng che khuất trên giao diện.
+Màn hình *Email Alerts* cho phép khai báo máy chủ và cổng SMTP, tài khoản gửi, danh sách người nhận, các mức Syslog cần cảnh báo, thời gian chống gửi trùng và thời gian gom bản tin. Mỗi thư gồm nội dung văn bản thuần và HTML; màu, tiêu đề cùng khuyến nghị xử lý thay đổi theo mức độ nghiêm trọng. Với Gmail, CAMS dùng kết nối SMTP qua TLS ngầm định trên cổng `465` và mật khẩu ứng dụng. Giá trị bí mật được mã hóa khi lưu, không được trả về QML và chỉ hiển thị dưới dạng che khuất trên giao diện.
 
-Ngoài nhật ký, dữ liệu quan sát như bảng định tuyến, DHCP binding, thống kê ACL, phiên NAT, bộ đếm cổng và bảng MAC hỗ trợ kiểm tra hoạt động của các chức năng. Các giá trị này chỉ phản ánh thời điểm thu thập; muốn kết luận về trạng thái hiện tại, người dùng phải cập nhật dữ liệu trước khi đối chiếu.
+Ngoài nhật ký, dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT, bộ đếm cổng và bảng MAC hỗ trợ kiểm tra hoạt động của các chức năng. Các giá trị này chỉ phản ánh thời điểm thu thập; muốn kết luận về trạng thái hiện tại, người dùng phải cập nhật dữ liệu trước khi đối chiếu.
 
 == Hiện thực hỗ trợ bảo mật và khai thác cảnh báo
 
 === Triển khai chính sách trên thiết bị
 
-CAMS cung cấp biểu mẫu Port Security để đặt giới hạn MAC, chế độ học và hành động khi vi phạm. Với DHCP Snooping và DAI, người dùng chọn VLAN áp dụng cùng cổng tin cậy theo mô hình mạng. Các thay đổi được lưu ở trạng thái chờ và kiểm duyệt trước khi gửi, như @fig-cams-l2-security.
+CAMS cung cấp biểu mẫu Port Security để đặt giới hạn địa chỉ MAC, chế độ học và hành động khi vi phạm. Với DHCP Snooping và DAI, người dùng chọn VLAN áp dụng cùng cổng tin cậy theo mô hình mạng. Các thay đổi được lưu ở trạng thái chờ và kiểm duyệt trước khi gửi, như @fig-cams-l2-security.
 
 #figure(
   image("/00_book/figures/gui/chapter-16/04-l2-security-view-push.png", width: 100%),
   caption: [Xem trước chính sách bảo vệ Lớp 2 trước khi áp dụng],
 ) <fig-cams-l2-security>
 
-Thiết bị mạng thực thi chính sách và có thể phát sinh nhật ký tùy theo tính năng, chế độ và cấu hình logging. Vì vậy, việc kiểm chứng cảnh báo cần một tình huống phù hợp với cơ chế đã bật, đồng thời phải bảo đảm đường truyền nhật ký đến CAMS hoạt động.
+Thiết bị mạng thực thi chính sách và có thể phát sinh nhật ký tùy theo tính năng, chế độ cùng cấu hình ghi nhật ký. Vì vậy, việc kiểm chứng cảnh báo cần một tình huống phù hợp với cơ chế đã bật, đồng thời phải bảo đảm đường truyền nhật ký đến CAMS hoạt động.
 
 === Lọc và phân tích sự kiện cảnh báo
 
@@ -112,22 +112,22 @@ System Logs cho phép tập trung các sự kiện cần chú ý bằng cách ch
 
 #figure(
   image("/00_book/figures/gui/chapter-13/05-critical-filter-result.png", width: 100%),
-  caption: [Lọc các bản tin có severity từ 0 đến 3 trên System Logs],
+  caption: [Lọc các bản tin có mức độ nghiêm trọng từ 0 đến 3 trên System Logs],
 ) <fig-cams-critical-log>
 
-Ngưỡng gửi trên thiết bị và bộ lọc hiển thị có ý nghĩa khác nhau: ngưỡng gửi thường bao gồm mức đã chọn cùng các mức nghiêm trọng hơn, còn bộ lọc trong CAMS chọn các mức cụ thể. Khi điều tra, người dùng cần đọc nội dung, nguồn và chuỗi thời gian thay vì kết luận chỉ dựa trên màu hoặc severity.
+Ngưỡng gửi trên thiết bị và bộ lọc hiển thị có ý nghĩa khác nhau: ngưỡng gửi thường bao gồm mức đã chọn cùng các mức nghiêm trọng hơn, còn bộ lọc trong CAMS chọn các mức cụ thể. Khi điều tra, người dùng cần đọc nội dung, nguồn và chuỗi thời gian thay vì kết luận chỉ dựa trên màu hoặc mức độ nghiêm trọng.
 
-Trong phạm vi hiện tại, CAMS hỗ trợ phân tích dấu hiệu bất thường qua nhật ký, kiểm tra chính sách và gửi cảnh báo Syslog qua email. Hệ thống chưa hoàn thiện bộ tương quan sự kiện, khả năng phát hiện xâm nhập bằng phân tích gói tin hoặc cảnh báo qua SMS.
+Trong phạm vi hiện tại, CAMS hỗ trợ phân tích dấu hiệu bất thường qua nhật ký, kiểm tra chính sách và gửi cảnh báo Syslog qua thư điện tử. Hệ thống chưa hoàn thiện bộ tương quan sự kiện, khả năng phát hiện xâm nhập bằng phân tích gói tin hoặc cảnh báo qua SMS.
 
 == Tiện ích vận hành và bảo vệ dự án
 
-SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy chủ và hàng đợi truyền nền. Terminal đồng hành cung cấp phiên CLI phục vụ thao tác trực tiếp. Sau thay đổi thủ công, cần đồng bộ lại để dữ liệu trong CAMS phản ánh cấu hình mới.
+SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy chủ và hàng đợi truyền nền. Đầu cuối đồng hành cung cấp phiên CLI phục vụ thao tác trực tiếp. Sau thay đổi thủ công, cần đồng bộ lại để dữ liệu trong CAMS phản ánh cấu hình mới.
 
 Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. 
 
 Các trường mật khẩu thiết bị được bảo vệ theo định dạng `ENC$v2$` với AES-256-GCM và AAD gắn ngữ cảnh `host:column`. Với bản ghi phiên bản 2, hoán đổi bản mã sang ngữ cảnh khác làm xác minh thẻ thất bại. Khi có mật khẩu dự án, khóa được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn; khi không có mật khẩu, mã nguồn sử dụng khóa HKDF từ dữ liệu cục bộ nên không có cùng mức bảo vệ dựa trên bí mật người dùng. Ghi đè mảng byte khi hủy khóa không bảo đảm xóa được mọi bản sao trong bộ nhớ @cryptographyAeadDocs @rfc9106 @nistSp80038d.
 
-Mật khẩu ứng dụng email (`sender_app_password`) trong `alert_settings.json` cũng có cơ chế mã hóa AES-256-GCM và phân quyền tệp `0600`. Mã hóa trường xác thực khác với tùy chọn mã hóa toàn gói `.ntp`: gói chỉ được mã hóa khi người dùng chọn bảo vệ bằng mật khẩu. `.ntp` là phần mở rộng dự án của CAMS, không phải giao thức đồng bộ thời gian NTP. Khôi phục workspace không tự động hoàn tác cấu hình thiết bị; các lab ở Chương 5 chưa kiểm thử riêng toàn bộ cơ chế mật mã này.
+Mật khẩu ứng dụng thư điện tử (`sender_app_password`) trong `alert_settings.json` cũng được mã hóa bằng AES-256-GCM và tệp được đặt quyền `0600`. Mã hóa trường xác thực khác với tùy chọn mã hóa toàn gói `.ntp`: gói chỉ được mã hóa khi người dùng chọn bảo vệ bằng mật khẩu. `.ntp` là phần mở rộng dự án của CAMS, không phải giao thức đồng bộ thời gian NTP. Khôi phục không gian làm việc không tự động hoàn tác cấu hình thiết bị; các kịch bản ở Chương 5 chưa kiểm thử riêng toàn bộ cơ chế mật mã này.
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),

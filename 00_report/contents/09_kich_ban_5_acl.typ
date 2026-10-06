@@ -10,7 +10,7 @@ Phép thử được thiết kế theo cặp đối chứng. Mỗi chính sách 
 
 ==== Mô hình và quy hoạch địa chỉ
 
-@fig-k5-topology trình bày mô hình thực nghiệm. `R1` thực hiện định tuyến giữa VLAN theo mô hình router-on-a-stick trên `GigabitEthernet0/1`; `R2` là bộ định tuyến biên thực hiện NAT; `R3` đóng vai trò ISP và cung cấp dịch vụ HTTP trên `Loopback0`. Ba máy trạm `VPC7`, `VPC8` và `VPC9` lần lượt thuộc VLAN 10, VLAN 20 và VLAN 30. Các liên kết kép giữa ba bộ chuyển mạch được gom kênh; nội dung này tạo hạ tầng kết nối nhưng không phải đối tượng đánh giá của kịch bản ACL.
+@fig-k5-topology trình bày mô hình thử nghiệm. `R1` thực hiện định tuyến giữa các VLAN theo mô hình bộ định tuyến dùng một liên kết trung kế trên `GigabitEthernet0/1`; `R2` là bộ định tuyến biên thực hiện NAT; `R3` đóng vai trò ISP và cung cấp dịch vụ HTTP trên `Loopback0`. Ba máy trạm `VPC7`, `VPC8` và `VPC9` lần lượt thuộc VLAN 10, VLAN 20 và VLAN 30. Các liên kết kép giữa ba bộ chuyển mạch được gom kênh; nội dung này tạo hạ tầng kết nối nhưng không phải đối tượng đánh giá của kịch bản ACL.
 
 #figure(
   image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png", width: 92%),
@@ -45,16 +45,16 @@ ACL thứ hai được gắn chiều vào trên `GigabitEthernet0/1.20` và `Gig
   text-size: 9.5pt,
   header: ([ACL / luật], [Nguồn], [Đích và dịch vụ], [Hành động], [Vị trí]),
   rows: (
-    ([V10 / 10], [`192.168.10.0/24`], [`192.168.12.2`, TCP/23], [Từ chối, ghi log], [`Gi0/1.10` in]),
-    ([V10 / 20], [`any`], [`any`, IP], [Cho phép, ghi log], [`Gi0/1.10` in]),
-    ([V20-V30 / 10], [`192.168.20.0/24`], [`203.162.4.1`, TCP/80], [Từ chối, ghi log], [`Gi0/1.20` in]),
-    ([V20-V30 / 20], [`192.168.30.0/24`], [`203.162.4.1`, ICMP], [Từ chối, ghi log], [`Gi0/1.30` in]),
-    ([V20-V30 / 30], [`any`], [`any`, IP], [Cho phép, ghi log], [`Gi0/1.20`, `.30` in]),
+    ([V10 / 10], [`192.168.10.0/24`], [`192.168.12.2`, TCP/23], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.10`]),
+    ([V10 / 20], [`any`], [`any`, IP], [Cho phép, ghi nhật ký], [Chiều vào `Gi0/1.10`]),
+    ([V20-V30 / 10], [`192.168.20.0/24`], [`203.162.4.1`, TCP/80], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.20`]),
+    ([V20-V30 / 20], [`192.168.30.0/24`], [`203.162.4.1`, ICMP], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.30`]),
+    ([V20-V30 / 30], [`any`], [`any`, IP], [Cho phép, ghi nhật ký], [Chiều vào `Gi0/1.20` và `.30`]),
   ),
   caption: [Ma trận chính sách ACL được kiểm chứng],
 ) <tab-k5-acl-policy>
 
-@fig-k5-acl-applied là bằng chứng cấu hình sau triển khai. Kết quả `show ip interface` xác nhận ACL đã được gắn chiều vào trên ba subinterface. Kết quả `show access-lists` xác nhận đúng địa chỉ nguồn, đích, giao thức, cổng dịch vụ và từ khóa `log`. Hình này thay cho chuỗi ảnh nhập biểu mẫu và thao tác Push vì mục tiêu của thực nghiệm là chứng minh cấu hình cuối trên thiết bị.
+@fig-k5-acl-applied là bằng chứng cấu hình sau triển khai. Kết quả `show ip interface` xác nhận ACL đã được gắn chiều vào trên ba cổng con. Kết quả `show access-lists` xác nhận đúng địa chỉ nguồn, đích, giao thức, cổng dịch vụ và từ khóa `log`. Hình này thay cho chuỗi ảnh nhập biểu mẫu và thao tác *Push* vì mục tiêu của thử nghiệm là chứng minh cấu hình cuối trên thiết bị.
 
 #figure(
   image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/1.png", width: 96%),
@@ -96,7 +96,7 @@ Ba phép thử âm được thực hiện từ đúng VLAN nguồn của từng 
 
 ==== Đối chiếu sự kiện trên System Logs
 
-R1 gửi Syslog về CAMS qua mạng quản trị. Chính sách gửi phải bao gồm mức `6 - Informational` vì bản tin ACL trong phép thử mang severity 6. Tại thời điểm chụp @fig-k5-acl-syslog, bộ thu C++ đang lắng nghe trên `0.0.0.0:5514/UDP+TCP` và đã nhận 272 bản tin. Các dòng bằng chứng quan trọng gồm:
+R1 gửi Syslog về CAMS qua mạng quản trị. Chính sách gửi phải bao gồm mức `6 - Informational` vì bản tin ACL trong phép thử có mức độ nghiêm trọng bằng 6. Tại thời điểm chụp @fig-k5-acl-syslog, bộ thu C++ đang lắng nghe trên `0.0.0.0:5514/UDP+TCP` và đã nhận 272 bản tin. Các dòng bằng chứng quan trọng gồm:
 
 - `ACL_V10_NO_TELNET_R2 denied tcp 192.168.10.1(...) -> 192.168.12.2(23)`;
 - `ACL_V20_V30_OUT denied tcp 192.168.20.1(...) -> 203.162.4.1(80)`;
@@ -108,7 +108,7 @@ R1 gửi Syslog về CAMS qua mạng quản trị. Chính sách gửi phải bao
   caption: [System Logs ghi nhận các sự kiện ACL được phép và bị từ chối từ R1],
 ) <fig-k5-acl-syslog>
 
-Trường `SEC` trong bảng là mã phân hệ Cisco IOS; Syslog facility được tách từ PRI. Với PRI bằng 190 trong các bản tin minh họa, Syslog facility bằng 23 (`local7`) và severity bằng 6. Việc tách hai trường giúp tránh gọi nhầm `SEC` là facility theo chuẩn Syslog.
+Trường `SEC` trong bảng là mã phân hệ Cisco IOS; nhóm nguồn Syslog được tách từ PRI. Với PRI bằng 190 trong các bản tin minh họa, nhóm nguồn Syslog bằng 23 (`local7`) và mức độ nghiêm trọng bằng 6. Việc tách hai trường giúp tránh gọi nhầm `SEC` là nhóm nguồn theo chuẩn Syslog.
 
 ==== Đánh giá kết quả
 
@@ -116,13 +116,13 @@ Trường `SEC` trong bảng là mã phân hệ Cisco IOS; Syslog facility đư�
   columns: (16%, 32%, 20%, 32%),
   header: ([Ca thử], [Lưu lượng], [Kết quả], [Bằng chứng]),
   rows: (
-    ([ACL-01], [VLAN 10 đến `192.168.12.2`, TCP/23], [Bị từ chối], [ICMP Type 3 Code 13 và log `denied tcp`.]),
-    ([ACL-02], [VLAN 20 đến `203.162.4.1`, TCP/80], [Bị từ chối], [ICMP Type 3 Code 13 và log `denied tcp`.]),
-    ([ACL-03], [VLAN 30 đến `203.162.4.1`, ICMP], [Bị từ chối], [Năm phản hồi administratively prohibited và log `denied icmp`.]),
+    ([ACL-01], [VLAN 10 đến `192.168.12.2`, TCP/23], [Bị từ chối], [ICMP Type 3 Code 13 và nhật ký `denied tcp`.]),
+    ([ACL-02], [VLAN 20 đến `203.162.4.1`, TCP/80], [Bị từ chối], [ICMP Type 3 Code 13 và nhật ký `denied tcp`.]),
+    ([ACL-03], [VLAN 30 đến `203.162.4.1`, ICMP], [Bị từ chối], [Năm phản hồi `administratively prohibited` và nhật ký `denied icmp`.]),
     ([ACL-04], [VLAN 10 đến `203.162.4.1`, ICMP và TCP/80], [Được phép], [Năm phản hồi ICMP và năm chu kỳ kết nối TCP/80.]),
     ([ACL-05], [VLAN 20/30 với lưu lượng không khớp deny], [Được phép], [ICMP, TCP/23 hoặc TCP/80 hoàn tất; System Logs có dòng `permitted`.]),
   ),
   caption: [Kết quả kiểm chứng chính sách ACL trong Kịch bản 5],
 ) <tab-k5-acl-results>
 
-Kết quả cho thấy hai ACL được áp dụng đúng chiều trên ba subinterface của R1. Ba lưu lượng khớp luật từ chối đều bị R1 chặn và tạo bản tin Syslog; các lưu lượng đối chứng vẫn được chuyển tiếp. CAMS tiếp nhận, phân tích và hiển thị đúng thiết bị nguồn `192.168.122.104`, mã phân hệ `SEC`, severity 6, mnemonic cùng thông tin địa chỉ và dịch vụ. Phạm vi kết luận giới hạn ở các địa chỉ, giao thức và số lần thử nêu trong bảng; kịch bản chưa đo thông lượng ghi log hoặc tỷ lệ mất bản tin khi tải cao.
+Kết quả cho thấy hai ACL được áp dụng đúng chiều trên ba cổng con của R1. Ba lưu lượng khớp luật từ chối đều bị R1 chặn và tạo bản tin Syslog; các lưu lượng đối chứng vẫn được chuyển tiếp. CAMS tiếp nhận, phân tích và hiển thị đúng thiết bị nguồn `192.168.122.104`, mã phân hệ `SEC`, mức độ nghiêm trọng bằng 6, mã sự kiện cùng thông tin địa chỉ và dịch vụ. Phạm vi kết luận giới hạn ở các địa chỉ, giao thức và số lần thử nêu trong bảng; kịch bản chưa đo thông lượng ghi nhật ký hoặc tỷ lệ mất bản tin khi tải cao.

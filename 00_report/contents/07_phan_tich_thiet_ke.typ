@@ -5,7 +5,7 @@
 
 == Tác nhân và yêu cầu chức năng
 
-Tác nhân chính là người quản trị mạng, giảng viên hoặc sinh viên vận hành phòng lab. Người dùng tạo không gian làm việc, khai báo thiết bị, đồng bộ dữ liệu, chuẩn bị cấu hình, duyệt lệnh và theo dõi kết quả. Router, switch và máy chủ cung cấp dịch vụ truyền tệp là các hệ thống bên ngoài mà CAMS kết nối; thiết bị mạng đồng thời là nguồn phát nhật ký.
+Tác nhân chính là người quản trị mạng, giảng viên hoặc sinh viên vận hành phòng thực hành. Người dùng tạo không gian làm việc, khai báo thiết bị, đồng bộ dữ liệu, chuẩn bị cấu hình, duyệt lệnh và theo dõi kết quả. Bộ định tuyến, bộ chuyển mạch và máy chủ cung cấp dịch vụ truyền tệp là các hệ thống bên ngoài mà CAMS kết nối; thiết bị mạng đồng thời là nguồn phát nhật ký.
 
 Yêu cầu chức năng được phân theo bốn nhóm của đề tài để liên kết thiết kế với tiêu chí kiểm chứng.
 
@@ -16,12 +16,12 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
     ([Quản lý], [Thêm, sửa, xóa và nhập danh mục; quản lý phiên; đồng bộ và lưu lịch sử cấu hình.], [Danh mục, trạng thái kết nối, bản sao cấu hình.]),
     ([Tự động hóa], [Kiểm tra dữ liệu; tạo lệnh theo từng chức năng; xem trước, áp dụng và trả kết quả riêng từng thiết bị.], [Cấu hình chờ, lệnh dự kiến, phản hồi thực thi.]),
     ([Giám sát], [Thu thập thông tin vận hành; nhận, lưu, lọc và xuất Syslog.], [Trạng thái quan sát, nhật ký có nguồn và thời gian.]),
-    ([Bảo mật], [Triển khai ACL, Port Security, DHCP Snooping, DAI; hỗ trợ xem các sự kiện cảnh báo liên quan.], [Chính sách đã gửi, trạng thái và nhật ký để đối chiếu.]),
+    ([Bảo mật], [Triển khai ACL, bảo mật cổng (Port Security), DHCP Snooping và DAI; hỗ trợ xem các sự kiện cảnh báo liên quan.], [Chính sách đã gửi, trạng thái và nhật ký để đối chiếu.]),
   ),
   caption: [Yêu cầu chức năng theo phạm vi đề tài],
 )
 
-SFTP, terminal và đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
+SFTP, đầu cuối và chức năng đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
 
 Các ca sử dụng chính được xác định trong ranh giới CAMS. Người quản trị khởi tạo các thao tác; thiết bị mạng tham gia thực thi và phát nhật ký; máy chủ SFTP và SMTP cung cấp dịch vụ bên ngoài. Ca sử dụng triển khai cấu hình bao gồm kiểm tra tham số và xem trước lệnh.
 
@@ -46,7 +46,7 @@ CAMS tổ chức trách nhiệm thành bốn lớp như @fig-layer-architecture.
   caption: [Kiến trúc phân lớp của CAMS],
 ) <fig-layer-architecture>
 
-Bộ thu Syslog C++ và terminal Alacritty là các tiến trình đồng hành ngoài luồng giao diện. Syslog trao đổi sự kiện JSON Lines với Python; NTTP/1 phục vụ terminal. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
+Bộ thu Syslog C++ và đầu cuối Alacritty là các tiến trình đồng hành ngoài luồng giao diện. Bộ thu Syslog trao đổi sự kiện JSON Lines với Python; NTTP/1 phục vụ đầu cuối. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
 
 Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
 
@@ -62,7 +62,7 @@ Người dùng nhập tham số trên biểu mẫu của từng chức năng. Sa
 
 === Xem trước và thực thi
 
-Luồng View & Push được mô tả tại @fig-state-flow. Bộ điều khiển lấy dữ liệu chờ và dùng Jinja2 tạo khối lệnh. Người dùng kiểm tra thiết bị đích, nội dung thay đổi và thứ tự lệnh trước khi chọn Push. Tác vụ nền sử dụng phiên kết nối có khóa, gửi lệnh và xử lý phản hồi.
+Luồng *View & Push* được mô tả tại @fig-state-flow. Bộ điều khiển lấy dữ liệu chờ và dùng Jinja2 tạo khối lệnh. Người dùng kiểm tra thiết bị đích, nội dung thay đổi và thứ tự lệnh trước khi chọn *Push*. Tác vụ nền sử dụng phiên kết nối có khóa, gửi lệnh và xử lý phản hồi.
 
 #figure(
   image("/00_book/figures/report/diagrams/02_state_flow.svg", width: 100%),
@@ -71,7 +71,7 @@ Luồng View & Push được mô tả tại @fig-state-flow. Bộ điều khiể
 
 Với thao tác thành công, ứng dụng cập nhật trạng thái bản ghi; với lỗi, thông tin phải được giữ để người dùng kiểm tra và xử lý tiếp. Thành công ở bước gửi lệnh chưa chứng minh dịch vụ hoạt động đúng. Cần truy vấn trạng thái hoặc thử lưu lượng phù hợp để xác minh, nhất là khi một khối lệnh có thể đã được áp dụng một phần trước khi lỗi xuất hiện.
 
-Luồng View & Push xác định thứ tự tương tác giữa người dùng, giao diện, nghiệp vụ, dữ liệu và thiết bị. Khóa phiên chỉ tuần tự hóa truy cập cùng thiết bị; không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
+Luồng *View & Push* xác định thứ tự tương tác giữa người dùng, giao diện, nghiệp vụ, dữ liệu và thiết bị. Khóa phiên chỉ tuần tự hóa truy cập cùng thiết bị; không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
 
 
 
@@ -81,7 +81,7 @@ Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn v�
 
 Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiêm trọng, mã sự kiện nếu phân tích được và nội dung gốc. Giao diện hỗ trợ lọc theo thiết bị, thời gian, mức độ và từ khóa, qua đó giúp người quản trị khoanh vùng các sự kiện như thay đổi kết nối hoặc vi phạm chính sách. Khi đồng hồ trên thiết bị chưa được đồng bộ, hệ thống phải phân biệt thời gian do thiết bị ghi với thời gian CAMS nhận bản tin.
 
-@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau lưu trữ, bộ phát hiện theo ngưỡng và dịch vụ email xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
+@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu dữ liệu vào SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau khi lưu trữ, bộ phát hiện theo ngưỡng và dịch vụ thư điện tử xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
 
 #figure(
   image("/00_book/figures/report/diagrams/review-syslog-sequence.svg", width: 100%),
@@ -94,13 +94,13 @@ CAMS kiểm soát quyền thực thi trên thiết bị và bảo vệ dữ li�
 
 === Kiểm tra đặc quyền và xử lý lỗi xác thực
 CAMS lựa chọn mức đặc quyền 15 cho các luồng quản trị Cisco IOS hiện có. Đây là chính sách của ứng dụng, không phải yêu cầu mọi lệnh Cisco IOS đều cần mức 15. Quy trình kiểm tra gồm:
-- *Bước 1 (Prompt Level):* Nhận diện dấu nhắc lệnh ban đầu của thiết bị để xác định sơ bộ chế độ hoạt động (User EXEC hoặc Privileged EXEC).
+- *Bước 1 – nhận diện dấu nhắc:* CAMS nhận diện dấu nhắc lệnh ban đầu của thiết bị để xác định sơ bộ chế độ thực thi người dùng (User EXEC) hoặc chế độ thực thi đặc quyền (Privileged EXEC).
 - *Bước 2:* Với thiết bị Cisco, gửi `show privilege` để đọc mức quyền. Khi xác định mức quyền dưới 15, thiếu mật khẩu đặc quyền gây lỗi; nếu có mật khẩu, ứng dụng gọi `enable` hoặc `enable 15` rồi kiểm tra lại. Nhánh xác minh sau nâng quyền từ chối khi không xác nhận được mức quyền yêu cầu.
 
-Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` khi lần kiểm tra ban đầu không đọc được mức quyền. Vì dấu nhắc này cũng có thể xuất hiện ở mức quyền trung gian, chưa thể mô tả toàn bộ cơ chế là từ chối mặc định (fail-closed) trong mọi tình huống. Đây là giới hạn cần kiểm thử và hoàn thiện.
+Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` khi lần kiểm tra ban đầu không đọc được mức quyền. Vì dấu nhắc này cũng có thể xuất hiện ở mức quyền trung gian, chưa thể mô tả toàn bộ cơ chế là từ chối khi chưa xác minh trong mọi tình huống. Đây là giới hạn cần kiểm thử và hoàn thiện.
 
 === Vòng đời khóa phiên Argon2id và mã hóa AES-256-GCM (ENC\$v2\$)
-Để chống lại các nỗ lực vét cạn ngoại tuyến (Offline Brute-force) và hoán đổi bản mã (Ciphertext Swapping), CAMS áp dụng kiến trúc mã hóa có xác thực:
+Để hạn chế nguy cơ dò mật khẩu ngoại tuyến và hoán đổi bản mã, CAMS áp dụng cơ chế mã hóa có xác thực:
 - Khi dự án có mật khẩu, khóa mã hóa dữ liệu (Data Encryption Key – DEK) được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn song song @rfc9106.
 - Các trường mật khẩu được mã hóa bằng AES-256-GCM và lưu theo định dạng nội bộ `ENC$v2$`. Đây là phiên bản phong bì dữ liệu của CAMS, không phải tên một tiêu chuẩn mật mã @nistSp80038d.
 - Dữ liệu xác thực bổ sung (Additional Authenticated Data – AAD) chứa ngữ cảnh `host:column`. Với bản ghi phiên bản 2 và đúng ngữ cảnh, việc đổi bản mã sang thiết bị hoặc cột khác làm xác minh thẻ thất bại (`InvalidTag`).
@@ -108,22 +108,22 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
 
 #report-table(
   columns: (22%, 35%, 43%),
-  header: ([Tính năng], [Công nghệ & Thuật toán], [Cơ chế hoạt động]),
+  header: ([Tính năng], [Công nghệ và thuật toán], [Cơ chế hoạt động]),
   rows: (
     ([Kiểm tra đặc quyền], [Phân tích mức quyền, Netmiko `enable`], [Đọc mức quyền, nâng quyền khi cần và kiểm tra lại; còn nhánh dự phòng dấu nhắc ở lần kiểm tra ban đầu.]),
-    ([Mã hóa At-Rest (`ENC$v2$`)], [Argon2id (RFC 9106), AES-256-GCM], [Lưu bản mã cấu trúc `ENC$v2$...`. Sử dụng Record-Bound AAD để chống tráo đổi. Ghi đè bộ nhớ khi hủy khóa.]),
-    ([Nhật ký ACL], [Jinja2, Cisco IOS logging], [Sinh tùy chọn ghi nhật ký cho các quy tắc hỗ trợ; thiết bị phải có đích Syslog và ngưỡng gửi phù hợp.]),
+    ([Mã hóa dữ liệu lưu trữ (`ENC$v2$`)], [Argon2id (RFC 9106), AES-256-GCM], [Lưu bản mã theo cấu trúc `ENC$v2$...`; liên kết AAD với ngữ cảnh bản ghi để chống tráo đổi; ghi đè mảng byte khi hủy khóa.]),
+    ([Nhật ký ACL], [Jinja2, cơ chế ghi nhật ký Cisco IOS], [Sinh tùy chọn ghi nhật ký cho các quy tắc hỗ trợ; thiết bị phải có đích Syslog và ngưỡng gửi phù hợp.]),
   ),
   caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
 ) <tab-security-architecture>
 
 == Thiết kế cơ sở dữ liệu
 
-CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị và cấu hình của các chức năng Interfaces, DHCP, định tuyến, ACL, NAT, chuyển mạch và Syslog; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, DHCP binding, thống kê ACL, phiên NAT và bản tin Syslog. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
+CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị và cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch cùng Syslog; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT và bản tin Syslog. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
 
 Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã thiết bị. Trước khi ghi dữ liệu, tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và các quan hệ phụ thuộc. Những bản ghi tham gia luồng View \& Push còn có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại để xác nhận cấu hình thực tế trên thiết bị @elmasri2016database.
 
-Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 19 tên bảng trong nhóm `info_collected`, tổng cộng 93 tên bảng. Đây là số đếm của lược đồ nguồn, không khẳng định mọi workspace đang chạy đều có đúng 93 bảng.
+Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 19 tên bảng trong nhóm `info_collected`, tổng cộng 93 tên bảng. Đây là số đếm của lược đồ nguồn, không khẳng định mọi không gian làm việc đang chạy đều có đúng 93 bảng.
 
 Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/database/schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
 
@@ -152,6 +152,6 @@ Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `
 
 == Thiết kế giao diện và xử lý lỗi
 
-Giao diện gồm khu vực danh mục thiết bị, tab làm việc, vùng chức năng và thanh trạng thái. Các biểu mẫu dùng chung cách nhập, lưu và xem trước thay đổi. System Logs cung cấp không gian đọc nhật ký tập trung; các tiện ích SFTP và terminal được mở theo nhu cầu. Hình minh họa giao diện được trình bày tại Chương 4 để gắn thiết kế với phần hiện thực.
+Giao diện gồm khu vực danh mục thiết bị, thẻ làm việc, vùng chức năng và thanh trạng thái. Các biểu mẫu dùng chung cách nhập, lưu và xem trước thay đổi. *System Logs* cung cấp không gian đọc nhật ký tập trung; các tiện ích SFTP và đầu cuối được mở theo nhu cầu. Hình minh họa giao diện được trình bày tại Chương 4 để gắn thiết kế với phần hiện thực.
 
-Cơ chế Host Lock bảo vệ truy cập phiên dùng chung; Batch Executor điều phối tác vụ giữa các thiết bị. Mỗi lỗi cần gắn với thiết bị và thao tác gây lỗi. Hủy tác vụ hoặc hết thời gian chờ không đồng nghĩa hoàn tác lệnh đã gửi; sau sự cố cần đồng bộ lại để biết phần cấu hình thực tế đã thay đổi.
+Cơ chế khóa theo thiết bị (`Host Lock`) bảo vệ truy cập phiên dùng chung; bộ thực thi theo lô (`BatchExecutor`) điều phối tác vụ giữa các thiết bị. Mỗi lỗi cần gắn với thiết bị và thao tác gây lỗi. Hủy tác vụ hoặc hết thời gian chờ không đồng nghĩa hoàn tác lệnh đã gửi; sau sự cố cần đồng bộ lại để xác định phần cấu hình thực tế đã thay đổi.

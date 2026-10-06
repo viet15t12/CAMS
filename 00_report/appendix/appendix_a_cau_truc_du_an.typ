@@ -9,19 +9,19 @@
 #appendix-heading[PHỤ LỤC A. CẤU TRÚC DỰ ÁN VÀ ÁNH XẠ MÃ NGUỒN]
 #metadata("appendix-a-start") <appendix-a-start>
 
-#appendix-section[A.1.][Sơ đồ cấu trúc thư mục mã nguồn runtime ứng dụng desktop]
+#appendix-section[A.1.][Sơ đồ cấu trúc thư mục mã nguồn ứng dụng]
 
-Mã nguồn ứng dụng desktop CAMS được tổ chức tại thư mục gốc của kho mã nguồn theo kiến trúc phân lớp. Sơ đồ dưới đây thể hiện các lớp chính, nhóm mô-đun và trách nhiệm tương ứng.
+Mã nguồn ứng dụng CAMS được tổ chức tại thư mục gốc của kho mã nguồn theo kiến trúc phân lớp. Sơ đồ dưới đây thể hiện các lớp chính, nhóm mô-đun và trách nhiệm tương ứng.
 
 #figure(
   image("/00_book/figures/report/appendix/project-structure.svg", width: 90%),
-  caption: [Cấu trúc thư mục mã nguồn ứng dụng desktop CAMS],
+  caption: [Cấu trúc thư mục mã nguồn ứng dụng CAMS],
 ) <fig-appendix-project-structure>
 
 #pagebreak(weak: true)
 #appendix-section[A.2.][Ánh xạ các thành phần đại diện theo mã nguồn]
 
-Các bảng dưới đây sử dụng tên tệp và mô-đun có trong kho mã nguồn khi biên tập. Mỗi hàng liệt kê thành phần đại diện, không khẳng định một biểu mẫu chỉ dùng đúng một repository hoặc mọi bảng đều có trong tất cả workspace. Đường dẫn mô-đun được tính từ thư mục gốc dự án; tên mẫu Jinja2 được ghi ngắn để dễ đọc.
+Các bảng dưới đây sử dụng tên tệp và mô-đun có trong kho mã nguồn khi biên tập. Mỗi hàng liệt kê thành phần đại diện, không khẳng định một biểu mẫu chỉ dùng đúng một kho dữ liệu hoặc mọi bảng đều có trong tất cả không gian làm việc. Đường dẫn mô-đun được tính từ thư mục gốc dự án; tên mẫu Jinja2 được ghi ngắn để dễ đọc.
 
 #report-table(
   columns: (23%, 26%, 25%, 26%),
@@ -54,9 +54,9 @@ Các bảng dưới đây sử dụng tên tệp và mô-đun có trong kho mã 
     ([#table-code("VtpPage.qml", size: 8.5pt)], [#table-code("features/switching/", size: 8.5pt)], [#table-code("t09_vtp_domains; t09_vtp_switches", size: 8.5pt)], [#table-code("features/switching/worker.py", size: 8.5pt)]),
     ([#table-code("SyslogWorkspace.qml", size: 8.5pt)], [#table-code("features/syslog/qt/manager.py", size: 8.5pt)], [#table-code("t10_syslog_servers; t12_syslog_messages", size: 8.5pt)], [#table-code("features/syslog/transport/receiver.py", size: 8.5pt)]),
     ([#table-code("SftpView.qml", size: 8.5pt)], [#table-code("features/sftp/controller.py", size: 8.5pt)], [#table-code("Hàng đợi phiên, không phải bảng cấu hình mạng", size: 8.5pt)], [#table-code("features/sftp/sftp_service.py", size: 8.5pt)]),
-    ([#table-code("DatabaseBrowserView.qml", size: 8.5pt)], [#table-code("core/external_tools.py", size: 8.5pt)], [#table-code("Các bảng có trong workspace được mở", size: 8.5pt)], [#table-code("infrastructure/database/browser/", size: 8.5pt)]),
+    ([#table-code("DatabaseBrowserView.qml", size: 8.5pt)], [#table-code("core/external_tools.py", size: 8.5pt)], [#table-code("Các bảng có trong không gian làm việc được mở", size: 8.5pt)], [#table-code("infrastructure/database/browser/", size: 8.5pt)]),
   ),
   caption: [Ánh xạ giao diện, mô-đun và lưu trữ theo mã nguồn hiện tại],
 ) <tab-system-component-mapping-continued>
 
-Terminal đồng hành được tổ chức trong `features/terminal/`, gồm `launcher.py`, `ipc_server.py` và `managed_manager.py`. Terminal giao tiếp với ứng dụng chính qua IPC. Bộ duyệt dữ liệu được mở qua `core/external_tools.py`; bảng dữ liệu khả dụng phụ thuộc workspace, không mặc định luôn có 93 bảng.
+Đầu cuối đồng hành được tổ chức trong `features/terminal/`, gồm `launcher.py`, `ipc_server.py` và `managed_manager.py`. Thành phần này giao tiếp với ứng dụng chính qua IPC. Bộ duyệt dữ liệu được mở qua `core/external_tools.py`; các bảng khả dụng phụ thuộc vào không gian làm việc, không mặc định luôn có 93 bảng.

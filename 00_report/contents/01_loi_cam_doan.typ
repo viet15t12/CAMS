@@ -4,7 +4,7 @@
 
 Nhóm tác giả cam đoan báo cáo nghiên cứu khoa học với đề tài: "Nghiên cứu và xây dựng hệ thống quản lý tập trung, tự động hóa cấu hình và giám sát an ninh mạng" là công trình do nhóm tác giả thực hiện dưới sự hướng dẫn khoa học của ThS. Phan Thanh Toản, Bộ môn Mạng Viễn thông, Học viện Công nghệ Bưu chính Viễn thông cơ sở tại TP. Hồ Chí Minh.
 
-Kết quả trình bày trong báo cáo là trung thực, do nhóm tác giả thực hiện và chưa từng được công bố trong bất kỳ công trình nào khác. Mã nguồn tự xây dựng, thư viện mã nguồn mở và tài liệu tham khảo sử dụng trong quá trình phát triển đều được trích dẫn đầy đủ theo đúng quy định.
+Kết quả trình bày trong báo cáo là trung thực, do nhóm tác giả thực hiện và chưa từng được công bố trong bất kỳ công trình nào khác. Mã nguồn tự xây dựng, thư viện mã nguồn mở và tài liệu tham khảo sử dụng trong quá trình phát triển đều được trích dẫn đầy đủ theo quy định.
 
 #standalone-title[Phạm vi đóng góp của từng thành viên]
 
@@ -28,7 +28,7 @@ Kết quả trình bày trong báo cáo là trung thực, do nhóm tác giả th
 
   [*Nguyễn Phan Kiên*],
   [N24DCVT046],
-  [Nền tảng phía sau, logic nghiệp vụ cho các chức năng mạng, mẫu cấu hình Jinja2, đồng bộ running-config, kiểm thử tích hợp],
+  [Lớp xử lý nghiệp vụ cho các chức năng mạng, mẫu cấu hình Jinja2, đồng bộ `running-config`, kiểm thử tích hợp],
 
   [*Nguyễn Trần Đạt Phú*],
   [N24DCVT072],

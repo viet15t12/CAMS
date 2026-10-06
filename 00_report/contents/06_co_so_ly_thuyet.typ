@@ -9,7 +9,7 @@
 
 Trong mạng doanh nghiệp, quản lý tập trung là cách tổ chức danh mục thiết bị, thông tin kết nối, cấu hình, trạng thái vận hành và lịch sử thay đổi tại một đầu mối thống nhất. Cách tổ chức này giúp người quản trị tra cứu dữ liệu và thực hiện cùng một quy trình trên nhiều thiết bị, thay vì duy trì các tệp rời rạc cho từng bộ định tuyến hoặc bộ chuyển mạch. Đối với CAMS, đầu mối quản lý là ứng dụng máy tính để bàn cùng không gian làm việc cục bộ; hệ thống chưa phải nền tảng máy chủ phục vụ đồng thời nhiều người dùng.
 
-Cấu hình thủ công qua giao diện dòng lệnh đòi hỏi người quản trị đăng nhập vào từng thiết bị, nhập lệnh theo đúng chế độ và tự ghi nhận kết quả. Phương pháp này phù hợp với thao tác đơn lẻ hoặc xử lý sự cố trực tiếp, nhưng dễ phát sinh sai khác khi cùng một chính sách phải áp dụng cho nhiều thiết bị. Tự động hóa cấu hình chuyển các bước lặp lại thành quy trình phần mềm gồm tiếp nhận tham số, kiểm tra dữ liệu, tạo lệnh, kết nối, triển khai và lưu kết quả. Nhờ đó, lệnh được tạo theo cùng một mẫu, thời gian thao tác được rút ngắn và kết quả giữa các thiết bị nhất quán hơn @edelman2018automation.
+Cấu hình thủ công qua giao diện dòng lệnh đòi hỏi người quản trị đăng nhập vào từng thiết bị, nhập lệnh theo đúng chế độ và tự ghi nhận kết quả. Phương pháp này phù hợp với thao tác đơn lẻ hoặc xử lý sự cố trực tiếp, nhưng dễ phát sinh sai khác khi cùng một chính sách phải áp dụng cho nhiều thiết bị. Tự động hóa cấu hình chuyển các bước lặp lại thành quy trình phần mềm gồm tiếp nhận tham số, kiểm tra dữ liệu, tạo lệnh, kết nối, triển khai và lưu kết quả. Nhờ đó, lệnh được tạo theo cùng một mẫu và giảm thao tác nhập lặp lại; mức cải thiện về thời gian cần được đo trong từng môi trường cụ thể @edelman2018automation.
 
 #report-table(
   columns: (22%, 37%, 41%),
@@ -28,9 +28,9 @@ Tự động hóa không loại bỏ vai trò kiểm soát của con người. N
 
 === Các mô hình quản lý cấu hình
 
-Mô hình quản lý theo trạng thái phân biệt *trạng thái mong muốn* (desired state) với *trạng thái quan sát* (observed state). Trạng thái mong muốn biểu diễn cấu hình mà người dùng dự kiến áp dụng; trạng thái quan sát phản ánh dữ liệu thu thập từ thiết bị tại một thời điểm. Một bản ghi vừa được lưu trong cơ sở dữ liệu mới thể hiện ý định cấu hình, chưa chứng minh thiết bị đã thay đổi.
+Mô hình quản lý theo trạng thái phân biệt *trạng thái mong muốn* (Desired State) với *trạng thái quan sát* (Observed State). Trạng thái mong muốn biểu diễn cấu hình mà người dùng dự kiến áp dụng; trạng thái quan sát phản ánh dữ liệu thu thập từ thiết bị tại một thời điểm. Một bản ghi vừa được lưu trong cơ sở dữ liệu mới thể hiện ý định cấu hình, chưa chứng minh thiết bị đã thay đổi.
 
-Trong CAMS, quy trình *Xem trước và triển khai* (View & Push) gồm bốn bước: lưu dữ liệu ở trạng thái chờ, kết xuất dữ liệu thành lệnh Cisco IOS, hiển thị lệnh để kiểm duyệt, sau đó triển khai và cập nhật kết quả theo phản hồi của thiết bị. Cơ chế *Lưu chờ* (Staged Save) cho phép người dùng hoàn thiện nhiều bản ghi trước khi mở cửa sổ xem trước. Cách tổ chức này tách thao tác biên soạn khỏi thao tác gây thay đổi trên thiết bị, đồng thời tạo điểm kiểm soát trước khi thực thi.
+Trong CAMS, quy trình xem trước và triển khai (*View & Push*) gồm bốn bước: lưu dữ liệu ở trạng thái chờ, kết xuất dữ liệu thành lệnh Cisco IOS, hiển thị lệnh để kiểm duyệt, sau đó triển khai và cập nhật kết quả theo phản hồi của thiết bị. Cơ chế lưu chờ cho phép người dùng hoàn thiện nhiều bản ghi trước khi mở cửa sổ xem trước. Cách tổ chức này tách thao tác biên soạn khỏi thao tác gây thay đổi trên thiết bị, đồng thời tạo điểm kiểm soát trước khi thực thi.
 
 Lưu phiên bản cấu hình hỗ trợ truy vết và so sánh thay đổi. Tuy nhiên, việc mở một bản sao cũ hoặc khôi phục tệp dự án chỉ phục hồi dữ liệu cục bộ; muốn đưa thiết bị về cấu hình trước đó, người quản trị vẫn phải tạo lệnh khôi phục, triển khai và xác minh riêng.
 
@@ -80,7 +80,7 @@ So với việc phân tích văn bản CLI, giao thức theo mô hình dữ li�
 
 === Dịch vụ và định tuyến Lớp 3
 
-*Địa chỉ IPv4 và cấu trúc mạng.* Địa chỉ IPv4 gồm phần mạng và phần máy, được xác định bằng độ dài tiền tố hoặc mặt nạ mạng. Ký pháp CIDR biểu diễn mạng dưới dạng địa chỉ kèm độ dài tiền tố, chẳng hạn `192.168.10.0/24`. Trong một số lệnh Cisco IOS, mặt nạ ký tự đại diện (wildcard mask) được dùng để chọn các bit cần so khớp; giá trị này thường là phần đảo bit của mặt nạ mạng. CAMS phải kiểm tra địa chỉ, tiền tố và quan hệ mạng trước khi tạo lệnh. Bên cạnh cổng vật lý, hệ thống quản lý các cổng logic như Loopback, cổng con (subinterface), cổng VLAN ảo (SVI) và đường hầm (tunnel).
+*Địa chỉ IPv4 và cấu trúc mạng.* Địa chỉ IPv4 gồm phần mạng và phần máy, được xác định bằng độ dài tiền tố hoặc mặt nạ mạng. Ký pháp CIDR biểu diễn mạng dưới dạng địa chỉ kèm độ dài tiền tố, chẳng hạn `192.168.10.0/24`. Trong một số lệnh Cisco IOS, mặt nạ ký tự đại diện (wildcard mask) được dùng để chọn các bit cần so khớp; giá trị này thường là phần đảo bit của mặt nạ mạng. CAMS phải kiểm tra địa chỉ, tiền tố và quan hệ mạng trước khi tạo lệnh. Bên cạnh cổng vật lý, hệ thống quản lý các cổng logic như Loopback, cổng con, giao diện VLAN ảo (SVI) và đường hầm.
 
 *Cấp phát địa chỉ động.* Giao thức cấu hình máy chủ động (Dynamic Host Configuration Protocol – DHCP) cấp địa chỉ và tham số mạng cho máy trạm. Chuỗi trao đổi điển hình gồm các bản tin Discover, Offer, Request và Acknowledge. Khi máy khách và máy chủ ở hai miền quảng bá khác nhau, tác nhân chuyển tiếp DHCP chuyển yêu cầu đến máy chủ. Một vùng cấp phát cần xác định mạng, cổng mặc định, máy chủ DNS, thời gian thuê và dải địa chỉ loại trừ để tránh cấp trùng cho thiết bị hạ tầng @rfc2131.
 
@@ -90,7 +90,7 @@ EIGRP sử dụng thuật toán cập nhật khuếch tán để lựa chọn đ
 
 *Chuyển đổi địa chỉ.* Chuyển đổi địa chỉ mạng (Network Address Translation – NAT) ánh xạ địa chỉ giữa hai miền. Chuyển đổi địa chỉ theo cổng (Port Address Translation – PAT) phân biệt nhiều luồng dùng chung một địa chỉ bằng số cổng. Cấu hình phải xác định đúng phía trong, phía ngoài, kiểu ánh xạ tĩnh hoặc động và điều kiện chọn lưu lượng. NAT thay đổi thông tin địa chỉ, không thay thế danh sách kiểm soát truy cập @rfc3022.
 
-*Dự phòng cổng mặc định.* Nhóm giao thức dự phòng bộ định tuyến đầu tiên (First-Hop Redundancy Protocol – FHRP) cung cấp địa chỉ cổng mặc định ảo cho máy trạm. HSRP tổ chức thiết bị theo vai trò chủ động và dự phòng; VRRP thực hiện bầu chọn thiết bị chủ động theo chuẩn IETF; GLBP bổ sung cơ chế phân phối máy trạm cho nhiều thiết bị chuyển tiếp ảo thông qua vai trò AVG và AVF @rfc9568 @ciscoFhrpGuide. Với GLBP, độ ưu tiên quyết định thiết bị quản lý cổng ảo, còn cân bằng tải được thực hiện bằng cách phân phối các địa chỉ MAC ảo cho máy trạm.
+*Dự phòng cổng mặc định.* Nhóm giao thức dự phòng chặng đầu (First-Hop Redundancy Protocol – FHRP) cung cấp địa chỉ cổng mặc định ảo cho máy trạm. HSRP tổ chức thiết bị theo vai trò chủ động và dự phòng; VRRP thực hiện bầu chọn thiết bị chủ động theo chuẩn IETF; GLBP bổ sung cơ chế phân phối máy trạm cho nhiều thiết bị chuyển tiếp ảo thông qua vai trò AVG và AVF @rfc9568 @ciscoFhrpGuide. Với GLBP, độ ưu tiên quyết định thiết bị quản lý cổng ảo, còn cân bằng tải được thực hiện bằng cách phân phối các địa chỉ MAC ảo cho máy trạm.
 
 === Chuyển mạch Lớp 2
 
@@ -108,7 +108,7 @@ Trong quy trình tự động hóa, các đối tượng Lớp 2 có quan hệ p
 
 *Danh sách kiểm soát truy cập.* Danh sách kiểm soát truy cập (Access Control List – ACL) đánh giá lưu lượng theo thứ tự các quy tắc và dừng tại quy tắc khớp đầu tiên. ACL chuẩn chủ yếu so khớp địa chỉ nguồn; ACL mở rộng có thể xét địa chỉ nguồn, địa chỉ đích, giao thức và cổng vận chuyển. Khi triển khai, cần xác định đúng cổng, chiều vào hoặc ra và quy tắc từ chối ngầm ở cuối danh sách @ciscoAclGuide.
 
-*Bảo mật cổng.* Port Security giới hạn địa chỉ MAC được phép xuất hiện trên cổng truy cập. Địa chỉ có thể được khai báo tĩnh hoặc học theo chế độ cố định (sticky). Khi vi phạm, thiết bị có thể loại bỏ khung, ghi nhận vi phạm hoặc đặt cổng vào trạng thái vô hiệu hóa, tương ứng với chế độ `protect`, `restrict` và `shutdown` @ciscoPortSecurityGuide.
+*Bảo mật cổng.* Tính năng Port Security giới hạn địa chỉ MAC được phép xuất hiện trên cổng truy cập. Địa chỉ có thể được khai báo tĩnh hoặc được học rồi ghi cố định bằng chế độ `sticky`. Khi vi phạm, thiết bị có thể loại bỏ khung, ghi nhận vi phạm hoặc đặt cổng vào trạng thái vô hiệu hóa, tương ứng với chế độ `protect`, `restrict` và `shutdown` @ciscoPortSecurityGuide.
 
 *DHCP Snooping và kiểm tra ARP động.* DHCP Snooping phân loại cổng tin cậy và không tin cậy, chỉ cho phép phản hồi DHCP từ hướng máy chủ hợp lệ và xây dựng bảng liên kết gồm VLAN, địa chỉ IP, địa chỉ MAC, cổng và thời hạn thuê. Kiểm tra ARP động (Dynamic ARP Inspection – DAI) đối chiếu cặp IP–MAC trong gói ARP với bảng liên kết DHCP Snooping hoặc ACL ARP; việc kiểm tra được áp dụng trên cổng không tin cậy. Vì vậy, DAI phụ thuộc vào nguồn dữ liệu liên kết chính xác, đặc biệt đối với máy dùng địa chỉ tĩnh @ciscoDhcpSnoopingGuide @ciscoDaiGuide.
 
@@ -120,7 +120,7 @@ Các cơ chế trên được thực thi trên thiết bị mạng. CAMS tạo v
 
 Một hệ thống Syslog tập trung gồm thiết bị phát bản tin, bộ thu nhận, bộ phân tích, nơi lưu trữ và giao diện truy vấn. Thiết bị mạng gửi sự kiện về một địa chỉ tập trung; bộ thu nhận tiếp nhận bản tin, bộ phân tích tách các trường, sau đó lưu cả dữ liệu đã chuẩn hóa và nội dung gốc. Cách lưu này hỗ trợ truy vấn nhanh mà vẫn giữ bằng chứng để kiểm tra khi bộ phân tích gặp định dạng chưa biết.
 
-RFC 3164 mô tả định dạng Syslog truyền thống, thường gặp trong nhật ký thiết bị cũ @rfc3164. Theo RFC 5424, bản tin Syslog có phần đầu chứa mức ưu tiên PRI, phiên bản, dấu thời gian, tên máy, tên ứng dụng, mã tiến trình và mã bản tin; sau đó là dữ liệu có cấu trúc và nội dung sự kiện. PRI được tính theo công thức `facility × 8 + severity`. Trong đó, *facility* của Syslog biểu thị nhóm nguồn phát theo chuẩn, còn *severity* biểu thị mức độ nghiêm trọng @rfc5424.
+RFC 3164 mô tả định dạng Syslog truyền thống, thường gặp trong nhật ký thiết bị cũ @rfc3164. Theo RFC 5424, bản tin Syslog có phần đầu chứa giá trị ưu tiên PRI, phiên bản, dấu thời gian, tên máy, tên ứng dụng, mã tiến trình và mã bản tin; sau đó là dữ liệu có cấu trúc và nội dung sự kiện. PRI được tính theo công thức `facility × 8 + severity`. Trong đó, *facility* biểu thị nhóm nguồn Syslog theo chuẩn, còn *severity* biểu thị mức độ nghiêm trọng @rfc5424.
 
 #report-table(
   columns: (10%, 24%, 29%, 37%),
@@ -154,7 +154,7 @@ Trong CAMS, bộ thu nhận viết bằng C++ tiếp nhận bản tin UDP và TC
 
 Nhật ký tập trung có thể được lọc theo thiết bị, khoảng thời gian, mức độ nghiêm trọng, mã phân hệ và từ khóa. Việc kết hợp nhiều trường giúp người quản trị nhận biết các sự kiện như cổng thay đổi trạng thái, cấu hình bị sửa hoặc Port Security phát hiện địa chỉ MAC vi phạm. Theo hướng dẫn quản lý nhật ký của NIST, quá trình khai thác cần gắn với chính sách lưu giữ, rà soát và ứng phó, thay vì chỉ thu thập dữ liệu @nistSp80092.
 
-Tương quan sự kiện là quá trình liên kết nhiều bản tin theo thời gian, nguồn và ngữ cảnh để tìm mẫu bất thường. CAMS hiện có thu nhận, phân tích trường, lọc nhật ký, gửi cảnh báo qua email và bộ phát hiện sự kiện theo ngưỡng trong cửa sổ thời gian. Các quy tắc này nhận diện dấu hiệu trong nhật ký, chưa tương đương một hệ thống phát hiện xâm nhập dựa trên phân tích lưu lượng. Nếu thiết bị không phát sinh hoặc không chuyển bản tin về bộ thu nhận, CAMS không thể tự suy ra toàn bộ sự kiện đã xảy ra.
+Tương quan sự kiện là quá trình liên kết nhiều bản tin theo thời gian, nguồn và ngữ cảnh để tìm mẫu bất thường. CAMS hiện có chức năng thu nhận, phân tích trường, lọc nhật ký, gửi cảnh báo qua thư điện tử và phát hiện sự kiện theo ngưỡng trong cửa sổ thời gian. Các quy tắc này nhận diện dấu hiệu trong nhật ký, chưa tương đương một hệ thống phát hiện xâm nhập dựa trên phân tích lưu lượng. Nếu thiết bị không phát sinh hoặc không chuyển bản tin về bộ thu nhận, CAMS không thể tự suy ra toàn bộ sự kiện đã xảy ra.
 
 == Cơ sở dữ liệu và hệ thống lưu trữ
 
@@ -194,14 +194,14 @@ Việc tách giao diện khỏi logic giúp kiểm thử nghiệp vụ mà khôn
     ([Jinja2], [Kết xuất dữ liệu đã kiểm tra thành mẫu lệnh Cisco IOS @jinja2Docs.]),
     ([Dulwich], [Lưu phiên bản cấu hình trong kho Git cục bộ, hỗ trợ lịch sử và so sánh @dulwichDocs.]),
     ([Argon2id, AES-256-GCM], [Dẫn xuất khóa từ mật khẩu và mã hóa có xác thực cho gói dự án khi bật bảo vệ.]),
-    ([C++ / POSIX sockets], [Bộ thu Syslog dùng socket và vòng lặp poll ở tiến trình riêng; lưu SQLite và phát sự kiện JSON Lines.]),
-    ([Alacritty], [Terminal giả lập nhúng trực tiếp, hỗ trợ thao tác dòng lệnh nhanh qua SSH/Telnet.]),
-    ([IPC NTTP/1], [Giao thức nội bộ giữa ứng dụng và terminal đồng hành Alacritty; độc lập với kênh sự kiện của bộ thu Syslog.]),
+    ([C++ và ổ cắm POSIX], [Bộ thu Syslog dùng ổ cắm và vòng lặp `poll` ở tiến trình riêng; lưu dữ liệu vào SQLite và phát sự kiện JSON Lines.]),
+    ([Alacritty], [Trình giả lập đầu cuối được nhúng vào ứng dụng, hỗ trợ thao tác dòng lệnh qua SSH hoặc Telnet.]),
+    ([IPC NTTP/1], [Giao thức nội bộ giữa ứng dụng và đầu cuối đồng hành Alacritty; độc lập với kênh sự kiện của bộ thu Syslog.]),
   ),
   caption: [Các thành phần công nghệ phục vụ quy trình quản trị],
 )
 
-Tác vụ mạng được chuyển sang luồng nền để vòng lặp giao diện tiếp tục xử lý thao tác người dùng. *Khóa theo thiết bị* (Host Lock) tuần tự hóa các tác vụ cùng sử dụng một phiên CLI; *bộ thực thi theo lô* (Batch Executor) cho phép xử lý đồng thời trên các thiết bị độc lập. Cách tổ chức này hạn chế lệnh bị xen kẽ trên cùng một phiên mà vẫn tận dụng khả năng xử lý song song @pythonThreadingDocs.
+Tác vụ mạng được chuyển sang luồng nền để vòng lặp giao diện tiếp tục xử lý thao tác người dùng. Cơ chế khóa theo thiết bị (`Host Lock`) tuần tự hóa các tác vụ cùng sử dụng một phiên CLI; bộ thực thi theo lô (`BatchExecutor`) cho phép xử lý đồng thời trên các thiết bị độc lập. Cách tổ chức này hạn chế lệnh bị xen kẽ trên cùng một phiên mà vẫn tận dụng khả năng xử lý song song @pythonThreadingDocs.
 
 Mỗi tác vụ phải có thời gian chờ và kết quả gắn với thiết bị cụ thể. Việc hủy tác vụ hoặc mất kết nối không đồng nghĩa với hoàn tác các lệnh đã gửi; sau sự cố, hệ thống cần thu thập lại trạng thái để xác định phần cấu hình thực tế đã được áp dụng.
 
