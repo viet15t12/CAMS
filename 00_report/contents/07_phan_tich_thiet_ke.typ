@@ -23,7 +23,16 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
 
 SFTP, đầu cuối và chức năng đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
 
-Các ca sử dụng chính được xác định trong ranh giới CAMS. Người quản trị khởi tạo các thao tác; thiết bị mạng tham gia thực thi và phát nhật ký; máy chủ SFTP và SMTP cung cấp dịch vụ bên ngoài. Ca sử dụng triển khai cấu hình bao gồm kiểm tra tham số và xem trước lệnh.
+=== Mô hình ca sử dụng
+
+Các ca sử dụng chính được xác định trong ranh giới CAMS như @fig-use-case-cams. Người quản trị khởi tạo thao tác; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký; máy chủ SFTP và SMTP cung cấp dịch vụ bên ngoài. Nhóm ca quản lý cấu hình đi theo chuỗi đồng bộ trạng thái, chuẩn bị dữ liệu mong muốn, xem trước lệnh, triển khai và xác minh. Truyền tệp và đóng gói dự án hỗ trợ vận hành nhưng không thay thế các bước kiểm tra cấu hình trên thiết bị.
+
+#figure(
+  image("/00_book/figures/report/diagrams/23_use_case_cams.svg", width: 92%),
+  caption: [Sơ đồ ca sử dụng chính của CAMS và các hệ thống bên ngoài],
+) <fig-use-case-cams>
+
+Ranh giới trên giúp phân biệt trách nhiệm của CAMS với phản hồi do thiết bị hoặc dịch vụ ngoài cung cấp. Ví dụ, CAMS có thể kiểm tra tham số và ghi nhận phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra trạng thái hoặc lưu lượng thử phù hợp. Cách phân tách này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
 
 
 == Yêu cầu phi chức năng
@@ -69,7 +78,14 @@ Luồng *View & Push* được mô tả tại @fig-state-flow. Bộ điều khi�
   caption: [Luồng cấu hình từ dữ liệu chờ đến thực thi và cập nhật kết quả],
 ) <fig-state-flow>
 
-Với thao tác thành công, ứng dụng cập nhật trạng thái bản ghi; với lỗi, thông tin phải được giữ để người dùng kiểm tra và xử lý tiếp. Thành công ở bước gửi lệnh chưa chứng minh dịch vụ hoạt động đúng. Cần truy vấn trạng thái hoặc thử lưu lượng phù hợp để xác minh, nhất là khi một khối lệnh có thể đã được áp dụng một phần trước khi lỗi xuất hiện.
+Trình tự trao đổi chi tiết được thể hiện tại @fig-view-push-sequence. Giao diện chỉ tạo tác vụ thực thi sau khi người dùng xác nhận bản xem trước. Tác vụ nền lấy khóa của phiên thiết bị, gửi lệnh, nhận phản hồi và cập nhật trạng thái liên quan. Kết quả được trả riêng theo thiết bị để một lỗi không che khuất kết quả của các thiết bị còn lại.
+
+#figure(
+  image("/00_book/figures/report/diagrams/24_view_push_sequence.svg", width: 100%),
+  caption: [Sơ đồ tuần tự của quy trình View \& Push],
+) <fig-view-push-sequence>
+
+Với thao tác thành công, ứng dụng cập nhật trạng thái bản ghi; với lỗi, thông tin được giữ để người dùng kiểm tra và xử lý tiếp. Thành công ở bước gửi lệnh chưa chứng minh dịch vụ hoạt động đúng. Cần truy vấn trạng thái hoặc thử lưu lượng phù hợp để xác minh, nhất là khi một khối lệnh có thể đã được áp dụng một phần trước khi lỗi xuất hiện.
 
 Luồng *View & Push* xác định thứ tự tương tác giữa người dùng, giao diện, nghiệp vụ, dữ liệu và thiết bị. Khóa phiên chỉ tuần tự hóa truy cập cùng thiết bị; không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
 
@@ -119,7 +135,7 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
 
 == Thiết kế cơ sở dữ liệu
 
-CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị và cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch cùng Syslog; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT và bản tin Syslog. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
+CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị, cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch và các đích Syslog cần cấu hình; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT và bản tin Syslog đã nhận. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
 
 Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã thiết bị. Trước khi ghi dữ liệu, tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và các quan hệ phụ thuộc. Những bản ghi tham gia luồng View \& Push còn có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại để xác nhận cấu hình thực tế trên thiết bị @elmasri2016database.
 
@@ -137,17 +153,18 @@ Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `
     ([#table-code("t04_ospf_networks")], [PK: #table-code("id"); FK: #table-code("ospf_id")], [Mạng, wildcard và vùng OSPF.]),
     ([#table-code("t05_ACL_DB")], [PK: #table-code("Acl_id"); FK: #table-code("host")], [Tên, loại ACL và trạng thái cấu hình.]),
     ([#table-code("t05_extended_acl_rules")], [PK: #table-code("id"); FK: #table-code("acl_id")], [Thứ tự, hành động và điều kiện khớp luật.]),
+    ([#table-code("t05_router_iface_acl")], [PK: #table-code("id"); FK: #table-code("iface_id"), #table-code("acl_id")], [Gắn ACL vào cổng mạng theo chiều vào hoặc ra.]),
     ([#table-code("t05_NAT_DB")], [PK: #table-code("nat_id"); FK: #table-code("host")], [Cấu hình NAT và loại chuyển đổi.]),
-    ([#table-code("t12_syslog_messages")], [PK: #table-code("id"); #table-code("device_host") là trường liên kết logic], [Thuộc cơ sở dữ liệu quan sát; lưu nguồn, PRI, mức độ, mã Cisco và bản tin gốc.]),
+    ([#table-code("t10_syslog_servers")], [PK ghép: #table-code("device_host"), #table-code("server_ip"), #table-code("protocol"), #table-code("port"); FK: #table-code("device_host")], [Đích Syslog và trạng thái triển khai cấu hình theo thiết bị.]),
   ),
   caption: [Các bảng và khóa đại diện trong lược đồ dữ liệu CAMS],
 ) <tab-core-erd>
 
-@fig-core-erd thể hiện các quan hệ một–nhiều. Đường liền là khóa ngoại trong cùng cơ sở dữ liệu; đường đứt là đối chiếu logic giữa hai tệp SQLite. Bảng Syslog không khai báo khóa ngoại sang danh mục thiết bị, nên không được mô tả như quan hệ toàn vẹn tham chiếu do SQLite tự bảo đảm.
+@fig-core-erd chỉ thể hiện các khóa ngoại đã khai báo trong nhóm lược đồ `device_network`. Mũi tên đi từ bảng cha đến bảng con. Trong đó, `t05_router_iface_acl` tham chiếu đồng thời cổng mạng và ACL; `t10_syslog_servers` tham chiếu thiết bị qua `device_host`. Bảng `t12_syslog_messages` thuộc `info_collected.db`; trường `device_host` ở bảng này chỉ phục vụ đối chiếu logic và không phải khóa ngoại liên cơ sở dữ liệu.
 
 #figure(
   image("/00_book/figures/report/diagrams/review-core-erd.svg", width: 100%),
-  caption: [Lược đồ quan hệ đại diện giữa thiết bị, cấu hình và nhật ký],
+  caption: [Lược đồ khóa ngoại đại diện trong cơ sở dữ liệu `device_network.db`],
 ) <fig-core-erd>
 
 == Thiết kế giao diện và xử lý lỗi
@@ -155,3 +172,9 @@ Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `
 Giao diện gồm khu vực danh mục thiết bị, thẻ làm việc, vùng chức năng và thanh trạng thái. Các biểu mẫu dùng chung cách nhập, lưu và xem trước thay đổi. *System Logs* cung cấp không gian đọc nhật ký tập trung; các tiện ích SFTP và đầu cuối được mở theo nhu cầu. Hình minh họa giao diện được trình bày tại Chương 4 để gắn thiết kế với phần hiện thực.
 
 Cơ chế khóa theo thiết bị (`Host Lock`) bảo vệ truy cập phiên dùng chung; bộ thực thi theo lô (`BatchExecutor`) điều phối tác vụ giữa các thiết bị. Mỗi lỗi cần gắn với thiết bị và thao tác gây lỗi. Hủy tác vụ hoặc hết thời gian chờ không đồng nghĩa hoàn tác lệnh đã gửi; sau sự cố cần đồng bộ lại để xác định phần cấu hình thực tế đã thay đổi.
+
+== Tiểu kết chương
+
+Thiết kế CAMS liên kết ba luồng: quản lý trạng thái, thực thi có kiểm duyệt và giám sát kết quả. Dữ liệu chờ được tách khỏi trạng thái quan sát; tác vụ mạng chạy ngoài luồng giao diện; phản hồi được lưu theo thiết bị để hỗ trợ truy vết.
+
+Chương 4 trình bày phần hiện thực trong mã nguồn và giao diện; Chương 5 kiểm tra bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký. Các sơ đồ không thay thế bằng chứng vận hành.

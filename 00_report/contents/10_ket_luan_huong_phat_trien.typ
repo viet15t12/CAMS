@@ -55,3 +55,15 @@ Nhằm mở rộng tính năng và nâng cao độ tin cậy của CAMS, nhóm t
 + *Hỗ trợ nhiều nhà sản xuất:* xây dựng kiến trúc trình điều khiển hoặc trình cắm để hỗ trợ MikroTik RouterOS, VyOS, Juniper và bộ định tuyến Linux.
 + *Mở rộng giao thức quản trị hiện đại:* tích hợp NETCONF/RESTCONF dựa trên mô hình dữ liệu YANG (IETF/OpenConfig) @rfc6241 @rfc8040 @rfc7950.
 + *Tích hợp phân tích và cảnh báo:* hoàn thiện tương quan sự kiện Syslog, bổ sung webhook và kiểm thử độ trễ, cơ chế chống gửi trùng cùng độ tin cậy của cảnh báo thư điện tử đã hiện thực.
+
+== Kiến nghị triển khai và đánh giá tiếp theo
+
+Trước khi áp dụng CAMS ngoài phòng thực hành, cần xây dựng bộ kiểm thử lặp lại được cho từng nhóm chức năng. Mỗi ca nên ghi rõ phiên bản thiết bị, dữ liệu đầu vào, trạng thái kết nối ban đầu, lệnh dự kiến, kết quả trên thiết bị và thời gian thực hiện. Các ca lỗi như sai địa chỉ, mất kết nối giữa lúc triển khai hoặc lệnh bị Cisco IOS từ chối cần được kiểm tra cùng trạng thái dữ liệu chờ sau lỗi. Cách ghi nhận này giúp tách lỗi của phần mềm khỏi lỗi mô hình mạng và tạo cơ sở so sánh giữa các phiên bản.
+
+Trong giảng dạy, CAMS nên được sử dụng theo quy trình có kiểm soát: người học chuẩn bị cấu hình, đọc bản xem trước, dự đoán tác động, triển khai rồi đối chiếu bằng lệnh `show` và lưu lượng thử. Với môi trường vận hành thật, phạm vi thí điểm nên giới hạn ở nhóm thiết bị và mẫu cấu hình đã được xác minh; quyền truy cập, bản sao cấu hình và phương án khôi phục phải được chuẩn bị trước khi mở rộng quy mô.
+
+== Kết luận chung
+
+Kết quả của đề tài cho thấy CAMS đã hình thành được một quy trình quản trị tập trung gồm lưu trữ dữ liệu, sinh và kiểm duyệt lệnh, thực thi nền, thu thập trạng thái và khai thác Syslog. Năm kịch bản cung cấp bằng chứng chức năng cho các nội dung trọng tâm trong phạm vi phòng thực hành. Tuy nhiên, các kết quả này chưa thay thế đánh giá định lượng về thời gian, độ tin cậy, tải Syslog và khả năng phục hồi khi lỗi xảy ra.
+
+Giá trị chính của hệ thống nằm ở việc liên kết cấu hình mong muốn với trạng thái quan sát và bằng chứng kiểm tra theo từng thiết bị. Các hướng phát triển nêu trên vì vậy cần ưu tiên khả năng kiểm chứng, bảo vệ thông tin xác thực và xử lý lỗi trước khi mở rộng thêm nền tảng hoặc giao thức. Đây cũng là cơ sở để CAMS tiếp tục được hoàn thiện thành công cụ hỗ trợ thực hành và quản trị mạng có phạm vi sử dụng rõ ràng.

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+  <defs>
+    <style>
+      text { font-family: 'Liberation Sans', Arial, sans-serif; fill: #000000; }
+      .title { font-size: 22px; font-weight: 700; }
+      .label { font-size: 17px; }
+      .actor-label { font-size: 18px; font-weight: 700; }
+      .boundary, .usecase, .actor-box { fill: #ffffff; stroke: #000000; stroke-width: 1.6; }
+      .assoc { fill: none; stroke: #000000; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect class="boundary" x="230" y="30" width="700" height="620" rx="8"/>
+  <text class="title" x="580" y="62" text-anchor="middle">Hệ thống CAMS</text>
+
+  <circle cx="105" cy="270" r="24" class="actor-box"/>
+  <path class="assoc" d="M105 294V380M55 325H155M105 380L62 438M105 380L148 438"/>
+  <text class="actor-label" x="105" y="474" text-anchor="middle">Người quản trị</text>
+
+  <rect class="actor-box" x="985" y="105" width="180" height="72" rx="8"/>
+  <text class="actor-label" x="1075" y="136" text-anchor="middle">Thiết bị mạng</text>
+  <text class="label" x="1075" y="160" text-anchor="middle">Router / Switch</text>
+
+  <rect class="actor-box" x="985" y="485" width="180" height="82" rx="8"/>
+  <text class="actor-label" x="1075" y="516" text-anchor="middle">Dịch vụ ngoài</text>
+  <text class="label" x="1075" y="543" text-anchor="middle">SFTP / SMTP</text>
+
+  <ellipse class="usecase" cx="410" cy="130" rx="135" ry="42"/>
+  <text class="label" x="410" y="124" text-anchor="middle">Quản lý dự án</text>
+  <text class="label" x="410" y="147" text-anchor="middle">và danh mục thiết bị</text>
+
+  <ellipse class="usecase" cx="750" cy="130" rx="135" ry="42"/>
+  <text class="label" x="750" y="124" text-anchor="middle">Đồng bộ trạng thái</text>
+  <text class="label" x="750" y="147" text-anchor="middle">từ thiết bị</text>
+
+  <ellipse class="usecase" cx="410" cy="270" rx="135" ry="42"/>
+  <text class="label" x="410" y="264" text-anchor="middle">Chuẩn bị và xem trước</text>
+  <text class="label" x="410" y="287" text-anchor="middle">cấu hình mong muốn</text>
+
+  <ellipse class="usecase" cx="750" cy="270" rx="135" ry="42"/>
+  <text class="label" x="750" y="264" text-anchor="middle">Triển khai</text>
+  <text class="label" x="750" y="287" text-anchor="middle">cấu hình</text>
+
+  <ellipse class="usecase" cx="410" cy="410" rx="135" ry="42"/>
+  <text class="label" x="410" y="404" text-anchor="middle">Xem trạng thái, kết quả</text>
+  <text class="label" x="410" y="427" text-anchor="middle">và nhật ký</text>
+
+  <ellipse class="usecase" cx="750" cy="410" rx="135" ry="42"/>
+  <text class="label" x="750" y="404" text-anchor="middle">Xác minh trạng thái</text>
+  <text class="label" x="750" y="427" text-anchor="middle">sau triển khai</text>
+
+  <ellipse class="usecase" cx="410" cy="550" rx="135" ry="42"/>
+  <text class="label" x="410" y="544" text-anchor="middle">Truyền tệp và</text>
+  <text class="label" x="410" y="567" text-anchor="middle">đóng gói dự án</text>
+
+  <ellipse class="usecase" cx="750" cy="550" rx="135" ry="42"/>
+  <text class="label" x="750" y="544" text-anchor="middle">Thu nhận Syslog</text>
+  <text class="label" x="750" y="567" text-anchor="middle">và phát cảnh báo</text>
+
+  <path class="assoc" d="M155 325L275 140M155 325L275 270M155 325L275 410M155 325L275 540"/>
+  <path class="assoc" d="M985 141L885 130M985 141L885 270M985 141L885 410M985 141L885 540"/>
+  <path class="assoc" d="M985 526L885 550M985 526V625H410V592"/>
+</svg>
