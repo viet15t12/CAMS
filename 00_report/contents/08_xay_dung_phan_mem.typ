@@ -3,6 +3,10 @@
 
 = Xây dựng phần mềm CAMS
 
+Chương 3 đã xác định kiến trúc phân lớp, mô hình dữ liệu và các luồng quản lý cấu hình, giám sát cùng bảo vệ dữ liệu. Chương này trình bày cách các thiết kế đó được hiện thực trong mã nguồn và giao diện CAMS. Trọng tâm là trách nhiệm của từng thành phần, đường đi của dữ liệu và cách ứng dụng xử lý tác vụ nền; kết quả vận hành trên mô hình mạng được dành cho Chương 5.
+
+Nội dung được sắp xếp theo chuỗi sử dụng của hệ thống: khởi tạo ứng dụng, quản lý thiết bị, tự động hóa cấu hình, thu thập dữ liệu, triển khai chính sách bảo mật và sử dụng các tiện ích hỗ trợ. Cách trình bày này giữ liên kết giữa yêu cầu ở Chương 3 với bằng chứng kiểm thử ở chương tiếp theo.
+
 == Môi trường phát triển và tổ chức mã nguồn
 
 CAMS là ứng dụng máy tính để bàn có yêu cầu Python từ 3.11 trở lên theo cấu hình dự án, sử dụng Qt Quick/QML và PyQt6 cho giao diện @qtQuickDocs @pyqt6Docs, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
@@ -11,9 +15,9 @@ Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện v
 
 == Khởi tạo và kết nối giao diện với nghiệp vụ
 
-Ứng dụng nạp màn hình chào để người dùng tạo hoặc mở dự án, thiết lập đường dẫn dữ liệu rồi chuyển vào giao diện chính. Các đối tượng Python, phương thức và tín hiệu PyQt6 truyền yêu cầu và kết quả giữa QML với tầng nghiệp vụ.
+Ứng dụng nạp màn hình chào để người dùng tạo hoặc mở dự án, thiết lập đường dẫn dữ liệu rồi chuyển vào giao diện chính. Khi khởi tạo, `main.py` tạo các thành phần dùng chung như bộ quản lý cơ sở dữ liệu, sổ đăng ký phiên thiết bị, bộ điều khiển không gian làm việc, SFTP và Syslog; sau đó công bố các đối tượng cần thiết cho QML qua ngữ cảnh của Qt.
 
-Các bộ điều khiển dữ liệu, Syslog, SFTP và không gian làm việc xử lý chức năng tương ứng. Tác vụ mạng chạy nền và gửi kết quả về giao diện. @fig-cams-workspace minh họa giao diện làm việc của ứng dụng.
+QML tiếp nhận thao tác và gọi phương thức của bộ điều khiển Python. Tầng nghiệp vụ kiểm tra dữ liệu, thực hiện tác vụ rồi phát tín hiệu để giao diện cập nhật trạng thái hoặc hiển thị lỗi. Các thao tác mạng và lưu gói dự án được đưa sang tác vụ nền để không chặn luồng giao diện. @fig-cams-workspace minh họa không gian làm việc sau khi quá trình khởi tạo hoàn tất.
 
 #figure(
   image("/00_book/figures/gui/chapter-03/01-workspace-overview.png", width: 88%),
@@ -93,7 +97,9 @@ Màn hình *Email Alerts* cho phép khai báo máy chủ và cổng SMTP, tài k
 
 Ngoài nhật ký, dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT, bộ đếm cổng và bảng MAC hỗ trợ kiểm tra hoạt động của các chức năng. Các giá trị này chỉ phản ánh thời điểm thu thập; muốn kết luận về trạng thái hiện tại, người dùng phải cập nhật dữ liệu trước khi đối chiếu.
 
-== Hiện thực hỗ trợ bảo mật và khai thác cảnh báo
+== Hiện thực chính sách bảo mật và liên kết sự kiện
+
+Nhóm chức năng này kết hợp hai phần đã tách trong thiết kế: thiết bị mạng thực thi chính sách, còn CAMS chuẩn bị cấu hình và khai thác sự kiện do thiết bị phát sinh. Vì vậy, luồng triển khai tiếp tục sử dụng *View & Push* ở Mục 4.4, trong khi luồng quan sát sử dụng bộ thu Syslog ở Mục 4.5.
 
 === Triển khai chính sách trên thiết bị
 
@@ -106,9 +112,9 @@ CAMS cung cấp biểu mẫu Port Security để đặt giới hạn địa ch�
 
 Thiết bị mạng thực thi chính sách và có thể phát sinh nhật ký tùy theo tính năng, chế độ cùng cấu hình ghi nhật ký. Vì vậy, việc kiểm chứng cảnh báo cần một tình huống phù hợp với cơ chế đã bật, đồng thời phải bảo đảm đường truyền nhật ký đến CAMS hoạt động.
 
-=== Lọc và phân tích sự kiện cảnh báo
+=== Liên kết chính sách với sự kiện giám sát
 
-System Logs cho phép tập trung các sự kiện cần chú ý bằng cách chọn mức độ và điều kiện lọc. @fig-cams-critical-log minh họa kết quả lọc các mức 0, 1, 2 và 3. Kết quả này thể hiện khả năng truy vấn nhật ký, nhưng không đủ để kết luận phần mềm đã phát hiện một cuộc tấn công.
+Sau khi thiết bị áp dụng chính sách, System Logs cung cấp điểm đối chiếu sự kiện theo nguồn, mức độ nghiêm trọng, mã phân hệ và nội dung. @fig-cams-critical-log minh họa kết quả lọc các mức 0, 1, 2 và 3. Kết quả lọc chứng minh khả năng truy vấn nhật ký, nhưng không tự chứng minh phần mềm đã phát hiện một cuộc tấn công.
 
 #figure(
   image("/00_book/figures/gui/chapter-13/05-critical-filter-result.png", width: 100%),
@@ -117,21 +123,39 @@ System Logs cho phép tập trung các sự kiện cần chú ý bằng cách ch
 
 Ngưỡng gửi trên thiết bị và bộ lọc hiển thị có ý nghĩa khác nhau: ngưỡng gửi thường bao gồm mức đã chọn cùng các mức nghiêm trọng hơn, còn bộ lọc trong CAMS chọn các mức cụ thể. Khi điều tra, người dùng cần đọc nội dung, nguồn và chuỗi thời gian thay vì kết luận chỉ dựa trên màu hoặc mức độ nghiêm trọng.
 
-Trong phạm vi hiện tại, CAMS hỗ trợ phân tích dấu hiệu bất thường qua nhật ký, kiểm tra chính sách và gửi cảnh báo Syslog qua thư điện tử. Hệ thống chưa hoàn thiện bộ tương quan sự kiện, khả năng phát hiện xâm nhập bằng phân tích gói tin hoặc cảnh báo qua SMS.
+Trong phạm vi hiện tại, CAMS hỗ trợ khoanh vùng dấu hiệu bất thường qua nhật ký, đối chiếu chính sách và gửi cảnh báo thư điện tử. Hệ thống chưa có bộ tương quan sự kiện hoàn chỉnh, chưa phát hiện xâm nhập bằng phân tích gói tin và chưa hỗ trợ cảnh báo qua SMS.
 
-== Tiện ích vận hành và bảo vệ dự án
+== Hiện thực tiện ích vận hành và bảo vệ dữ liệu dự án
 
-SFTP cung cấp hai khung tệp cục bộ và từ xa, xác nhận khóa máy chủ và hàng đợi truyền nền. Đầu cuối đồng hành cung cấp phiên CLI phục vụ thao tác trực tiếp. Sau thay đổi thủ công, cần đồng bộ lại để dữ liệu trong CAMS phản ánh cấu hình mới.
+=== Truyền tệp và đầu cuối
 
-Không gian làm việc lưu dữ liệu và lịch sử sao lưu trong gói `.ntp`, hỗ trợ điểm khôi phục cùng tùy chọn bảo vệ bằng Argon2id và AES-256-GCM. 
+`SftpController` điều phối không gian truyền tệp gồm hai khung cục bộ và từ xa, danh sách kết nối đã lưu, hàng đợi truyền cùng nhật ký thao tác. Bên cạnh SFTP, CAMS hỗ trợ giao thức sao chép an toàn (Secure Copy Protocol – SCP). Các lời gọi SFTP/SCP chạy ngoài luồng giao diện và được tuần tự hóa vì phiên Paramiko không an toàn khi nhiều luồng cùng sử dụng. Với máy chủ chưa biết, ứng dụng hiển thị loại khóa và dấu vân tay để người dùng xác nhận trước khi ghi vào `known_hosts`.
 
-Các trường mật khẩu thiết bị được bảo vệ theo định dạng `ENC$v2$` với AES-256-GCM và AAD gắn ngữ cảnh `host:column`. Với bản ghi phiên bản 2, hoán đổi bản mã sang ngữ cảnh khác làm xác minh thẻ thất bại. Khi có mật khẩu dự án, khóa được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn; khi không có mật khẩu, mã nguồn sử dụng khóa HKDF từ dữ liệu cục bộ nên không có cùng mức bảo vệ dựa trên bí mật người dùng. Ghi đè mảng byte khi hủy khóa không bảo đảm xóa được mọi bản sao trong bộ nhớ @cryptographyAeadDocs @rfc9106 @nistSp80038d.
+Đầu cuối Alacritty chạy như tiến trình đồng hành và trao đổi trạng thái phiên với CAMS qua NTTP/1. Công cụ này phục vụ chẩn đoán hoặc thao tác CLI trực tiếp, không đi qua dữ liệu chờ và cửa sổ *View & Push*. Vì vậy, sau khi thay đổi cấu hình thủ công, người quản trị cần đồng bộ lại để cơ sở dữ liệu phản ánh trạng thái mới của thiết bị.
 
-Mật khẩu ứng dụng thư điện tử (`sender_app_password`) trong `alert_settings.json` cũng được mã hóa bằng AES-256-GCM và tệp được đặt quyền `0600`. Mã hóa trường xác thực khác với tùy chọn mã hóa toàn gói `.ntp`: gói chỉ được mã hóa khi người dùng chọn bảo vệ bằng mật khẩu. `.ntp` là phần mở rộng dự án của CAMS, không phải giao thức đồng bộ thời gian NTP. Khôi phục không gian làm việc không tự động hoàn tác cấu hình thiết bị; các kịch bản ở Chương 5 chưa kiểm thử riêng toàn bộ cơ chế mật mã này.
+=== Đóng gói không gian làm việc và điểm khôi phục
+
+`WorkspaceService` quản lý vòng đời tạo, mở, lưu và đóng dự án. Gói `.ntp` chứa tệp mô tả, hai cơ sở dữ liệu SQLite, dữ liệu sao lưu cấu hình và các snapshot của không gian làm việc. Mỗi snapshot lưu trạng thái nhất quán cần thiết cho việc khôi phục; số snapshot tự động được giới hạn theo chính sách lưu giữ để tránh tăng kích thước gói không kiểm soát.
+
+Khi khôi phục, hệ thống kiểm tra snapshot, tạo một điểm an toàn cho trạng thái hiện tại, thay thế dữ liệu trong không gian làm việc rồi ghi lại gói theo cơ chế thay thế nguyên tử. Thao tác này chỉ khôi phục dữ liệu dự án; nó không tự gửi lệnh hoàn tác xuống thiết bị. Phần mở rộng `.ntp` là định dạng dự án của CAMS, không liên quan đến giao thức đồng bộ thời gian NTP.
+
+=== Bảo vệ thông tin xác thực
+
+Mô-đun `credential_cipher` mã hóa mật khẩu thiết bị theo định dạng `ENC$v2$` bằng AES-256-GCM. Dữ liệu xác thực bổ sung gắn bản mã với ngữ cảnh `host:column`, nhờ đó bản mã bị chuyển sang thiết bị hoặc trường khác sẽ không vượt qua bước xác minh thẻ. Khi dự án có mật khẩu, khóa được dẫn xuất bằng Argon2id; nếu không có mật khẩu, hệ thống dùng khóa HKDF từ dữ liệu cục bộ và không đạt cùng mức bảo vệ dựa trên bí mật người dùng @cryptographyAeadDocs @rfc9106 @nistSp80038d.
+
+Mật khẩu ứng dụng thư điện tử trong `alert_settings.json` được xử lý qua cùng giao diện mã hóa với ngữ cảnh `smtp:sender_app_password`. Tệp được ghi bằng thao tác thay thế và đặt quyền `0600` trên hệ điều hành hỗ trợ. Đây là bảo vệ ở mức trường dữ liệu, khác với mã hóa toàn bộ gói dự án.
+
+=== Bảo vệ toàn bộ gói dự án
+
+Khi người dùng đặt mật khẩu dự án, mô-đun `workspace.crypto` mã hóa tải ZIP của gói `.ntp` bằng AES-256-GCM. Khóa 256 bit được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn. Phần đầu có phiên bản chứa dấu nhận dạng `NTPAES1`, tham số dẫn xuất khóa, nonce và độ dài dữ liệu; phần đầu này được xác thực cùng bản mã. Dự án không có mật khẩu vẫn được đóng gói nhưng toàn bộ gói không được mã hóa.
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),
   caption: [Phần đầu tệp dự án được bảo vệ, quan sát bằng công cụ xxd],
 ) <fig-cams-encrypted-project>
 
-@fig-cams-encrypted-project cho thấy dấu nhận dạng `NTPAES1` và phần thông tin đầu tệp, gồm thuật toán AES-256-GCM, hàm dẫn xuất khóa Argon2id cùng các tham số liên quan. Phần thông tin này có thể đọc được để phục vụ xử lý tệp; ảnh minh họa cấu trúc lưu trữ, không thay thế kiểm thử mã hóa và giải mã. Chương 5 trình bày các kịch bản kiểm chứng chức năng.
+@fig-cams-encrypted-project cho thấy dấu nhận dạng và phần thông tin có thể đọc để bộ giải mã xác định định dạng. Hình chỉ minh họa cấu trúc lưu trữ, không chứng minh quy trình mở gói đúng mật khẩu, từ chối sai mật khẩu hoặc phát hiện bản mã bị sửa. Các cơ chế này chưa có kịch bản kiểm thử riêng trong Chương 5.
+
+== Tiểu kết chương
+
+Chương 4 đã ánh xạ thiết kế ở Chương 3 vào các mô-đun hiện thực: QML và PyQt6 cho giao diện, SQLite cho trạng thái, tác vụ nền cho kết nối cùng các dịch vụ riêng cho Syslog, SFTP và không gian làm việc. Các nhóm nghiệp vụ dùng chung bước kiểm duyệt và trả kết quả theo thiết bị. Chương 5 tiếp tục đánh giá bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký.

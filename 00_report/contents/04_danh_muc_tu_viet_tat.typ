@@ -84,6 +84,7 @@
   [RFC], [Request for Comments], [Tài liệu tiêu chuẩn và đặc tả kỹ thuật Internet],
   [RSTP], [Rapid Spanning Tree Protocol], [Giao thức cây bao trùm hội tụ nhanh],
   [RTT], [Round-Trip Time], [Thời gian khứ hồi],
+  [SCP], [Secure Copy Protocol], [Giao thức sao chép tệp an toàn qua SSH],
   [SFTP], [SSH File Transfer Protocol], [Giao thức truyền tệp an toàn qua SSH],
   [SHA], [Secure Hash Algorithm], [Thuật toán băm an toàn],
   [SMTP], [Simple Mail Transfer Protocol], [Giao thức truyền thư điện tử],
