@@ -23,18 +23,19 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
 
 SFTP, đầu cuối và chức năng đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
 
+#pagebreak(weak: true)
 === Mô hình ca sử dụng
 
-Các ca sử dụng chính được xác định trong ranh giới CAMS như @fig-use-case-cams. Người quản trị khởi tạo thao tác; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký; máy chủ SFTP và SMTP cung cấp dịch vụ bên ngoài. Nhóm ca quản lý cấu hình đi theo chuỗi đồng bộ trạng thái, chuẩn bị dữ liệu mong muốn, xem trước lệnh, triển khai và xác minh. Truyền tệp và đóng gói dự án hỗ trợ vận hành nhưng không thay thế các bước kiểm tra cấu hình trên thiết bị.
+Các ca sử dụng chính được xác định trong ranh giới CAMS như @fig-use-case-cams. Người quản trị khởi tạo thao tác; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký; máy chủ SFTP và SMTP cung cấp dịch vụ bên ngoài. Nhóm ca quản lý cấu hình đi theo chuỗi đồng bộ trạng thái, chuẩn bị dữ liệu mong muốn, xem trước lệnh, triển khai và xác minh. Truyền tệp, đầu cuối và cảnh báo thư điện tử hỗ trợ vận hành nhưng không thay thế các bước kiểm tra cấu hình trên thiết bị.
 
 #figure(
   image("/00_book/figures/report/diagrams/23_use_case_cams.svg", width: 92%),
   caption: [Sơ đồ ca sử dụng chính của CAMS và các hệ thống bên ngoài],
 ) <fig-use-case-cams>
 
-Ranh giới trên giúp phân biệt trách nhiệm của CAMS với phản hồi do thiết bị hoặc dịch vụ ngoài cung cấp. Ví dụ, CAMS có thể kiểm tra tham số và ghi nhận phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra trạng thái hoặc lưu lượng thử phù hợp. Cách phân tách này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
+Quan hệ `<<include>>` cho biết ca sử dụng bên trái luôn bao hàm bước xử lý ở bên phải trong luồng tương ứng; ký hiệu này không biểu diễn thứ tự thời gian. Ranh giới hệ thống giúp phân biệt trách nhiệm của CAMS với phản hồi do thiết bị hoặc dịch vụ ngoài cung cấp. Ví dụ, CAMS có thể kiểm tra tham số và ghi nhận phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra trạng thái hoặc lưu lượng thử phù hợp. Cách phân tách này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
 
-
+#pagebreak(weak: true)
 == Yêu cầu phi chức năng
 
 - *Khả năng phản hồi:* các tác vụ mạng chạy nền; giao diện hiển thị tiến trình và kết quả thay vì chờ đồng bộ trên luồng chính.
@@ -59,6 +60,7 @@ Bộ thu Syslog C++ và đầu cuối Alacritty là các tiến trình đồng h
 
 Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
 
+#pagebreak(weak: true)
 == Luồng quản lý và tự động hóa cấu hình
 
 === Đồng bộ trạng thái cơ sở
@@ -80,6 +82,7 @@ Luồng *View & Push* được mô tả tại @fig-state-flow. Bộ điều khi�
 
 Trình tự trao đổi chi tiết được thể hiện tại @fig-view-push-sequence. Giao diện chỉ tạo tác vụ thực thi sau khi người dùng xác nhận bản xem trước. Tác vụ nền lấy khóa của phiên thiết bị, gửi lệnh, nhận phản hồi và cập nhật trạng thái liên quan. Kết quả được trả riêng theo thiết bị để một lỗi không che khuất kết quả của các thiết bị còn lại.
 
+#pagebreak(weak: true)
 #figure(
   image("/00_book/figures/report/diagrams/24_view_push_sequence.svg", width: 100%),
   caption: [Sơ đồ tuần tự của quy trình View \& Push],
@@ -91,6 +94,7 @@ Luồng *View & Push* xác định thứ tự tương tác giữa người dùng
 
 
 
+#pagebreak(weak: true)
 == Luồng giám sát và khai thác cảnh báo
 
 Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn và tiếp nhận Syslog do thiết bị gửi. Luồng Syslog gồm cấu hình địa chỉ đích trên thiết bị, khởi động bộ thu nhận tại CAMS, phân tích và lưu bản tin vào cơ sở dữ liệu, sau đó hiển thị kết quả trên giao diện.
@@ -104,6 +108,7 @@ Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiê
   caption: [Sơ đồ tuần tự thu nhận, lưu trữ và khai thác Syslog],
 ) <fig-syslog-sequence>
 
+#pagebreak(weak: true)
 == Thiết kế cơ chế an ninh phân quyền và bảo mật dữ liệu
 
 CAMS kiểm soát quyền thực thi trên thiết bị và bảo vệ dữ liệu xác thực khi lưu trữ. Hai cơ chế này có phạm vi khác nhau: quyền thiết bị do Cisco IOS quyết định, còn mã hóa cục bộ phụ thuộc vào khóa của phiên dự án.
@@ -160,7 +165,7 @@ Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `
   caption: [Các bảng và khóa đại diện trong lược đồ dữ liệu CAMS],
 ) <tab-core-erd>
 
-@fig-core-erd chỉ thể hiện các khóa ngoại đã khai báo trong nhóm lược đồ `device_network`. Mũi tên đi từ bảng cha đến bảng con. Trong đó, `t05_router_iface_acl` tham chiếu đồng thời cổng mạng và ACL; `t10_syslog_servers` tham chiếu thiết bị qua `device_host`. Bảng `t12_syslog_messages` thuộc `info_collected.db`; trường `device_host` ở bảng này chỉ phục vụ đối chiếu logic và không phải khóa ngoại liên cơ sở dữ liệu.
+@fig-core-erd chỉ thể hiện các khóa ngoại đã khai báo trong nhóm lược đồ `device_network`. Mỗi mũi tên đi từ bảng được tham chiếu (bảng cha) đến bảng chứa khóa ngoại (bảng con). Phần lớn là quan hệ một-nhiều: một bản ghi cha có thể chưa có hoặc có nhiều bản ghi con. Riêng `t02_interface_name` đến `t02_router_iface_l3` là quan hệ một-tối-đa-một vì mỗi cổng chỉ có tối đa một bản ghi cấu hình Lớp 3. Trong đó, `t05_router_iface_acl` tham chiếu đồng thời cổng mạng và ACL; `t10_syslog_servers` tham chiếu thiết bị qua `device_host`. Bảng `t12_syslog_messages` thuộc `info_collected.db`; trường `device_host` ở bảng này chỉ phục vụ đối chiếu logic và không phải khóa ngoại liên cơ sở dữ liệu.
 
 #figure(
   image("/00_book/figures/report/diagrams/review-core-erd.svg", width: 100%),

@@ -5,8 +5,8 @@
     </marker>
     <style>
       text { font-family: 'Liberation Sans', Arial, sans-serif; fill: #000000; }
-      .head { font-size: 18px; font-weight: 700; }
-      .label { font-size: 15px; }
+      .head { font-size: 21px; font-weight: 700; }
+      .label { font-size: 19px; }
       .box { fill: #ffffff; stroke: #000000; stroke-width: 1.5; }
       .life { stroke: #000000; stroke-width: 1.3; stroke-dasharray: 7 5; }
       .msg { stroke: #000000; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
@@ -24,18 +24,18 @@
 
   <path class="life" d="M100 78V690M300 78V690M500 78V690M700 78V690M900 78V690M1100 78V690"/>
 
-  <path class="msg" d="M100 118H300"/><text class="label" x="200" y="108" text-anchor="middle">1. Chọn thiết bị và chức năng</text>
-  <path class="msg" d="M300 165H500"/><text class="label" x="400" y="155" text-anchor="middle">2. Yêu cầu dữ liệu chờ</text>
+  <path class="msg" d="M100 118H300"/><text class="label" x="200" y="90" text-anchor="middle"><tspan x="200">1. Chọn thiết bị</tspan><tspan x="200" dy="19">và chức năng</tspan></text>
+  <path class="msg" d="M300 165H500"/><text class="label" x="400" y="137" text-anchor="middle"><tspan x="400">2. Yêu cầu</tspan><tspan x="400" dy="19">dữ liệu chờ</tspan></text>
   <path class="msg" d="M500 212H700"/><text class="label" x="600" y="202" text-anchor="middle">3. Đọc bản ghi</text>
-  <path class="reply" d="M700 259H500"/><text class="label" x="600" y="249" text-anchor="middle">4. Trả dữ liệu chờ</text>
-  <path class="reply" d="M500 306H300"/><text class="label" x="400" y="296" text-anchor="middle">5. Sinh bản xem trước</text>
+  <path class="reply" d="M700 259H500"/><text class="label" x="600" y="231" text-anchor="middle"><tspan x="600">4. Trả dữ liệu</tspan><tspan x="600" dy="19">chờ</tspan></text>
+  <path class="reply" d="M500 306H300"/><text class="label" x="400" y="278" text-anchor="middle"><tspan x="400">5. Sinh bản</tspan><tspan x="400" dy="19">xem trước</tspan></text>
   <path class="msg" d="M100 353H300"/><text class="label" x="200" y="343" text-anchor="middle">6. Xác nhận Push</text>
-  <path class="msg" d="M300 400H900"/><text class="label" x="600" y="390" text-anchor="middle">7. Tạo tác vụ nền kèm thiết bị đích</text>
-  <path class="msg" d="M900 447H1100"/><text class="label" x="1000" y="437" text-anchor="middle">8. Khóa phiên, gửi lệnh</text>
+  <path class="msg" d="M300 400H900"/><text class="label" x="600" y="372" text-anchor="middle"><tspan x="600">7. Tạo tác vụ nền</tspan><tspan x="600" dy="19">kèm thiết bị đích</tspan></text>
+  <path class="msg" d="M900 447H1100"/><text class="label" x="1000" y="419" text-anchor="middle"><tspan x="1000">8. Khóa phiên</tspan><tspan x="1000" dy="19">và gửi lệnh</tspan></text>
   <path class="reply" d="M1100 494H900"/><text class="label" x="1000" y="484" text-anchor="middle">9. Phản hồi CLI</text>
-  <path class="msg" d="M900 541H700"/><text class="label" x="800" y="531" text-anchor="middle">10. Cập nhật trạng thái</text>
-  <path class="reply" d="M900 588H300"/><text class="label" x="600" y="578" text-anchor="middle">11. Trả kết quả theo thiết bị</text>
-  <path class="reply" d="M300 635H100"/><text class="label" x="200" y="625" text-anchor="middle">12. Hiển thị kết quả</text>
+  <path class="msg" d="M900 541H700"/><text class="label" x="800" y="513" text-anchor="middle"><tspan x="800">10. Cập nhật</tspan><tspan x="800" dy="19">trạng thái</tspan></text>
+  <path class="reply" d="M900 588H300"/><text class="label" x="600" y="560" text-anchor="middle"><tspan x="600">11. Trả kết quả</tspan><tspan x="600" dy="19">theo thiết bị</tspan></text>
+  <path class="reply" d="M300 635H100"/><text class="label" x="200" y="607" text-anchor="middle"><tspan x="200">12. Hiển thị</tspan><tspan x="200" dy="19">kết quả</tspan></text>
 
   <rect class="note" x="350" y="690" width="500" height="48" rx="6"/>
   <text class="label" x="600" y="710" text-anchor="middle">Nếu thực thi lỗi hoặc chỉ thành công một phần, CAMS giữ thông tin</text>

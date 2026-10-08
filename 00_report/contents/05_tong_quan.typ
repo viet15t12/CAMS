@@ -58,8 +58,4 @@ Các nội dung chưa được đánh giá trong phạm vi kiểm chứng gồm 
 
 Quá trình kiểm chứng kết hợp kiểm thử các thành phần xử lý dữ liệu, sinh lệnh và giao tiếp giữa các lớp với thực nghiệm trên EVE-NG. Các tiêu chí đánh giá gồm tính đúng đắn của cấu hình, kết quả thực thi, khả năng thu nhận nhật ký và phản hồi khi xảy ra lỗi. Chương 5 trình bày các kịch bản hiện có; những chỉ tiêu chưa có dữ liệu đo tái lập được ghi nhận là chưa kiểm chứng trong phần kết luận.
 
-== Sản phẩm và bố cục báo cáo
 
-Sản phẩm của đề tài gồm phần mềm CAMS, báo cáo thuyết minh, tài liệu hướng dẫn sử dụng và các kịch bản kiểm thử. Đóng góp chính là tổ chức quy trình quản trị từ danh mục thiết bị đến cấu hình và giám sát trong một không gian làm việc. Người dùng chuẩn bị thay đổi, kiểm duyệt lệnh qua *View & Push*, theo dõi kết quả và đối chiếu với trạng thái hoặc nhật ký thu được.
-
-Báo cáo gồm sáu chương: giới thiệu đề tài; cơ sở lý thuyết và công nghệ; phân tích và thiết kế; xây dựng phần mềm; thử nghiệm và đánh giá; kết luận và hướng phát triển. Các thao tác chi tiết được trình bày riêng trong tài liệu hướng dẫn sử dụng.

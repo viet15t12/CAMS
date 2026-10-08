@@ -1,4 +1,4 @@
-#import "../config/tables.typ": report-table
+#import "../config/tables.typ": report-table, table-code
 
 === Kịch bản 5: Kiểm chứng chính sách ACL và nhật ký an ninh tập trung
 
@@ -41,15 +41,16 @@ Hai ACL mở rộng được cấu hình trên R1. ACL thứ nhất được g�
 ACL thứ hai được gắn chiều vào trên `GigabitEthernet0/1.20` và `GigabitEthernet0/1.30`. Luật số 10 từ chối TCP/80 từ VLAN 20 đến máy chủ `203.162.4.1`; luật số 20 từ chối ICMP từ VLAN 30 đến cùng máy chủ; luật số 30 cho phép các lưu lượng IP còn lại. Mỗi luật do CAMS sinh đều có từ khóa `log`, nên Cisco IOS tạo sự kiện `%SEC-6-IPACCESSLOGP` hoặc `%SEC-6-IPACCESSLOGDP` khi có lưu lượng khớp.
 
 #report-table(
-  columns: (15%, 18%, 29%, 21%, 17%),
-  text-size: 9.5pt,
+  columns: (14%, 21%, 27%, 20%, 18%),
+  text-size: 9pt,
+  cell-inset: (x: 4pt, y: 4pt),
   header: ([ACL / luật], [Nguồn], [Đích và dịch vụ], [Hành động], [Vị trí]),
   rows: (
-    ([V10 / 10], [`192.168.10.0/24`], [`192.168.12.2`, TCP/23], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.10`]),
-    ([V10 / 20], [`any`], [`any`, IP], [Cho phép, ghi nhật ký], [Chiều vào `Gi0/1.10`]),
-    ([V20-V30 / 10], [`192.168.20.0/24`], [`203.162.4.1`, TCP/80], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.20`]),
-    ([V20-V30 / 20], [`192.168.30.0/24`], [`203.162.4.1`, ICMP], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.30`]),
-    ([V20-V30 / 30], [`any`], [`any`, IP], [Cho phép, ghi nhật ký], [Chiều vào `Gi0/1.20` và `.30`]),
+    ([V10 / 10], [#table-code("192.168.10.0/24")], [#table-code("192.168.12.2"), TCP/23], [Từ chối; ghi log], [Vào #table-code("Gi0/1.10")]),
+    ([V10 / 20], [#table-code("any")], [#table-code("any"), IP], [Cho phép; ghi log], [Vào #table-code("Gi0/1.10")]),
+    ([V20-V30 / 10], [#table-code("192.168.20.0/24")], [#table-code("203.162.4.1"), TCP/80], [Từ chối; ghi log], [Vào #table-code("Gi0/1.20") và #table-code("Gi0/1.30")]),
+    ([V20-V30 / 20], [#table-code("192.168.30.0/24")], [#table-code("203.162.4.1"), ICMP], [Từ chối; ghi log], [Vào #table-code("Gi0/1.20") và #table-code("Gi0/1.30")]),
+    ([V20-V30 / 30], [#table-code("any")], [#table-code("any"), IP], [Cho phép; ghi log], [Vào #table-code("Gi0/1.20") và #table-code("Gi0/1.30")]),
   ),
   caption: [Ma trận chính sách ACL được kiểm chứng],
 ) <tab-k5-acl-policy>

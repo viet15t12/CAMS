@@ -5,10 +5,9 @@
     </marker>
     <style>
       text { font-family: 'Liberation Sans', Arial, sans-serif; fill: #000000; }
-      .title { font-size: 19px; font-weight: 700; }
-      .key { font-size: 14px; }
-      .card { font-size: 13px; }
-      .note { font-size: 15px; }
+      .title { font-size: 22px; font-weight: 700; }
+      .key { font-size: 17px; }
+      .note { font-size: 18px; }
       .box { fill: #ffffff; stroke: #000000; stroke-width: 1.5; }
       .bus { fill: none; stroke: #000000; stroke-width: 1.5; }
       .rel { fill: none; stroke: #000000; stroke-width: 1.5; marker-end: url(#arrow); }
@@ -51,11 +50,6 @@
   <path class="rel" d="M700 126V176"/>
   <path class="rel" d="M980 126V176"/>
   <path class="rel" d="M1260 126V166"/>
-  <text class="card" x="151" y="158">1 → 0..n</text>
-  <text class="card" x="431" y="158">1 → 0..n</text>
-  <text class="card" x="711" y="158">1 → 0..n</text>
-  <text class="card" x="991" y="158">1 → 0..n</text>
-  <text class="card" x="1271" y="153">1 → 0..n</text>
 
   <!-- Các bảng con cấp hai -->
   <rect class="box" x="20" y="350" width="240" height="76" rx="8"/>
@@ -78,10 +72,6 @@
   <path class="rel" d="M420 256V346"/>
   <path class="rel" d="M700 256V346"/>
   <path class="rel" d="M980 256V346"/>
-  <text class="card" x="151" y="316">1 → 0..1</text>
-  <text class="card" x="431" y="316">1 → 0..n</text>
-  <text class="card" x="711" y="316">1 → 0..n</text>
-  <text class="card" x="991" y="316">1 → 0..n</text>
 
   <!-- Bảng gắn ACL vào cổng, có hai khóa ngoại -->
   <rect class="box" x="480" y="555" width="440" height="88" rx="8"/>
@@ -91,10 +81,8 @@
 
   <!-- Tuyến riêng tránh mọi khối cấp hai -->
   <path class="rel" d="M260 218H275V599H476"/>
-  <path class="rel" d="M820 218H940V599H924"/>
-  <text class="card" x="286" y="586">1 → 0..n</text>
-  <text class="card" x="838" y="586">1 → 0..n</text>
-
-  <text class="note" x="700" y="701" text-anchor="middle">Mũi tên biểu diễn khóa ngoại từ bảng cha đến bảng con; mọi quan hệ đều được đối chiếu từ lược đồ device_network.</text>
-  <text class="note" x="700" y="729" text-anchor="middle">Bản tin Syslog nhận được thuộc info_collected.db nên không xuất hiện trong sơ đồ khóa ngoại này.</text>
+  <path class="rel" d="M820 218H835V520H820V551"/>
+  <text class="note" x="700" y="696" text-anchor="middle">Mỗi mũi tên đi từ bảng được tham chiếu (bảng cha) đến bảng chứa khóa ngoại (bảng con).</text>
+  <text class="note" x="700" y="720" text-anchor="middle">Phần lớn là quan hệ một-nhiều; riêng interface_name đến router_iface_l3 là quan hệ một-tối đa-một.</text>
+  <text class="note" x="700" y="744" text-anchor="middle">Bản tin Syslog nhận được thuộc info_collected.db nên không xuất hiện trong sơ đồ này.</text>
 </svg>

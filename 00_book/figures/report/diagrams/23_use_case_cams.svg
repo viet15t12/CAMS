@@ -1,63 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
   <defs>
+    <marker id="include-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#000000"/>
+    </marker>
     <style>
       text { font-family: 'Liberation Sans', Arial, sans-serif; fill: #000000; }
-      .title { font-size: 22px; font-weight: 700; }
-      .label { font-size: 17px; }
-      .actor-label { font-size: 18px; font-weight: 700; }
-      .boundary, .usecase, .actor-box { fill: #ffffff; stroke: #000000; stroke-width: 1.6; }
+      .title { font-size: 29px; font-weight: 700; }
+      .label { font-size: 23px; }
+      .relation-label { font-size: 18px; font-style: italic; }
+      .actor-label { font-size: 24px; font-weight: 700; }
+      .boundary, .usecase, .actor-box { fill: #ffffff; stroke: #000000; stroke-width: 1.7; }
       .assoc { fill: none; stroke: #000000; stroke-width: 1.5; }
+      .include { fill: none; stroke: #000000; stroke-width: 1.4; stroke-dasharray: 7 5; marker-end: url(#include-arrow); }
     </style>
   </defs>
 
-  <rect class="boundary" x="230" y="30" width="700" height="620" rx="8"/>
-  <text class="title" x="580" y="62" text-anchor="middle">Hệ thống CAMS</text>
+  <!-- Ranh giới hệ thống -->
+  <rect class="boundary" x="235" y="28" width="850" height="744" rx="9"/>
+  <text class="title" x="660" y="63" text-anchor="middle">Hệ thống CAMS</text>
 
-  <circle cx="105" cy="270" r="24" class="actor-box"/>
-  <path class="assoc" d="M105 294V380M55 325H155M105 380L62 438M105 380L148 438"/>
-  <text class="actor-label" x="105" y="474" text-anchor="middle">Người quản trị</text>
+  <!-- Tác nhân chính -->
+  <circle cx="105" cy="330" r="25" class="actor-box"/>
+  <path class="assoc" d="M105 355V445M52 388H158M105 445L62 505M105 445L148 505"/>
+  <text class="actor-label" x="105" y="542" text-anchor="middle">Người quản trị</text>
 
-  <rect class="actor-box" x="985" y="105" width="180" height="72" rx="8"/>
-  <text class="actor-label" x="1075" y="136" text-anchor="middle">Thiết bị mạng</text>
-  <text class="label" x="1075" y="160" text-anchor="middle">Router / Switch</text>
+  <!-- Các hệ thống ngoài -->
+  <rect class="actor-box" x="1145" y="105" width="220" height="82" rx="8"/>
+  <text class="actor-label" x="1255" y="138" text-anchor="middle">Thiết bị mạng</text>
+  <text class="label" x="1255" y="164" text-anchor="middle">Router / Switch</text>
 
-  <rect class="actor-box" x="985" y="485" width="180" height="82" rx="8"/>
-  <text class="actor-label" x="1075" y="516" text-anchor="middle">Dịch vụ ngoài</text>
-  <text class="label" x="1075" y="543" text-anchor="middle">SFTP / SMTP</text>
+  <rect class="actor-box" x="1145" y="520" width="220" height="76" rx="8"/>
+  <text class="actor-label" x="1255" y="552" text-anchor="middle">Máy chủ SFTP</text>
+  <text class="label" x="1255" y="578" text-anchor="middle">Truyền tệp</text>
 
-  <ellipse class="usecase" cx="410" cy="130" rx="135" ry="42"/>
-  <text class="label" x="410" y="124" text-anchor="middle">Quản lý dự án</text>
-  <text class="label" x="410" y="147" text-anchor="middle">và danh mục thiết bị</text>
+  <rect class="actor-box" x="1145" y="650" width="220" height="76" rx="8"/>
+  <text class="actor-label" x="1255" y="682" text-anchor="middle">Máy chủ SMTP</text>
+  <text class="label" x="1255" y="708" text-anchor="middle">Gửi thư cảnh báo</text>
 
-  <ellipse class="usecase" cx="750" cy="130" rx="135" ry="42"/>
-  <text class="label" x="750" y="124" text-anchor="middle">Đồng bộ trạng thái</text>
-  <text class="label" x="750" y="147" text-anchor="middle">từ thiết bị</text>
+  <!-- Các ca sử dụng do người quản trị khởi tạo -->
+  <ellipse class="usecase" cx="430" cy="145" rx="145" ry="48"/>
+  <text class="label" x="430" y="139" text-anchor="middle">Quản lý dự án và</text>
+  <text class="label" x="430" y="164" text-anchor="middle">danh mục thiết bị</text>
 
-  <ellipse class="usecase" cx="410" cy="270" rx="135" ry="42"/>
-  <text class="label" x="410" y="264" text-anchor="middle">Chuẩn bị và xem trước</text>
-  <text class="label" x="410" y="287" text-anchor="middle">cấu hình mong muốn</text>
+  <ellipse class="usecase" cx="430" cy="310" rx="145" ry="48"/>
+  <text class="label" x="430" y="304" text-anchor="middle">Chuẩn bị cấu hình mạng</text>
+  <text class="label" x="430" y="329" text-anchor="middle">và chính sách bảo mật</text>
 
-  <ellipse class="usecase" cx="750" cy="270" rx="135" ry="42"/>
-  <text class="label" x="750" y="264" text-anchor="middle">Triển khai</text>
-  <text class="label" x="750" y="287" text-anchor="middle">cấu hình</text>
+  <ellipse class="usecase" cx="430" cy="475" rx="145" ry="48"/>
+  <text class="label" x="430" y="469" text-anchor="middle">Giám sát trạng thái và</text>
+  <text class="label" x="430" y="494" text-anchor="middle">nhật ký Syslog</text>
 
-  <ellipse class="usecase" cx="410" cy="410" rx="135" ry="42"/>
-  <text class="label" x="410" y="404" text-anchor="middle">Xem trạng thái, kết quả</text>
-  <text class="label" x="410" y="427" text-anchor="middle">và nhật ký</text>
+  <ellipse class="usecase" cx="430" cy="640" rx="145" ry="48"/>
+  <text class="label" x="430" y="634" text-anchor="middle">Truyền tệp SFTP và</text>
+  <text class="label" x="430" y="659" text-anchor="middle">sử dụng đầu cuối</text>
 
-  <ellipse class="usecase" cx="750" cy="410" rx="135" ry="42"/>
-  <text class="label" x="750" y="404" text-anchor="middle">Xác minh trạng thái</text>
-  <text class="label" x="750" y="427" text-anchor="middle">sau triển khai</text>
+  <!-- Các ca sử dụng được bao hàm trong luồng chính -->
+  <ellipse class="usecase" cx="850" cy="145" rx="145" ry="48"/>
+  <text class="label" x="850" y="139" text-anchor="middle">Đồng bộ trạng thái</text>
+  <text class="label" x="850" y="164" text-anchor="middle">từ thiết bị</text>
 
-  <ellipse class="usecase" cx="410" cy="550" rx="135" ry="42"/>
-  <text class="label" x="410" y="544" text-anchor="middle">Truyền tệp và</text>
-  <text class="label" x="410" y="567" text-anchor="middle">đóng gói dự án</text>
+  <ellipse class="usecase" cx="850" cy="310" rx="145" ry="48"/>
+  <text class="label" x="850" y="304" text-anchor="middle">Xem trước và triển khai</text>
+  <text class="label" x="850" y="329" text-anchor="middle">cấu hình</text>
 
-  <ellipse class="usecase" cx="750" cy="550" rx="135" ry="42"/>
-  <text class="label" x="750" y="544" text-anchor="middle">Thu nhận Syslog</text>
-  <text class="label" x="750" y="567" text-anchor="middle">và phát cảnh báo</text>
+  <ellipse class="usecase" cx="850" cy="475" rx="145" ry="48"/>
+  <text class="label" x="850" y="469" text-anchor="middle">Xác minh trạng thái</text>
+  <text class="label" x="850" y="494" text-anchor="middle">sau triển khai</text>
 
-  <path class="assoc" d="M155 325L275 140M155 325L275 270M155 325L275 410M155 325L275 540"/>
-  <path class="assoc" d="M985 141L885 130M985 141L885 270M985 141L885 410M985 141L885 540"/>
-  <path class="assoc" d="M985 526L885 550M985 526V625H410V592"/>
+  <ellipse class="usecase" cx="850" cy="640" rx="145" ry="48"/>
+  <text class="label" x="850" y="634" text-anchor="middle">Phát cảnh báo</text>
+  <text class="label" x="850" y="659" text-anchor="middle">qua thư điện tử</text>
+
+  <!-- Liên kết của tác nhân chính -->
+  <path class="assoc" d="M158 388L285 145M158 388L285 310M158 388L285 475M158 388L285 640"/>
+
+  <!-- Quan hệ bao hàm giữa các ca sử dụng -->
+  <path class="include" d="M575 145H701"/>
+  <text class="relation-label" x="638" y="133" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+  <path class="include" d="M575 310H701"/>
+  <text class="relation-label" x="638" y="298" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+  <path class="include" d="M575 475H701"/>
+  <text class="relation-label" x="638" y="463" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+  <path class="include" d="M555 505L735 605"/>
+  <text class="relation-label" x="650" y="548" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+
+  <!-- Liên kết tới các hệ thống ngoài -->
+  <path class="assoc" d="M995 145H1145M995 310L1145 165M995 475L1145 176"/>
+  <path class="assoc" d="M575 640V735H1110V558H1145"/>
+  <path class="assoc" d="M995 640H1145"/>
 </svg>

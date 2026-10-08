@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650">
   <defs>
     <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#000000"/></marker>
-    <style>text{font-family:'Liberation Sans',sans-serif;fill:#000000}.head{font-size:22px;font-weight:700}.label{font-size:18px}.life{stroke:#000000;stroke-dasharray:7 5}.msg{stroke:#000000;stroke-width:1.7;fill:none;marker-end:url(#a)}.box{fill:#ffffff;stroke:#000000;stroke-width:1.5}</style>
+    <style>text{font-family:'Liberation Sans',sans-serif;fill:#000000}.head{font-size:23px;font-weight:700}.label{font-size:20px}.label-bg{fill:#ffffff;stroke:none}.life{stroke:#000000;stroke-dasharray:7 5}.msg{stroke:#000000;stroke-width:1.7;fill:none;marker-end:url(#a)}.box{fill:#ffffff;stroke:#000000;stroke-width:1.5}</style>
   </defs>
   <rect width="1200" height="650" fill="white"/>
   <g>
@@ -12,12 +12,12 @@
     <rect class="box" x="1015" y="20" width="150" height="70" rx="8"/><text class="head" x="1090" y="62" text-anchor="middle">QML</text>
     <path class="life" d="M130 90V610M375 90V610M620 90V610M865 90V610M1090 90V610"/>
     <path class="msg" d="M130 135H375"/><text class="label" x="252" y="124" text-anchor="middle">1. Bản tin UDP/TCP</text>
-    <path class="msg" d="M375 205H620"/><text class="label" x="497" y="194" text-anchor="middle">2. Phân tích và lưu bản tin gốc</text>
-    <path class="msg" d="M375 275H865"/><text class="label" x="620" y="264" text-anchor="middle">3. Sự kiện JSON Lines</text>
-    <path class="msg" d="M865 345H620"/><text class="label" x="742" y="334" text-anchor="middle">4. Lưu sự kiện tổng hợp khi vượt ngưỡng</text>
-    <path class="msg" d="M865 415H1090"/><text class="label" x="977" y="404" text-anchor="middle">5. Thông báo dữ liệu mới</text>
-    <path class="msg" d="M1090 485H865"/><text class="label" x="977" y="474" text-anchor="middle">6. Điều kiện lọc</text>
-    <path class="msg" d="M865 555H620"/><text class="label" x="742" y="544" text-anchor="middle">7. Truy vấn SQLite</text>
+    <path class="msg" d="M375 205H620"/><text class="label" x="497" y="174" text-anchor="middle"><tspan x="497">2. Phân tích bản tin</tspan><tspan x="497" dy="21">và lưu bản gốc</tspan></text>
+    <path class="msg" d="M375 275H865"/><rect class="label-bg" x="520" y="225" width="200" height="45"/><text class="label" x="620" y="244" text-anchor="middle"><tspan x="620">3. Chuyển sự kiện</tspan><tspan x="620" dy="21">qua JSON Lines</tspan></text>
+    <path class="msg" d="M865 345H620"/><text class="label" x="742" y="314" text-anchor="middle"><tspan x="742">4. Vượt ngưỡng cảnh báo</tspan><tspan x="742" dy="21">thì lưu sự kiện tổng hợp</tspan></text>
+    <path class="msg" d="M865 415H1090"/><text class="label" x="977" y="384" text-anchor="middle"><tspan x="977">5. Thông báo</tspan><tspan x="977" dy="21">dữ liệu mới</tspan></text>
+    <path class="msg" d="M1090 485H865"/><text class="label" x="977" y="474" text-anchor="middle">6. Gửi điều kiện lọc</text>
+    <path class="msg" d="M865 555H620"/><text class="label" x="742" y="524" text-anchor="middle"><tspan x="742">7. Truy vấn dữ liệu</tspan><tspan x="742" dy="21">từ SQLite</tspan></text>
     <text class="label" x="600" y="638" text-anchor="middle">Thiết bị phát sinh sự kiện → CAMS lưu bản tin gốc → phân tích, lọc và cảnh báo</text>
   </g>
 </svg>
