@@ -1,5 +1,5 @@
 #pagebreak(weak: true)
-= Cơ sở lý thuyết và cô          ng nghệ
+= Cơ sở lý thuyết và công nghệ
 
 == Quản lý cấu hình và tự động hóa mạng
 
@@ -31,3 +31,7 @@ VLAN, BGP chỉ nên được giới thiệu như nền tảng cho hướng mở
 == Nguyên tắc kiểm thử
 
 Hệ thống sử dụng các nhóm kiểm thử gồm unit/contract test, QML smoke test, dev-mode safety test và thử nghiệm tích hợp trên lab.
+
+// Tệp đề cương cũ này được mở độc lập, không nằm trong cây include của main.typ.
+// Cần danh mục riêng để trích dẫn ở trên được phân giải khi xem tệp này.
+#bibliography("../bibliography/networktools_references.bib", style: "ieee")

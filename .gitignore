@@ -8,6 +8,8 @@ Thumbs.db
 .vscode/*
 !.vscode/tasks.json
 !.vscode/rename-doc-folders.sh
+!.vscode/settings.json
+!00_report/.vscode/settings.json
 .cache/
 .uv-cache/
 *.swp

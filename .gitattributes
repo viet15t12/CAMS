@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# PDFs must never be normalized or merged as text.
+*.pdf binary

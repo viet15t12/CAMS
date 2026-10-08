@@ -36,7 +36,7 @@
 
 Kịch bản kiểm tra trực tiếp trạng thái DHCP Snooping trên SW1 và nguồn cấp địa chỉ cho R2 khi thay đổi cổng tin cậy. R1 cấp dải `192.168.10.0/24`, FAKE_DHCP cấp dải `192.168.66.0/24`, còn R2 đóng vai trò máy khách DHCP. Tiêu chí đạt là lệnh `show` xác nhận dịch vụ hoạt động trên VLAN 10 và địa chỉ R2 nhận được thuộc dải của máy chủ nằm sau cổng DHCP tin cậy.
 
-#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/topology-redrawn.svg", width: 100%), caption: [Mô hình kịch bản 1 với hai máy chủ DHCP, bộ chuyển mạch SW1 và máy khách R2 (vẽ lại từ topology EVE-NG).]) <fig-k1-topology>
+#figure(image("/00_book/figures/report/diagrams/dhcp-snooping-lab/topology-redrawn.svg", width: 100%), caption: [Mô hình kịch bản 1 với hai máy chủ DHCP, bộ chuyển mạch SW1 và máy khách R2.]) <fig-k1-topology>
 
 Trong @fig-k1-topology, R1 nối SW1 qua Gi0/1, R2 qua Gi0/2 và FAKE_DHCP qua Gi0/3. Gi0/2 luôn là cổng không tin cậy; phép thử lần lượt đặt Gi0/1 rồi Gi0/3 làm cổng tin cậy để đối chiếu nguồn cấp phát. DAI được tắt trong toàn bộ phần này và được kiểm thử riêng ở mục kế tiếp.
 
