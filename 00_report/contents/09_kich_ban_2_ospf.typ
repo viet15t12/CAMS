@@ -8,8 +8,8 @@
 Kịch bản kiểm tra khả năng cấu hình OSPFv2 theo nhóm trên năm bộ định tuyến bằng CAMS, thiết lập quan hệ láng giềng, học tuyến tới các mạng LAN và truyền thông hai chiều giữa các máy trạm. Toàn bộ mạng nghiệp vụ tham gia vùng OSPF 0; mạng quản trị được loại khỏi các khai báo OSPF. Các mạng LAN và Loopback được quảng bá bằng lệnh `network`; kịch bản này không sử dụng tái phân phối tuyến.
 
 #figure(
-  image("/00_book/figures/report/diagrams/ospf-lab2-five-routers/topology.png", width: 100%),
-  caption: [Mô hình thử nghiệm OSPF một vùng gồm năm bộ định tuyến, hai bộ chuyển mạch và bốn máy trạm],
+  image("/00_book/figures/report/diagrams/ospf-lab2-five-routers/topology-redrawn.svg", width: 100%),
+  caption: [Mô hình thử nghiệm OSPF một vùng gồm năm bộ định tuyến, hai bộ chuyển mạch và bốn máy trạm (vẽ lại từ topology EVE-NG)],
 ) <fig-topo-scenario-2>
 
 Trong @fig-topo-scenario-2, `R1`, `R2` và `R3` nối vào một mạng trung chuyển chung qua `SW1`. `R3` nối `R4`, còn `R4` nối `R5`. `VPC8` và `VPC9` nối trực tiếp tới các cổng LAN của `R1` và `R2`; `VPC10` và `VPC11` thuộc cùng LAN phía sau `R5`, kết nối qua `SW2`. Các đám mây mạng trong sơ đồ cung cấp kết nối quản trị tới CAMS, không được tính là liên kết chuyển tiếp lưu lượng giữa các LAN của bài thử.
