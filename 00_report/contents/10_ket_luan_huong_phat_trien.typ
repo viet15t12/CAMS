@@ -17,7 +17,7 @@
     ([Cấu hình mạng], [Sinh lệnh và triển khai các nghiệp vụ Lớp 2, định tuyến, DHCP, GLBP, NAT/PAT và ACL.], [Năm kịch bản EVE-NG ở Chương 5; kịch bản 2 có kết quả trên năm bộ định tuyến và sáu loạt kiểm tra ICMP đều nhận đủ 5/5 hồi đáp. Kịch bản 3 mới xác nhận cấu hình GLBP/PAT, chưa kiểm thử chuyển đổi dự phòng.]),
     ([Giám sát an ninh], [Thu nhận Syslog, lọc sự kiện và gửi thư điện tử; hỗ trợ cấu hình chính sách trên thiết bị.], [Kịch bản 1 kiểm tra DHCP Snooping/DAI; kịch bản 4 có hai mẫu thư cảnh báo; kịch bản 5 đối chiếu lưu lượng ACL bị chặn, lưu lượng được phép và nhật ký. Chưa đo tỷ lệ mất bản tin dưới tải.]),
     ([Tiện ích và bảo vệ dữ liệu], [SFTP, đầu cuối, gói dự án `.ntp`; `ENC$v2$`, Argon2id/AES-256-GCM và khóa theo thiết bị.], [Cơ chế được đối chiếu theo mã nguồn và ảnh chức năng ở Chương 3–4; chưa có kịch bản riêng đánh giá toàn bộ cơ chế mật mã, đặc quyền và truyền tệp.]),
-    ([Tài liệu hướng dẫn], [Quyển hướng dẫn dạng PDF và website MkDocs gồm các quy trình sử dụng theo từng nhóm chức năng.], [Đường dẫn website và mã QR được trình bày trong Chương 4; nội dung Markdown được đồng bộ với nguồn Typst.]),
+    ([Tài liệu hướng dẫn], [Website hướng dẫn sử dụng gồm các quy trình theo từng nhóm chức năng.], [Đường dẫn website và mã QR được trình bày trong Chương 4 để người dùng truy cập trực tiếp.]),
   ),
   text-size: 9.5pt,
   cell-inset: (x: 5pt, y: 6pt),
