@@ -23,17 +23,11 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
 
 SFTP, đầu cuối và chức năng đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
 
-#pagebreak(weak: true)
-=== Mô hình ca sử dụng
+=== Tác nhân và luồng tương tác
 
-Các ca sử dụng chính được xác định trong ranh giới CAMS như @fig-use-case-cams. Người quản trị khởi tạo thao tác; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký; máy chủ SFTP và SMTP cung cấp dịch vụ bên ngoài. Nhóm ca quản lý cấu hình đi theo chuỗi đồng bộ trạng thái, chuẩn bị dữ liệu mong muốn, xem trước lệnh, triển khai và xác minh. Truyền tệp, đầu cuối và cảnh báo thư điện tử hỗ trợ vận hành nhưng không thay thế các bước kiểm tra cấu hình trên thiết bị.
+Người quản trị khởi tạo thao tác trên CAMS; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký. Máy chủ SFTP và SMTP là các dịch vụ ngoài hỗ trợ truyền tệp và gửi cảnh báo. Luồng cấu hình gồm đồng bộ trạng thái, chuẩn bị dữ liệu, xem trước lệnh, triển khai và xác minh.
 
-#figure(
-  image("/00_book/figures/report/diagrams/23_use_case_cams.svg", width: 92%),
-  caption: [Sơ đồ ca sử dụng chính của CAMS và các hệ thống bên ngoài],
-) <fig-use-case-cams>
-
-Quan hệ `<<include>>` cho biết ca sử dụng bên trái luôn bao hàm bước xử lý ở bên phải trong luồng tương ứng; ký hiệu này không biểu diễn thứ tự thời gian. Ranh giới hệ thống giúp phân biệt trách nhiệm của CAMS với phản hồi do thiết bị hoặc dịch vụ ngoài cung cấp. Ví dụ, CAMS có thể kiểm tra tham số và ghi nhận phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra trạng thái hoặc lưu lượng thử phù hợp. Cách phân tách này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
+CAMS kiểm tra tham số và lưu phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra hoặc lưu lượng thử. Nguyên tắc này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
 
 #pagebreak(weak: true)
 == Yêu cầu phi chức năng
@@ -88,11 +82,9 @@ Trình tự trao đổi chi tiết được thể hiện tại @fig-view-push-se
   caption: [Sơ đồ tuần tự của quy trình View \& Push],
 ) <fig-view-push-sequence>
 
-Với thao tác thành công, ứng dụng cập nhật trạng thái bản ghi; với lỗi, thông tin được giữ để người dùng kiểm tra và xử lý tiếp. Thành công ở bước gửi lệnh chưa chứng minh dịch vụ hoạt động đúng. Cần truy vấn trạng thái hoặc thử lưu lượng phù hợp để xác minh, nhất là khi một khối lệnh có thể đã được áp dụng một phần trước khi lỗi xuất hiện.
+Ứng dụng cập nhật trạng thái khi thành công và giữ thông tin lỗi để người dùng xử lý. Việc gửi lệnh thành công chưa chứng minh dịch vụ hoạt động đúng; người dùng vẫn phải kiểm tra trạng thái hoặc lưu lượng, nhất là khi khối lệnh có thể chỉ được áp dụng một phần.
 
-Luồng *View & Push* xác định thứ tự tương tác giữa người dùng, giao diện, nghiệp vụ, dữ liệu và thiết bị. Khóa phiên chỉ tuần tự hóa truy cập cùng thiết bị; không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
-
-
+Khóa phiên tuần tự hóa truy cập cùng thiết bị nhưng không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
 
 #pagebreak(weak: true)
 == Luồng giám sát và khai thác cảnh báo
@@ -142,7 +134,7 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
 
 CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị, cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch và các đích Syslog cần cấu hình; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT và bản tin Syslog đã nhận. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
 
-Các bảng liên kết với nhau bằng khóa chính, khóa ngoại và mã thiết bị. Trước khi ghi dữ liệu, tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và các quan hệ phụ thuộc. Những bản ghi tham gia luồng View \& Push còn có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại để xác nhận cấu hình thực tế trên thiết bị @elmasri2016database.
+Các bảng liên kết bằng khóa chính, khóa ngoại và mã thiết bị. Tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và quan hệ phụ thuộc trước khi ghi dữ liệu. Bản ghi trong luồng View \& Push có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; các trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại từ thiết bị.
 
 Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 19 tên bảng trong nhóm `info_collected`, tổng cộng 93 tên bảng. Đây là số đếm của lược đồ nguồn, không khẳng định mọi không gian làm việc đang chạy đều có đúng 93 bảng.
 

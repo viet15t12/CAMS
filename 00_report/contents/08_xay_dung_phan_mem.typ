@@ -9,7 +9,7 @@ Nội dung được sắp xếp theo chuỗi sử dụng của hệ thống: kh�
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn có yêu cầu Python từ 3.11 trở lên theo cấu hình dự án, sử dụng Qt Quick/QML và PyQt6 cho giao diện @qtQuickDocs @pyqt6Docs, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường cùng các gói phụ thuộc của dự án.
+CAMS là ứng dụng máy tính để bàn dùng Python 3.11 trở lên, Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường và gói phụ thuộc.
 
 Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và các thành phần dùng chung; `core/` chứa đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và quản lý không gian làm việc. Tệp `main.py` khởi tạo ứng dụng và liên kết các thành phần. Cấu trúc chi tiết được trình bày trong phụ lục; chương này tập trung vào cách hiện thực các chức năng chính.
 
@@ -141,7 +141,7 @@ Khi khôi phục, hệ thống kiểm tra snapshot, tạo một điểm an toàn
 
 === Bảo vệ thông tin xác thực
 
-Mô-đun `credential_cipher` mã hóa mật khẩu thiết bị theo định dạng `ENC$v2$` bằng AES-256-GCM. Dữ liệu xác thực bổ sung gắn bản mã với ngữ cảnh `host:column`, nhờ đó bản mã bị chuyển sang thiết bị hoặc trường khác sẽ không vượt qua bước xác minh thẻ. Khi dự án có mật khẩu, khóa được dẫn xuất bằng Argon2id; nếu không có mật khẩu, hệ thống dùng khóa HKDF từ dữ liệu cục bộ và không đạt cùng mức bảo vệ dựa trên bí mật người dùng @cryptographyAeadDocs @rfc9106 @nistSp80038d.
+Mô-đun `credential_cipher` mã hóa mật khẩu thiết bị theo định dạng `ENC$v2$` bằng AES-256-GCM. Dữ liệu xác thực bổ sung gắn bản mã với ngữ cảnh `host:column`, nên bản mã bị chuyển sang thiết bị hoặc trường khác sẽ không vượt qua bước xác minh. Khi dự án có mật khẩu, khóa được dẫn xuất bằng Argon2id; nếu không, hệ thống dùng khóa HKDF từ dữ liệu cục bộ với mức bảo vệ thấp hơn @rfc9106 @nistSp80038d.
 
 Mật khẩu ứng dụng thư điện tử trong `alert_settings.json` được xử lý qua cùng giao diện mã hóa với ngữ cảnh `smtp:sender_app_password`. Tệp được ghi bằng thao tác thay thế và đặt quyền `0600` trên hệ điều hành hỗ trợ. Đây là bảo vệ ở mức trường dữ liệu, khác với mã hóa toàn bộ gói dự án.
 
@@ -155,6 +155,31 @@ Khi người dùng đặt mật khẩu dự án, mô-đun `workspace.crypto` mã
 ) <fig-cams-encrypted-project>
 
 @fig-cams-encrypted-project cho thấy dấu nhận dạng và phần thông tin có thể đọc để bộ giải mã xác định định dạng. Hình chỉ minh họa cấu trúc lưu trữ, không chứng minh quy trình mở gói đúng mật khẩu, từ chối sai mật khẩu hoặc phát hiện bản mã bị sửa. Các cơ chế này chưa có kịch bản kiểm thử riêng trong Chương 5.
+
+== Tài liệu hướng dẫn sử dụng trực tuyến
+
+Bên cạnh quyển hướng dẫn dạng PDF, nhóm xây dựng phiên bản tài liệu trực tuyến bằng MkDocs để người dùng tra cứu theo từng chức năng, tìm kiếm nội dung và mở nhanh các chương liên quan trong quá trình thực hành. Nội dung website được đồng bộ với nguồn Typst của quyển hướng dẫn, gồm các phần cài đặt, điều hướng, quản lý thiết bị, cấu hình Router, cấu hình Switch và các công cụ vận hành.
+
+#grid(
+  columns: (1fr, 38mm),
+  gutter: 8mm,
+  align: top,
+  [
+    #set par(justify: false)
+    Tài liệu được công bố tại:
+
+    #link("https://viet15t12.github.io/CAMS/")[#raw("https://viet15t12.github.io/CAMS/")]
+
+    Người đọc có thể mở trực tiếp đường dẫn hoặc quét mã QR trong @fig-cams-online-manual. Vì website có thể được cập nhật sau khi báo cáo được in, ngày truy cập và phiên bản phần mềm vẫn cần được ghi nhận khi dùng tài liệu làm căn cứ đối chiếu.
+  ],
+  [
+    #set text(size: 9pt)
+    #figure(
+      image("/00_report/figures/qr-tai-lieu-huong-dan-cams.svg", width: 28mm),
+      caption: [Tài liệu hướng dẫn CAMS trực tuyến],
+    ) <fig-cams-online-manual>
+  ],
+)
 
 == Tiểu kết chương
 

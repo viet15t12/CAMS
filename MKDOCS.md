@@ -1,6 +1,8 @@
 # Vận hành website tài liệu CAMS
 
-MkDocs lấy nội dung từ `00_book` và tạo website tĩnh trong `site`. Các file Typst vẫn được giữ làm nguồn tham khảo nhưng bị loại khỏi website khi build.
+MkDocs lấy nội dung từ `00_book` và tạo website tĩnh trong `site`. Nguồn Typst trong `00_book/contents` là bản nội dung chuẩn; các chương Markdown trong `00_book/DOC` được sinh từ nguồn này và là đầu vào của website.
+
+Website đã công bố: <https://viet15t12.github.io/CAMS/>
 
 ## Chạy website trên máy cá nhân
 
@@ -19,7 +21,19 @@ mkdocs build --strict
 
 ## Thêm các chương Markdown
 
-Đặt các file chương trong `00_book/DOC`, sau đó thêm chúng vào mục `nav` trong `mkdocs.yml` để xác định tên và thứ tự hiển thị.
+Sau khi sửa nội dung Typst, đồng bộ toàn bộ chương Markdown bằng:
+
+```bash
+python scripts/sync_book_markdown.py
+```
+
+Để kiểm tra mà không ghi file:
+
+```bash
+python scripts/sync_book_markdown.py --check
+```
+
+Khi thêm chương mới, tạo file Typst trong `00_book/contents`, tạo file Markdown đích cùng tiền tố số trong `00_book/DOC`, rồi thêm file Markdown vào mục `nav` trong `mkdocs.yml` để xác định tên và thứ tự hiển thị.
 
 Vì file chương nằm trong `00_book/DOC`, đường dẫn ảnh cần đi lên một cấp, ví dụ:
 

@@ -241,7 +241,7 @@ Cuối cùng, trên máy trạm `PC1`, lệnh `ip dhcp` được sử dụng đ�
   caption: [Kiểm tra PC1 nhận DHCP và truy vết đường đi qua cổng GLBP tới bộ định tuyến NAT cùng mạng phía ngoài],
 ) <fig-k3-client-test>
 
-Kết quả lệnh `trace 1.1.1.1` trong @fig-k3-client-test ghi nhận chặng đầu tiên là `192.168.4.2` (`R1`), tiếp theo là `192.168.1.2` (bộ định tuyến NAT) và `10.0.10.1` (cổng phía ngoài). Chặng cuối trả về ICMP Type 3 Code 3 (`Destination port unreachable`), là phản hồi kết thúc bình thường của phép truy vết UDP khi gói thăm dò tới thiết bị đích @ciscoTracerouteGuide. Địa chỉ phản hồi `10.0.10.1` khác địa chỉ được truy vết `1.1.1.1`; cần đối chiếu địa chỉ Loopback hoặc địa chỉ cổng của bộ định tuyến phía ngoài, hoặc bổ sung phép thử ICMP đến cùng đích để xác nhận quan hệ này. Không xem riêng thông báo `port unreachable` là lỗi định tuyến.
+Lệnh `trace 1.1.1.1` trong @fig-k3-client-test đi qua `192.168.4.2` (`R1`), `192.168.1.2` (bộ định tuyến NAT) rồi `10.0.10.1` (cổng phía ngoài). ICMP Type 3 Code 3 là phản hồi kết thúc bình thường của truy vết UDP khi gói thăm dò tới đích @ciscoTracerouteGuide. Tuy nhiên, địa chỉ phản hồi cuối khác `1.1.1.1`, nên cần đối chiếu địa chỉ cổng hoặc bổ sung phép thử ICMP trước khi kết luận về đích cuối.
 
 ==== Đánh giá kết quả
 
@@ -422,7 +422,7 @@ Phần bản tin gốc (*Raw message*) vẫn được giữ nguyên để phục
 <189>104: 000108: *Aug 29 20:25:44.323: %LINEPROTO-5-UPDOWN:
 Line protocol on Interface Loopback99, changed state to down
 ```
-Dấu `*` trước thời gian Cisco cho biết đồng hồ chưa được đặt hoặc chưa đồng bộ với máy chủ NTP đã cấu hình @ciscoTimestampGuide. @fig-k4-message-detail lại hiển thị *synchronized*, không nhất quán với bản tin gốc; đây là sai lệch của phiên bản giao diện được chụp và không được dùng làm bằng chứng đồng hồ đã đồng bộ. Các ảnh thư cảnh báo phía sau hiển thị trạng thái chưa đồng bộ. Việc giữ bản tin gốc giúp phát hiện sai lệch phân tích này; nhãn *parsed* không chứng minh tất cả trường đều đúng.
+Dấu `*` trước thời gian Cisco cho biết đồng hồ chưa được đồng bộ. @fig-k4-message-detail lại hiển thị *synchronized*, không nhất quán với bản tin gốc và không được dùng làm bằng chứng đồng bộ. Sai lệch này cho thấy cần giữ bản tin gốc để kiểm tra kết quả phân tích.
 
 #step-title[Bước 9. Tạo sự kiện kiểm thử và đối chiếu với bộ thu nhận Syslog]
 
@@ -483,7 +483,7 @@ Hai hình minh họa cho thấy thư cảnh báo giữ được mối liên hệ
 
 ==== Đánh giá kết quả
 
-CAMS đã cấu hình Syslog theo nhóm cho bốn thiết bị. Ba bộ định tuyến sử dụng `GigabitEthernet0/0`, còn bộ chuyển mạch sử dụng `Vlan1` làm cổng nguồn. Bộ thu nhận Syslog tiếp nhận bản tin từ các địa chỉ `192.168.122.101` đến `192.168.122.104`, phân tích được nhóm nguồn Syslog, mức độ nghiêm trọng, mã phân hệ Cisco và mã sự kiện, đồng thời giữ nguyên nội dung gốc theo cấu trúc Syslog @rfc5424. Các sự kiện thay đổi trạng thái cổng và thông báo cấu hình xuất hiện nhất quán giữa đầu cuối thiết bị với bảng *System Logs*. Phần cảnh báo qua thư điện tử cho phép chọn mức cần gửi, bảo vệ mật khẩu ứng dụng và tách thao tác SMTP khỏi bộ nhận. Hai thư mức Error và Warning được chọn làm ví dụ minh họa, sử dụng dữ liệu liên kết trực tiếp với các sự kiện của kịch bản; cách lưu và rà soát này phù hợp với nguyên tắc quản lý nhật ký tập trung @nistSp80092.
+CAMS đã cấu hình Syslog cho bốn thiết bị và nhận bản tin từ `192.168.122.101` đến `192.168.122.104`. Hệ thống tách nhóm nguồn, mức độ, mã Cisco và nội dung gốc theo cấu trúc Syslog @rfc5424; các sự kiện khớp giữa đầu cuối thiết bị và *System Logs*. Cảnh báo thư điện tử dùng các sự kiện Error và Warning đã ghi nhận, đồng thời tách luồng SMTP khỏi bộ nhận. Quy trình lưu và đối chiếu phù hợp với nguyên tắc quản lý nhật ký tập trung @nistSp80092.
 
 
 === Kịch bản 5: Kiểm chứng chính sách ACL và nhật ký an ninh tập trung

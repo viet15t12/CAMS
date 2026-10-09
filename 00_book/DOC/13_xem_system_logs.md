@@ -1,58 +1,45 @@
+<!-- Đồng bộ tự động từ ../contents/13_xem_system_logs.typ; chạy scripts/sync_book_markdown.py để cập nhật. -->
+
 # Xem log trên System Logs
 
-Workspace **System Logs** là nơi CAMS nhận, hiển thị, lọc và xuất bản ghi Syslog
-từ thiết bị mạng. Chức năng này khác với [Chương 10 · Syslog Server trên
-Router](10_cau_hinh_syslog_server.md): Chương 10 tạo cấu hình để router gửi log,
-còn chương này hướng dẫn vận hành bộ nhận và đọc log đã tới CAMS.
+Workspace **System Logs** là nơi CAMS nhận, hiển thị, lọc và xuất bản ghi Syslog từ thiết bị mạng. Chức năng này khác với [Chương 10](10_cau_hinh_syslog_server.md) : [Chương 10](10_cau_hinh_syslog_server.md) tạo cấu hình để router gửi log, còn chương này hướng dẫn vận hành bộ nhận và đọc log đã tới CAMS.
 
 Mở **System Logs** trên Activity Bar hoặc nhấn `Ctrl+Alt+L`.
 
 ## Khởi động bộ nhận log
 
-<figure>
-<p><img src="../../figures/gui/chapter-13/02-listener-status.png"
-style="width:100.0%" /></p>
-<figcaption><p>Listener đang nhận Syslog qua UDP và TCP.</p></figcaption>
+<figure id="fig-ch13-02-listener-status" markdown="span">
+  ![Listener đang nhận Syslog qua UDP và TCP](../figures/gui/chapter-13/02-listener-status.png){ loading=lazy }
+  <figcaption>Listener đang nhận Syslog qua UDP và TCP.</figcaption>
 </figure>
 
 Thanh trạng thái cho biết:
 
 - **Listener active/stopped**: bộ nhận đang chạy hay đã dừng.
-- Địa chỉ bind và port, ví dụ `0.0.0.0:5514`: `0.0.0.0` cho phép lắng nghe trên
-  các địa chỉ mạng của máy CAMS; port phải trùng với port đích cấu hình trên
-  router và được firewall cho phép.
+- Địa chỉ bind và port, ví dụ `0.0.0.0:5514`: `0.0.0.0` cho phép lắng nghe trên các địa chỉ mạng của máy CAMS; port phải trùng với port đích cấu hình trên router và được firewall cho phép.
 - **UDP + TCP**: các giao thức vận chuyển listener đang chấp nhận.
 - **received**: tổng số bản tin đã nhận trong phiên hiển thị.
-- **dropped**: số bản tin bị loại bỏ. Nếu giá trị này tăng, cần kiểm tra cấu hình
-  listener, kích thước/lưu lượng bản tin và tài nguyên máy.
+- **dropped**: số bản tin bị loại bỏ. Nếu giá trị này tăng, cần kiểm tra cấu hình listener, kích thước/lưu lượng bản tin và tài nguyên máy.
 
-Chọn **Start Listener** để bắt đầu nhận hoặc **Stop Listener** khi cần dừng. Địa
-chỉ bind, port, giao thức và chính sách lưu trữ được đặt trong **Settings →
-System Logs**. Trước khi thử, bảo đảm router gửi đến đúng IP của máy CAMS, đúng
-port và giao thức.
+Chọn **Start Listener** để bắt đầu nhận hoặc **Stop Listener** khi cần dừng. Địa chỉ bind, port, giao thức và chính sách lưu trữ được đặt trong **Settings → System Logs**. Trước khi thử, bảo đảm router gửi đến đúng IP của máy CAMS, đúng port và giao thức.
 
 ## Đọc bảng log
 
-<figure>
-<p><img src="../../figures/gui/chapter-13/01-system-logs-overview.png"
-style="width:100.0%" /></p>
-<figcaption><p>Tổng thể System Logs với đủ tám mức severity từ 0 đến 7.</p></figcaption>
+<figure id="fig-ch13-01-system-logs-overview" markdown="span">
+  ![Tổng thể System Logs với đủ tám mức severity từ 0 đến 7](../figures/gui/chapter-13/01-system-logs-overview.png){ loading=lazy }
+  <figcaption>Tổng thể System Logs với đủ tám mức severity từ 0 đến 7.</figcaption>
 </figure>
 
-Mỗi dòng thể hiện thời điểm nhận, thiết bị nguồn, giao thức, severity, Cisco
-facility/mnemonic và nội dung bản tin. Có thể chọn một host ở panel bên trái để
-tập trung vào thiết bị đó, nhưng không bắt buộc phải mở hoặc chụp đầy đủ danh
-sách host khi phân tích log.
+Mỗi dòng thể hiện thời điểm nhận, thiết bị nguồn, giao thức, severity, Cisco facility/mnemonic và nội dung bản tin. Có thể chọn một host ở panel bên trái để tập trung vào thiết bị đó, để giới hạn phạm vi phân tích log.
 
 ## Tám mức độ log Cisco: 0–7
 
-Cisco Syslog có **8 mức severity**, được đánh số từ `0` đến `7`; số càng nhỏ thì
-sự kiện càng nghiêm trọng. Giao diện CAMS dùng tên **Notice** ở mức 5 và
-**Debug** ở mức 7; trong cấu hình Cisco hai mức này thường được gọi là
-**Notifications** và **Debugging**.
+Cisco Syslog có **8 mức severity**, được đánh số từ `0` đến `7`; số càng nhỏ thì sự kiện càng nghiêm trọng. Giao diện CAMS dùng tên **Notice** ở mức 5 và **Debug** ở mức 7; trong cấu hình Cisco hai mức này thường được gọi là **Notifications** và **Debugging**.
+
+<div id="tab-ch13-table-1"></div>
 
 | Mức | Tên trên CAMS | Tên thường gặp trên Cisco | Ý nghĩa và cách xử lý cơ bản |
-|---:|---|---|---|
+| --- | --- | --- | --- |
 | **0** | Emergency | Emergencies | Hệ thống không thể sử dụng; xử lý ngay và kích hoạt quy trình sự cố. |
 | **1** | Alert | Alerts | Điều kiện cần hành động ngay, ví dụ tài nguyên quan trọng bị lỗi. |
 | **2** | Critical | Critical | Lỗi nghiêm trọng ảnh hưởng chức năng chính; ưu tiên điều tra cao. |
@@ -62,35 +49,33 @@ sự kiện càng nghiêm trọng. Giao diện CAMS dùng tên **Notice** ở m�
 | **6** | Informational | Informational | Thông tin vận hành thông thường, trạng thái interface hoặc phiên làm việc. |
 | **7** | Debug | Debugging | Dữ liệu chẩn đoán rất chi tiết; chỉ bật khi cần vì có thể tạo nhiều log. |
 
-<figure>
-<p><img src="../../figures/gui/chapter-13/04-severity-levels.png"
-style="width:48.0%" /></p>
-<figcaption><p>Bộ lọc cho phép chọn chính xác từng mức severity 0–7.</p></figcaption>
+*Tám mức độ log Cisco: 0–7*
+
+<figure id="fig-ch13-04-severity-levels" markdown="span">
+  ![Bộ lọc cho phép chọn chính xác từng mức severity 0–7](../figures/gui/chapter-13/04-severity-levels.png){ loading=lazy }
+  <figcaption>Bộ lọc cho phép chọn chính xác từng mức severity 0–7.</figcaption>
 </figure>
 
-!!! important "Phân biệt mức gửi và bộ lọc xem"
-    Trên router, cấu hình mức trap `5` thường có nghĩa là gửi mức `0` đến `5`,
-    tức mức đã chọn và mọi mức nghiêm trọng hơn. Trong trang System Logs, đánh
-    dấu riêng mức `5` chỉ hiển thị bản ghi có severity đúng bằng `5`. Muốn xem
-    nhóm sự cố nghiêm trọng từ Emergency đến Error, chọn đồng thời `0`, `1`, `2`
-    và `3`.
+!!! note "Phân biệt mức gửi và bộ lọc xem"
 
-<figure>
-<p><img src="../../figures/gui/chapter-13/05-critical-filter-result.png"
-style="width:100.0%" /></p>
-<figcaption><p>Kết quả khi lọc đồng thời bốn mức nghiêm trọng 0, 1, 2 và 3.</p></figcaption>
+    Trên router, cấu hình mức trap `5` thường có nghĩa là gửi mức `0` đến `5`, tức mức đã chọn và mọi mức nghiêm trọng hơn. Trong trang System Logs, đánh dấu riêng mức `5` chỉ hiển thị bản ghi có severity đúng bằng `5`. Muốn xem nhóm sự cố nghiêm trọng từ Emergency đến Error, chọn đồng thời `0`, `1`, `2` và `3`.
+
+<figure id="fig-ch13-05-critical-filter-result" markdown="span">
+  ![Kết quả khi lọc đồng thời bốn mức nghiêm trọng 0, 1, 2 và 3](../figures/gui/chapter-13/05-critical-filter-result.png){ loading=lazy }
+  <figcaption>Kết quả khi lọc đồng thời bốn mức nghiêm trọng 0, 1, 2 và 3.</figcaption>
 </figure>
 
 ## Lọc log trên thanh công cụ
 
-<figure>
-<p><img src="../../figures/gui/chapter-13/03-log-filter-bar.png"
-style="width:100.0%" /></p>
-<figcaption><p>Các điều kiện lọc nhanh trước khi đọc hoặc xuất log.</p></figcaption>
+<figure id="fig-ch13-03-log-filter-bar" markdown="span">
+  ![Các điều kiện lọc nhanh trước khi đọc hoặc xuất log](../figures/gui/chapter-13/03-log-filter-bar.png){ loading=lazy }
+  <figcaption>Các điều kiện lọc nhanh trước khi đọc hoặc xuất log.</figcaption>
 </figure>
 
+<div id="tab-ch13-table-2"></div>
+
 | Bộ lọc | Cách sử dụng |
-|---|---|
+| --- | --- |
 | **Smart Filter** | Mở trình tạo điều kiện theo nội dung, host, facility, mnemonic, severity, giao thức và thời gian. |
 | **Host** | Chọn một hoặc nhiều thiết bị gửi log; để trống để xem tất cả host đã kết nối. |
 | **Severity** | Chọn chính xác một hay nhiều mức trong dải 0–7. |
@@ -100,51 +85,49 @@ style="width:100.0%" /></p>
 | **Reset** | Xóa toàn bộ điều kiện và trở về danh sách mặc định. |
 | **Export Excel** | Xuất đúng các dòng đang hiển thị sau khi áp dụng tất cả bộ lọc. |
 
-Nên lọc theo khoảng thời gian và host trước, sau đó thêm severity hoặc từ khóa.
-Cách này làm tập kết quả nhỏ hơn và giúp so sánh chuỗi sự kiện dễ hơn.
+*Lọc log trên thanh công cụ*
+
+Nên lọc theo khoảng thời gian và host trước, sau đó thêm severity hoặc từ khóa. Cách này làm tập kết quả nhỏ hơn và giúp so sánh chuỗi sự kiện dễ hơn.
 
 ## Tạo Smart Filter
 
-Nhấp vào ô **Click to build a Smart Filter…** để mở biểu mẫu. Chỉ nhập những
-điều kiện cần thiết; CAMS tự tạo biểu thức ở cuối cửa sổ.
+Nhấp vào ô **Click to build a Smart Filter…** để mở biểu mẫu. Chỉ nhập những điều kiện cần thiết; CAMS tự tạo biểu thức ở cuối cửa sổ.
 
-<figure>
-<p><img src="../../figures/gui/chapter-13/06-smart-filter-builder.png"
-style="width:78.0%" /></p>
-<figcaption><p>Smart Filter kết hợp host, severity, facility, mnemonic và thời gian.</p></figcaption>
+<figure id="fig-ch13-06-smart-filter-builder" markdown="span">
+  ![Smart Filter kết hợp host, severity, facility, mnemonic và thời gian](../figures/gui/chapter-13/06-smart-filter-builder.png){ loading=lazy }
+  <figcaption>Smart Filter kết hợp host, severity, facility, mnemonic và thời gian.</figcaption>
 </figure>
 
-- **Message contains**: tìm chuỗi không phân biệt chữ hoa/thường trong nội dung
-  bản tin.
-- **Hosts**: nhập đúng host/IP; nhiều giá trị được phân tách bằng dấu phẩy.
-- **Cisco facility**: nhập một phần tên facility như `LINK`, `LINEPROTO`, `SYS`
-  hoặc `OSPF`.
-- **Mnemonic**: nhập mã sự kiện như `UPDOWN`, `CONFIG_I` hoặc `ADJCHG`.
-- **Severities**: dùng số `0–7` hoặc tên; có thể nhập nhiều mức bằng dấu phẩy,
-  ví dụ `error,warning` hoặc `3,4`.
-- **Protocol**: Any giữ lựa chọn trên thanh công cụ; UDP, TCP hoặc UDP + TCP sẽ
-  ghi đè điều kiện giao thức tương ứng.
-- **From / To (UTC)**: khoảng thời gian tuyệt đối. **Recent window** nhận dạng
-  như `30m`, `2h`, `7d`, `1w` và thay thế From khi được nhập.
-- **Latest per host**: số bản ghi mới nhất cho mỗi host; `0` không giới hạn.
+<div id="tab-ch13-fields-2"></div>
 
-Điều kiện trong Smart Filter sẽ **ghi đè bộ lọc cùng loại** trên thanh công cụ.
-Ví dụ, nếu Smart Filter có `severity:3,4`, lựa chọn severity trên thanh công cụ
-không còn quyết định điều kiện severity. Đọc biểu thức **Generated Smart Filter**
-trước khi chọn **Apply Filter**.
+| Tham số | Ý nghĩa và cách dùng |
+| --- | --- |
+| Message contains | tìm chuỗi không phân biệt chữ hoa/thường trong nội dung bản tin. |
+| Hosts | nhập đúng host/IP; nhiều giá trị được phân tách bằng dấu phẩy. |
+| Cisco facility | nhập một phần tên facility như `LINK`, `LINEPROTO`, `SYS` hoặc `OSPF`. |
+| Mnemonic | nhập mã sự kiện như `UPDOWN`, `CONFIG_I` hoặc `ADJCHG`. |
+| Severities | dùng số `0–7` hoặc tên; có thể nhập nhiều mức bằng dấu phẩy, ví dụ `error,warning` hoặc `3,4`. |
+| Protocol | Any giữ lựa chọn trên thanh công cụ; UDP, TCP hoặc UDP + TCP sẽ ghi đè điều kiện giao thức tương ứng. |
+| From / To (UTC) | khoảng thời gian tuyệt đối. **Recent window** nhận dạng như `30m`, `2h`, `7d`, `1w` và thay thế From khi được nhập. |
+| Latest per host | số bản ghi mới nhất cho mỗi host; `0` không giới hạn. |
+
+*Tạo Smart Filter — tham số*
+
+Điều kiện trong Smart Filter sẽ **ghi đè bộ lọc cùng loại** trên thanh công cụ. Ví dụ, nếu Smart Filter có `severity:3,4`, lựa chọn severity trên thanh công cụ không còn quyết định điều kiện severity. Đọc biểu thức **Generated Smart Filter** trước khi chọn **Apply Filter**.
 
 ## Xem chi tiết một bản tin
 
-Nhấp đúp một dòng log để mở cửa sổ chi tiết.
+Nhấp đúp một dòng log để mở cửa sổ chi tiết tại [hình minh họa](#fig-ch13-07-log-message-details).
 
-<figure>
-<p><img src="../../figures/gui/chapter-13/07-log-message-details.png"
-style="width:78.0%" /></p>
-<figcaption><p>Thông tin đã phân tích và raw message của một sự kiện Cisco.</p></figcaption>
+<figure id="fig-ch13-07-log-message-details" markdown="span">
+  ![Thông tin đã phân tích và raw message của một sự kiện Cisco](../figures/gui/chapter-13/07-log-message-details.png){ loading=lazy }
+  <figcaption>Thông tin đã phân tích và raw message của một sự kiện Cisco.</figcaption>
 </figure>
 
+<div id="tab-ch13-table-4"></div>
+
 | Thuộc tính | Ý nghĩa |
-|---|---|
+| --- | --- |
 | **Source / Protocol** | IP nguồn và UDP/TCP đã mang bản tin đến CAMS. |
 | **Received** | Thời điểm CAMS nhận bản tin; dùng mốc này khi đồng hồ thiết bị không tin cậy. |
 | **Device time** | Thời gian do thiết bị ghi trong bản tin. |
@@ -155,13 +138,10 @@ style="width:78.0%" /></p>
 | **Sequence / Clock** | Số thứ tự bản tin và trạng thái đồng bộ đồng hồ nếu có. |
 | **Raw message** | Bản tin gốc; dùng để đối chiếu khi trường đã phân tích thiếu hoặc không như mong đợi. |
 
-Khi điều tra, nên đọc theo thứ tự: **Received/Device time → Host → Severity →
-Facility/Mnemonic → Raw message**. Nếu thời gian giữa nhiều thiết bị lệch nhau,
-kiểm tra NTP trước khi kết luận thứ tự sự kiện.
+*Xem chi tiết một bản tin*
+
+Khi điều tra, nên đọc theo thứ tự: **Received/Device time → Host → Severity → Facility/Mnemonic → Raw message**. Nếu thời gian giữa nhiều thiết bị lệch nhau, kiểm tra NTP trước khi kết luận thứ tự sự kiện.
 
 ## Xuất log phục vụ phân tích
 
-Áp dụng bộ lọc phù hợp rồi chọn **Export Excel**. CAMS chỉ xuất các dòng đang
-hiển thị sau mọi bộ lọc, vì vậy nên ghi nhận khoảng thời gian, host, severity và
-Smart Filter đã dùng. Không xuất toàn bộ dữ liệu khi chỉ cần một sự cố ngắn vì
-tệp lớn sẽ khó kiểm tra và có thể chứa thông tin vận hành không liên quan.
+Áp dụng bộ lọc phù hợp rồi chọn **Export Excel**. CAMS chỉ xuất các dòng đang hiển thị sau mọi bộ lọc, vì vậy nên ghi nhận khoảng thời gian, host, severity và Smart Filter đã dùng. Không xuất toàn bộ dữ liệu khi chỉ cần một sự cố ngắn vì tệp lớn sẽ khó kiểm tra và có thể chứa thông tin vận hành không liên quan.

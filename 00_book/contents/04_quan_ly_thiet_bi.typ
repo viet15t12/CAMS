@@ -1,4 +1,4 @@
-// Nguồn nội dung: DOC/04_quan_ly_thiet_bi.md
+// Bản Markdown tương ứng được đồng bộ tự động vào DOC/04_quan_ly_thiet_bi.md.
 #import "../config/commands.typ": report-note
 #import "../config/images.typ": insert-image
 #import "../config/tables.typ": report-table

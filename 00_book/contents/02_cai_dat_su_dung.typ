@@ -1,4 +1,4 @@
-// Nguồn nội dung: DOC/02_cai_dat_su_dung.md
+// Bản Markdown tương ứng được đồng bộ tự động vào DOC/02_cai_dat_su_dung.md.
 #import "../config/commands.typ": report-note
 #import "../config/images.typ": insert-image
 

@@ -1,4 +1,4 @@
-// Nguồn nội dung: DOC/00_loi_mo_dau.md
+// Bản Markdown tương ứng được đồng bộ tự động vào DOC/00_loi_mo_dau.md.
 #import "../config/commands.typ": front-heading
 
 #front-heading[LỜI MỞ ĐẦU]

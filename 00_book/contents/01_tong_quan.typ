@@ -1,4 +1,4 @@
-// Nguồn nội dung: DOC/01_tong_quan.md
+// Bản Markdown tương ứng được đồng bộ tự động vào DOC/01_tong_quan.md.
 #import "../config/tables.typ": report-table
 #import "../config/diagrams.typ": flow-diagram
 

@@ -1,4 +1,4 @@
-// Nguồn nội dung: DOC/13_xem_system_logs.md
+// Bản Markdown tương ứng được đồng bộ tự động vào DOC/13_xem_system_logs.md.
 #import "../config/commands.typ": report-note
 #import "../config/images.typ": insert-image
 #import "../config/tables.typ": report-table
