@@ -101,7 +101,7 @@
 
   set text(
     font: "Liberation Serif",
-    size: 12.5pt,
+    size: 13pt,
     lang: "vi",
   )
 

@@ -1,13 +1,6 @@
 #import "config/info.typ": *
 
 #let cover-navy = rgb("#08233d")
-#let cover-logo = "logo.png"
-
-#let cover-students = (
-  (name: [Nguyễn Quốc Việt], id: [N24DCVT113]),
-  (name: [Nguyễn Phan Kiên], id: [N24DCVT046]),
-  (name: [Nguyễn Trần Đạt Phú], id: [N24DCVT072]),
-)
 
 #let cover-frame() = context {
   let w = page.width
@@ -59,45 +52,31 @@
       #academy \
       #campus
     ]
-    #v(9pt)
+    #v(7pt)
     #text(size: 12pt, weight: "bold")[#faculty]
 
+    #v(27mm)
+
+    #text(size: 20pt, weight: "bold")[#report-type]
     #v(8mm)
-    #image(cover-logo, width: 7cm)
-    #v(6mm)
+    #text(size: 14.5pt, weight: "bold")[
+      ĐỀ TÀI NGHIÊN CỨU KHOA HỌC CỦA SINH VIÊN \
+      NĂM HỌC #academic-year
+    ]
 
-    #text(size: 15pt, weight: "bold", fill: cover-navy)[#report-type]
-    #v(6mm)
-
-    #line(length: 84%, stroke: 0.8pt + cover-navy)
-    #v(4mm)
-    #text(size: 13pt, weight: "bold")[ĐỀ TÀI:]
-    #v(3mm)
+    #v(25mm)
     #text(size: 16.2pt, weight: "bold")[#project-title]
-    #v(4mm)
-    #line(length: 84%, stroke: 0.8pt + cover-navy)
+    #v(9mm)
+    #text(size: 14.5pt, weight: "bold")[MÃ SỐ ĐỀ TÀI: #project-code]
   ]
 
-  #v(6mm)
+  #v(18mm)
+  #align(left, text(size: 12pt)[
+    *Thuộc nhóm ngành khoa học:* #field
+  ])
 
-  #align(center, block(width: 84%, table(
-    columns: (38%, 62%),
-    stroke: none,
-    inset: (x: 0pt, y: 3.5pt),
-    align: (left, left),
-    [*Giảng viên hướng dẫn:*], [#advisor],
-    [*Sinh viên thực hiện:*], [
-      #for (index, student) in cover-students.enumerate() {
-        student.name
-        text(" - ")
-        student.id
-        if index < cover-students.len() - 1 { linebreak() }
-      }
-    ],
-  )))
-
-  #v(6.5cm)
+  #v(1fr)
   #align(center, text(size: 13pt, weight: "bold")[
-    TP. HỒ CHÍ MINH, THÁNG 10 NĂM 2026
+    TP. HỒ CHÍ MINH, 10/2026
   ])
 ]
