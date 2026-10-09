@@ -113,7 +113,7 @@
   )
 
   set list(
-    marker: ([•], [o], [▪]),
+    marker: text("-"),
     indent: 0.5cm,
     body-indent: 0.5cm,
     tight: false,
@@ -126,7 +126,8 @@
     spacing: 1.4em,
   )
 
-  // Bullet/enum: Times New Roman 13 pt, 1,5 dòng, 0 pt trước/sau,
+  // Danh sách dùng gạch ngang ở mọi cấp; danh sách đánh số giữ nguyên.
+  // Times New Roman 13 pt, 1,5 dòng, 0 pt trước/sau,
   // không thụt dòng đầu và căn trái.
   show list: it => {
     set list(tight: false, spacing: 1.4em)

@@ -499,8 +499,8 @@ Phép thử được thiết kế theo cặp đối chứng. Mỗi chính sách 
 @fig-k5-topology trình bày mô hình thử nghiệm. `R1` thực hiện định tuyến giữa các VLAN theo mô hình bộ định tuyến dùng một liên kết trung kế trên `GigabitEthernet0/1`; `R2` là bộ định tuyến biên thực hiện NAT; `R3` đóng vai trò ISP và cung cấp dịch vụ HTTP trên `Loopback0`. Ba máy trạm `VPC7`, `VPC8` và `VPC9` lần lượt thuộc VLAN 10, VLAN 20 và VLAN 30. Sơ đồ thể hiện các liên kết kép giữa ba bộ chuyển mạch; phần thử nghiệm ACL không cung cấp kết quả lệnh xác minh EtherChannel, nên không kết luận trạng thái gom kênh chỉ từ sơ đồ.
 
 #figure(
-  image("/00_report/Tai_lieu_lab/LAB5/ANH_CUA_LAB/so_do.png", width: 92%),
-  caption: [Mô hình kiểm chứng ACL với R1 định tuyến liên VLAN, R2 làm NAT và R3 làm ISP],
+  image("/00_book/figures/report/diagrams/acl-lab5/topology-redrawn.svg", width: 100%),
+  caption: [Mô hình kiểm chứng ACL với R1 định tuyến liên VLAN, R2 làm NAT và R3 làm ISP (vẽ lại từ topology EVE-NG)],
 ) <fig-k5-topology>
 
 #report-table(
@@ -527,16 +527,15 @@ Hai ACL mở rộng được cấu hình trên R1. ACL thứ nhất được g�
 ACL thứ hai được gắn chiều vào trên `GigabitEthernet0/1.20` và `GigabitEthernet0/1.30`. Luật số 10 từ chối TCP/80 từ VLAN 20 đến máy chủ `203.162.4.1`; luật số 20 từ chối ICMP từ VLAN 30 đến cùng máy chủ; luật số 30 cho phép các lưu lượng IP còn lại. Mỗi luật do CAMS sinh đều có từ khóa `log`, nên Cisco IOS tạo sự kiện `%SEC-6-IPACCESSLOGP` hoặc `%SEC-6-IPACCESSLOGDP` khi có lưu lượng khớp.
 
 #report-table(
-  columns: (14%, 21%, 27%, 20%, 18%),
-  text-size: 9pt,
-  cell-inset: (x: 4pt, y: 4pt),
+  columns: (15%, 21%, 26%, 21%, 17%),
+  text-size: 9.5pt,
   header: ([ACL / luật], [Nguồn], [Đích và dịch vụ], [Hành động], [Vị trí]),
   rows: (
-    ([V10 / 10], [#table-code("192.168.10.0/24")], [#table-code("192.168.12.2"), TCP/23], [Từ chối; ghi log], [Vào #table-code("Gi0/1.10")]),
-    ([V10 / 20], [#table-code("any")], [#table-code("any"), IP], [Cho phép; ghi log], [Vào #table-code("Gi0/1.10")]),
-    ([V20-V30 / 10], [#table-code("192.168.20.0/24")], [#table-code("203.162.4.1"), TCP/80], [Từ chối; ghi log], [Vào #table-code("Gi0/1.20") và #table-code("Gi0/1.30")]),
-    ([V20-V30 / 20], [#table-code("192.168.30.0/24")], [#table-code("203.162.4.1"), ICMP], [Từ chối; ghi log], [Vào #table-code("Gi0/1.20") và #table-code("Gi0/1.30")]),
-    ([V20-V30 / 30], [#table-code("any")], [#table-code("any"), IP], [Cho phép; ghi log], [Vào #table-code("Gi0/1.20") và #table-code("Gi0/1.30")]),
+    ([V10 / 10], [#table-code("192.168.10.0/24")], [`192.168.12.2`, TCP/23], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.10`]),
+    ([V10 / 20], [`any`], [`any`, IP], [Cho phép, ghi nhật ký], [Chiều vào `Gi0/1.10`]),
+    ([V20-V30 / 10], [#table-code("192.168.20.0/24")], [`203.162.4.1`, TCP/80], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.20`]),
+    ([V20-V30 / 20], [#table-code("192.168.30.0/24")], [`203.162.4.1`, ICMP], [Từ chối, ghi nhật ký], [Chiều vào `Gi0/1.30`]),
+    ([V20-V30 / 30], [`any`], [`any`, IP], [Cho phép, ghi nhật ký], [Chiều vào `Gi0/1.20` và `.30`]),
   ),
   caption: [Ma trận chính sách ACL được kiểm chứng],
 ) <tab-k5-acl-policy>
