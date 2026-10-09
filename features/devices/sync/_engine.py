@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 import sqlite3
 from dataclasses import dataclass, field
-from ipaddress import IPv4Address
+from ipaddress import IPv4Address, IPv4Network
 from typing import Any
 
 
@@ -21,6 +21,8 @@ class ParsedRouterConfig:
     eigrp_processes: dict[int, dict[str, Any]] = field(default_factory=dict)
     fhrp_members: list[dict[str, Any]] = field(default_factory=list)
     dhcp_helpers: list[dict[str, str]] = field(default_factory=list)
+    dhcp_pools: list[dict[str, Any]] = field(default_factory=list)
+    unsupported_dhcp_pools: list[dict[str, str]] = field(default_factory=list)
     unsupported_routes: list[dict[str, str]] = field(default_factory=list)
     unsupported_routing: list[dict[str, str]] = field(default_factory=list)
 
@@ -114,6 +116,8 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
     unsupported_routing: list[dict[str, str]] = []
     ospf_processes: dict[int, dict[str, Any]] = {}
     eigrp_processes: dict[int, dict[str, Any]] = {}
+    dhcp_pools: list[dict[str, Any]] = []
+    unsupported_dhcp_pools: list[dict[str, str]] = []
     current_kind = ""
     current_name = ""
     current_body: list[str] = []
@@ -137,6 +141,14 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
                         "code": "NAMED_EIGRP_UNSUPPORTED",
                     }
                 )
+        elif current_kind == "dhcp_pool":
+            pool = parse_dhcp_pool_block(current_name, current_body)
+            if pool is not None:
+                dhcp_pools.append(pool)
+            else:
+                unsupported_dhcp_pools.append(
+                    {"pool": current_name, "code": "DHCP_POOL_FORM_UNSUPPORTED"}
+                )
         current_kind = ""
         current_name = ""
         current_body = []
@@ -154,6 +166,11 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
             hostname = clean_label(stripped.split(None, 1)[1])
 
         is_top_level = not line.startswith((" ", "\t"))
+        if is_top_level and stripped.startswith("ip dhcp pool "):
+            flush_current()
+            current_kind = "dhcp_pool"
+            current_name = clean_text(stripped[len("ip dhcp pool "):])
+            continue
         if is_top_level and stripped.startswith("ip route "):
             flush_current()
             route_kind, route = parse_static_route_line(stripped)
@@ -210,9 +227,52 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
         eigrp_processes=eigrp_processes,
         fhrp_members=fhrp_members,
         dhcp_helpers=dhcp_helpers,
+        dhcp_pools=dhcp_pools,
+        unsupported_dhcp_pools=unsupported_dhcp_pools,
         unsupported_routes=unsupported_routes,
         unsupported_routing=unsupported_routing,
     )
+
+
+def parse_dhcp_pool_block(name: str, body: list[str]) -> dict[str, Any] | None:
+    """Read network pools represented by the DHCP editor, without truncating options."""
+    from features.dhcp.validation import pool_values
+
+    network = ""
+    mask = ""
+    gateway = ""
+    dns = ""
+    lease = "1"
+    for line in body:
+        parts = line.split()
+        if not parts:
+            continue
+        if parts[0] in {"vrf", "host", "client-identifier", "hardware-address"}:
+            return None
+        if parts[0] == "network":
+            # The editor supports one primary IPv4 subnet per pool.
+            if network or len(parts) not in {2, 3} or (len(parts) == 2 and "/" not in parts[1]):
+                return None
+            try:
+                subnet = IPv4Network(
+                    parts[1] if len(parts) == 2 else f"{parts[1]}/{parts[2].lstrip('/')}",
+                    strict=False,
+                )
+            except ValueError:
+                return None
+            network, mask = str(subnet.network_address), str(subnet.netmask)
+        elif parts[0] == "default-router":
+            gateway = " ".join(parts[1:])
+        elif parts[0] == "dns-server":
+            dns = " ".join(parts[1:])
+        elif parts[0] == "lease":
+            lease = " ".join(parts[1:])
+    if not network:
+        return None
+    try:
+        return pool_values(name, network, mask, gateway, dns, lease)
+    except ValueError:
+        return None
 
 
 def parse_interface_brief(brief_text: str) -> dict[str, dict[str, Any]]:
@@ -950,6 +1010,7 @@ def sync_device_state(
             "eigrp": _eigrp_has_pending(conn, host),
             "fhrp": _fhrp_has_pending(conn, host),
             "dhcp_helpers": _dhcp_helpers_have_pending(conn, host),
+            "dhcp_pools": _table_has_pending(conn, "t03_dhcp_pool", host),
         }
         if mode == "safe":
             conflicts = [name for name, exists in pending.items() if exists]
@@ -963,6 +1024,9 @@ def sync_device_state(
                 "eigrp_processes": len(parsed.eigrp_processes),
                 "fhrp_members": len(parsed.fhrp_members),
                 "dhcp_helpers": len(parsed.dhcp_helpers),
+                "dhcp_pools": len(parsed.dhcp_pools),
+                "unsupported_dhcp_pools": len(parsed.unsupported_dhcp_pools),
+                "unsupported_dhcp_pool_details": parsed.unsupported_dhcp_pools,
                 "conflicts": [name for name, exists in pending.items() if exists],
                 "unsupported_routes": len(parsed.unsupported_routes),
                 "unsupported_route_details": parsed.unsupported_routes,
@@ -996,6 +1060,8 @@ def sync_device_state(
                 insert_fhrp_members(conn, host, parsed.fhrp_members)
             if mode == "force_device_state" or not pending["dhcp_helpers"]:
                 sync_dhcp_helpers(conn, host, parsed.dhcp_helpers)
+            if mode == "force_device_state" or not pending["dhcp_pools"]:
+                sync_dhcp_pools(conn, host, parsed.dhcp_pools, parsed.unsupported_dhcp_pools)
             if mode == "force_device_state" or not pending["static_routes"]:
                 sync_static_routes(conn, host, parsed.static_routes)
             if mode == "force_device_state" or not pending["default_routes"]:
@@ -1020,6 +1086,9 @@ def sync_device_state(
         "eigrp_processes": len(parsed.eigrp_processes),
         "fhrp_members": len(parsed.fhrp_members),
         "dhcp_helpers": len(parsed.dhcp_helpers),
+        "dhcp_pools": len(parsed.dhcp_pools),
+        "unsupported_dhcp_pools": len(parsed.unsupported_dhcp_pools),
+        "unsupported_dhcp_pool_details": parsed.unsupported_dhcp_pools,
         "conflicts": conflicts,
         "unsupported_routes": len(parsed.unsupported_routes),
         "unsupported_route_details": parsed.unsupported_routes,
@@ -1058,6 +1127,10 @@ def _ensure_sync_indexes(conn: sqlite3.Connection) -> None:
     conn.execute(
         "CREATE INDEX IF NOT EXISTS ix_t03_router_iface_helper_sync "
         "ON t03_router_iface_helper(iface_id, sync_status);"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS ix_t03_dhcp_pool_sync "
+        "ON t03_dhcp_pool(host, sync_status);"
     )
 
 
@@ -1207,6 +1280,62 @@ def _dhcp_helpers_have_pending(conn: sqlite3.Connection, host: str) -> bool:
         """,
         (host,),
     ).fetchone() is not None
+
+
+def sync_dhcp_pools(
+    conn: sqlite3.Connection,
+    host: str,
+    pools: list[dict[str, Any]],
+    unsupported: list[dict[str, str]],
+) -> None:
+    """Reconcile observed pools, retaining IDs and unsupported device-side pools."""
+    existing = list(
+        conn.execute(
+            "SELECT dhcp_id, pool FROM t03_dhcp_pool WHERE host = ? ORDER BY dhcp_id;",
+            (host,),
+        )
+    )
+    by_name: dict[str, int] = {}
+    protected_names = {item["pool"] for item in unsupported}
+    retained = {
+        int(row["dhcp_id"]) for row in existing if row["pool"] in protected_names
+    }
+    for row in existing:
+        by_name.setdefault(str(row["pool"]), int(row["dhcp_id"]))
+    for pool in pools:
+        values = tuple(
+            pool[key] for key in ("pool", "network", "subnetmask", "defaut", "dns", "lease")
+        )
+        pool_id = by_name.get(pool["pool"])
+        if pool_id is not None:
+            conn.execute(
+                """
+                UPDATE t03_dhcp_pool
+                SET pool = ?, network = ?, subnetmask = ?, defaut = ?, dns = ?, lease = ?,
+                    sync_status = 'synchronized', action_Cfg = '000'
+                WHERE dhcp_id = ? AND host = ?;
+                """,
+                (*values, pool_id, host),
+            )
+            retained.add(pool_id)
+        else:
+            cursor = conn.execute(
+                """
+                INSERT INTO t03_dhcp_pool
+                    (host, pool, network, subnetmask, defaut, dns, lease, sync_status, action_Cfg)
+                VALUES (?, ?, ?, ?, ?, ?, ?, 'synchronized', '000');
+                """,
+                (host, *values),
+            )
+            by_name[pool["pool"]] = int(cursor.lastrowid)
+    conn.executemany(
+        "DELETE FROM t03_dhcp_pool WHERE dhcp_id = ? AND host = ?;",
+        [
+            (int(row["dhcp_id"]), host)
+            for row in existing
+            if int(row["dhcp_id"]) not in retained
+        ],
+    )
 
 
 def sync_dhcp_helpers(

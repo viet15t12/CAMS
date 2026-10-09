@@ -191,6 +191,30 @@ Rectangle {
 
     ListModel { id: poolListModel }
 
+    function refreshFromDevice(updatedHost) {
+        if (String(updatedHost || "").trim() !== currentHostIp.trim()) return
+        // A background collection must not discard staged rows or an open editor.
+        if (hasPendingLocalChanges || isEditing() || poolField.text.trim() !== "" ||
+                networkField.text.trim() !== "" || subnetField.text.trim() !== "" ||
+                gatewayField.text.trim() !== "" || dnsField.text.trim() !== "" ||
+                leaseField.text.trim() !== "1") return
+        reloadPools()
+    }
+
+    Connections {
+        target: typeof cli !== "undefined" ? cli : null
+        function onRunningConfigFinished(host, ok, message) {
+            if (ok) dhcpPoolForm.refreshFromDevice(host)
+        }
+    }
+
+    Connections {
+        target: typeof dbManager !== "undefined" ? dbManager : null
+        function onRunningConfigUpdated(host) {
+            dhcpPoolForm.refreshFromDevice(host)
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 0

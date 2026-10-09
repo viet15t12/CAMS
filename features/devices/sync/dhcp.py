@@ -1,5 +1,5 @@
-"""SQLite synchronization for observed interface DHCP relay state."""
+"""SQLite synchronization for observed DHCP pools and interface relay state."""
 
-from ._engine import sync_dhcp_helpers
+from ._engine import sync_dhcp_helpers, sync_dhcp_pools
 
-__all__ = ["sync_dhcp_helpers"]
+__all__ = ["sync_dhcp_helpers", "sync_dhcp_pools"]

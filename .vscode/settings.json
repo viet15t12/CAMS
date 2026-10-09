@@ -1,4 +1,5 @@
 {
   "tinymist.rootPath": "${workspaceFolder}",
-  "tinymist.projectResolution": "lockDatabase"
+  "tinymist.projectResolution": "lockDatabase",
+  "cmake.sourceDirectory": "/data/Projects/CAMS_2/native/syslog_collector"
 }

@@ -7,6 +7,7 @@ from ._engine import (
     default_ospf_process,
     merge_interface_brief,
     merge_interface_ospf_settings,
+    parse_dhcp_pool_block,
     parse_eigrp_block,
     parse_interface_block,
     parse_interface_brief,

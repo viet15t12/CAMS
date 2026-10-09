@@ -8,7 +8,7 @@ The package separates the public synchronization surface by responsibility:
 - `parser.py`: running-config parsing
 - `interfaces.py`: interface SQLite writers
 - `fhrp.py`: HSRP, VRRP, and GLBP SQLite writers
-- `dhcp.py`: interface DHCP relay/helper SQLite writer
+- `dhcp.py`: DHCP pool and interface relay/helper SQLite writers
 - `routing.py`: static route, OSPF, and EIGRP writers
 - `service.py`: transaction-level orchestration
 - `common.py`: shared normalization helpers
@@ -33,6 +33,15 @@ observed HSRP, VRRP, and GLBP configuration.
 IPv4 `ip helper-address` commands are collected from router interface blocks
 and synchronized into `t03_router_iface_helper`. Multiple helpers per interface
 are preserved. Safe mode leaves pending helper changes untouched.
+
+IPv4 `ip dhcp pool` network blocks are synchronized into `t03_dhcp_pool`,
+including default router, multiple DNS servers, and lease duration. Existing
+pool IDs are retained; observed rows use `synchronized` and `action_Cfg = '000'`
+so collection does not queue a push. Safe mode preserves pending pool edits and
+deletes for the host. Preview reports pool counts without writing. Pools absent
+from the next snapshot are removed locally. VRF, manual binding, secondary
+subnet, and other pool forms the editor cannot represent are reported as
+unsupported; existing rows with those names are preserved.
 
 Subinterfaces are classified independently from physical L3 profiles. The
 parser records `dot1Q`/`isl`, VLAN ID and the optional native flag, while the
