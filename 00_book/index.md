@@ -2,8 +2,8 @@
 
 CAMS là ứng dụng desktop hỗ trợ quản lý, cấu hình và giám sát thiết bị mạng trong một không gian làm việc tập trung. Tài liệu này hướng dẫn từ bước chuẩn bị môi trường, quản lý thiết bị đến cấu hình các chức năng trong Workspace.
 
-!!! warning "Phạm vi sử dụng"
-    CAMS đang được phát triển và kiểm chứng trong môi trường nghiên cứu. Hãy xem trước cấu hình, kiểm tra đúng thiết bị và sao lưu dữ liệu trước khi áp dụng thay đổi trên hệ thống thực tế.
+<!-- !!! warning "Phạm vi sử dụng"
+    CAMS đang được phát triển và kiểm chứng trong môi trường nghiên cứu. Hãy xem trước cấu hình, kiểm tra đúng thiết bị và sao lưu dữ liệu trước khi áp dụng thay đổi trên hệ thống thực tế. -->
 
 ## Đọc tài liệu
 
