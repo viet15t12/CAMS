@@ -65,6 +65,37 @@ Rectangle {
         viewPushRevision++
     }
 
+    function refreshCollectedHost(updatedHost) {
+        const host = String(updatedHost || "").trim()
+        if (host === "") return
+        Qt.callLater(function() {
+            if (!aclView) return
+            const loaders = [rulesLoader, bindingsLoader]
+            for (let i = 0; i < loaders.length; ++i) {
+                const item = loaders[i].item
+                if (!item || String(item.currentHostIp || "").trim() !== host ||
+                        item.hasPendingLocalChanges === true) continue
+                if (item.reloadCollectedState) item.reloadCollectedState()
+                else if (item.reloadAll) item.reloadAll()
+            }
+            aclView.viewPushRevision++
+        })
+    }
+
+    Connections {
+        target: typeof cli !== "undefined" ? cli : null
+        function onRunningConfigFinished(host, ok, message) {
+            if (ok) aclView.refreshCollectedHost(host)
+        }
+    }
+
+    Connections {
+        target: typeof dbManager !== "undefined" ? dbManager : null
+        function onRunningConfigUpdated(host) {
+            aclView.refreshCollectedHost(host)
+        }
+    }
+
     function activateTab(tabName) {
         currentTab = tabName
         syncHostToCurrentTab()

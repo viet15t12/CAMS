@@ -156,6 +156,7 @@ FormLayout {
         let hasMissingRequired = false
         let hasSpaceError = false
         let hasIpv4Error = false
+        let hasAdError = false
 
         for (let i = 0; i < routeModel.count; i++) {
             const row = routeModel.get(i)
@@ -199,9 +200,10 @@ FormLayout {
                 continue
             }
 
-            let adValue = parseInt(adText)
-            if (isNaN(adValue) || adValue < 1 || adValue > 255) {
-                adValue = 1
+            const adValue = adText === "" ? 1 : Number(adText)
+            if (!/^\d*$/.test(adText) || !Number.isInteger(adValue) || adValue < 1 || adValue > 255) {
+                hasAdError = true
+                continue
             }
 
             routes.push({
@@ -214,6 +216,11 @@ FormLayout {
             })
         }
 
+        if (hasAdError) {
+            lastError = "Static route AD must be an integer between 1 and 255."
+            if (strictValidation) showValidation(lastError)
+            return null
+        }
         if (hasSpaceError) {
             staticRoutingForm.lastError = "IP fields cannot contain spaces."
             if (strictValidation) {

@@ -298,7 +298,7 @@ def insert_ospf_process(conn: sqlite3.Connection, db: Any, host: str, process: d
         """
         SELECT ospf_id, process_id, router_id, reference_bandwidth,
                passive_default, default_originate, default_originate_always,
-               action_Cfg
+               action_Cfg, sync_status
         FROM t04_ospf_processes
         WHERE host = ? AND process_id = ?
         ORDER BY ospf_id ASC

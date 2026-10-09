@@ -93,5 +93,3 @@ def sync_eigrp_key_chains(conn: sqlite3.Connection, db: Any, host: str, payload:
                     existing["id"],
                 ),
             )
-        else:
-            conn.execute("UPDATE t04_eigrp_key_chains SET sync_status = 'pending_apply' WHERE id = ?;", (existing["id"],))

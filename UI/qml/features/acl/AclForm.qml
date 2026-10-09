@@ -18,12 +18,15 @@ Rectangle {
     property int viewedAclId: 0
     property string viewedAclName: ""
     property string loadedDescription: ""
+    property string loadedAclName: ""
+    property bool ruleSequencesUnavailable: false
     property string loadedRulesSignature: ""
     property var pendingDeleteIds: []
     property bool hasPendingDeletes: pendingDeleteIds.length > 0
     readonly property bool hasPendingLocalChanges: hasPendingDeletes
                                                     || (selectedAclId > 0
-                                                        && (loadedDescription !== editor.descriptionText.trim()
+                                                        && (loadedAclName !== editor.aclNameText.trim()
+                                                            || loadedDescription !== editor.descriptionText.trim()
                                                             || loadedRulesSignature !== rulesSignature()))
                                                     || (selectedAclId === 0
                                                         && viewedAclId === 0
@@ -35,7 +38,10 @@ Rectangle {
     ListModel { id: savedAclModel }
 
     function isEditing() { return selectedAclId > 0 }
-    function titleAction(value) { return String(value || "permit").toLowerCase() === "deny" ? "Deny" : "Permit" }
+    function titleAction(value) {
+        const action = String(value || "permit").toLowerCase()
+        return action === "evaluate" ? "Evaluate" : action === "deny" ? "Deny" : "Permit"
+    }
 
     function notify(message, type) {
         if (typeof statusBar !== "undefined")
@@ -79,6 +85,7 @@ Rectangle {
 
     function ruleDetail(rule) {
         const type = currentAclType.toLowerCase()
+        if (rule.protocol === "evaluate") return "evaluate " + (rule.reflect_name || "")
         if (type === "standard")
             return "src: " + (rule.source || "any") + (rule.wildcard ? " / " + rule.wildcard : "")
         if (type === "mac")
@@ -97,10 +104,30 @@ Rectangle {
         viewedAclId = 0
         viewedAclName = ""
         loadedDescription = ""
+        loadedAclName = ""
+        ruleSequencesUnavailable = false
         loadedRulesSignature = ""
         ruleModel.clear()
         editor.reset(currentHostIp)
         lastError = ""
+    }
+
+    function reloadCollectedState() {
+        if (hasPendingLocalChanges) return false
+        const aclId = viewedAclId
+        const editing = isEditing()
+        refreshSavedAcls()
+        if (aclId > 0) {
+            for (let i = 0; i < savedAcls.length; ++i) {
+                if (Number(savedAcls[i].Acl_id) === aclId) {
+                    if (editing) loadAcl(i)
+                    else viewAcl(i)
+                    return true
+                }
+            }
+            clearEditor()
+        }
+        return true
     }
 
     function populateRules(acl) {
@@ -110,7 +137,7 @@ Rectangle {
             const rule = rules[i]
             ruleModel.append({
                 ruleSequence: rule.sequence || ((i + 1) * 10),
-                ruleAction: titleAction(rule.action),
+                ruleAction: titleAction(rule.protocol === "evaluate" ? "evaluate" : rule.action),
                 ruleDetail: ruleDetail(rule),
                 ruleAclType: currentAclType,
                 ruleData: rule
@@ -138,8 +165,10 @@ Rectangle {
         editor.loadFields(acl)
         populateRules(acl)
         loadedDescription = editor.descriptionText
+        loadedAclName = editor.aclNameText.trim()
         loadedRulesSignature = rulesSignature()
-        lastError = ""
+        ruleSequencesUnavailable = acl.rules_editable === false
+        lastError = ruleSequencesUnavailable ? "This snapshot omits rule sequence numbers. Rules are read-only; collect a snapshot with sequence numbers before editing them." : ""
     }
 
     function rulesSignature() {
@@ -154,8 +183,8 @@ Rectangle {
     function validateSequence(text) {
         if (text === "") return 0
         const value = Number(text)
-        if (!Number.isInteger(value) || value < 1 || value > 65535) {
-            lastError = "Sequence must be an integer between 1 and 65535."
+        if (!/^\d+$/.test(text) || !Number.isInteger(value) || value < 1 || value > 2147483647) {
+            lastError = "Sequence must be an integer between 1 and 2147483647."
             return -1
         }
         for (let i = 0; i < ruleModel.count; ++i) {
@@ -168,9 +197,21 @@ Rectangle {
     }
 
     function addRule() {
+        if (ruleSequencesUnavailable) return
         const requested = validateSequence(editor.sequenceText())
         if (requested < 0) return
-        const sequence = requested || ((ruleModel.count + 1) * 10)
+        let sequence = requested
+        if (!sequence) {
+            sequence = 10
+            while (sequence <= 2147483647) {
+                let used = false
+                for (let i = 0; i < ruleModel.count; ++i) {
+                    if (ruleModel.get(i).ruleSequence === sequence) { used = true; break }
+                }
+                if (!used) break
+                sequence += 10
+            }
+        }
         const built = editor.buildRule(sequence, editor.actionText())
         ruleModel.append({
             ruleSequence: sequence,
@@ -191,15 +232,24 @@ Rectangle {
         const rules = []
         for (let i = 0; i < ruleModel.count; ++i) {
             const row = ruleModel.get(i)
-            const data = row.ruleData || {}
+            // Nested ListModel rows must become plain data before crossing QVariant.
+            const data = JSON.parse(JSON.stringify(row.ruleData || {}))
+            if (currentAclType === "Dynamic" && row.ruleData.dynamic_name &&
+                    (row.ruleData.timeout_seconds === undefined || row.ruleData.timeout_seconds === null))
+                data.timeout_seconds = null
             data.sequence = row.ruleSequence
-            data.action = String(row.ruleAction).toLowerCase()
+            data.action = row.ruleAction === "Evaluate" ? "permit" : String(row.ruleAction).toLowerCase()
             rules.push(data)
         }
         const currentRulesSignature = rulesSignature()
         const descriptionChanged = loadedDescription !== editor.descriptionText.trim()
+        const nameChanged = loadedAclName !== editor.aclNameText.trim()
         const rulesChanged = loadedRulesSignature !== currentRulesSignature
-        if (selectedAclId > 0 && !descriptionChanged && !rulesChanged) {
+        if (ruleSequencesUnavailable && rulesChanged && !nameChanged) {
+            lastError = "Rule sequence numbers are unavailable in this snapshot."
+            return
+        }
+        if (selectedAclId > 0 && !nameChanged && !descriptionChanged && !rulesChanged) {
             notify("No ACL changes to save.", "info")
             return
         }
@@ -209,7 +259,7 @@ Rectangle {
             acl_name: editor.aclNameText.trim(),
             acl_type: currentAclType,
             description: editor.descriptionText.trim(),
-            description_only: selectedAclId > 0 && descriptionChanged && !rulesChanged,
+            description_only: selectedAclId > 0 && !nameChanged && descriptionChanged && !rulesChanged,
             rules_changed: selectedAclId === 0 || rulesChanged,
             rules: rules
         }
@@ -290,7 +340,7 @@ Rectangle {
             onAddRuleRequested: form.addRule()
             onSaveRequested: form.saveAcl()
             onCancelRequested: form.clearEditor()
-            onClearRulesRequested: { ruleModel.clear(); editor.clearRuleInputs() }
+            onClearRulesRequested: { if (!form.ruleSequencesUnavailable) { ruleModel.clear(); editor.clearRuleInputs() } }
         }
 
         Item {
@@ -313,7 +363,7 @@ Rectangle {
                     editing: form.isEditing()
                     viewing: form.viewedAclId > 0
                     aclName: form.viewedAclName
-                    allowDelete: form.viewedAclId === 0 || form.isEditing()
+                    allowDelete: !form.ruleSequencesUnavailable && (form.viewedAclId === 0 || form.isEditing())
                     onDeleteRequested: (index) => {
                         if (index >= 0 && index < ruleModel.count) ruleModel.remove(index)
                     }

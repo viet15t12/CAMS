@@ -22,6 +22,9 @@ CLI_ERRORS = (
     "% Incomplete command",
     "% Ambiguous command",
     "% Bad mask",
+    "% Authorization failed",
+    "% Error",
+    "% Unknown command",
 )
 
 
@@ -45,19 +48,22 @@ def render_acl_payload(payload: dict[str, Any], platform: str = "cisco_ios") -> 
     bindings = config.get("bindings", [])
     for binding in bindings:
         if binding.get("state") == "remove":
-            commands.extend(_binding_commands(config["acl_name"], binding))
+            commands.extend(_binding_commands(config["acl_name"], binding, acl_type))
+    if config.get("resequence"):
+        commands.append(f"ip access-list resequence {config['acl_name']} 10 10")
     commands.extend(_command_lines(rendered))
     for binding in bindings:
         if binding.get("state") != "remove":
-            commands.extend(_binding_commands(config["acl_name"], binding))
+            commands.extend(_binding_commands(config["acl_name"], binding, acl_type))
     return commands
 
 
-def _binding_commands(acl_name: str, binding: dict[str, Any]) -> list[str]:
+def _binding_commands(acl_name: str, binding: dict[str, Any], acl_type: str = "standard") -> list[str]:
     prefix = "no " if binding.get("state") == "remove" else ""
+    family = "mac" if acl_type == "mac" else "ip"
     return [
         f"interface {binding['interface_name']}",
-        f"{prefix}ip access-group {acl_name} {binding['direction']}",
+        f"{prefix}{family} access-group {acl_name} {binding['direction']}",
         "exit",
     ]
 

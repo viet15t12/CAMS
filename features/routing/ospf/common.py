@@ -19,7 +19,7 @@ def process_action_cfg(current: dict[str, Any] | None, submitted: dict[str, Any]
         return "1111"
     before = normalize_process_core(current)
     after = normalize_process_core(submitted)
-    return "".join(
+    changed = "".join(
         (
             "1" if before["router_id"] != after["router_id"] else "0",
             "1" if before["reference_bandwidth"] != after["reference_bandwidth"] else "0",
@@ -31,6 +31,8 @@ def process_action_cfg(current: dict[str, Any] | None, submitted: dict[str, Any]
             ) else "0",
         )
     )
+    pending = normalize_action_cfg(current.get("action_Cfg"), "0000") if current.get("sync_status") == "pending_apply" else "0000"
+    return "".join("1" if old == "1" or new == "1" else "0" for old, new in zip(pending, changed))
 
 
 def normalize_priority(value: Any) -> int:

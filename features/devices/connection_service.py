@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any, Callable
 
 from domain.status import ConnectionStatus
+from .running_config_service import acl_collection_notice
 
 
 class DeviceConnectionService:
@@ -88,7 +89,8 @@ class DeviceConnectionService:
                 "message": f"Connected {host}; backup succeeded, but DB sync failed: {sync.get('message')}.",
             }
         suffix = "" if status_updated else " Database status was not updated."
+        notice = acl_collection_notice(sync)
         return {
-            "ok": True, "severity": "success", "sync": sync,
-            "message": f"Connected {host}; running-config committed in backup/{host}/cfg.{suffix}",
+            "ok": True, "severity": "warning" if notice else "success", "sync": sync,
+            "message": f"Connected {host}; running-config committed in backup/{host}/cfg.{suffix}" + (" " + notice if notice else ""),
         }

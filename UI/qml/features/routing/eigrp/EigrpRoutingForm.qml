@@ -32,6 +32,7 @@ FormLayout {
     property var processPayloadByUid: ({})
     property var availableInterfaces: []
     property int viewPushRevision: 0
+    property int loadRevision: 0
 
     ListModel { id: processModel }
 
@@ -486,16 +487,20 @@ FormLayout {
     }
 
     function loadFromDatabase() {
+        const revision = ++loadRevision
+        isLoading = true
         resetProcessModel()
         lastError = ""
         loadedProcessesSignature = "[]"
         hasPendingLocalChanges = false
 
         const host = String(currentHostIp || "").trim()
-        if (host === "")
+        if (host === "") {
+            isLoading = false
+            rebuildProcessOptions()
             return
+        }
 
-        isLoading = true
         const payload = dbManager.getEigrpRouting(host)
         const ok = payload && (payload.ok === undefined || payload.ok === true)
         if (!ok) {
@@ -512,6 +517,7 @@ FormLayout {
         loadAvailableInterfaces()
 
         Qt.callLater(function() {
+            if (!eigrpRoutingForm || revision !== eigrpRoutingForm.loadRevision) return
             eigrpRoutingForm.loadAvailableInterfaces()
             eigrpRoutingForm.loadedProcessesSignature = eigrpRoutingForm.currentProcessesSignature()
             eigrpRoutingForm.hasPendingLocalChanges = false
@@ -543,7 +549,8 @@ FormLayout {
             notify("Saved EIGRP routing for host " + host, "success")
             return true
         }
-        lastError = "Save EIGRP routing failed."
+        const backendError = String(dbManager.getLastRoutingError ? dbManager.getLastRoutingError() : "").trim()
+        lastError = backendError !== "" ? backendError : "Save EIGRP routing failed."
         notify(lastError, "error")
         return false
     }

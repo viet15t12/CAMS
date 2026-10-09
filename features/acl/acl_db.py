@@ -5,8 +5,8 @@ from typing import Any
 
 from .bindings import mark_bindings_deleted, read_bindings, replace_bindings
 from .common import db_connection, log_db_error, normalize_host, soft_delete, text_or_none
-from .rules import mark_rules_deleted, read_rules, replace_rules
-from .validation import canonical_type, validate_acl_name, validate_rules
+from .rules import RULE_TABLES, mark_rules_deleted, read_rules, replace_rules, normalized_rules
+from .validation import _integer, canonical_type, validate_acl_name, validate_rules
 
 
 def get_acls(db: Any, host: str, acl_type: str) -> list[dict[str, Any]]:
@@ -29,6 +29,7 @@ def get_acls(db: Any, host: str, acl_type: str) -> list[dict[str, Any]]:
                 acl = dict(row)
                 acl["rules"] = read_rules(conn, kind, acl["Acl_id"])
                 acl["bindings"] = read_bindings(conn, acl["Acl_id"])
+                acl["rules_editable"] = not bool(int(acl["action_Cfg"] or 0) & 4)
                 result.append(acl)
             return result
     except sqlite3.Error as exc:
@@ -71,6 +72,21 @@ def _insert_acl(
     return int(cursor.lastrowid)
 
 
+def _remove_acl(conn: sqlite3.Connection, acl_id: int, kind: str) -> None:
+    # A pending parent can be an edited deployed ACL. Retain the removal
+    # whenever observed/historical rules still exist; cancel only local rows.
+    deployed = any(conn.execute(
+        f"SELECT 1 FROM {table} WHERE acl_id=? AND sync_status IN ('synchronized','pending_delete') LIMIT 1",
+        (acl_id,),
+    ).fetchone() for table in RULE_TABLES.values())
+    mark_rules_deleted(conn, kind, acl_id)
+    mark_bindings_deleted(conn, acl_id)
+    if deployed:
+        conn.execute("UPDATE t05_ACL_DB SET sync_status='pending_delete' WHERE Acl_id=?", (acl_id,))
+    else:
+        soft_delete(conn, "t05_ACL_DB", "Acl_id", acl_id)
+
+
 def _create_or_revive_acl(
     conn: sqlite3.Connection, host: str, name: str, kind: str, description: str | None,
 ) -> int:
@@ -82,13 +98,15 @@ def _create_or_revive_acl(
         return _insert_acl(conn, host, name, kind, description)
     if existing["sync_status"] != "pending_delete":
         raise sqlite3.IntegrityError(f"ACL name already exists for host: {name}")
+    if existing["acl_type"] != kind:
+        raise ValueError("Push the old ACL deletion before reusing its name for another ACL type")
 
     acl_id = int(existing["Acl_id"])
     mark_rules_deleted(conn, existing["acl_type"], acl_id)
     mark_bindings_deleted(conn, acl_id)
     conn.execute(
         """UPDATE t05_ACL_DB
-           SET acl_type = ?, description = ?, sync_status = 'pending_apply', action_Cfg = 1
+           SET acl_type = ?, description = ?, sync_status = 'pending_apply', action_Cfg = action_Cfg | 1
            WHERE Acl_id = ?""", (kind, description, acl_id),
     )
     return acl_id
@@ -102,7 +120,9 @@ def save_acl(db: Any, payload: Any) -> bool:
         name = validate_acl_name(payload.get("acl_name"))
         kind = canonical_type(payload.get("acl_type"))
         description = text_or_none(payload.get("description"))
-        acl_id = int(payload.get("acl_id") or 0)
+        if description and ("\n" in description or "\r" in description):
+            raise ValueError("ACL description must use one line")
+        acl_id = _integer(payload.get("acl_id") or 0, "ACL ID")
         rules = [dict(rule) for rule in list(payload.get("rules") or [])]
         raw_bindings = payload.get("bindings")
         if raw_bindings is None and "binding" in payload:
@@ -123,9 +143,15 @@ def save_acl(db: Any, payload: Any) -> bool:
             current = _existing_acl(conn, acl_id) if acl_id > 0 else None
             if acl_id > 0 and current is None:
                 return False
+            if current and current["host"] != host:
+                raise ValueError("ACL does not belong to this host")
             if current and description_only:
+                if current["acl_name"] != name or current["acl_type"] != kind:
+                    raise ValueError("Description-only changes cannot rename or change ACL type")
+                if (current["description"] or "") == (description or ""):
+                    return True
                 conn.execute(
-                    "UPDATE t05_ACL_DB SET description = ?, action_Cfg = 1, sync_status = 'pending_apply' WHERE Acl_id = ?",
+                    "UPDATE t05_ACL_DB SET description = ?, action_Cfg = action_Cfg | 1, sync_status = 'pending_apply' WHERE Acl_id = ?",
                     (description, acl_id),
                 )
                 conn.commit()
@@ -139,27 +165,24 @@ def save_acl(db: Any, payload: Any) -> bool:
                     for item in read_bindings(conn, acl_id)
                 ]
                 if current["host"] == host and current["acl_name"] == name:
-                    mark_rules_deleted(conn, current["acl_type"], acl_id)
-                    conn.execute(
-                        """UPDATE t05_ACL_DB
-                           SET acl_type = ?, description = ?, sync_status = 'pending_apply', action_Cfg = 1
-                           WHERE Acl_id = ?""", (kind, description, acl_id),
-                    )
+                    raise ValueError("Push the old ACL deletion before reusing its name for another ACL type")
                 else:
-                    mark_rules_deleted(conn, current["acl_type"], acl_id)
-                    mark_bindings_deleted(conn, acl_id)
-                    soft_delete(conn, "t05_ACL_DB", "Acl_id", acl_id)
+                    _remove_acl(conn, acl_id, current["acl_type"])
                     acl_id = _create_or_revive_acl(conn, host, name, kind, description)
                 rules_changed = True
                 if raw_bindings is None:
                     bindings = preserved_bindings
                 binding_changed = True
             elif current:
-                action_cfg = 1 if (current["description"] or "") != (description or "") else current["action_Cfg"]
-                conn.execute(
-                    "UPDATE t05_ACL_DB SET description = ?, action_Cfg = ?, sync_status = 'pending_apply' WHERE Acl_id = ?",
-                    (description, action_cfg, acl_id),
-                )
+                if (current["description"] or "") != (description or ""):
+                    conn.execute(
+                        "UPDATE t05_ACL_DB SET description = ?, action_Cfg = action_Cfg | 1, sync_status = 'pending_apply' WHERE Acl_id = ?",
+                        (description, acl_id),
+                    )
+                if rules_changed:
+                    rules_changed = normalized_rules(kind, rules) != normalized_rules(kind, read_rules(conn, kind, acl_id))
+                    if rules_changed and int(current["action_Cfg"] or 0) & 4:
+                        raise ValueError("ACL rule sequence numbers are not available in this snapshot")
             else:
                 acl_id = _create_or_revive_acl(conn, host, name, kind, description)
 
@@ -169,7 +192,7 @@ def save_acl(db: Any, payload: Any) -> bool:
                 replace_bindings(conn, acl_id, host, bindings)
             conn.commit()
         return True
-    except sqlite3.Error as exc:
+    except (sqlite3.Error, TypeError, ValueError, OverflowError) as exc:
         log_db_error("saveAcl", exc)
         return False
 
@@ -187,20 +210,19 @@ def save_acl_bindings(db: Any, acl_id: int, payload: Any) -> bool:
             if current is None:
                 return False
             replace_bindings(conn, acl_id, current["host"], bindings)
-            conn.execute("UPDATE t05_ACL_DB SET sync_status = 'pending_apply' WHERE Acl_id = ?", (acl_id,))
             conn.commit()
         return True
-    except sqlite3.Error as exc:
+    except (sqlite3.Error, TypeError, ValueError, OverflowError) as exc:
         log_db_error("saveAclBindings", exc)
         return False
 
 
 def delete_acls(db: Any, payload: Any) -> bool:
     try:
-        acl_ids = list(dict.fromkeys(int(value) for value in list(payload or []) if int(value) > 0))
+        acl_ids = list(dict.fromkeys(_integer(value, "ACL ID") for value in list(payload or [])))
     except (TypeError, ValueError):
         return False
-    if not acl_ids:
+    if not acl_ids or any(value <= 0 for value in acl_ids):
         return False
     try:
         with db_connection(db) as conn:
@@ -208,9 +230,7 @@ def delete_acls(db: Any, payload: Any) -> bool:
             if any(row is None for row in current_rows):
                 return False
             for acl_id, current in zip(acl_ids, current_rows):
-                mark_rules_deleted(conn, current["acl_type"], acl_id)
-                mark_bindings_deleted(conn, acl_id)
-                soft_delete(conn, "t05_ACL_DB", "Acl_id", acl_id)
+                _remove_acl(conn, acl_id, current["acl_type"])
             conn.commit()
         return True
     except sqlite3.Error as exc:

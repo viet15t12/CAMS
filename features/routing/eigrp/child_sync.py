@@ -124,9 +124,6 @@ def sync_eigrp_child_table(
         if existing is None:
             insert_child_row(conn, db, eigrp_id, table, submitted)
             continue
-        current = dict(existing)
-        current.pop("id", None)
+        current = normalized_child_rows(db, {field: [existing]}, field)[0]
         if current != submitted:
             update_child_row(conn, db, existing["id"], table, submitted)
-        else:
-            conn.execute(f"UPDATE {table} SET sync_status = 'pending_apply' WHERE id = ?;", (existing["id"],))

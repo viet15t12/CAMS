@@ -30,8 +30,8 @@ def _apply_tracking(cursor: sqlite3.Cursor, tracking: dict[str, Any]) -> int:
 
     for acl_id in tracking.get("acl", {}).get("add", []):
         cursor.execute(
-            f"UPDATE {ACL['main']} SET sync_status='synchronized' WHERE Acl_id=? AND (sync_status IN ('pending_apply', 'pending_delete') OR sync_status IS NULL)",
-            (acl_id,),
+            f"UPDATE {ACL['main']} SET sync_status='synchronized', action_Cfg=COALESCE(action_Cfg,0) & ? WHERE Acl_id=? AND sync_status!='pending_delete'",
+            (~int(tracking.get("clear_action_bits", 1)), acl_id),
         )
         changes += cursor.rowcount
     for kind, states in tracking.get("rules", {}).items():

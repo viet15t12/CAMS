@@ -5,6 +5,18 @@ from __future__ import annotations
 from typing import Any, Callable
 
 
+def acl_collection_notice(sync: dict[str, Any]) -> str:
+    summary = sync.get("summary") or {}
+    notices = []
+    if "acls" in summary.get("conflicts", []):
+        notices.append("ACL changes waiting for Push were preserved.")
+    unsupported = summary.get("unsupported_acl_details", [])
+    if unsupported:
+        names = ", ".join(str(row.get("acl_name") or "unknown") for row in unsupported)
+        notices.append(f"ACL forms not supported by the editor were skipped: {names}. Existing data was preserved.")
+    return " ".join(notices)
+
+
 class RunningConfigService:
     def __init__(
         self,
@@ -71,8 +83,9 @@ class RunningConfigService:
                 "message": f"Running-config committed in backup/{host}/cfg, but DB sync failed: {sync.get('message')}.",
                 "sync": sync,
             }
+        notice = acl_collection_notice(sync)
         return {
-            **backup, "ok": True, "severity": "success",
-            "message": f"Running-config committed in backup/{host}/cfg.",
+            **backup, "ok": True, "severity": "warning" if notice else "success",
+            "message": f"Running-config committed in backup/{host}/cfg." + (" " + notice if notice else ""),
             "sync": sync,
         }

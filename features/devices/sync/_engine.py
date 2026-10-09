@@ -25,6 +25,9 @@ class ParsedRouterConfig:
     unsupported_dhcp_pools: list[dict[str, str]] = field(default_factory=list)
     unsupported_routes: list[dict[str, str]] = field(default_factory=list)
     unsupported_routing: list[dict[str, str]] = field(default_factory=list)
+    acls: list[dict[str, Any]] = field(default_factory=list)
+    unsupported_acls: list[dict[str, str]] = field(default_factory=list)
+    acl_bindings: list[dict[str, str]] = field(default_factory=list)
 
 
 def clean_text(value: Any) -> str:
@@ -107,7 +110,10 @@ def parse_static_route_line(line: str) -> tuple[str, dict[str, Any]]:
 
 
 def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
+    from .acl import parse_acl_sections
+
     text = ANSI_RE.sub("", config_text or "").replace("\r\n", "\n").replace("\r", "\n")
+    acls, unsupported_acls, acl_bindings = parse_acl_sections(text)
     hostname = ""
     interfaces: list[dict[str, Any]] = []
     static_routes: list[dict[str, Any]] = []
@@ -118,6 +124,7 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
     eigrp_processes: dict[int, dict[str, Any]] = {}
     dhcp_pools: list[dict[str, Any]] = []
     unsupported_dhcp_pools: list[dict[str, str]] = []
+    key_chains: list[dict[str, Any]] = []
     current_kind = ""
     current_name = ""
     current_body: list[str] = []
@@ -149,6 +156,8 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
                 unsupported_dhcp_pools.append(
                     {"pool": current_name, "code": "DHCP_POOL_FORM_UNSUPPORTED"}
                 )
+        elif current_kind == "key_chain":
+            key_chains.extend(parse_key_chain_block(current_name, current_body))
         current_kind = ""
         current_name = ""
         current_body = []
@@ -166,6 +175,11 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
             hostname = clean_label(stripped.split(None, 1)[1])
 
         is_top_level = not line.startswith((" ", "\t"))
+        if is_top_level and stripped.startswith("key chain "):
+            flush_current()
+            current_kind = "key_chain"
+            current_name = clean_text(stripped[len("key chain "):])
+            continue
         if is_top_level and stripped.startswith("ip dhcp pool "):
             flush_current()
             current_kind = "dhcp_pool"
@@ -207,6 +221,15 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
 
     flush_current()
     merge_interface_ospf_settings(ospf_processes, interfaces)
+    for process in eigrp_processes.values():
+        process["key_chains"] = key_chains
+    for interface in interfaces:
+        for setting in interface.get("eigrp_settings", []):
+            process = eigrp_processes.get(setting["as_number"])
+            if process is not None:
+                process["interface_settings"].append(
+                    {key: value for key, value in setting.items() if key != "as_number"}
+                )
     fhrp_members = [
         dict(member, interface_name=interface["name"])
         for interface in interfaces
@@ -231,6 +254,9 @@ def parse_running_config_sections(config_text: str) -> ParsedRouterConfig:
         unsupported_dhcp_pools=unsupported_dhcp_pools,
         unsupported_routes=unsupported_routes,
         unsupported_routing=unsupported_routing,
+        acls=acls,
+        unsupported_acls=unsupported_acls,
+        acl_bindings=acl_bindings,
     )
 
 
@@ -273,6 +299,54 @@ def parse_dhcp_pool_block(name: str, body: list[str]) -> dict[str, Any] | None:
         return pool_values(name, network, mask, gateway, dns, lease)
     except ValueError:
         return None
+
+
+def parse_key_chain_block(name: str, body: list[str]) -> list[dict[str, Any]]:
+    rows = []
+    current = None
+    for line in body:
+        parts = line.split()
+        if len(parts) == 2 and parts[0] == "key" and parts[1].isdigit():
+            current = {"chain_name": name, "key_id": int(parts[1]), "key_string": "",
+                       "accept_lifetime": None, "send_lifetime": None}
+            rows.append(current)
+        elif current is not None and parts:
+            field = {"key-string": "key_string", "accept-lifetime": "accept_lifetime",
+                     "send-lifetime": "send_lifetime"}.get(parts[0])
+            if field:
+                current[field] = " ".join(parts[1:])
+    return rows
+
+
+def parse_interface_eigrp_lines(interface: dict[str, Any], body: list[str]) -> list[dict[str, Any]]:
+    settings = {}
+    for line in body:
+        negated = line.startswith("no ")
+        parts = (line[3:] if negated else line).split()
+        if "eigrp" not in parts:
+            continue
+        offset = parts.index("eigrp")
+        if offset + 1 >= len(parts) or not parts[offset + 1].isdigit():
+            continue
+        number = int(parts[offset + 1])
+        row = settings.setdefault(number, {
+            "as_number": number, "interface_name": interface["name"],
+            "bandwidth": interface.get("bandwidth"), "delay": interface.get("delay"),
+            "split_horizon": 1, "next_hop_self": 0,
+        })
+        command = " ".join(parts[:offset])
+        args = parts[offset + 2:]
+        numeric = {"ip hello-interval": "hello_interval", "ip hold-time": "hold_time",
+                   "ip bandwidth-percent": "bandwidth_percent"}.get(command)
+        if numeric and args and not negated:
+            row[numeric] = int_or_none(args[0])
+        elif command in {"ip split-horizon", "ip next-hop-self"}:
+            row[command[3:].replace("-", "_")] = 0 if negated else 1
+        elif command == "ip authentication key-chain" and args and not negated:
+            row["auth_key_chain"] = args[0]
+        elif command == "ip summary-address" and len(args) == 2 and not negated:
+            row["summary_ip"], row["summary_mask"] = args
+    return list(settings.values())
 
 
 def parse_interface_brief(brief_text: str) -> dict[str, dict[str, Any]]:
@@ -461,6 +535,7 @@ def parse_interface_block(name: str, body: list[str]) -> dict[str, Any]:
         row["ospf_settings"].append(merged)
 
     row["fhrp_members"] = parse_interface_fhrp_lines(body)
+    row["eigrp_settings"] = parse_interface_eigrp_lines(row, body)
 
     lowered_name = row["name"].lower()
     if "." in row["name"]:
@@ -647,6 +722,8 @@ def parse_interface_ospf_line(line: str, bindings: list[dict[str, Any]], options
         bindings.append({"process_id": int(parts[2]), "area": area_to_int(parts[4])})
     elif len(parts) >= 4 and parts[2] == "cost":
         options["cost"] = int_or_none(parts[3])
+    elif len(parts) >= 4 and parts[2] == "priority":
+        options["priority"] = int_or_none(parts[3])
     elif len(parts) >= 4 and parts[2] == "hello-interval":
         options["hello_interval"] = int_or_none(parts[3])
     elif len(parts) >= 4 and parts[2] == "dead-interval":
@@ -660,6 +737,8 @@ def parse_interface_ospf_line(line: str, bindings: list[dict[str, Any]], options
         options["network_type"] = net_type if net_type in {"broadcast", "non-broadcast", "point-to-point", "point-to-multipoint"} else ""
     elif len(parts) >= 3 and parts[2] == "authentication":
         options["auth_type"] = "message-digest" if "message-digest" in parts[3:] else "plain"
+    elif len(parts) >= 4 and parts[2] == "authentication-key":
+        options["auth_key"] = " ".join(parts[3:])
 
 
 def default_eigrp_process(as_number: int) -> dict[str, Any]:
@@ -736,6 +815,16 @@ def parse_eigrp_block(
             process["bfd_all_interfaces"] = 1
         elif line.startswith("metric weights ") and len(parts) >= 8:
             process["metric_weights"] = " ".join(parts[2:8])
+        elif line.startswith("distribute-list ") and len(parts) in {3, 4} and parts[2] in {"in", "out"}:
+            process["distribute_lists"].append({
+                "list_name": parts[1], "direction": parts[2],
+                "interface_name": parts[3] if len(parts) == 4 else None,
+            })
+        elif line.startswith("offset-list ") and len(parts) in {4, 5} and parts[2] in {"in", "out"}:
+            process["offset_lists"].append({
+                "list_name": parts[1], "direction": parts[2], "value": int_or_none(parts[3]),
+                "interface_name": parts[4] if len(parts) == 5 else None,
+            })
         elif line.startswith("eigrp stub"):
             process["stub_enabled"] = 1
             options = parts[2:]
@@ -973,12 +1062,14 @@ def merge_interface_ospf_settings(processes: dict[int, dict[str, Any]], interfac
                     "interface_name": interface["name"],
                     "area": area,
                     "cost": setting.get("cost"),
+                    "priority": setting.get("priority", 1),
                     "hello_interval": setting.get("hello_interval"),
                     "dead_interval": setting.get("dead_interval"),
                     "mtu_ignore": bool_int(setting.get("mtu_ignore")),
                     "bfd": bool_int(setting.get("bfd")),
                     "network_type": clean_text(setting.get("network_type")),
                     "auth_type": clean_text(setting.get("auth_type")),
+                    "auth_key": clean_text(setting.get("auth_key")),
                 }
             )
 
@@ -990,6 +1081,8 @@ def sync_device_state(
     interface_brief: str | None = None,
     mode: str = "safe",
 ) -> dict[str, Any]:
+    from .acl import acl_has_pending, sync_acls
+
     mode = str(mode or "safe").strip().lower()
     if mode not in {"safe", "force_device_state", "preview"}:
         raise ValueError("Sync mode must be safe, force_device_state, or preview")
@@ -1011,6 +1104,7 @@ def sync_device_state(
             "fhrp": _fhrp_has_pending(conn, host),
             "dhcp_helpers": _dhcp_helpers_have_pending(conn, host),
             "dhcp_pools": _table_has_pending(conn, "t03_dhcp_pool", host),
+            "acls": acl_has_pending(conn, host),
         }
         if mode == "safe":
             conflicts = [name for name, exists in pending.items() if exists]
@@ -1032,6 +1126,10 @@ def sync_device_state(
                 "unsupported_route_details": parsed.unsupported_routes,
                 "unsupported_routing": len(parsed.unsupported_routing),
                 "unsupported_routing_details": parsed.unsupported_routing,
+                "acls": len(parsed.acls),
+                "acl_bindings": len(parsed.acl_bindings),
+                "unsupported_acls": len(parsed.unsupported_acls),
+                "unsupported_acl_details": parsed.unsupported_acls,
                 "mode": mode,
             }
         _ensure_sync_indexes(conn)
@@ -1048,6 +1146,7 @@ def sync_device_state(
                     not pending["interfaces"]
                     and not pending["fhrp"]
                     and not pending["dhcp_helpers"]
+                    and not pending["acls"]
                 )
             )
             # Remove this host's old members before interface reconciliation;
@@ -1074,6 +1173,8 @@ def sync_device_state(
                 sync_eigrp_processes(
                     conn, host, list(parsed.eigrp_processes.values())
                 )
+            if mode == "force_device_state" or not pending["acls"]:
+                sync_acls(conn, host, parsed.acls, parsed.unsupported_acls, parsed.acl_bindings)
     finally:
         conn.close()
 
@@ -1094,6 +1195,10 @@ def sync_device_state(
         "unsupported_route_details": parsed.unsupported_routes,
         "unsupported_routing": len(parsed.unsupported_routing),
         "unsupported_routing_details": parsed.unsupported_routing,
+        "acls": len(parsed.acls),
+        "acl_bindings": len(parsed.acl_bindings),
+        "unsupported_acls": len(parsed.unsupported_acls),
+        "unsupported_acl_details": parsed.unsupported_acls,
         "mode": mode,
     }
 
@@ -1605,13 +1710,15 @@ def sync_eigrp_processes(
     """Replace the observed classic EIGRP snapshot with sync_status='synchronized' rows."""
     from features.routing.eigrp.child_sync import CHILD_TABLES
     from features.routing.eigrp.process_store import insert_eigrp_process
+    from features.routing.eigrp.save_key_chains import sync_eigrp_key_chains
 
     conn.execute("DELETE FROM t04_eigrp_processes WHERE host = ?;", (host,))
+    conn.execute("DELETE FROM t04_eigrp_key_chains WHERE host = ?;", (host,))
     adapter = _EigrpSyncAdapter()
     for process in processes:
         eigrp_id = insert_eigrp_process(conn, adapter, host, process)
         conn.execute(
-            "UPDATE t04_eigrp_processes SET sync_status = 'synchronized' WHERE eigrp_id = ?;",
+            "UPDATE t04_eigrp_processes SET sync_status = 'synchronized', action_Cfg = '0000000' WHERE eigrp_id = ?;",
             (eigrp_id,),
         )
         for table in CHILD_TABLES:
@@ -1619,6 +1726,8 @@ def sync_eigrp_processes(
                 f"UPDATE {table} SET sync_status = 'synchronized' WHERE eigrp_id = ?;",
                 (eigrp_id,),
             )
+    sync_eigrp_key_chains(conn, adapter, host, processes)
+    conn.execute("UPDATE t04_eigrp_key_chains SET sync_status = 'synchronized' WHERE host = ?;", (host,))
 
 
 def sync_interfaces(conn: sqlite3.Connection, host: str, interfaces: list[dict[str, Any]]) -> None:
@@ -1917,9 +2026,9 @@ def sync_ospf_processes(conn: sqlite3.Connection, host: str, processes: list[dic
             """
             INSERT INTO t04_ospf_processes (
                 host, process_id, router_id, reference_bandwidth,
-                passive_default, default_originate, default_originate_always, sync_status
+                passive_default, default_originate, default_originate_always, action_Cfg, sync_status
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, 'synchronized');
+            VALUES (?, ?, ?, ?, ?, ?, ?, '0000', 'synchronized');
             """,
             (
                 host,
@@ -2042,11 +2151,11 @@ def sync_ospf_processes(conn: sqlite3.Connection, host: str, processes: list[dic
                 conn.execute(
                     """
                     INSERT INTO t04_router_iface_ospf (
-                        ospf_id, iface_id, area, cost, hello_interval, dead_interval,
-                        mtu_ignore, bfd, network_type, auth_type, sync_status
+                        ospf_id, iface_id, area, cost, priority, hello_interval, dead_interval,
+                        mtu_ignore, bfd, network_type, auth_type, auth_key, sync_status
                     )
                     VALUES (?, (SELECT iface_id FROM t02_interface_name WHERE host = ? AND interface_name = ?),
-                            ?, ?, ?, ?, ?, ?, ?, ?, 1);
+                            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'synchronized');
                     """,
                     (
                         ospf_id,
@@ -2054,11 +2163,13 @@ def sync_ospf_processes(conn: sqlite3.Connection, host: str, processes: list[dic
                         clean_text(iface.get("interface_name")),
                         area_to_int(iface.get("area")),
                         int_or_none(iface.get("cost")),
+                        int_or_none(iface.get("priority")) if iface.get("priority") is not None else 1,
                         int_or_none(iface.get("hello_interval")),
                         int_or_none(iface.get("dead_interval")),
                         bool_int(iface.get("mtu_ignore")),
                         bool_int(iface.get("bfd")),
                         clean_text(iface.get("network_type")) or None,
                         clean_text(iface.get("auth_type")) or None,
+                        clean_text(iface.get("auth_key")) or None,
                     ),
                 )

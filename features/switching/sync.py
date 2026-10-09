@@ -608,6 +608,7 @@ def sync_switch_state(
             device_role = str(role_row[0] or "").lower()
 
     parsed_fhrp = parse_running_config_sections(snapshot.get("running_config", ""))
+    from features.devices.sync.acl import acl_has_pending, sync_acls
     parsed_security = parse_l2_security(snapshot)
     has_security_snapshot = "dhcp_snooping" in snapshot or "running_config" in snapshot
 
@@ -617,11 +618,16 @@ def sync_switch_state(
         "vtp": parse_vtp_status(snapshot.get("vtp_status", "")) is not None,
         "fhrp": ("running_config" in snapshot) and (device_role == "sw3" if device_role else True),
         "security": has_security_snapshot,
+        "acls": "running_config" in snapshot,
     }
     conflicts: list[str] = []
     with db._connect() as conn:
         for module, available in modules.items():
             if not available:
+                continue
+            if module == "acls":
+                if acl_has_pending(conn, host):
+                    conflicts.append(module)
                 continue
             if module == "fhrp":
                 pending = conn.execute(
@@ -641,7 +647,9 @@ def sync_switch_state(
             if _module_has_local_state(conn, host, module) and _module_is_pending(db, host, module):
                 conflicts.append(module)
     if mode == "preview":
-        return {"conflicts": conflicts, "available": [key for key, value in modules.items() if value]}
+        return {"conflicts": conflicts, "available": [key for key, value in modules.items() if value],
+                "acls": len(parsed_fhrp.acls), "unsupported_acls": len(parsed_fhrp.unsupported_acls),
+                "unsupported_acl_details": parsed_fhrp.unsupported_acls}
 
     counts = {
         "vlans": 0,
@@ -650,9 +658,18 @@ def sync_switch_state(
         "fhrp_members": 0,
         "security_vlans": 0,
         "trust_ports": 0,
+        "acls": 0,
+        "acl_bindings": 0,
+        "unsupported_acls": len(parsed_fhrp.unsupported_acls),
+        "unsupported_acl_details": parsed_fhrp.unsupported_acls,
     }
     applied: list[str] = []
     with db._connect() as conn, conn:
+        if modules["acls"] and (mode == "force_device_state" or "acls" not in conflicts):
+            sync_acls(conn, host, parsed_fhrp.acls, parsed_fhrp.unsupported_acls, parsed_fhrp.acl_bindings)
+            counts["acls"] = len(parsed_fhrp.acls)
+            counts["acl_bindings"] = len(parsed_fhrp.acl_bindings)
+            applied.append("acls")
         if modules["vlan"] and (mode == "force_device_state" or "vlan" not in conflicts):
             counts["vlans"] = _sync_vlans(conn, host, parse_vlan_brief(snapshot["vlan_brief"]))
             applied.append("vlan")

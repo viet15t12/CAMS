@@ -44,6 +44,10 @@ ip route 10.30.0.0 255.255.0.0 GigabitEthernet0/0
         )
         self.assertEqual([row["ad"] for row in parsed.static_routes], [1, 10])
         self.assertEqual(parsed.default_routes[0]["next_hop_ip"], "192.0.2.254")
+        self.assertEqual(
+            {row["code"] for row in parsed.unsupported_routes},
+            {"NON_IPV4_ROUTE_UNSUPPORTED"},
+        )
 
     def test_parse_multiple_default_routes(self) -> None:
         parsed = parse_running_config_sections(
@@ -63,7 +67,7 @@ ip route 0.0.0.0 0.0.0.0 198.51.100.1
         )
         self.assertEqual(
             {row["code"] for row in parsed.unsupported_routes},
-            {"NON_IPV4_ROUTE_UNSUPPORTED"},
+            set(),
         )
 
     def test_sync_is_idempotent_and_removes_observed_routes(self) -> None:

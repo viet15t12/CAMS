@@ -17,7 +17,7 @@ def get_ospf_routing(db: Any, host: str) -> dict[str, Any]:
             process_rows = conn.execute(
                 """
                 SELECT ospf_id, process_id, router_id, reference_bandwidth,
-                       passive_default, default_originate, default_originate_always, sync_status
+                       passive_default, default_originate, default_originate_always, action_Cfg, sync_status
                 FROM t04_ospf_processes
                 WHERE host = ? AND sync_status != 'pending_delete'
                 ORDER BY ospf_id ASC;

@@ -235,11 +235,20 @@ def send_cli_routing_commands(hostname, connection, sub_type, commands):
         read_timeout=60,
         cmd_verify=False,
     )
+    return check_cli_routing_output(hostname, output_log)
+
+
+def check_cli_routing_output(hostname, output_log):
+    text = str(output_log or "")
+    error_markers = ("% invalid input", "% incomplete command", "% ambiguous command",
+                     "% unknown command", "% authorization failed", "% error")
+    if any(marker in text.lower() for marker in error_markers):
+        raise RuntimeError(f"Router {hostname} rejected routing commands: {text.strip()}")
 
     print(f"\n[INFO] Router response log from {hostname}:")
-    print(output_log)
+    print(text)
     print("=" * 50)
-    return output_log
+    return text
 
 
 def apply_routing_with_connector(connector, payload):
@@ -311,14 +320,7 @@ def task_push_routing(task):
     
     output_log = res[0].result
 
-    # ==============================================================
-    # [BÍ KÍP 2] IN LOG PHẢN HỒI THỰC TẾ TỪ ROUTER
-    # ==============================================================
-    print(f"\n[INFO] Router response log from {task.host.hostname}:")
-    print(output_log)
-    print("=" * 50)
-
-    return output_log
+    return check_cli_routing_output(task.host.hostname, output_log)
 
 def build_worker_inventory(db_path, task_list):
     task_map = {item.get("target", {}).get("ip"): item for item in task_list if item.get("target", {}).get("ip")}

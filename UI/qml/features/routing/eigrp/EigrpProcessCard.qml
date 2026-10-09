@@ -122,7 +122,7 @@ ProcessCard {
         appendRows(keyChainsModel, payload.key_chains, function(row) {
             return {
                 chain_name: row.chain_name || "",
-                key_id: row.key_id > 0 ? String(row.key_id) : "",
+                key_id: row.key_id !== undefined && row.key_id !== null ? String(row.key_id) : "",
                 key_string: row.key_string || "",
                 accept_lifetime: row.accept_lifetime || "",
                 send_lifetime: row.send_lifetime || ""
@@ -199,8 +199,8 @@ ProcessCard {
         const raw = String(text || "").trim()
         if (raw === "")
             return { ok: true, message: "" }
-        const value = parseInt(raw, 10)
-        if (isNaN(value) || value < 1)
+        const value = Number(raw)
+        if (!/^\d+$/.test(raw) || !Number.isSafeInteger(value) || value < 1)
             return { ok: false, message: "%1 must be a positive integer.".arg(label) }
         return { ok: true, message: "" }
     }

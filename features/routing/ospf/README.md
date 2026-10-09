@@ -1,6 +1,6 @@
 # OSPF
 
-**partial**, đối chiếu **2026-08-22**, cho process, area/range, network,
+**partial**, đối chiếu **2026-10-10**, cho process, area/range, network,
 distance, interface, passive, redistribution và tuning. QML
 `UI/qml/features/routing/ospf/OspfRoutingForm.qml`; API qua `dbManager`; DB nhóm
 OSPF `t04_*`; worker `features/routing/ospf/worker.py`. Validate process/area/
@@ -17,5 +17,11 @@ lỗi load/save được đưa vào `FormLayout.errorMessage` ngoài thông báo
 
 Process table dùng `action_Cfg` bốn bit cho router-id, reference bandwidth,
 passive-default và default-originate. Save chỉ bật bit của nhóm thực sự thay đổi;
-dispatcher/worker bỏ qua các bit 0 và reset mask về `0000` sau push thành công.
+Các bit chưa Push được cộng dồn qua nhiều lần Save; dispatcher/worker bỏ qua
+các bit 0 và reset mask về `0000` sau push thành công.
 Workspace cũ được bổ sung cột này bằng migration không phá dữ liệu.
+
+Running-config sync ghi interface bằng trạng thái chuỗi `synchronized` phù hợp
+CHECK constraint; giữ priority 0 và plain authentication key. Collection không
+đánh dấu process pending hoặc tạo lệnh Push. Xóa process chụp số thứ tự trước
+khi xóa ListModel row để thông báo không nhận giá trị `undefined`.

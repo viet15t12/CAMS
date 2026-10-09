@@ -321,7 +321,8 @@ class DeviceConnector:
                 f"{self.last_sync_summary.get('interfaces', 0)} interface(s), "
                 f"{self.last_sync_summary.get('static_routes', 0)} static route(s), "
                 f"{self.last_sync_summary.get('default_routes', 0)} default route(s), "
-                f"{self.last_sync_summary.get('ospf_processes', 0)} OSPF process(es).\n"
+                f"{self.last_sync_summary.get('ospf_processes', 0)} OSPF process(es), "
+                f"{self.last_sync_summary.get('acls', 0)} ACL(s).\n"
             )
             if self.last_sync_summary.get("conflicts"):
                 print(
@@ -329,6 +330,9 @@ class DeviceConnector:
                     + ", ".join(self.last_sync_summary["conflicts"])
                     + ".\n"
                 )
+            if self.last_sync_summary.get("unsupported_acl_details"):
+                names = ", ".join(row["acl_name"] for row in self.last_sync_summary["unsupported_acl_details"])
+                print(f"[WARNING] Unsupported ACL forms preserved: {names}.\n")
             return True
         except Exception as e:
             self.last_sync_error = str(e)

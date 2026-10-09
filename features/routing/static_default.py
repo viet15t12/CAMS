@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import sqlite3
 import ipaddress
+from contextlib import closing
 from typing import Any
 
 from .common import log_db_error, normalize_host
+from .ospf.validation import _integer
 
 
 def fetch_default_route(conn: sqlite3.Connection, host: str) -> sqlite3.Row | None:
@@ -111,7 +113,7 @@ def get_default_routes(db: Any, host: str) -> dict[str, Any]:
     if not host:
         return {"ok": False, "message": "Host is empty", "routes": []}
     try:
-        with db._connect() as conn:
+        with closing(db._connect()) as conn:
             rows = fetch_default_routes(conn, host)
         return {
             "ok": True,
@@ -138,19 +140,23 @@ def save_default_routes(db: Any, host: str, routes: Any) -> bool:
     try:
         submitted: list[tuple[int, str]] = []
         seen: set[str] = set()
+        submitted_ids: set[int] = set()
         for value in db._as_list(routes):
             route = db._as_dict(value)
-            route_id = db._int_or_none(route.get("id")) or 0
+            route_id = _integer(route.get("id"), "Default route ID", minimum=0, optional=True) or 0
+            if route_id and route_id in submitted_ids:
+                raise ValueError("Duplicate default-route ID")
+            submitted_ids.add(route_id)
             next_hop = str(route.get("nexthop") or route.get("next_hop_ip") or "").strip()
             if not next_hop:
-                continue
+                raise ValueError("Default route requires a next-hop IPv4 address")
             next_hop = str(ipaddress.IPv4Address(next_hop))
             if next_hop in seen:
                 raise ValueError("Duplicate default-route next-hop")
             seen.add(next_hop)
             submitted.append((route_id, next_hop))
 
-        with db._connect() as conn:
+        with closing(db._connect()) as conn, conn:
             # Heal contradictory pairs produced by older versions that always
             # replaced an unchanged default route on every form save.
             repaired_ids: dict[int, int] = {}
@@ -208,7 +214,11 @@ def save_default_routes(db: Any, host: str, routes: Any) -> bool:
                     (host, *deleted),
                 )
             conn.commit()
+        if hasattr(db, "_set_last_routing_error"):
+            db._set_last_routing_error("")
         return True
-    except (sqlite3.Error, ValueError, ipaddress.AddressValueError) as exc:
+    except (sqlite3.Error, OverflowError, TypeError, ValueError) as exc:
+        if hasattr(db, "_set_last_routing_error"):
+            db._set_last_routing_error(str(exc))
         log_db_error("saveDefaultRoutes", exc)
         return False

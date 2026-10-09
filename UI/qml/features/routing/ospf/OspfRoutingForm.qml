@@ -33,6 +33,7 @@ FormLayout {
     property var processPayloadByUid: ({})
     property var availableInterfaces: []
     property int viewPushRevision: 0
+    property int loadRevision: 0
     signal routingGroupRequested(string protocol)
 
     onSelectedNetworkProcessIndexChanged: Qt.callLater(clampSelectedAreaIndex)
@@ -556,12 +557,14 @@ FormLayout {
         for (let i = 0; i < processModel.count; i++) {
             const row = processModel.get(i)
             if (Number(row.processUid) === Number(processUid)) {
+                // ListModel.get() returns a live row that becomes invalid on removal.
+                const processOrder = row.processOrder
                 processModel.remove(i)
                 const nextPayloads = Object.assign({}, processPayloadByUid)
                 delete nextPayloads[key]
                 processPayloadByUid = nextPayloads
                 resequenceProcessOrders()
-                notify("Removed OSPF process %1 from the local editor.".arg(row.processOrder), "warning")
+                notify("Removed OSPF process %1 from the local editor.".arg(processOrder), "warning")
                 refreshStats()
                 Qt.callLater(rebuildProcessOptions)
                 Qt.callLater(refreshDirtyFlag)
@@ -611,16 +614,20 @@ FormLayout {
     }
 
     function loadFromDatabase() {
+        const revision = ++loadRevision
+        isLoading = true
         resetProcessModel()
         lastError = ""
         loadedProcessesSignature = "[]"
         hasPendingLocalChanges = false
 
         const host = String(currentHostIp || "").trim()
-        if (host === "")
+        if (host === "") {
+            isLoading = false
+            rebuildProcessOptions()
             return
+        }
 
-        isLoading = true
         if (typeof dbManager === "undefined" || dbManager === null
                 || !dbManager.getOspfRouting) {
             lastError = "OSPF database service is unavailable."
@@ -647,6 +654,7 @@ FormLayout {
         loadAvailableInterfaces()
 
         Qt.callLater(function() {
+            if (!ospfRoutingForm || revision !== ospfRoutingForm.loadRevision) return
             ospfRoutingForm.loadAvailableInterfaces()
             ospfRoutingForm.loadedProcessesSignature = ospfRoutingForm.currentProcessesSignature()
             ospfRoutingForm.hasPendingLocalChanges = false

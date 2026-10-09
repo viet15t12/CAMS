@@ -79,6 +79,37 @@ Rectangle {
         activationReloadTimer.restart()
     }
 
+    function refreshCollectedHost(updatedHost) {
+        const host = String(updatedHost || "").trim()
+        if (host === "") return
+        // Refresh cached tabs too, while preserving each tab's local draft.
+        Qt.callLater(function() {
+            if (!routingView) return
+            const loaders = [infoLoader, staticLoader, defaultLoader, ospfLoader, eigrpLoader]
+            for (let i = 0; i < loaders.length; i++) {
+                const item = loaders[i].item
+                if (!item || String(item.currentHostIp || "").trim() !== host ||
+                        hasUnsavedChanges(item) || item.isLoading === true || item.isSaving === true)
+                    continue
+                if (item.loadFromDatabase) item.loadFromDatabase()
+            }
+        })
+    }
+
+    Connections {
+        target: typeof cli !== "undefined" ? cli : null
+        function onRunningConfigFinished(host, ok, message) {
+            if (ok) routingView.refreshCollectedHost(host)
+        }
+    }
+
+    Connections {
+        target: typeof dbManager !== "undefined" ? dbManager : null
+        function onRunningConfigUpdated(host) {
+            routingView.refreshCollectedHost(host)
+        }
+    }
+
     function ensureCurrentTabLoaded() {
         if (infoLoader.status === Loader.Loading && currentTab !== "Info")
             infoLoaded = false

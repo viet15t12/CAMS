@@ -13,7 +13,7 @@ def load_process_for_compare(conn: sqlite3.Connection, db: Any, eigrp_id: int) -
         SELECT eigrp_id, as_number, router_id, timers_active_time, bfd_all_interfaces,
                auto_summary, passive_default, metric_weights, distance_internal, distance_external,
                variance, maximum_paths, stub_enabled, stub_options, stub_leak_map,
-               action, action_Cfg
+               action, action_Cfg, sync_status
         FROM t04_eigrp_processes
         WHERE eigrp_id = ? AND sync_status != 'pending_delete'
         LIMIT 1;
@@ -135,7 +135,7 @@ def insert_eigrp_process(conn: sqlite3.Connection, db: Any, host: str, process: 
             db._str_or_none(process.get("stub_options")),
             db._str_or_none(process.get("stub_leak_map")),
             db._int_or_none(process.get("action")) or 15,
-            normalize_action_cfg(process.get("action_Cfg")),
+            "1111111",
         ),
     )
     eigrp_id = cur.lastrowid

@@ -245,13 +245,13 @@ def routing_dispatcher(target_ip="all", target_module="all", dry_run=False, sess
                 e_id, host, as_num, r_id, t_active, bfd_all, auto_sum, pass_def, m_weights, d_int, d_ext, var, max_p, stub_en, stub_opt, stub_leak, proc_success, act_cfg = proc
                 p_state = success_state(proc_success)
                 
-                push_router_id = has_eigrp_text_bit(act_cfg, 0)
-                push_timers    = has_eigrp_text_bit(act_cfg, 1)
-                push_bfd_all   = has_eigrp_text_bit(act_cfg, 2)
-                push_auto_sum  = has_eigrp_text_bit(act_cfg, 3)
-                push_pass_def  = has_eigrp_text_bit(act_cfg, 4)
-                push_variance  = has_eigrp_text_bit(act_cfg, 5)
-                push_max_paths = has_eigrp_text_bit(act_cfg, 6)
+                push_router_id = p_state != "ignore" and has_eigrp_text_bit(act_cfg, 0)
+                push_timers    = p_state != "ignore" and has_eigrp_text_bit(act_cfg, 1)
+                push_bfd_all   = p_state != "ignore" and has_eigrp_text_bit(act_cfg, 2)
+                push_auto_sum  = p_state != "ignore" and has_eigrp_text_bit(act_cfg, 3)
+                push_pass_def  = p_state != "ignore" and has_eigrp_text_bit(act_cfg, 4)
+                push_variance  = p_state != "ignore" and has_eigrp_text_bit(act_cfg, 5)
+                push_max_paths = p_state != "ignore" and has_eigrp_text_bit(act_cfg, 6)
 
                 config_data = {
                     "as_number": as_num, "state": p_state,
@@ -265,6 +265,9 @@ def routing_dispatcher(target_ip="all", target_module="all", dry_run=False, sess
                     "metric_weights": m_weights,
                     "distance_internal": d_int, "distance_external": d_ext,
                     "stub_enabled": stub_en, "stub_options": stub_opt, "stub_leak_map": stub_leak,
+                    "push_metric_weights": p_state != "ignore",
+                    "push_distance": p_state != "ignore",
+                    "push_stub": p_state != "ignore",
                     "networks": [], "interfaces": [], "redistribute": [],
                     "passive_interfaces": [], "distribute_lists": [], "offset_lists": [], "key_chains": []
                 }
@@ -295,9 +298,9 @@ def routing_dispatcher(target_ip="all", target_module="all", dry_run=False, sess
                 pass_ids_add, pass_ids_del = [], []
                 cursor.execute(f"SELECT id, {EIGRP_PASS_IFACE_COL} AS interface_name, mode, sync_status FROM {T_EIGRP_PASS} WHERE eigrp_id = ? AND (sync_status IN ('pending_apply', 'pending_delete') OR sync_status IS NULL)", (e_id,))
                 for p_id, intf_name, mode, p_success in cursor.fetchall():
-                    p_state = success_state(p_success)
-                    config_data["passive_interfaces"].append({"interface_name": intf_name, "mode": mode, "state": p_state})
-                    if p_state == "remove": pass_ids_del.append(p_id)
+                    passive_state = success_state(p_success)
+                    config_data["passive_interfaces"].append({"interface_name": intf_name, "mode": mode, "state": passive_state})
+                    if passive_state == "remove": pass_ids_del.append(p_id)
                     else: pass_ids_add.append(p_id)
 
                 # [4] BỐC DỮ LIỆU INTERFACE SETTINGS
@@ -309,7 +312,37 @@ def routing_dispatcher(target_ip="all", target_module="all", dry_run=False, sess
                     if i_state == "remove": intf_ids_del.append(i_id)
                     else: intf_ids_add.append(i_id)
 
-                is_pending = proc_success in (None, "pending_apply", "pending_delete") or net_ids_add or net_ids_del or redis_ids_add or redis_ids_del or pass_ids_add or pass_ids_del or intf_ids_add or intf_ids_del
+                # Remaining EIGRP editor sections must participate in preview,
+                # command execution, and database acknowledgement as well.
+                dist_ids_add, dist_ids_del = [], []
+                off_ids_add, off_ids_del = [], []
+                key_ids_add, key_ids_del = [], []
+                for table, fields, scope, scope_value, config_key, added, deleted in (
+                    (T_EIGRP_DIST, f"list_name, direction, {EIGRP_DIST_IFACE_COL} AS interface_name",
+                     "eigrp_id", e_id, "distribute_lists", dist_ids_add, dist_ids_del),
+                    (T_EIGRP_OFF, f"list_name, direction, value, {EIGRP_OFF_IFACE_COL} AS interface_name",
+                     "eigrp_id", e_id, "offset_lists", off_ids_add, off_ids_del),
+                    (T_EIGRP_KEY, "chain_name, key_id, key_string, accept_lifetime, send_lifetime",
+                     "host", host, "key_chains", key_ids_add, key_ids_del),
+                ):
+                    cursor.execute(
+                        f"SELECT id, {fields}, sync_status FROM {table} WHERE {scope} = ? "
+                        "AND (sync_status IN ('pending_apply', 'pending_delete') OR sync_status IS NULL)",
+                        (scope_value,),
+                    )
+                    columns = [column[0] for column in cursor.description]
+                    for values in cursor.fetchall():
+                        row = dict(zip(columns, values))
+                        row_id = row.pop("id")
+                        row["state"] = success_state(row.pop("sync_status"))
+                        config_data[config_key].append(row)
+                        (deleted if row["state"] == "remove" else added).append(row_id)
+
+                is_pending = (proc_success in (None, "pending_apply", "pending_delete")
+                              or net_ids_add or net_ids_del or redis_ids_add or redis_ids_del
+                              or pass_ids_add or pass_ids_del or intf_ids_add or intf_ids_del
+                              or dist_ids_add or dist_ids_del or off_ids_add or off_ids_del
+                              or key_ids_add or key_ids_del)
 
                 if is_pending:
                     valid_data.append({
@@ -319,6 +352,9 @@ def routing_dispatcher(target_ip="all", target_module="all", dry_run=False, sess
                         "redis_ids_add": redis_ids_add, "redis_ids_del": redis_ids_del,
                         "pass_ids_add": pass_ids_add, "pass_ids_del": pass_ids_del,
                         "intf_ids_add": intf_ids_add, "intf_ids_del": intf_ids_del,
+                        "dist_ids_add": dist_ids_add, "dist_ids_del": dist_ids_del,
+                        "off_ids_add": off_ids_add, "off_ids_del": off_ids_del,
+                        "key_ids_add": key_ids_add, "key_ids_del": key_ids_del,
                         "config": [config_data]
                     })
 
@@ -463,7 +499,7 @@ def routing_dispatcher(target_ip="all", target_module="all", dry_run=False, sess
                                 if item["action"] == "remove":
                                     item_changes += apply_change(f"DELETE FROM {T_EIGRP_PROC} WHERE eigrp_id = ?", (e_id,))
                                 else:
-                                    item_changes += apply_change(f"UPDATE {T_EIGRP_PROC} SET sync_status = 'synchronized' WHERE eigrp_id = ?", (e_id,))
+                                    item_changes += apply_change(f"UPDATE {T_EIGRP_PROC} SET sync_status = 'synchronized', action_Cfg = '0000000' WHERE eigrp_id = ?", (e_id,))
                                 
                                 # Cập nhật các bảng con dựa trên tracking list từ cấu trúc dữ liệu
                                 for n_id in item.get("net_ids_add", []): item_changes += apply_change(f"UPDATE {T_EIGRP_NET} SET sync_status = 'synchronized' WHERE id = ?", (n_id,))

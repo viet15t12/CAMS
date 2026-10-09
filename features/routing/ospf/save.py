@@ -71,7 +71,10 @@ def save_ospf_routing(db: Any, host: str, payload: Any) -> bool:
                         sync_ospf_networks(conn, db, ospf_id, process)
                         continue
 
-                    archive_ospf_process(conn, ospf_id)
+                    # The upsert resets children for an unchanged identity.
+                    # Keep the parent's pending mask until those edits are pushed.
+                    if current is None or current.get("process_id") != process_id:
+                        archive_ospf_process(conn, ospf_id)
                     saved_id = insert_ospf_process(conn, db, host, process)
                     if saved_id in existing_ids:
                         submitted_ids.add(saved_id)

@@ -51,9 +51,12 @@ def _rule_payload(acl_type: str, row: sqlite3.Row) -> dict[str, Any]:
             ) or None
         if acl_type == "dynamic":
             item["dyn_name"] = item.pop("dynamic_name")
-            item["timeout"] = item.pop("timeout_seconds")
+            timeout = item.pop("timeout_seconds")
+            item["timeout"] = None if timeout is None else timeout // 60
         elif acl_type == "reflexive":
             item["timeout"] = item.pop("timeout_seconds")
+            if item.get("protocol") == "evaluate":
+                item["action"] = "evaluate"
     return item
 
 
@@ -122,6 +125,10 @@ def _collect_acl(cursor: sqlite3.Cursor, row: sqlite3.Row) -> tuple[dict[str, An
         rule_tracking["del" if state == "remove" else "add"].append(int(rule["id"]))
 
     bindings, binding_tracking = _collect_bindings(cursor, acl_id, str(row["host"] or ""))
+    command_flags = int(row["action_Cfg"] or 0)
+    if not parent_remove and (rules_add or rules_del) and command_flags & 4:
+        raise ValueError(f"ACL {row['acl_name']} needs a snapshot with rule sequence numbers before editing")
+    resequence = bool(not parent_remove and (rules_add or rules_del) and command_flags & 2)
     payload = {
         "acl_id": acl_id,
         "acl_name": row["acl_name"],
@@ -132,14 +139,16 @@ def _collect_acl(cursor: sqlite3.Cursor, row: sqlite3.Row) -> tuple[dict[str, An
         "rules_add": rules_add,
         "rules_del": rules_del,
         "bindings": bindings,
+        "resequence": resequence,
     }
     tracking = {
         "acl": {
-            "add": [acl_id] if _pending(row["sync_status"]) and not parent_remove else [],
+            "add": [acl_id] if (_pending(row["sync_status"]) or resequence) and not parent_remove else [],
             "del": [acl_id] if parent_remove else [],
         },
         "rules": {acl_type: rule_tracking},
         "bindings": binding_tracking,
+        "clear_action_bits": 3 if resequence else 1,
     }
     return payload, tracking
 

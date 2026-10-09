@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 from typing import Any, Callable
 
 from features.devices.sync import sync_device_state
@@ -51,10 +52,13 @@ class ConfigSyncService:
             "commitId": str(commit_result.get("commitId") or ""),
         }
         has_interface_inventory = bool(str(interface_brief or "").strip())
+        has_acl_config = bool(re.search(r"(?m)^(?:ip access-list |mac access-list |access-list )",
+                                        str(running_config or "")))
         if (
             not bool(commit_result.get("changed"))
             and not has_interface_inventory
             and not switch_state
+            and not has_acl_config
         ):
             return {
                 **base,
@@ -77,7 +81,7 @@ class ConfigSyncService:
 
         base["role"] = role
         if role in {"sw2", "sw3"}:
-            if not switch_state:
+            if not switch_state and not has_acl_config:
                 return {
                     **base,
                     "ok": True,
@@ -86,7 +90,7 @@ class ConfigSyncService:
                     "summary": {},
                 }
             try:
-                switch_snapshot = dict(switch_state)
+                switch_snapshot = dict(switch_state or {})
                 if running_config:
                     switch_snapshot["running_config"] = str(running_config)
                 summary = self._switch_synchronizer(

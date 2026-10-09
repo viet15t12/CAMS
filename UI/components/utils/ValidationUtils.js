@@ -190,8 +190,8 @@ function parseMetricWeights(value) {
     const result = { ok: true, k1: 0, k2: 0, k3: 0, k4: 0, k5: 0 }
     const keys = ["k1", "k2", "k3", "k4", "k5"]
     for (let i = 1; i <= 5; i++) {
-        const n = parseInt(tokens[i], 10)
-        if (isNaN(n) || n < 0 || n > 255) {
+        const n = Number(tokens[i])
+        if (!/^\d+$/.test(tokens[i]) || !Number.isSafeInteger(n) || n < 0 || n > 255) {
             return {
                 ok:     false,
                 reason: "Metric weight values k1–k5 must be integers between 0 and 255."
@@ -203,8 +203,10 @@ function parseMetricWeights(value) {
 }
 
 function isValidAsNumber(value) {
-    const n = parseInt(String(value || ""), 10)
-    return !isNaN(n) && n >= 1 && n <= 65535
+    const raw = String(value === undefined || value === null ? "" : value).trim()
+    if (!/^\d+$/.test(raw)) return false
+    const n = Number(raw)
+    return Number.isSafeInteger(n) && n >= 1 && n <= 65535
 }
 
 function isValidOspfProcessId(value) {

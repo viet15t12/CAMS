@@ -5,6 +5,8 @@
 -- t05_ACL_DB action_Cfg logic:
 --   * type: INTEGER, default 1
 --   * bit0 = description / remark
+--   * bit1 = imported IP ACL needs resequence 10 10 before rule edits
+--   * bit2 = sequence numbers unavailable for a mixed/remark layout (rules read-only)
 --   * change acl_name or acl_type by replace (sync_status = 'pending_delete' + new row sync_status = 'pending_apply')
 --   * change description by keeping row and setting action_Cfg
 --   * rule child tables only use sync_status.

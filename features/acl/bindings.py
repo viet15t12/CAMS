@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sqlite3
 from typing import Any
+from .validation import _integer
 
 
 def read_bindings(conn: sqlite3.Connection, acl_id: int) -> list[dict[str, Any]]:
@@ -18,16 +19,15 @@ def read_bindings(conn: sqlite3.Connection, acl_id: int) -> list[dict[str, Any]]
 def replace_bindings(
     conn: sqlite3.Connection, acl_id: int, host: str, bindings: list[dict[str, Any]],
 ) -> None:
-    conn.execute(
-        "UPDATE t05_router_iface_acl SET sync_status = 'pending_delete' WHERE acl_id = ? AND sync_status != 'pending_delete'", (acl_id,),
-    )
     seen: set[tuple[int, str]] = set()
     for binding in bindings:
-        iface_id = int(binding.get("iface_id") or 0)
-        direction = "out" if str(binding.get("direction") or "in").lower() == "out" else "in"
+        iface_id = _integer(binding.get("iface_id"), "ACL interface ID")
+        direction = str(binding.get("direction") or "in").lower()
+        if iface_id <= 0 or direction not in {"in", "out"}:
+            raise ValueError("ACL binding requires an interface and an in/out direction")
         key = (iface_id, direction)
-        if iface_id <= 0 or key in seen:
-            continue
+        if key in seen:
+            raise ValueError("Duplicate ACL interface binding")
         seen.add(key)
         exists = conn.execute(
             """SELECT 1 FROM t02_interface_name
@@ -35,6 +35,13 @@ def replace_bindings(
         ).fetchone()
         if exists is None:
             raise sqlite3.IntegrityError(f"Interface {iface_id} does not belong to ACL host {host}")
+    current = {(row["iface_id"], row["direction"]): row for row in read_bindings(conn, acl_id)}
+    for key, row in current.items():
+        if key not in seen:
+            conn.execute("UPDATE t05_router_iface_acl SET sync_status='pending_delete' WHERE id=?", (row["id"],))
+    for iface_id, direction in seen:
+        if (iface_id, direction) in current:
+            continue
         conn.execute(
             """INSERT INTO t05_router_iface_acl (iface_id, acl_id, direction, sync_status)
                VALUES (?, ?, ?, 'pending_apply')

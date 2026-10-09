@@ -1,6 +1,6 @@
 # Routing
 
-Đối chiếu: **2026-08-18**.
+Đối chiếu: **2026-10-10**.
 
 Routing Group thay thế workflow Clone trong QML. Popup bốn bước chọn từ hai đến
 năm host đang connected, nhập Process ID/AS Number và Router ID riêng cho từng host,
@@ -29,3 +29,19 @@ nối, push dùng session registry. Xem README thư mục con.
 
 `features/routing/view_push.py` sở hữu preview/push riêng của routing;
 `core/view_push.py` chỉ giữ base/shared controller và composition factory.
+
+Sau Get Running Config, các tab Static, Default, OSPF và EIGRP đã được tạo sẽ
+nạp lại dữ liệu của đúng host; tab có thay đổi chưa Save giữ nguyên draft.
+Load OSPF/EIGRP dùng revision để callback của host cũ không ghi đè host mới.
+Xóa process chỉ thay đổi local editor; Cancel Changes nạp lại dữ liệu đã lưu.
+
+Lưu payload không thay đổi không tạo thêm pending work. Các bit cấu hình process
+chưa Push được giữ qua nhiều lần Save, rồi reset sau Push thành công. Static/
+Default validate toàn bộ payload và rollback cùng transaction khi một dòng lỗi.
+Worker nhận diện CLI từ chối lệnh; host thất bại giữ pending state để kiểm tra/retry.
+
+Regression coverage: `tests/test_routing_regressions.py` kiểm tra running-config,
+Save/preview và acknowledgement bằng session giả; `tests/test_routing_ui_regressions.py`
+chạy QML thật với SQLite tạm, kiểm tra xóa/hủy, đổi host và refresh tab đã cache.
+Các suite Routing Group, clone compatibility, database contract và View & Push
+kiểm tra luồng nhóm. BGP hiện chưa có editor/worker và tab vẫn bị vô hiệu hóa.

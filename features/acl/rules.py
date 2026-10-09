@@ -14,6 +14,30 @@ RULE_TABLES = {
 }
 
 
+def normalized_rules(acl_type: str, rules: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Compare configuration fields rather than IDs or synchronization metadata."""
+    fields = {
+        "standard": ("sequence", "action", "source", "wildcard"),
+        "mac": ("sequence", "action", "src_mac", "src_mask", "dst_mac", "dst_mask", "ethertype"),
+    }.get(acl_type, ("sequence", "action", "protocol", "source", "src_wildcard", "src_port",
+                     "destination", "dst_wildcard", "dst_port"))
+    if acl_type in {"dynamic", "reflexive"}:
+        fields += (("dynamic_name" if acl_type == "dynamic" else "reflect_name"), "timeout_seconds")
+    defaults = {"action": "permit", "source": "any", "destination": "any", "protocol": "ip",
+                "src_mac": "any", "dst_mac": "any", "timeout_seconds": 300}
+    result = []
+    for row in rules:
+        item = {field: (int_or_none(row.get(field)) if field in {"sequence", "timeout_seconds"}
+                        else text_or_none(row.get(field))) for field in fields}
+        for field in fields:
+            if item[field] is None and field in defaults:
+                if field == "timeout_seconds" and acl_type == "dynamic" and field in row and row[field] is None:
+                    continue
+                item[field] = defaults[field]
+        result.append(item)
+    return sorted(result, key=lambda row: row["sequence"] or 0)
+
+
 def insert_rule(conn: sqlite3.Connection, acl_type: str, acl_id: int, rule: dict[str, Any]) -> None:
     seq = int_or_none(rule.get("sequence"))
     action = text_or_default(rule.get("action"), "permit").lower()
@@ -55,12 +79,15 @@ def _insert_ip_rule(
         return
     extra_name = "dynamic_name" if acl_type == "dynamic" else "reflect_name"
     table = RULE_TABLES[acl_type]
+    timeout = (None if acl_type == "dynamic" and "timeout_seconds" in rule and rule["timeout_seconds"] is None
+               else int_or_none(rule.get("timeout_seconds")) or 300)
     conn.execute(
         f"""INSERT INTO {table}
             (acl_id, sequence, action, protocol, source, src_wildcard, src_port,
              destination, dst_wildcard, dst_port, {extra_name}, timeout_seconds, sync_status)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending_apply')""",
-        fields + [text_or_none(rule.get(extra_name)), int_or_none(rule.get("timeout_seconds")) or 300],
+        fields + [(text_or_none(rule.get(extra_name)) or "") if acl_type == "dynamic"
+                  else text_or_none(rule.get(extra_name)), timeout],
     )
 
 

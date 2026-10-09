@@ -27,7 +27,6 @@ def normalize_process(db: Any, process: dict[str, Any]) -> dict[str, Any]:
         "stub_options": text(process.get("stub_options")),
         "stub_leak_map": text(process.get("stub_leak_map")),
         "action": int_or_none_value(process.get("action")) or 15,
-        "action_Cfg": normalize_action_cfg(process.get("action_Cfg")),
         "networks": [
             {
                 "network": text(row.get("network")),
@@ -99,3 +98,15 @@ def normalize_process(db: Any, process: dict[str, Any]) -> dict[str, Any]:
             if text(row.get("protocol"))
         ],
     }
+
+
+def process_action_cfg(db: Any, current: dict[str, Any], submitted: dict[str, Any]) -> str:
+    """Select changed process commands and retain edits still waiting for Push."""
+    before = normalize_process(db, current)
+    after = normalize_process(db, submitted)
+    pending = (normalize_action_cfg(current.get("action_Cfg"))
+               if current.get("sync_status") == "pending_apply" else "0000000")
+    fields = ("router_id", "timers_active_time", "bfd_all_interfaces", "auto_summary",
+              "passive_default", "variance", "maximum_paths")
+    return "".join("1" if pending[i] == "1" or before[key] != after[key] else "0"
+                   for i, key in enumerate(fields))

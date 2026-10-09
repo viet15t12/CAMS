@@ -9,6 +9,7 @@ The package separates the public synchronization surface by responsibility:
 - `interfaces.py`: interface SQLite writers
 - `fhrp.py`: HSRP, VRRP, and GLBP SQLite writers
 - `dhcp.py`: DHCP pool and interface relay/helper SQLite writers
+- `acl.py`: supported IOS ACL parsing and observed ACL/binding reconciliation
 - `routing.py`: static route, OSPF, and EIGRP writers
 - `service.py`: transaction-level orchestration
 - `common.py`: shared normalization helpers
@@ -42,6 +43,20 @@ deletes for the host. Preview reports pool counts without writing. Pools absent
 from the next snapshot are removed locally. VRF, manual binding, secondary
 subnet, and other pool forms the editor cannot represent are reported as
 unsupported; existing rows with those names are preserved.
+
+OSPF observations store interface priority (including zero) and plain authentication
+keys with `sync_status = 'synchronized'`, matching the database CHECK constraint.
+Classic EIGRP observations include supported interface timers/authentication/summary
+settings, distribute/offset lists and key chains. Collected OSPF/EIGRP process
+command masks are zero, so importing running-config does not queue a push.
+
+Named and numbered IPv4 ACLs, representable Dynamic/Reflexive/MAC rules and
+interface access-group bindings are imported with synchronized state. ACL IDs and
+unchanged rule/binding IDs are retained. Safe mode preserves pending ACL work and
+its interface identities; unsupported ACL forms protect existing same-name data.
+ACL tabs refresh on collection while retaining drafts. Sequence metadata is retained
+in the ACL command mask to avoid deleting guessed sequence numbers on later edits;
+see `features/acl/README.md` for its bounds. NAT ACL tables remain a separate model.
 
 Subinterfaces are classified independently from physical L3 profiles. The
 parser records `dot1Q`/`isl`, VLAN ID and the optional native flag, while the

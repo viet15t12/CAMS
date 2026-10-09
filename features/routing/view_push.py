@@ -151,12 +151,15 @@ class RoutingViewPushController(BaseViewPushController):
 
     @staticmethod
     def _redact_secrets(lines: list[str]) -> list[str]:
-        return [
-            (
-                " ".join([*line.split()[:-1], "<redacted>"])
-                if "authentication-key" in line.lower()
-                or "message-digest-key" in line.lower()
-                else line
-            )
-            for line in lines
-        ]
+        redacted = []
+        for line in lines:
+            tokens = line.split()
+            lowered = [token.lower() for token in tokens]
+            if "key-string" in lowered:
+                end = lowered.index("key-string") + 1
+                redacted.append(" ".join([*tokens[:end], "<redacted>"]))
+            elif "authentication-key" in line.lower() or "message-digest-key" in line.lower():
+                redacted.append(" ".join([*tokens[:-1], "<redacted>"]))
+            else:
+                redacted.append(line)
+        return redacted

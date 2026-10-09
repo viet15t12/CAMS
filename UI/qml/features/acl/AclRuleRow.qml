@@ -23,7 +23,7 @@ SavedListRow {
     signal deleteClicked(int index)
 
     function displayAction(action) {
-        return action === "Permit" ? "Permit" : "Deny"
+        return action
     }
 
     Layout.fillWidth: true
