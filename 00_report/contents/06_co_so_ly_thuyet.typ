@@ -40,19 +40,18 @@ Ansible tổ chức tác vụ bằng tệp mô tả; Nornir cung cấp khung l�
 
 #report-table(
   columns: (18%, 27%, 27%, 28%),
-  header: ([Công cụ], [Trọng tâm], [Ưu điểm chính], [Giới hạn khi đối chiếu với CAMS]),
+  header: ([Công cụ], [Trọng tâm], [Ưu điểm chính], [Khác biệt so với CAMS]),
   rows: (
     ([Ansible], [Tự động hóa theo tệp tác vụ và bộ mô-đun.], [Hỗ trợ nhiều hãng, hệ sinh thái lớn, không cần cài tác nhân trên thiết bị mạng.], [Cần kiến thức về tệp cấu hình và quy trình dòng lệnh; không hướng riêng đến giao diện thực hành tích hợp.]),
     ([Nornir], [Khung lập trình tự động hóa bằng Python.], [Linh hoạt khi xây dựng tác vụ, quản lý danh mục và xử lý đồng thời.], [Đòi hỏi phát triển mã nguồn cho quy trình và giao diện sử dụng.]),
     ([NetBox], [Nguồn dữ liệu chuẩn cho DCIM và IPAM.], [Mô hình dữ liệu hạ tầng chặt chẽ, có giao diện lập trình ứng dụng.], [Không mặc nhiên là công cụ triển khai cấu hình xuống thiết bị.]),
     ([Oxidized], [Sao lưu và theo dõi phiên bản cấu hình.], [Phù hợp cho kiểm kê, phát hiện sai khác và lưu lịch sử.], [Phạm vi tạo cấu hình và kiểm duyệt thay đổi còn hạn chế.]),
     ([Catalyst Center], [Quản trị và bảo đảm ở quy mô doanh nghiệp.], [Chức năng tích hợp rộng, hỗ trợ vận hành tập trung.], [Khác mô hình ứng dụng cục bộ dành cho phòng thực hành.]),
-    ([CAMS], [Quản lý trạng thái, xem trước lệnh, triển khai và giám sát trong một ứng dụng máy tính để bàn.], [Giao diện trực quan, dữ liệu cục bộ và quy trình phù hợp môi trường nghiên cứu Cisco IOS.], [Phạm vi hãng thiết bị, giao thức quản trị và khả năng cộng tác còn hẹp.]),
   ),
   caption: [Đối chiếu phạm vi của một số công cụ quản lý và tự động hóa mạng],
 )
 
-CAMS không nhằm thay thế các nền tảng doanh nghiệp nêu trên. Đề tài tập trung kết hợp danh mục thiết bị, cấu hình theo trạng thái, bước xem trước lệnh và thu thập nhật ký trong một công cụ cục bộ phục vụ học tập, thử nghiệm và quản trị phòng thực hành.
+CAMS không nhằm thay thế các nền tảng doanh nghiệp nêu trên. Đề tài tập trung kết hợp danh mục thiết bị, cấu hình theo trạng thái, bước xem trước lệnh và thu thập nhật ký trong một công cụ cục bộ phục vụ học tập, thử nghiệm và quản trị phòng thực hành. Giới hạn hiện tại của CAMS là phạm vi hãng thiết bị, giao thức quản trị và khả năng cộng tác còn hẹp.
 
 == Giao thức quản trị từ xa và giao diện dòng lệnh
 
