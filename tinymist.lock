@@ -17,11 +17,11 @@ root = "file:."
 system-fonts = true
 
 [[route]]
-id = "file:00_report/main.typ"
+id = "file:00_book/main.typ"
 priority = 256
 
 [[route]]
-id = "file:00_book/main.typ"
+id = "file:00_report/main.typ"
 priority = 256
 
 [[task]]
