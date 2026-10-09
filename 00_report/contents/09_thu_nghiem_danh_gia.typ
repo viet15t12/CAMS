@@ -257,7 +257,7 @@ Minh chứng hiện có xác nhận cấu hình GLBP trên R1/R2 và cấp phát
 Kịch bản 4 kiểm tra khả năng cấu hình Syslog theo nhóm trên nhiều thiết bị Cisco, đồng thời đánh giá việc tiếp nhận, phân tích, hiển thị và gửi cảnh báo qua thư điện tử trong CAMS. Ba bộ định tuyến `R1`, `R2`, `R3` và bộ chuyển mạch `SW1` cùng gửi bản tin về máy chủ `192.168.122.1` qua cổng `5514/UDP`. Nội dung kiểm tra gồm cấu hình trên thiết bị; khả năng phân tách nguồn gửi, địa chỉ IP nguồn, nhóm nguồn Syslog, mức độ nghiêm trọng, mã sự kiện và nội dung gốc; cùng khả năng chuyển hai mức cảnh báo đã chọn qua SMTP.
 
 #figure(
-  image("/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png", width: 92%),
+  image("/00_book/figures/report/diagrams/syslog-lab/syslog-lab-topology-report.png", width: 50%),
   caption: [Sơ đồ Kịch bản 4: Thu thập Syslog tập trung],
 ) <fig-topo-scenario-4>
 

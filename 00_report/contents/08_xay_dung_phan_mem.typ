@@ -155,7 +155,7 @@ Khi người dùng đặt mật khẩu dự án, mô-đun `workspace.crypto` mã
 ) <fig-cams-encrypted-project>
 
 @fig-cams-encrypted-project cho thấy dấu nhận dạng và phần thông tin có thể đọc để bộ giải mã xác định định dạng. Hình chỉ minh họa cấu trúc lưu trữ, không chứng minh quy trình mở gói đúng mật khẩu, từ chối sai mật khẩu hoặc phát hiện bản mã bị sửa. Các cơ chế này chưa có kịch bản kiểm thử riêng trong Chương 5.
-
+#pagebreak(weak: true)
 == Tài liệu hướng dẫn sử dụng trực tuyến
 
 Bên cạnh quyển hướng dẫn dạng PDF, nhóm xây dựng phiên bản tài liệu trực tuyến bằng MkDocs để người dùng tra cứu theo từng chức năng, tìm kiếm nội dung và mở nhanh các chương liên quan trong quá trình thực hành. Nội dung website được đồng bộ với nguồn Typst của quyển hướng dẫn, gồm các phần cài đặt, điều hướng, quản lý thiết bị, cấu hình Router, cấu hình Switch và các công cụ vận hành.
@@ -181,6 +181,6 @@ Bên cạnh quyển hướng dẫn dạng PDF, nhóm xây dựng phiên bản t�
   ],
 )
 
-== Tiểu kết chương
+// == Tiểu kết chương
 
-Chương 4 đã ánh xạ thiết kế ở Chương 3 vào các mô-đun hiện thực: QML và PyQt6 cho giao diện, SQLite cho trạng thái, tác vụ nền cho kết nối cùng các dịch vụ riêng cho Syslog, SFTP và không gian làm việc. Các nhóm nghiệp vụ dùng chung bước kiểm duyệt và trả kết quả theo thiết bị. Chương 5 tiếp tục đánh giá bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký.
+// Chương 4 đã ánh xạ thiết kế ở Chương 3 vào các mô-đun hiện thực: QML và PyQt6 cho giao diện, SQLite cho trạng thái, tác vụ nền cho kết nối cùng các dịch vụ riêng cho Syslog, SFTP và không gian làm việc. Các nhóm nghiệp vụ dùng chung bước kiểm duyệt và trả kết quả theo thiết bị. Chương 5 tiếp tục đánh giá bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký.

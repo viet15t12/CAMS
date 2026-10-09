@@ -86,7 +86,7 @@ Trình tự trao đổi chi tiết được thể hiện tại @fig-view-push-se
 
 Khóa phiên tuần tự hóa truy cập cùng thiết bị nhưng không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
 
-#pagebreak(weak: true)
+
 == Luồng giám sát và khai thác cảnh báo
 
 Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn và tiếp nhận Syslog do thiết bị gửi. Luồng Syslog gồm cấu hình địa chỉ đích trên thiết bị, khởi động bộ thu nhận tại CAMS, phân tích và lưu bản tin vào cơ sở dữ liệu, sau đó hiển thị kết quả trên giao diện.
@@ -100,7 +100,7 @@ Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiê
   caption: [Sơ đồ tuần tự thu nhận, lưu trữ và khai thác Syslog],
 ) <fig-syslog-sequence>
 
-#pagebreak(weak: true)
+
 == Thiết kế cơ chế an ninh phân quyền và bảo mật dữ liệu
 
 CAMS kiểm soát quyền thực thi trên thiết bị và bảo vệ dữ liệu xác thực khi lưu trữ. Hai cơ chế này có phạm vi khác nhau: quyền thiết bị do Cisco IOS quyết định, còn mã hóa cục bộ phụ thuộc vào khóa của phiên dự án.
@@ -129,7 +129,7 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
   ),
   caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
 ) <tab-security-architecture>
-
+#pagebreak(weak: true)
 == Thiết kế cơ sở dữ liệu
 
 CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị, cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch và các đích Syslog cần cấu hình; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT và bản tin Syslog đã nhận. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
@@ -170,8 +170,8 @@ Giao diện gồm khu vực danh mục thiết bị, thẻ làm việc, vùng ch
 
 Cơ chế khóa theo thiết bị (`Host Lock`) bảo vệ truy cập phiên dùng chung; bộ thực thi theo lô (`BatchExecutor`) điều phối tác vụ giữa các thiết bị. Mỗi lỗi cần gắn với thiết bị và thao tác gây lỗi. Hủy tác vụ hoặc hết thời gian chờ không đồng nghĩa hoàn tác lệnh đã gửi; sau sự cố cần đồng bộ lại để xác định phần cấu hình thực tế đã thay đổi.
 
-== Tiểu kết chương
+// == Tiểu kết chương
 
-Thiết kế CAMS liên kết ba luồng: quản lý trạng thái, thực thi có kiểm duyệt và giám sát kết quả. Dữ liệu chờ được tách khỏi trạng thái quan sát; tác vụ mạng chạy ngoài luồng giao diện; phản hồi được lưu theo thiết bị để hỗ trợ truy vết.
+// Thiết kế CAMS liên kết ba luồng: quản lý trạng thái, thực thi có kiểm duyệt và giám sát kết quả. Dữ liệu chờ được tách khỏi trạng thái quan sát; tác vụ mạng chạy ngoài luồng giao diện; phản hồi được lưu theo thiết bị để hỗ trợ truy vết.
 
-Chương 4 trình bày phần hiện thực trong mã nguồn và giao diện; Chương 5 kiểm tra bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký. Các sơ đồ không thay thế bằng chứng vận hành.
+// Chương 4 trình bày phần hiện thực trong mã nguồn và giao diện; Chương 5 kiểm tra bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký. Các sơ đồ không thay thế bằng chứng vận hành.
