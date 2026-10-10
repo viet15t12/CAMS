@@ -50,7 +50,7 @@ install_fedora_dependencies() {
         exit 1
     fi
 
-    fedora_packages="tar git uv python3-devel gcc gcc-c++ cmake make pkgconf-pkg-config freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel rust cargo"
+    fedora_packages="tar git uv golang python3-devel gcc gcc-c++ cmake make pkgconf-pkg-config freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel rust cargo"
     # PyQt wheels bundle Qt itself, but the Wayland/X11 platform plugins still
     # dynamically link to these Fedora runtime libraries.
     fedora_packages="$fedora_packages libX11 libX11-xcb libXext libxcb libxkbcommon libxkbcommon-x11 libwayland-client libwayland-cursor"
@@ -109,6 +109,11 @@ if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ] && ! command -v uv >/dev/null 2>&1
     echo "Install uv from https://docs.astral.sh/uv/ and run this installer again." >&2
     exit 1
 fi
+if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ] && ! command -v go >/dev/null 2>&1; then
+    echo "ERROR: Go is required to build the gocore automation sidecar." >&2
+    echo "Install Go 1.23 or newer and run ./install.sh again." >&2
+    exit 1
+fi
 
 data_home=${XDG_DATA_HOME:-$HOME/.local/share}
 install_base=${CAMS_INSTALL_BASE:-$data_home/cams}
@@ -144,15 +149,16 @@ tar -C "$SOURCE_ROOT" \
     --exclude='target' \
     --exclude='*.egg-info' \
     -cf "$archive" \
-    UI core data/README.md docshots domain features infrastructure native \
+    UI core data/README.md docshots domain features gocore infrastructure native \
     qtpyTerminal-main runtime_qml scripts templates vendor licenses \
+    docs/gocoreRESTCONF.md \
     .python-version README.md LICENSE app_facade.py cams.sh main.py update.sh \
     pyproject.toml setup_cython.py uv.lock packaging/linux/cams-launcher
 
 # Program files are replaceable; user databases live in the sibling data/
 # directory and are deliberately never removed during an install or upgrade.
 rm -rf -- "$app_dir"
-mkdir -p "$app_dir" "$user_data_dir" "$bin_dir" "$applications_dir" \
+mkdir -p "$app_dir" "$app_dir/bin" "$user_data_dir" "$bin_dir" "$applications_dir" \
     "$scalable_icons_dir" "$bitmap_icons_dir"
 tar -C "$app_dir" -xf "$archive"
 install -m 0755 "$app_dir/packaging/linux/cams-launcher" "$app_dir/cams-launcher"
@@ -175,6 +181,15 @@ esac
 } > "$app_dir/.cams-release"
 
 if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ]; then
+    echo "Building the gocore automation sidecar..."
+    (
+        cd "$app_dir/gocore"
+        go test ./...
+        go build -trimpath \
+            -ldflags "-s -w -X main.version=$release_commit" \
+            -o "$app_dir/bin/gocore" ./cmd/gocore
+    )
+
     echo "Installing Python dependencies..."
     (cd "$app_dir" && ./cams.sh sync)
 
@@ -190,6 +205,9 @@ if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ]; then
 fi
 
 ln -sfn "$app_dir/cams-launcher" "$bin_dir/cams"
+if [ -x "$app_dir/bin/gocore" ]; then
+    ln -sfn "$app_dir/bin/gocore" "$bin_dir/gocore"
+fi
 install -m 0644 "$SOURCE_ROOT/UI/resources/brand/logo.svg" "$scalable_icons_dir/cams.svg"
 install -m 0644 "$SOURCE_ROOT/UI/resources/brand/logo.png" "$bitmap_icons_dir/cams.png"
 
@@ -219,6 +237,9 @@ echo
 echo "CAMS was installed successfully."
 echo "  Application menu: CAMS"
 echo "  Command:          $bin_dir/cams"
+if [ -x "$app_dir/bin/gocore" ]; then
+    echo "  Automation CLI:   $bin_dir/gocore (dry-run foundation)"
+fi
 echo "  Program files:    $app_dir"
 echo "  User data:        $user_data_dir"
 case ":${PATH:-}:" in

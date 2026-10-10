@@ -60,8 +60,7 @@
   #align(center)[
     #text(size: 15.5pt, weight: "bold")[
       #academy \
-      #campus
-    ]
+          ]
     #v(7pt)
     #text(size: 12pt, weight: "bold")[#faculty]
 
@@ -81,7 +80,7 @@
   ]
 
   #v(18mm)
-  #align(left, text(size: 12pt)[
+  #align(left, text(size: 13pt)[
     *Thuộc nhóm ngành khoa học:* #field
   ])
 
@@ -96,7 +95,7 @@
   #align(center)[
     #text(size: 15.5pt, weight: "bold")[
       #academy \
-      #campus
+      // #campus
     ]
     #v(7pt)
     #text(size: 12pt, weight: "bold")[#faculty]
@@ -128,6 +127,7 @@
     inset: (x: 0pt, y: 3pt),
     align: (left, left),
     [*Sinh viên thực hiện:*], [
+      #set par(leading: 0.8em)
       #for (index, student) in cover-students.enumerate() {
         student.name
         text(" - MSSV: ")
@@ -135,7 +135,7 @@
         if index < cover-students.len() - 1 { linebreak() }
       }
     ],
-    [*Lớp, khoa:*], [#student-class, #faculty],
+    [*Lớp, khoa:*], [#student-class, Khoa Viễn Thông 2],
     [*Ngành học:*], [#major],
     [*Người hướng dẫn:*], [#advisor],
   )

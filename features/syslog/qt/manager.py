@@ -207,10 +207,10 @@ class SyslogManager(QObject):
         published directly, and the detector ignores the CAMS facility.
         """
         try:
-            alerts = self.security_detector.process(rows)
-            if not alerts:
+            detections = self.security_detector.process_detections(rows)
+            if not detections:
                 return
-            inserted = self.service.repository.insert_messages(alerts)
+            inserted = self.service.repository.insert_security_detections(detections)
         except Exception as exc:
             self._error(f"Could not record security alert: {exc}")
             return

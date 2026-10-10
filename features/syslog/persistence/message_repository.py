@@ -2,15 +2,31 @@
 
 from __future__ import annotations
 
+import json
 from collections.abc import Iterable
 from contextlib import closing
 from pathlib import Path
 from typing import Any
 
+from ..automation import AutomationDetection
 from ..domain.models import SyslogMessage
 from ..security import annotate_security, security_filter_clause
 from .connections import info_connection
 from .schema import ensure_schema
+
+
+MESSAGE_INSERT_SQL = """INSERT INTO t12_syslog_messages
+    (device_host, source_ip, device_time, sequence_number,
+     clock_unsynchronized, received_at, syslog_pri, syslog_facility,
+     cisco_facility, cisco_subfacility, facility, severity, mnemonic,
+     message, raw_message, protocol, parse_status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+
+AUTOMATION_EVENT_INSERT_SQL = """INSERT INTO t13_automation_events
+    (event_id, schema_version, event_type, device_host, subject_key,
+     attributes_json, evidence_json, detected_at, fingerprint)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(event_id) DO NOTHING"""
 
 
 class MessageRepository:
@@ -23,21 +39,9 @@ class MessageRepository:
         rows = list(messages)
         if not rows:
             return []
-        sql = """INSERT INTO t12_syslog_messages
-            (device_host, source_ip, device_time, sequence_number,
-             clock_unsynchronized, received_at, syslog_pri, syslog_facility,
-             cisco_facility, cisco_subfacility, facility, severity, mnemonic,
-             message, raw_message, protocol, parse_status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
-        values = [(
-            row.device_host, row.source_ip, row.device_time, row.sequence_number,
-            int(row.clock_unsynchronized), row.received_at, row.syslog_pri,
-            row.syslog_facility, row.cisco_facility, row.cisco_subfacility,
-            row.facility, row.severity, row.mnemonic, row.message,
-            row.raw_message, row.protocol, row.parse_status,
-        ) for row in rows]
+        values = [self._message_values(row) for row in rows]
         with closing(info_connection(self.info_db)) as conn:
-            conn.executemany(sql, values)
+            conn.executemany(MESSAGE_INSERT_SQL, values)
             last_id = int(conn.execute("SELECT last_insert_rowid()").fetchone()[0])
             conn.commit()
         first_id = max(1, last_id - len(rows) + 1) if last_id else 0
@@ -46,6 +50,57 @@ class MessageRepository:
             item = row.to_dict()
             item["id"] = first_id + offset if first_id else 0
             result.append(self._public_row(item))
+        return result
+
+    def insert_security_detections(
+        self, detections: Iterable[AutomationDetection],
+    ) -> list[dict[str, Any]]:
+        """Atomically persist deduplicated machine events and synthetic alerts."""
+        pending = list(detections)
+        if not pending:
+            return []
+        inserted: list[tuple[SyslogMessage, int]] = []
+        with closing(info_connection(self.info_db)) as conn:
+            with conn:
+                for detection in pending:
+                    event_cursor = conn.execute(
+                        AUTOMATION_EVENT_INSERT_SQL,
+                        detection.event.database_values(),
+                    )
+                    if event_cursor.rowcount == 0:
+                        continue
+                    alert_cursor = conn.execute(
+                        MESSAGE_INSERT_SQL,
+                        self._message_values(detection.alert),
+                    )
+                    alert_id = int(alert_cursor.lastrowid)
+                    conn.execute(
+                        "UPDATE t13_automation_events SET source_alert_id = ? "
+                        "WHERE event_id = ?",
+                        (alert_id, detection.event.event_id),
+                    )
+                    inserted.append((detection.alert, alert_id))
+        result: list[dict[str, Any]] = []
+        for alert, alert_id in inserted:
+            item = alert.to_dict()
+            item["id"] = alert_id
+            result.append(self._public_row(item))
+        return result
+
+    def query_automation_events(self, limit: int = 100) -> list[dict[str, Any]]:
+        """Return recent structured detections without exposing action secrets."""
+        row_limit = max(1, min(int(limit), 1_000))
+        with closing(info_connection(self.info_db)) as conn:
+            rows = conn.execute(
+                "SELECT * FROM t13_automation_events ORDER BY id DESC LIMIT ?",
+                (row_limit,),
+            ).fetchall()
+        result: list[dict[str, Any]] = []
+        for row in rows:
+            item = dict(row)
+            item["attributes"] = json.loads(item.pop("attributes_json") or "{}")
+            item["evidence"] = json.loads(item.pop("evidence_json") or "{}")
+            result.append(item)
         return result
 
     def query_messages(
@@ -199,6 +254,16 @@ class MessageRepository:
             deleted = max(0, int(cursor.rowcount))
             conn.commit()
         return deleted
+
+    @staticmethod
+    def _message_values(row: SyslogMessage) -> tuple[Any, ...]:
+        return (
+            row.device_host, row.source_ip, row.device_time, row.sequence_number,
+            int(row.clock_unsynchronized), row.received_at, row.syslog_pri,
+            row.syslog_facility, row.cisco_facility, row.cisco_subfacility,
+            row.facility, row.severity, row.mnemonic, row.message,
+            row.raw_message, row.protocol, row.parse_status,
+        )
 
     @staticmethod
     def _public_row(row: dict[str, Any]) -> dict[str, Any]:
