@@ -6,9 +6,10 @@ from concurrent.futures import ThreadPoolExecutor
 import logging
 import os
 from pathlib import Path
+import threading
 from typing import Any
 
-from PyQt6.QtCore import QObject, QStandardPaths, pyqtSignal, pyqtSlot
+from PyQt6.QtCore import QObject, QStandardPaths, pyqtProperty, pyqtSignal, pyqtSlot
 
 from ..alerts.service import (
     EmailAlertService,
@@ -26,6 +27,7 @@ _VI_VALIDATION = {
     "Select at least one Syslog level to alert on.": "Chọn ít nhất 1 mức log cần cảnh báo.",
     "SMTP server is required.": "Nhập máy chủ SMTP.",
     "SMTP port must be between 1 and 65535.": "Cổng SMTP phải từ 1 đến 65535.",
+    "Select Auto, SSL/TLS, or STARTTLS for SMTP security.": "Chọn Auto, SSL/TLS hoặc STARTTLS cho bảo mật SMTP.",
     "Sender email is invalid.": "Email gửi không hợp lệ.",
     "Sender App Password is required.": "Nhập App Password của tài khoản gửi.",
     "Add at least one recipient email.": "Thêm ít nhất 1 email nhận.",
@@ -61,6 +63,7 @@ def _validation_result(exc: AlertValidationError, language: str) -> dict[str, An
 class EmailAlertManager(QObject):
     configurationChanged = pyqtSignal()
     testEmailFinished = pyqtSignal(bool, str)
+    testStateChanged = pyqtSignal()
     alertError = pyqtSignal(str)
 
     def __init__(
@@ -81,6 +84,13 @@ class EmailAlertManager(QObject):
         self.service = EmailAlertService(self.store, on_error=self._report_alert_error)
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="email-alert-test")
         self._shutdown = False
+        self._test_lock = threading.Lock()
+        self._test_sending = False
+
+    @pyqtProperty(bool, notify=testStateChanged)
+    def testSending(self) -> bool:
+        with self._test_lock:
+            return self._test_sending
 
     def _language(self) -> str:
         try:
@@ -106,13 +116,20 @@ class EmailAlertManager(QObject):
 
     @pyqtSlot("QVariant", str, result="QVariant")
     def saveConfiguration(self, payload: Any, language: str = "en") -> dict[str, Any]:
+        values = _mapping(payload)
         try:
-            config = self.store.save(_mapping(payload))
+            config = self.store.save(values)
         except AlertValidationError as exc:
             return _validation_result(exc, language)
+        except OSError:
+            return {"ok": False, "errors": {}, "message": (
+                "Không lưu được cấu hình Email Alerts. Kiểm tra quyền ghi thư mục cấu hình."
+                if language == "vi" else
+                "Could not save Email Alerts settings. Check configuration folder permissions."
+            )}
         self.configurationChanged.emit()
         warning = ""
-        supplied = str(_mapping(payload).get("sender_app_password") or "").replace(" ", "")
+        supplied = str(values.get("sender_app_password") or "").replace(" ", "")
         if supplied and config.smtp_host.casefold() == "smtp.gmail.com" and len(supplied) != 16:
             warning = (
                 "Đã lưu. App Password Gmail thường có 16 ký tự; hãy kiểm tra lại nếu gửi thất bại."
@@ -138,6 +155,15 @@ class EmailAlertManager(QObject):
             return _validation_result(exc, language)
 
         selected_language = "vi" if language == "vi" else "en"
+        with self._test_lock:
+            if self._test_sending:
+                return {"ok": False, "errors": {}, "message": (
+                    "Email thử đang được gửi. Chờ kết quả trước khi thử lại."
+                    if selected_language == "vi" else
+                    "A test email is already being sent. Wait for the result before retrying."
+                )}
+            self._test_sending = True
+        self.testStateChanged.emit()
 
         def task() -> None:
             try:
@@ -150,13 +176,27 @@ class EmailAlertManager(QObject):
                     if selected_language == "vi"
                     else f"Test email sent to {count} recipient(s). Check the Spam folder too."
                 )
-                self.testEmailFinished.emit(True, message)
+                ok = True
             except Exception as exc:
                 message = delivery_error_message(exc, selected_language)
                 LOGGER.warning("Syslog test email delivery failed: %s", message)
-                self.testEmailFinished.emit(False, message)
+                ok = False
+            finally:
+                with self._test_lock:
+                    self._test_sending = False
+                self.testStateChanged.emit()
+            self.testEmailFinished.emit(ok, message)
 
-        self._executor.submit(task)
+        try:
+            self._executor.submit(task)
+        except RuntimeError:
+            with self._test_lock:
+                self._test_sending = False
+            self.testStateChanged.emit()
+            return {"ok": False, "message": (
+                "Dịch vụ Email Alerts đang dừng." if selected_language == "vi" else
+                "Email alert service is shutting down."
+            ), "errors": {}}
         return {
             "ok": True,
             "message": "Đang gửi email thử..." if selected_language == "vi" else "Sending test email...",

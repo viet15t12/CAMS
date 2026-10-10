@@ -21,7 +21,7 @@ Rectangle {
     property int recipientRevision: 0
     property string savedSnapshot: ""
     property var validationErrors: ({})
-    property bool testSending: false
+    readonly property bool testSending: backend !== null && backend.testSending
     property string feedbackMessage: ""
     property string feedbackSeverity: "info"
 
@@ -72,6 +72,7 @@ Rectangle {
             "enabled": alertEnabled,
             "smtp_host": smtpHost.text.trim(),
             "smtp_port": smtpPort.value,
+            "smtp_security": smtpSecurity.currentValue,
             "sender_email": senderEmail.text.trim(),
             "sender_app_password": appPassword.text.replace(/\s/g, ""),
             "recipients": recipientsPayload(),
@@ -97,6 +98,7 @@ Rectangle {
         selectedLevels = (config.levels || [0, 1, 2]).slice(0)
         smtpHost.text = String(config.smtp_host || "smtp.gmail.com")
         smtpPort.value = Number(config.smtp_port || 465)
+        smtpSecurity.currentIndex = Math.max(0, ["auto", "ssl", "starttls"].indexOf(config.smtp_security || "auto"))
         senderEmail.text = String(config.sender_email || "")
         appPassword.text = ""
         hasSavedPassword = Boolean(config.has_password)
@@ -109,7 +111,8 @@ Rectangle {
         batchSeconds.value = Number(config.batch_seconds ?? 10)
         recipientRevision++
         validationErrors = ({})
-        feedbackMessage = ""
+        feedbackMessage = testSending ? tr("Sending test email...", "Đang gửi email thử...") : ""
+        feedbackSeverity = "info"
         savedSnapshot = currentSnapshot()
         loading = false
     }
@@ -161,10 +164,13 @@ Rectangle {
     }
 
     function recipientIssue(index) {
+        if (index < 0 || index >= recipientModel.count)
+            return ""
         const backendIssue = validationErrors["recipients." + index]
         if (backendIssue)
             return String(backendIssue)
-        const value = String(recipientModel.get(index).value || "").trim()
+        const row = recipientModel.get(index)
+        const value = String(row ? row.value || "" : "").trim()
         if (value === "")
             return ""
         const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
@@ -206,7 +212,6 @@ Rectangle {
             return
         const result = backend.sendTestEmail(payload(), LanguageState.language)
         if (applyResult(result)) {
-            testSending = true
             feedbackSeverity = "info"
         }
     }
@@ -217,9 +222,14 @@ Rectangle {
         target: root.backend
         enabled: root.backend !== null
         function onTestEmailFinished(ok, message) {
-            root.testSending = false
             root.feedbackMessage = String(message || "")
             root.feedbackSeverity = ok ? "success" : "error"
+        }
+        function onAlertError(message) {
+            if (!root.testSending) {
+                root.feedbackMessage = String(message || "")
+                root.feedbackSeverity = "error"
+            }
         }
     }
 
@@ -399,6 +409,7 @@ Rectangle {
 
                     StandardTextField {
                         id: smtpHost
+                        objectName: "emailAlertsSmtpHost"
                         Layout.fillWidth: true
                         labelText: root.tr("SMTP server", "Máy chủ SMTP")
                         placeholderText: "smtp.gmail.com"
@@ -406,6 +417,7 @@ Rectangle {
 
                     StandardSpinBox {
                         id: smtpPort
+                        objectName: "emailAlertsSmtpPort"
                         Layout.fillWidth: true
                         labelText: root.tr("Port", "Cổng")
                         from: 1
@@ -416,6 +428,7 @@ Rectangle {
 
                     StandardTextField {
                         id: senderEmail
+                        objectName: "emailAlertsSenderEmail"
                         Layout.fillWidth: true
                         labelText: root.tr("Sender email", "Email gửi")
                         placeholderText: "cams.syslog.alert@gmail.com"
@@ -423,6 +436,7 @@ Rectangle {
 
                     StandardPasswordField {
                         id: appPassword
+                        objectName: "emailAlertsAppPassword"
                         Layout.fillWidth: true
                         labelText: "App Password"
                         placeholderText: root.hasSavedPassword
@@ -433,6 +447,18 @@ Rectangle {
                             if (text !== normalized)
                                 text = normalized
                         }
+                    }
+
+                    StandardComboBox {
+                        id: smtpSecurity
+                        objectName: "emailAlertsSmtpSecurity"
+                        Layout.fillWidth: true
+                        Layout.columnSpan: parent.columns
+                        labelText: root.tr("Connection security", "Bảo mật kết nối")
+                        model: [root.tr("Auto (465: SSL/TLS; other ports: STARTTLS)",
+                                        "Tự động (465: SSL/TLS; cổng khác: STARTTLS)"),
+                                "SSL/TLS", "STARTTLS"]
+                        valueModel: ["auto", "ssl", "starttls"]
                     }
                 }
 
@@ -454,9 +480,20 @@ Rectangle {
 
                 InlineMessage {
                     Layout.fillWidth: true
+                    severity: "info"
+                    wrapText: true
+                    message: root.tr(
+                        "Gmail: use port 465 with SSL/TLS, or port 587 with STARTTLS if your network blocks 465. Auto selects the matching mode.",
+                        "Gmail: dùng cổng 465 với SSL/TLS, hoặc 587 với STARTTLS nếu mạng chặn 465. Chế độ tự động chọn theo cổng."
+                    )
+                }
+
+                InlineMessage {
+                    Layout.fillWidth: true
                     severity: "error"
                     wrapText: true
                     message: root.fieldError("smtp_host") || root.fieldError("smtp_port")
+                             || root.fieldError("smtp_security")
                              || root.fieldError("sender_email")
                              || root.fieldError("sender_app_password")
                 }

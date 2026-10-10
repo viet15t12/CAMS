@@ -95,3 +95,28 @@ Chưa hỗ trợ RFC6587 octet-counting, TLS hoặc nhiều bind endpoint/port.
 Chi tiết vận hành: [`../../docs/SYSTEM_LOGS.md`](../../docs/SYSTEM_LOGS.md).
 Test nằm trong `tests/syslog/`, gồm cả các nhóm parsing, transport, application,
 persistence và device configuration.
+
+## Email Alerts
+
+**Settings > Email Alerts** lọc severity, chống trùng theo thiết bị/mã Cisco và
+gom log trước khi gửi trên worker riêng. Gửi thử dùng draft hiện tại; cảnh báo
+tự động dùng cấu hình đã Save. Mật khẩu lưu được mã hóa và không trả về QML.
+
+`smtp_security` mặc định `auto` để tương thích file cấu hình cũ: cổng 465 dùng
+SSL/TLS ngay từ đầu, các cổng khác (gồm 587) dùng STARTTLS trước khi đăng nhập.
+Có thể chọn rõ SSL/TLS hoặc STARTTLS cho máy chủ dùng cổng riêng. Mọi kết nối
+vẫn xác minh chứng thư và hostname; máy chủ không hỗ trợ STARTTLS sẽ dừng trước
+khi gửi thông tin đăng nhập. Đối chiếu [Python SMTP](https://docs.python.org/3/library/smtplib.html)
+và [cấu hình Gmail](https://support.google.com/mail/answer/7104828?hl=en).
+
+Thông báo lỗi phân biệt DNS, timeout, kết nối bị từ chối, TLS, đăng nhập và
+máy chủ từ chối gửi. Kèm endpoint, bước thất bại và mã SMTP khi có; không đưa
+nội dung phản hồi thô hoặc App Password vào giao diện/log. Gửi thử chỉ chạy
+một lần tại một thời điểm, kể cả khi người dùng mở lại trang Settings. Nếu chỉ
+một phần người nhận được máy chủ chấp nhận, app báo số lượng cụ thể; lỗi QUIT
+sau khi máy chủ nhận thư không biến kết quả thành thất bại. Lỗi cảnh báo tự
+động cũng được hiển thị trên trang Settings khi không có email thử đang gửi.
+
+Kiểm thử SMTP và QML nằm trong `test_smtp_delivery.py`,
+`test_email_alert_manager.py`, `test_email_alerts.py`; SMTP dùng mock, không gửi
+email thật. Kiểm thử Syslog listener dùng socket localhost và cấu hình tạm.

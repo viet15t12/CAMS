@@ -18,6 +18,7 @@ DEFAULT_VALUES: dict[str, Any] = {
     "enabled": False,
     "smtp_host": "smtp.gmail.com",
     "smtp_port": 465,
+    "smtp_security": "auto",
     "sender_email": "",
     "sender_app_password": "",
     "recipients": [""],
@@ -40,6 +41,13 @@ class AlertConfiguration:
     levels: tuple[int, ...]
     cooldown_seconds: int
     batch_seconds: int
+    smtp_security: str = "auto"
+
+    @property
+    def transport_security(self) -> str:
+        if self.smtp_security == "auto":
+            return "ssl" if self.smtp_port == 465 else "starttls"
+        return self.smtp_security
 
     def public_dict(self) -> dict[str, Any]:
         """Return settings safe to expose to QML (never include the password)."""
@@ -47,6 +55,7 @@ class AlertConfiguration:
             "enabled": self.enabled,
             "smtp_host": self.smtp_host,
             "smtp_port": self.smtp_port,
+            "smtp_security": self.smtp_security,
             "sender_email": self.sender_email,
             "recipients": list(self.recipients) or [""],
             "levels": list(self.levels),
@@ -106,6 +115,7 @@ def validate_configuration(
     enabled = _as_bool(values.get("enabled")) or require_enabled_fields
     smtp_host = str(values.get("smtp_host") or "").strip()
     smtp_port = _as_int(values.get("smtp_port"), 0)
+    smtp_security = str(values.get("smtp_security") or "auto").strip().casefold()
     sender_email = str(values.get("sender_email") or "").strip()
     supplied_password = re.sub(r"\s+", "", str(values.get("sender_app_password") or ""))
     password = supplied_password or str(saved_password or "")
@@ -132,6 +142,8 @@ def validate_configuration(
             errors["smtp_host"] = "SMTP server is required."
         if not 1 <= smtp_port <= 65535:
             errors["smtp_port"] = "SMTP port must be between 1 and 65535."
+        if smtp_security not in {"auto", "ssl", "starttls"}:
+            errors["smtp_security"] = "Select Auto, SSL/TLS, or STARTTLS for SMTP security."
         if not sender_email or not _valid_email(sender_email):
             errors["sender_email"] = "Sender email is invalid."
         if not password:
@@ -168,6 +180,7 @@ def validate_configuration(
         levels=tuple(levels),
         cooldown_seconds=cooldown,
         batch_seconds=batch,
+        smtp_security=smtp_security,
     )
 
 

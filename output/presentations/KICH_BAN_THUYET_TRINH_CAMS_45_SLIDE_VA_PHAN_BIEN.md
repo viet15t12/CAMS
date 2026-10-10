@@ -1,0 +1,629 @@
+# Kịch bản thuyết trình và phản biện CAMS
+
+Bám theo 45 trang của bản slide CAMS do nhóm cung cấp. Lời nói dùng cách xưng nhóm em; người trình bày có thể dùng liền mạch hoặc chia đoạn cho ba thành viên. Thời lượng là mục tiêu luyện tập, không phải thời gian đã đo.
+
+## Cách sử dụng
+
+Phần Lời nói là nội dung nói trước hội đồng. Phần Điều khiển là hướng dẫn riêng, không đọc thành tiếng. Các câu phản biện dùng khi được hỏi, không đọc hết trong 15 phút. Chuẩn bị video và ảnh dự phòng; không cộng thêm thời gian video vào lịch demo.
+
+Video nhóm đã quay chưa nằm trong PDF này. Lời dẫn demo dưới đây bám hình và kết quả trên slide. Khi dùng clip, đọc đúng IP, bộ đếm và kết quả thật trong clip; nếu khác ảnh cũ thì nói đó là hai lần thử khác nhau.
+
+## Phân bổ thời gian
+
+00:00 đến 02:20 — slide 1 đến 6 — bài toán và phạm vi.
+02:20 đến 04:50 — slide 7 đến 12 — phương pháp và mô hình trạng thái.
+04:50 đến 08:30 — slide 13 đến 20 — kiến trúc và chức năng.
+08:30 đến 13:30 — slide 21 đến 42 — demo bốn lab, gồm 15 giây chuyển clip.
+13:30 đến 15:00 — slide 43 đến 45 — kết quả, hạn chế và kết thúc.
+
+Trong 5 phút demo, dành Lab 1 khoảng 100 giây, Lab 2 65 giây, Lab 3 55 giây và Lab 4 65 giây. Đây là trần cả lời dẫn và clip từng lab. Nếu clip dài hơn, chọn đoạn trọng tâm hoặc dùng ảnh; không chiếu toàn clip rồi kể lại toàn bộ slide.
+
+## Cách phối hợp người nói và người điều khiển
+
+Nếu một người nói toàn bộ: một thành viên khác điều khiển slide và video theo tín hiệu. Nếu chia ba người, đề xuất người A nói slide 1–12, người B nói 13–20, người C dẫn demo 21–42, người A kết luận 43–45. Nhóm tự gán tên theo năng lực và phân công thật; không bắt buộc chia đều phút. Thời gian bàn giao lấy trong ngân sách của slide, không cộng thêm.
+
+Câu chuyển từ A sang B: Sau phương pháp nghiên cứu, em xin mời thành viên tiếp theo trình bày kiến trúc và các chức năng của CAMS.
+Câu chuyển từ B sang C: Để đối chiếu các chức năng với kết quả trên thiết bị, nhóm xin trình bày bốn kịch bản thực nghiệm.
+Câu chuyển về kết luận: Từ các kết quả vừa trình bày, nhóm xin tổng hợp những điểm đã đạt được và các giới hạn còn tồn tại.
+
+## Lời nói theo từng slide
+
+### Slide 1 Giới thiệu đề tài
+
+Mốc mục tiêu 00:00 đến 00:25 — 25 giây.
+
+Lời nói: Kính thưa quý thầy cô trong hội đồng, nhóm em xin trình bày đề tài Nghiên cứu và xây dựng hệ thống quản lý tập trung, tự động hóa cấu hình và giám sát an ninh mạng, dưới sự hướng dẫn của thầy Phan Thanh Toản. Sản phẩm của nhóm là CAMS, một ứng dụng hỗ trợ quản trị thiết bị mạng và kiểm chứng kết quả cấu hình trong cùng một quy trình.
+
+Điều khiển: Nhìn hội đồng khi chào. Không đọc lại toàn bộ tên và mã sinh viên trên màn hình.
+
+### Slide 2 Nội dung báo cáo
+
+Mốc mục tiêu 00:25 đến 00:35 — 10 giây.
+
+Lời nói: Nhóm em sẽ trình bày bài toán, phương pháp và thiết kế hệ thống, sau đó minh họa bốn kịch bản thực nghiệm và kết thúc bằng kết quả cùng hướng phát triển.
+
+Điều khiển: Bấm chuyển ngay sau câu này.
+
+### Slide 3 Hạn chế của thao tác thủ công
+
+Mốc mục tiêu 00:35 đến 01:05 — 30 giây.
+
+Lời nói: Khi số thiết bị tăng, việc mở từng terminal và lặp lại các lệnh cấu hình khiến người quản trị phải đối chiếu nhiều nguồn thông tin. Những sai lệch về địa chỉ, cổng hoặc tham số có thể phát sinh trong quá trình nhập liệu. Đồng thời, nếu không tổ chức sao lưu và lưu vết riêng, việc xác định cấu hình đã thay đổi ở đâu cũng trở nên khó khăn. Đây là bài toán nhóm lựa chọn giải quyết.
+
+Điều khiển: Chỉ các terminal rồi nhìn hội đồng. CLI có thể có công cụ lưu vết; không nói bản thân CLI hoàn toàn không lưu được lịch sử.
+
+### Slide 4 Quy trình quản trị tập trung
+
+Mốc mục tiêu 01:05 đến 01:30 — 25 giây.
+
+Lời nói: Từ bài toán đó, nhóm xây dựng một quy trình gồm kết nối thiết bị, thu thập cấu hình, xem trước lệnh, triển khai và xác minh kết quả. Điểm nhóm chú trọng là người dùng có thể rà soát lệnh trước khi gửi, và kết quả phải được kiểm tra lại trên thiết bị, thay vì chỉ dựa vào thông báo thành công của ứng dụng.
+
+Điều khiển: Chỉ chuỗi bên phải từ trên xuống. Nhấn giọng ở xem trước và xác minh.
+
+### Slide 5 Mục tiêu nghiên cứu
+
+Mốc mục tiêu 01:30 đến 01:55 — 25 giây.
+
+Lời nói: Đề tài có bốn mục tiêu: tập trung thông tin thiết bị và cấu hình; hỗ trợ triển khai để giảm thao tác lặp; thu thập sự kiện và gửi cảnh báo theo chính sách; cuối cùng là kiểm chứng các chức năng trên EVE-NG. Các mục tiêu này được gắn với những kịch bản cụ thể ở phần thực nghiệm.
+
+Điều khiển: Không đọc nguyên văn bốn mô tả nhỏ. Cảnh báo sớm là mục tiêu, không phải kết quả đo độ trễ.
+
+### Slide 6 Đối tượng và phạm vi
+
+Mốc mục tiêu 01:55 đến 02:20 — 25 giây.
+
+Lời nói: Phạm vi kiểm chứng hiện tại là router Cisco vIOS L3 và switch vIOS L2 trong EVE-NG. Ứng dụng sử dụng Python, PyQt6 và QML, cùng SQLite. Kết quả trong báo cáo gắn với các phiên bản IOS đã thử nghiệm. Các nội dung như đa nhà sản xuất, HA, RBAC và BGP chưa thuộc phạm vi kiểm chứng của đề tài.
+
+Điều khiển: Chỉ cột phạm vi rồi cột giới hạn. Đây là chỗ khóa phạm vi trước khi nói kết quả.
+
+### Slide 7 Phân tích nghiệp vụ
+
+Mốc mục tiêu 02:20 đến 02:50 — 30 giây.
+
+Lời nói: Giai đoạn đầu tiên là khảo sát cú pháp Cisco IOS và mô hình hóa nghiệp vụ cấu hình. Sơ đồ mô tả một thao tác từ giao diện: đọc dữ liệu đã lưu, sinh lệnh xem trước, nhận xác nhận của người dùng, rồi giao tác vụ cho worker gửi xuống thiết bị. Phản hồi được trả lại và cập nhật theo từng thiết bị. Nhóm tổ chức các bước này để việc nhập liệu và việc thực thi không bị gộp thành một thao tác.
+
+Điều khiển: Không đọc 12 mũi tên. Chỉ đường từ giao diện tới worker và thiết bị.
+
+### Slide 8 Sinh lệnh và kiểm duyệt
+
+Mốc mục tiêu 02:50 đến 03:10 — 20 giây.
+
+Lời nói: Giai đoạn thứ hai là hiện thực mô hình dữ liệu và các mẫu lệnh. Hệ thống kiểm tra tham số được hỗ trợ rồi sinh CLI để người dùng rà soát. Việc kiểm tra đầu vào giúp phát hiện một số lỗi nhập liệu, còn xem trước giúp người quản trị kiểm tra đúng đích và đúng ý định cấu hình.
+
+Điều khiển: Không nói validation bảo đảm không bao giờ sai cấu hình.
+
+### Slide 9 Xác minh trên mô phỏng
+
+Mốc mục tiêu 03:10 đến 03:30 — 20 giây.
+
+Lời nói: Giai đoạn cuối là triển khai trên thiết bị ảo và đối chiếu bằng cấu hình đang chạy, trạng thái giao thức và lưu lượng thử. Mỗi kịch bản đều cần bằng chứng trên thiết bị. Với chức năng bảo mật, nhóm sử dụng thêm phép đối chứng để phân biệt chặn đúng chính sách với lỗi mất kết nối thông thường.
+
+Điều khiển: Chuyển từ phương pháp sang thiết kế bằng câu cuối.
+
+### Slide 10 Trạng thái mong muốn
+
+Mốc mục tiêu 03:30 đến 03:55 — 25 giây.
+
+Lời nói: Trong thiết kế, nhóm phân biệt trạng thái người dùng muốn cấu hình với trạng thái quan sát được trên thiết bị. Khi nhập và lưu trên giao diện, dữ liệu mới thể hiện cấu hình mong muốn. Nó chưa đủ để khẳng định thiết bị đã thay đổi. Cách phân biệt này giúp giải thích rõ một cấu hình đang chờ áp dụng.
+
+Điều khiển: Chỉ Desired State. Không gọi trạng thái đã lưu là cấu hình đã chạy.
+
+### Slide 11 Xem trước và triển khai
+
+Mốc mục tiêu 03:55 đến 04:20 — 25 giây.
+
+Lời nói: Bước tiếp theo là chuyển dữ liệu mong muốn thành lệnh và hiển thị trong View & Push. Người dùng kiểm tra lệnh trước khi xác nhận gửi. Hệ thống thực hiện tác vụ với thiết bị đích và ghi nhận phản hồi. Tuy nhiên, phản hồi CLI vẫn cần được đối chiếu với trạng thái sau triển khai.
+
+Điều khiển: Chỉ Preview & Apply; nhắc đây là kiểm duyệt của người vận hành.
+
+### Slide 12 Trạng thái quan sát
+
+Mốc mục tiêu 04:20 đến 04:50 — 30 giây.
+
+Lời nói: Sau triển khai, ứng dụng thu thập running-config và các thông tin liên quan để quan sát trạng thái thực tế. Lịch sử cấu hình hỗ trợ đối chiếu các phiên bản. Việc ánh xạ trở lại biểu mẫu phụ thuộc bộ phân tích của từng mô-đun; nhóm không coi việc tải được một file running-config là bằng chứng mọi chức năng đã đồng bộ đầy đủ. Kết quả nghiệp vụ vẫn được xác minh bằng lệnh show và kiểm thử.
+
+Điều khiển: Chỉ Observed State. Nếu bị hỏi lỗi ACL vừa gặp, trả lời bằng mục phản biện về đồng bộ; không tuyên bố tự đồng bộ toàn bộ cú pháp IOS.
+
+### Slide 13 Bốn nhóm chức năng
+
+Mốc mục tiêu 04:50 đến 05:15 — 25 giây.
+
+Lời nói: CAMS được tổ chức thành bốn nhóm chức năng: quản lý thiết bị và kết nối; tự động hóa cấu hình; thu thập và quan sát Syslog; cấu hình cơ chế bảo vệ Lớp 2. Các nhóm cùng phục vụ một luồng vận hành: người quản trị thiết lập, thiết bị thực thi và ứng dụng thu thập thông tin để kiểm tra kết quả.
+
+Điều khiển: Chuyển ý sang kiến trúc; không đọc danh sách giao thức ở đây.
+
+### Slide 14 Kiến trúc phân lớp
+
+Mốc mục tiêu 05:15 đến 05:55 — 40 giây.
+
+Lời nói: Về kiến trúc, QML và Qt Quick đảm nhiệm giao diện. Lớp trung gian PyQt6 chuyển tín hiệu giữa giao diện và nghiệp vụ. Các service thực hiện xử lý và kiểm tra tham số; repository phụ trách dữ liệu; worker xử lý tác vụ nền. Ở dưới là SQLite và lớp kết nối với thiết bị. Cách tổ chức này giúp tách thao tác giao diện khỏi tác vụ mạng có thời gian chờ, và giúp nhóm thay đổi một mô-đun mà hạn chế ảnh hưởng đến các phần khác. Trong các bài thử trình bày hôm nay, thiết bị Cisco được thao tác bằng CLI qua kết nối quản trị.
+
+Điều khiển: Chỉ từng tầng, không đọc từng ô. API trên hình kiến trúc không phải bằng chứng đã kiểm chứng mọi giao thức quản trị.
+
+### Slide 15 Vai trò của cơ sở dữ liệu
+
+Mốc mục tiêu 05:55 đến 06:25 — 30 giây.
+
+Lời nói: Hai cơ sở dữ liệu phục vụ hai vai trò chính. device_network.db lưu danh sách thiết bị và dữ liệu cấu hình phục vụ thao tác nghiệp vụ. info_collected.db lưu các thông tin thu thập và nhật ký. Khi cần hiển thị dữ liệu đã quan sát trong biểu mẫu, mô-đun đồng bộ sẽ ánh xạ các trường được hỗ trợ vào dữ liệu nghiệp vụ. Vì vậy, đây là sự phân chia vai trò chính, không phải hai kho hoàn toàn không trao đổi dữ liệu.
+
+Điều khiển: Không nói mọi observed state chỉ nằm duy nhất trong info_collected.db; bộ đồng bộ hiện có ghi vào bảng nghiệp vụ.
+
+### Slide 16 View và Push
+
+Mốc mục tiêu 06:25 đến 06:50 — 25 giây.
+
+Lời nói: Ví dụ trên màn hình cho thấy đủ ba bước: nhập tham số, rà soát CLI và xác minh bằng lệnh show. Việc lưu biểu mẫu chưa gửi lệnh ngay. Người quản trị có cơ hội kiểm tra trước khi Push. Sau đó, nhóm kiểm tra cấu hình thực tế để xác nhận lệnh được áp dụng đúng vị trí và đúng tham số.
+
+Điều khiển: Chỉ ba hình từ trái sang phải. Phần minh họa này không cần mở app trực tiếp.
+
+### Slide 17 Phạm vi đã xây dựng
+
+Mốc mục tiêu 06:50 đến 07:15 — 25 giây.
+
+Lời nói: Ứng dụng đã xây dựng các mô-đun định tuyến, dự phòng Lớp 3, chuyển mạch, dịch vụ mạng và tiện ích vận hành như SFTP hay cảnh báo email. Tuy nhiên, danh sách chức năng đã xây dựng khác với phạm vi đã kiểm chứng sâu. Trong phần trình bày này, nhóm tập trung vào bốn kịch bản có bằng chứng: DHCP Snooping và DAI, OSPF, Syslog và ACL.
+
+Điều khiển: Không khẳng định bốn lab đã kiểm chứng toàn bộ giao thức trong danh sách.
+
+### Slide 18 Thiết bị và lịch sử cấu hình
+
+Mốc mục tiêu 07:15 đến 07:45 — 30 giây.
+
+Lời nói: Thông tin thiết bị và trạng thái kết nối được tập trung trong danh sách quản lý. Ứng dụng hỗ trợ thu thập running-config, lưu lịch sử và so sánh phiên bản để người quản trị xem thay đổi. Dữ liệu quan sát phản ánh lần thu thập gần nhất; nếu thiết bị được sửa bên ngoài ứng dụng thì cần thu thập lại trước khi dùng dữ liệu đó để đánh giá.
+
+Điều khiển: Diễn đạt lại câu luôn giữ cấu hình mới nhất trên slide: mới nhất tại lần thu thập, không phải cập nhật tức thời mọi thay đổi.
+
+### Slide 19 Thực hiện cấu hình theo nhóm
+
+Mốc mục tiêu 07:45 đến 08:10 — 25 giây.
+
+Lời nói: Khi cấu hình theo nhóm, một chính sách chung vẫn được sinh thành lệnh riêng cho từng thiết bị. Tác vụ cùng một thiết bị được khóa để hạn chế gửi lệnh chồng nhau, còn các thiết bị độc lập có thể được xử lý song song. Kết quả cần được xem theo từng thiết bị; nhóm chưa triển khai rollback tự động cho toàn bộ nhóm khi một thiết bị gặp lỗi.
+
+Điều khiển: Nhấn Host Lock. Khóa phiên không đồng nghĩa giao dịch nguyên tử xuyên nhiều router.
+
+### Slide 20 Phòng vệ và quan sát
+
+Mốc mục tiêu 08:10 đến 08:30 — 20 giây.
+
+Lời nói: Phần phòng vệ là cấu hình các cơ chế trên router và switch, còn phần quan sát là tiếp nhận và phân tích sự kiện thiết bị gửi về. CAMS hỗ trợ quản trị và theo dõi các cơ chế đó; thiết bị mạng trực tiếp thực thi việc lọc. Sau đây nhóm minh họa bằng bốn kịch bản.
+
+Điều khiển: Chuyển sang demo. Nếu nói facility: phân biệt nhóm nguồn Syslog với mã phân hệ Cisco như LINK, SEC.
+
+### Slide 21 Lab 1 mô hình
+
+Mốc mục tiêu 08:30 đến 08:38 — 8 giây.
+
+Lời nói: Lab đầu tiên sử dụng hai nguồn DHCP qua SW1, với R2 đóng vai trò máy khách. Nhóm thay đổi cổng tin cậy để đối chiếu nguồn cấp.
+
+Điều khiển: Chỉ R1, FAKE_DHCP, SW1 và R2. Mở clip Lab 1 tại đây nếu dùng video.
+
+### Slide 22 Lab 1 DHCP trust
+
+Mốc mục tiêu 08:38 đến 08:48 — 10 giây.
+
+Lời nói: Trên CAMS, nhóm bật DHCP Snooping ở VLAN 10 và đặt Gi0/1 nối R1 làm cổng tin cậy. Cổng máy khách vẫn không tin cậy.
+
+Điều khiển: Nếu clip đang chạy, nói theo cảnh này; không quay lại đọc slide sau clip.
+
+### Slide 23 Lab 1 kết quả DHCP
+
+Mốc mục tiêu 08:48 đến 08:58 — 10 giây.
+
+Lời nói: Khi tin cậy Gi0/1, R2 nhận địa chỉ từ dải 192.168.10.0. Khi chuyển trust sang Gi0/3, địa chỉ nhận được thuộc dải 192.168.66.0.
+
+Điều khiển: Nêu .4 và .100 nếu dùng đúng ảnh này; video mới có IP khác thì đọc kết quả trong video. Không nói Snooping tự nhận diện server thật bằng tên.
+
+### Slide 24 Lab 1 bật DAI
+
+Mốc mục tiêu 08:58 đến 09:10 — 12 giây.
+
+Lời nói: Tiếp theo, nhóm trả trust về cổng nối R1 và bật DAI trên VLAN 10. DHCP Snooping cung cấp bảng liên kết để DAI kiểm tra bản tin ARP.
+
+Điều khiển: Chỉ Enable DAI, Save Policy và phần triển khai. Không bỏ bước setup DAI trong video.
+
+### Slide 25 Lab 1 cổng DAI trust
+
+Mốc mục tiêu 09:10 đến 09:20 — 10 giây.
+
+Lời nói: Gi0/1 nối gateway R1 được tin cậy cho DHCP và ARP. Gi0/2 nối R2 vẫn không tin cậy, nên ARP từ máy khách phải được kiểm tra.
+
+Điều khiển: Chỉ dòng DHCP + ARP và checkbox. Hai loại trust phục vụ hai kiểm tra khác nhau.
+
+### Slide 26 Lab 1 tạo sai lệch
+
+Mốc mục tiêu 09:20 đến 09:32 — 12 giây.
+
+Lời nói: Nhóm đổi IP của R2 sang 192.168.10.250, khác liên kết DHCP hợp lệ đã học. Đây là cách tạo sai lệch có kiểm soát để thử DAI.
+
+Điều khiển: Không gọi thao tác đổi IP này là một cuộc tấn công MITM hoàn chỉnh.
+
+### Slide 27 Lab 1 đối chứng ping
+
+Mốc mục tiêu 09:32 đến 09:44 — 12 giây.
+
+Lời nói: Với địa chỉ DHCP hợp lệ, ping nhận năm trên năm phản hồi. Sau khi đổi IP và xóa ARP cache, ping không nhận phản hồi. Nhóm kiểm tra thêm log để xác định nguyên nhân.
+
+Điều khiển: Chỉ kết quả 5/5 và 0/5; không dừng kết luận chỉ ở ping.
+
+### Slide 28 Lab 1 bộ đếm và log
+
+Mốc mục tiêu 09:44 đến 10:00 — 16 giây.
+
+Lời nói: Bộ đếm DAI ghi nhận ARP bị loại bỏ, và log SW_DAI xác định cổng, VLAN cùng địa chỉ nguồn vi phạm. CAMS nhận các bản tin và hiển thị cảnh báo tương ứng.
+
+Điều khiển: Ảnh cũ có 9 ARP dropped, không gọi là 9 gói ping hoặc DHCP. Cảnh báo CAMS tổng hợp và bộ đếm switch có khoảng quan sát khác nhau.
+
+### Slide 29 Lab 1 phục hồi
+
+Mốc mục tiêu 10:00 đến 10:10 — 10 giây.
+
+Lời nói: Sau khi trả R2 về DHCP, switch học lại liên kết hợp lệ và kết nối được khôi phục. Kịch bản xác nhận cả chặn sai lệch lẫn duy trì lưu lượng hợp lệ.
+
+Điều khiển: Kết thúc clip Lab 1 và chuyển Lab 2. Nếu dùng ảnh, chỉ .5 và 5/5.
+
+### Slide 30 Lab 2 mô hình
+
+Mốc mục tiêu 10:10 đến 10:20 — 10 giây.
+
+Lời nói: Lab thứ hai kiểm tra OSPF trên năm router và các LAN ở xa. Mạng quản trị được tách khỏi phần quảng bá OSPF của bài thử.
+
+Điều khiển: Mở clip Lab 2 tại đây. Chỉ tuyến R1 qua R3, R4 tới R5.
+
+### Slide 31 Lab 2 cấu hình nhóm
+
+Mốc mục tiêu 10:20 đến 10:40 — 20 giây.
+
+Lời nói: Nhóm chọn R1 đến R5, khai báo process, router ID và các mạng nghiệp vụ trong Routing Group. Lệnh được sinh riêng theo từng router và được xem trước trước khi gửi. Các cổng transit được cho phép hình thành láng giềng, còn cổng LAN được đặt passive theo cấu hình bài thử.
+
+Điều khiển: Không đọc toàn bộ bảng IP. Nếu video chỉ rà soát cấu hình đã có, nói rà soát và áp dụng lại, không nói dựng từ trắng.
+
+### Slide 32 Lab 2 láng giềng và tuyến
+
+Mốc mục tiêu 10:40 đến 10:55 — 15 giây.
+
+Lời nói: Trên R1, kết quả show ghi nhận các láng giềng ở trạng thái FULL trong lần thử này và các tuyến OSPF tới mạng nghiệp vụ ở xa. Đây là bằng chứng giao thức đã hoạt động trên thiết bị.
+
+Điều khiển: Chỉ FULL và tuyến .50.0/24. Không nói mọi mô hình broadcast đều bắt buộc tất cả neighbor FULL.
+
+### Slide 33 Lab 2 ping và trace
+
+Mốc mục tiêu 10:55 đến 11:15 — 20 giây.
+
+Lời nói: VPC8 liên lạc được với VPC10 ở LAN phía R5. Trace cho thấy đường đi qua R1, R3, R4 và R5. Nhóm dùng kết quả này để xác nhận định tuyến giữa các LAN, không dùng RTT của vài gói để kết luận hiệu năng hoặc thời gian hội tụ.
+
+Điều khiển: Kết thúc clip. Trace UDP kết thúc Type 3 Code 3 tại đích là bình thường. Mô hình này không có đường dữ liệu dự phòng.
+
+### Slide 34 Lab 3 mô hình Syslog
+
+Mốc mục tiêu 11:15 đến 11:25 — 10 giây.
+
+Lời nói: Lab thứ ba tập trung Syslog từ ba router và một switch về máy chạy CAMS qua UDP, cổng 5514.
+
+Điều khiển: Mở clip Lab 3 nếu có. Đây là lab của Quốc Việt; không nói tất cả lab cùng một EVE-NG.
+
+### Slide 35 Lab 3 cấu hình nguồn gửi
+
+Mốc mục tiêu 11:25 đến 11:40 — 15 giây.
+
+Lời nói: CAMS khai báo đích nhận, cổng và mức Notifications theo nhóm, đồng thời đặt source interface cho từng thiết bị. Preview giúp kiểm tra chính sách chung và cổng nguồn riêng trước khi triển khai.
+
+Điều khiển: Notifications gồm severity 0 đến 5, không phải chỉ mức 5. Địa chỉ 192.168.122.1 là đích của môi trường này.
+
+### Slide 36 Lab 3 log thiết bị
+
+Mốc mục tiêu 11:40 đến 11:55 — 15 giây.
+
+Lời nói: Khi tạo sự kiện thay đổi trạng thái cổng, bản tin xuất hiện trong System Logs với thiết bị nguồn, mức nghiêm trọng, mã sự kiện và nội dung. Nhóm đối chiếu nội dung này với sự kiện đã tạo trên thiết bị.
+
+Điều khiển: Chỉ LINK / 3 Error. LINK là mã phân hệ Cisco; facility chuẩn được tính từ PRI.
+
+### Slide 37 Lab 3 email
+
+Mốc mục tiêu 11:55 đến 12:10 — 15 giây.
+
+Lời nói: Hai thư minh họa mức Warning từ R1 và Error từ SW1. Thư giữ thông tin nguồn và nội dung sự kiện để người nhận đối chiếu. Các sự kiện này do nhóm chủ động tạo để kiểm chứng luồng cảnh báo.
+
+Điều khiển: Ảnh trái LV4, phải LV3. Không gọi mọi LINK up/down là tấn công. Không lấy chênh lệch giờ chưa đồng bộ để tính độ trễ email.
+
+### Slide 38 Lab 4 mô hình ACL
+
+Mốc mục tiêu 12:10 đến 12:20 — 10 giây.
+
+Lời nói: Lab cuối kiểm tra ba chính sách theo VLAN: chặn TCP/23 ở VLAN 10, TCP/80 ở VLAN 20 và ICMP ở VLAN 30, với các đích thử đã xác định.
+
+Điều khiển: Mở clip Lab 4. R1 thực thi ACL, R2 NAT, R3 cung cấp đích .4.1.
+
+### Slide 39 Lab 4 luật ACL
+
+Mốc mục tiêu 12:20 đến 12:35 — 15 giây.
+
+Lời nói: Hai ACL được quản lý trên CAMS. Các luật deny xác định rõ nguồn, đích và giao thức; permit phía sau cho phép phần lưu lượng còn lại. Nhóm kiểm tra thứ tự luật trước khi áp dụng.
+
+Điều khiển: Nếu video hiện deny cuối sau permit any: nó không được chạm tới trong chính sách này. Không gọi đó là dòng đang chặn lưu lượng còn lại.
+
+### Slide 40 Lab 4 binding
+
+Mốc mục tiêu 12:35 đến 12:45 — 10 giây.
+
+Lời nói: Lệnh show trên R1 xác nhận các ACL được gắn chiều vào ở cổng con VLAN 10, 20 và 30. Đây là bước xác minh vị trí thực thi.
+
+Điều khiển: Chỉ inbound ACL. Tên có OUT không quyết định chiều; binding IN mới quyết định.
+
+### Slide 41 Lab 4 lưu lượng bị chặn
+
+Mốc mục tiêu 12:45 đến 13:00 — 15 giây.
+
+Lời nói: HTTP từ VLAN 20 và ICMP từ VLAN 30 bị router từ chối với Type 3 Code 13. Phản hồi này cho thấy từ chối theo chính sách; nhóm dùng thêm lưu lượng được phép làm đối chứng.
+
+Điều khiển: Video TCP -3 -p 80 là thử kết nối TCP tới cổng dịch vụ, không phải tải đầy đủ trang web.
+
+### Slide 42 Lab 4 deny và permit
+
+Mốc mục tiêu 13:00 đến 13:15 — 15 giây.
+
+Lời nói: Log ghi nhận HTTP từ VLAN 20 bị denied, trong khi ICMP từ VLAN 20 và HTTP từ VLAN 30 được permitted. Các trường nguồn, đích và giao thức khớp chính sách. Kết quả cho thấy ACL lọc đúng phạm vi trong phép thử.
+
+Điều khiển: Chỉ hàng denied cuối và hai hàng permitted tương ứng. Không cộng packet count thành số lần tấn công. Kết thúc demo.
+
+### Slide 43 Kết quả đạt được
+
+Mốc mục tiêu 13:30 đến 14:00 — 30 giây.
+
+Lời nói: Qua các kịch bản, nhóm đã xây dựng và kiểm chứng một quy trình quản trị tập trung từ cấu hình đến quan sát kết quả. View & Push hỗ trợ kiểm duyệt lệnh; cấu hình nhóm tổ chức thao tác trên nhiều thiết bị; các phép thử xác nhận cơ chế mạng hoạt động; Syslog và email cung cấp thông tin liên quan đến sự kiện. Đóng góp của nhóm nằm ở thiết kế và hiện thực quy trình tích hợp này trong phạm vi đã thử nghiệm.
+
+Điều khiển: Nêu cả ACL dù mục kiểm chứng trên slide chưa liệt kê. Không nói nghiên cứu tạo ra giao thức bảo mật mới.
+
+### Slide 44 Hạn chế và hướng phát triển
+
+Mốc mục tiêu 14:00 đến 14:40 — 40 giây.
+
+Lời nói: Hệ thống còn giới hạn ở nền tảng Cisco đã thử nghiệm, phụ thuộc định dạng CLI và chưa có rollback tự động khi triển khai gặp lỗi. Nhóm cũng chưa có phép đo tái lập để kết luận thời gian thao tác, khả năng chịu tải hay độ trễ cảnh báo. Vì vậy, hướng ưu tiên là hoàn thiện kiểm soát lỗi và bộ phân tích, bổ sung đánh giá định lượng, rồi mở rộng đa nhà sản xuất và giao thức quản trị. Các hướng như khám phá topology và phân tích bất thường nâng cao sẽ được thực hiện sau.
+
+Điều khiển: Rule cảnh báo hiện có khác với hướng mở rộng rule engine/AI. Hạn chế đo thời gian không ghi trên slide nhưng nên chủ động nêu một câu.
+
+### Slide 45 Kết thúc và tài liệu
+
+Mốc mục tiêu 14:40 đến 15:00 — 20 giây.
+
+Lời nói: Nhóm đã công bố tài liệu hướng dẫn sử dụng để hỗ trợ việc xem lại quy trình và các chức năng. Phần trình bày của nhóm đến đây là kết thúc. Nhóm em xin cảm ơn quý thầy cô đã theo dõi và xin tiếp nhận các câu hỏi, góp ý của hội đồng.
+
+Điều khiển: Dừng ở trang QR. Nhìn hội đồng, không tự mở website. Nếu chưa xác nhận trang đang truy cập được thì nói tài liệu được giới thiệu tại đường dẫn trên slide.
+
+## Điều khiển video trong phần demo
+
+Ở slide 21, mở clip Lab 1 và nói các câu của slide 21–29 theo các cảnh. Sau clip, chuyển thẳng slide 30; chỉ mở lại ảnh 27–29 nếu clip không có hoặc hội đồng yêu cầu. Làm tương tự: clip Lab 2 thay phần trình bày 30–33, clip Lab 3 thay 34–37, clip Lab 4 thay 38–42.
+
+Nếu chỉ một số lab có clip, lab còn lại trình bày bằng ảnh đúng các câu tương ứng. Có thể mở video thành file riêng hoặc chèn vào deck, nhưng phải thử trên máy trình chiếu trước. Một thành viên phụ trách bấm và âm lượng; nếu có tiếng thuyết minh sẵn, tránh nói chồng lên giọng trong clip.
+
+Nếu video không mở trong khoảng 10 giây: nói “Nhóm xin dùng các ảnh kết quả đã chuẩn bị để tiếp tục đối chiếu”, rồi chuyển sang slide của lab đó. Nếu câu hỏi yêu cầu kiểm thử trực tiếp, mở môi trường chỉ khi sẵn sàng và phù hợp thời gian; không tự nhận đây là demo trực tiếp khi đang chiếu bản quay.
+
+## Bản rút gọn khi bị nhắc thời gian
+
+Nếu đến phút 7 mà chưa vào slide 19: gom lời cho slide 17–20 thành “CAMS hỗ trợ nhiều mô-đun nhưng hôm nay nhóm tập trung vào bốn kịch bản có bằng chứng. Hệ thống tổ chức cấu hình theo nhóm, kết hợp kiểm duyệt lệnh và quan sát nhật ký. Sau đây là phần thực nghiệm.”
+
+Nếu còn 3 phút cho thực nghiệm: Lab 1 chỉ giữ IP đúng/sai, log và phục hồi; Lab 2 giữ neighbor/route và ping; Lab 3 giữ sự kiện/log/email; Lab 4 giữ một cặp deny/permit cùng đích và log. Bỏ việc đọc ô nhập và bảng IP; không bỏ cả kết luận lẫn hạn chế.
+
+Nếu còn 30 giây để kết thúc: “Nhóm đã kiểm chứng quy trình cấu hình và quan sát tập trung trong bốn kịch bản Cisco IOS trên EVE-NG. Hệ thống còn giới hạn nền tảng, bộ phân tích CLI và chưa có rollback tự động hoặc đánh giá tải lớn. Nhóm sẽ ưu tiên hoàn thiện độ tin cậy và đánh giá định lượng. Nhóm em xin cảm ơn hội đồng.”
+
+## Các điểm nên sửa hoặc nói rõ trước khi trình bày
+
+Các mục dưới đây là ghi chú rà soát; chưa sửa trực tiếp bản Canva hoặc PDF của nhóm.
+
+Slide 3: Giới hạn câu thiếu lưu vết cho trường hợp quản trị thủ công chưa có công cụ lưu vết; CLI vẫn có thể kết hợp Git và backup.
+
+Slide 15: Vai trò hai DB là phân chia chính; dữ liệu quan sát được hỗ trợ có thể được đồng bộ vào bảng nghiệp vụ.
+
+Slide 18: Đổi luôn giữ cấu hình mới nhất thành lưu cấu hình tại lần thu thập gần nhất.
+
+Slide 20: Phân biệt facility chuẩn Syslog và mã phân hệ Cisco. LINK/SEC không phải facility chuẩn.
+
+Slide 31: Sửa lỗi chữ ViewView & Push thành View & Push.
+
+Slide 32: Caption đang lặp thao tác chọn nhóm; nên đổi thành xác nhận láng giềng và tuyến OSPF trên R1.
+
+Slide 35: Sửa cấu hìnhhình thành cấu hình.
+
+Slide 37: Hai email là sự kiện kiểm thử Warning và Error; không diễn giải cả hai là tấn công hoặc đo độ trễ.
+
+Slide 39: Video mới có deny cuối sau permit any; chuẩn bị giải thích luật không được chạm tới, không buộc video trùng số luật của ảnh cũ.
+
+Slide 43: Mục kiểm chứng nên nhắc thêm ACL. Danh sách chức năng đã xây dựng không đồng nghĩa đã test đầy đủ.
+
+Slide 44: AI/rule engine nâng cao là hướng phát triển; không phủ nhận quy tắc cảnh báo DAI hiện có.
+
+## Trả lời phản biện
+
+Mỗi câu trả lời nên đi theo kết luận, bằng chứng và giới hạn. Trả lời ý được hỏi trước, khoảng 20–40 giây; giải thích thêm khi hội đồng yêu cầu. Nếu chưa kiểm chứng, nói rõ rồi quay về kết quả đã có.
+
+### Câu 1 Điểm mới là gì so với Ansible Nornir hoặc các hệ thống thương mại
+
+Trả lời: Đề tài tập trung vào quy trình trực quan kết hợp nhập cấu hình, xem trước CLI, triển khai theo thiết bị và đối chiếu thông tin vận hành. Đóng góp của nhóm là thiết kế, hiện thực và kiểm chứng quy trình tích hợp đó trong CAMS. Nhóm chưa có cơ sở khẳng định vượt các hệ thống hiện có về quy mô hoặc hiệu năng. Ansible và Nornir cũng có thể được dùng để xây quy trình tương tự; nhóm không tuyên bố CAMS là công cụ duy nhất làm được.
+
+Bằng chứng hoặc lưu ý: Mở slide 4, 16, 19. Slide hiện chưa có bảng đối chiếu giải pháp; không bịa kết quả benchmark.
+
+### Câu 2 Chỉ ghép thư viện và sinh lệnh thì nghiên cứu nằm ở đâu
+
+Trả lời: Các thư viện cung cấp nền tảng, còn nhóm thực hiện mô hình dữ liệu cấu hình, phân chia mô-đun, ánh xạ tham số sang cú pháp IOS, tổ chức tác vụ và thiết kế các phép kiểm chứng. Kết quả nghiên cứu trong phạm vi đề tài là thiết kế và đánh giá hệ thống ứng dụng; nhóm chưa đề xuất thuật toán hoặc giao thức mạng mới.
+
+Bằng chứng hoặc lưu ý: Slide 7, 14, 16 và các phép đối chứng lab.
+
+### Câu 3 Tại sao CAMS tốt hơn gõ CLI
+
+Trả lời: Với kịch bản cấu hình theo nhóm, CAMS tập trung thông tin và cho phép người dùng rà soát tham số trên giao diện. Đây là lợi ích về tổ chức thao tác mà nhóm quan sát được. Nhóm chưa đo thời gian tái lập hoặc khảo sát người dùng nên chưa đưa ra tỷ lệ nhanh hơn hay kết luận tốt hơn cho mọi công việc. CLI vẫn hữu ích cho chẩn đoán sâu và trường hợp ngoài biểu mẫu.
+
+Bằng chứng hoặc lưu ý: Slide 19 và Lab 2. Nếu hỏi thao tác click có nhiều hơn không: tùy kịch bản, không trộn click và số lệnh thành cùng một đơn vị.
+
+### Câu 4 Tại sao dùng EVE NG mà chưa thử thiết bị thật
+
+Trả lời: EVE-NG giúp nhóm kiểm soát và lặp lại cấu hình Cisco IOS trong điều kiện có thể triển khai nhiều thiết bị. Các kết quả phản ánh môi trường mô phỏng đã thử. Nhóm cần thử trên thiết bị vật lý để đánh giá khác biệt về phần cứng, tài nguyên và tải thực tế.
+
+Bằng chứng hoặc lưu ý: Slide 6 và 44.
+
+### Câu 5 An ninh mạng do CAMS hay thiết bị thực hiện
+
+Trả lời: Router và switch thực thi ACL, DHCP Snooping và DAI. CAMS hỗ trợ cấu hình, triển khai, tiếp nhận nhật ký và hiển thị hoặc tổng hợp cảnh báo. Nhóm không xây dựng một thiết bị lọc gói thay thế router hay switch.
+
+Bằng chứng hoặc lưu ý: Slide 20 và Lab 1, Lab 4.
+
+### Câu 6 DAI có chứng minh chống tấn công ARP spoofing hoàn chỉnh không
+
+Trả lời: Bài thử xác nhận ARP có ánh xạ IP–MAC không khớp bảng DHCP Snooping bị DAI loại bỏ. Nhóm kiểm tra bộ đếm, log và phục hồi kết nối. Việc đổi IP tạo sai lệch có kiểm soát; nhóm chưa chứng minh một cuộc MITM hoàn chỉnh hoặc đo khả năng chống mọi biến thể ARP spoofing.
+
+Bằng chứng hoặc lưu ý: Slide 26 đến 29.
+
+### Câu 7 Tại sao gateway phải DAI trust và máy khách không trust
+
+Trả lời: Gateway R1 dùng địa chỉ tĩnh, còn bài thử kiểm tra máy khách bằng binding DHCP. Nhóm đặt cổng nối gateway tin cậy và cổng máy khách không tin cậy. Trên cổng không tin cậy, DAI kiểm tra ARP theo thông tin liên kết hợp lệ. Việc đặt trust phải dựa trên vị trí và mức tin cậy của cổng.
+
+Bằng chứng hoặc lưu ý: Slide 25. DHCP trust và ARP trust là hai thuộc tính khác nhau.
+
+### Câu 8 Máy tên FAKE được nhận IP có phải cơ chế bảo mật thất bại
+
+Trả lời: Snooping dựa vào trạng thái tin cậy của cổng, không dựa vào tên thiết bị. Trong pha đối chứng, nhóm chủ động chuyển trust sang cổng FAKE_DHCP để xác nhận nguồn được chấp nhận thay đổi theo chính sách. Trong vận hành thật, cổng của nguồn không hợp lệ phải giữ không tin cậy.
+
+Bằng chứng hoặc lưu ý: Slide 23; DAI tắt trong pha đối chiếu DHCP.
+
+### Câu 9 Ping thất bại có thể do routing hoặc cấu hình sai chứ không phải DAI
+
+Trả lời: Nhóm không kết luận chỉ từ ping. Phép đối chứng ban đầu thành công, sau đổi IP có log SW_DAI đúng cổng và IP, bộ đếm ARP dropped tăng, rồi phục hồi DHCP thì ping hoạt động lại. Chuỗi này gắn việc mất kết nối với kiểm tra DAI trong kịch bản.
+
+Bằng chứng hoặc lưu ý: Slide 27, 28, 29.
+
+### Câu 10 Tại sao switch ghi 9 drops nhưng CAMS tổng hợp 5 ARP
+
+Trả lời: Bộ đếm switch là số ARP bị loại bỏ trong khoảng quan sát của thiết bị. Cảnh báo CAMS tổng hợp những sự kiện log đã nhận tại thời điểm cảnh báo. Một log có thể ghi nhiều ARP; hai giá trị khác nhau về phạm vi và thời điểm, nên không bắt buộc bằng nhau. Không có đủ dữ liệu để suy ra tỷ lệ mất log từ hai con số đó.
+
+Bằng chứng hoặc lưu ý: Slide 28; 9 là ARP, không phải gói ICMP hoặc DHCP.
+
+### Câu 11 OSPF có dự phòng hoặc đã đo hội tụ chưa
+
+Trả lời: Mô hình đang trình bày kiểm chứng hình thành láng giềng, học tuyến và kết nối giữa LAN. Chuỗi R3–R4–R5 không có đường dữ liệu thay thế nên không chứng minh chuyển tuyến dự phòng. Nhóm chưa đo thời gian hội tụ tái lập.
+
+Bằng chứng hoặc lưu ý: Slide 30 đến 33.
+
+### Câu 12 Vì sao OSPF không chạy trên mạng quản trị
+
+Trả lời: Nhóm giới hạn OSPF cho mạng nghiệp vụ của bài thử để không đưa mạng quản trị vào miền định tuyến đang đánh giá. Các thiết bị vẫn có kết nối quản trị cho CAMS; kết nối đó không được tính là đường chuyển tiếp nghiệp vụ giữa các LAN.
+
+Bằng chứng hoặc lưu ý: Slide 30 và 31.
+
+### Câu 13 OSPF neighbor 2 WAY có phải lỗi không
+
+Trả lời: Trên mạng broadcast, hai DROTHER có thể duy trì 2-WAY bình thường, còn adjacency FULL hình thành với DR và BDR. Cần đọc vai trò và bảng tuyến thực tế. Trong ảnh của lần thử này, láng giềng trên R1 là FULL; nhóm không lấy tất cả neighbor FULL làm quy tắc cho mọi topology.
+
+Bằng chứng hoặc lưu ý: Slide 32.
+
+### Câu 14 Trace báo Destination port unreachable thì sao lại thành công
+
+Trả lời: UDP traceroute gửi tới cổng đích không có dịch vụ lắng nghe. ICMP Type 3 Code 3 từ đúng máy đích là dấu hiệu probe đã tới đích. Nó khác Type 3 Code 13 trong bài ACL, là từ chối theo chính sách.
+
+Bằng chứng hoặc lưu ý: Slide 33 so với 41.
+
+### Câu 15 Tại sao dùng UDP 5514 thay vì 514
+
+Trả lời: 5514 là cổng thu được chọn cho ứng dụng; phải cấu hình khớp ở cả nguồn gửi và bộ nhận. Nó giúp tiến trình không cần quyền liên kết cổng thấp như 514 trong thiết lập thông thường trên Linux. Đây không phải thay đổi cổng chuẩn của Syslog. UDP vẫn có khả năng mất hoặc đảo thứ tự bản tin; nhóm chưa đo độ tin cậy dưới tải.
+
+Bằng chứng hoặc lưu ý: Slide 34 và 35.
+
+### Câu 16 Facility có phải LINK LINEPROTO hoặc SEC không
+
+Trả lời: Không. LINK, LINEPROTO và SEC là mã phân hệ trong bản tin Cisco. Facility chuẩn Syslog lấy từ PRI: facility là phần nguyên của PRI chia 8; severity là PRI modulo 8. Ví dụ PRI 190 tương ứng local7, facility 23 và severity 6.
+
+Bằng chứng hoặc lưu ý: Slide 20, 36, 42. Chỉnh cách nói dù chữ nhóm chức năng facility trên slide chưa thật chính xác.
+
+### Câu 17 Notifications là chỉ gửi mức 5 phải không
+
+Trả lời: Không, ngưỡng Notifications gửi các mức severity từ 0 đến 5. ACL tạo bản tin SEC-6 nên trong Lab ACL phải đặt ngưỡng ít nhất Informational mức 6. Giá trị severity càng nhỏ thì mức nghiêm trọng càng cao.
+
+Bằng chứng hoặc lưu ý: Slide 35, 42; không dùng policy mức 5 của Lab Syslog cho log ACL mức 6.
+
+### Câu 18 Email Warning có nghĩa là đã phát hiện một cuộc tấn công không
+
+Trả lời: Chưa. Các thư minh họa giữ severity và nội dung sự kiện do nhóm chủ động tạo. LINK up/down hoặc một bản tin USERLOG_WARNING không tự chứng minh có tấn công. Cảnh báo giúp người quản trị biết và điều tra; nhóm chưa kiểm chứng một hệ thống phát hiện xâm nhập đầy đủ.
+
+Bằng chứng hoặc lưu ý: Slide 37. Thư trái là sự kiện thử USERLOG_WARNING, phải là LINK-3-UPDOWN.
+
+### Câu 19 Email chậm bao lâu hoặc nhận đủ bao nhiêu phần trăm
+
+Trả lời: Nhóm có bằng chứng thư nhận được gắn với sự kiện nguồn, nhưng chưa đo độ trễ hay tỷ lệ chuyển thư tái lập. Một số đồng hồ thiết bị chưa đồng bộ; không dùng chênh lệch timestamp trong ảnh để kết luận độ trễ.
+
+Bằng chứng hoặc lưu ý: Slide 37.
+
+### Câu 20 Vì sao ACL tên OUT nhưng lại gắn IN
+
+Trả lời: Tên ACL chỉ là định danh. Hướng xử lý được quyết định bởi binding ip access-group ... in hoặc out. Trong kịch bản, nhóm gắn chiều vào trên các subinterface VLAN để xử lý lưu lượng từ máy khách ngay khi đi vào R1.
+
+Bằng chứng hoặc lưu ý: Slide 40.
+
+### Câu 21 Đích ACL NO TELNET R2 có thật là R2 không
+
+Trả lời: Theo quy hoạch hiện tại, 192.168.12.2 là cổng của R1. Tên ACL được giữ từ dữ liệu thử nghiệm và chưa phản ánh đúng thiết bị đích. Nhóm diễn giải kết quả theo IP và TCP/23 thực tế, không suy luận từ tên ACL.
+
+Bằng chứng hoặc lưu ý: Slide 38, 39. Acknowledge lệch tên ngắn gọn, không cố bảo vệ tên sai.
+
+### Câu 22 Deny sau permit any dùng để làm gì
+
+Trả lời: Template có dòng deny cuối kèm log để ghi nhận lưu lượng không khớp những luật trước. Trong ACL này, permit ip any any đã khớp mọi gói IP còn lại, nên deny cuối không được chạm tới. Nó dư thừa trong chính sách hiện tại và không tạo thêm tác dụng chặn.
+
+Bằng chứng hoặc lưu ý: Slide 39 hoặc video mới có 3 và 4 luật; ảnh cũ có thể chỉ hiển thị luật nghiệp vụ.
+
+### Câu 23 Chỉ thấy chặn có thể là mất đường hoặc dịch vụ không chạy
+
+Trả lời: Nhóm dùng phép đối chứng cùng đích: VLAN 20 HTTP bị chặn nhưng ICMP được phép; VLAN 30 ICMP bị chặn nhưng TCP/80 được phép. Log khớp nguồn, đích và giao thức, đồng thời Type 3 Code 13 xác nhận router từ chối theo chính sách.
+
+Bằng chứng hoặc lưu ý: Slide 41 và 42. Log counter packet không phải số lần tấn công.
+
+### Câu 24 Push nhóm có rollback hoặc bảo đảm cùng thành công không
+
+Trả lời: Chưa có rollback tự động toàn nhóm. Kết quả cần được xem theo từng host. Host Lock hạn chế thao tác chồng lên một thiết bị, nhưng không biến triển khai nhiều thiết bị thành một giao dịch nguyên tử. Nếu một host lỗi, cần đối chiếu trạng thái thực tế rồi xử lý và thử lại.
+
+Bằng chứng hoặc lưu ý: Slide 19 và 44. Không hứa all or nothing.
+
+### Câu 25 Thông tin xác thực được bảo vệ thế nào và tại sao còn Telnet
+
+Trả lời: Mã nguồn có cơ chế AES-256-GCM để mã hóa thông tin xác thực; chế độ dự án có passphrase dùng Argon2id để dẫn xuất khóa. Chế độ mở có nhánh dẫn xuất hoặc fallback không dựa trên bí mật người dùng nên không có mức bảo vệ tương đương dự án có passphrase. Mã hóa dữ liệu lưu trữ cũng không thay thế quản lý khóa và phân quyền. Đối với đường truyền, SSH là lựa chọn ưu tiên; Telnet truyền không mã hóa và chỉ phù hợp môi trường lab có kiểm soát. RBAC và Secret Vault nằm ngoài phạm vi hiện tại.
+
+Bằng chứng hoặc lưu ý: Slide 6. Không khẳng định có RBAC, vault, hoặc bảo mật tuyệt đối.
+
+### Câu 26 Tải được running config sao ACL có lúc không lên giao diện
+
+Trả lời: Thu thập file, phân tích nội dung và ánh xạ dữ liệu vào biểu mẫu là ba bước khác nhau. Giao diện có thể trống khi mở sai loại ACL hoặc khi phần import chưa hỗ trợ dữ liệu đó. Nhóm đã rà soát vấn đề trong quá trình chuẩn bị, và cần kiểm tra cả luật lẫn binding với show trên thiết bị. Trạng thái giao diện hiện tại không đủ chứng minh mọi cú pháp IOS đã đồng bộ hoàn chỉnh.
+
+Bằng chứng hoặc lưu ý: Nói đúng bản sửa thực tế nhóm đã thực hiện. Chưa có bằng chứng sửa triệt để thì không gọi đã hoàn tất importer.
+
+### Câu 27 SQLite và C plus plus có bảo đảm chịu tải lớn không
+
+Trả lời: Không thể suy từ công nghệ sang kết quả chịu tải. SQLite phù hợp dữ liệu cục bộ của ứng dụng trong phạm vi hiện tại. Bộ thu C++ là lựa chọn triển khai, nhưng nhóm chưa có benchmark đủ để kết luận thông lượng hoặc giới hạn tải. Cần thử tải có phương pháp và theo dõi mất bản tin, tài nguyên và thời gian xử lý.
+
+Bằng chứng hoặc lưu ý: Slide 15, 43, 44.
+
+### Câu 28 Đóng góp cá nhân từng thành viên là gì
+
+Trả lời: Trả lời theo công việc thực tế mỗi người đã làm: mô-đun, tài liệu, tích hợp hoặc kịch bản kiểm thử. Có thể nói các Lab 1, 2 và ACL do Kiên thực hiện, Syslog theo tài liệu do Quốc Việt thực hiện; phần phân công lập trình khác phải do nhóm xác nhận. Không gán vai trò tác giả kiến trúc hoặc mã nguồn khi chưa có thông tin.
+
+Bằng chứng hoặc lưu ý: Thống nhất câu trả lời trong nhóm trước khi lên. Không dùng đây làm lời đáp cố định nếu người trình bày khác.
+
+## Cách xử lý câu hỏi khó
+
+Khi chưa hiểu: “Thầy cho em xác nhận lại, câu hỏi đang tập trung vào cách triển khai hay kết quả kiểm chứng của chức năng này ạ?”
+
+Khi chưa biết: “Phần đó nhóm chưa kiểm chứng nên em chưa có đủ cơ sở kết luận. Kết quả hiện tại xác nhận được…” Sau đó nói đúng bằng chứng liên quan, không tự suy ra kết quả mới.
+
+Khi bị chỉ ra lỗi đúng: “Dạ, nhận xét của thầy đúng ở điểm đó. Trong bản hiện tại, giới hạn là… Nhóm sẽ điều chỉnh cách diễn giải hoặc hoàn thiện chức năng này.” Nếu chỉ sai cách ghi tên, phân biệt rõ tên sai với kết quả lọc theo IP.
+
+Khi cần người khác trả lời: “Phần này bạn trong nhóm trực tiếp phụ trách, em xin mời bạn bổ sung.” Người trả lời sau đi thẳng vào nội dung, không kể lại toàn bộ phần trước.
+
+Khi không có số đo: “Nhóm chưa có số đo tái lập cho chỉ tiêu này. Em xin không đưa ra tỷ lệ từ cảm nhận thao tác. Hiện nhóm có bằng chứng chức năng ở các phép thử sau…”
+
+## Checklist trước khi lên trình bày
+
+1. Chạy thử slide và video trên máy sẽ trình chiếu; kiểm tra chữ terminal, tỷ lệ màn hình, âm lượng và đường dẫn file.
+2. Lưu deck và bốn clip trên máy cùng một USB dự phòng; giữ bản ảnh để tiếp tục nếu clip lỗi.
+3. Tập một lượt có bấm giờ. Ghi lại thời điểm vào slide 21 và 43; điều chỉnh độ dài lời nói thay vì chỉ đọc nhanh hơn.
+4. Chốt người nói, người bấm và người trả lời các phần lập trình, routing, Syslog và an ninh.
+5. Nhớ bốn chuỗi bằng chứng: DAI binding → ARP drop → log → phục hồi; OSPF neighbor → route → ping/trace; Syslog sự kiện → log → email; ACL binding → deny/permit → log.
+6. Nhớ ba giới hạn: chưa benchmark thời gian hoặc tải; chưa rollback tự động toàn nhóm; chỉ kiểm chứng nền tảng và cú pháp đã thử.
+7. Hít thở chậm trước câu đầu, nói câu mở đầu đã thuộc. Khi được hỏi, chờ hết câu rồi trả lời. Nếu có nhiều ý, xin trả lời lần lượt.
+
+## Nguồn đối chiếu
+
+Bản slide CAMS gồm 45 trang, do nhóm cung cấp ngày 10 tháng 10 năm 2026. Kết quả lab và các giới hạn đối chiếu với nội dung báo cáo trong dự án. Video chưa được đọc trong lần soạn này. Tài liệu này là kịch bản tập nói và chuẩn bị hỏi đáp, không phải bổ sung kết quả thực nghiệm mới.

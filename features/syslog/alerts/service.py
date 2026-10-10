@@ -20,6 +20,31 @@ from .settings import AlertConfiguration, AlertSettingsStore
 EmailSender = Callable[[AlertConfiguration, list[dict[str, Any]], str, bool], str]
 
 
+class SmtpDeliveryError(RuntimeError):
+    """Keep the failing SMTP stage without storing or logging credentials."""
+
+    def __init__(self, config: AlertConfiguration, stage: str, cause: Exception) -> None:
+        self.endpoint = f"{config.smtp_host}:{config.smtp_port}"
+        self.security = config.transport_security
+        self.stage = stage
+        self.cause = cause
+        super().__init__(f"SMTP {stage} failed ({type(cause).__name__})")
+
+
+class PartialRecipientRefusal(smtplib.SMTPRecipientsRefused):
+    def __init__(self, recipients: dict, total: int) -> None:
+        super().__init__(recipients)
+        self.total = total
+
+
+def _close_smtp(server: smtplib.SMTP) -> None:
+    try:
+        server.close()
+    except Exception:
+        # Cleanup must never hide the delivery result or its original error.
+        pass
+
+
 def send_smtp_message(
     config: AlertConfiguration,
     records: list[dict[str, Any]],
@@ -35,33 +60,131 @@ def send_smtp_message(
     message.set_content(text_body)
     message.add_alternative(html_body, subtype="html")
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(
-        config.smtp_host, config.smtp_port, timeout=20, context=context
-    ) as server:
+    server = None
+    stage = "connection"
+    try:
+        if config.transport_security == "ssl":
+            server = smtplib.SMTP_SSL(
+                config.smtp_host, config.smtp_port, timeout=20, context=context
+            )
+        else:
+            server = smtplib.SMTP(config.smtp_host, config.smtp_port, timeout=20)
+            stage = "STARTTLS"
+            server.ehlo()
+            server.starttls(context=context)
+            server.ehlo()
+        stage = "authentication"
         server.login(config.sender_email, config.sender_app_password)
-        server.send_message(message)
+        stage = "delivery"
+        refused = server.send_message(message)
+        if refused:
+            raise PartialRecipientRefusal(refused, len(config.recipients))
+    except Exception as exc:
+        if server is not None:
+            _close_smtp(server)
+        raise SmtpDeliveryError(config, stage, exc) from exc
+    # SMTP has already accepted the message. A QUIT error cannot undo delivery.
+    try:
+        server.quit()
+    except OSError:
+        pass
+    finally:
+        _close_smtp(server)
     return subject
 
 
 def delivery_error_message(exc: BaseException, language: str) -> str:
     vietnamese = language == "vi"
+    prefix = ""
+    if isinstance(exc, SmtpDeliveryError):
+        stages = {
+            "connection": "kết nối", "STARTTLS": "STARTTLS",
+            "authentication": "đăng nhập", "delivery": "gửi thư",
+        }
+        stage = stages.get(exc.stage, exc.stage) if vietnamese else exc.stage
+        security = "SSL/TLS" if exc.security == "ssl" else "STARTTLS"
+        prefix = f"{exc.endpoint} ({security}, {stage}): "
+        exc = exc.cause
+
+    def result(en: str, vi: str) -> str:
+        return prefix + (vi if vietnamese else en)
+
+    def codes(recipients: dict) -> str:
+        return ", ".join(sorted({str(value[0]) for value in recipients.values()}))
+
     if isinstance(exc, smtplib.SMTPAuthenticationError):
-        return (
-            "Đăng nhập thất bại. Kiểm tra App Password và đảm bảo tài khoản đã bật xác minh 2 bước."
-            if vietnamese
-            else "Sign-in failed. Check the App Password and make sure 2-Step Verification is enabled."
+        return result(
+            f"Sign-in failed (SMTP {exc.smtp_code}). Check the App Password and 2-Step Verification.",
+            f"Đăng nhập thất bại (SMTP {exc.smtp_code}). Kiểm tra App Password và xác minh 2 bước.",
         )
-    if isinstance(exc, (socket.timeout, TimeoutError, ConnectionError, OSError)):
-        return (
-            "Không kết nối được tới máy chủ SMTP. Kiểm tra mạng, máy chủ và cổng."
-            if vietnamese
-            else "Could not connect to the SMTP server. Check the network, server, and port."
+    if isinstance(exc, ssl.SSLCertVerificationError):
+        return result(
+            "TLS certificate verification failed. Check the computer clock, trusted certificates, and network TLS inspection.",
+            "Không xác minh được chứng thư TLS. Kiểm tra giờ máy, chứng thư tin cậy và proxy kiểm tra TLS của mạng.",
         )
-    return (
-        f"Gửi email thất bại: {exc}"
-        if vietnamese
-        else f"Email delivery failed: {exc}"
-    )
+    if isinstance(exc, ssl.SSLError):
+        return result(
+            "TLS negotiation failed. Use SSL/TLS for port 465 or STARTTLS for port 587.",
+            "Bắt tay TLS thất bại. Dùng SSL/TLS cho cổng 465 hoặc STARTTLS cho cổng 587.",
+        )
+    if isinstance(exc, PartialRecipientRefusal):
+        accepted = exc.total - len(exc.recipients)
+        return result(
+            f"Email accepted for {accepted} of {exc.total} recipients; others were refused (SMTP {codes(exc.recipients)}).",
+            f"Máy chủ nhận thư cho {accepted}/{exc.total} người nhận; các địa chỉ còn lại bị từ chối (SMTP {codes(exc.recipients)}).",
+        )
+    if isinstance(exc, smtplib.SMTPRecipientsRefused):
+        return result(
+            f"All recipient addresses were refused (SMTP {codes(exc.recipients)}). Check the recipients and sending policy.",
+            f"Tất cả địa chỉ nhận bị từ chối (SMTP {codes(exc.recipients)}). Kiểm tra người nhận và chính sách gửi thư.",
+        )
+    if isinstance(exc, smtplib.SMTPSenderRefused):
+        return result(
+            f"Sender address was refused (SMTP {exc.smtp_code}). Check the sender account and sending permissions.",
+            f"Địa chỉ gửi bị từ chối (SMTP {exc.smtp_code}). Kiểm tra tài khoản và quyền gửi thư.",
+        )
+    if isinstance(exc, smtplib.SMTPDataError):
+        return result(
+            f"SMTP server rejected the email (SMTP {exc.smtp_code}). Check sending limits and server policy.",
+            f"Máy chủ từ chối thư (SMTP {exc.smtp_code}). Kiểm tra hạn mức và chính sách gửi thư.",
+        )
+    if isinstance(exc, smtplib.SMTPNotSupportedError):
+        return result(
+            "SMTP server does not support the required STARTTLS or authentication method. Check connection security and port.",
+            "Máy chủ không hỗ trợ STARTTLS hoặc cách đăng nhập yêu cầu. Kiểm tra chế độ bảo mật và cổng.",
+        )
+    if isinstance(exc, smtplib.SMTPResponseException):
+        return result(
+            f"SMTP server refused the request (SMTP {exc.smtp_code}). Check server availability and sending policy.",
+            f"Máy chủ từ chối yêu cầu (SMTP {exc.smtp_code}). Kiểm tra trạng thái máy chủ và chính sách gửi thư.",
+        )
+    if isinstance(exc, smtplib.SMTPServerDisconnected):
+        return result(
+            "SMTP server closed the connection. Check the network and connection security, then retry.",
+            "Máy chủ SMTP đóng kết nối. Kiểm tra mạng và chế độ bảo mật, rồi thử lại.",
+        )
+    if isinstance(exc, smtplib.SMTPException):
+        return result("SMTP protocol error. Check server capabilities and settings.",
+                      "Lỗi giao thức SMTP. Kiểm tra khả năng máy chủ và cấu hình.")
+    if isinstance(exc, socket.gaierror):
+        return result("DNS could not resolve the SMTP server. Check its hostname and DNS/network settings.",
+                      "DNS không phân giải được máy chủ SMTP. Kiểm tra tên máy chủ, DNS và mạng.")
+    if isinstance(exc, (socket.timeout, TimeoutError)):
+        return result(
+            "SMTP operation timed out. The network may block the port; for Gmail, try port 587 with STARTTLS.",
+            "Thao tác SMTP hết thời gian chờ. Mạng có thể chặn cổng; với Gmail, thử cổng 587 và STARTTLS.",
+        )
+    if isinstance(exc, ConnectionRefusedError):
+        return result("SMTP connection was refused. Check the server, port, and firewall.",
+                      "Kết nối SMTP bị từ chối. Kiểm tra máy chủ, cổng và tường lửa.")
+    if isinstance(exc, OSError):
+        code = f" (OS {exc.errno})" if exc.errno is not None else ""
+        return result(
+            f"SMTP network operation failed{code}. Check the network, server, port, and firewall.",
+            f"Thao tác mạng SMTP thất bại{code}. Kiểm tra mạng, máy chủ, cổng và tường lửa.",
+        )
+    return result(f"Email delivery failed ({type(exc).__name__}).",
+                  f"Gửi email thất bại ({type(exc).__name__}).")
 
 
 def test_record(language: str = "en") -> dict[str, Any]:
