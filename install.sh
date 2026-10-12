@@ -110,7 +110,7 @@ if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ] && ! command -v uv >/dev/null 2>&1
     exit 1
 fi
 if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ] && ! command -v go >/dev/null 2>&1; then
-    echo "ERROR: Go is required to build the gocore automation sidecar." >&2
+    echo "ERROR: Go is required to build CAMS Automation Engine." >&2
     echo "Install Go 1.23 or newer and run ./install.sh again." >&2
     exit 1
 fi
@@ -181,13 +181,13 @@ esac
 } > "$app_dir/.cams-release"
 
 if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ]; then
-    echo "Building the gocore automation sidecar..."
+    echo "Building CAMS Automation Engine..."
     (
         cd "$app_dir/gocore"
         go test ./...
         go build -trimpath \
             -ldflags "-s -w -X main.version=$release_commit" \
-            -o "$app_dir/bin/gocore" ./cmd/gocore
+            -o "$app_dir/bin/cams-automation" ./cmd/gocore
     )
 
     echo "Installing Python dependencies..."
@@ -205,8 +205,10 @@ if [ "${CAMS_INSTALL_SKIP_SETUP:-0}" != "1" ]; then
 fi
 
 ln -sfn "$app_dir/cams-launcher" "$bin_dir/cams"
-if [ -x "$app_dir/bin/gocore" ]; then
-    ln -sfn "$app_dir/bin/gocore" "$bin_dir/gocore"
+if [ -x "$app_dir/bin/cams-automation" ]; then
+    ln -sfn "$app_dir/bin/cams-automation" "$bin_dir/cams-automation"
+    # Compatibility alias for the original foundation CLI name.
+    ln -sfn "$app_dir/bin/cams-automation" "$bin_dir/gocore"
 fi
 install -m 0644 "$SOURCE_ROOT/UI/resources/brand/logo.svg" "$scalable_icons_dir/cams.svg"
 install -m 0644 "$SOURCE_ROOT/UI/resources/brand/logo.png" "$bitmap_icons_dir/cams.png"
@@ -237,8 +239,9 @@ echo
 echo "CAMS was installed successfully."
 echo "  Application menu: CAMS"
 echo "  Command:          $bin_dir/cams"
-if [ -x "$app_dir/bin/gocore" ]; then
-    echo "  Automation CLI:   $bin_dir/gocore (dry-run foundation)"
+if [ -x "$app_dir/bin/cams-automation" ]; then
+    echo "  Automation engine: $bin_dir/cams-automation (dry-run)"
+    echo "  Compatibility CLI: $bin_dir/gocore"
 fi
 echo "  Program files:    $app_dir"
 echo "  User data:        $user_data_dir"

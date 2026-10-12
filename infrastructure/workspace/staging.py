@@ -39,23 +39,28 @@ def workspace_content_signature(root: str | Path) -> ContentSignature:
                         side_metadata.st_mtime_ns,
                     )
                 )
-    backup = workspace / "backup"
-    if backup.is_symlink() or not backup.is_dir():
-        raise InvalidWorkspacePackage("The workspace backup path is invalid.")
-    for path in sorted(backup.rglob("*"), key=lambda item: item.as_posix()):
-        if path.is_symlink():
+    for directory_name in ("backup", "automation"):
+        directory = workspace / directory_name
+        if directory_name == "automation" and not directory.exists():
+            continue
+        if directory.is_symlink() or not directory.is_dir():
             raise InvalidWorkspacePackage(
-                f"Symbolic links are forbidden in workspace backups: {path}."
+                f"The workspace {directory_name} path is invalid."
             )
-        relative = path.relative_to(workspace).as_posix()
-        metadata = path.stat()
-        entries.append(
-            (
-                relative + ("/" if path.is_dir() else ""),
-                0 if path.is_dir() else metadata.st_size,
-                metadata.st_mtime_ns,
+        for path in sorted(directory.rglob("*"), key=lambda item: item.as_posix()):
+            if path.is_symlink():
+                raise InvalidWorkspacePackage(
+                    f"Symbolic links are forbidden in workspace {directory_name}: {path}."
+                )
+            relative = path.relative_to(workspace).as_posix()
+            metadata = path.stat()
+            entries.append(
+                (
+                    relative + ("/" if path.is_dir() else ""),
+                    0 if path.is_dir() else metadata.st_size,
+                    metadata.st_mtime_ns,
+                )
             )
-        )
     return tuple(entries)
 
 

@@ -11,6 +11,7 @@ import (
 
 	"github.com/viet15t12/CAMS/gocore/internal/event"
 	"github.com/viet15t12/CAMS/gocore/internal/protocol"
+	"github.com/viet15t12/CAMS/gocore/internal/rule"
 )
 
 var version = "dev"
@@ -41,6 +42,7 @@ func run(args []string, stdin io.Reader, stdout, stderr io.Writer) error {
 		report := map[string]any{
 			"version": version, "go_version": runtime.Version(),
 			"protocol_version": protocol.Version, "event_schema_version": event.SchemaVersion,
+			"rule_version": rule.Version, "service_name": "CAMS Automation Engine",
 			"mode": "dry-run", "network_mutation": false,
 		}
 		if *jsonOutput {
@@ -74,6 +76,31 @@ func run(args []string, stdin io.Reader, stdout, stderr io.Writer) error {
 		return json.NewEncoder(stdout).Encode(map[string]any{
 			"ok": true, "event_id": value.EventID, "event_type": value.EventType,
 		})
+	case "validate-rule":
+		flags := flag.NewFlagSet("validate-rule", flag.ContinueOnError)
+		flags.SetOutput(stderr)
+		if err := flags.Parse(args[1:]); err != nil {
+			return err
+		}
+		if flags.NArg() > 1 {
+			return errors.New("usage: cams-automation validate-rule [FILE|-]")
+		}
+		reader := stdin
+		if flags.NArg() == 1 && flags.Arg(0) != "-" {
+			file, err := os.Open(flags.Arg(0))
+			if err != nil {
+				return err
+			}
+			defer file.Close()
+			reader = file
+		}
+		value, err := rule.Decode(reader)
+		if err != nil {
+			return err
+		}
+		return json.NewEncoder(stdout).Encode(map[string]any{
+			"ok": true, "rule_id": value.Metadata.ID, "revision": value.Revision,
+		})
 	case "serve":
 		flags := flag.NewFlagSet("serve", flag.ContinueOnError)
 		flags.SetOutput(stderr)
@@ -95,5 +122,5 @@ func run(args []string, stdin io.Reader, stdout, stderr io.Writer) error {
 }
 
 func usage(writer io.Writer) {
-	fmt.Fprintln(writer, "usage: gocore <version|doctor|validate-event|serve> [options]")
+	fmt.Fprintln(writer, "usage: cams-automation <version|doctor|validate-event|validate-rule|serve> [options]")
 }

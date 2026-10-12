@@ -43,6 +43,8 @@ PACKAGE_VERSION = 1
 REQUIRED_DATABASES = ("device_network.db", "info_collected.db")
 MANIFEST_NAME = "manifest.json"
 SNAPSHOT_INDEX_NAME = "snapshots/index.json"
+# Kept at the v1 minimum so older .ntp packages without automation rules still
+# open; new saves add automation/rules through _collect_workspace_directories.
 _DIRECTORY_ENTRIES = ("backup/", "snapshots/")
 _FORBIDDEN_SUFFIXES = ("-wal", "-shm", "-journal", ".tmp", ".lock", ".log")
 _COPY_CHUNK_SIZE = 1024 * 1024
@@ -326,6 +328,14 @@ class WorkspaceSession:
     @property
     def backup_directory(self) -> Path:
         return self.working_directory / "backup"
+
+    @property
+    def automation_directory(self) -> Path:
+        return self.working_directory / "automation"
+
+    @property
+    def automation_rules_directory(self) -> Path:
+        return self.automation_directory / "rules"
 
     @property
     def is_closed(self) -> bool:
@@ -838,8 +848,23 @@ class WorkspacePackageCodec:
                 raise InvalidWorkspacePackage(f"Expected a file entry: {name!r}.")
             return
         root = path.parts[0]
-        if root not in {"backup", "snapshots"}:
+        if root not in {"backup", "snapshots", "automation"}:
             raise InvalidWorkspacePackage(f"Unknown project entry: {name!r}.")
+        if root == "automation":
+            if len(path.parts) == 1 and is_directory:
+                return
+            if len(path.parts) < 2 or path.parts[1] != "rules":
+                raise InvalidWorkspacePackage(f"Unknown automation entry: {name!r}.")
+            if is_directory and len(path.parts) != 2:
+                raise InvalidWorkspacePackage(
+                    f"Nested automation rule directories are forbidden: {name!r}."
+                )
+            if not is_directory and (
+                len(path.parts) != 3 or not name.casefold().endswith(".json")
+            ):
+                raise InvalidWorkspacePackage(
+                    f"Automation rules must be direct JSON files: {name!r}."
+                )
         if any(part.casefold() == ".git" for part in path.parts):
             raise InvalidWorkspacePackage("Git metadata is forbidden in .ntp packages.")
         if not is_directory and name.casefold().endswith(_FORBIDDEN_SUFFIXES):
@@ -1049,8 +1074,10 @@ class WorkspacePackageCodec:
                 raise FileNotFoundError(f"Required workspace database not found: {database}")
         backup = root / "backup"
         snapshots = root / "snapshots"
+        automation_rules = root / "automation" / "rules"
         backup.mkdir(exist_ok=True)
         snapshots.mkdir(exist_ok=True)
+        automation_rules.mkdir(parents=True, exist_ok=True)
         index = root / SNAPSHOT_INDEX_NAME
         if not index.exists():
             index.write_text(
@@ -1066,7 +1093,9 @@ class WorkspacePackageCodec:
         return WorkspaceManifest.from_bytes(path.read_bytes())
 
     def _collect_workspace_files(self, root: Path) -> list[tuple[str, Path]]:
-        allowed_roots = {MANIFEST_NAME, *REQUIRED_DATABASES, "backup", "snapshots"}
+        allowed_roots = {
+            MANIFEST_NAME, *REQUIRED_DATABASES, "backup", "snapshots", "automation",
+        }
         for child in root.iterdir():
             if child.name not in allowed_roots:
                 raise InvalidWorkspacePackage(
@@ -1075,7 +1104,7 @@ class WorkspacePackageCodec:
         files: list[tuple[str, Path]] = []
         for database_name in REQUIRED_DATABASES:
             files.append((database_name, root / database_name))
-        for directory_name in ("backup", "snapshots"):
+        for directory_name in ("backup", "snapshots", "automation"):
             directory = root / directory_name
             if directory.is_symlink() or not directory.is_dir():
                 raise InvalidWorkspacePackage(
@@ -1129,8 +1158,8 @@ class WorkspacePackageCodec:
 
     @staticmethod
     def _collect_workspace_directories(root: Path) -> list[str]:
-        directories = ["backup/", "snapshots/"]
-        for directory_name in ("backup", "snapshots"):
+        directories = ["backup/", "snapshots/", "automation/"]
+        for directory_name in ("backup", "snapshots", "automation"):
             directory = root / directory_name
             for path in sorted(directory.rglob("*"), key=lambda item: item.as_posix()):
                 if path.is_symlink():

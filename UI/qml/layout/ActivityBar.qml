@@ -63,6 +63,10 @@ Rectangle {
         return activityBar.selectItem(5, "compliance")
     }
 
+    function activateAutomation() {
+        return activityBar.selectItem(6, "automation")
+    }
+
     function activateSettings() {
         return activityBar.selectItem(2, "settings")
     }
@@ -173,6 +177,17 @@ Rectangle {
             opacity: 1.0
 
             onClicked: activityBar.activateCompliance()
+        }
+
+        ActivityBarItem {
+            objectName: "automationActivityItem"
+            iconSource: AppAssets.navigationLogs
+            tooltipText: "Automation Rules"
+            enabled: true
+            isActive: activityBar.appMode === "automation"
+            opacity: 1.0
+
+            onClicked: activityBar.activateAutomation()
         }
 
     }

@@ -45,6 +45,8 @@ from app_facade import (
     WindowSettings,
 )
 from features.config_backup import ConfigBackupService
+from features.automation.manager import AutomationManager
+from features.automation.rules import sample_icmp_rule_text
 from features.sftp import SftpController
 from infrastructure.system.virtual_lab import VirtualLabInfo
 from infrastructure.system.desktop_environment import DesktopEnvironmentDetector
@@ -854,9 +856,9 @@ class QmlSmokeTests(unittest.TestCase):
             panel,
             "filteredItems.length",
         ).evaluate()[0]
-        self.assertEqual(filtered_count, 6)
+        self.assertEqual(filtered_count, 7)
         self.assertTrue(
-            self._wait_until(lambda: panel.property("renderedCardCount") == 6)
+            self._wait_until(lambda: panel.property("renderedCardCount") == 7)
         )
 
         cards = [
@@ -865,7 +867,7 @@ class QmlSmokeTests(unittest.TestCase):
                 panel,
                 f"cardAt({index})",
             ).evaluate()[0]
-            for index in range(6)
+            for index in range(7)
         ]
         self.assertTrue(all(card is not None for card in cards))
 
@@ -880,6 +882,60 @@ class QmlSmokeTests(unittest.TestCase):
                 )
         self.assertTrue(any(float(card.property("height")) > 72 for card in cards))
         self.assertEqual(self.warnings, [])
+
+    def test_automation_rule_settings_loads_without_backend(self) -> None:
+        page = self._create("UI/qml/content/AutomationRuleSettings.qml")
+        self.assertEqual(page.property("objectName"), "automationRuleSettings")
+
+        workspace = self._create("UI/qml/features/automation/AutomationWorkspace.qml")
+        self.assertEqual(workspace.property("objectName"), "automationWorkspace")
+        for object_name in (
+            "automationServicePage",
+            "automationRuleFilesPage",
+            "automationRuleEditorPage",
+            "automationActionsPage",
+        ):
+            self.assertIsNotNone(workspace.findChild(QObject, object_name))
+
+    def test_automation_workspace_reload_signals_do_not_recurse(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            info_db = root / "info.db"
+            info_db.touch()
+            manager = AutomationManager(
+                info_db=info_db,
+                rules_dir=root / "rules",
+            )
+            self.engine.rootContext().setContextProperty("automationManager", manager)
+            try:
+                workspace = self._create(
+                    "UI/qml/features/automation/AutomationWorkspace.qml"
+                )
+                result = manager.saveRule(sample_icmp_rule_text())
+                self.assertTrue(result["ok"], result)
+                files_page = workspace.findChild(QObject, "automationRuleFilesPage")
+                self.assertIsNotNone(files_page)
+                self.assertTrue(
+                    self._wait_until(lambda: len(files_page.property("rules")) == 1)
+                )
+                requested_pages = []
+                workspace.pageRequested.connect(requested_pages.append)
+                QMetaObject.invokeMethod(
+                    workspace,
+                    "editRule",
+                    Q_ARG("QVariant", "mitigate-icmp-dos"),
+                    Q_ARG("QVariant", "mitigate-icmp-dos.json"),
+                )
+                editor_page = workspace.findChild(
+                    QObject, "automationRuleEditorPage"
+                )
+                self.assertEqual(requested_pages, ["editor"])
+                self.assertEqual(
+                    editor_page.property("selectedRuleId"), "mitigate-icmp-dos"
+                )
+                self.assertEqual(self.warnings, [])
+            finally:
+                manager.shutdown()
 
     def test_language_selector_updates_and_persists_vietnamese(self) -> None:
         backend = self.context_objects["languageSettings"]
@@ -2095,6 +2151,13 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertAlmostEqual(syslog_item.property("opacity"), 1.0)
         self.assertEqual(syslog_item.parent().objectName(), "activityTopGroup")
 
+        automation_item = activity_bar.findChild(QObject, "automationActivityItem")
+        self.assertIsNotNone(automation_item)
+        self.assertTrue(automation_item.property("visible"))
+        self.assertTrue(automation_item.property("enabled"))
+        self.assertAlmostEqual(automation_item.property("opacity"), 1.0)
+        self.assertEqual(automation_item.parent().objectName(), "activityTopGroup")
+
         database_item = activity_bar.findChild(QObject, "databaseActivityItem")
         settings_item = activity_bar.findChild(QObject, "settingsActivityItem")
         self.assertIsNotNone(database_item)
@@ -2104,6 +2167,10 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertLess(database_item.property("y"), settings_item.property("y"))
         self.assertEqual(activity_bar.property("activeIndex"), 0)
         self.assertEqual(activity_bar.property("appMode"), "devices")
+        QMetaObject.invokeMethod(activity_bar, "activateAutomation")
+        self.app.processEvents()
+        self.assertEqual(activity_bar.property("appMode"), "automation")
+        self.assertTrue(automation_item.property("isActive"))
         self.assertEqual(self.warnings, [])
 
     def test_database_sidebar_groups_tables_with_semantic_icons(self) -> None:
@@ -3811,6 +3878,49 @@ class QmlSmokeTests(unittest.TestCase):
             )
         self.app.processEvents()
         self.assertEqual(toast_manager.property("toastCount"), 3)
+        self.assertEqual(self.warnings, [])
+
+    def test_main_automation_activity_opens_the_workspace(self) -> None:
+        self.engine.loadFromModule("UI", "Main")
+        self.app.processEvents()
+        root = self.engine.rootObjects()[0]
+        activity_bar = root.findChild(QObject, "mainActivityBar")
+        panel_sidebar = root.findChild(QObject, "mainPanelSideBar")
+        loader = root.findChild(QObject, "automationWorkspaceLoader")
+
+        self.assertIsNotNone(activity_bar)
+        self.assertIsNotNone(panel_sidebar)
+        self.assertIsNotNone(loader)
+        QMetaObject.invokeMethod(activity_bar, "activateAutomation")
+
+        self.assertTrue(self._wait_until(lambda: root.property("isAutomationMode")))
+        self.assertEqual(panel_sidebar.property("appMode"), "automation")
+        automation_panel = panel_sidebar.findChild(QObject, "automationPanel")
+        devices_panel = panel_sidebar.findChild(QObject, "devicesPanel")
+        self.assertIsNotNone(automation_panel)
+        self.assertIsNotNone(devices_panel)
+        self.assertTrue(automation_panel.property("visible"))
+        self.assertFalse(devices_panel.property("visible"))
+        self.assertEqual(automation_panel.property("selectedKey"), "service")
+        self.assertEqual(automation_panel.property("renderedCardCount"), 4)
+        self.assertTrue(self._wait_until(lambda: loader.property("active")))
+        self.assertTrue(
+            self._wait_until(
+                lambda: root.findChild(QObject, "automationWorkspace") is not None
+            )
+        )
+        workspace = root.findChild(QObject, "automationWorkspace")
+        QMetaObject.invokeMethod(
+            automation_panel,
+            "selectPage",
+            Q_ARG("QVariant", "rules"),
+        )
+        self.assertTrue(
+            self._wait_until(
+                lambda: root.property("activeAutomationPage") == "rules"
+                and workspace.property("activePage") == "rules"
+            )
+        )
         self.assertEqual(self.warnings, [])
 
     def test_content_area_loads_every_feature_and_mode(self) -> None:

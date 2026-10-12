@@ -315,6 +315,8 @@ class WorkspaceService:
         backup_sqlite_database(session.device_network_db, staged / "device_network.db")
         backup_sqlite_database(session.info_collected_db, staged / "info_collected.db")
         copy_stable_tree(session.backup_directory, staged / "backup")
+        session.automation_rules_directory.mkdir(parents=True, exist_ok=True)
+        copy_stable_tree(session.automation_directory, staged / "automation")
         snapshots = session.working_directory / "snapshots"
         copy_stable_tree(snapshots, staged / "snapshots")
         normalize_git_metadata_for_package(staged)

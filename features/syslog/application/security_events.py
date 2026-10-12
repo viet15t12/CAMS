@@ -88,6 +88,8 @@ class SecurityEvent:
     packets: int = 1
     target: str = ""
     detail: str = ""
+    protocol: str = ""
+    interface: str = ""
 
 
 def _text(row: dict[str, Any]) -> str:
@@ -126,6 +128,8 @@ def _classify_acl(row: dict[str, Any]) -> SecurityEvent | None:
     if not match or match.group("action").lower() != "denied":
         return None
     rest = match.group("rest")
+    first_word = rest.strip().split(None, 1)[0].casefold() if rest.strip() else ""
+    network_protocol = first_word if first_word in {"icmp", "tcp", "udp", "ip"} else ""
     source_part, _, target_part = rest.partition("->")
     source, _ = _first_ip(source_part)
     if not source:
@@ -140,6 +144,8 @@ def _classify_acl(row: dict[str, Any]) -> SecurityEvent | None:
         packets=max(1, int(match.group("count"))),
         target=target_text,
         detail=f"ACL {match.group('acl')}",
+        protocol=network_protocol,
+        interface=_interface(_text(row)),
     )
 
 
@@ -326,6 +332,10 @@ class SecurityEventDetector:
         attributes: dict[str, Any] = {"offender_key": event.key}
         if rule.name == "ACL_DROP_FLOOD":
             attributes["offender_ip"] = event.key
+            if event.protocol:
+                attributes["protocol"] = event.protocol
+            if event.interface:
+                attributes["interface"] = event.interface
             if event.target:
                 attributes["target"] = event.target
         else:

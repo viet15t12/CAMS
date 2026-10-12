@@ -1,11 +1,12 @@
-# gocore RESTCONF: thiết kế triển khai phù hợp với CAMS
+# CAMS Automation Engine (gocore): thiết kế RESTCONF phù hợp với CAMS
 
-> Trạng thái: **đang triển khai nền tảng `dry-run`**
+> Trạng thái: **đã có luồng lập lịch rule → action JSON `dry-run` end-to-end**
 >
-> Đối chiếu mã nguồn: **2026-10-11**
+> Đối chiếu mã nguồn: **2026-10-12**
 >
 > Phạm vi: tự động phản ứng sự kiện an ninh từ Syslog bằng RESTCONF trên Cisco
-> IOS XE. Tài liệu này không khẳng định CAMS hiện đã hỗ trợ luồng đó end-to-end.
+> IOS XE. CAMS hiện mới hoàn tất luồng end-to-end tới action `dry-run`, chưa có
+> bước RESTCONF làm thay đổi cấu hình thiết bị.
 
 ## 1. Kết luận kiến trúc
 
@@ -20,9 +21,9 @@ Hướng phù hợp nhất với mã nguồn hiện tại là:
    ghi vào `t12_syslog_messages`, `SecurityEventDetector` phân loại và tạo một
    sự kiện có cấu trúc.
 2. **SQLite là hàng đợi bền vững.** Python ghi event vào
-   `t13_automation_events`; Go match rule rồi materialize action vào
+   `t13_automation_events`; Go match rule rồi trả action typed để Python ghi vào
    `t13_automation_actions`. Không chỉ truyền dữ liệu qua bộ nhớ.
-3. **Go là execution sidecar.** Một tiến trình `gocore` duy nhất cho workspace
+3. **Go là execution sidecar.** Một tiến trình `cams-automation` duy nhất cho workspace
    đang hoạt động nhận action đã chuẩn hóa, kiểm tra policy, gọi RESTCONF, xác
    minh kết quả, quản lý idempotency và ghi audit/rollback.
 4. **Python giữ quyền với credential và vòng đời workspace.** Python giải mã
@@ -36,7 +37,7 @@ Hướng phù hợp nhất với mã nguồn hiện tại là:
 
 Nhánh triển khai: `feature/gocore-restconf-foundation`.
 
-Đã có trong lát cắt nền tảng đầu tiên:
+Đã có trong lát cắt `dry-run` hiện tại:
 
 - schema `t13_automation_events` và `t13_automation_actions` trong
   `info_collected.db`;
@@ -44,17 +45,29 @@ Nhánh triển khai: `feature/gocore-restconf-foundation`.
   event máy đọc với cảnh báo `%CAMS-*`;
 - `SecurityEventDetector.process_detections()` giữ nguyên API cảnh báo cũ nhưng
   đồng thời trả event có cấu trúc;
-- module Go `gocore` chỉ dùng standard library, có `doctor`, `validate-event` và
-  JSON Lines sidecar `serve --stdio`;
+- module Go `gocore` chỉ dùng standard library, có `doctor`, `validate-event`,
+  `validate-rule` và JSON Lines sidecar `serve --stdio`;
 - handshake sidecar chỉ chấp nhận `mode: dry-run`; binary hiện không có code
   gửi request mạng;
-- `install.sh` đóng gói source Go, chạy Go test/build và cài lệnh `gocore`.
+- rule JSON v1 được kiểm tra strict, nạp lại theo nhịp, match event và sinh plan
+  cho `acl.deny-protocol-source` hoặc `interface.admin-state`;
+- scheduler trong Go giữ event ở `pending` cho tới khi rule đến kỳ; dedup,
+  cooldown và giới hạn action/giờ được kiểm tra lại khi Python ghi audit;
+- `AutomationManager` tự khởi động/dừng sidecar cùng CAMS, đổi binding theo
+  workspace và loại `CAMS_CREDENTIAL_KEY` khỏi environment của tiến trình con;
+- tab chính **Automation Rules** trên Activity Bar có sidebar riêng, không dùng
+  danh sách thiết bị; giao diện được tách thành các trang **Service**,
+  **Rule Files**, **Rule Editor** và **Action History**;
+- rule được lưu trong `automation/rules/` của workspace và đi theo gói `.ntp`,
+  kể cả snapshot/rollback;
+- `install.sh` build/cài `cams-automation` và giữ alias `gocore`.
 
 Chưa có trong lát cắt này:
 
-- rule loader/matcher và materialize `t13_automation_actions`;
-- Python process manager để tự khởi động sidecar theo workspace;
-- RESTCONF profile, TLS probe, action driver, approve/rollback và UI;
+- RESTCONF profile, TLS probe và capability fingerprint;
+- RESTCONF client/driver thực thi, GET-before, verify và rollback;
+- UI duyệt/từ chối, protected inventory và kill switch toàn cục;
+- lease/retry cho action có network mutation;
 - mọi chế độ có mutation mạng (`approve`, `auto`).
 
 Luồng mục tiêu:
@@ -71,24 +84,25 @@ t12_syslog_messages
     ├──────────────► cảnh báo %CAMS-* + email/UI
     │
     ▼ transaction
-t13_automation_events ──► t13_automation_actions
-                               │ claim/lease
+t13_automation_events ──► cams-automation (Go)
+          pending          load/schedule/match rule JSON
+                               │ typed action plan
                                ▼
-                        gocore sidecar (Go)
-                               │ GET → PATCH/PUT/DELETE → GET verify
-                               ▼
-                            RESTCONF
+                    t13_automation_actions
+                         status=simulated
+                               │
+                               └──── RESTCONF executor (chưa triển khai)
 ```
 
 ## 2. Những gì mã nguồn hiện có thực sự cung cấp
 
 | Thành phần | Hiện trạng trong mã nguồn | Hệ quả cho gocore |
 | --- | --- | --- |
-| Go | Đã có module `gocore`, event validator và sidecar protocol chỉ `dry-run`; chưa có RESTCONF executor | Có nền build/test an toàn nhưng chưa phải chức năng automation end-to-end |
+| Go | Đã có validator event/rule, scheduler, matcher và action planner chỉ `dry-run`; chưa có RESTCONF executor | Kịch bản đã đi end-to-end tới action JSON/audit nhưng chưa thay đổi thiết bị |
 | Syslog DB | `t12_syslog_messages` nằm trong `info_collected.db`; có `device_host`, `source_ip`, `received_at`, `cisco_facility`, `mnemonic`, `message`, `raw_message` | Không dùng schema suy đoán; `source_ip` là địa chỉ thiết bị gửi Syslog, không phải IP kẻ tấn công |
 | Phát hiện an ninh | `features/syslog/application/security_events.py` đã nhận diện `ACL_DROP_FLOOD`, `DHCP_ROGUE_SERVER`, `DHCP_SNOOPING_FLOOD`, `DAI_ARP_SPOOF`, `PORT_SECURITY_REPEAT` | Tái sử dụng kết quả chuẩn hóa; không viết một bộ regex thứ hai trong Go |
 | Cảnh báo tổng hợp | `SyslogManager._publish_security_alerts()` ghi lại bản tin `%CAMS-*` vào `t12_syslog_messages` và gửi email | Giữ luồng UI/email hiện có; action tự động phải có outbox riêng, không parse ngược chuỗi cảnh báo |
-| Workspace | Khi mở `.ntp`, hai DB được giải nén vào thư mục tạm và toàn bộ service được chuyển sang DB đó | Không hard-code `/var/lib/cams/info_collected.db`; sidecar phải được bind vào workspace đang mở và dừng trước khi workspace bị dọn |
+| Workspace | Khi mở `.ntp`, DB và `automation/rules/` được giải nén vào thư mục tạm; manager đổi binding sidecar theo session | Không hard-code DB/rule path; đóng workspace phải dừng sidecar trước khi dọn thư mục tạm |
 | Credential | `t01_devices.password` được mã hóa `ENC$v2$`; cipher phụ thuộc project/session và do Python quản lý | Go không thể và không nên tự giải mã trực tiếp từ SQLite |
 | Cấu hình thiết bị | `t01_devices` chỉ có một `method` và một `portnumber` cho thiết bị | Cần profile RESTCONF riêng nếu cùng thiết bị vẫn dùng SSH/Telnet cho các module khác |
 | RESTCONF hiện tại | Chỉ xuất hiện rời rạc ở Routing/DHCP/FHRP; ACL và Interface báo chưa tích hợp; nhiều request dùng `verify=False` | Không tái sử dụng nguyên trạng làm nền production; cần client chung, TLS bắt buộc, verify và rollback |
@@ -100,6 +114,8 @@ Các nguồn sự thật chính:
 - `infrastructure/database/schemas/info_collected/12_info_syslog.sql`
 - `features/syslog/application/security_events.py`
 - `features/syslog/qt/manager.py`
+- `features/automation/manager.py`, `features/automation/rules.py`
+- `gocore/internal/rule/` và `gocore/internal/protocol/`
 - `infrastructure/workspace/package.py` và `main.py`
 - `infrastructure/security/credential_cipher.py`
 - `infrastructure/database/schemas/device_network/01_core_devices.sql`
@@ -259,37 +275,70 @@ Quy tắc persistence:
 ## 7. Rule v1: policy khai báo, không phải chương trình tùy ý
 
 Rule nằm trong workspace/project và được Python kiểm tra trước khi kích hoạt.
-Go kiểm tra lại bằng cùng JSON Schema. Dùng YAML cho người viết nhưng canonical
-form dùng để hash/revision phải là JSON đã chuẩn hóa.
+Go kiểm tra lại bằng contract strict và từ chối field lạ. Bản hiện tại dùng JSON
+trực tiếp để Python và Go có cùng canonical form/revision, chưa nhận YAML.
 
-```yaml
-version: 1
+Ví dụ kịch bản PC bị chiếm quyền phát ICMP nhanh, router gửi ACL deny Syslog:
 
-metadata:
-  id: isolate-port-security-repeat
-  description: Cô lập tạm cổng có port-security violation lặp lại
-  enabled: true
+```json
+{
+  "version": 1,
+  "metadata": {
+    "id": "mitigate-icmp-dos",
+    "name": "Mitigate ICMP DoS",
+    "description": "Prepare a temporary inbound deny for a repeated ICMP source.",
+    "enabled": false
+  },
+  "schedule": { "interval_seconds": 1 },
+  "match": {
+    "event_type": "ACL_DROP_FLOOD",
+    "require_attributes": ["offender_ip", "interface", "protocol"],
+    "attributes": { "protocol": "icmp" }
+  },
+  "policy": {
+    "mode": "dry-run",
+    "cooldown_seconds": 300,
+    "max_actions_per_hour": 6
+  },
+  "action": {
+    "type": "acl.deny-protocol-source",
+    "protocol": "icmp",
+    "source_from": "attributes.offender_ip",
+    "interface_from": "attributes.interface",
+    "ttl_seconds": 300
+  }
+}
+```
 
-match:
-  event_type: PORT_SECURITY_REPEAT
-  require_attributes: [interface]
-  device_roles: [sw2, sw3]
+Mẫu từ GUI luôn có `enabled: false`. Người dùng phải kiểm tra log thực tế có
+`attributes.interface` đáng tin, lưu file rồi bật rule rõ ràng. Go chạy rule đến
+kỳ `interval_seconds`; event chưa đến kỳ vẫn ở `pending`, event/action chống lặp
+bằng revision và `dedup_key`.
 
-policy:
-  mode: dry-run                 # dry-run | approve | auto
-  cooldown: 10m
-  max_actions_per_hour: 3
-  max_active_actions: 1
+Khi match, Go trả plan typed tương tự dưới đây; Python kiểm tra lại rồi lưu vào
+`t13_automation_actions`:
 
-action:
-  type: interface.admin-state
-  interface_from: attributes.interface
-  enabled: false
-  ttl: 5m
+```json
+{
+  "event_id": "evt-...",
+  "rule_id": "mitigate-icmp-dos",
+  "mode": "dry-run",
+  "action_type": "acl.deny-protocol-source",
+  "status": "simulated",
+  "request_redacted": {
+    "driver": "acl.deny-protocol-source",
+    "device_host": "192.0.2.1",
+    "interface": "GigabitEthernet1/0/2",
+    "protocol": "icmp",
+    "source_ip": "198.51.100.9",
+    "ttl_seconds": 300,
+    "dry_run": true
+  }
+}
 ```
 
 Không đưa `target`, `path`, `method`, `body` hoặc SQL vào rule v1. Driver
-`interface.admin-state` chịu trách nhiệm:
+driver typed chịu trách nhiệm:
 
 - lấy target từ `device_host` và profile inventory;
 - chuẩn hóa interface;
@@ -328,7 +377,7 @@ riêng, tối thiểu gồm:
 Trong MVP app-bound:
 
 1. Python dùng repository/credential cipher hiện có để lấy profile.
-2. Python spawn `gocore serve --stdio` với environment đã loại
+2. Python spawn `cams-automation serve --stdio` với environment đã loại
    `CAMS_CREDENTIAL_KEY`, rồi gửi đúng credential cần dùng qua pipe stdin riêng;
    không qua argv hoặc file rule.
 3. Go giữ credential trong bộ nhớ đúng thời gian cần thiết, không ghi DB/log.
@@ -395,7 +444,7 @@ tùy chọn.
 
 | Event hiện có | Dữ liệu đáng tin hiện có | Mặc định an toàn |
 | --- | --- | --- |
-| `ACL_DROP_FLOOD` | IP nguồn bị deny, đích/port nếu parse được; thường không có ingress interface | Notify/dry-run. Không shutdown port. Chỉ tạo ACL action sau khi có driver và attachment đã kiểm chứng |
+| `ACL_DROP_FLOOD` | IP nguồn, protocol, đích/port; interface chỉ có khi chính dòng log chứa trường `on ...`/`interface ...` | Planner chỉ sinh ACL action khi đủ IP + protocol + interface; hiện chỉ lưu `simulated`, chưa push |
 | `DHCP_ROGUE_SERVER` | MAC hoặc interface untrusted tùy message | Approve; chỉ cô lập khi interface tồn tại và không thuộc protected list |
 | `DHCP_SNOOPING_FLOOD` | MAC/interface | Dry-run rồi approve |
 | `DAI_ARP_SPOOF` | MAC/interface và packet count | Dry-run rồi approve |
@@ -409,16 +458,21 @@ một phần của driver/preflight, nếu không action bị từ chối.
 
 ### 11.1 Giai đoạn 1 — app-bound sidecar
 
-Python quản lý một tiến trình `gocore serve --stdio` cho workspace đang mở:
+Python hiện quản lý một tiến trình `cams-automation serve --stdio` cho workspace
+đang mở:
 
-- truyền `project_id`, đường dẫn DB và protocol version qua handshake;
-- theo dõi heartbeat và restart có giới hạn;
-- sidecar claim action trong DB của workspace đó;
-- đổi workspace: ngừng nhận action, chờ request đang chạy, đóng SQLite, dừng
-  sidecar rồi mới xóa workspace tạm;
-- đóng app: không nhận action mới và cảnh báo nếu còn action cần revert.
+- tự khởi động khi CAMS khởi động; source checkout có thể fallback sang
+  `go run`, bản cài dùng binary đã build;
+- truyền `project_id`, `rules_dir`, mode và protocol version qua handshake;
+- mỗi giây lấy tối đa 100 event `pending`; Go nạp file, áp lịch từng rule rồi
+  trả plan qua JSON Lines;
+- Python kiểm tra lại mode/action catalog/cooldown/quota trước khi ghi action và
+  chuyển event đã đánh giá sang `processed`;
+- đổi/đóng workspace: dừng sidecar cũ trước khi thư mục tạm bị dọn rồi khởi động
+  lại với DB và `automation/rules/` mới;
+- tiến trình con không nhận `CAMS_CREDENTIAL_KEY` hoặc `CAMS_SECRET_*`.
 
-Ở giai đoạn này chỉ hỗ trợ `dry-run` và `approve`. Nếu action có TTL mà không có
+Ở giai đoạn này chỉ hỗ trợ `dry-run`. Nếu action có TTL mà không có
 daemon bền vững, CAMS phải từ chối đóng hoặc yêu cầu revert/acknowledge rõ ràng;
 không được âm thầm hứa sẽ revert sau khi tiến trình đã dừng.
 
@@ -448,7 +502,7 @@ thực sự chấp nhận được, không mặc định tùy tiện là `1s`.
 
 ```text
 gocore/
-├── cmd/gocore/              # serve, validate-rules, probe, doctor
+├── cmd/gocore/              # serve, validate-rule, validate-event, doctor
 ├── internal/protocol/       # JSONL handshake/event/result, versioned
 ├── internal/rules/          # schema, canonicalization, revision hash
 ├── internal/store/          # SQLite outbox, lease, audit, migrations
@@ -478,7 +532,7 @@ production vẫn có một authority là Python.
 
 ## 13. Lộ trình triển khai
 
-Ký hiệu: ✅ hoàn thành trong foundation; 🟡 đang làm/hoàn thành một phần; ⬜ chưa
+Ký hiệu: ✅ hoàn thành trong mã hiện tại; 🟡 đang làm/hoàn thành một phần; ⬜ chưa
 bắt đầu.
 
 ### Pha 0 — chốt dữ liệu lab ⬜
@@ -496,7 +550,7 @@ bắt đầu.
 - ✅ Tách kết quả detector thành event DTO có cấu trúc.
 - ✅ Thêm schema/migration `t13_automation_*` và repository transaction.
 - ✅ Giữ việc tạo `%CAMS-*`/email hiện có từ cùng DTO.
-- Thêm UI xem event và kill switch; chưa gọi router.
+- ✅ Thêm audit action `simulated` trong UI; chưa có kill switch toàn cục.
 
 **Xong khi:** restart app không làm mất action, replay không tạo trùng, đổi
 workspace không trộn event.
@@ -504,10 +558,15 @@ workspace không trộn event.
 ### Pha 2 — gocore dry-run 🟡
 
 - ✅ Tạo module Go, protocol JSONL và event validator.
-- ⬜ Thêm rule validator, store lease và audit.
-- Match event, tạo action idempotent và hiển thị action trong UI.
-- ⬜ Implement catalog/action typed nhưng RESTCONF client dùng fake server.
-- ⬜ Tích hợp lifecycle sidecar vào Python.
+- ✅ Thêm rule JSON v1 strict, revision hash, loader và scheduler theo từng file.
+- ✅ Match event, tạo action idempotent và hiển thị audit trong UI.
+- ✅ Python quản lý lifecycle sidecar, tự khởi động cùng CAMS và đổi workspace.
+- ✅ GUI nhiều trang tạo/import/sửa/bật/tắt/xóa rule trong
+  `automation/rules/`, quản lý sidecar và xem action audit riêng biệt.
+- ✅ Persistence kiểm tra lại catalog, cooldown và quota trước khi ghi action.
+- ⬜ Store lease/retry chỉ cần cho action mutation; action `simulated` hiện không claim.
+- ✅ Catalog planner chỉ nhận hai action typed, không nhận URL/body/SQL tùy ý.
+- ⬜ Thêm RESTCONF client fake server để kiểm thử executor trước lab thật.
 
 **Xong khi:** toàn bộ action chỉ thành `simulated`, không có network mutation;
 crash/restart không thực thi trùng.
@@ -582,19 +641,21 @@ mở production.
 Các ví dụ Cisco chỉ là điểm bắt đầu. Path và payload cuối cùng phải lấy từ YANG
 library và `GET` trên đúng thiết bị lab của dự án.
 
-## 17. Build và kiểm tra foundation
+## 17. Build và kiểm tra lát cắt dry-run
 
 Trong source checkout:
 
 ```bash
 cd gocore
 go test ./...
-go build -trimpath -o /tmp/gocore ./cmd/gocore
-/tmp/gocore doctor --json
+go build -trimpath -o /tmp/cams-automation ./cmd/gocore
+/tmp/cams-automation doctor --json
+/tmp/cams-automation validate-rule /path/to/rule.json
 ```
 
 `install.sh` yêu cầu Go 1.23 trở lên khi không đặt
 `CAMS_INSTALL_SKIP_SETUP=1`. Bản cài chuẩn build binary vào
-`$CAMS_INSTALL_BASE/app/bin/gocore` và tạo symlink `~/.local/bin/gocore` (hoặc
-`CAMS_BIN_DIR/gocore`). Lệnh `doctor` phải báo `mode=dry-run` và
-`network_mutation=false` ở foundation này.
+`$CAMS_INSTALL_BASE/app/bin/cams-automation` và tạo symlink
+`~/.local/bin/cams-automation` (hoặc `CAMS_BIN_DIR/cams-automation`). Alias
+`gocore` vẫn được tạo để tương thích. Lệnh `doctor` phải báo `mode=dry-run` và
+`network_mutation=false` trong lát cắt này.

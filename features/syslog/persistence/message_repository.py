@@ -28,6 +28,12 @@ AUTOMATION_EVENT_INSERT_SQL = """INSERT INTO t13_automation_events
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(event_id) DO NOTHING"""
 
+AUTOMATION_ACTION_INSERT_SQL = """INSERT INTO t13_automation_actions
+    (event_id, rule_id, rule_revision, mode, action_type, status,
+     dedup_key, request_redacted_json)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(dedup_key) DO NOTHING"""
+
 
 class MessageRepository:
     def __init__(self, info_db: Path) -> None:
@@ -100,6 +106,126 @@ class MessageRepository:
             item = dict(row)
             item["attributes"] = json.loads(item.pop("attributes_json") or "{}")
             item["evidence"] = json.loads(item.pop("evidence_json") or "{}")
+            result.append(item)
+        return result
+
+    def query_pending_automation_events(self, limit: int = 100) -> list[dict[str, Any]]:
+        """Return the stable event contract consumed by the Go rule engine."""
+        row_limit = max(1, min(int(limit), 100))
+        with closing(info_connection(self.info_db)) as conn:
+            rows = conn.execute(
+                """SELECT event_id, schema_version, event_type, device_host,
+                          subject_key, attributes_json, evidence_json,
+                          detected_at, fingerprint
+                   FROM t13_automation_events
+                   WHERE status = 'pending'
+                   ORDER BY id LIMIT ?""",
+                (row_limit,),
+            ).fetchall()
+        return [self._automation_event_contract(row) for row in rows]
+
+    def materialize_automation_actions(
+        self,
+        actions: Iterable[dict[str, Any]],
+        processed_event_ids: Iterable[str],
+    ) -> dict[str, int]:
+        """Persist simulated plans and complete evaluated events atomically.
+
+        Cooldown and hourly limits are rechecked against durable state here;
+        the sidecar cannot bypass them by returning a crafted response.
+        """
+        pending_actions = [dict(action) for action in actions]
+        processed = list(dict.fromkeys(
+            str(event_id).strip() for event_id in processed_event_ids
+            if str(event_id).strip()
+        ))
+        inserted = 0
+        suppressed = 0
+        with closing(info_connection(self.info_db)) as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            try:
+                pending_rows = conn.execute(
+                    "SELECT event_id, device_host, subject_key, attributes_json "
+                    "FROM t13_automation_events WHERE status = 'pending'"
+                ).fetchall()
+                events: dict[str, dict[str, Any]] = {}
+                for row in pending_rows:
+                    event_row = dict(row)
+                    event_row["attributes"] = json.loads(
+                        event_row.pop("attributes_json") or "{}"
+                    )
+                    events[str(row["event_id"])] = event_row
+                for action in pending_actions:
+                    values = self._validated_action_values(action, events)
+                    event_row = events[values[0]]
+                    cooldown = max(0, min(int(action.get("cooldown_seconds", 0)), 86400))
+                    hourly_limit = max(
+                        1, min(int(action.get("max_actions_per_hour", 1)), 1000)
+                    )
+                    if cooldown and conn.execute(
+                        """SELECT 1
+                           FROM t13_automation_actions AS action
+                           JOIN t13_automation_events AS event
+                             ON event.event_id = action.event_id
+                           WHERE action.rule_id = ?
+                             AND event.device_host = ?
+                             AND event.subject_key = ?
+                             AND julianday(action.created_at) >=
+                                 julianday('now', ?)
+                           LIMIT 1""",
+                        (
+                            values[1], event_row["device_host"],
+                            event_row["subject_key"], f"-{cooldown} seconds",
+                        ),
+                    ).fetchone() is not None:
+                        suppressed += 1
+                        continue
+                    recent_count = int(conn.execute(
+                        """SELECT COUNT(*) FROM t13_automation_actions
+                           WHERE rule_id = ?
+                             AND julianday(created_at) >= julianday('now', '-1 hour')""",
+                        (values[1],),
+                    ).fetchone()[0])
+                    if recent_count >= hourly_limit:
+                        suppressed += 1
+                        continue
+                    cursor = conn.execute(AUTOMATION_ACTION_INSERT_SQL, values)
+                    if cursor.rowcount:
+                        inserted += 1
+                if processed:
+                    valid_processed = [event_id for event_id in processed if event_id in events]
+                    if valid_processed:
+                        placeholders = ",".join("?" for _ in valid_processed)
+                        conn.execute(
+                            "UPDATE t13_automation_events "
+                            "SET status = 'processed', updated_at = CURRENT_TIMESTAMP "
+                            f"WHERE status = 'pending' AND event_id IN ({placeholders})",
+                            valid_processed,
+                        )
+                conn.commit()
+            except Exception:
+                conn.rollback()
+                raise
+        return {"inserted": inserted, "suppressed": suppressed}
+
+    def query_automation_actions(self, limit: int = 100) -> list[dict[str, Any]]:
+        row_limit = max(1, min(int(limit), 500))
+        with closing(info_connection(self.info_db)) as conn:
+            rows = conn.execute(
+                """SELECT action.*, event.device_host, event.subject_key,
+                          event.event_type, event.detected_at
+                   FROM t13_automation_actions AS action
+                   JOIN t13_automation_events AS event
+                     ON event.event_id = action.event_id
+                   ORDER BY action.id DESC LIMIT ?""",
+                (row_limit,),
+            ).fetchall()
+        result: list[dict[str, Any]] = []
+        for row in rows:
+            item = dict(row)
+            item["request_redacted"] = json.loads(
+                item.pop("request_redacted_json") or "{}"
+            )
             result.append(item)
         return result
 
@@ -263,6 +389,63 @@ class MessageRepository:
             row.syslog_facility, row.cisco_facility, row.cisco_subfacility,
             row.facility, row.severity, row.mnemonic, row.message,
             row.raw_message, row.protocol, row.parse_status,
+        )
+
+    @staticmethod
+    def _automation_event_contract(row: Any) -> dict[str, Any]:
+        item = dict(row)
+        item["attributes"] = json.loads(item.pop("attributes_json") or "{}")
+        item["evidence"] = json.loads(item.pop("evidence_json") or "{}")
+        return item
+
+    @staticmethod
+    def _validated_action_values(
+        action: dict[str, Any], events: dict[str, dict[str, Any]],
+    ) -> tuple[str, str, str, str, str, str, str, str]:
+        event_id = str(action.get("event_id") or "").strip()
+        rule_id = str(action.get("rule_id") or "").strip()
+        revision = str(action.get("rule_revision") or "").strip()
+        mode = str(action.get("mode") or "").strip()
+        action_type = str(action.get("action_type") or "").strip()
+        status = str(action.get("status") or "").strip()
+        dedup_key = str(action.get("dedup_key") or "").strip()
+        request = action.get("request_redacted")
+        if event_id not in events:
+            raise ValueError("Automation action references a non-pending event")
+        if not rule_id or not revision or not dedup_key:
+            raise ValueError("Automation action identity is incomplete")
+        if mode != "dry-run" or status != "simulated":
+            raise ValueError("Only simulated dry-run actions are accepted")
+        if action_type not in {"acl.deny-protocol-source", "interface.admin-state"}:
+            raise ValueError("Unsupported automation action type")
+        if not isinstance(request, dict) or request.get("dry_run") is not True:
+            raise ValueError("Automation action request must be a redacted dry-run object")
+        event = events[event_id]
+        attributes = event.get("attributes")
+        if not isinstance(attributes, dict):
+            raise ValueError("Automation event attributes are invalid")
+        if (
+            str(action.get("device_host") or "") != str(event["device_host"])
+            or str(action.get("subject_key") or "") != str(event["subject_key"])
+            or request.get("driver") != action_type
+            or request.get("device_host") != event["device_host"]
+        ):
+            raise ValueError("Automation action target does not match its source event")
+        if action_type == "acl.deny-protocol-source":
+            if (
+                request.get("source_ip") != attributes.get("offender_ip")
+                or request.get("interface") != attributes.get("interface")
+                or request.get("protocol") != attributes.get("protocol")
+            ):
+                raise ValueError("ACL action values do not match source event attributes")
+        elif (
+            request.get("interface") != attributes.get("interface")
+            or not isinstance(request.get("enabled"), bool)
+        ):
+            raise ValueError("Interface action values do not match source event attributes")
+        return (
+            event_id, rule_id, revision, mode, action_type, status, dedup_key,
+            json.dumps(request, ensure_ascii=False, sort_keys=True, separators=(",", ":")),
         )
 
     @staticmethod

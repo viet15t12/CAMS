@@ -33,6 +33,7 @@ Rectangle {
     signal devicesLoaded(var devices)
     signal settingSelected(string key)
     signal databaseTableSelected(string tableName)
+    signal automationPageSelected(string key)
     signal syslogHostSelected(string host)
     signal syslogOperationFinished(bool ok, string message)
 
@@ -46,6 +47,7 @@ Rectangle {
     function clearDevices() { devicesPanel.clearDevices() }
     function selectSyslogHost(host) { syslogPanel.selectedHost = String(host || "") }
     function selectSetting(key) { return settingsPanel.selectSetting(key) }
+    function selectAutomationPage(key) { return automationPanel.selectPage(key) }
 
     // ── 3. CONTAINER CHUYỂN TAB ───────────────────────────────────────────────
         StackLayout {
@@ -57,12 +59,14 @@ Rectangle {
             if (panelSideBar.appMode === "database") return 2
             if (panelSideBar.appMode === "syslog") return 3
             if (panelSideBar.appMode === "sftp") return 4
+            if (panelSideBar.appMode === "automation") return 5
             return 0
         }
 
         // [0] GIAO DIỆN DEVICES (Đã tách file)
         DevicesPanel {
             id: devicesPanel
+            objectName: "devicesPanel"
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -107,6 +111,16 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             backend: typeof sftpController !== "undefined" ? sftpController : null
+        }
+
+        // [5] AUTOMATION WORKSPACE NAVIGATION
+        AutomationPanel {
+            id: automationPanel
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            onPageSelected: function(key) {
+                panelSideBar.automationPageSelected(key)
+            }
         }
     }
 }

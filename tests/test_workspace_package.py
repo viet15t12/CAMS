@@ -58,6 +58,11 @@ class WorkspacePackageTests(unittest.TestCase):
         backup.mkdir(parents=True)
         (backup / "running-config.txt").write_bytes(b"hostname router-01\n")
         (root / "backup" / "reserved-empty-folder").mkdir()
+        rules = root / "automation" / "rules"
+        rules.mkdir(parents=True)
+        (rules / "example.json").write_text(
+            '{"version":1,"metadata":{"id":"example"}}\n', encoding="utf-8"
+        )
         snapshots = root / "snapshots"
         snapshots.mkdir()
         (snapshots / "index.json").write_text(
@@ -90,6 +95,12 @@ class WorkspacePackageTests(unittest.TestCase):
         )
         self.assertTrue(
             (working_directory / "backup/reserved-empty-folder").is_dir()
+        )
+        self.assertEqual(
+            (session.automation_rules_directory / "example.json").read_text(
+                encoding="utf-8"
+            ),
+            '{"version":1,"metadata":{"id":"example"}}\n',
         )
         session.close()
         self.assertFalse(working_directory.exists())
