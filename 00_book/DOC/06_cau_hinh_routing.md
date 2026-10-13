@@ -196,7 +196,7 @@ Chọn các router tham gia nhóm. Chỉ những router được đánh dấu m�
 
 ### Bước 2 — Identity
 
-Nhập **Process ID** và **Router ID** riêng cho từng host. Process ID có thể khác nhau giữa các router, còn Router ID phải duy nhất trong miền OSPF.
+Nhập **Process ID** và **Router ID** riêng cho từng host. Process ID có thể khác nhau giữa các router, còn Router ID phải duy nhất trong miền OSPF. Để điền nhanh Router ID, nhập ba octet trong mẫu **Router ID template**, để trống đúng một octet rồi chọn **Auto ID**. Octet trống được tăng `1, 2, 3...` theo thứ tự router đã chọn; các giá trị sinh ra vẫn có thể sửa riêng từng dòng.
 
 <figure id="fig-ch06-20-routing-group-identity" markdown="span">
   ![Process ID và Router ID riêng của từng router](../figures/gui/chapter-06/20-routing-group-identity.png){ loading=lazy }
@@ -209,19 +209,19 @@ Khai báo tham số dùng chung như Reference Bandwidth và Passive Default. D�
 
 ### Bước 4 — Networks
 
-CAMS liệt kê các connected network theo từng host và kèm interface đã phát hiện. Chọn network cần chạy OSPF, gán Area rồi dùng **Save** hoặc **Save & Push**.
+CAMS gom cùng một connected network/wildcard của nhiều router thành một dòng. Chọn network và gán Area một lần; lựa chọn được áp dụng cho mọi router đã chọn có subnet đó. Nút **Details** hiển thị router/interface tham gia và cho phép bỏ chọn một router nếu cần ngoại lệ. Khi lưu, CAMS vẫn sinh network statement riêng trên từng thiết bị rồi mới dùng **Save** hoặc **Save & Push**.
 
 <figure id="fig-ch06-22-routing-group-networks" markdown="span">
-  ![Chọn network và area độc lập cho R1 và R2](../figures/gui/chapter-06/22-routing-group-networks.png){ loading=lazy }
-  <figcaption>Chọn network và area độc lập cho R1 và R2.</figcaption>
+  ![Chọn connected network và area cho Routing Group](../figures/gui/chapter-06/22-routing-group-networks.png){ loading=lazy }
+  <figcaption>Chọn connected network và area cho Routing Group.</figcaption>
 </figure>
 
 Toàn bộ quy trình gồm:
 
 1. **Hosts**: chọn các router tham gia.
-1. **Identity**: nhập Process ID và Router ID riêng từng host.
+1. **Identity**: nhập Process ID và Router ID riêng từng host hoặc dùng Auto ID.
 1. **Common**: nhập tham số OSPF dùng chung.
-1. **Networks**: chọn connected network và area của từng host.
+1. **Networks**: chọn connected network và area theo subnet; mở Details khi cần kiểm soát từng host.
 
 <figure id="fig-ch06-26-routing-group-view-push" markdown="span">
   ![View & Push OSPF tổng hợp lệnh riêng cho hai thiết bị](../figures/gui/chapter-06/26-routing-group-view-push.png){ loading=lazy }

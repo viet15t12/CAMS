@@ -252,6 +252,85 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertEqual(limit_map["targets"], 5)
         self.assertIn("at most 5 hosts", limit_map["error"])
 
+    def test_routing_group_auto_ids_support_any_variable_octet(self) -> None:
+        dialog = self._create("UI/qml/features/routing/RoutingGroupDialog.qml")
+        result, is_undefined = QQmlExpression(
+            QQmlEngine.contextForObject(dialog),
+            dialog,
+            """
+            populateTargets([
+                {host: "r1", networks: []},
+                {host: "r2", networks: []},
+                {host: "r3", networks: []}
+            ]);
+            for (let i = 0; i < 3; i++)
+                updateSelected(i, true);
+            const ok = autoAssignRouterIds(["10", "", "20", "30"]);
+            ({ok: ok, targets: selectedTargets(), error: errorText})
+            """,
+        ).evaluate()
+
+        self.assertFalse(is_undefined)
+        result_map = result.toVariant()
+        self.assertTrue(result_map["ok"], result_map["error"])
+        self.assertEqual(
+            [target["router_id"] for target in result_map["targets"]],
+            ["10.1.20.30", "10.2.20.30", "10.3.20.30"],
+        )
+
+        invalid, invalid_is_undefined = QQmlExpression(
+            QQmlEngine.contextForObject(dialog),
+            dialog,
+            """
+            const ok = autoAssignRouterIds(["10", "", "", "30"]);
+            ({ok: ok, error: errorText})
+            """,
+        ).evaluate()
+        self.assertFalse(invalid_is_undefined)
+        invalid_map = invalid.toVariant()
+        self.assertFalse(invalid_map["ok"])
+        self.assertIn("exactly one", invalid_map["error"])
+
+    def test_routing_group_merges_shared_network_and_applies_area_to_owners(self) -> None:
+        dialog = self._create("UI/qml/features/routing/RoutingGroupDialog.qml")
+        result, is_undefined = QQmlExpression(
+            QQmlEngine.contextForObject(dialog),
+            dialog,
+            """
+            const shared = {
+                network: "10.1.12.0", wildcard: "0.0.0.255", prefix_length: 24,
+                interfaces: [{interface_name: "GigabitEthernet0/1"}]
+            };
+            populateTargets([
+                {host: "r1", device_name: "R1", networks: [shared]},
+                {host: "r2", device_name: "R2", networks: [shared]}
+            ]);
+            updateSelected(0, true);
+            updateSelected(1, true);
+            rebuildNetworkGroups();
+            const before = {
+                count: groupedNetworks.count,
+                members: groupedNetworks.get(0).memberCount
+            };
+            updateNetworkGroup(0, "selected", true);
+            updateNetworkGroup(0, "area", "7");
+            updateNetworkGroupMember(0, 1, false);
+            const partial = groupedNetworks.get(0).partiallySelected;
+            updateNetworkGroupMember(0, 1, true);
+            ({before: before, partial: partial, targets: selectedTargets()})
+            """,
+        ).evaluate()
+
+        self.assertFalse(is_undefined)
+        result_map = result.toVariant()
+        self.assertEqual(result_map["before"], {"count": 1, "members": 2})
+        self.assertTrue(result_map["partial"])
+        for target in result_map["targets"]:
+            self.assertEqual(
+                target["networks"],
+                [{"network": "10.1.12.0", "wildcard": "0.0.0.255", "area": "7"}],
+            )
+
     def test_routing_group_network_area_columns_align_across_hosts_and_widths(self) -> None:
         window = self._create("tests/qml/RoutingGroupNetworkGeometryHarness.qml")
         self.assertTrue(QTest.qWaitForWindowExposed(window, 1000))
@@ -273,7 +352,7 @@ class QmlSmokeTests(unittest.TestCase):
                 window.setWidth(width)
                 QTest.qWait(50)
                 fields = area_fields()
-                self.assertEqual(len(fields), 12)  # Four networks on each of R1/R2/R3.
+                self.assertEqual(len(fields), 4)  # Shared subnets are shown once.
                 geometry = [
                     (field.mapToItem(window.contentItem(), QPointF(0, 0)).x(),
                      field.width())
