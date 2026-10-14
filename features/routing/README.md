@@ -13,6 +13,13 @@ thất bại. File kết quả cũ được xóa trước mỗi lần chạy đ�
 quả stale. Retry cùng local draft `pending_apply` là idempotent cho cả OSPF và
 EIGRP; process đã đồng bộ không bị ghi đè ngầm.
 
+Identity hỗ trợ Auto ID bằng mẫu bốn octet: người dùng điền ba octet và để trống
+một vị trí; vị trí trống được tăng 1, 2, 3... theo thứ tự host đã chọn. Bước
+Networks gom cùng một network/wildcard thành một dòng, chọn và nhập Area một lần
+rồi mở rộng lựa chọn về từng host sở hữu subnet đó. Nút Details hiển thị đúng
+router/interface tham gia trước khi lưu và cho phép bỏ chọn từng router khi cần
+một ngoại lệ cục bộ.
+
 `clone_service.py` và các clone slot chỉ còn là compatibility API cho automation
 cũ; không còn được export/khởi tạo bởi QML runtime mới.
 

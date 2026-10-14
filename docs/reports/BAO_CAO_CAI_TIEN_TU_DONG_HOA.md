@@ -154,12 +154,13 @@ Giới hạn cũ 5 thiết bị được thay bằng **số thiết bị đủ �
 | Nhóm | Vị trí | Thao tác hàng loạt |
 | --- | --- | --- |
 | Routing Group | Bước 2. Identity | Một Process ID (OSPF) hoặc AS (EIGRP) cho mọi host đã chọn. |
-| Routing Group | Bước 4. Networks | Chọn/loại network theo mẫu (subnet, dải, tên interface như `Loopback*`, `Gi*0/1.*`) trên mọi router; All/None; **Set area** cho mọi network đã chọn. |
+| Routing Group | Bước 4. Networks | Chọn/loại network theo mẫu (subnet, dải, tên interface như `Loopback*`, `Gi*0/1.*`); All/None; **Set area** cho mọi network đã chọn. Sau khi hợp nhất với `main`, thao tác chạy trên danh sách network đã gộp theo subnet (mỗi subnet một dòng) của commit `a78932b`. |
 | Syslog Group | Bước 2. Interfaces | Source interface theo mẫu (`Loopback0`, `Vlan*`); mỗi host lấy interface đầu tiên khớp, host không khớp được liệt kê. |
 | VTP Group | Member policy | Một mode cho mọi switch, hoặc "First server, rest client"; pruning tự tắt khi không phải server. |
 | FHRP | Member policy | Một priority và preempt cho mọi router. |
 
 Router ID không có thao tác áp cho tất cả vì giá trị này phải khác nhau giữa các thiết bị.
+Nhánh `main` (commit `a78932b`) đã bổ sung nút **Auto ID** sinh Router ID tăng dần; hai tính năng được giữ song song ở bước Identity.
 
 ---
 

@@ -14,6 +14,7 @@ StandardDialog {
     property var ownerForm: null
     property var hostRows: []
     property int selectedCount: 0
+    property alias groupedNetworks: groupedNetworkModel
     readonly property int maxHosts: Math.max(2, targetModel.count)
     property string errorText: ""
 
@@ -23,6 +24,7 @@ StandardDialog {
     subtitle: "Configure the same routing policy on multiple devices"
 
     ListModel { id: targetModel }
+    ListModel { id: groupedNetworkModel }
 
     function notify(message, type) {
         if (ownerForm && ownerForm.notify)
@@ -43,6 +45,7 @@ StandardDialog {
         hostRows = rows || []
         selectedCount = 0
         targetModel.clear()
+        groupedNetworkModel.clear()
         for (let i = 0; i < hostRows.length; i++) {
             targetModel.append({
                 host: String(hostRows[i].host),
@@ -168,6 +171,181 @@ StandardDialog {
         changed[field] = value
         changedNetworks[networkIndex] = changed
         targetModel.setProperty(hostIndex, "networks", changedNetworks)
+    }
+
+    function interfaceNames(interfaces) {
+        const names = []
+        for (let i = 0; i < collectionCount(interfaces); i++) {
+            const item = collectionItem(interfaces, i)
+            const name = String(item.interface_name || "").trim()
+            if (name !== "")
+                names.push(name)
+        }
+        return names.join(", ")
+    }
+
+    // Present a connected subnet once even when it belongs to several selected
+    // routers. Saving still expands the choice back to each owning host so the
+    // generated OSPF/EIGRP configuration remains device-local.
+    function rebuildNetworkGroups() {
+        const groupsByKey = ({})
+        const groups = []
+        for (let hostIndex = 0; hostIndex < targetModel.count; hostIndex++) {
+            const row = targetModel.get(hostIndex)
+            if (!row.selected)
+                continue
+            const choices = row.networks || []
+            for (let networkIndex = 0;
+                    networkIndex < collectionCount(choices); networkIndex++) {
+                const choice = collectionItem(choices, networkIndex)
+                const key = String(choice.network || "") + "|"
+                            + String(choice.wildcard || "")
+                let group = groupsByKey[key]
+                if (!group) {
+                    group = {
+                        key: key,
+                        network: String(choice.network || ""),
+                        wildcard: String(choice.wildcard || ""),
+                        prefixLength: Number(choice.prefix_length || 0),
+                        selectedCount: 0,
+                        selectedAreas: [],
+                        members: []
+                    }
+                    groupsByKey[key] = group
+                    groups.push(group)
+                }
+                const isSelected = choice.selected === true
+                if (isSelected) {
+                    group.selectedCount++
+                    group.selectedAreas.push(String(choice.area || "0"))
+                }
+                group.members.push({
+                    hostIndex: hostIndex,
+                    networkIndex: networkIndex,
+                    host: String(row.host || ""),
+                    deviceName: String(row.deviceName || ""),
+                    interfaceNames: interfaceNames(choice.interfaces),
+                    selected: isSelected
+                })
+            }
+        }
+
+        groupedNetworkModel.clear()
+        for (let i = 0; i < groups.length; i++) {
+            const group = groups[i]
+            let area = group.selectedAreas.length > 0
+                     ? group.selectedAreas[0] : "0"
+            let areaMixed = false
+            for (let a = 1; a < group.selectedAreas.length; a++) {
+                if (group.selectedAreas[a] !== area) {
+                    areaMixed = true
+                    break
+                }
+            }
+            groupedNetworkModel.append({
+                network: group.network,
+                wildcard: group.wildcard,
+                prefixLength: group.prefixLength,
+                selected: group.selectedCount === group.members.length
+                          && group.members.length > 0,
+                partiallySelected: group.selectedCount > 0
+                                   && group.selectedCount < group.members.length,
+                area: area,
+                areaMixed: areaMixed,
+                memberCount: group.members.length,
+                members: group.members
+            })
+        }
+    }
+
+    function updateNetworkGroup(groupIndex, field, value) {
+        if (groupIndex < 0 || groupIndex >= groupedNetworkModel.count)
+            return
+        const group = groupedNetworkModel.get(groupIndex)
+        if (field === "selected") {
+            groupedNetworkModel.setProperty(groupIndex, "selected", Boolean(value))
+            groupedNetworkModel.setProperty(groupIndex, "partiallySelected", false)
+        } else if (field === "area") {
+            groupedNetworkModel.setProperty(groupIndex, "area", String(value))
+            groupedNetworkModel.setProperty(groupIndex, "areaMixed", false)
+        }
+        const members = group.members || []
+        for (let i = 0; i < collectionCount(members); i++) {
+            const member = collectionItem(members, i)
+            if (field === "selected"
+                    && typeof members.setProperty === "function")
+                members.setProperty(i, "selected", Boolean(value))
+            updateNetwork(Number(member.hostIndex), Number(member.networkIndex),
+                          field, value)
+        }
+    }
+
+    function updateNetworkGroupMember(groupIndex, memberIndex, selected) {
+        if (groupIndex < 0 || groupIndex >= groupedNetworkModel.count)
+            return
+        const group = groupedNetworkModel.get(groupIndex)
+        const members = group.members || []
+        if (memberIndex < 0 || memberIndex >= collectionCount(members))
+            return
+        const member = collectionItem(members, memberIndex)
+        if (typeof members.setProperty === "function")
+            members.setProperty(memberIndex, "selected", Boolean(selected))
+        updateNetwork(Number(member.hostIndex), Number(member.networkIndex),
+                      "selected", Boolean(selected))
+
+        let selectedMembers = 0
+        for (let i = 0; i < collectionCount(members); i++) {
+            if (collectionItem(members, i).selected === true)
+                selectedMembers++
+        }
+        groupedNetworkModel.setProperty(
+            groupIndex, "selected", selectedMembers === collectionCount(members))
+        groupedNetworkModel.setProperty(
+            groupIndex, "partiallySelected",
+            selectedMembers > 0 && selectedMembers < collectionCount(members))
+    }
+
+    function autoAssignRouterIds(octets) {
+        const values = []
+        let variableIndex = -1
+        for (let i = 0; i < 4; i++) {
+            const value = String(octets && octets.length > i ? octets[i] : "").trim()
+            if (value === "") {
+                if (variableIndex >= 0) {
+                    errorText = "Leave exactly one Router ID octet blank for Auto ID."
+                    return false
+                }
+                variableIndex = i
+                values.push("")
+                continue
+            }
+            if (!/^\d+$/.test(value) || Number(value) < 0 || Number(value) > 255) {
+                errorText = "Each fixed Router ID octet must be from 0 to 255."
+                return false
+            }
+            values.push(String(Number(value)))
+        }
+        if (variableIndex < 0) {
+            errorText = "Leave one Router ID octet blank; Auto ID fills it with 1, 2, 3..."
+            return false
+        }
+
+        const selectedIndexes = []
+        for (let index = 0; index < targetModel.count; index++) {
+            if (targetModel.get(index).selected)
+                selectedIndexes.push(index)
+        }
+        if (selectedIndexes.length === 0) {
+            errorText = "Select hosts before assigning Router IDs."
+            return false
+        }
+        for (let order = 0; order < selectedIndexes.length; order++) {
+            const assigned = values.slice()
+            assigned[variableIndex] = String(order + 1)
+            targetModel.setProperty(selectedIndexes[order], "routerId", assigned.join("."))
+        }
+        errorText = ""
+        return true
     }
 
     function stepValid() {
@@ -297,6 +475,7 @@ StandardDialog {
                     Layout.fillWidth: true
                     visible: dialog.stepIndex === 1
                     targetModel: targetModel
+                    controller: dialog
                     protocol: dialog.protocol
                 }
                 RoutingGroupCommonStep {
@@ -311,6 +490,7 @@ StandardDialog {
                     targetModel: targetModel
                     controller: dialog
                     protocol: dialog.protocol
+                    networkModel: dialog.groupedNetworks
                 }
             }
         }
