@@ -176,9 +176,15 @@ from features.config_sync import ConfigSyncService
 from features.devices import DeviceLoginService, DeviceRepository, DeviceService
 from features.sftp import SftpController
 from features.syslog import SyslogManager
+from features.automation import AutomationManager
 from features.compliance import SecurityAuditController, SecurityComplianceService
 from infrastructure.network.session_registry import DeviceSessionRegistry
-from infrastructure.database.paths import BACKUP_DIR, DEVICE_NETWORK_DB, INFO_COLLECTED_DB
+from infrastructure.database.paths import (
+    BACKUP_DIR,
+    DATA_DIR,
+    DEVICE_NETWORK_DB,
+    INFO_COLLECTED_DB,
+)
 from infrastructure.security import bind_session_credentials, clear_session_credentials
 from infrastructure.system.runtime_tmp import cleanup_runtime_tmp
 
@@ -294,6 +300,7 @@ def main() -> int:
     window_settings = WindowSettings()
     update_manager = UpdateManager()
     welcome_controller = WelcomeController()
+    automation_manager = AutomationManager()
 
     def prepare_workspace_close() -> None:
         """Disconnect devices and persist their offline state before packaging."""
@@ -302,6 +309,7 @@ def main() -> int:
         # workspace close waits for every disconnect before rebuilding .ntp.
         session_registry.close_all(timeout=None)
         device_repository.reset_connected_to_waiting()
+        automation_manager.prepare_workspace_close()
 
     workspace_save_controller = WorkspaceSaveController(
         welcome_controller,
@@ -342,6 +350,11 @@ def main() -> int:
             syslog_manager.set_database_paths(
                 INFO_COLLECTED_DB, DEVICE_NETWORK_DB
             )
+            automation_manager.set_workspace(
+                INFO_COLLECTED_DB,
+                DATA_DIR / "automation" / "rules",
+                "default",
+            )
             return
         bind_session_credentials(session)
         if not db_manager.set_workspace_databases(
@@ -358,6 +371,11 @@ def main() -> int:
         syslog_manager.set_database_paths(
             session.info_collected_db, session.device_network_db
         )
+        automation_manager.set_workspace(
+            session.info_collected_db,
+            session.automation_rules_directory,
+            session.manifest.project_id,
+        )
         if syslog_manager.settings.enabledOnStartup \
                 and syslog_manager.listenerState == "stopped":
             result = syslog_manager.startServer()
@@ -373,6 +391,7 @@ def main() -> int:
         shutdown_complete = True
         try:
             # Stop new callbacks/tasks first, then abort network I/O before releasing sessions.
+            automation_manager.shutdown()
             network_monitor.shutdown()
             db_manager.shutdown()
             cli.shutdown()
@@ -417,6 +436,7 @@ def main() -> int:
     context.setContextProperty("syslogManager", syslog_manager)
     context.setContextProperty("syslogSettings", syslog_manager.settings)
     context.setContextProperty("emailAlertManager", syslog_manager.email_alerts)
+    context.setContextProperty("automationManager", automation_manager)
     context.setContextProperty("securityAuditController", security_audit_controller)
     context.setContextProperty("nqvEasterEggEnabled", brand_easter_egg == "nqv")
     context.setContextProperty("ptitEasterEggEnabled", brand_easter_egg == "ptit")
@@ -500,6 +520,8 @@ def main() -> int:
     # Installation remains opt-in through the confirmation shown by QML.
     if update_manager.available and not packaging_qml_smoke_test:
         QTimer.singleShot(1_500, update_manager.checkForUpdates)
+    if not packaging_qml_smoke_test:
+        QTimer.singleShot(0, automation_manager.start)
 
     def request_shutdown(_signum: int, _frame: object) -> None:
         app.quit()

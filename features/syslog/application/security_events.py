@@ -21,6 +21,7 @@ from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
 from typing import Any
 
+from ..automation import AutomationDetection, create_automation_event
 from ..domain.models import SyslogMessage
 from ..security import security_outcome
 
@@ -87,6 +88,8 @@ class SecurityEvent:
     packets: int = 1
     target: str = ""
     detail: str = ""
+    protocol: str = ""
+    interface: str = ""
 
 
 def _text(row: dict[str, Any]) -> str:
@@ -125,6 +128,8 @@ def _classify_acl(row: dict[str, Any]) -> SecurityEvent | None:
     if not match or match.group("action").lower() != "denied":
         return None
     rest = match.group("rest")
+    first_word = rest.strip().split(None, 1)[0].casefold() if rest.strip() else ""
+    network_protocol = first_word if first_word in {"icmp", "tcp", "udp", "ip"} else ""
     source_part, _, target_part = rest.partition("->")
     source, _ = _first_ip(source_part)
     if not source:
@@ -139,6 +144,8 @@ def _classify_acl(row: dict[str, Any]) -> SecurityEvent | None:
         packets=max(1, int(match.group("count"))),
         target=target_text,
         detail=f"ACL {match.group('acl')}",
+        protocol=network_protocol,
+        interface=_interface(_text(row)),
     )
 
 
@@ -234,7 +241,7 @@ def classify_security_event(row: dict[str, Any]) -> SecurityEvent | None:
 
 @dataclass(slots=True)
 class _Window:
-    hits: deque[tuple[float, int, str, str]] = field(default_factory=deque)
+    hits: deque[tuple[float, int, str, str, int | None]] = field(default_factory=deque)
     last_alert: float | None = None
 
     def prune(self, now: float, window: float) -> None:
@@ -271,7 +278,14 @@ class SecurityEventDetector:
             self._windows.clear()
 
     def process(self, rows: Iterable[dict[str, Any]]) -> list[SyslogMessage]:
-        alerts: list[SyslogMessage] = []
+        """Compatibility API returning the existing human-facing alerts."""
+        return [detection.alert for detection in self.process_detections(rows)]
+
+    def process_detections(
+        self, rows: Iterable[dict[str, Any]],
+    ) -> list[AutomationDetection]:
+        """Return each alert together with its versioned automation event."""
+        detections: list[AutomationDetection] = []
         now = self._clock()
         with self._lock:
             for row in rows:
@@ -281,15 +295,15 @@ class SecurityEventDetector:
                 rule = self.rules.get(event.rule)
                 if rule is None:
                     continue
-                alert = self._record(row, event, rule, now)
-                if alert is not None:
-                    alerts.append(alert)
+                detection = self._record(row, event, rule, now)
+                if detection is not None:
+                    detections.append(detection)
             self._prune(now)
-        return alerts
+        return detections
 
     def _record(
         self, row: dict[str, Any], event: SecurityEvent, rule: DetectionRule, now: float,
-    ) -> SyslogMessage | None:
+    ) -> AutomationDetection | None:
         device = str(row.get("device_host") or row.get("source_ip") or "")
         key = (device.casefold(), rule.name, event.key)
         if key not in self._windows:
@@ -300,7 +314,13 @@ class SecurityEventDetector:
             self._windows[key] = _Window(hits=deque(maxlen=self._MAX_EVENTS_PER_KEY))
         window = self._windows[key]
         window.prune(now, rule.window_seconds)
-        window.hits.append((now, event.packets, event.target, event.detail))
+        source_id = row.get("id")
+        message_id = (
+            int(source_id)
+            if isinstance(source_id, int) and not isinstance(source_id, bool) and source_id > 0
+            else None
+        )
+        window.hits.append((now, event.packets, event.target, event.detail, message_id))
         events = len(window.hits)
         packets = sum(hit[1] for hit in window.hits)
         if not rule.crossed(events, packets):
@@ -308,7 +328,38 @@ class SecurityEventDetector:
         if window.last_alert is not None and now - window.last_alert < rule.cooldown_seconds:
             return None
         window.last_alert = now
-        return self._build_alert(row, event, rule, device, events, packets, window)
+        alert = self._build_alert(row, event, rule, device, events, packets, window)
+        attributes: dict[str, Any] = {"offender_key": event.key}
+        if rule.name == "ACL_DROP_FLOOD":
+            attributes["offender_ip"] = event.key
+            if event.protocol:
+                attributes["protocol"] = event.protocol
+            if event.interface:
+                attributes["interface"] = event.interface
+            if event.target:
+                attributes["target"] = event.target
+        else:
+            if event.target:
+                attributes["interface"] = event.target
+            if _MAC_RE.fullmatch(event.key):
+                attributes["offender_mac"] = event.key.lower()
+        evidence = {
+            "events": events,
+            "packets": packets,
+            "window_seconds": int(rule.window_seconds),
+            "source_message_ids": [hit[4] for hit in window.hits if hit[4] is not None],
+            "targets": list(dict.fromkeys(hit[2] for hit in window.hits if hit[2])),
+            "details": list(dict.fromkeys(hit[3] for hit in window.hits if hit[3])),
+        }
+        automation_event = create_automation_event(
+            event_type=rule.name,
+            device_host=device,
+            subject_key=event.key,
+            detected_at=alert.received_at,
+            attributes=attributes,
+            evidence=evidence,
+        )
+        return AutomationDetection(alert=alert, event=automation_event)
 
     @staticmethod
     def _build_alert(

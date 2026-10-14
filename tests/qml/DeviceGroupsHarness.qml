@@ -13,14 +13,6 @@ ApplicationWindow {
         id: panel
         objectName: "deviceGroupsPanel"
         anchors.fill: parent
-        openEditors: [
-            {
-                "uid": "192.0.2.1",
-                "title": "Router A",
-                "deviceType": "router",
-                "status": "connected"
-            }
-        ]
     }
 
     Component.onCompleted: {

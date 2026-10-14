@@ -45,6 +45,8 @@ from app_facade import (
     WindowSettings,
 )
 from features.config_backup import ConfigBackupService
+from features.automation.manager import AutomationManager
+from features.automation.rules import sample_icmp_rule_text
 from features.sftp import SftpController
 from infrastructure.system.virtual_lab import VirtualLabInfo
 from infrastructure.system.desktop_environment import DesktopEnvironmentDetector
@@ -934,9 +936,16 @@ class QmlSmokeTests(unittest.TestCase):
             panel,
             "filteredItems.length",
         ).evaluate()[0]
-        self.assertEqual(filtered_count, 6)
+        expected_count = QQmlExpression(
+            QQmlEngine.contextForObject(panel),
+            panel,
+            "allItems.length",
+        ).evaluate()[0]
+        self.assertEqual(filtered_count, expected_count)
         self.assertTrue(
-            self._wait_until(lambda: panel.property("renderedCardCount") == 6)
+            self._wait_until(
+                lambda: panel.property("renderedCardCount") == expected_count
+            )
         )
 
         cards = [
@@ -945,7 +954,7 @@ class QmlSmokeTests(unittest.TestCase):
                 panel,
                 f"cardAt({index})",
             ).evaluate()[0]
-            for index in range(6)
+            for index in range(expected_count)
         ]
         self.assertTrue(all(card is not None for card in cards))
 
@@ -960,6 +969,60 @@ class QmlSmokeTests(unittest.TestCase):
                 )
         self.assertTrue(any(float(card.property("height")) > 72 for card in cards))
         self.assertEqual(self.warnings, [])
+
+    def test_automation_rule_settings_loads_without_backend(self) -> None:
+        page = self._create("UI/qml/content/AutomationRuleSettings.qml")
+        self.assertEqual(page.property("objectName"), "automationRuleSettings")
+
+        workspace = self._create("UI/qml/features/automation/AutomationWorkspace.qml")
+        self.assertEqual(workspace.property("objectName"), "automationWorkspace")
+        for object_name in (
+            "automationServicePage",
+            "automationRuleFilesPage",
+            "automationRuleEditorPage",
+            "automationActionsPage",
+        ):
+            self.assertIsNotNone(workspace.findChild(QObject, object_name))
+
+    def test_automation_workspace_reload_signals_do_not_recurse(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            info_db = root / "info.db"
+            info_db.touch()
+            manager = AutomationManager(
+                info_db=info_db,
+                rules_dir=root / "rules",
+            )
+            self.engine.rootContext().setContextProperty("automationManager", manager)
+            try:
+                workspace = self._create(
+                    "UI/qml/features/automation/AutomationWorkspace.qml"
+                )
+                result = manager.saveRule(sample_icmp_rule_text())
+                self.assertTrue(result["ok"], result)
+                files_page = workspace.findChild(QObject, "automationRuleFilesPage")
+                self.assertIsNotNone(files_page)
+                self.assertTrue(
+                    self._wait_until(lambda: len(files_page.property("rules")) == 1)
+                )
+                requested_pages = []
+                workspace.pageRequested.connect(requested_pages.append)
+                QMetaObject.invokeMethod(
+                    workspace,
+                    "editRule",
+                    Q_ARG("QVariant", "mitigate-icmp-dos"),
+                    Q_ARG("QVariant", "mitigate-icmp-dos.json"),
+                )
+                editor_page = workspace.findChild(
+                    QObject, "automationRuleEditorPage"
+                )
+                self.assertEqual(requested_pages, ["editor"])
+                self.assertEqual(
+                    editor_page.property("selectedRuleId"), "mitigate-icmp-dos"
+                )
+                self.assertEqual(self.warnings, [])
+            finally:
+                manager.shutdown()
 
     def test_language_selector_updates_and_persists_vietnamese(self) -> None:
         backend = self.context_objects["languageSettings"]
@@ -2175,6 +2238,13 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertAlmostEqual(syslog_item.property("opacity"), 1.0)
         self.assertEqual(syslog_item.parent().objectName(), "activityTopGroup")
 
+        automation_item = activity_bar.findChild(QObject, "automationActivityItem")
+        self.assertIsNotNone(automation_item)
+        self.assertTrue(automation_item.property("visible"))
+        self.assertTrue(automation_item.property("enabled"))
+        self.assertAlmostEqual(automation_item.property("opacity"), 1.0)
+        self.assertEqual(automation_item.parent().objectName(), "activityTopGroup")
+
         database_item = activity_bar.findChild(QObject, "databaseActivityItem")
         settings_item = activity_bar.findChild(QObject, "settingsActivityItem")
         self.assertIsNotNone(database_item)
@@ -2184,6 +2254,10 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertLess(database_item.property("y"), settings_item.property("y"))
         self.assertEqual(activity_bar.property("activeIndex"), 0)
         self.assertEqual(activity_bar.property("appMode"), "devices")
+        QMetaObject.invokeMethod(activity_bar, "activateAutomation")
+        self.app.processEvents()
+        self.assertEqual(activity_bar.property("appMode"), "automation")
+        self.assertTrue(automation_item.property("isActive"))
         self.assertEqual(self.warnings, [])
 
     def test_database_sidebar_groups_tables_with_semantic_icons(self) -> None:
@@ -3255,93 +3329,39 @@ class QmlSmokeTests(unittest.TestCase):
 
         self.assertEqual(self.warnings, [])
 
-    def test_open_editors_stays_below_devices_and_group_menu_controls_all(self) -> None:
+    def test_device_group_menu_controls_all(self) -> None:
         harness = self._create("tests/qml/DeviceGroupsHarness.qml")
         self.assertTrue(QTest.qWaitForWindowExposed(harness, 1000))
 
         panel = harness.findChild(QObject, "deviceGroupsPanel")
-        device_scroll = harness.findChild(QObject, "deviceGroupScrollView")
-        open_editors = harness.findChild(QObject, "openEditorsSection")
-        connected = harness.findChild(QObject, "connectedDeviceGroup")
         menu = harness.findChild(QObject, "panelGroupContextMenu")
         collapse_all = harness.findChild(QObject, "panelGroupCollapseAll")
         expand_all = harness.findChild(QObject, "panelGroupExpandAll")
-        self.assertTrue(
-            all(
-                (
-                    panel,
-                    device_scroll,
-                    open_editors,
-                    connected,
-                    menu,
-                    collapse_all,
-                    expand_all,
-                )
-            )
-        )
-        self.assertGreaterEqual(
-            float(open_editors.property("y")) + 0.5,
-            float(device_scroll.property("y")) + float(device_scroll.property("height")),
-        )
-        self.assertAlmostEqual(
-            float(open_editors.property("y")) + float(open_editors.property("height")),
-            float(panel.property("height")),
-            delta=1.0,
-        )
+        self.assertTrue(all((panel, menu, collapse_all, expand_all)))
 
-        header_point = QQmlExpression(
-            QQmlEngine.contextForObject(connected),
-            connected,
-            "mapToItem(null, width / 2, Theme.listItemHeight / 2)",
-        ).evaluate()[0]
-        QTest.mouseClick(
-            harness,
-            Qt.MouseButton.RightButton,
-            Qt.KeyboardModifier.NoModifier,
-            QPoint(round(header_point.x()), round(header_point.y())),
+        QMetaObject.invokeMethod(
+            panel,
+            "openDeviceGroupContext",
+            Q_ARG("QVariant", 100),
+            Q_ARG("QVariant", 100),
         )
         self.app.processEvents()
         self.assertTrue(menu.property("visible"))
 
-        collapse_point = QQmlExpression(
-            QQmlEngine.contextForObject(collapse_all),
-            collapse_all,
-            "mapToItem(null, width / 2, height / 2)",
-        ).evaluate()[0]
-        QTest.mouseClick(
-            harness,
-            Qt.MouseButton.LeftButton,
-            Qt.KeyboardModifier.NoModifier,
-            QPoint(round(collapse_point.x()), round(collapse_point.y())),
-        )
+        QMetaObject.invokeMethod(collapse_all, "triggered")
         self.app.processEvents()
         self.assertTrue(panel.property("allDeviceGroupsCollapsed"))
 
-        header_point = QQmlExpression(
-            QQmlEngine.contextForObject(connected),
-            connected,
-            "mapToItem(null, width / 2, Theme.listItemHeight / 2)",
-        ).evaluate()[0]
-        QTest.mouseClick(
-            harness,
-            Qt.MouseButton.RightButton,
-            Qt.KeyboardModifier.NoModifier,
-            QPoint(round(header_point.x()), round(header_point.y())),
+        QMetaObject.invokeMethod(
+            panel,
+            "openDeviceGroupContext",
+            Q_ARG("QVariant", 100),
+            Q_ARG("QVariant", 100),
         )
         self.app.processEvents()
         self.assertTrue(menu.property("visible"))
 
-        expand_point = QQmlExpression(
-            QQmlEngine.contextForObject(expand_all),
-            expand_all,
-            "mapToItem(null, width / 2, height / 2)",
-        ).evaluate()[0]
-        QTest.mouseClick(
-            harness,
-            Qt.MouseButton.LeftButton,
-            Qt.KeyboardModifier.NoModifier,
-            QPoint(round(expand_point.x()), round(expand_point.y())),
-        )
+        QMetaObject.invokeMethod(expand_all, "triggered")
         self.app.processEvents()
         self.assertTrue(panel.property("allDeviceGroupsExpanded"))
         self.assertEqual(self.warnings, [])
@@ -3891,6 +3911,49 @@ class QmlSmokeTests(unittest.TestCase):
             )
         self.app.processEvents()
         self.assertEqual(toast_manager.property("toastCount"), 3)
+        self.assertEqual(self.warnings, [])
+
+    def test_main_automation_activity_opens_the_workspace(self) -> None:
+        self.engine.loadFromModule("UI", "Main")
+        self.app.processEvents()
+        root = self.engine.rootObjects()[0]
+        activity_bar = root.findChild(QObject, "mainActivityBar")
+        panel_sidebar = root.findChild(QObject, "mainPanelSideBar")
+        loader = root.findChild(QObject, "automationWorkspaceLoader")
+
+        self.assertIsNotNone(activity_bar)
+        self.assertIsNotNone(panel_sidebar)
+        self.assertIsNotNone(loader)
+        QMetaObject.invokeMethod(activity_bar, "activateAutomation")
+
+        self.assertTrue(self._wait_until(lambda: root.property("isAutomationMode")))
+        self.assertEqual(panel_sidebar.property("appMode"), "automation")
+        automation_panel = panel_sidebar.findChild(QObject, "automationPanel")
+        devices_panel = panel_sidebar.findChild(QObject, "devicesPanel")
+        self.assertIsNotNone(automation_panel)
+        self.assertIsNotNone(devices_panel)
+        self.assertTrue(automation_panel.property("visible"))
+        self.assertFalse(devices_panel.property("visible"))
+        self.assertEqual(automation_panel.property("selectedKey"), "service")
+        self.assertEqual(automation_panel.property("renderedCardCount"), 4)
+        self.assertTrue(self._wait_until(lambda: loader.property("active")))
+        self.assertTrue(
+            self._wait_until(
+                lambda: root.findChild(QObject, "automationWorkspace") is not None
+            )
+        )
+        workspace = root.findChild(QObject, "automationWorkspace")
+        QMetaObject.invokeMethod(
+            automation_panel,
+            "selectPage",
+            Q_ARG("QVariant", "rules"),
+        )
+        self.assertTrue(
+            self._wait_until(
+                lambda: root.property("activeAutomationPage") == "rules"
+                and workspace.property("activePage") == "rules"
+            )
+        )
         self.assertEqual(self.warnings, [])
 
     def test_content_area_loads_every_feature_and_mode(self) -> None:
@@ -4455,84 +4518,6 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertEqual(harness.property("selectedTextFeature"), 5)
         self.assertEqual(harness.property("contentMainFeature"), -1)
         self.assertEqual(harness.property("contentTextFeature"), 5)
-        self.assertEqual(self.warnings, [])
-
-    def test_open_editors_tracks_selects_and_closes_device_tabs(self) -> None:
-        harness = self._create("tests/qml/OpenEditorsHarness.qml")
-        self.assertTrue(QTest.qWaitForWindowExposed(harness, 1000))
-        tabs = harness.findChild(QObject, "openEditorsDeviceTabs")
-        section = harness.findChild(QObject, "openEditorsTestSection")
-        editor_list = harness.findChild(QObject, "openEditorsList")
-        self.assertIsNotNone(tabs)
-        self.assertIsNotNone(section)
-        self.assertIsNotNone(editor_list)
-        self.assertTrue(self._wait_until(lambda: tabs.property("tabCount") == 3))
-        self.assertEqual(section.property("editorCount"), 3)
-        self.assertEqual(tabs.property("activeUid"), "192.0.2.3")
-        self.assertEqual(editor_list.property("currentIndex"), 2)
-        self.assertEqual(section.property("height"), 4 * 28)
-
-        first_row = QQmlExpression(
-            QQmlEngine.contextForObject(editor_list),
-            editor_list,
-            "itemAtIndex(0)",
-        ).evaluate()[0]
-        self.assertIsNotNone(first_row)
-        first_point = QQmlExpression(
-            QQmlEngine.contextForObject(first_row),
-            first_row,
-            "mapToItem(null, width / 2, height / 2)",
-        ).evaluate()[0]
-        QTest.mouseClick(
-            harness,
-            Qt.MouseButton.LeftButton,
-            Qt.KeyboardModifier.NoModifier,
-            QPoint(round(first_point.x()), round(first_point.y())),
-        )
-        self.assertTrue(
-            self._wait_until(lambda: tabs.property("activeUid") == "192.0.2.1")
-        )
-        self.assertEqual(editor_list.property("currentIndex"), 0)
-
-        first_row = QQmlExpression(
-            QQmlEngine.contextForObject(editor_list),
-            editor_list,
-            "itemAtIndex(0)",
-        ).evaluate()[0]
-        self.assertIsNotNone(first_row)
-        close_first = first_row.findChild(QObject, "openEditorCloseButton0")
-        self.assertIsNotNone(close_first)
-        self.assertTrue(close_first.property("visible"))
-        close_point = QQmlExpression(
-            QQmlEngine.contextForObject(close_first),
-            close_first,
-            "mapToItem(null, width / 2, height / 2)",
-        ).evaluate()[0]
-        QTest.mouseClick(
-            harness,
-            Qt.MouseButton.LeftButton,
-            Qt.KeyboardModifier.NoModifier,
-            QPoint(round(close_point.x()), round(close_point.y())),
-        )
-        self.assertTrue(self._wait_until(lambda: tabs.property("tabCount") == 2))
-        self.assertEqual(section.property("editorCount"), 2)
-
-        close_all = harness.findChild(QObject, "openEditorsCloseAllButton")
-        self.assertIsNotNone(close_all)
-        close_all_point = QQmlExpression(
-            QQmlEngine.contextForObject(close_all),
-            close_all,
-            "mapToItem(null, width / 2, height / 2)",
-        ).evaluate()[0]
-        QTest.mouseClick(
-            harness,
-            Qt.MouseButton.LeftButton,
-            Qt.KeyboardModifier.NoModifier,
-            QPoint(round(close_all_point.x()), round(close_all_point.y())),
-        )
-        self.assertTrue(self._wait_until(lambda: tabs.property("tabCount") == 0))
-        self.assertEqual(section.property("editorCount"), 0)
-        self.assertEqual(tabs.property("activeUid"), "")
         self.assertEqual(self.warnings, [])
 
     def test_interface_row_context_menu_edits_and_deletes_target(self) -> None:

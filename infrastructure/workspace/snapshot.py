@@ -140,6 +140,7 @@ class SnapshotService:
             for database_name in REQUIRED_DATABASES:
                 shutil.copy2(stage / database_name, temporary / database_name)
             copy_stable_tree(stage / "backup", temporary / "backup", attempts=1)
+            copy_stable_tree(stage / "automation", temporary / "automation", attempts=1)
             inventory = self._inventory(temporary)
             size = sum(int(item["size"]) for item in inventory)
             record = SnapshotRecord(
@@ -211,7 +212,9 @@ class SnapshotService:
         ) as temporary:
             rollback_root = Path(temporary)
             old_backup = rollback_root / "original-backup"
+            old_automation = rollback_root / "original-automation"
             backup_swapped = False
+            automation_swapped = False
             try:
                 for database_name in REQUIRED_DATABASES:
                     backup_sqlite_database(
@@ -220,22 +223,45 @@ class SnapshotService:
                 copy_stable_tree(
                     source / "backup", rollback_root / "replacement-backup", attempts=1
                 )
+                source_automation = source / "automation"
+                if source_automation.is_dir():
+                    copy_stable_tree(
+                        source_automation,
+                        rollback_root / "replacement-automation",
+                        attempts=1,
+                    )
+                else:
+                    (rollback_root / "replacement-automation" / "rules").mkdir(
+                        parents=True
+                    )
 
                 os.replace(session.backup_directory, old_backup)
                 backup_swapped = True
+                session.automation_rules_directory.mkdir(parents=True, exist_ok=True)
+                os.replace(session.automation_directory, old_automation)
+                automation_swapped = True
                 os.replace(
                     rollback_root / "replacement-backup", session.backup_directory
+                )
+                os.replace(
+                    rollback_root / "replacement-automation",
+                    session.automation_directory,
                 )
                 for database_name in REQUIRED_DATABASES:
                     target = session.working_directory / database_name
                     _remove_sqlite_side_files(target)
                     os.replace(rollback_root / database_name, target)
                 backup_swapped = False
+                automation_swapped = False
             except Exception:
                 if backup_swapped and old_backup.exists():
                     shutil.rmtree(session.backup_directory, ignore_errors=True)
                     os.replace(old_backup, session.backup_directory)
                     backup_swapped = False
+                if automation_swapped and old_automation.exists():
+                    shutil.rmtree(session.automation_directory, ignore_errors=True)
+                    os.replace(old_automation, session.automation_directory)
+                    automation_swapped = False
                 if recovery is not None:
                     for database_name in REQUIRED_DATABASES:
                         recovery_copy = rollback_root / f"recovery-{database_name}"
@@ -248,6 +274,9 @@ class SnapshotService:
                 if backup_swapped and old_backup.exists():
                     shutil.rmtree(session.backup_directory, ignore_errors=True)
                     os.replace(old_backup, session.backup_directory)
+                if automation_swapped and old_automation.exists():
+                    shutil.rmtree(session.automation_directory, ignore_errors=True)
+                    os.replace(old_automation, session.automation_directory)
         return record
 
     def _read_index(self, path: Path) -> list[SnapshotRecord]:

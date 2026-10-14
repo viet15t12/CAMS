@@ -24,6 +24,7 @@ StatefulWindow {
     property bool isDoNotDisturb: false
     readonly property int notificationHistoryCount: notificationHistoryModel.count
     property string activeSettingKey: "theme"
+    property string activeAutomationPage: "service"
     property bool statusTaskVisible: false
     property bool statusTaskBusy: false
     property bool statusTaskOk: true
@@ -221,7 +222,9 @@ StatefulWindow {
     readonly property bool isSftpMode: activityBar.appMode === "sftp"
     readonly property bool isSyslogMode: activityBar.appMode === "syslog"
     readonly property bool isComplianceMode: activityBar.appMode === "compliance"
+    readonly property bool isAutomationMode: activityBar.appMode === "automation"
     property bool complianceWorkspaceLoaded: false
+    property bool automationWorkspaceLoaded: false
     readonly property bool isIndependentMode: false
     readonly property int visibleStatusBarHeight: StatusBarState.isVisible ? Theme.statusBarHeight : 0
     readonly property bool textInputHasFocus: root.activeFocusItem !== null
@@ -238,6 +241,11 @@ StatefulWindow {
             root.complianceWorkspaceLoaded = true
             root.sidebarVisible = false
         }
+    }
+
+    onIsAutomationModeChanged: {
+        if (root.isAutomationMode)
+            root.automationWorkspaceLoaded = true
     }
 
     function attachPersistentSettingsBackends() {
@@ -940,6 +948,9 @@ StatefulWindow {
                     onDatabaseTableSelected: function(tableName) {
                         root.activeDatabaseTable = tableName
                     }
+                    onAutomationPageSelected: function(key) {
+                        root.activeAutomationPage = key
+                    }
                     onSyslogHostSelected: host => root.selectedSyslogHost = host
                     onSyslogOperationFinished: function(ok, message) {
                         statusBar.showMessage(message, ok ? "success" : "error")
@@ -1036,7 +1047,8 @@ StatefulWindow {
                         objectName: "mainContentArea"
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        visible: !root.isSyslogMode && !root.isSftpMode && !root.isComplianceMode
+                        visible: !root.isSyslogMode && !root.isSftpMode
+                                 && !root.isComplianceMode && !root.isAutomationMode
 
                         tabCount: deviceTabs.tabCount
                         activeMainFeature: deviceTabs.currentFMain
@@ -1093,6 +1105,25 @@ StatefulWindow {
                         visible: root.isComplianceMode
                         sourceComponent: Component {
                             ComplianceWorkspace {}
+                        }
+                    }
+
+                    Loader {
+                        id: automationWorkspaceLoader
+                        objectName: "automationWorkspaceLoader"
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        active: root.automationWorkspaceLoaded
+                        asynchronous: true
+                        visible: root.isAutomationMode
+                        sourceComponent: Component {
+                            AutomationWorkspace {
+                                activePage: root.activeAutomationPage
+                                onPageRequested: function(key) {
+                                    root.activeAutomationPage = key
+                                    panelSideBar.selectAutomationPage(key)
+                                }
+                            }
                         }
                     }
                 }
