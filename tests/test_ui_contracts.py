@@ -909,6 +909,10 @@ class ButtonIconContractTests(unittest.TestCase):
         self.assertIn("getDeviceConfigurations(host)", config_page)
         self.assertIn("saveDeviceConfiguration(host, draftData)", config_page)
         self.assertIn("deleteDeviceConfiguration(host, clone(row))", config_page)
+        self.assertIn(
+            "function onRunningConfigFinished(updatedHost, ok, detail)",
+            config_page,
+        )
         self.assertIn("ContextMenuItem {", context_menu)
         self.assertIn("AppAssets.navigationSyslog", activity_bar)
         self.assertIn("id: syslogWorkspaceLoader", main)
@@ -1972,6 +1976,9 @@ class QmlModuleContractTests(unittest.TestCase):
             'objectName: "informationCompareModeButton"',
             'objectName: "informationDiffBaseComboBox"',
             'objectName: "informationDiffTargetComboBox"',
+            'objectName: "informationDeleteSnapshotButton"',
+            'objectName: "informationDeleteSnapshotDialog"',
+            "dbManager.deleteRunningConfigSnapshot(",
             "property var commitHistory: []",
             "function onRunningConfigFinished(host, ok, message)",
             "onCurrentHostIpChanged: reloadData()",

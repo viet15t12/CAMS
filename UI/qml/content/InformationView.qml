@@ -163,6 +163,38 @@ Rectangle {
         return true
     }
 
+    function selectedHistoryCommitId() {
+        const index = commitHistoryComboBox.currentIndex
+        if (index < 0 || index >= root.commitHistory.length)
+            return ""
+        return String(root.commitHistory[index].commitId || "")
+    }
+
+    function requestDeleteSelectedSnapshot() {
+        const commitId = root.selectedHistoryCommitId()
+        if (root.viewMode !== "snapshot" || commitId === "")
+            return false
+        deleteSnapshotDialog.snapshotCommitId = commitId
+        deleteSnapshotDialog.messageText =
+            "Delete running-config snapshot " + commitId.slice(0, 7)
+            + " for " + String(root.currentHostIp || "") + "?\n\n"
+            + "This only removes the selected local backup version. "
+            + "Newer snapshots remain available, but their internal Git IDs may change. "
+            + "This action cannot be undone."
+        deleteSnapshotDialog.open()
+        return true
+    }
+
+    function deleteSelectedSnapshot(commitId) {
+        const result = dbManager.deleteRunningConfigSnapshot(
+            String(root.currentHostIp || ""), String(commitId || "")
+        )
+        root.notify(String(result.message || ""), result.ok ? "success" : "error")
+        if (result.ok)
+            root.reloadData("snapshot-delete")
+        return result.ok === true
+    }
+
     // Ánh xạ payload snapshot backend vào ConfigTextViewer hiện có.
     function applyCommitPayload(requestedCommit, payload) {
         const ok = payload && payload.ok === true
@@ -405,11 +437,36 @@ Rectangle {
                         }
                     }
 
-                    Item {
+                    StandardButton {
+                        objectName: "informationDeleteSnapshotButton"
                         visible: !root.compactLayout
                         Layout.row: 0
                         Layout.column: 4
+                        text: "Delete"
+                        icon.source: AppAssets.actionDelete
+                        type: "Danger"
+                        tooltip: "Delete the selected local running-config snapshot"
+                        enabled: root.viewMode === "snapshot"
+                                 && root.selectedHistoryCommitId() !== ""
+                                 && !root.isLoadingHistory
+                                 && !root.isLoadingCommit
+                        onClicked: root.requestDeleteSelectedSnapshot()
+                    }
+
+                    StandardButton {
+                        objectName: "informationDeleteSnapshotCompactButton"
+                        visible: root.compactLayout && root.viewMode === "snapshot"
+                        Layout.row: 2
+                        Layout.column: 0
+                        Layout.columnSpan: 2
                         Layout.fillWidth: true
+                        text: "Delete selected snapshot"
+                        icon.source: AppAssets.actionDelete
+                        type: "Danger"
+                        enabled: root.selectedHistoryCommitId() !== ""
+                                 && !root.isLoadingHistory
+                                 && !root.isLoadingCommit
+                        onClicked: root.requestDeleteSelectedSnapshot()
                     }
 
                     RowLayout {
@@ -527,7 +584,9 @@ Rectangle {
                 anchors.fill: parent
                 anchors.margins: Theme.spacing12
                 text: root.displayedText
-                wrapLongLines: true
+                // Config files are line-oriented. Avoiding wrap prevents a full
+                // document relayout while scrolling large snapshots.
+                wrapLongLines: false
                 smoothVerticalScrolling: true
                 syntaxMode: root.viewMode === "diff" ? "diff" : "configuration"
                 sourceLabel: root.viewMode === "diff"
@@ -566,5 +625,21 @@ Rectangle {
             )
             root.notify(String(result.message || ""), result.ok ? "success" : "error")
         }
+    }
+
+    SftpMessageDialog {
+        id: deleteSnapshotDialog
+        objectName: "informationDeleteSnapshotDialog"
+        property string snapshotCommitId: ""
+        titleText: "Delete Configuration Snapshot"
+        confirmation: true
+        rejectText: "Cancel"
+        acceptText: "Delete"
+        onAccepted: {
+            const commitId = snapshotCommitId
+            snapshotCommitId = ""
+            root.deleteSelectedSnapshot(commitId)
+        }
+        onRejected: snapshotCommitId = ""
     }
 }

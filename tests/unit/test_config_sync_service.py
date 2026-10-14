@@ -43,6 +43,9 @@ router ospf 1
  router-id 1.1.1.1
  network 192.0.2.0 0.0.0.255 area 0
 !
+logging trap debugging
+logging source-interface GigabitEthernet0/0
+logging host 192.168.122.1 transport udp port 5514
 """,
                 "",
                 {"changed": True, "commitId": "d" * 40},
@@ -51,6 +54,7 @@ router ospf 1
             self.assertTrue(result["ok"], result)
             self.assertEqual(result["summary"]["interfaces"], 1)
             self.assertEqual(result["summary"]["ospf_processes"], 1)
+            self.assertEqual(result["summary"]["syslog_servers"], 1)
             with closing(sqlite3.connect(db_path)) as connection:
                 self.assertEqual(
                     connection.execute(
@@ -65,6 +69,18 @@ router ospf 1
                         ("10.2.3.1",),
                     ).fetchone()[0],
                     "192.0.2.1",
+                )
+                self.assertEqual(
+                    connection.execute(
+                        """SELECT server_ip, protocol, port, source_interface,
+                                  trap_severity, configured, sync_status
+                           FROM t10_syslog_servers WHERE device_host = ?""",
+                        ("10.2.3.1",),
+                    ).fetchone(),
+                    (
+                        "192.168.122.1", "udp", 5514,
+                        "GigabitEthernet0/0", 7, 1, "synchronized",
+                    ),
                 )
 
     def test_changed_router_snapshot_runs_sync_pipeline(self) -> None:

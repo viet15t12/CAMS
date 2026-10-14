@@ -251,6 +251,17 @@ Item {
         }
     }
 
+    Connections {
+        target: typeof cli !== "undefined" ? cli : null
+
+        function onRunningConfigFinished(updatedHost, ok, detail) {
+            if (ok
+                    && String(updatedHost || "").trim() === String(root.host || "").trim()
+                    && root.formMode === 0 && !root.saving)
+                root.reloadData("runningConfigSync")
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: root.compactLayout ? Theme.spacing12 : Theme.spacing16

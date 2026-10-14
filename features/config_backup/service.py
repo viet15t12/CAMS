@@ -125,6 +125,22 @@ class ConfigBackupService:
         except Exception as exc:
             return {"ok": False, "host": (host or "").strip(), "commitId": "", "content": "", "path": "", "message": str(exc)}
 
+    def delete_snapshot(self, host: str, commit_id: str) -> dict[str, object]:
+        """Delete one selected history snapshot without touching device state."""
+        try:
+            normalized_host = validate_host(host)
+            self.migrate_legacy_backup(normalized_host)
+            return self.repository.delete_commit(
+                normalized_host, (commit_id or "").strip()
+            )
+        except Exception as exc:
+            return {
+                "ok": False,
+                "host": (host or "").strip(),
+                "deletedCommitId": commit_id or "",
+                "message": f"Could not delete running-config snapshot: {exc}",
+            }
+
     def export_commit(
         self, host: str, commit_id: str, destination: Path
     ) -> dict[str, object]:

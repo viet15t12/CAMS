@@ -4015,7 +4015,13 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertIsNotNone(
             information.findChild(QObject, "informationExportConfigButton")
         )
-        self.assertTrue(viewer.property("wrapLongLines"))
+        self.assertIsNotNone(
+            information.findChild(QObject, "informationDeleteSnapshotButton")
+        )
+        self.assertIsNotNone(
+            information.findChild(QObject, "informationDeleteSnapshotDialog")
+        )
+        self.assertFalse(viewer.property("wrapLongLines"))
         self.assertTrue(viewer.property("smoothVerticalScrolling"))
         self.assertEqual(self.warnings, [])
 

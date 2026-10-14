@@ -345,3 +345,63 @@ class ConfigBackupRepository:
             except KeyError as exc:
                 raise LookupError("No configuration backup commits exist for this host.") from exc
         return self.read_commit(normalized_host, commit_id)
+
+    def delete_commit(self, host: str, commit_id: str) -> dict[str, object]:
+        """Remove one reachable snapshot and relink newer local history safely.
+
+        Git commits are immutable, so deleting a middle snapshot creates an
+        equivalent linear chain for the remaining newer snapshots.  HEAD is
+        moved only after every replacement object has been written; a failure
+        therefore leaves the original history reachable.
+        """
+        normalized_host = validate_host(host)
+        path = repository_path(self.backup_root, normalized_host)
+        with self._lock_for(normalized_host):
+            metadata = self._metadata_path(path)
+            if not metadata.is_dir():
+                raise LookupError(
+                    "No configuration backup repository exists for this host."
+                )
+
+            with Repo(metadata) as repo:
+                selected = self._reachable_commit(repo, commit_id)
+                newest_first = [entry.commit for entry in repo.get_walker()]
+                remaining = [
+                    commit for commit in reversed(newest_first)
+                    if commit.id != selected.id
+                ]
+
+                replacement_parent: bytes | None = None
+                replacement_head: Commit | None = None
+                for original in remaining:
+                    replacement = original.copy()
+                    replacement.parents = (
+                        [replacement_parent] if replacement_parent is not None else []
+                    )
+                    repo.object_store.add_object(replacement)
+                    replacement_parent = replacement.id
+                    replacement_head = replacement
+
+                if replacement_head is None:
+                    try:
+                        del repo.refs[b"HEAD"]
+                    except KeyError:
+                        pass
+                    (path / CONFIG_FILENAME).unlink(missing_ok=True)
+                    head_id = ""
+                else:
+                    latest_content = self._read_blob(repo, replacement_head).decode(
+                        "utf-8", errors="replace"
+                    )
+                    self._write_latest_atomically(path, latest_content)
+                    repo.refs[b"HEAD"] = replacement_head.id
+                    head_id = replacement_head.id.decode("ascii")
+
+            return {
+                "ok": True,
+                "host": normalized_host,
+                "deletedCommitId": selected.id.decode("ascii"),
+                "headCommitId": head_id,
+                "remaining": len(remaining),
+                "message": "Running-config snapshot deleted.",
+            }

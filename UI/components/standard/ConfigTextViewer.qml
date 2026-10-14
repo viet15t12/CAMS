@@ -852,6 +852,21 @@ Item {
         return true
     }
 
+    function tuneScrollSurface() {
+        const flickable = textScroll.contentItem
+        if (!flickable)
+            return false
+        // Keep trackpad/touch drags responsive without the elastic overshoot
+        // and integer-pixel stepping that make long rich-text documents jitter.
+        flickable.boundsBehavior = Flickable.StopAtBounds
+        flickable.boundsMovement = Flickable.StopAtBounds
+        flickable.flickDeceleration = 3200
+        flickable.maximumFlickVelocity = 4800
+        flickable.synchronousDrag = false
+        flickable.pixelAligned = false
+        return true
+    }
+
     onTextChanged: {
         // Occurrence delegates retain QTextDocument offsets. Tear them down
         // before the text binding can replace a long document with a shorter
@@ -889,6 +904,7 @@ Item {
         startHighlighting()
         rebuildSelectionOccurrences()
         updateRenderedText()
+        Qt.callLater(root.tuneScrollSurface)
     }
 
     FontMetrics {
@@ -1097,7 +1113,12 @@ Item {
                     ScrollBar.horizontal.policy: root.wrapLongLines
                                                  ? ScrollBar.AlwaysOff
                                                  : ScrollBar.AsNeeded
-                    ScrollBar.vertical.policy: ScrollBar.AsNeeded
+                    ScrollBar.vertical: ScrollBar {
+                        objectName: "configViewerVerticalScrollBar"
+                        policy: ScrollBar.AsNeeded
+                        interactive: true
+                        snapMode: ScrollBar.NoSnap
+                    }
 
                     Connections {
                         target: textScroll.contentItem

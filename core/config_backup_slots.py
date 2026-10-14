@@ -39,6 +39,13 @@ class ConfigBackupSlotsMixin:
             target_commit_id,
         )
 
+    @pyqtSlot(str, str, result="QVariant")
+    def deleteRunningConfigSnapshot(
+        self, host: str, commit_id: str
+    ) -> dict[str, object]:
+        """Permanently delete one selected local running-config snapshot."""
+        return self._config_backup_service.delete_snapshot(host, commit_id)
+
     @pyqtSlot(str, str, str, result="QVariant")
     def exportRunningConfigAtCommit(
         self, host: str, commit_id: str, destination_url: str

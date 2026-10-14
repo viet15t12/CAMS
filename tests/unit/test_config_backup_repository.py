@@ -105,6 +105,42 @@ class ConfigBackupRepositoryTests(unittest.TestCase):
             committed = repository.commit_snapshot("10.2.3.1", "hostname migrated")
             self.assertTrue(committed["ok"])
 
+    def test_delete_middle_snapshot_preserves_remaining_contents_and_latest(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repository = ConfigBackupRepository(Path(temp_dir) / "backup")
+            first = repository.commit_snapshot(
+                "10.2.3.1", "hostname first", timestamp=1_700_000_000
+            )
+            middle = repository.commit_snapshot(
+                "10.2.3.1", "hostname middle", timestamp=1_700_000_001
+            )
+            repository.commit_snapshot(
+                "10.2.3.1", "hostname latest", timestamp=1_700_000_002
+            )
+
+            result = repository.delete_commit("10.2.3.1", middle["commitId"])
+
+            self.assertTrue(result["ok"], result)
+            history = repository.list_commits("10.2.3.1")
+            self.assertEqual(len(history), 2)
+            self.assertEqual(repository.read_latest("10.2.3.1")["content"], "hostname latest\n")
+            self.assertEqual(
+                repository.read_commit("10.2.3.1", first["commitId"])["content"],
+                "hostname first\n",
+            )
+            self.assertNotIn(middle["commitId"], {row["commitId"] for row in history})
+
+    def test_delete_only_snapshot_leaves_an_empty_history(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repository = ConfigBackupRepository(Path(temp_dir) / "backup")
+            snapshot = repository.commit_snapshot("router-a", "hostname only")
+
+            result = repository.delete_commit("router-a", snapshot["commitId"])
+
+            self.assertTrue(result["ok"], result)
+            self.assertEqual(result["remaining"], 0)
+            self.assertEqual(repository.list_commits("router-a"), [])
+
 
 if __name__ == "__main__":
     unittest.main()
