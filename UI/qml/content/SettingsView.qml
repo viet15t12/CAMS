@@ -25,6 +25,7 @@ Rectangle {
                                                    || activeSettingKey === "tool_catalog"
     readonly property bool isSyslogSetting: activeSettingKey === "syslog_server"
     readonly property bool isEmailAlertSetting: activeSettingKey === "email_alerts"
+    readonly property bool isTelegramAlertSetting: activeSettingKey === "telegram_alerts"
     readonly property bool isSftpSetting: activeSettingKey === "sftp"
     readonly property bool isBatchPushSetting: activeSettingKey === "batch_push"
     readonly property bool isSoftwareUpdateSetting: activeSettingKey === "software_update"
@@ -1132,6 +1133,7 @@ Rectangle {
                  && !settingsView.isExternalToolsSetting
                  && !settingsView.isSyslogSetting
                  && !settingsView.isEmailAlertSetting
+                 && !settingsView.isTelegramAlertSetting
                  && !settingsView.isSftpSetting
                  && !settingsView.isBatchPushSetting
                  && !settingsView.isSoftwareUpdateSetting
@@ -1158,6 +1160,11 @@ Rectangle {
     EmailAlertSettings {
         anchors.fill: parent
         visible: settingsView.isEmailAlertSetting
+    }
+
+    TelegramAlertSettings {
+        anchors.fill: parent
+        visible: settingsView.isTelegramAlertSetting
     }
 
     SftpSettings {

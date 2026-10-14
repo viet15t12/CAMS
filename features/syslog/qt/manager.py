@@ -22,6 +22,7 @@ from ..smart_filter import SmartFilterError, build_log_filters
 from ..security import annotate_security
 from .alerts import EmailAlertManager
 from .settings import SyslogSettings
+from .telegram_alerts import TelegramAlertManager
 
 
 def _variant_dict(value: Any) -> dict[str, Any]:
@@ -75,6 +76,10 @@ class SyslogManager(QObject):
             self, language_getter=language_getter
         )
         self.email_alerts.alertError.connect(self._error)
+        self.telegram_alerts = TelegramAlertManager(
+            self, language_getter=language_getter
+        )
+        self.telegram_alerts.alertError.connect(self._error)
         self.service = SyslogServerService(
             INFO_COLLECTED_DB, DEVICE_NETWORK_DB,
             self._messages_stored, self._error, self._receiver_error,
@@ -196,6 +201,7 @@ class SyslogManager(QObject):
         with self._count_lock:
             self._received_count += len(rows)
         self.email_alerts.submit(rows)
+        self.telegram_alerts.submit(rows)
         self.messagesInserted.emit(rows)
         self.stateChanged.emit()
         self._publish_security_alerts(rows)
@@ -217,6 +223,7 @@ class SyslogManager(QObject):
         with self._count_lock:
             self._received_count += len(inserted)
         self.email_alerts.submit(inserted)
+        self.telegram_alerts.submit(inserted)
         self.messagesInserted.emit(inserted)
         self.stateChanged.emit()
 
@@ -477,6 +484,7 @@ class SyslogManager(QObject):
         self.native.stop()
         self.service.stop(receiver_timeout=0.5, writer_timeout=1.0)
         self.email_alerts.shutdown()
+        self.telegram_alerts.shutdown()
         self.executor.shutdown(wait=True, cancel_futures=True)
 
 

@@ -120,3 +120,22 @@ sau khi máy chủ nhận thư không biến kết quả thành thất bại. L�
 Kiểm thử SMTP và QML nằm trong `test_smtp_delivery.py`,
 `test_email_alert_manager.py`, `test_email_alerts.py`; SMTP dùng mock, không gửi
 email thật. Kiểm thử Syslog listener dùng socket localhost và cấu hình tạm.
+
+## Telegram Alerts
+
+**Settings > Telegram Alerts** dùng cùng cơ chế lọc severity, chống trùng và gom
+đợt như Email Alerts nhưng gửi qua Telegram Bot API trên worker riêng. Nhập Bot
+Token do `@BotFather` cấp và Chat ID dạng số; kênh công khai cũng có thể dùng
+username dạng `@channel`. Người dùng phải nhắn `/start` cho bot trước khi bot có
+thể gửi tin nhắn riêng.
+
+Bot Token được mã hóa trong `telegram_alert_settings.json`, không được trả về
+QML và không xuất hiện trong thông báo lỗi. Nút gửi thử dùng draft hiện tại mà
+không ghi đè cấu hình đã lưu. Nội dung dùng plain text, không bật parse mode và
+được giới hạn 4096 ký tự theo
+[Telegram Bot API](https://core.telegram.org/bots/api#sendmessage); đợt dài sẽ
+được tóm tắt thay vì bị API từ chối.
+
+Kiểm thử cấu hình, renderer, hàng đợi, Bot API mock và QML nằm trong
+`test_telegram_alerts.py` và `test_telegram_alert_manager.py`; không gửi tin
+nhắn Telegram thật.

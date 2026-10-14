@@ -436,6 +436,7 @@ def main() -> int:
     context.setContextProperty("syslogManager", syslog_manager)
     context.setContextProperty("syslogSettings", syslog_manager.settings)
     context.setContextProperty("emailAlertManager", syslog_manager.email_alerts)
+    context.setContextProperty("telegramAlertManager", syslog_manager.telegram_alerts)
     context.setContextProperty("automationManager", automation_manager)
     context.setContextProperty("securityAuditController", security_audit_controller)
     context.setContextProperty("nqvEasterEggEnabled", brand_easter_egg == "nqv")

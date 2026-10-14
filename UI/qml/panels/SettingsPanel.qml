@@ -22,7 +22,8 @@ Item {
         { "key": "batch_push", "title": LanguageState.text("Batch Push"), "desc": LanguageState.text("Parallel devices, test wave, and failure stop") },
         { "key": "sftp", "title": "SFTP/SCP", "desc": LanguageState.text("Default local and remote transfer paths") },
         { "key": "syslog_server", "title": LanguageState.text("System Logs"), "desc": LanguageState.text("Listener, device destination, and message retention") },
-        { "key": "email_alerts", "title": LanguageState.text("Email Alerts"), "desc": LanguageState.text("Send selected Syslog levels by email") }
+        { "key": "email_alerts", "title": LanguageState.text("Email Alerts"), "desc": LanguageState.text("Send selected Syslog levels by email") },
+        { "key": "telegram_alerts", "title": LanguageState.text("Telegram Alerts"), "desc": LanguageState.text("Send selected Syslog levels through a Telegram bot") }
     ]
 
     property var filteredItems: []
