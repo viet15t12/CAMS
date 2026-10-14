@@ -9,6 +9,7 @@ from typing import Any
 from PyQt6.QtCore import pyqtSlot
 
 from .conversion import _variant_list
+from .view_push_runtime import save_batch_policy
 
 
 class ViewPushSlotsMixin:
@@ -504,6 +505,20 @@ class ViewPushSlotsMixin:
             module,
             start_message,
             run_push,
+        )
+
+    @pyqtSlot(result="QVariant")
+    def batchPushPolicy(self) -> dict[str, int]:
+        """Expose parallelism, canary size and failure threshold to QML."""
+        return self._view_push_batch.policy()
+
+    @pyqtSlot(int, int, int, result="QVariant")
+    def setBatchPushPolicy(
+        self, max_concurrent_hosts: int, canary_hosts: int, max_fail_percent: int
+    ) -> dict[str, int]:
+        """Persist the batch policy; it applies from the next Push."""
+        return save_batch_policy(
+            self._view_push_batch, max_concurrent_hosts, canary_hosts, max_fail_percent
         )
 
     @pyqtSlot(str, "QVariant", str, result=bool)

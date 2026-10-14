@@ -178,6 +178,38 @@ Rectangle {
         errorText = ""
     }
 
+    function memberHosts() {
+        const hosts = []
+        for (let i = 0; i < memberModel.count; i++)
+            hosts.push(String(memberModel.get(i).host))
+        return hosts
+    }
+
+    function applyHostSelection(hosts) {
+        const wanted = {}
+        for (let i = 0; i < hosts.length; i++)
+            wanted[String(hosts[i])] = true
+        const current = memberHosts()
+        for (let j = 0; j < current.length; j++) {
+            if (wanted[current[j]] !== true)
+                toggleHost(current[j], false)
+        }
+        for (let k = 0; k < hosts.length; k++)
+            toggleHost(String(hosts[k]), true)
+    }
+
+    function applyModeToAll(modeFor) {
+        for (let i = 0; i < memberModel.count; i++) {
+            const mode = modeFor(i)
+            memberModel.setProperty(i, "vtpMode", mode)
+            // Pruning is only valid on a server, matching the per-card checkbox rule.
+            if (mode !== "server")
+                memberModel.setProperty(i, "pruning", false)
+        }
+        memberRepeater.model = null
+        memberRepeater.model = memberModel
+    }
+
     function memberPayload() {
         const members = []
         for (let i = 0; i < memberModel.count; i++) {
@@ -357,7 +389,7 @@ Rectangle {
         WorkspaceHeader {
             Layout.fillWidth: true
             title: "VTP Group"
-            subtitle: "Stage one VTP domain for two to five connected switches."
+            subtitle: "Stage one VTP domain for two or more connected switches."
 
             StandardButton {
                 text: "Add Group"
@@ -463,7 +495,7 @@ Rectangle {
                     FormSection {
                         Layout.fillWidth: true
                         title: "Participating switches"
-                        helpText: "Select 2-5 connected switches that should share the VTP domain configuration. Verify connectivity and current VLAN state before applying a common VTP policy."
+                        helpText: "Select two or more connected switches that should share the VTP domain configuration. Verify connectivity and current VLAN state before applying a common VTP policy."
 
                         RowLayout {
                             Layout.fillWidth: true
@@ -471,7 +503,7 @@ Rectangle {
 
                             Text {
                                 Layout.fillWidth: true
-                                text: memberModel.count + " selected · choose 2–5 connected switches"
+                                text: memberModel.count + " selected · choose 2 or more connected switches"
                                 color: memberModel.count >= 2 ? Theme.alertSuccess
                                                               : Theme.textSecondary
                                 font.family: Theme.fontFamily
@@ -498,6 +530,17 @@ Rectangle {
                                          ? "Connect at least two switches before creating a VTP group."
                                          : "Clear the filter or try another device name or address."
                             emphasized: false
+                        }
+
+                        HostSelectionBar {
+                            Layout.fillWidth: true
+                            items: (root.hostOptions || []).map(option => ({
+                                host: String(option.host),
+                                name: String(option.device_name || ""),
+                                role: String(option.role || "")
+                            }))
+                            selectedHosts: memberModel.count >= 0 ? root.memberHosts() : []
+                            onApplySelection: hosts => root.applyHostSelection(hosts)
                         }
 
                         GridLayout {
@@ -577,7 +620,32 @@ Rectangle {
                             emphasized: false
                         }
 
+                        RowLayout {
+                            Layout.fillWidth: true
+                            visible: memberModel.count > 0
+                            StandardComboBox {
+                                id: bulkModeCombo
+                                Layout.preferredWidth: 180
+                                labelText: "Mode for every switch"
+                                model: ["server", "client", "transparent", "off"]
+                                currentIndex: 1
+                            }
+                            StandardButton {
+                                Layout.alignment: Qt.AlignBottom
+                                text: "Apply to all"
+                                onClicked: root.applyModeToAll(i => bulkModeCombo.currentText)
+                            }
+                            StandardButton {
+                                Layout.alignment: Qt.AlignBottom
+                                text: "First server, rest client"
+                                type: "Text"
+                                onClicked: root.applyModeToAll(i => i === 0 ? "server" : "client")
+                            }
+                            Item { Layout.fillWidth: true }
+                        }
+
                         Repeater {
+                            id: memberRepeater
                             model: memberModel
                             delegate: Rectangle {
                                 id: memberCard

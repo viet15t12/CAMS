@@ -10,7 +10,7 @@ from .repository import SyslogRepository
 
 
 class SyslogGroupService:
-    """Stage a common Syslog destination for two to five Cisco devices."""
+    """Stage a common Syslog destination for two or more Cisco devices."""
 
     MAX_HOSTS = 5
 

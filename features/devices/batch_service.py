@@ -10,7 +10,7 @@ from infrastructure.network.batch_executor import BatchExecutor
 
 
 class DeviceBatchService:
-    def __init__(self, max_concurrent_hosts: int = 5) -> None:
+    def __init__(self, max_concurrent_hosts: int | None = None) -> None:
         self._executor = BatchExecutor(max_concurrent_hosts)
         self._lock = threading.RLock()
         self._cancellations: dict[str, threading.Event] = {}

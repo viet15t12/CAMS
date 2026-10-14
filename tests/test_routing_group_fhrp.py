@@ -109,8 +109,9 @@ class RoutingGroupAndFhrpTests(unittest.TestCase):
                 2,
             )
 
-    def test_routing_group_rejects_more_than_five_hosts(self) -> None:
-        result = RoutingGroupService(self.db).save(
+    def test_routing_group_rejects_more_hosts_than_available(self) -> None:
+        service = RoutingGroupService(self.db)
+        result = service.save(
             "ospf",
             [
                 {"host": f"10.0.0.{index}", "process_id": index, "networks": []}
@@ -120,7 +121,9 @@ class RoutingGroupAndFhrpTests(unittest.TestCase):
         )
 
         self.assertFalse(result["ok"])
-        self.assertEqual(result["message"], "Routing Group supports at most 5 hosts")
+        self.assertEqual(
+            result["message"], f"Routing Group supports at most {service.max_hosts()} hosts"
+        )
 
     def test_routing_group_partial_result_names_each_failed_host_and_reason(self) -> None:
         with self.db._connect() as connection:
@@ -416,8 +419,9 @@ class RoutingGroupAndFhrpTests(unittest.TestCase):
         self.assertEqual([task["sub_type"] for task in hsrp_tasks], ["hsrp"])
         self.assertEqual([task["sub_type"] for task in glbp_tasks], ["glbp"])
 
-    def test_fhrp_rejects_more_than_five_hosts(self) -> None:
-        result = FhrpService(self.db).save(
+    def test_fhrp_rejects_more_hosts_than_available(self) -> None:
+        service = FhrpService(self.db)
+        result = service.save(
             {
                 "protocol": "hsrp",
                 "group_number": 12,
@@ -430,7 +434,7 @@ class RoutingGroupAndFhrpTests(unittest.TestCase):
         )
 
         self.assertFalse(result["ok"])
-        self.assertIn("at most 5", result["message"])
+        self.assertIn(f"at most {service.max_hosts()}", result["message"])
 
     def test_fhrp_cli_rejection_is_not_reported_as_success(self) -> None:
         class Connection:

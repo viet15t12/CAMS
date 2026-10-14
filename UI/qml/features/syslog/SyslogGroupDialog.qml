@@ -13,6 +13,7 @@ StandardDialog {
     property var ownerForm: null
     property int stepIndex: 0
     property int selectedCount: 0
+    property string sourceFeedback: ""
     readonly property int maxHosts: targetModel.count > 0 ? targetModel.count : 5
     property string errorText: ""
     property string serverIp: ""
@@ -138,6 +139,66 @@ StandardDialog {
         errorText = ""
     }
 
+    function targetItems() {
+        const items = []
+        for (let i = 0; i < targetModel.count; ++i) {
+            const row = targetModel.get(i)
+            items.push({host: String(row.host), name: String(row.deviceName || ""),
+                        role: String(row.roleName || "")})
+        }
+        return items
+    }
+
+    function selectedHostList() {
+        const hosts = []
+        for (let i = 0; i < targetModel.count; ++i) {
+            if (targetModel.get(i).selected)
+                hosts.push(String(targetModel.get(i).host))
+        }
+        return hosts
+    }
+
+    function applyHostSelection(hosts) {
+        const wanted = {}
+        for (let i = 0; i < hosts.length; ++i)
+            wanted[String(hosts[i])] = true
+        for (let j = 0; j < targetModel.count; ++j) {
+            const row = targetModel.get(j)
+            // Hosts without interface inventory stay disabled, as with the checkbox.
+            updateSelected(j, wanted[String(row.host)] === true
+                              && collectionCount(row.interfaces) > 0)
+        }
+    }
+
+    // Pick, per selected host, the first interface whose name matches the pattern.
+    function applySourceInterface() {
+        const pattern = sourcePatternField.text.trim()
+        const match = pattern === "" ? null : HostPattern.tokenMatcher(pattern)
+        if (match === null) {
+            sourceFeedback = "Type an interface name or wildcard, for example Loopback0 or Vlan*."
+            return
+        }
+        let changed = 0
+        const missing = []
+        for (let i = 0; i < targetModel.count; ++i) {
+            const row = targetModel.get(i)
+            if (!row.selected)
+                continue
+            const names = interfaceNames(row.interfaces)
+            const found = names.find(name => match({host: "", name: name}))
+            if (found === undefined) {
+                missing.push(String(row.host))
+            } else {
+                targetModel.setProperty(i, "sourceInterface", found)
+                changed++
+            }
+        }
+        sourceRepeater.model = null
+        sourceRepeater.model = targetModel
+        sourceFeedback = "Source interface set on " + changed + " host(s)."
+                + (missing.length > 0 ? " No match on: " + missing.join(", ") + "." : "")
+    }
+
     function selectedTargets() {
         const targets = []
         for (let i = 0; i < targetModel.count; ++i) {
@@ -254,6 +315,8 @@ StandardDialog {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
+            // Pin content to the viewport; otherwise it shrinks to its implicit width.
+            contentWidth: availableWidth
 
             ColumnLayout {
                 width: parent.width
@@ -262,9 +325,16 @@ StandardDialog {
                 FormSection {
                     Layout.fillWidth: true
                     visible: dialog.stepIndex === 0
-                    title: "Select participating hosts (2–5 devices)"
+                    title: "Select participating hosts (2 or more devices)"
                     helpTitle: "Syslog Group host selection"
-                    helpText: "Participating hosts: Select between two and five connected Cisco IOS/IOS-XE devices. Each host is saved independently, so one failure does not roll back successful hosts.\n\nInterface count: Number of synchronized source-interface candidates owned by that device. A host without interface inventory is disabled until Interfaces or Switching data is synchronized."
+                    helpText: "Participating hosts: Select two or more connected Cisco IOS/IOS-XE devices, up to every available device. Each host is saved independently, so one failure does not roll back successful hosts.\n\nInterface count: Number of synchronized source-interface candidates owned by that device. A host without interface inventory is disabled until Interfaces or Switching data is synchronized."
+
+                    HostSelectionBar {
+                        Layout.fillWidth: true
+                        items: targetModel.count >= 0 ? dialog.targetItems() : []
+                        selectedHosts: dialog.selectedCount >= 0 ? dialog.selectedHostList() : []
+                        onApplySelection: hosts => dialog.applyHostSelection(hosts)
+                    }
 
                     Repeater {
                         model: targetModel
@@ -316,7 +386,34 @@ StandardDialog {
                     helpTitle: "Per-host source interface"
                     helpText: "Source interface: Cisco interface whose IP address is used as the source of outgoing Syslog packets. Loopback is preferred for stable identity; otherwise choose the management interface or reachable SVI. The interface must belong to the selected host."
 
+                    RowLayout {
+                        Layout.fillWidth: true
+                        StandardTextField {
+                            id: sourcePatternField
+                            objectName: "syslogBulkSourceField"
+                            Layout.fillWidth: true
+                            labelText: "Source interface for every host"
+                            placeholderText: "Loopback0  ·  Vlan1  ·  Lo*  ·  Gi*0/0"
+                            onAccepted: dialog.applySourceInterface()
+                        }
+                        StandardButton {
+                            Layout.alignment: Qt.AlignBottom
+                            text: "Apply to all"
+                            onClicked: dialog.applySourceInterface()
+                        }
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        visible: dialog.sourceFeedback !== ""
+                        text: dialog.sourceFeedback
+                        color: Theme.textSecondary
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        wrapMode: Text.WordWrap
+                    }
+
                     Repeater {
+                        id: sourceRepeater
                         model: targetModel
                         delegate: RowLayout {
                             required property int index

@@ -116,7 +116,7 @@ class DeviceSelectionContractTests(unittest.TestCase):
         self.assertIn("acceptedModifiers: Qt.ShiftModifier", self.syslog_item)
         self.assertIn('text: "Configure as Syslog Group ("', self.syslog_menu)
         self.assertIn("root.batchHosts.length >= 2", self.syslog_menu)
-        self.assertIn("root.batchHosts.length <= 5", self.syslog_menu)
+        self.assertNotIn("root.batchHosts.length <= 5", self.syslog_menu)
 
 
 if __name__ == "__main__":

@@ -14,7 +14,7 @@ StandardDialog {
     property var ownerForm: null
     property var hostRows: []
     property int selectedCount: 0
-    readonly property int maxHosts: 5
+    readonly property int maxHosts: Math.max(2, targetModel.count)
     property string errorText: ""
 
     preferredWidth: 920
@@ -47,6 +47,7 @@ StandardDialog {
             targetModel.append({
                 host: String(hostRows[i].host),
                 deviceName: String(hostRows[i].device_name || ""),
+                role: String(hostRows[i].role || ""),
                 selected: false,
                 processId: "",
                 routerId: "",
@@ -84,6 +85,40 @@ StandardDialog {
         selectedCount += selected ? 1 : -1
         selectedCount = Math.max(0, selectedCount)
         errorText = ""
+    }
+
+    function targetItems() {
+        const items = []
+        for (let i = 0; i < targetModel.count; i++) {
+            const row = targetModel.get(i)
+            items.push({host: String(row.host), name: String(row.deviceName || ""),
+                        role: String(row.role || "")})
+        }
+        return items
+    }
+
+    function selectedHostList() {
+        const hosts = []
+        for (let i = 0; i < targetModel.count; i++) {
+            if (targetModel.get(i).selected)
+                hosts.push(String(targetModel.get(i).host))
+        }
+        return hosts
+    }
+
+    function applyHostSelection(hosts) {
+        const wanted = {}
+        for (let i = 0; i < hosts.length; i++)
+            wanted[String(hosts[i])] = true
+        // Deselect first so the maxHosts limit counts only the new selection.
+        for (let j = 0; j < targetModel.count; j++) {
+            if (wanted[String(targetModel.get(j).host)] !== true)
+                updateSelected(j, false)
+        }
+        for (let k = 0; k < targetModel.count; k++) {
+            if (wanted[String(targetModel.get(k).host)] === true)
+                updateSelected(k, true)
+        }
     }
 
     function selectedTargets() {
@@ -239,10 +274,19 @@ StandardDialog {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
+            // Pin content to the viewport; otherwise it shrinks to its implicit width.
+            contentWidth: availableWidth
             ColumnLayout {
                 width: parent.width
                 spacing: Theme.spacing12
 
+                HostSelectionBar {
+                    Layout.fillWidth: true
+                    visible: dialog.stepIndex === 0
+                    items: targetModel.count >= 0 ? dialog.targetItems() : []
+                    selectedHosts: dialog.selectedCount >= 0 ? dialog.selectedHostList() : []
+                    onApplySelection: hosts => dialog.applyHostSelection(hosts)
+                }
                 RoutingGroupHostStep {
                     Layout.fillWidth: true
                     visible: dialog.stepIndex === 0

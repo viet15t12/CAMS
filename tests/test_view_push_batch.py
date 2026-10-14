@@ -124,22 +124,78 @@ class ViewPushBatchServiceTests(unittest.TestCase):
             [("r1", contexts["r1"]), ("r3", contexts["r3"])],
         )
 
-    def test_pushes_up_to_five_hosts_at_the_same_time(self) -> None:
+    def test_concurrency_is_configurable_and_hard_capped(self) -> None:
         controller = _Controller()
         service = ViewPushBatchService(
-            _Factory(controller), max_concurrent_hosts=99
+            _Factory(controller), max_concurrent_hosts=4, canary_hosts=0
         )
 
         result = service.run(
             "routing",
             "ospf",
-            [f"r{index}" for index in range(1, 7)],
+            [f"r{index}" for index in range(3, 13)],
             on_host=lambda *_: None,
             on_progress=lambda *_: None,
         )
 
-        self.assertEqual(result["total"], 6)
-        self.assertEqual(controller.maximum, 5)
+        self.assertEqual(result["total"], 10)
+        self.assertEqual(controller.maximum, 4)
+        capped = ViewPushBatchService(_Factory(controller), max_concurrent_hosts=999)
+        self.assertEqual(capped._executor.max_concurrent_hosts, 50)
+
+    def test_policy_update_is_clamped_and_reported(self) -> None:
+        service = ViewPushBatchService(_Factory(_Controller()))
+
+        policy = service.set_policy(999, -3, 150)
+
+        self.assertEqual(
+            policy,
+            {"maxConcurrentHosts": 50, "canaryHosts": 0, "maxFailPercent": 100},
+        )
+        self.assertEqual(service.policy(), policy)
+
+    def test_canary_wave_finishes_before_remaining_hosts_start(self) -> None:
+        controller = _Controller()
+        started: list[str] = []
+        service = ViewPushBatchService(
+            _Factory(controller), max_concurrent_hosts=20,
+            canary_hosts=3, max_fail_percent=100,
+        )
+
+        result = service.run(
+            "routing",
+            "ospf",
+            [f"r{index}" for index in range(3, 13)],
+            on_host=lambda host, state, *_: (
+                started.append(host) if state == "running" else None
+            ),
+            on_progress=lambda *_: None,
+        )
+
+        self.assertEqual(result["success"], 10)
+        self.assertCountEqual(started[:3], ["r3", "r4", "r5"])
+        self.assertLessEqual(controller.maximum, 7)
+
+    def test_failure_threshold_stops_remaining_hosts(self) -> None:
+        controller = _Controller()
+        controller.push = lambda host, module: {"ok": False, "message": "down"}
+        service = ViewPushBatchService(
+            _Factory(controller), max_concurrent_hosts=2,
+            canary_hosts=3, max_fail_percent=30,
+        )
+
+        result = service.run(
+            "routing",
+            "ospf",
+            [f"r{index}" for index in range(1, 11)],
+            on_host=lambda *_: None,
+            on_progress=lambda *_: None,
+        )
+
+        self.assertEqual(result["failed"], 3)
+        self.assertEqual(result["cancelled"], 7)
+        self.assertTrue(result["halted"])
+        self.assertIn("failure rate exceeded 30%", result["message"])
 
     def test_cancelled_batch_does_not_start_queued_hosts(self) -> None:
         controller = _Controller()

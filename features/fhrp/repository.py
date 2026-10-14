@@ -27,7 +27,7 @@ class FhrpRepository:
         with closing(self.db._connect()) as conn:
             rows = conn.execute(
                 """
-                SELECT host, device_name
+                SELECT host, device_name, role, device_type
                 FROM t01_devices
                 WHERE connection_status = 'connected'
                   AND (
@@ -38,7 +38,11 @@ class FhrpRepository:
                 """
             ).fetchall()
         return [
-            {"host": row["host"], "device_name": row["device_name"] or ""}
+            {
+                "host": row["host"],
+                "device_name": row["device_name"] or "",
+                "role": str(row["role"] or row["device_type"] or ""),
+            }
             for row in rows
         ]
 

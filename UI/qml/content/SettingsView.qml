@@ -26,6 +26,7 @@ Rectangle {
     readonly property bool isSyslogSetting: activeSettingKey === "syslog_server"
     readonly property bool isEmailAlertSetting: activeSettingKey === "email_alerts"
     readonly property bool isSftpSetting: activeSettingKey === "sftp"
+    readonly property bool isBatchPushSetting: activeSettingKey === "batch_push"
     readonly property bool isSoftwareUpdateSetting: activeSettingKey === "software_update"
 
     function statusBarPreviewDate() {
@@ -1132,6 +1133,7 @@ Rectangle {
                  && !settingsView.isSyslogSetting
                  && !settingsView.isEmailAlertSetting
                  && !settingsView.isSftpSetting
+                 && !settingsView.isBatchPushSetting
                  && !settingsView.isSoftwareUpdateSetting
 
         Text {
@@ -1161,6 +1163,11 @@ Rectangle {
     SftpSettings {
         anchors.fill: parent
         visible: settingsView.isSftpSetting
+    }
+
+    BatchPushSettings {
+        anchors.fill: parent
+        visible: settingsView.isBatchPushSetting
     }
 
     SoftwareUpdateSettings {

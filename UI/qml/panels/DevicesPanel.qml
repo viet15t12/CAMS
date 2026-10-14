@@ -230,6 +230,27 @@ Item {
         deviceSelectionChanged(selectedHostList)
     }
 
+    function visibleHostItems() {
+        return connectedSection.devices.concat(
+            waitingSection.devices,
+            disconnectedSection.devices
+        ).map(device => ({
+            host: String(device.ip || ""),
+            name: String(device.name || ""),
+            role: String(device.type || "")
+        }))
+    }
+
+    function selectHosts(hosts) {
+        const next = ({})
+        for (let i = 0; i < hosts.length; ++i)
+            next[String(hosts[i])] = true
+        selectedHosts = next
+        if (hosts.length > 0)
+            anchorHost = String(hosts[0])
+        deviceSelectionChanged(selectedHostList)
+    }
+
     function hostStatusMap() {
         const statuses = ({})
         for (let i = 0; i < allDevices.length; ++i)
@@ -605,6 +626,17 @@ Item {
             visibleCount: devicesPanel.visibleHosts().length
             onSelectAllRequested: devicesPanel.selectAllVisibleHosts()
             onClearRequested: devicesPanel.clearSelection()
+        }
+
+        HostSelectionBar {
+            objectName: "deviceHostSelectionBar"
+            Layout.fillWidth: true
+            Layout.leftMargin: Theme.spacing8
+            Layout.rightMargin: Theme.spacing8
+            visible: devicesPanel.multiSelectMode
+            items: devicesPanel.multiSelectMode ? devicesPanel.visibleHostItems() : []
+            selectedHosts: devicesPanel.selectedHostList
+            onApplySelection: hosts => devicesPanel.selectHosts(hosts)
         }
 
         ScrollView {

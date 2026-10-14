@@ -248,9 +248,10 @@ class QmlSmokeTests(unittest.TestCase):
 
         self.assertFalse(limit_is_undefined)
         limit_map = limit_result.toVariant()
-        self.assertEqual(limit_map["count"], 5)
-        self.assertEqual(limit_map["targets"], 5)
-        self.assertIn("at most 5 hosts", limit_map["error"])
+        # The limit follows the available hosts, so all six can be selected.
+        self.assertEqual(limit_map["count"], 6)
+        self.assertEqual(limit_map["targets"], 6)
+        self.assertEqual(limit_map["error"], "")
 
     def test_routing_group_network_area_columns_align_across_hosts_and_widths(self) -> None:
         window = self._create("tests/qml/RoutingGroupNetworkGeometryHarness.qml")

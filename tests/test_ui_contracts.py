@@ -903,7 +903,7 @@ class ButtonIconContractTests(unittest.TestCase):
         self.assertIn("groupDialog.openFor(root, hosts)", devices_panel)
         self.assertIn('sequence: "Escape"', devices_panel)
         self.assertIn('text: "Configure as Syslog Group ("', context_menu)
-        self.assertIn("root.batchHosts.length <= 5", context_menu)
+        self.assertNotIn("root.batchHosts.length <= 5", context_menu)
         self.assertIn('controllerName: "syslog"', config_page)
         self.assertIn("CrudFormActions {", config_page)
         self.assertIn("getDeviceConfigurations(host)", config_page)

@@ -23,6 +23,13 @@ class FhrpService:
         self.db = db
         self.repository = FhrpRepository(db)
 
+    def max_hosts(self) -> int:
+        """A group may include every connected host, never fewer than two."""
+        try:
+            return max(len(self.repository.connected_hosts()), 2)
+        except Exception:
+            return self.MAX_HOSTS
+
     def options(self) -> dict[str, Any]:
         return {"ok": True, "hosts": self.repository.connected_hosts()}
 
@@ -103,9 +110,10 @@ class FhrpService:
         ]
         if len(raw_members) < 2:
             raise ValueError("FHRP requires at least two selected hosts.")
-        if len(raw_members) > self.MAX_HOSTS:
+        max_limit = self.max_hosts()
+        if len(raw_members) > max_limit:
             raise ValueError(
-                f"FHRP supports at most {self.MAX_HOSTS} selected hosts."
+                f"FHRP supports at most {max_limit} selected hosts."
             )
         hosts: set[str] = set()
         selected_endpoints: set[tuple[str, str, int]] = set()

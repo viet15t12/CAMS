@@ -23,7 +23,7 @@ class VtpGroupRepository:
         with closing(self.db._connect()) as conn:
             rows = conn.execute(
                 """
-                SELECT host, device_name
+                SELECT host, device_name, role, device_type
                 FROM t01_devices
                 WHERE connection_status = 'connected'
                   AND (
@@ -34,7 +34,11 @@ class VtpGroupRepository:
                 """
             ).fetchall()
         return [
-            {"host": str(row["host"]), "device_name": str(row["device_name"] or "")}
+            {
+                "host": str(row["host"]),
+                "device_name": str(row["device_name"] or ""),
+                "role": str(row["role"] or row["device_type"] or ""),
+            }
             for row in rows
         ]
 
@@ -356,7 +360,7 @@ class VtpGroupRepository:
 
 
 class VtpGroupService:
-    """Validate a VTP domain and stage it independently for up to five switches."""
+    """Validate a VTP domain and stage it independently for every connected switch."""
 
     MAX_HOSTS = 5
 
@@ -368,7 +372,7 @@ class VtpGroupService:
     def max_hosts(self) -> int:
         try:
             count = len(self.repository.connected_switches())
-            return min(self.MAX_HOSTS, max(count, 2))
+            return max(count, 2)
         except Exception:
             return self.MAX_HOSTS
 

@@ -21,6 +21,13 @@ StandardDialog {
     property string messageText: ""
     property bool isPushing: false
     property int pushTargetCount: 0
+    property var batchPolicy: ({})
+    property double pushStartedAt: 0
+    property double pushElapsedMs: 0
+    readonly property int canarySize: {
+        const size = Number(batchPolicy.canaryHosts || 0)
+        return size > 0 && size < pushTargetCount ? size : 0
+    }
     property var ownerForm: null
     readonly property int pendingPreviewCount:
         Object.keys(pendingPreviews).length
@@ -49,6 +56,7 @@ StandardDialog {
         moduleName = String(module || "all").toLowerCase()
         results = []
         pushTargetCount = 0
+        pushStartedAt = 0
         pendingHosts = ({})
         previewResults = ({})
         const pending = {}
@@ -108,12 +116,35 @@ StandardDialog {
         for (let i = 0; i < readyHosts.length; i++)
             pending[String(readyHosts[i])] = true
         pendingHosts = pending
+        batchPolicy = typeof dbManager.batchPushPolicy === "function"
+                ? dbManager.batchPushPolicy() : ({})
+        pushStartedAt = Date.now()
+        pushElapsedMs = 0
         isPushing = true
-        messageText = "Pushing configuration to " + readyHosts.length + " device(s)..."
+        messageText = pushStatusText()
         if (!dbManager.pushViewPushBatchAsync(controllerName, readyHosts, moduleName)) {
             for (let j = 0; j < readyHosts.length; j++)
                 recordResult(String(readyHosts[j]), false, "Batch Push task could not start.")
         }
+    }
+
+    function elapsedText() {
+        return (pushElapsedMs / 1000).toFixed(1) + " s"
+    }
+
+    function pushStatusText() {
+        const parallel = Number(batchPolicy.maxConcurrentHosts || 0)
+        const prefix = parallel > 0 ? parallel + " at a time. " : ""
+        if (canarySize === 0)
+            return prefix + "Pushing configuration to " + pushTargetCount + " device(s)..."
+        if (results.length < canarySize)
+            return prefix + "Wave 1/2 (test wave): " + results.length + "/" + canarySize
+                    + " devices done. The other " + (pushTargetCount - canarySize)
+                    + " devices wait for this wave."
+        const waveFailed = results.slice(0, canarySize).filter(item => !item.ok).length
+        return prefix + "Wave 1/2 finished (" + (canarySize - waveFailed) + " ok, "
+                + waveFailed + " failed). Wave 2/2: remaining "
+                + (pushTargetCount - canarySize) + " device(s)..."
     }
 
     function recordResult(host, ok, message) {
@@ -123,23 +154,46 @@ StandardDialog {
         delete pending[String(host)]
         pendingHosts = pending
         const next = results.slice()
-        next.push({host: String(host), ok: Boolean(ok), message: String(message || "")})
+        const text = String(message || "")
+        next.push({
+            host: String(host),
+            ok: Boolean(ok),
+            // Backend marks hosts it never started after the failure threshold.
+            skipped: !ok && text.indexOf("batch stopped") >= 0,
+            message: text
+        })
         results = next
-        if (Object.keys(pending).length === 0) {
+        pushElapsedMs = Date.now() - pushStartedAt
+        if (Object.keys(pending).length > 0) {
+            messageText = pushStatusText()
+        } else {
             isPushing = false
             const succeeded = next.filter(item => item.ok)
-            const failed = next.filter(item => !item.ok)
-            messageText = "Push completed: " + succeeded.length + " succeeded, "
-                    + failed.length + " failed."
+            const skipped = next.filter(item => item.skipped)
+            const failed = next.filter(item => !item.ok && !item.skipped)
+            messageText = "Push completed in " + elapsedText() + ": "
+                    + succeeded.length + " succeeded, " + failed.length + " failed"
+                    + (skipped.length > 0 ? ", " + skipped.length + " skipped" : "") + "."
             if (failed.length > 0)
                 messageText += " Failed: "
                         + failed.map(item => item.host).join(", ") + "."
+            if (skipped.length > 0)
+                messageText += " Stopped because failures exceeded "
+                        + Number(batchPolicy.maxFailPercent || 0) + "%; skipped (not changed): "
+                        + skipped.map(item => item.host).join(", ") + "."
             notify(messageText, failed.length === 0 ? "success" : "warning")
             if (ownerForm && ownerForm.reloadData)
                 ownerForm.reloadData("pushCompleted")
             pushCompleted(failed.length === 0, messageText)
             close()
         }
+    }
+
+    Timer {
+        interval: 200
+        repeat: true
+        running: dialog.isPushing
+        onTriggered: dialog.pushElapsedMs = Date.now() - dialog.pushStartedAt
     }
 
     Connections {
@@ -180,6 +234,7 @@ StandardDialog {
             }
             Text {
                 text: dialog.completedStepCount + " / " + dialog.totalStepCount
+                      + (dialog.pushStartedAt > 0 ? "  ·  " + dialog.elapsedText() : "")
                 color: Theme.textSecondary
                 font.family: Theme.fontFamily
                 font.pixelSize: Theme.fontSizeSmall

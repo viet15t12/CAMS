@@ -8,7 +8,7 @@ FormSection {
     id: root
     required property var targetModel
     required property var controller
-    title: "Select participating hosts (2–5 devices)"
+    title: "Select participating hosts (2 or more devices)"
     helpText: "Select between 2 and 5 connected routers that will receive the shared routing configuration. Only checked hosts are changed. Review device reachability and interface synchronization before continuing."
 
     Repeater {

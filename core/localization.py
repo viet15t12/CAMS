@@ -32,6 +32,8 @@ _VIETNAMESE_TEXT: dict[str, str] = {
     "System Logs": "System Logs",
     "Listener, device destination, and message retention": "Listener, đích thiết bị và thời gian lưu message",
     "Email Alerts": "Cảnh báo qua email",
+    "Batch Push": "Push hàng loạt",
+    "Parallel devices, test wave, and failure stop": "Số máy song song, đợt thử và ngưỡng dừng khi lỗi",
     "Send selected Syslog levels by email": "Gửi các mức Syslog đã chọn qua email",
     "Language and notification translation": "Ngôn ngữ và bản dịch thông báo",
     "Software Update": "Cập nhật phần mềm",

@@ -102,7 +102,7 @@ class TerminalHelper(QObject):
                 self._device_login_service.repository.get_role,
             )
         self._config_sync_service = config_sync_service
-        self._batch_service = DeviceBatchService(max_concurrent_hosts=5)
+        self._batch_service = DeviceBatchService()
         self._connection_service = DeviceConnectionService(
             self._device_login_service,
             self._device_service,

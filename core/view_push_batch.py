@@ -6,7 +6,11 @@ import threading
 from collections.abc import Callable
 from typing import Any
 
-from infrastructure.network.batch_executor import BatchExecutor
+from infrastructure.network.batch_executor import (
+    DEFAULT_CANARY_HOSTS,
+    DEFAULT_MAX_FAIL_PERCENT,
+    BatchExecutor,
+)
 
 
 HostCallback = Callable[[str, str, str, int], None]
@@ -16,17 +20,36 @@ ProgressCallback = Callable[[int, int, int, int], None]
 class ViewPushBatchService:
     """Run one controller independently per host with bounded concurrency."""
 
-    MAX_CONCURRENT_HOSTS = 5
-
-    def __init__(self, controller_factory: Any, max_concurrent_hosts: int = 5) -> None:
+    def __init__(
+        self,
+        controller_factory: Any,
+        max_concurrent_hosts: int | None = None,
+        canary_hosts: int = DEFAULT_CANARY_HOSTS,
+        max_fail_percent: int = DEFAULT_MAX_FAIL_PERCENT,
+    ) -> None:
         self._controllers = controller_factory
-        concurrency = min(
-            self.MAX_CONCURRENT_HOSTS,
-            max(1, int(max_concurrent_hosts)),
-        )
-        self._executor = BatchExecutor(concurrency)
+        self._executor = BatchExecutor(max_concurrent_hosts)
+        self._canary_hosts = canary_hosts
+        self._max_fail_percent = max_fail_percent
         self._lock = threading.RLock()
         self._active_cancellations: set[threading.Event] = set()
+
+    def policy(self) -> dict[str, int]:
+        return {
+            "maxConcurrentHosts": self._executor.max_concurrent_hosts,
+            "canaryHosts": self._canary_hosts,
+            "maxFailPercent": self._max_fail_percent,
+        }
+
+    def set_policy(
+        self, max_concurrent_hosts: int, canary_hosts: int, max_fail_percent: int
+    ) -> dict[str, int]:
+        # A running batch keeps its own executor reference; the change applies
+        # to the next Push.
+        self._executor = BatchExecutor(max_concurrent_hosts)
+        self._canary_hosts = max(0, int(canary_hosts))
+        self._max_fail_percent = max(0, min(100, int(max_fail_percent)))
+        return self.policy()
 
     def cancel_all(self) -> None:
         """Prevent queued hosts from starting during application shutdown."""
@@ -84,6 +107,10 @@ class ViewPushBatchService:
                 cancel_event=cancellation,
                 on_host=on_host,
                 on_progress=on_progress,
+                # Post-push reconcile stays unthrottled: halting it would leave
+                # already-pushed hosts unsaved.
+                canary_hosts=self._canary_hosts,
+                max_fail_percent=self._max_fail_percent,
             )
         finally:
             with self._lock:
@@ -91,6 +118,7 @@ class ViewPushBatchService:
         succeeded = sum(1 for item in results if item.get("ok"))
         cancelled = sum(1 for item in results if item.get("state") == "cancelled")
         failed = len(results) - succeeded - cancelled
+        halted = any(item.get("halted") for item in results)
         return {
             "ok": failed == 0 and cancelled == 0,
             "partial": succeeded > 0 and (failed > 0 or cancelled > 0),
@@ -98,10 +126,12 @@ class ViewPushBatchService:
             "success": succeeded,
             "failed": failed,
             "cancelled": cancelled,
+            "halted": halted,
             "results": results,
             "message": (
                 f"Push completed: {succeeded} succeeded, {failed} failed"
-                f"{f', {cancelled} cancelled' if cancelled else ''}."
+                f"{f', {cancelled} cancelled' if cancelled else ''}"
+                f"{f' (stopped: failure rate exceeded {self._max_fail_percent}%)' if halted else ''}."
             ),
         }
 

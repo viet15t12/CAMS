@@ -17,6 +17,13 @@ class RoutingGroupService:
         self.db = db
         self.repository = RoutingGroupRepository(db)
 
+    def max_hosts(self) -> int:
+        """A group may include every host that can be configured, never fewer than two."""
+        try:
+            return max(len(self.repository.configuration_hosts()), 2)
+        except Exception:
+            return self.MAX_HOSTS
+
     def options(self) -> dict[str, Any]:
         """Return host/network choices already filtered by interface ownership."""
         return {"ok": True, "hosts": self.repository.configuration_hosts()}
@@ -30,9 +37,10 @@ class RoutingGroupService:
         normalized = [target for target in normalized if str(target.get("host") or "").strip()]
         if len(normalized) < 2:
             return self._error("Routing Group requires at least two hosts")
-        if len(normalized) > self.MAX_HOSTS:
+        max_limit = self.max_hosts()
+        if len(normalized) > max_limit:
             return self._error(
-                f"Routing Group supports at most {self.MAX_HOSTS} hosts"
+                f"Routing Group supports at most {max_limit} hosts"
             )
         hosts = [str(target.get("host") or "").strip() for target in normalized]
         if len(hosts) != len(set(hosts)):

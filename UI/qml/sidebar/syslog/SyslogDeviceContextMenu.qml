@@ -111,7 +111,6 @@ Rectangle {
             text: "Configure as Syslog Group (" + root.batchHosts.length + ")"
             iconSource: AppAssets.actionPush
             enabled: !root.busy && root.batchHosts.length >= 2
-                     && root.batchHosts.length <= 5
             onTriggered: {
                 root.groupRequested(root.batchHosts.slice(0))
                 root.close()

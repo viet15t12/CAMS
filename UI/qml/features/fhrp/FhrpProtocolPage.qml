@@ -67,7 +67,7 @@ Rectangle {
     property int advertisementMs: 1000
     property string loadBalancing: "round-robin"
     property alias savedGroupModel: groupModel
-    readonly property int maxHosts: 5
+    readonly property int maxHosts: Math.max(2, (root.hostOptions || []).length)
     readonly property bool isViewLoading: false
     readonly property bool compactLayout: width < Theme.dataWorkspaceBreakpoint
     readonly property string protocolTitle: protocol === "hsrp"
@@ -179,7 +179,7 @@ Rectangle {
         return -1
     }
 
-    function toggleHost(host, selected) {
+    function toggleHost(host, selected, refresh = true) {
         const index = findMemberIndex(host)
         if (selected && index < 0) {
             if (memberModel.count >= maxHosts) {
@@ -205,6 +205,22 @@ Rectangle {
             memberModel.remove(index)
         }
         errorText = ""
+        if (refresh)
+            refreshMatchingInterfaces()
+    }
+
+    function applyHostSelection(hosts) {
+        const wanted = {}
+        for (let i = 0; i < hosts.length; i++)
+            wanted[String(hosts[i])] = true
+        const current = selectedHosts()
+        for (let j = 0; j < current.length; j++) {
+            if (wanted[String(current[j])] !== true)
+                toggleHost(current[j], false, false)
+        }
+        for (let k = 0; k < hosts.length; k++)
+            toggleHost(String(hosts[k]), true, false)
+        // One interface lookup for the whole selection instead of one per host.
         refreshMatchingInterfaces()
     }
 
@@ -315,6 +331,22 @@ Rectangle {
             return
         }
         memberModel.setProperty(index, field, value)
+    }
+
+    function applyPolicyToAll() {
+        const priority = bulkPriorityField.text.trim()
+        if (priority !== "" && !/^\d+$/.test(priority)) {
+            errorText = "Priority must be a number."
+            return
+        }
+        for (let i = 0; i < memberModel.count; i++) {
+            if (priority !== "")
+                updateMember(i, "priority", priority)
+            updateMember(i, "preempt", bulkPreemptCheck.checked)
+        }
+        errorText = ""
+        memberRepeater.model = null
+        memberRepeater.model = memberModel
     }
 
     function parseTracks(value) {
@@ -652,6 +684,17 @@ Rectangle {
                         wrapMode: Text.WordWrap
                     }
 
+                    HostSelectionBar {
+                        Layout.fillWidth: true
+                        items: (root.hostOptions || []).map(option => ({
+                            host: String(option.host),
+                            name: String(option.device_name || ""),
+                            role: String(option.role || "")
+                        }))
+                        selectedHosts: memberModel.count >= 0 ? root.selectedHosts() : []
+                        onApplySelection: hosts => root.applyHostSelection(hosts)
+                    }
+
                     GridLayout {
                         objectName: "fhrpHostPicker"
                         Layout.fillWidth: true
@@ -804,7 +847,34 @@ Rectangle {
                         emphasized: false
                     }
 
+                    RowLayout {
+                        Layout.fillWidth: true
+                        visible: memberModel.count > 0
+                        StandardTextField {
+                            id: bulkPriorityField
+                            objectName: "fhrpBulkPriorityField"
+                            Layout.preferredWidth: 180
+                            labelText: "Priority for every router"
+                            placeholderText: "100"
+                            inputMethodHints: Qt.ImhDigitsOnly
+                            onAccepted: root.applyPolicyToAll()
+                        }
+                        StandardCheckBox {
+                            id: bulkPreemptCheck
+                            Layout.alignment: Qt.AlignBottom
+                            text: "Preempt"
+                            checked: true
+                        }
+                        StandardButton {
+                            Layout.alignment: Qt.AlignBottom
+                            text: "Apply to all"
+                            onClicked: root.applyPolicyToAll()
+                        }
+                        Item { Layout.fillWidth: true }
+                    }
+
                     Repeater {
+                        id: memberRepeater
                         model: memberModel
                         delegate: FhrpMemberEditor {
                             id: memberEditor

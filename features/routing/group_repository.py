@@ -86,6 +86,7 @@ class RoutingGroupRepository:
                     {
                         "host": row["host"],
                         "device_name": row["device_name"] or "",
+                        "role": str(row["role"] or row["device_type"] or ""),
                         "networks": list(networks.values()),
                     }
                 )
