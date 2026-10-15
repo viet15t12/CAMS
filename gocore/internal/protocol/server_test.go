@@ -27,13 +27,13 @@ func TestServerHandshakePingAndShutdown(t *testing.T) {
 	}
 }
 
-func TestServerRejectsMutationMode(t *testing.T) {
+func TestServerAcceptsAutoPlanningMode(t *testing.T) {
 	input := fmt.Sprintf(`{"protocol_version":1,"type":"hello","request_id":"1","payload":{"mode":"auto","project_id":"project-1","rules_dir":%q}}`, t.TempDir()) + "\n"
 	var output bytes.Buffer
-	if err := NewServer(strings.NewReader(input), &output).Run(); err == nil {
-		t.Fatal("Run() accepted auto mode")
+	if err := NewServer(strings.NewReader(input), &output).Run(); err != nil {
+		t.Fatalf("Run() rejected auto mode: %v", err)
 	}
-	if !strings.Contains(output.String(), "only supports dry-run") {
+	if !strings.Contains(output.String(), `"mode":"auto"`) {
 		t.Fatalf("unexpected output: %q", output.String())
 	}
 }

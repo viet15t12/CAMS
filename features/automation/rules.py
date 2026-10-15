@@ -10,11 +10,25 @@ from pathlib import Path
 from typing import Any
 
 
-RULE_VERSION = 1
+RULE_VERSION = 2
+SUPPORTED_RULE_VERSIONS = frozenset({1, 2})
 MAX_RULE_BYTES = 256 * 1024
 MAX_RULE_FILES = 256
+MAX_CLI_COMMANDS = 100
+MAX_VERIFY_COMMANDS = 20
+MAX_CLI_COMMAND_LENGTH = 512
+MAX_CLI_TOTAL_LENGTH = 16 * 1024
+RULE_SUFFIX = ".rule.cams"
+LEGACY_RULE_SUFFIX = ".json"
 _IDENTIFIER = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 _TOP_LEVEL = {"version", "metadata", "schedule", "match", "policy", "action"}
+_V1_ACTION_FIELDS = {
+    "type", "transport", "protocol", "source_from", "interface_from",
+    "interface", "enabled", "ttl_seconds",
+}
+_V2_ACTION_FIELDS = {
+    "type", "transport", "mode", "commands", "verify_commands", "ttl_seconds",
+}
 
 
 def _require_keys(value: dict[str, Any], allowed: set[str], label: str) -> None:
@@ -29,14 +43,50 @@ def _mapping(value: Any, label: str) -> dict[str, Any]:
     return dict(value)
 
 
+def _cli_commands(
+    value: Any,
+    label: str,
+    *,
+    maximum: int,
+    required: bool,
+) -> list[str]:
+    if not isinstance(value, list):
+        raise ValueError(f"{label} must be a JSON array")
+    if required and not value:
+        raise ValueError(f"{label} must contain at least one command")
+    if len(value) > maximum:
+        raise ValueError(f"{label} must not contain more than {maximum} commands")
+    commands: list[str] = []
+    for index, command in enumerate(value):
+        if not isinstance(command, str):
+            raise ValueError(f"{label}[{index}] must be a string")
+        normalized = command.strip()
+        if (
+            not normalized
+            or len(normalized) > MAX_CLI_COMMAND_LENGTH
+            or "\n" in command
+            or "\r" in command
+            or "\x00" in command
+        ):
+            raise ValueError(
+                f"{label}[{index}] must be one non-empty CLI line of at most "
+                f"{MAX_CLI_COMMAND_LENGTH} characters"
+            )
+        commands.append(normalized)
+    if sum(len(command) for command in commands) > MAX_CLI_TOTAL_LENGTH:
+        raise ValueError(f"{label} exceeds {MAX_CLI_TOTAL_LENGTH} total characters")
+    return commands
+
+
 def validate_rule_payload(value: Any) -> dict[str, Any]:
     rule = _mapping(value, "rule")
     _require_keys(rule, _TOP_LEVEL, "rule")
     if set(rule) != _TOP_LEVEL:
         missing = _TOP_LEVEL - set(rule)
         raise ValueError(f"rule is missing: {', '.join(sorted(missing))}")
-    if isinstance(rule["version"], bool) or rule["version"] != RULE_VERSION:
-        raise ValueError("Only rule version 1 is supported")
+    version = rule["version"]
+    if isinstance(version, bool) or version not in SUPPORTED_RULE_VERSIONS:
+        raise ValueError("Only rule versions 1 and 2 are supported")
 
     metadata = _mapping(rule["metadata"], "metadata")
     _require_keys(metadata, {"id", "name", "description", "enabled"}, "metadata")
@@ -79,8 +129,8 @@ def validate_rule_payload(value: Any) -> dict[str, Any]:
 
     policy = _mapping(rule["policy"], "policy")
     _require_keys(policy, {"mode", "cooldown_seconds", "max_actions_per_hour"}, "policy")
-    if policy.get("mode") != "dry-run":
-        raise ValueError("This release only accepts policy.mode dry-run")
+    if policy.get("mode") not in {"dry-run", "auto"}:
+        raise ValueError("policy.mode must be dry-run or auto")
     cooldown = policy.get("cooldown_seconds")
     hourly = policy.get("max_actions_per_hour")
     if isinstance(cooldown, bool) or not isinstance(cooldown, int) or not 0 <= cooldown <= 86400:
@@ -91,13 +141,36 @@ def validate_rule_payload(value: Any) -> dict[str, Any]:
     action = _mapping(rule["action"], "action")
     _require_keys(
         action,
-        {"type", "protocol", "source_from", "interface_from", "enabled", "ttl_seconds"},
+        _V1_ACTION_FIELDS if version == 1 else _V2_ACTION_FIELDS,
         "action",
     )
     action_type = str(action.get("type") or "")
     ttl = action.get("ttl_seconds", 0)
     if isinstance(ttl, bool) or not isinstance(ttl, int) or not 0 <= ttl <= 86400:
         raise ValueError("action.ttl_seconds must be between 0 and 86400")
+    if version == 2:
+        if action_type != "ssh.cli":
+            raise ValueError("Rule version 2 requires action.type ssh.cli")
+        if action.get("transport") != "ssh":
+            raise ValueError("Version 2 CLI actions require transport ssh")
+        if action.get("mode") not in {"config", "exec"}:
+            raise ValueError("Version 2 action.mode must be config or exec")
+        action["commands"] = _cli_commands(
+            action.get("commands"),
+            "action.commands",
+            maximum=MAX_CLI_COMMANDS,
+            required=True,
+        )
+        action["verify_commands"] = _cli_commands(
+            action.get("verify_commands", []),
+            "action.verify_commands",
+            maximum=MAX_VERIFY_COMMANDS,
+            required=False,
+        )
+        if ttl != 0:
+            raise ValueError("Version 2 CLI actions require ttl_seconds 0")
+        return rule
+
     if action_type == "acl.deny-protocol-source":
         if action.get("protocol") not in {"icmp", "tcp", "udp", "ip"}:
             raise ValueError("ACL action protocol must be icmp, tcp, udp or ip")
@@ -107,15 +180,36 @@ def validate_rule_payload(value: Any) -> dict[str, Any]:
             raise ValueError("ACL interface_from must be attributes.interface")
         if "enabled" in action:
             raise ValueError("ACL action does not accept enabled")
+        if "transport" in action:
+            raise ValueError("ACL action does not accept transport")
     elif action_type == "interface.admin-state":
-        if action.get("interface_from") != "attributes.interface":
+        interface_from = str(action.get("interface_from") or "")
+        interface = str(action.get("interface") or "").strip()
+        if bool(interface_from) == bool(interface):
+            raise ValueError(
+                "Interface action requires exactly one of interface_from or interface"
+            )
+        if interface_from and interface_from != "attributes.interface":
             raise ValueError("Interface action interface_from must be attributes.interface")
+        if interface and (
+            len(interface) > 128
+            or not re.fullmatch(r"[A-Za-z][A-Za-z0-9./_-]*", interface)
+        ):
+            raise ValueError("Interface action interface is invalid")
+        if action.get("transport", "") not in {"", "ssh"}:
+            raise ValueError("Interface action transport must be ssh")
         if not isinstance(action.get("enabled"), bool):
             raise ValueError("Interface action enabled must be true or false")
         if "protocol" in action or "source_from" in action:
             raise ValueError("Interface action does not accept protocol or source_from")
     else:
         raise ValueError(f"Unsupported action.type: {action_type}")
+    if policy.get("mode") == "auto" and action_type != "interface.admin-state":
+        raise ValueError("Auto mode currently supports interface.admin-state only")
+    if policy.get("mode") == "auto" and action.get("transport") != "ssh":
+        raise ValueError("Auto interface actions require transport ssh")
+    if policy.get("mode") == "auto" and ttl != 0:
+        raise ValueError("Auto interface actions require ttl_seconds 0 until revert is supported")
     return rule
 
 
@@ -164,6 +258,45 @@ def sample_icmp_rule_text() -> str:
     return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
 
 
+def sample_cli_rule_text() -> str:
+    value = {
+        "version": 2,
+        "metadata": {
+            "id": "multi-command-icmp-response-v2",
+            "name": "Multi-command ICMP flood response",
+            "description": (
+                "Disabled version 2 example that pushes a bounded configuration "
+                "sequence through the active CAMS SSH session."
+            ),
+            "enabled": False,
+        },
+        "schedule": {"interval_seconds": 5},
+        "match": {
+            "event_type": "ICMP_FLOOD",
+            "require_attributes": [],
+            "attributes": {"protocol": "icmp"},
+        },
+        "policy": {
+            "mode": "auto",
+            "cooldown_seconds": 600,
+            "max_actions_per_hour": 1,
+        },
+        "action": {
+            "type": "ssh.cli",
+            "transport": "ssh",
+            "mode": "config",
+            "commands": [
+                "interface GigabitEthernet0/3",
+                "description CAMS_AUTO_ICMP_FLOOD",
+                "shutdown",
+            ],
+            "verify_commands": ["show interfaces GigabitEthernet0/3"],
+            "ttl_seconds": 0,
+        },
+    }
+    return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
+
+
 class RuleFileRepository:
     def __init__(self, directory: str | Path) -> None:
         self.set_directory(directory)
@@ -176,9 +309,16 @@ class RuleFileRepository:
         self.directory = path
 
     def list_rules(self) -> list[dict[str, Any]]:
-        files = sorted(self.directory.glob("*.json"), key=lambda item: item.name.casefold())
+        files = sorted(
+            (
+                path
+                for path in self.directory.iterdir()
+                if path.name.casefold().endswith((RULE_SUFFIX, LEGACY_RULE_SUFFIX))
+            ),
+            key=lambda item: item.name.casefold(),
+        )
         if len(files) > MAX_RULE_FILES:
-            raise ValueError(f"Rules directory exceeds {MAX_RULE_FILES} JSON files")
+            raise ValueError(f"Rules directory exceeds {MAX_RULE_FILES} rule files")
         result: list[dict[str, Any]] = []
         for path in files:
             if path.is_symlink() or not path.is_file():
@@ -186,13 +326,31 @@ class RuleFileRepository:
             try:
                 value = decode_rule_text(path.read_text(encoding="utf-8"))
                 metadata = value["metadata"]
+                action = value["action"]
+                policy = value["policy"]
+                target = str(
+                    action.get("interface")
+                    or action.get("interface_from")
+                    or action.get("source_from")
+                    or action.get("mode")
+                    or ""
+                )
                 result.append({
                     "id": metadata["id"],
+                    "version": value["version"],
                     "name": metadata["name"],
                     "description": metadata.get("description", ""),
                     "enabled": metadata["enabled"],
                     "event_type": value["match"]["event_type"],
-                    "action_type": value["action"]["type"],
+                    "action_type": action["type"],
+                    "action_enabled": action.get("enabled"),
+                    "transport": action.get("transport", "internal"),
+                    "target": target,
+                    "action_mode": action.get("mode", ""),
+                    "command_count": len(action.get("commands", [])),
+                    "mode": policy["mode"],
+                    "cooldown_seconds": policy["cooldown_seconds"],
+                    "max_actions_per_hour": policy["max_actions_per_hour"],
                     "interval_seconds": value["schedule"]["interval_seconds"],
                     "valid": True,
                     "file_name": path.name,
@@ -201,7 +359,12 @@ class RuleFileRepository:
             except (OSError, UnicodeError, ValueError) as exc:
                 result.append({
                     "id": path.stem, "name": path.name, "description": "",
+                    "version": 0,
                     "enabled": False, "event_type": "", "action_type": "",
+                    "action_enabled": None, "transport": "", "target": "",
+                    "action_mode": "", "command_count": 0,
+                    "mode": "", "cooldown_seconds": 0,
+                    "max_actions_per_hour": 0,
                     "interval_seconds": 0, "valid": False,
                     "file_name": path.name, "error": str(exc),
                 })
@@ -233,12 +396,19 @@ class RuleFileRepository:
         except Exception:
             Path(temporary_name).unlink(missing_ok=True)
             raise
-        return {"ok": True, "id": rule_id, "message": f"Saved rule {rule_id}."}
+        return {
+            "ok": True,
+            "id": rule_id,
+            "file_name": target.name,
+            "message": f"Saved rule {target.name}.",
+        }
 
     def import_rule(self, source: str | Path) -> dict[str, Any]:
         path = Path(source)
         if path.is_symlink() or not path.is_file():
-            raise ValueError("Choose a regular JSON rule file")
+            raise ValueError("Choose a regular .rule.cams or legacy JSON rule file")
+        if not path.name.casefold().endswith((RULE_SUFFIX, LEGACY_RULE_SUFFIX)):
+            raise ValueError("Automation rule files must use .rule.cams")
         if path.stat().st_size > MAX_RULE_BYTES:
             raise ValueError(f"Rule exceeds {MAX_RULE_BYTES} bytes")
         return self.save_rule_text(path.read_text(encoding="utf-8"))
@@ -267,27 +437,36 @@ class RuleFileRepository:
         normalized = str(rule_id or "").strip()
         if not _IDENTIFIER.fullmatch(normalized) or len(normalized) > 96:
             raise ValueError("Invalid automation rule id")
-        return self.directory / f"{normalized}.json"
+        return self.directory / f"{normalized}{RULE_SUFFIX}"
 
     def _path_for_reference(self, rule_reference: str) -> Path:
         reference = str(rule_reference or "").strip()
-        if reference.casefold().endswith(".json"):
+        if reference.casefold().endswith((RULE_SUFFIX, LEGACY_RULE_SUFFIX)):
             if (
                 Path(reference).name != reference
-                or reference in {".json", "..json"}
-                or len(reference) > 128
+                or reference.casefold() in {RULE_SUFFIX, LEGACY_RULE_SUFFIX}
+                or len(reference) > 160
             ):
                 raise ValueError("Invalid automation rule file name")
             return self.directory / reference
-        return self._path_for_id(reference)
+        canonical = self._path_for_id(reference)
+        legacy = self.directory / f"{reference}{LEGACY_RULE_SUFFIX}"
+        return canonical if canonical.exists() or not legacy.exists() else legacy
 
 
 __all__ = [
     "MAX_RULE_BYTES",
     "MAX_RULE_FILES",
     "RULE_VERSION",
+    "SUPPORTED_RULE_VERSIONS",
+    "MAX_CLI_COMMANDS",
+    "MAX_VERIFY_COMMANDS",
+    "MAX_CLI_COMMAND_LENGTH",
+    "MAX_CLI_TOTAL_LENGTH",
+    "RULE_SUFFIX",
     "RuleFileRepository",
     "decode_rule_text",
     "sample_icmp_rule_text",
+    "sample_cli_rule_text",
     "validate_rule_payload",
 ]

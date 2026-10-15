@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "metadata": {
+    "id": "demo-acl-icmp-dry-run",
+    "name": "Demo: simulate ICMP source deny",
+    "description": "Dry-run example that plans an ACL deny action from typed event attributes without changing a device.",
+    "enabled": false
+  },
+  "schedule": {
+    "interval_seconds": 1
+  },
+  "match": {
+    "event_type": "ACL_DROP_FLOOD",
+    "require_attributes": [
+      "offender_ip",
+      "interface",
+      "protocol"
+    ],
+    "attributes": {
+      "protocol": "icmp"
+    }
+  },
+  "policy": {
+    "mode": "dry-run",
+    "cooldown_seconds": 300,
+    "max_actions_per_hour": 6
+  },
+  "action": {
+    "type": "acl.deny-protocol-source",
+    "protocol": "icmp",
+    "source_from": "attributes.offender_ip",
+    "interface_from": "attributes.interface",
+    "ttl_seconds": 300
+  }
+}
+

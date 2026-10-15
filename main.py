@@ -300,7 +300,7 @@ def main() -> int:
     window_settings = WindowSettings()
     update_manager = UpdateManager()
     welcome_controller = WelcomeController()
-    automation_manager = AutomationManager()
+    automation_manager = AutomationManager(session_registry=session_registry)
 
     def prepare_workspace_close() -> None:
         """Disconnect devices and persist their offline state before packaging."""

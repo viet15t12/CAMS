@@ -19,7 +19,8 @@ from PyQt6.QtCore import QObject, QTimer, pyqtProperty, pyqtSignal, pyqtSlot
 from features.syslog.persistence.message_repository import MessageRepository
 from infrastructure.database.paths import DATA_DIR, INFO_COLLECTED_DB
 
-from .rules import RuleFileRepository, sample_icmp_rule_text
+from .executor import AutomationActionExecutor
+from .rules import RuleFileRepository, sample_cli_rule_text, sample_icmp_rule_text
 
 
 APP_DIR = Path(__file__).resolve().parents[2]
@@ -55,6 +56,7 @@ class AutomationManager(QObject):
         rules_dir: str | Path | None = None,
         project_id: str = "default",
         command: list[str] | None = None,
+        session_registry: Any | None = None,
         autostart: bool = False,
     ) -> None:
         super().__init__(parent)
@@ -71,6 +73,8 @@ class AutomationManager(QObject):
         initial_rules = Path(rules_dir) if rules_dir is not None else DATA_DIR / "automation" / "rules"
         self._rules = RuleFileRepository(initial_rules)
         self._repository = MessageRepository(self._info_db)
+        self._session_registry = session_registry
+        self._action_executor: AutomationActionExecutor | None = None
         self._command_override = list(command) if command else None
         self._process: subprocess.Popen[str] | None = None
         self._response_queue: queue.Queue[dict[str, Any] | None] | None = None
@@ -191,10 +195,10 @@ class AutomationManager(QObject):
                     project_id = self._project_id
                     rules_dir = str(self._rules.directory)
                 self._request_locked("hello", {
-                    "mode": "dry-run", "project_id": project_id,
+                    "mode": "auto", "project_id": project_id,
                     "rules_dir": rules_dir,
                 })
-            self._set_state("running", f"{SERVICE_NAME} is running in dry-run mode.")
+            self._set_state("running", f"{SERVICE_NAME} is running in auto mode.")
         except Exception as exc:
             with self._process_lock:
                 self._stop_process_locked()
@@ -299,6 +303,7 @@ class AutomationManager(QObject):
             if not isinstance(actions, list) or not isinstance(processed, list):
                 raise RuntimeError("Automation sidecar returned an invalid evaluate payload")
             result = repository.materialize_automation_actions(actions, processed)
+            execution = self._executor_instance().execute_ready(repository, limit=10)
             loaded_rules = max(0, int(payload.get("loaded_rules", 0)))
             safe_errors = [
                 {"file": str(item.get("file") or ""), "error": str(item.get("error") or "")}
@@ -309,11 +314,16 @@ class AutomationManager(QObject):
                 self._action_count = len(repository.query_automation_actions(500))
                 self._rule_errors = safe_errors
                 self._status_message = (
-                    f"Dry-run active: {loaded_rules} rule(s), "
-                    f"{result['inserted']} new action(s), {len(deferred)} deferred event(s)."
+                    f"Auto active: {loaded_rules} rule(s), {result['inserted']} new action(s), "
+                    f"{execution['verified']} applied, {execution['noop_verified']} already correct, "
+                    f"{execution['failed']} failed, {len(deferred)} deferred event(s)."
                 )
             self.rulesChanged.emit()
-            if result["inserted"] or result["suppressed"]:
+            if (
+                result["inserted"]
+                or result["suppressed"]
+                or any(execution.values())
+            ):
                 self.actionsChanged.emit()
             self.stateChanged.emit()
         except Exception as exc:
@@ -323,6 +333,15 @@ class AutomationManager(QObject):
             self.errorOccurred.emit(str(exc))
         finally:
             self._set_busy(False)
+
+    def _executor_instance(self) -> AutomationActionExecutor:
+        if self._action_executor is None:
+            if self._session_registry is None:
+                from core.sessions import device_session_registry
+
+                self._session_registry = device_session_registry
+            self._action_executor = AutomationActionExecutor(self._session_registry)
+        return self._action_executor
 
     def set_workspace(
         self,
@@ -470,6 +489,10 @@ class AutomationManager(QObject):
     @pyqtSlot(result=str)
     def sampleIcmpRule(self) -> str:
         return sample_icmp_rule_text()
+
+    @pyqtSlot(result=str)
+    def sampleCliRule(self) -> str:
+        return sample_cli_rule_text()
 
     @pyqtSlot(result="QVariant")
     def getActions(self) -> list[dict[str, Any]]:

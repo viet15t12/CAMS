@@ -2,12 +2,23 @@ package rule
 
 import (
 	"encoding/json"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/viet15t12/CAMS/gocore/internal/event"
 )
+
+const fixedInterfaceRule = `{
+  "version": 1,
+  "metadata": {"id":"shutdown-gi0-3-on-icmp-flood","name":"Shutdown Gi0/3","enabled":true},
+  "schedule": {"interval_seconds":1},
+  "match": {"event_type":"ICMP_FLOOD","require_attributes":[],"attributes":{"protocol":"icmp"}},
+  "policy": {"mode":"auto","cooldown_seconds":300,"max_actions_per_hour":2},
+  "action": {"type":"interface.admin-state","transport":"ssh","interface":"GigabitEthernet0/3","enabled":false,"ttl_seconds":0}
+}`
 
 const icmpRule = `{
   "version": 1,
@@ -25,6 +36,22 @@ const icmpRule = `{
     "source_from":"attributes.offender_ip",
     "interface_from":"attributes.interface",
     "ttl_seconds":300
+  }
+}`
+
+const cliRuleV2 = `{
+  "version": 2,
+  "metadata": {"id":"configure-ospf","name":"Configure OSPF","enabled":true},
+  "schedule": {"interval_seconds":1},
+  "match": {"event_type":"ICMP_FLOOD","require_attributes":[],"attributes":{"protocol":"icmp"}},
+  "policy": {"mode":"auto","cooldown_seconds":300,"max_actions_per_hour":2},
+  "action": {
+    "type":"ssh.cli",
+    "transport":"ssh",
+    "mode":"config",
+    "commands":["router ospf 1","network 10.0.0.0 0.0.0.255 area 0"],
+    "verify_commands":["show ip ospf interface brief"],
+    "ttl_seconds":0
   }
 }`
 
@@ -73,10 +100,111 @@ func TestEvaluateFailsClosedWithoutIngressInterface(t *testing.T) {
 	}
 }
 
+func TestFixedInterfaceRulePlansAutoShutdown(t *testing.T) {
+	value, err := Decode(strings.NewReader(fixedInterfaceRule))
+	if err != nil {
+		t.Fatal(err)
+	}
+	eventValue := event.Event{
+		SchemaVersion: 1, EventID: "evt-icmp-flood", EventType: "ICMP_FLOOD",
+		DeviceHost: "192.168.122.101", SubjectKey: "192.168.122.101",
+		DetectedAt: "2026-10-15T02:45:15Z", Fingerprint: "fp-icmp-flood",
+		Attributes: json.RawMessage(`{"protocol":"icmp"}`),
+		Evidence:   json.RawMessage(`{"events":1}`),
+	}
+	plans, err := Evaluate([]Rule{value}, []event.Event{eventValue})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(plans) != 1 {
+		t.Fatalf("Evaluate() returned %d plans", len(plans))
+	}
+	request := plans[0].RequestRedacted
+	if request["interface"] != "GigabitEthernet0/3" || request["enabled"] != false ||
+		request["interface_binding"] != "literal" || request["transport"] != "ssh" ||
+		request["dry_run"] != false ||
+		plans[0].Mode != "auto" || plans[0].Status != "ready" {
+		t.Fatalf("unexpected fixed-interface plan: %#v", plans[0])
+	}
+}
+
+func TestVersion2PlansSSHCLICommands(t *testing.T) {
+	value, err := Decode(strings.NewReader(cliRuleV2))
+	if err != nil {
+		t.Fatal(err)
+	}
+	eventValue := event.Event{
+		SchemaVersion: 1, EventID: "evt-cli-v2", EventType: "ICMP_FLOOD",
+		DeviceHost: "192.168.122.101", SubjectKey: "192.168.122.101",
+		DetectedAt: "2026-10-15T02:45:15Z", Fingerprint: "fp-cli-v2",
+		Attributes: json.RawMessage(`{"protocol":"icmp"}`),
+		Evidence:   json.RawMessage(`{"events":1}`),
+	}
+	plans, err := Evaluate([]Rule{value}, []event.Event{eventValue})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(plans) != 1 {
+		t.Fatalf("Evaluate() returned %d plans", len(plans))
+	}
+	request := plans[0].RequestRedacted
+	commands, ok := request["commands"].([]string)
+	if !ok || len(commands) != 2 || commands[0] != "router ospf 1" {
+		t.Fatalf("unexpected CLI commands: %#v", request["commands"])
+	}
+	if request["rule_version"] != 2 || request["transport"] != "ssh" ||
+		request["mode"] != "config" || plans[0].ActionType != "ssh.cli" ||
+		plans[0].Status != "ready" {
+		t.Fatalf("unexpected version 2 plan: %#v", plans[0])
+	}
+}
+
+func TestVersionContractsRejectMixedActionFields(t *testing.T) {
+	badV1 := strings.Replace(
+		fixedInterfaceRule,
+		`"ttl_seconds":0`,
+		`"ttl_seconds":0,"commands":["show clock"]`,
+		1,
+	)
+	if _, err := Decode(strings.NewReader(badV1)); err == nil {
+		t.Fatal("Decode() accepted version 2 fields in a version 1 action")
+	}
+
+	badV2 := strings.Replace(cliRuleV2, `"mode":"config"`, `"mode":"shell"`, 1)
+	if _, err := Decode(strings.NewReader(badV2)); err == nil {
+		t.Fatal("Decode() accepted an unsupported version 2 CLI mode")
+	}
+
+	newlineV2 := strings.Replace(
+		cliRuleV2,
+		`"router ospf 1"`,
+		`"router ospf 1\nreload"`,
+		1,
+	)
+	if _, err := Decode(strings.NewReader(newlineV2)); err == nil {
+		t.Fatal("Decode() accepted a multi-line CLI command")
+	}
+}
+
+func TestLoadDirectoryAcceptsCAMSRuleExtension(t *testing.T) {
+	directory := t.TempDir()
+	path := filepath.Join(directory, "shutdown-icmp.rule.cams")
+	if err := os.WriteFile(path, []byte(fixedInterfaceRule), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	rules, loadErrors, err := LoadDirectory(directory)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(loadErrors) != 0 || len(rules) != 1 || rules[0].Source != "shutdown-icmp.rule.cams" {
+		t.Fatalf("unexpected load result rules=%#v errors=%#v", rules, loadErrors)
+	}
+}
+
 func TestDecodeRejectsArbitraryAction(t *testing.T) {
-	bad := strings.Replace(icmpRule, `"acl.deny-protocol-source"`, `"restconf.raw"`, 1)
+	bad := strings.Replace(icmpRule, `"acl.deny-protocol-source"`, `"network.raw"`, 1)
 	if _, err := Decode(strings.NewReader(bad)); err == nil {
-		t.Fatal("Decode() accepted arbitrary RESTCONF action")
+		t.Fatal("Decode() accepted an arbitrary network action")
 	}
 }
 

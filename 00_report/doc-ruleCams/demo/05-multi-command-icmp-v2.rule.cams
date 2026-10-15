@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "metadata": {
+    "id": "demo-multi-command-icmp-v2",
+    "name": "Demo: multi-command ICMP response v2",
+    "description": "Disabled version 2 example that pushes three configuration commands over the active CAMS SSH session.",
+    "enabled": false
+  },
+  "schedule": {
+    "interval_seconds": 5
+  },
+  "match": {
+    "event_type": "ICMP_FLOOD",
+    "require_attributes": [],
+    "attributes": {
+      "protocol": "icmp"
+    }
+  },
+  "policy": {
+    "mode": "auto",
+    "cooldown_seconds": 600,
+    "max_actions_per_hour": 1
+  },
+  "action": {
+    "type": "ssh.cli",
+    "transport": "ssh",
+    "mode": "config",
+    "commands": [
+      "interface GigabitEthernet0/3",
+      "description CAMS_AUTO_ICMP_FLOOD",
+      "shutdown"
+    ],
+    "verify_commands": [
+      "show interfaces GigabitEthernet0/3"
+    ],
+    "ttl_seconds": 0
+  }
+}

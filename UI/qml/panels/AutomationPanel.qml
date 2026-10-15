@@ -16,7 +16,7 @@ Item {
         { "key": "service", "title": "Service", "desc": "Engine status, lifecycle, and validation errors" },
         { "key": "rules", "title": "Rule Files", "desc": "Import, enable, disable, edit, and delete rules" },
         { "key": "editor", "title": "Rule Editor", "desc": "Write and validate declarative JSON rules" },
-        { "key": "actions", "title": "Action History", "desc": "Inspect recent dry-run action plans" }
+        { "key": "actions", "title": "Action History", "desc": "Inspect recent automatic and dry-run actions" }
     ]
     readonly property string selectedKey:
         selectedIndex >= 0 && selectedIndex < pages.length

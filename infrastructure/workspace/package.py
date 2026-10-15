@@ -860,10 +860,11 @@ class WorkspacePackageCodec:
                     f"Nested automation rule directories are forbidden: {name!r}."
                 )
             if not is_directory and (
-                len(path.parts) != 3 or not name.casefold().endswith(".json")
+                len(path.parts) != 3
+                or not name.casefold().endswith((".rule.cams", ".json"))
             ):
                 raise InvalidWorkspacePackage(
-                    f"Automation rules must be direct JSON files: {name!r}."
+                    f"Automation rules must be direct .rule.cams files: {name!r}."
                 )
         if any(part.casefold() == ".git" for part in path.parts):
             raise InvalidWorkspacePackage("Git metadata is forbidden in .ntp packages.")

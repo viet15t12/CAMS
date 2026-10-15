@@ -6,6 +6,9 @@ TERMINAL_SOURCE="$APP_ROOT/vendor/alacritty"
 TERMINAL_BINARY="$TERMINAL_SOURCE/target/release/cams-terminal"
 SYSLOG_SOURCE="$APP_ROOT/native/syslog_collector"
 SYSLOG_BINARY="$APP_ROOT/bin/cams-syslog-collector"
+AUTOMATION_SOURCE="$APP_ROOT/gocore"
+AUTOMATION_BINARY=${CAMS_AUTOMATION_BINARY:-$APP_ROOT/bin/cams-automation}
+MINIMUM_GO_MINOR=23
 cd "$APP_ROOT"
 
 prepare_environment() {
@@ -33,6 +36,81 @@ require_uv() {
         exit 1
     fi
     echo "uv: $(uv --version)"
+}
+
+require_go() {
+    if ! command -v go >/dev/null 2>&1; then
+        echo "ERROR: Go 1.23 or newer is required to build CAMS Automation Engine." >&2
+        echo "On Fedora, install it with: sudo dnf install golang" >&2
+        return 1
+    fi
+
+    go_version=$(go env GOVERSION 2>/dev/null || true)
+    numeric_version=${go_version#go}
+    go_major=${numeric_version%%.*}
+    go_remainder=${numeric_version#*.}
+    go_minor=${go_remainder%%.*}
+    go_minor=${go_minor%%-*}
+    case "$go_major:$go_minor" in
+        *[!0-9:]*|:|*:)
+            echo "ERROR: Could not determine the installed Go version: ${go_version:-unknown}." >&2
+            return 1
+            ;;
+    esac
+    if [ "$go_major" -lt 1 ] \
+        || { [ "$go_major" -eq 1 ] && [ "$go_minor" -lt "$MINIMUM_GO_MINOR" ]; }; then
+        echo "ERROR: Go 1.$MINIMUM_GO_MINOR or newer is required; found $go_version." >&2
+        return 1
+    fi
+    echo "go: $go_version"
+}
+
+check_automation_engine() {
+    if [ ! -f "$AUTOMATION_BINARY" ]; then
+        echo "ERROR: CAMS Automation Engine was not found: $AUTOMATION_BINARY" >&2
+        return 1
+    fi
+    if [ ! -x "$AUTOMATION_BINARY" ]; then
+        echo "ERROR: CAMS Automation Engine is not executable: $AUTOMATION_BINARY" >&2
+        return 1
+    fi
+    echo "CAMS Automation Engine: $AUTOMATION_BINARY ($("$AUTOMATION_BINARY" version))"
+}
+
+build_automation_engine() {
+    require_go
+    if [ ! -f "$AUTOMATION_SOURCE/go.mod" ]; then
+        echo "ERROR: Go module was not found: $AUTOMATION_SOURCE/go.mod" >&2
+        return 1
+    fi
+    mkdir -p "$APP_ROOT/bin"
+    echo "Testing and building CAMS Automation Engine..."
+    (
+        cd "$AUTOMATION_SOURCE"
+        go test ./...
+        go build -trimpath -o "$AUTOMATION_BINARY" ./cmd/gocore
+    )
+    check_automation_engine
+}
+
+automation_sources_are_newer() {
+    [ -x "$AUTOMATION_BINARY" ] || return 0
+    find "$AUTOMATION_SOURCE" -type f \
+        \( -name '*.go' -o -name 'go.mod' -o -name 'go.sum' \) \
+        -newer "$AUTOMATION_BINARY" -print | grep -q .
+}
+
+ensure_automation_engine() {
+    if [ ! -x "$AUTOMATION_BINARY" ]; then
+        echo "CAMS Automation Engine is missing; building it now..."
+        build_automation_engine
+    elif automation_sources_are_newer; then
+        echo "Go automation sources changed; rebuilding them now..."
+        build_automation_engine
+    else
+        echo "CAMS Automation Engine: already compiled and up to date."
+        check_automation_engine
+    fi
 }
 
 has_python_headers() {
@@ -214,6 +292,7 @@ ensure_syslog_collector() {
 }
 
 ensure_runtime_binaries() {
+    ensure_automation_engine
     ensure_syslog_collector
     ensure_terminal
 }
@@ -274,6 +353,7 @@ run_app() {
 
 setup_all() {
     sync_environment
+    ensure_automation_engine
     build_cython_optional
     ensure_syslog_collector
     build_terminal_optional
@@ -285,13 +365,15 @@ show_menu() {
     echo "CAMS"
     echo "  1) Sync dependencies"
     echo "  2) Build and verify Cython"
-    echo "  3) Full setup (sync + optional Cython + terminal build)"
+    echo "  3) Full setup (sync + Go engine + optional Cython + native builds)"
     echo "  4) Check Cython status"
     echo "  5) Run application"
     echo "  6) Full setup and run"
     echo "  7) Check CAMS Terminal"
     echo "  8) Build C++ Syslog collector"
     echo "  9) Check C++ Syslog collector"
+    echo " 10) Build Go Automation Engine"
+    echo " 11) Check Go Automation Engine"
     echo "  0) Exit"
     printf "Select: "
     read -r choice
@@ -305,6 +387,8 @@ show_menu() {
         7) check_terminal ;;
         8) build_syslog_collector ;;
         9) check_syslog_collector ;;
+        10) build_automation_engine ;;
+        11) check_automation_engine ;;
         0) exit 0 ;;
         *) echo "Invalid selection." >&2; exit 2 ;;
     esac
@@ -319,11 +403,13 @@ case "${1:-menu}" in
     terminal-check) check_terminal ;;
     syslog-build) build_syslog_collector ;;
     syslog-check) check_syslog_collector ;;
+    automation-build) build_automation_engine ;;
+    automation-check) check_automation_engine ;;
     run) run_app ;;
     all) setup_all; run_app ;;
     menu) show_menu ;;
     *)
-        echo "Usage: $0 [sync|build|setup|check|terminal-build|terminal-check|syslog-build|syslog-check|run|all]" >&2
+        echo "Usage: $0 [sync|build|setup|check|automation-build|automation-check|terminal-build|terminal-check|syslog-build|syslog-check|run|all]" >&2
         exit 2
         ;;
 esac

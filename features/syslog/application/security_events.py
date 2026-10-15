@@ -65,6 +65,8 @@ class DetectionRule:
 
 
 DEFAULT_RULES: dict[str, DetectionRule] = {
+    # An EEM policy already counted the ICMP burst; one HA_EM alert is enough.
+    "ICMP_FLOOD": DetectionRule("ICMP_FLOOD", 1, 10, 1, cooldown_seconds=300),
     # >=10 denied flows or >=100 denied packets from one source within 60 s.
     "ACL_DROP_FLOOD": DetectionRule("ACL_DROP_FLOOD", 2, 60, 10, 100),
     # DHCPOFFER/ACK/NAK received on an untrusted port: a rogue DHCP server.
@@ -149,6 +151,26 @@ def _classify_acl(row: dict[str, Any]) -> SecurityEvent | None:
     )
 
 
+def _classify_icmp_flood(row: dict[str, Any]) -> SecurityEvent | None:
+    """Recognize the HA_EM alert emitted by the MONITOR-ICMP EEM policy."""
+    if _facility(row) != "HA_EM":
+        return None
+    if str(row.get("mnemonic") or "").upper() != "LOG":
+        return None
+    text = _text(row)
+    if re.search(r"\bICMP[-_ ]FLOOD\b", text, re.IGNORECASE) is None:
+        return None
+    device = str(row.get("device_host") or row.get("source_ip") or "")
+    if not device:
+        return None
+    return SecurityEvent(
+        rule="ICMP_FLOOD",
+        key=device,
+        description="HA_EM ICMP flood threshold",
+        protocol="icmp",
+    )
+
+
 def _classify_dhcp_snooping(row: dict[str, Any]) -> SecurityEvent | None:
     if _facility(row) != "DHCP_SNOOPING" and not "DHCP_SNOOPING" in _text(row):
         return None
@@ -221,6 +243,7 @@ def _classify_port_security(row: dict[str, Any]) -> SecurityEvent | None:
 
 
 _CLASSIFIERS: tuple[Callable[[dict[str, Any]], SecurityEvent | None], ...] = (
+    _classify_icmp_flood,
     _classify_acl,
     _classify_dhcp_snooping,
     _classify_dai,
@@ -338,6 +361,8 @@ class SecurityEventDetector:
                 attributes["interface"] = event.interface
             if event.target:
                 attributes["target"] = event.target
+        elif rule.name == "ICMP_FLOOD":
+            attributes["protocol"] = "icmp"
         else:
             if event.target:
                 attributes["interface"] = event.target
@@ -375,6 +400,11 @@ class SecurityEventDetector:
                 f"{packets} packet(s) in {events} log event(s) within {seconds}s "
                 f"on {device} by {details or event.description}"
                 + (f"; targets: {targets}" if targets else "")
+            )
+        elif rule.name == "ICMP_FLOOD":
+            message = (
+                "ICMP flood threshold reported by HA_EM on "
+                f"{device}; an automation event is ready for policy evaluation"
             )
         elif rule.name == "DHCP_ROGUE_SERVER":
             message = (

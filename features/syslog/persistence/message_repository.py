@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import re
+import uuid
 from collections.abc import Iterable
 from contextlib import closing
 from pathlib import Path
@@ -13,6 +15,41 @@ from ..domain.models import SyslogMessage
 from ..security import annotate_security, security_filter_clause
 from .connections import info_connection
 from .schema import ensure_schema
+
+
+_AUTOMATION_INTERFACE_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9./_-]{0,127}$")
+_AUTOMATION_MAX_CLI_COMMANDS = 100
+_AUTOMATION_MAX_VERIFY_COMMANDS = 20
+_AUTOMATION_MAX_CLI_COMMAND_LENGTH = 512
+_AUTOMATION_MAX_CLI_TOTAL_LENGTH = 16 * 1024
+
+
+def _validated_cli_commands(
+    value: Any, label: str, *, maximum: int, required: bool,
+) -> list[str]:
+    if not isinstance(value, list):
+        raise ValueError(f"{label} must be a list")
+    if required and not value:
+        raise ValueError(f"{label} must not be empty")
+    if len(value) > maximum:
+        raise ValueError(f"{label} contains too many commands")
+    commands: list[str] = []
+    for command in value:
+        if not isinstance(command, str):
+            raise ValueError(f"{label} must contain strings")
+        normalized = command.strip()
+        if (
+            not normalized
+            or len(normalized) > _AUTOMATION_MAX_CLI_COMMAND_LENGTH
+            or "\n" in command
+            or "\r" in command
+            or "\x00" in command
+        ):
+            raise ValueError(f"{label} contains an invalid CLI command")
+        commands.append(normalized)
+    if sum(len(command) for command in commands) > _AUTOMATION_MAX_CLI_TOTAL_LENGTH:
+        raise ValueError(f"{label} is too large")
+    return commands
 
 
 MESSAGE_INSERT_SQL = """INSERT INTO t12_syslog_messages
@@ -229,6 +266,141 @@ class MessageRepository:
             result.append(item)
         return result
 
+    def claim_next_auto_action(
+        self, lease_owner: str | None = None, lease_seconds: int = 90,
+    ) -> dict[str, Any] | None:
+        """Atomically lease the oldest executable auto action.
+
+        Interface admin-state changes are idempotent, so an expired claim can
+        safely return to ``ready`` after a process interruption. Version 2 CLI
+        sequences fail closed instead of being replayed after an expired lease.
+        """
+        owner = str(lease_owner or uuid.uuid4().hex).strip()
+        if not owner or len(owner) > 128:
+            raise ValueError("Automation lease owner is invalid")
+        seconds = max(15, min(int(lease_seconds), 300))
+        with closing(info_connection(self.info_db)) as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            try:
+                conn.execute(
+                    """UPDATE t13_automation_actions
+                       SET status = 'failed', lease_owner = NULL, lease_until = NULL,
+                           last_error = 'SSH CLI action lease expired; automatic replay is disabled',
+                           updated_at = CURRENT_TIMESTAMP
+                       WHERE mode = 'auto' AND action_type = 'ssh.cli'
+                         AND status IN ('claimed', 'applying')
+                         AND lease_until IS NOT NULL
+                         AND datetime(lease_until) <= datetime('now')"""
+                )
+                conn.execute(
+                    """UPDATE t13_automation_actions
+                       SET status = 'ready', lease_owner = NULL, lease_until = NULL,
+                           updated_at = CURRENT_TIMESTAMP
+                       WHERE mode = 'auto' AND action_type = 'interface.admin-state'
+                         AND status IN ('claimed', 'applying')
+                         AND lease_until IS NOT NULL
+                         AND datetime(lease_until) <= datetime('now')"""
+                )
+                row = conn.execute(
+                    """SELECT id FROM t13_automation_actions
+                       WHERE mode = 'auto' AND status = 'ready'
+                         AND (next_attempt_at IS NULL
+                              OR datetime(next_attempt_at) <= datetime('now'))
+                       ORDER BY id LIMIT 1"""
+                ).fetchone()
+                if row is None:
+                    conn.commit()
+                    return None
+                action_id = int(row["id"])
+                cursor = conn.execute(
+                    """UPDATE t13_automation_actions
+                       SET status = 'claimed', attempts = attempts + 1,
+                           lease_owner = ?,
+                           lease_until = datetime('now', ?),
+                           updated_at = CURRENT_TIMESTAMP
+                       WHERE id = ? AND mode = 'auto' AND status = 'ready'""",
+                    (owner, f"+{seconds} seconds", action_id),
+                )
+                if cursor.rowcount != 1:
+                    conn.rollback()
+                    return None
+                claimed = conn.execute(
+                    """SELECT action.*, event.device_host, event.subject_key,
+                              event.event_type, event.detected_at
+                       FROM t13_automation_actions AS action
+                       JOIN t13_automation_events AS event
+                         ON event.event_id = action.event_id
+                       WHERE action.id = ?""",
+                    (action_id,),
+                ).fetchone()
+                conn.commit()
+            except Exception:
+                conn.rollback()
+                raise
+        if claimed is None:
+            return None
+        item = dict(claimed)
+        item["request_redacted"] = json.loads(
+            item.pop("request_redacted_json") or "{}"
+        )
+        return item
+
+    def begin_auto_action(self, action_id: int, lease_owner: str) -> None:
+        """Move one leased action into the applying state."""
+        with closing(info_connection(self.info_db)) as conn:
+            cursor = conn.execute(
+                """UPDATE t13_automation_actions
+                   SET status = 'applying', updated_at = CURRENT_TIMESTAMP
+                   WHERE id = ? AND mode = 'auto' AND status = 'claimed'
+                     AND lease_owner = ?
+                     AND datetime(lease_until) > datetime('now')""",
+                (int(action_id), str(lease_owner)),
+            )
+            if cursor.rowcount != 1:
+                raise RuntimeError("Automation action lease is no longer valid")
+            conn.commit()
+
+    def finish_auto_action(
+        self,
+        action_id: int,
+        lease_owner: str,
+        status: str,
+        *,
+        before: dict[str, Any] | None = None,
+        after: dict[str, Any] | None = None,
+        error: str = "",
+    ) -> None:
+        """Persist the final verified result without storing credentials."""
+        final_status = str(status or "").strip()
+        if final_status not in {"verified", "noop_verified", "failed"}:
+            raise ValueError("Unsupported automation completion status")
+        before_json = json.dumps(
+            before or {}, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        )
+        after_json = json.dumps(
+            after or {}, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        )
+        last_error = str(error or "").strip()[:4000] or None
+        successful = final_status in {"verified", "noop_verified"}
+        with closing(info_connection(self.info_db)) as conn:
+            cursor = conn.execute(
+                """UPDATE t13_automation_actions
+                   SET status = ?, before_json = ?, after_json = ?, last_error = ?,
+                       applied_at = CASE WHEN ? THEN CURRENT_TIMESTAMP ELSE applied_at END,
+                       verified_at = CASE WHEN ? THEN CURRENT_TIMESTAMP ELSE verified_at END,
+                       lease_owner = NULL, lease_until = NULL,
+                       updated_at = CURRENT_TIMESTAMP
+                   WHERE id = ? AND mode = 'auto'
+                     AND status IN ('claimed', 'applying') AND lease_owner = ?""",
+                (
+                    final_status, before_json, after_json, last_error,
+                    int(successful), int(successful), int(action_id), str(lease_owner),
+                ),
+            )
+            if cursor.rowcount != 1:
+                raise RuntimeError("Automation action could not be completed")
+            conn.commit()
+
     def query_messages(
         self, filters: dict[str, Any], before_id: int = 0, limit: int = 200
     ) -> list[dict[str, Any]]:
@@ -414,12 +586,23 @@ class MessageRepository:
             raise ValueError("Automation action references a non-pending event")
         if not rule_id or not revision or not dedup_key:
             raise ValueError("Automation action identity is incomplete")
-        if mode != "dry-run" or status != "simulated":
-            raise ValueError("Only simulated dry-run actions are accepted")
-        if action_type not in {"acl.deny-protocol-source", "interface.admin-state"}:
+        if mode == "dry-run":
+            if status != "simulated":
+                raise ValueError("Dry-run actions must be simulated")
+        elif mode == "auto":
+            if status != "ready":
+                raise ValueError("Auto actions must enter the ready state")
+        else:
+            raise ValueError("Unsupported automation action mode")
+        if action_type not in {
+            "acl.deny-protocol-source", "interface.admin-state", "ssh.cli",
+        }:
             raise ValueError("Unsupported automation action type")
-        if not isinstance(request, dict) or request.get("dry_run") is not True:
-            raise ValueError("Automation action request must be a redacted dry-run object")
+        if (
+            not isinstance(request, dict)
+            or request.get("dry_run") is not (mode == "dry-run")
+        ):
+            raise ValueError("Automation action request mode is invalid")
         event = events[event_id]
         attributes = event.get("attributes")
         if not isinstance(attributes, dict):
@@ -432,17 +615,53 @@ class MessageRepository:
         ):
             raise ValueError("Automation action target does not match its source event")
         if action_type == "acl.deny-protocol-source":
+            if mode == "auto":
+                raise ValueError("Auto mode currently supports interface actions only")
             if (
                 request.get("source_ip") != attributes.get("offender_ip")
                 or request.get("interface") != attributes.get("interface")
                 or request.get("protocol") != attributes.get("protocol")
             ):
                 raise ValueError("ACL action values do not match source event attributes")
-        elif (
-            request.get("interface") != attributes.get("interface")
-            or not isinstance(request.get("enabled"), bool)
-        ):
-            raise ValueError("Interface action values do not match source event attributes")
+        elif action_type == "interface.admin-state":
+            interface = str(request.get("interface") or "")
+            binding = str(request.get("interface_binding") or "")
+            if mode == "auto" and request.get("transport") != "ssh":
+                raise ValueError("Auto interface actions require SSH transport")
+            if not isinstance(request.get("enabled"), bool):
+                raise ValueError("Interface action enabled value is invalid")
+            if binding == "event":
+                if interface != attributes.get("interface"):
+                    raise ValueError(
+                        "Interface action values do not match source event attributes"
+                    )
+            elif binding == "literal":
+                if not _AUTOMATION_INTERFACE_PATTERN.fullmatch(interface):
+                    raise ValueError("Interface action literal is invalid")
+            else:
+                raise ValueError("Interface action binding is invalid")
+        else:
+            if request.get("rule_version") != 2:
+                raise ValueError("SSH CLI actions require rule version 2")
+            if request.get("transport") != "ssh":
+                raise ValueError("SSH CLI actions require SSH transport")
+            if request.get("mode") not in {"config", "exec"}:
+                raise ValueError("SSH CLI action mode is invalid")
+            _validated_cli_commands(
+                request.get("commands"),
+                "SSH CLI commands",
+                maximum=_AUTOMATION_MAX_CLI_COMMANDS,
+                required=True,
+            )
+            _validated_cli_commands(
+                request.get("verify_commands", []),
+                "SSH CLI verification commands",
+                maximum=_AUTOMATION_MAX_VERIFY_COMMANDS,
+                required=False,
+            )
+            ttl_seconds = request.get("ttl_seconds", 0)
+            if isinstance(ttl_seconds, bool) or ttl_seconds != 0:
+                raise ValueError("SSH CLI actions require ttl_seconds 0")
         return (
             event_id, rule_id, revision, mode, action_type, status, dedup_key,
             json.dumps(request, ensure_ascii=False, sort_keys=True, separators=(",", ":")),

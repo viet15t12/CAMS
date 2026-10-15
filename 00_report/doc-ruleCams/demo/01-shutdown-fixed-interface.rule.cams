@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "metadata": {
+    "id": "demo-shutdown-fixed-interface",
+    "name": "Demo: shutdown fixed interface",
+    "description": "Disabled-by-default demo that shuts GigabitEthernet0/3 on an ICMP_FLOOD event.",
+    "enabled": false
+  },
+  "schedule": {
+    "interval_seconds": 1
+  },
+  "match": {
+    "event_type": "ICMP_FLOOD",
+    "require_attributes": [],
+    "attributes": {
+      "protocol": "icmp"
+    }
+  },
+  "policy": {
+    "mode": "auto",
+    "cooldown_seconds": 300,
+    "max_actions_per_hour": 2
+  },
+  "action": {
+    "type": "interface.admin-state",
+    "transport": "ssh",
+    "interface": "GigabitEthernet0/3",
+    "enabled": false,
+    "ttl_seconds": 0
+  }
+}
+

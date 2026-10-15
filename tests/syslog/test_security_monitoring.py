@@ -105,6 +105,29 @@ class SecurityMonitoringTests(unittest.TestCase):
         self.assertLessEqual(len(detector._windows), 3)
         self.assertTrue(all(len(window.hits) <= 4 for window in detector._windows.values()))
 
+    def test_ha_em_icmp_flood_emits_immediate_automation_event(self):
+        raw = (
+            "<185>41: 000037: *Oct 15 02:45:11.816 ICT: %HA_EM-1-LOG: "
+            "ICMP-FLOOD: CANH BAO ICMP FLOOD: Vuot 200 ICMP Echo Request "
+            "trong chu ky giam sat. Kiem tra ACL MONITOR-ICMP de xac dinh "
+            "SRC DST va INTERFACE"
+        )
+        parsed = parse_message(raw.encode(), "192.168.122.101", "udp")
+        parsed.device_host = "192.168.122.101"
+        row = parsed.to_dict()
+        row["id"] = 41
+        self.assertEqual((row["cisco_facility"], row["mnemonic"]), ("HA_EM", "LOG"))
+        detector = SecurityEventDetector()
+        detections = detector.process_detections([row])
+        self.assertEqual(len(detections), 1)
+        self.assertEqual(detections[0].alert.mnemonic, "ICMP_FLOOD")
+        event = detections[0].event.to_dict()
+        self.assertEqual(event["event_type"], "ICMP_FLOOD")
+        self.assertEqual(event["device_host"], "192.168.122.101")
+        self.assertEqual(event["attributes"]["protocol"], "icmp")
+        self.assertEqual(event["evidence"]["source_message_ids"], [41])
+        self.assertEqual(detector.process_detections([row]), [])
+
     def test_permit_operational_and_recovery_messages_do_not_trigger_violation_alerts(self):
         rows = [
             {"cisco_facility": "SW_DAI", "mnemonic": "DHCP_SNOOPING_PERMIT",

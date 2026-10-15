@@ -151,7 +151,6 @@ tar -C "$SOURCE_ROOT" \
     -cf "$archive" \
     UI core data/README.md docshots domain features gocore infrastructure native \
     qtpyTerminal-main runtime_qml scripts templates vendor licenses \
-    docs/gocoreRESTCONF.md \
     .python-version README.md LICENSE app_facade.py cams.sh main.py update.sh \
     pyproject.toml setup_cython.py uv.lock packaging/linux/cams-launcher
 

@@ -31,6 +31,31 @@ Rectangle {
             ? String(result.message) : fallback
     }
 
+    function actionSummary(rule) {
+        if (!rule || !rule.valid)
+            return ""
+        if (String(rule.action_type) === "interface.admin-state") {
+            const verb = rule.action_enabled === true ? "No shutdown" : "Shutdown"
+            return "%1 %2".arg(verb).arg(String(rule.target || "event interface"))
+        }
+        if (String(rule.action_type) === "ssh.cli") {
+            return "SSH %1 · %2 command(s)"
+                .arg(String(rule.action_mode || "config"))
+                .arg(Number(rule.command_count || 0))
+        }
+        return "%1 · %2".arg(String(rule.action_type)).arg(String(rule.target || "event data"))
+    }
+
+    function importRuleFile(fileUrl) {
+        if (backend === null)
+            return
+        const result = backend.importRule(String(fileUrl || ""))
+        showResult(result, "Unable to import the rule.")
+        if (result && result.ok) {
+            editRequested(String(result.id || ""), String(result.file_name || ""))
+        }
+    }
+
     Component.onCompleted: reloadRules()
 
     Connections {
@@ -41,11 +66,11 @@ Rectangle {
     FileDialog {
         id: importDialog
         title: "Import automation rule"
-        nameFilters: ["CAMS automation rule (*.json)"]
-        onAccepted: {
-            const result = root.backend.importRule(String(selectedFile))
-            root.showResult(result, "Unable to import the rule.")
-        }
+        nameFilters: [
+            "CAMS automation rule (*.rule.cams)",
+            "Legacy JSON automation rule (*.json)"
+        ]
+        onAccepted: root.importRuleFile(selectedFile)
     }
 
     Dialog {
@@ -66,7 +91,7 @@ Rectangle {
             root.pendingDeleteRuleFile = ""
         }
         contentItem: Text {
-            text: "This removes the JSON rule file from the active workspace. Existing audit actions are retained."
+            text: "This removes the .rule.cams file from the active workspace. Existing audit actions are retained."
             color: Theme.textPrimary
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSizeNormal
@@ -94,7 +119,7 @@ Rectangle {
                 }
                 Text {
                     Layout.fillWidth: true
-                    text: "Manage the validated JSON rule files stored in the active workspace."
+                    text: "Enable, inspect and edit validated .rule.cams files. Use Quick Builder for fixed-interface SSH actions."
                     color: Theme.textSecondary
                     font.pixelSize: Theme.fontSizeSmall
                     font.family: Theme.fontFamily
@@ -108,7 +133,8 @@ Rectangle {
                 onClicked: root.reloadRules()
             }
             StandardButton {
-                text: "Import JSON"
+                objectName: "automationImportRuleButton"
+                text: "Import .rule.cams"
                 icon.source: AppAssets.actionUpload
                 enabled: root.backend !== null
                 onClicked: importDialog.open()
@@ -150,10 +176,28 @@ Rectangle {
                     width: parent.width
                     spacing: Theme.spacing8
 
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: Theme.spacing8
+                        Text {
+                            Layout.fillWidth: true
+                            text: "%1 rule(s) in the active workspace".arg(root.rules.length)
+                            color: Theme.textSecondary
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeSmall
+                        }
+                        StandardBadge {
+                            text: root.backend !== null && root.backend.running
+                                  ? "ENGINE ACTIVE" : "ENGINE STOPPED"
+                            badgeColor: root.backend !== null && root.backend.running
+                                        ? Theme.alertSuccess : Theme.textDisabled
+                        }
+                    }
+
                     Text {
                         Layout.fillWidth: true
                         visible: root.rules.length === 0
-                        text: "No rule files in this workspace. Import JSON or open Rule Editor to create one."
+                        text: "No rule files in this workspace. Import .rule.cams or open Rule Editor to create one."
                         color: Theme.textSecondary
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
@@ -166,34 +210,36 @@ Rectangle {
                             id: ruleCard
                             required property var modelData
                             Layout.fillWidth: true
-                            implicitHeight: ruleRow.implicitHeight + 20
+                            implicitHeight: ruleContent.implicitHeight + 20
                             radius: Theme.radiusSmall
                             color: Theme.contentBackground
                             border.width: Theme.borderWidth
                             border.color: modelData.valid
                                           ? Theme.borderColor : Theme.alertError
 
-                            RowLayout {
-                                id: ruleRow
+                            ColumnLayout {
+                                id: ruleContent
                                 anchors.fill: parent
                                 anchors.margins: Theme.spacing8
-                                spacing: Theme.spacing8
+                                spacing: Theme.spacing4
 
-                                StandardCheckBox {
-                                    text: ""
-                                    checked: Boolean(ruleCard.modelData.enabled)
-                                    enabled: root.backend !== null
-                                             && Boolean(ruleCard.modelData.valid)
-                                    onToggled: {
-                                        const result = root.backend.setRuleEnabled(
-                                            String(ruleCard.modelData.file_name), checked
-                                        )
-                                        root.showResult(result, "Unable to update the rule.")
-                                    }
-                                }
-                                ColumnLayout {
+                                RowLayout {
                                     Layout.fillWidth: true
-                                    spacing: 2
+                                    spacing: Theme.spacing8
+
+                                    StandardCheckBox {
+                                        text: ""
+                                        checked: Boolean(ruleCard.modelData.enabled)
+                                        enabled: root.backend !== null
+                                                 && Boolean(ruleCard.modelData.valid)
+                                        onToggled: {
+                                            const result = root.backend.setRuleEnabled(
+                                                String(ruleCard.modelData.file_name), checked
+                                            )
+                                            root.showResult(result, "Unable to update the rule.")
+                                        }
+                                    }
+
                                     Text {
                                         Layout.fillWidth: true
                                         text: String(ruleCard.modelData.name)
@@ -202,41 +248,72 @@ Rectangle {
                                         font.weight: Font.Medium
                                         elide: Text.ElideRight
                                     }
-                                    Text {
-                                        Layout.fillWidth: true
+
+                                    StandardBadge {
                                         text: ruleCard.modelData.valid
-                                              ? "%1 → %2 · every %3s · %4"
-                                                   .arg(ruleCard.modelData.event_type)
-                                                   .arg(ruleCard.modelData.action_type)
-                                                   .arg(ruleCard.modelData.interval_seconds)
-                                                   .arg(ruleCard.modelData.file_name)
-                                              : String(ruleCard.modelData.error)
-                                        color: ruleCard.modelData.valid
-                                               ? Theme.textSecondary : Theme.alertError
-                                        font.family: Theme.monoFontFamily
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        elide: Text.ElideRight
+                                              ? String(ruleCard.modelData.mode).toUpperCase()
+                                              : "INVALID"
+                                        badgeColor: !ruleCard.modelData.valid
+                                                    ? Theme.alertError
+                                                    : (String(ruleCard.modelData.mode) === "auto"
+                                                       ? Theme.alertSuccess : Theme.alertWarning)
+                                    }
+
+                                    StandardBadge {
+                                        text: ruleCard.modelData.valid
+                                              ? "V%1 · %2"
+                                                   .arg(ruleCard.modelData.version)
+                                                   .arg(String(ruleCard.modelData.transport).toUpperCase())
+                                              : ""
+                                        badgeColor: Theme.accentEmphasis
+                                    }
+
+                                    StandardButton {
+                                        text: "Edit"
+                                        type: "Text"
+                                        icon.source: AppAssets.actionEdit
+                                        enabled: Boolean(ruleCard.modelData.valid)
+                                        onClicked: root.editRequested(
+                                            String(ruleCard.modelData.id),
+                                            String(ruleCard.modelData.file_name)
+                                        )
+                                    }
+                                    StandardButton {
+                                        text: "Delete"
+                                        type: "Text"
+                                        icon.source: AppAssets.actionDelete
+                                        onClicked: {
+                                            root.pendingDeleteRuleId = String(ruleCard.modelData.id)
+                                            root.pendingDeleteRuleFile = String(ruleCard.modelData.file_name)
+                                            deleteDialog.open()
+                                        }
                                     }
                                 }
-                                StandardButton {
-                                    text: "Edit"
-                                    type: "Text"
-                                    icon.source: AppAssets.actionEdit
-                                    enabled: Boolean(ruleCard.modelData.valid)
-                                    onClicked: root.editRequested(
-                                        String(ruleCard.modelData.id),
-                                        String(ruleCard.modelData.file_name)
-                                    )
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: ruleCard.modelData.valid
+                                          ? "%1 → %2 · cooldown %3s · max %4/hour · scan %5s"
+                                               .arg(ruleCard.modelData.event_type)
+                                               .arg(root.actionSummary(ruleCard.modelData))
+                                               .arg(ruleCard.modelData.cooldown_seconds)
+                                               .arg(ruleCard.modelData.max_actions_per_hour)
+                                               .arg(ruleCard.modelData.interval_seconds)
+                                          : String(ruleCard.modelData.error)
+                                    color: ruleCard.modelData.valid
+                                           ? Theme.textSecondary : Theme.alertError
+                                    font.family: Theme.monoFontFamily
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    elide: Text.ElideRight
                                 }
-                                StandardButton {
-                                    text: "Delete"
-                                    type: "Text"
-                                    icon.source: AppAssets.actionDelete
-                                    onClicked: {
-                                        root.pendingDeleteRuleId = String(ruleCard.modelData.id)
-                                        root.pendingDeleteRuleFile = String(ruleCard.modelData.file_name)
-                                        deleteDialog.open()
-                                    }
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: String(ruleCard.modelData.file_name)
+                                    color: Theme.textDisabled
+                                    font.family: Theme.monoFontFamily
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    elide: Text.ElideMiddle
                                 }
                             }
                         }

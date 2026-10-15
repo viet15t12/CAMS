@@ -1,6 +1,6 @@
 // Package rule loads declarative CAMS automation rules and matches them
 // against versioned security events. Rules may describe intent, but never an
-// arbitrary RESTCONF URL, HTTP method, payload, command or SQL statement.
+// arbitrary URL, transport payload, CLI command or SQL statement.
 package rule
 
 import (
@@ -22,13 +22,20 @@ import (
 )
 
 const (
-	Version       = 1
-	MaxRuleBytes  = 256 << 10
-	MaxRuleFiles  = 256
-	maxIdentifier = 96
+	Version             = 2
+	MinVersion          = 1
+	MaxRuleBytes        = 256 << 10
+	MaxRuleFiles        = 256
+	RuleSuffix          = ".rule.cams"
+	maxIdentifier       = 96
+	maxCLICommands      = 100
+	maxVerifyCommands   = 20
+	maxCLICommandLength = 512
+	maxCLITotalLength   = 16 << 10
 )
 
 var identifierPattern = regexp.MustCompile(`^[a-z0-9]+(?:[._-][a-z0-9]+)*$`)
+var interfacePattern = regexp.MustCompile(`^[A-Za-z][A-Za-z0-9./_-]*$`)
 
 type Metadata struct {
 	ID          string `json:"id"`
@@ -54,12 +61,17 @@ type Policy struct {
 }
 
 type Action struct {
-	Type          string `json:"type"`
-	Protocol      string `json:"protocol,omitempty"`
-	SourceFrom    string `json:"source_from,omitempty"`
-	InterfaceFrom string `json:"interface_from,omitempty"`
-	Enabled       *bool  `json:"enabled,omitempty"`
-	TTLSeconds    int    `json:"ttl_seconds,omitempty"`
+	Type           string   `json:"type"`
+	Transport      string   `json:"transport,omitempty"`
+	Protocol       string   `json:"protocol,omitempty"`
+	SourceFrom     string   `json:"source_from,omitempty"`
+	InterfaceFrom  string   `json:"interface_from,omitempty"`
+	Interface      string   `json:"interface,omitempty"`
+	Enabled        *bool    `json:"enabled,omitempty"`
+	TTLSeconds     int      `json:"ttl_seconds,omitempty"`
+	Mode           string   `json:"mode,omitempty"`
+	Commands       []string `json:"commands,omitempty"`
+	VerifyCommands []string `json:"verify_commands,omitempty"`
 }
 
 type Rule struct {
@@ -147,7 +159,7 @@ func Decode(reader io.Reader) (Rule, error) {
 }
 
 func (value Rule) Validate() error {
-	if value.Version != Version {
+	if value.Version < MinVersion || value.Version > Version {
 		return fmt.Errorf("unsupported rule version %d", value.Version)
 	}
 	if !identifierPattern.MatchString(value.Metadata.ID) || len(value.Metadata.ID) > maxIdentifier {
@@ -178,8 +190,8 @@ func (value Rule) Validate() error {
 			return fmt.Errorf("invalid attribute match %q", attribute)
 		}
 	}
-	if value.Policy.Mode != "dry-run" {
-		return errors.New("this release only accepts policy.mode dry-run")
+	if value.Policy.Mode != "dry-run" && value.Policy.Mode != "auto" {
+		return errors.New("policy.mode must be dry-run or auto")
 	}
 	if value.Policy.CooldownSeconds < 0 || value.Policy.CooldownSeconds > 86400 {
 		return errors.New("policy.cooldown_seconds must be between 0 and 86400")
@@ -187,12 +199,52 @@ func (value Rule) Validate() error {
 	if value.Policy.MaxActionsPerHour < 1 || value.Policy.MaxActionsPerHour > 1000 {
 		return errors.New("policy.max_actions_per_hour must be between 1 and 1000")
 	}
-	return value.Action.validate()
+	if err := value.Action.validate(value.Version); err != nil {
+		return err
+	}
+	if value.Version == 1 && value.Policy.Mode == "auto" && value.Action.Type != "interface.admin-state" {
+		return errors.New("auto mode currently supports interface.admin-state only")
+	}
+	if value.Version == 1 && value.Policy.Mode == "auto" && value.Action.Transport != "ssh" {
+		return errors.New("auto interface actions require transport ssh")
+	}
+	if value.Version == 1 && value.Policy.Mode == "auto" && value.Action.TTLSeconds != 0 {
+		return errors.New("auto interface actions require ttl_seconds 0 until revert is supported")
+	}
+	return nil
 }
 
-func (value Action) validate() error {
+func (value Action) validate(version int) error {
 	if value.TTLSeconds < 0 || value.TTLSeconds > 86400 {
 		return errors.New("action.ttl_seconds must be between 0 and 86400")
+	}
+	if version == 2 {
+		if value.Type != "ssh.cli" {
+			return errors.New("rule version 2 requires action.type ssh.cli")
+		}
+		if value.Transport != "ssh" {
+			return errors.New("version 2 CLI actions require transport ssh")
+		}
+		if value.Mode != "config" && value.Mode != "exec" {
+			return errors.New("version 2 action.mode must be config or exec")
+		}
+		if err := validateCLICommands(value.Commands, "action.commands", maxCLICommands, true); err != nil {
+			return err
+		}
+		if err := validateCLICommands(value.VerifyCommands, "action.verify_commands", maxVerifyCommands, false); err != nil {
+			return err
+		}
+		if value.TTLSeconds != 0 {
+			return errors.New("version 2 CLI actions require ttl_seconds 0")
+		}
+		if value.Protocol != "" || value.SourceFrom != "" || value.InterfaceFrom != "" ||
+			value.Interface != "" || value.Enabled != nil {
+			return errors.New("version 2 CLI action contains version 1 fields")
+		}
+		return nil
+	}
+	if value.Mode != "" || len(value.Commands) != 0 || len(value.VerifyCommands) != 0 {
+		return errors.New("rule version 1 action contains version 2 fields")
 	}
 	switch value.Type {
 	case "acl.deny-protocol-source":
@@ -208,9 +260,22 @@ func (value Action) validate() error {
 		if value.Enabled != nil {
 			return errors.New("ACL action does not accept enabled")
 		}
+		if value.Transport != "" {
+			return errors.New("ACL action does not accept transport")
+		}
 	case "interface.admin-state":
-		if value.InterfaceFrom != "attributes.interface" {
+		literalInterface := strings.TrimSpace(value.Interface)
+		if (value.InterfaceFrom != "") == (literalInterface != "") {
+			return errors.New("interface action requires exactly one of interface_from or interface")
+		}
+		if value.InterfaceFrom != "" && value.InterfaceFrom != "attributes.interface" {
 			return errors.New("interface action interface_from must be attributes.interface")
+		}
+		if literalInterface != "" && (len(literalInterface) > 128 || !interfacePattern.MatchString(literalInterface)) {
+			return errors.New("interface action interface is invalid")
+		}
+		if value.Transport != "" && value.Transport != "ssh" {
+			return errors.New("interface action transport must be ssh")
 		}
 		if value.Enabled == nil {
 			return errors.New("interface action enabled is required")
@@ -224,26 +289,53 @@ func (value Action) validate() error {
 	return nil
 }
 
+func validateCLICommands(commands []string, label string, maximum int, required bool) error {
+	if required && len(commands) == 0 {
+		return fmt.Errorf("%s must contain at least one command", label)
+	}
+	if len(commands) > maximum {
+		return fmt.Errorf("%s must not contain more than %d commands", label, maximum)
+	}
+	total := 0
+	for index, command := range commands {
+		normalized := strings.TrimSpace(command)
+		if normalized == "" || len(normalized) > maxCLICommandLength ||
+			strings.ContainsAny(command, "\r\n\x00") {
+			return fmt.Errorf(
+				"%s[%d] must be one non-empty CLI line of at most %d characters",
+				label, index, maxCLICommandLength,
+			)
+		}
+		total += len(normalized)
+	}
+	if total > maxCLITotalLength {
+		return fmt.Errorf("%s exceeds %d total characters", label, maxCLITotalLength)
+	}
+	return nil
+}
+
 func LoadDirectory(directory string) ([]Rule, []LoadError, error) {
 	entries, err := os.ReadDir(directory)
 	if err != nil {
 		return nil, nil, fmt.Errorf("read rules directory: %w", err)
 	}
-	jsonFiles := make([]os.DirEntry, 0, len(entries))
+	ruleFiles := make([]os.DirEntry, 0, len(entries))
 	for _, entry := range entries {
-		if entry.Type()&os.ModeSymlink != 0 || entry.IsDir() || strings.ToLower(filepath.Ext(entry.Name())) != ".json" {
+		lowerName := strings.ToLower(entry.Name())
+		if entry.Type()&os.ModeSymlink != 0 || entry.IsDir() ||
+			(!strings.HasSuffix(lowerName, RuleSuffix) && filepath.Ext(lowerName) != ".json") {
 			continue
 		}
-		jsonFiles = append(jsonFiles, entry)
+		ruleFiles = append(ruleFiles, entry)
 	}
-	if len(jsonFiles) > MaxRuleFiles {
-		return nil, nil, fmt.Errorf("rules directory exceeds %d JSON files", MaxRuleFiles)
+	if len(ruleFiles) > MaxRuleFiles {
+		return nil, nil, fmt.Errorf("rules directory exceeds %d rule files", MaxRuleFiles)
 	}
-	sort.Slice(jsonFiles, func(i, j int) bool { return jsonFiles[i].Name() < jsonFiles[j].Name() })
-	rules := make([]Rule, 0, len(jsonFiles))
+	sort.Slice(ruleFiles, func(i, j int) bool { return ruleFiles[i].Name() < ruleFiles[j].Name() })
+	rules := make([]Rule, 0, len(ruleFiles))
 	loadErrors := make([]LoadError, 0)
 	seen := make(map[string]string)
-	for _, entry := range jsonFiles {
+	for _, entry := range ruleFiles {
 		path := filepath.Join(directory, entry.Name())
 		file, openErr := os.Open(path)
 		if openErr != nil {
@@ -373,7 +465,7 @@ func planAction(currentRule Rule, currentEvent event.Event, attributes map[strin
 	request := map[string]any{
 		"driver":      currentRule.Action.Type,
 		"device_host": currentEvent.DeviceHost,
-		"dry_run":     true,
+		"dry_run":     currentRule.Policy.Mode == "dry-run",
 	}
 	switch currentRule.Action.Type {
 	case "acl.deny-protocol-source":
@@ -387,23 +479,43 @@ func planAction(currentRule Rule, currentEvent event.Event, attributes map[strin
 		request["interface"] = interfaceName
 		request["ttl_seconds"] = currentRule.Action.TTLSeconds
 	case "interface.admin-state":
-		interfaceName := strings.TrimSpace(stringValue(attributes["interface"]))
+		interfaceName := strings.TrimSpace(currentRule.Action.Interface)
+		interfaceBinding := "literal"
+		if interfaceName == "" {
+			interfaceName = strings.TrimSpace(stringValue(attributes["interface"]))
+			interfaceBinding = "event"
+		}
 		if interfaceName == "" || currentRule.Action.Enabled == nil {
 			return PlannedAction{}, false
 		}
 		request["interface"] = interfaceName
+		request["interface_binding"] = interfaceBinding
+		if currentRule.Action.Transport != "" {
+			request["transport"] = currentRule.Action.Transport
+		}
 		request["enabled"] = *currentRule.Action.Enabled
+		request["ttl_seconds"] = currentRule.Action.TTLSeconds
+	case "ssh.cli":
+		request["rule_version"] = currentRule.Version
+		request["transport"] = currentRule.Action.Transport
+		request["mode"] = currentRule.Action.Mode
+		request["commands"] = append([]string(nil), currentRule.Action.Commands...)
+		request["verify_commands"] = append([]string(nil), currentRule.Action.VerifyCommands...)
 		request["ttl_seconds"] = currentRule.Action.TTLSeconds
 	default:
 		return PlannedAction{}, false
 	}
 	dedupInput := currentEvent.EventID + "\x00" + currentRule.Metadata.ID + "\x00" + currentRule.Revision
 	dedup := sha256.Sum256([]byte(dedupInput))
+	status := "simulated"
+	if currentRule.Policy.Mode == "auto" {
+		status = "ready"
+	}
 	return PlannedAction{
 		EventID: currentEvent.EventID, DeviceHost: currentEvent.DeviceHost,
 		SubjectKey: currentEvent.SubjectKey, RuleID: currentRule.Metadata.ID,
 		RuleRevision: currentRule.Revision, Mode: currentRule.Policy.Mode,
-		ActionType: currentRule.Action.Type, Status: "simulated",
+		ActionType: currentRule.Action.Type, Status: status,
 		DedupKey:          hex.EncodeToString(dedup[:]),
 		CooldownSeconds:   currentRule.Policy.CooldownSeconds,
 		MaxActionsPerHour: currentRule.Policy.MaxActionsPerHour,

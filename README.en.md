@@ -45,7 +45,7 @@ The project is developed as part of a research initiative:
 ## System Requirements
 
 - 64-bit Windows 11 or a 64-bit Linux desktop;
-- Python **3.11 or later** and [`uv`](https://docs.astral.sh/uv/) only when running from source;
+- Python **3.11 or later**, [`uv`](https://docs.astral.sh/uv/), and Go **1.23 or later** only when running from source;
 - TShark/Wireshark if using the Device Logs feature;
 - valid access credentials to network devices when using real connections.
 
@@ -109,8 +109,11 @@ databases and settings should also be removed.
 ./cams.sh run
 ```
 
-Development commands run from the repository root. `uv` creates the environment
-from `pyproject.toml` and `uv.lock`; set `CAMS_DATA_DIR` to use another data path.
+Development commands run from the repository root. `./cams.sh setup` syncs the
+Python environment, tests and builds `bin/cams-automation`, then builds the
+remaining native components. Go 1.23 or later must already be in `PATH`; on
+Fedora, install it with `sudo dnf install golang`. Set `CAMS_DATA_DIR` to use
+another data path.
 
 ## Usage Guide
 
@@ -220,6 +223,7 @@ Runtime databases, logs, caches, credentials, private keys, and local backups mu
 - [Database Schema](docs/DATABASE_SCHEMA.md)
 - [UI Components](docs/UI_COMPONENTS.md)
 - [System Logs](docs/SYSTEM_LOGS.md)
+- [Automation `.rule.cams` guide and demos (Vietnamese)](00_report/doc-ruleCams/README.md)
 - [SFTP](docs/SFTP.md)
 - [Shortcuts](docs/SHORTCUTS.md)
 - [Code Audit Report](docs/CODE_AUDIT.md)

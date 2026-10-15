@@ -976,6 +976,12 @@ class QmlSmokeTests(unittest.TestCase):
 
         workspace = self._create("UI/qml/features/automation/AutomationWorkspace.qml")
         self.assertEqual(workspace.property("objectName"), "automationWorkspace")
+        self.assertIsNotNone(
+            workspace.findChild(QObject, "automationServiceStatusBar")
+        )
+        self.assertIsNotNone(
+            workspace.findChild(QObject, "automationGlobalServiceToggleButton")
+        )
         for object_name in (
             "automationServicePage",
             "automationRuleFilesPage",
@@ -983,6 +989,33 @@ class QmlSmokeTests(unittest.TestCase):
             "automationActionsPage",
         ):
             self.assertIsNotNone(workspace.findChild(QObject, object_name))
+
+        editor_page = workspace.findChild(QObject, "automationRuleEditorPage")
+        self.assertTrue(editor_page.property("visualMode"))
+        self.assertIsNotNone(
+            workspace.findChild(QObject, "automationQuickBuilder")
+        )
+        self.assertIsNotNone(
+            workspace.findChild(QObject, "automationBuilderInterface")
+        )
+        self.assertIsNotNone(
+            workspace.findChild(QObject, "automationCliSampleButton")
+        )
+        expression = QQmlExpression(
+            QQmlEngine.contextForObject(editor_page),
+            editor_page,
+            "generateFromBuilder(false)",
+        )
+        generated, is_undefined = expression.evaluate()
+        self.assertFalse(is_undefined, expression.error().toString())
+        self.assertTrue(generated)
+        rule_editor = workspace.findChild(QObject, "automationRuleEditor")
+        generated_rule = json.loads(rule_editor.property("text"))
+        self.assertEqual(
+            generated_rule["action"]["interface"], "GigabitEthernet0/3"
+        )
+        self.assertFalse(generated_rule["action"]["enabled"])
+        self.assertEqual(generated_rule["policy"]["mode"], "auto")
 
     def test_automation_workspace_reload_signals_do_not_recurse(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -1011,7 +1044,7 @@ class QmlSmokeTests(unittest.TestCase):
                     workspace,
                     "editRule",
                     Q_ARG("QVariant", "mitigate-icmp-dos"),
-                    Q_ARG("QVariant", "mitigate-icmp-dos.json"),
+                    Q_ARG("QVariant", "mitigate-icmp-dos.rule.cams"),
                 )
                 editor_page = workspace.findChild(
                     QObject, "automationRuleEditorPage"
@@ -1019,6 +1052,60 @@ class QmlSmokeTests(unittest.TestCase):
                 self.assertEqual(requested_pages, ["editor"])
                 self.assertEqual(
                     editor_page.property("selectedRuleId"), "mitigate-icmp-dos"
+                )
+                QMetaObject.invokeMethod(editor_page, "loadCliExample")
+                self.app.processEvents()
+                self.assertFalse(editor_page.property("visualMode"))
+                rule_editor = workspace.findChild(QObject, "automationRuleEditor")
+                cli_rule = json.loads(rule_editor.property("text"))
+                self.assertEqual(cli_rule["version"], 2)
+                self.assertEqual(cli_rule["action"]["type"], "ssh.cli")
+                self.assertEqual(cli_rule["action"]["mode"], "config")
+                self.assertEqual(self.warnings, [])
+            finally:
+                manager.shutdown()
+
+    def test_automation_import_opens_cams_rule_in_editor(self) -> None:
+        source = (
+            APP_DIR
+            / "templates/automation/shutdown-gigabitethernet0-3-on-icmp-flood.rule.cams"
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            info_db = root / "info.db"
+            info_db.touch()
+            manager = AutomationManager(info_db=info_db, rules_dir=root / "rules")
+            self.engine.rootContext().setContextProperty("automationManager", manager)
+            try:
+                workspace = self._create(
+                    "UI/qml/features/automation/AutomationWorkspace.qml"
+                )
+                files_page = workspace.findChild(QObject, "automationRuleFilesPage")
+                import_button = workspace.findChild(
+                    QObject, "automationImportRuleButton"
+                )
+                self.assertIsNotNone(files_page)
+                self.assertIsNotNone(import_button)
+                requested_pages = []
+                workspace.pageRequested.connect(requested_pages.append)
+                QMetaObject.invokeMethod(
+                    files_page,
+                    "importRuleFile",
+                    Q_ARG("QVariant", source.as_uri()),
+                )
+                self.assertTrue(
+                    self._wait_until(lambda: requested_pages == ["editor"])
+                )
+                editor_page = workspace.findChild(
+                    QObject, "automationRuleEditorPage"
+                )
+                self.assertEqual(
+                    editor_page.property("selectedRuleId"),
+                    "shutdown-gi0-3-on-icmp-flood",
+                )
+                self.assertEqual(
+                    editor_page.property("selectedRuleFile"),
+                    "shutdown-gi0-3-on-icmp-flood.rule.cams",
                 )
                 self.assertEqual(self.warnings, [])
             finally:

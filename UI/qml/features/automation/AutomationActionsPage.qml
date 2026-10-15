@@ -44,7 +44,7 @@ Rectangle {
                 }
                 Text {
                     Layout.fillWidth: true
-                    text: "Inspect simulated actions produced by scheduled rules. No request shown here was sent to a device."
+                    text: "Inspect queued, applied, verified, failed, and simulated actions produced by scheduled rules."
                     color: Theme.textSecondary
                     font.pixelSize: Theme.fontSizeSmall
                     font.family: Theme.fontFamily
@@ -60,8 +60,8 @@ Rectangle {
 
         InlineMessage {
             Layout.fillWidth: true
-            message: "Current mode: dry-run · network mutation disabled"
-            severity: "info"
+            message: "Auto mode uses the active SSH session. Version 1 runs typed interface actions; version 2 runs audited CLI command sequences."
+            severity: "warning"
         }
 
         Rectangle {
@@ -87,7 +87,7 @@ Rectangle {
                     Text {
                         Layout.fillWidth: true
                         visible: root.actions.length === 0
-                        text: "No action has been simulated yet."
+                        text: "No automation action has been recorded yet."
                         color: Theme.textSecondary
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
@@ -125,7 +125,14 @@ Rectangle {
                                     }
                                     StandardBadge {
                                         text: String(actionCard.modelData.status || "simulated").toUpperCase()
-                                        badgeColor: Theme.notificationInfoAccent
+                                        badgeColor: actionCard.modelData.status === "failed"
+                                                    ? Theme.alertError
+                                                    : (actionCard.modelData.status === "verified"
+                                                       || actionCard.modelData.status === "noop_verified")
+                                                      ? Theme.alertSuccess
+                                                      : actionCard.modelData.status === "applying"
+                                                        ? Theme.alertWarning
+                                                        : Theme.notificationInfoAccent
                                     }
                                 }
                                 Text {
@@ -146,6 +153,15 @@ Rectangle {
                                     font.family: Theme.monoFontFamily
                                     font.pixelSize: Theme.fontSizeSmall
                                     elide: Text.ElideRight
+                                }
+                                Text {
+                                    Layout.fillWidth: true
+                                    visible: String(actionCard.modelData.last_error || "").length > 0
+                                    text: String(actionCard.modelData.last_error || "")
+                                    color: Theme.alertError
+                                    font.family: Theme.fontFamily
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    wrapMode: Text.WordWrap
                                 }
                             }
                         }

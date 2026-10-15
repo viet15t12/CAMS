@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "metadata": {
+    "id": "shutdown-gi0-3-on-icmp-flood",
+    "name": "Shutdown Gi0/3 on ICMP flood",
+    "description": "React to HA_EM-1-LOG ICMP-FLOOD events through the active CAMS SSH session by shutting down GigabitEthernet0/3 and waiting for device-side verification.",
+    "enabled": true
+  },
+  "schedule": {
+    "interval_seconds": 1
+  },
+  "match": {
+    "event_type": "ICMP_FLOOD",
+    "require_attributes": [],
+    "attributes": {
+      "protocol": "icmp"
+    }
+  },
+  "policy": {
+    "mode": "auto",
+    "cooldown_seconds": 300,
+    "max_actions_per_hour": 2
+  },
+  "action": {
+    "type": "interface.admin-state",
+    "transport": "ssh",
+    "interface": "GigabitEthernet0/3",
+    "enabled": false,
+    "ttl_seconds": 0
+  }
+}

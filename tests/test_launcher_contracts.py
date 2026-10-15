@@ -182,8 +182,32 @@ class LauncherContractTests(unittest.TestCase):
                 encoding="utf-8",
             )
             fake_uv.chmod(0o755)
+            fake_go = Path(temp_dir) / "go"
+            fake_go.write_text(
+                "#!/bin/sh\n"
+                "case \"$1\" in\n"
+                "  env) echo 'go1.23.0'; exit 0 ;;\n"
+                "  test) exit 0 ;;\n"
+                "  build)\n"
+                "    shift\n"
+                "    output=\n"
+                "    while [ \"$#\" -gt 0 ]; do\n"
+                "      if [ \"$1\" = '-o' ]; then shift; output=$1; fi\n"
+                "      shift\n"
+                "    done\n"
+                "    printf '#!/bin/sh\\necho gocore-test\\n' > \"$output\"\n"
+                "    chmod +x \"$output\"\n"
+                "    exit 0 ;;\n"
+                "esac\n"
+                "exit 99\n",
+                encoding="utf-8",
+            )
+            fake_go.chmod(0o755)
             environment = os.environ.copy()
             environment["PATH"] = temp_dir + os.pathsep + environment.get("PATH", "")
+            environment["CAMS_AUTOMATION_BINARY"] = str(
+                Path(temp_dir) / "cams-automation"
+            )
             completed = subprocess.run(
                 ["sh", str(shell_path), "setup"],
                 text=True,
@@ -199,6 +223,17 @@ class LauncherContractTests(unittest.TestCase):
         self.assertIn("Skipping optional Cython acceleration", output)
         self.assertIn("Python fallback", output)
         self.assertNotIn("Building optional Cython", output)
+
+    def test_setup_builds_and_checks_go_automation_engine(self) -> None:
+        shell = (APP_ROOT / "cams.sh").read_text(encoding="utf-8")
+
+        self.assertIn("ensure_automation_engine", shell)
+        self.assertIn("build_automation_engine", shell)
+        self.assertIn("go test ./...", shell)
+        self.assertIn('go build -trimpath -o "$AUTOMATION_BINARY"', shell)
+        self.assertIn("automation-build) build_automation_engine", shell)
+        self.assertIn("automation-check) check_automation_engine", shell)
+        self.assertIn("Go 1.$MINIMUM_GO_MINOR or newer is required", shell)
 
     def test_setup_treats_cython_acceleration_as_optional(self) -> None:
         batch = (APP_ROOT / "cams.bat").read_text(encoding="utf-8")
@@ -232,10 +267,11 @@ class LauncherContractTests(unittest.TestCase):
         self.assertIn("unset VIRTUAL_ENV", shell)
         self.assertIn('/.cargo}/env"', shell)
 
-    def test_run_checks_cpp_and_rust_binaries_before_starting_python(self) -> None:
+    def test_run_checks_go_cpp_and_rust_binaries_before_starting_python(self) -> None:
         shell = (APP_ROOT / "cams.sh").read_text(encoding="utf-8")
 
         self.assertIn("ensure_runtime_binaries", shell)
+        self.assertIn("ensure_automation_engine", shell)
         self.assertIn("ensure_syslog_collector", shell)
         self.assertIn("ensure_terminal", shell)
         self.assertIn("syslog_sources_are_newer", shell)

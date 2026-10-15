@@ -60,7 +60,7 @@ class WorkspacePackageTests(unittest.TestCase):
         (root / "backup" / "reserved-empty-folder").mkdir()
         rules = root / "automation" / "rules"
         rules.mkdir(parents=True)
-        (rules / "example.json").write_text(
+        (rules / "example.rule.cams").write_text(
             '{"version":1,"metadata":{"id":"example"}}\n', encoding="utf-8"
         )
         snapshots = root / "snapshots"
@@ -97,7 +97,7 @@ class WorkspacePackageTests(unittest.TestCase):
             (working_directory / "backup/reserved-empty-folder").is_dir()
         )
         self.assertEqual(
-            (session.automation_rules_directory / "example.json").read_text(
+            (session.automation_rules_directory / "example.rule.cams").read_text(
                 encoding="utf-8"
             ),
             '{"version":1,"metadata":{"id":"example"}}\n',

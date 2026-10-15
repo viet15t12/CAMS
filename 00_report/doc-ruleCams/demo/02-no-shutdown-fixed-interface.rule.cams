@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "metadata": {
+    "id": "demo-enable-fixed-interface",
+    "name": "Demo: no shutdown fixed interface",
+    "description": "Disabled-by-default example that administratively enables GigabitEthernet0/3.",
+    "enabled": false
+  },
+  "schedule": {
+    "interval_seconds": 5
+  },
+  "match": {
+    "event_type": "INTERFACE_RECOVERY_APPROVED",
+    "require_attributes": [],
+    "attributes": {
+      "protocol": "icmp"
+    }
+  },
+  "policy": {
+    "mode": "auto",
+    "cooldown_seconds": 600,
+    "max_actions_per_hour": 1
+  },
+  "action": {
+    "type": "interface.admin-state",
+    "transport": "ssh",
+    "interface": "GigabitEthernet0/3",
+    "enabled": true,
+    "ttl_seconds": 0
+  }
+}
+

@@ -47,7 +47,7 @@ Dự án được phát triển trong khuôn khổ nghiên cứu:
 ## Yêu cầu hệ thống
 
 - Windows 11 64-bit hoặc Linux desktop 64-bit;
-- Python **3.11 trở lên** và [`uv`](https://docs.astral.sh/uv/) chỉ cần khi chạy từ mã nguồn;
+- Python **3.11 trở lên**, [`uv`](https://docs.astral.sh/uv/) và Go **1.23 trở lên** chỉ cần khi chạy từ mã nguồn;
 - TShark/Wireshark nếu sử dụng tính năng Device Logs;
 - quyền truy cập hợp lệ tới thiết bị mạng khi sử dụng kết nối thật.
 
@@ -143,8 +143,11 @@ sao lưu.
 ./cams.sh run
 ```
 
-Các lệnh phát triển chạy ngay từ root. `uv` tạo môi trường từ `pyproject.toml`
-và `uv.lock`; có thể đặt `CAMS_DATA_DIR` để dùng vị trí dữ liệu khác.
+Các lệnh phát triển chạy ngay từ root. `./cams.sh setup` đồng bộ môi trường
+Python, chạy test Go và build `bin/cams-automation`, sau đó build các thành phần
+native còn lại. Script yêu cầu Go 1.23 trở lên đã có trong `PATH`; trên Fedora
+có thể cài bằng `sudo dnf install golang`. Có thể đặt `CAMS_DATA_DIR` để dùng vị
+trí dữ liệu khác.
 
 ## Hướng dẫn sử dụng
 
@@ -253,6 +256,7 @@ Database runtime, log, cache, credential, private key và backup cục bộ khô
 - [Cơ sở dữ liệu](docs/DATABASE_SCHEMA.md)
 - [Thành phần giao diện](docs/UI_COMPONENTS.md)
 - [System Logs](docs/SYSTEM_LOGS.md)
+- [Automation Rule `.rule.cams` và file demo](00_report/doc-ruleCams/README.md)
 - [SFTP](docs/SFTP.md)
 - [Phím tắt](docs/SHORTCUTS.md)
 - [Báo cáo kiểm tra mã nguồn](docs/CODE_AUDIT.md)

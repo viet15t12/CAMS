@@ -151,6 +151,54 @@ class AutomationOutboxTests(unittest.TestCase):
             self.assertEqual(repository.query_automation_actions(), [])
             self.assertEqual(len(repository.query_pending_automation_events()), 1)
 
+    def test_materializer_accepts_validated_literal_interface_dry_run(self) -> None:
+        row = {
+            "id": 51,
+            "device_host": "192.168.122.101",
+            "source_ip": "192.168.122.101",
+            "protocol": "udp",
+            "cisco_facility": "HA_EM",
+            "mnemonic": "LOG",
+            "message": "ICMP-FLOOD: Vuot 200 ICMP Echo Request",
+        }
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database = Path(temp_dir) / "info.db"
+            database.touch()
+            repository = MessageRepository(database)
+            detection = SecurityEventDetector().process_detections([row])[0]
+            repository.insert_security_detections([detection])
+            plan = {
+                "event_id": detection.event.event_id,
+                "device_host": "192.168.122.101",
+                "subject_key": "192.168.122.101",
+                "rule_id": "shutdown-gi0-3-on-icmp-flood",
+                "rule_revision": "c" * 64,
+                "mode": "dry-run",
+                "action_type": "interface.admin-state",
+                "status": "simulated",
+                "dedup_key": "literal-interface-dedup",
+                "cooldown_seconds": 300,
+                "max_actions_per_hour": 2,
+                "request_redacted": {
+                    "driver": "interface.admin-state",
+                    "device_host": "192.168.122.101",
+                    "interface": "GigabitEthernet0/3",
+                    "interface_binding": "literal",
+                    "enabled": False,
+                    "ttl_seconds": 0,
+                    "dry_run": True,
+                },
+            }
+            result = repository.materialize_automation_actions(
+                [plan], [detection.event.event_id]
+            )
+            self.assertEqual(result, {"inserted": 1, "suppressed": 0})
+            action = repository.query_automation_actions()[0]
+            self.assertEqual(
+                action["request_redacted"]["interface"], "GigabitEthernet0/3"
+            )
+            self.assertFalse(action["request_redacted"]["enabled"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -40,6 +40,32 @@ class AutomationManagerSignalTests(unittest.TestCase):
                 rules = manager.getRules()
                 self.assertEqual(len(rules), 1)
                 self.assertEqual(len(rules_changed), 1)
+                self.assertIn('"version": 2', manager.sampleCliRule())
+                self.assertIn('"type": "ssh.cli"', manager.sampleCliRule())
+            finally:
+                manager.shutdown()
+
+    def test_import_cams_rule_returns_visual_editor_reference(self) -> None:
+        source = (
+            Path(__file__).resolve().parents[1]
+            / "templates/automation/shutdown-gigabitethernet0-3-on-icmp-flood.rule.cams"
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            info_db = root / "info.db"
+            info_db.touch()
+            manager = AutomationManager(info_db=info_db, rules_dir=root / "rules")
+            try:
+                result = manager.importRule(source.as_uri())
+                self.assertTrue(result["ok"], result)
+                self.assertEqual(
+                    result["file_name"],
+                    "shutdown-gi0-3-on-icmp-flood.rule.cams",
+                )
+                loaded = manager.getRule(result["file_name"])
+                self.assertTrue(loaded["ok"], loaded)
+                self.assertIn('"interface": "GigabitEthernet0/3"', loaded["text"])
+                self.assertIn('"transport": "ssh"', loaded["text"])
             finally:
                 manager.shutdown()
 

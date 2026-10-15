@@ -40,7 +40,7 @@ Rectangle {
                 }
                 Text {
                     Layout.fillWidth: true
-                    text: "Manage the CAMS Automation Engine lifecycle and inspect its current dry-run state."
+                    text: "Manage validated version 1 typed actions and version 2 CLI sequences executed through the active CAMS SSH session."
                     color: Theme.textSecondary
                     font.pixelSize: Theme.fontSizeSmall
                     font.family: Theme.fontFamily

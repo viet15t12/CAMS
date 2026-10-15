@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "metadata": {
+    "id": "demo-dynamic-interface-dry-run",
+    "name": "Demo: simulate dynamic interface shutdown",
+    "description": "Dry-run only: obtains the interface from trusted event attributes and does not modify the device.",
+    "enabled": false
+  },
+  "schedule": {
+    "interval_seconds": 1
+  },
+  "match": {
+    "event_type": "PORT_SECURITY_VIOLATION",
+    "require_attributes": [
+      "interface"
+    ],
+    "attributes": {}
+  },
+  "policy": {
+    "mode": "dry-run",
+    "cooldown_seconds": 300,
+    "max_actions_per_hour": 4
+  },
+  "action": {
+    "type": "interface.admin-state",
+    "interface_from": "attributes.interface",
+    "enabled": false,
+    "ttl_seconds": 0
+  }
+}

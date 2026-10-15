@@ -56,12 +56,13 @@ type evaluateResult struct {
 	LoadedRules       int                  `json:"loaded_rules"`
 }
 
-// Server accepts lifecycle and dry-run evaluation messages. Network mutation
-// remains impossible until the later executor milestone is enabled.
+// Server accepts lifecycle and rule evaluation messages. Device mutation is
+// performed by the Python host through its app-owned session registry.
 type Server struct {
 	input    io.Reader
 	output   io.Writer
 	rulesDir string
+	mode     string
 	engine   *rule.Engine
 }
 
@@ -110,8 +111,8 @@ func (server *Server) Run() error {
 				_ = encoder.Encode(errorResponse(message.RequestID, err.Error()))
 				return err
 			}
-			if payload.Mode != "dry-run" {
-				_ = encoder.Encode(errorResponse(message.RequestID, "current release only supports dry-run"))
+			if payload.Mode != "dry-run" && payload.Mode != "auto" {
+				_ = encoder.Encode(errorResponse(message.RequestID, "mode must be dry-run or auto"))
 				return fmt.Errorf("unsupported mode %q", payload.Mode)
 			}
 			rulesDir, err := validateRulesDirectory(payload.RulesDir)
@@ -120,10 +121,11 @@ func (server *Server) Run() error {
 				return err
 			}
 			server.rulesDir = rulesDir
+			server.mode = payload.Mode
 			handshaken = true
 			if err := encoder.Encode(response{
 				ProtocolVersion: Version, Type: "hello_ack", RequestID: message.RequestID,
-				OK: true, Mode: "dry-run", Payload: map[string]any{
+				OK: true, Mode: server.mode, Payload: map[string]any{
 					"service_name": "CAMS Automation Engine",
 					"rule_version": rule.Version,
 				},
@@ -133,7 +135,7 @@ func (server *Server) Run() error {
 		case "ping":
 			if err := encoder.Encode(response{
 				ProtocolVersion: Version, Type: "pong", RequestID: message.RequestID,
-				OK: true, Mode: "dry-run",
+				OK: true, Mode: server.mode,
 			}); err != nil {
 				return err
 			}
@@ -166,7 +168,7 @@ func (server *Server) Run() error {
 			}
 			if err := encoder.Encode(response{
 				ProtocolVersion: Version, Type: "evaluate_result", RequestID: message.RequestID,
-				OK: true, Mode: "dry-run", Payload: evaluateResult{
+				OK: true, Mode: server.mode, Payload: evaluateResult{
 					Actions:           scheduled.Actions,
 					ProcessedEventIDs: scheduled.ProcessedEventIDs,
 					DeferredEventIDs:  scheduled.DeferredEventIDs,
@@ -179,7 +181,7 @@ func (server *Server) Run() error {
 		case "shutdown":
 			return encoder.Encode(response{
 				ProtocolVersion: Version, Type: "shutdown_ack", RequestID: message.RequestID,
-				OK: true, Mode: "dry-run",
+				OK: true, Mode: server.mode,
 			})
 		default:
 			_ = encoder.Encode(errorResponse(message.RequestID, "unsupported message type"))
