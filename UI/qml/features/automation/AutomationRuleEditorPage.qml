@@ -28,6 +28,8 @@ Rectangle {
         builderName.text = "Shutdown interface on security event"
         builderDescription.text = "Close a fixed interface through the active CAMS SSH session when the event matches."
         builderEventType.text = "ICMP_FLOOD"
+        builderNetwork.text = ""
+        builderSubnetMask.text = ""
         builderInterface.text = "GigabitEthernet0/3"
         builderProtocol.currentIndex = 0
         builderAction.currentIndex = 0
@@ -38,6 +40,16 @@ Rectangle {
     }
 
     function builderPayload() {
+        const matchValue = {
+            "event_type": builderEventType.text.trim(),
+            "require_attributes": [],
+            "attributes": { "protocol": builderProtocol.currentValue }
+        }
+        if (builderNetwork.text.trim() !== ""
+                && builderSubnetMask.text.trim() !== "") {
+            matchValue.network = builderNetwork.text.trim()
+            matchValue.subnet_mask = builderSubnetMask.text.trim()
+        }
         return {
             "version": 1,
             "metadata": {
@@ -47,11 +59,7 @@ Rectangle {
                 "enabled": builderEnabled.checked
             },
             "schedule": { "interval_seconds": builderInterval.value },
-            "match": {
-                "event_type": builderEventType.text.trim(),
-                "require_attributes": [],
-                "attributes": { "protocol": builderProtocol.currentValue }
-            },
+            "match": matchValue,
             "policy": {
                 "mode": "auto",
                 "cooldown_seconds": builderCooldown.value,
@@ -76,6 +84,12 @@ Rectangle {
             resultMessage = "Rule ID, name, event type and interface are required."
             return false
         }
+        if ((builderNetwork.text.trim() === "")
+                !== (builderSubnetMask.text.trim() === "")) {
+            resultOk = false
+            resultMessage = "Network and subnet mask must be filled together."
+            return false
+        }
         ruleEditor.text = JSON.stringify(builderPayload(), null, 2) + "\n"
         if (showMessage) {
             resultOk = true
@@ -91,10 +105,23 @@ Rectangle {
         }
         try {
             const value = JSON.parse(ruleEditor.text)
-            if (!value.action || value.action.type !== "interface.admin-state"
-                    || !value.action.interface) {
+            const matchValue = value.match || {}
+            const required = Array.isArray(matchValue.require_attributes)
+                             ? matchValue.require_attributes : []
+            const attributes = matchValue.attributes || {}
+            const attributeKeys = Object.keys(attributes)
+            const quickBuilderSafe = Number(value.version) === 1
+                    && value.action
+                    && value.action.type === "interface.admin-state"
+                    && Boolean(value.action.interface)
+                    && value.action.transport === "ssh"
+                    && Number(value.action.ttl_seconds || 0) === 0
+                    && value.policy && value.policy.mode === "auto"
+                    && required.length === 0
+                    && attributeKeys.every(function(key) { return key === "protocol" })
+            if (!quickBuilderSafe) {
                 resultOk = true
-                resultMessage = "This action is not supported by Quick Builder. Continue in Advanced JSON mode."
+                resultMessage = "This rule contains advanced fields that Quick Builder cannot safely preserve. Continue in Advanced JSON mode."
                 return false
             }
             builderRuleId.text = String(value.metadata.id || "")
@@ -102,6 +129,8 @@ Rectangle {
             builderDescription.text = String(value.metadata.description || "")
             builderEnabled.checked = Boolean(value.metadata.enabled)
             builderEventType.text = String(value.match.event_type || "")
+            builderNetwork.text = String(value.match.network || "")
+            builderSubnetMask.text = String(value.match.subnet_mask || "")
             const protocol = String((value.match.attributes || {}).protocol || "icmp")
             builderProtocol.currentIndex = Math.max(0, builderProtocol.valueModel.indexOf(protocol))
             builderAction.currentIndex = value.action.enabled === true ? 1 : 0
@@ -175,7 +204,7 @@ Rectangle {
     function saveCurrentRule() {
         if (visualMode && !generateFromBuilder(false))
             return
-        const result = backend.saveRule(ruleEditor.text)
+        const result = backend.saveRule(ruleEditor.text, selectedRuleFile)
         showResult(result, "Unable to save the rule.")
         if (result && result.ok) {
             selectedRuleId = String(result.id)
@@ -334,6 +363,20 @@ Rectangle {
                             Layout.fillWidth: true
                             labelText: "Event type"
                             placeholderText: "ICMP_FLOOD"
+                        }
+                        StandardTextField {
+                            id: builderNetwork
+                            objectName: "automationBuilderNetwork"
+                            Layout.fillWidth: true
+                            labelText: "Device network (optional)"
+                            placeholderText: "192.168.122.0"
+                        }
+                        StandardTextField {
+                            id: builderSubnetMask
+                            objectName: "automationBuilderSubnetMask"
+                            Layout.fillWidth: true
+                            labelText: "Subnet mask (optional)"
+                            placeholderText: "255.255.255.0"
                         }
                         StandardTextField {
                             id: builderDescription

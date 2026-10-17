@@ -998,6 +998,13 @@ class QmlSmokeTests(unittest.TestCase):
         self.assertIsNotNone(
             workspace.findChild(QObject, "automationBuilderInterface")
         )
+        network_field = workspace.findChild(QObject, "automationBuilderNetwork")
+        mask_field = workspace.findChild(QObject, "automationBuilderSubnetMask")
+        self.assertIsNotNone(network_field)
+        self.assertIsNotNone(mask_field)
+        self.assertIsNotNone(
+            workspace.findChild(QObject, "automationSyncRulesButton")
+        )
         self.assertIsNotNone(
             workspace.findChild(QObject, "automationCliSampleButton")
         )
@@ -1016,6 +1023,17 @@ class QmlSmokeTests(unittest.TestCase):
         )
         self.assertFalse(generated_rule["action"]["enabled"])
         self.assertEqual(generated_rule["policy"]["mode"], "auto")
+
+        network_field.setProperty("text", "192.168.122.0")
+        mask_field.setProperty("text", "255.255.255.0")
+        generated, is_undefined = expression.evaluate()
+        self.assertFalse(is_undefined, expression.error().toString())
+        self.assertTrue(generated)
+        scoped_rule = json.loads(rule_editor.property("text"))
+        self.assertEqual(scoped_rule["match"]["network"], "192.168.122.0")
+        self.assertEqual(
+            scoped_rule["match"]["subnet_mask"], "255.255.255.0"
+        )
 
     def test_automation_workspace_reload_signals_do_not_recurse(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -1053,10 +1071,23 @@ class QmlSmokeTests(unittest.TestCase):
                 self.assertEqual(
                     editor_page.property("selectedRuleId"), "mitigate-icmp-dos"
                 )
+                rule_editor = workspace.findChild(QObject, "automationRuleEditor")
+                edited_rule = json.loads(rule_editor.property("text"))
+                edited_rule["metadata"]["id"] = "renamed-from-editor"
+                rule_editor.setProperty("text", json.dumps(edited_rule, indent=2))
+                QMetaObject.invokeMethod(editor_page, "saveCurrentRule")
+                self.app.processEvents()
+                self.assertEqual(
+                    [item["id"] for item in manager.getRules()],
+                    ["renamed-from-editor"],
+                )
+                self.assertEqual(
+                    editor_page.property("selectedRuleFile"),
+                    "renamed-from-editor.rule.cams",
+                )
                 QMetaObject.invokeMethod(editor_page, "loadCliExample")
                 self.app.processEvents()
                 self.assertFalse(editor_page.property("visualMode"))
-                rule_editor = workspace.findChild(QObject, "automationRuleEditor")
                 cli_rule = json.loads(rule_editor.property("text"))
                 self.assertEqual(cli_rule["version"], 2)
                 self.assertEqual(cli_rule["action"]["type"], "ssh.cli")

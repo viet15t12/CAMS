@@ -600,7 +600,7 @@ def sync_switch_state(
 
     ensure_switch_schema(db)
     device_role = ""
-    with db._connect() as conn:
+    with closing(db._connect()) as conn:
         role_row = conn.execute(
             "SELECT role FROM t01_devices WHERE host = ? LIMIT 1", (host,)
         ).fetchone()
@@ -621,7 +621,7 @@ def sync_switch_state(
         "acls": "running_config" in snapshot,
     }
     conflicts: list[str] = []
-    with db._connect() as conn:
+    with closing(db._connect()) as conn:
         for module, available in modules.items():
             if not available:
                 continue
@@ -664,29 +664,30 @@ def sync_switch_state(
         "unsupported_acl_details": parsed_fhrp.unsupported_acls,
     }
     applied: list[str] = []
-    with db._connect() as conn, conn:
-        if modules["acls"] and (mode == "force_device_state" or "acls" not in conflicts):
-            sync_acls(conn, host, parsed_fhrp.acls, parsed_fhrp.unsupported_acls, parsed_fhrp.acl_bindings)
-            counts["acls"] = len(parsed_fhrp.acls)
-            counts["acl_bindings"] = len(parsed_fhrp.acl_bindings)
-            applied.append("acls")
-        if modules["vlan"] and (mode == "force_device_state" or "vlan" not in conflicts):
-            counts["vlans"] = _sync_vlans(conn, host, parse_vlan_brief(snapshot["vlan_brief"]))
-            applied.append("vlan")
-        if modules["interfaces"] and (mode == "force_device_state" or "interfaces" not in conflicts):
-            counts["interfaces"] = _sync_interfaces(conn, host, snapshot)
-            applied.append("interfaces")
-        if modules["vtp"] and (mode == "force_device_state" or "vtp" not in conflicts):
-            counts["vtp"] = _sync_vtp(conn, host, snapshot["vtp_status"])
-            applied.append("vtp")
-        if modules["fhrp"] and (mode == "force_device_state" or "fhrp" not in conflicts):
-            clear_fhrp_members(conn, host)
-            insert_fhrp_members(conn, host, parsed_fhrp.fhrp_members)
-            counts["fhrp_members"] = len(parsed_fhrp.fhrp_members)
-            applied.append("fhrp")
-        if modules["security"] and (mode == "force_device_state" or "security" not in conflicts):
-            sec_counts = _sync_security(conn, host, parsed_security, mode=mode)
-            counts["security_vlans"] = sec_counts["security_vlans"]
-            counts["trust_ports"] = sec_counts["trust_ports"]
-            applied.append("security")
+    with closing(db._connect()) as conn:
+        with conn:
+            if modules["acls"] and (mode == "force_device_state" or "acls" not in conflicts):
+                sync_acls(conn, host, parsed_fhrp.acls, parsed_fhrp.unsupported_acls, parsed_fhrp.acl_bindings)
+                counts["acls"] = len(parsed_fhrp.acls)
+                counts["acl_bindings"] = len(parsed_fhrp.acl_bindings)
+                applied.append("acls")
+            if modules["vlan"] and (mode == "force_device_state" or "vlan" not in conflicts):
+                counts["vlans"] = _sync_vlans(conn, host, parse_vlan_brief(snapshot["vlan_brief"]))
+                applied.append("vlan")
+            if modules["interfaces"] and (mode == "force_device_state" or "interfaces" not in conflicts):
+                counts["interfaces"] = _sync_interfaces(conn, host, snapshot)
+                applied.append("interfaces")
+            if modules["vtp"] and (mode == "force_device_state" or "vtp" not in conflicts):
+                counts["vtp"] = _sync_vtp(conn, host, snapshot["vtp_status"])
+                applied.append("vtp")
+            if modules["fhrp"] and (mode == "force_device_state" or "fhrp" not in conflicts):
+                clear_fhrp_members(conn, host)
+                insert_fhrp_members(conn, host, parsed_fhrp.fhrp_members)
+                counts["fhrp_members"] = len(parsed_fhrp.fhrp_members)
+                applied.append("fhrp")
+            if modules["security"] and (mode == "force_device_state" or "security" not in conflicts):
+                sec_counts = _sync_security(conn, host, parsed_security, mode=mode)
+                counts["security_vlans"] = sec_counts["security_vlans"]
+                counts["trust_ports"] = sec_counts["trust_ports"]
+                applied.append("security")
     return {**counts, "conflicts": conflicts, "applied": applied}

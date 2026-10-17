@@ -11,6 +11,8 @@
   },
   "match": {
     "event_type": "ICMP_FLOOD",
+    "network": "192.168.122.0",
+    "subnet_mask": "255.255.255.0",
     "require_attributes": [],
     "attributes": {
       "protocol": "icmp"

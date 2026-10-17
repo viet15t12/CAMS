@@ -159,6 +159,59 @@ func TestVersion2PlansSSHCLICommands(t *testing.T) {
 	}
 }
 
+func TestNetworkScopeMatchesOnlyDeviceHostInsideSubnet(t *testing.T) {
+	scopedRule := strings.Replace(
+		cliRuleV2,
+		`"event_type":"ICMP_FLOOD"`,
+		`"event_type":"ICMP_FLOOD","network":"192.168.122.0","subnet_mask":"255.255.255.0"`,
+		1,
+	)
+	value, err := Decode(strings.NewReader(scopedRule))
+	if err != nil {
+		t.Fatal(err)
+	}
+	newEvent := func(id string, host string) event.Event {
+		return event.Event{
+			SchemaVersion: 1, EventID: id, EventType: "ICMP_FLOOD",
+			DeviceHost: host, SubjectKey: host,
+			DetectedAt: "2026-10-15T02:45:15Z", Fingerprint: "fp-" + id,
+			Attributes: json.RawMessage(`{"protocol":"icmp"}`),
+			Evidence:   json.RawMessage(`{"events":1}`),
+		}
+	}
+	plans, err := Evaluate([]Rule{value}, []event.Event{
+		newEvent("inside", "192.168.122.101"),
+		newEvent("outside", "192.168.123.101"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(plans) != 1 || plans[0].EventID != "inside" {
+		t.Fatalf("network scope planned unexpected actions: %#v", plans)
+	}
+}
+
+func TestNetworkScopeRejectsIncompleteOrInvalidIPv4Subnet(t *testing.T) {
+	cases := map[string]string{
+		"missing subnet mask":   `"event_type":"ICMP_FLOOD","network":"192.168.122.0"`,
+		"network has host bits": `"event_type":"ICMP_FLOOD","network":"192.168.122.101","subnet_mask":"255.255.255.0"`,
+		"non-contiguous mask":   `"event_type":"ICMP_FLOOD","network":"192.168.122.0","subnet_mask":"255.0.255.0"`,
+	}
+	for name, matchFields := range cases {
+		t.Run(name, func(t *testing.T) {
+			candidate := strings.Replace(
+				cliRuleV2,
+				`"event_type":"ICMP_FLOOD"`,
+				matchFields,
+				1,
+			)
+			if _, err := Decode(strings.NewReader(candidate)); err == nil {
+				t.Fatal("Decode() accepted an invalid network scope")
+			}
+		})
+	}
+}
+
 func TestVersionContractsRejectMixedActionFields(t *testing.T) {
 	badV1 := strings.Replace(
 		fixedInterfaceRule,

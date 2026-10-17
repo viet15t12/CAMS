@@ -11,6 +11,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math/bits"
+	"net/netip"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -50,6 +52,8 @@ type Schedule struct {
 
 type Match struct {
 	EventType         string            `json:"event_type"`
+	Network           string            `json:"network,omitempty"`
+	SubnetMask        string            `json:"subnet_mask,omitempty"`
 	RequireAttributes []string          `json:"require_attributes,omitempty"`
 	Attributes        map[string]string `json:"attributes,omitempty"`
 }
@@ -189,6 +193,9 @@ func (value Rule) Validate() error {
 		if !validAttributeName(attribute) || strings.TrimSpace(expected) == "" {
 			return fmt.Errorf("invalid attribute match %q", attribute)
 		}
+	}
+	if _, err := ipv4ScopePrefix(value.Match.Network, value.Match.SubnetMask); err != nil {
+		return err
 	}
 	if value.Policy.Mode != "dry-run" && value.Policy.Mode != "auto" {
 		return errors.New("policy.mode must be dry-run or auto")
@@ -448,6 +455,16 @@ func matches(currentRule Rule, currentEvent event.Event, attributes map[string]a
 	if currentRule.Match.EventType != currentEvent.EventType {
 		return false
 	}
+	if currentRule.Match.Network != "" {
+		prefix, err := ipv4ScopePrefix(currentRule.Match.Network, currentRule.Match.SubnetMask)
+		if err != nil {
+			return false
+		}
+		deviceHost, err := netip.ParseAddr(strings.TrimSpace(currentEvent.DeviceHost))
+		if err != nil || !deviceHost.Is4() || !prefix.Contains(deviceHost) {
+			return false
+		}
+	}
 	for _, name := range currentRule.Match.RequireAttributes {
 		if strings.TrimSpace(stringValue(attributes[name])) == "" {
 			return false
@@ -459,6 +476,40 @@ func matches(currentRule Rule, currentEvent event.Event, attributes map[string]a
 		}
 	}
 	return true
+}
+
+func ipv4ScopePrefix(networkValue string, subnetMaskValue string) (netip.Prefix, error) {
+	networkValue = strings.TrimSpace(networkValue)
+	subnetMaskValue = strings.TrimSpace(subnetMaskValue)
+	if (networkValue == "") != (subnetMaskValue == "") {
+		return netip.Prefix{}, errors.New("match.network and match.subnet_mask must be provided together")
+	}
+	if networkValue == "" {
+		return netip.Prefix{}, nil
+	}
+	networkAddress, err := netip.ParseAddr(networkValue)
+	if err != nil || !networkAddress.Is4() {
+		return netip.Prefix{}, errors.New("match.network must be a valid IPv4 network address")
+	}
+	maskAddress, err := netip.ParseAddr(subnetMaskValue)
+	if err != nil || !maskAddress.Is4() {
+		return netip.Prefix{}, errors.New("match.subnet_mask must be a valid IPv4 subnet mask")
+	}
+	octets := maskAddress.As4()
+	mask := uint32(octets[0])<<24 | uint32(octets[1])<<16 | uint32(octets[2])<<8 | uint32(octets[3])
+	prefixBits := bits.OnesCount32(mask)
+	expectedMask := uint32(0)
+	if prefixBits > 0 {
+		expectedMask = ^uint32(0) << (32 - prefixBits)
+	}
+	if mask != expectedMask {
+		return netip.Prefix{}, errors.New("match.subnet_mask must be a contiguous IPv4 subnet mask")
+	}
+	prefix := netip.PrefixFrom(networkAddress, prefixBits)
+	if prefix.Masked().Addr() != networkAddress {
+		return netip.Prefix{}, errors.New("match.network must be the canonical address for match.subnet_mask")
+	}
+	return prefix, nil
 }
 
 func planAction(currentRule Rule, currentEvent event.Event, attributes map[string]any) (PlannedAction, bool) {

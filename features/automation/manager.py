@@ -442,13 +442,25 @@ class AutomationManager(QObject):
         except Exception as exc:
             return {"ok": False, "message": str(exc), "text": ""}
 
+    def _refresh_engine_after_rule_change(self, result: dict[str, Any]) -> None:
+        if self.running:
+            self._schedule_evaluation()
+            result["message"] = str(result.get("message") or "Rule updated.") + (
+                " Automation Engine refresh requested."
+            )
+
     @pyqtSlot(str, result="QVariant")
-    def saveRule(self, text: str) -> dict[str, Any]:
+    @pyqtSlot(str, str, result="QVariant")
+    def saveRule(self, text: str, original_reference: str = "") -> dict[str, Any]:
         try:
             with self._repository_lock:
-                result = self._rules.save_rule_text(str(text))
+                result = self._rules.save_rule_text(
+                    str(text),
+                    str(original_reference or "") or None,
+                )
             self.getRules()
             self.rulesChanged.emit()
+            self._refresh_engine_after_rule_change(result)
             return result
         except Exception as exc:
             return {"ok": False, "message": str(exc)}
@@ -460,6 +472,7 @@ class AutomationManager(QObject):
                 result = self._rules.import_rule(_file_url_to_path(file_url))
             self.getRules()
             self.rulesChanged.emit()
+            self._refresh_engine_after_rule_change(result)
             return result
         except Exception as exc:
             return {"ok": False, "message": str(exc)}
@@ -471,6 +484,7 @@ class AutomationManager(QObject):
                 result = self._rules.set_enabled(rule_id, enabled)
             self.getRules()
             self.rulesChanged.emit()
+            self._refresh_engine_after_rule_change(result)
             return result
         except Exception as exc:
             return {"ok": False, "message": str(exc)}
@@ -482,9 +496,28 @@ class AutomationManager(QObject):
                 result = self._rules.delete_rule(rule_id)
             self.getRules()
             self.rulesChanged.emit()
+            self._refresh_engine_after_rule_change(result)
             return result
         except Exception as exc:
             return {"ok": False, "message": str(exc)}
+
+    @pyqtSlot(result="QVariant")
+    def syncRules(self) -> dict[str, Any]:
+        rules = self.getRules()
+        valid = sum(1 for item in rules if item.get("valid"))
+        invalid = len(rules) - valid
+        if not self.running:
+            return {
+                "ok": False,
+                "message": "Start Automation Engine before synchronizing rules.",
+            }
+        self._schedule_evaluation()
+        return {
+            "ok": True,
+            "message": (
+                f"Rule synchronization requested: {valid} valid, {invalid} invalid."
+            ),
+        }
 
     @pyqtSlot(result=str)
     def sampleIcmpRule(self) -> str:

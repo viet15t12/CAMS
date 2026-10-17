@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ipaddress
 import json
 import os
 import re
@@ -78,6 +79,32 @@ def _cli_commands(
     return commands
 
 
+def _validate_network_scope(match: dict[str, Any]) -> None:
+    has_network = "network" in match
+    has_subnet_mask = "subnet_mask" in match
+    if has_network != has_subnet_mask:
+        raise ValueError("match.network and match.subnet_mask must be provided together")
+    if not has_network:
+        return
+    network = match.get("network")
+    subnet_mask = match.get("subnet_mask")
+    if not isinstance(network, str) or not network.strip():
+        raise ValueError("match.network must be a non-empty IPv4 network address")
+    if not isinstance(subnet_mask, str) or not subnet_mask.strip():
+        raise ValueError("match.subnet_mask must be a non-empty IPv4 subnet mask")
+    try:
+        scope = ipaddress.IPv4Network(
+            f"{network.strip()}/{subnet_mask.strip()}",
+            strict=True,
+        )
+    except ValueError as exc:
+        raise ValueError(
+            "match.network and match.subnet_mask must define a canonical IPv4 network"
+        ) from exc
+    match["network"] = str(scope.network_address)
+    match["subnet_mask"] = str(scope.netmask)
+
+
 def validate_rule_payload(value: Any) -> dict[str, Any]:
     rule = _mapping(value, "rule")
     _require_keys(rule, _TOP_LEVEL, "rule")
@@ -108,7 +135,11 @@ def validate_rule_payload(value: Any) -> dict[str, Any]:
         raise ValueError("schedule.interval_seconds must be between 1 and 3600")
 
     match = _mapping(rule["match"], "match")
-    _require_keys(match, {"event_type", "require_attributes", "attributes"}, "match")
+    _require_keys(
+        match,
+        {"event_type", "require_attributes", "attributes", "network", "subnet_mask"},
+        "match",
+    )
     event_type = str(match.get("event_type") or "").strip()
     if not event_type or len(event_type) > 96:
         raise ValueError("match.event_type is required")
@@ -126,6 +157,7 @@ def validate_rule_payload(value: Any) -> dict[str, Any]:
         for key, expected in attributes.items()
     ):
         raise ValueError("match.attributes contains an invalid equality match")
+    _validate_network_scope(match)
 
     policy = _mapping(rule["policy"], "policy")
     _require_keys(policy, {"mode", "cooldown_seconds", "max_actions_per_hour"}, "policy")
@@ -273,6 +305,8 @@ def sample_cli_rule_text() -> str:
         "schedule": {"interval_seconds": 5},
         "match": {
             "event_type": "ICMP_FLOOD",
+            "network": "192.168.122.0",
+            "subnet_mask": "255.255.255.0",
             "require_attributes": [],
             "attributes": {"protocol": "icmp"},
         },
@@ -342,6 +376,8 @@ class RuleFileRepository:
                     "description": metadata.get("description", ""),
                     "enabled": metadata["enabled"],
                     "event_type": value["match"]["event_type"],
+                    "network": value["match"].get("network", ""),
+                    "subnet_mask": value["match"].get("subnet_mask", ""),
                     "action_type": action["type"],
                     "action_enabled": action.get("enabled"),
                     "transport": action.get("transport", "internal"),
@@ -360,7 +396,8 @@ class RuleFileRepository:
                 result.append({
                     "id": path.stem, "name": path.name, "description": "",
                     "version": 0,
-                    "enabled": False, "event_type": "", "action_type": "",
+                    "enabled": False, "event_type": "", "network": "",
+                    "subnet_mask": "", "action_type": "",
                     "action_enabled": None, "transport": "", "target": "",
                     "action_mode": "", "command_count": 0,
                     "mode": "", "cooldown_seconds": 0,
@@ -378,11 +415,24 @@ class RuleFileRepository:
         decode_rule_text(text)
         return text
 
-    def save_rule_text(self, text: str) -> dict[str, Any]:
+    def save_rule_text(
+        self,
+        text: str,
+        original_reference: str | None = None,
+    ) -> dict[str, Any]:
         value = decode_rule_text(text)
         rule_id = str(value["metadata"]["id"])
         normalized = json.dumps(value, ensure_ascii=False, indent=2) + "\n"
         target = self._path_for_id(rule_id)
+        source: Path | None = None
+        if str(original_reference or "").strip():
+            source = self._path_for_reference(str(original_reference))
+            if source.is_symlink() or not source.is_file():
+                raise FileNotFoundError(f"Rule not found: {original_reference}")
+            if source != target and target.exists():
+                raise FileExistsError(
+                    f"Cannot rename rule: {target.name} already exists"
+                )
         descriptor, temporary_name = tempfile.mkstemp(
             prefix=f".{rule_id}.", suffix=".tmp", dir=self.directory
         )
@@ -393,14 +443,25 @@ class RuleFileRepository:
                 os.fsync(stream.fileno())
             os.chmod(temporary_name, 0o600)
             os.replace(temporary_name, target)
+            if source is not None and source != target:
+                try:
+                    source.unlink()
+                except Exception:
+                    target.unlink(missing_ok=True)
+                    raise
         except Exception:
             Path(temporary_name).unlink(missing_ok=True)
             raise
+        renamed = source is not None and source != target
         return {
             "ok": True,
             "id": rule_id,
             "file_name": target.name,
-            "message": f"Saved rule {target.name}.",
+            "renamed": renamed,
+            "message": (
+                f"Renamed and saved rule as {target.name}."
+                if renamed else f"Saved rule {target.name}."
+            ),
         }
 
     def import_rule(self, source: str | Path) -> dict[str, Any]:
@@ -417,11 +478,10 @@ class RuleFileRepository:
         source = self._path_for_reference(rule_reference)
         value = decode_rule_text(self.get_rule_text(rule_reference))
         value["metadata"]["enabled"] = bool(enabled)
-        result = self.save_rule_text(json.dumps(value, ensure_ascii=False))
-        target = self._path_for_id(str(value["metadata"]["id"]))
-        if source != target:
-            source.unlink(missing_ok=True)
-        return result
+        return self.save_rule_text(
+            json.dumps(value, ensure_ascii=False),
+            source.name,
+        )
 
     def delete_rule(self, rule_reference: str) -> dict[str, Any]:
         reference = str(rule_reference or "").strip()

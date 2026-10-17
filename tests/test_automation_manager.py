@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -42,6 +43,32 @@ class AutomationManagerSignalTests(unittest.TestCase):
                 self.assertEqual(len(rules_changed), 1)
                 self.assertIn('"version": 2', manager.sampleCliRule())
                 self.assertIn('"type": "ssh.cli"', manager.sampleCliRule())
+                stopped_sync = manager.syncRules()
+                self.assertFalse(stopped_sync["ok"])
+            finally:
+                manager.shutdown()
+
+    def test_editing_rule_id_renames_managed_file(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            info_db = root / "info.db"
+            info_db.touch()
+            manager = AutomationManager(info_db=info_db, rules_dir=root / "rules")
+            try:
+                created = manager.saveRule(sample_icmp_rule_text())
+                edited = json.loads(sample_icmp_rule_text())
+                edited["metadata"]["id"] = "edited-icmp-rule"
+                result = manager.saveRule(
+                    json.dumps(edited),
+                    created["file_name"],
+                )
+
+                self.assertTrue(result["ok"], result)
+                self.assertTrue(result["renamed"])
+                self.assertEqual(
+                    [item["id"] for item in manager.getRules()],
+                    ["edited-icmp-rule"],
+                )
             finally:
                 manager.shutdown()
 

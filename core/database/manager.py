@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sqlite3
 import sys
+from contextlib import closing
 from pathlib import Path
 from typing import Any
 
@@ -102,10 +103,11 @@ class DatabaseManager(
         """Validate the managed schema and synchronize compatibility worker paths."""
         try:
             validate_device_database(self.db_path)
-            with sqlite3.connect(self.db_path) as connection:
-                ensure_interface_schema(connection)
-                ensure_fhrp_schema(connection)
-                ensure_ospf_schema(connection)
+            with closing(sqlite3.connect(self.db_path)) as connection:
+                with connection:
+                    ensure_interface_schema(connection)
+                    ensure_fhrp_schema(connection)
+                    ensure_ospf_schema(connection)
             DeviceRepository(self.db_path).synchronize_classification()
             configure_worker_paths(self.db_path)
             return True

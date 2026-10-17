@@ -28,6 +28,8 @@ Automation Engine được tự khởi động cùng ứng dụng. Thanh trạng
 | `metadata` | `enabled` | boolean | `true` mới tham gia đánh giá event |
 | `schedule` | `interval_seconds` | `1..3600` | Chu kỳ đánh giá rule |
 | `match` | `event_type` | chuỗi không rỗng | Loại security event cần bắt |
+| `match` | `network` | địa chỉ mạng IPv4, tùy chọn | Chỉ bắt event từ `device_host` thuộc mạng này; phải đi cùng `subnet_mask` |
+| `match` | `subnet_mask` | subnet mask IPv4, tùy chọn | Mặt nạ mạng dạng chấm thập phân, ví dụ `255.255.255.0` |
 | `match` | `require_attributes` | mảng tên thuộc tính | Event phải có đủ các thuộc tính này |
 | `match` | `attributes` | object chuỗi–chuỗi | Các điều kiện bằng chính xác, ví dụ `protocol = icmp` |
 | `policy` | `mode` | `dry-run` hoặc `auto` | Mô phỏng hoặc thực thi |
@@ -37,6 +39,8 @@ Automation Engine được tự khởi động cùng ứng dụng. Thanh trạng
 | `action` | `ttl_seconds` | `0..86400` | Auto SSH hiện bắt buộc bằng `0` |
 
 Schema là strict: viết sai tên trường hoặc thêm trường lạ sẽ bị từ chối khi import/save.
+
+`network` và `subnet_mask` là một cặp tùy chọn dùng chung cho cả version 1 và 2. Nếu khai báo một trường thì phải khai báo trường còn lại. `network` phải là địa chỉ đầu mạng chuẩn, ví dụ `192.168.122.0` với mask `255.255.255.0`; không dùng địa chỉ host như `192.168.122.101` với mask `/24`. CAMS đối chiếu subnet này với trường `device_host` của security event. Muốn chỉ nhận đúng một thiết bị, dùng địa chỉ host đó với mask `255.255.255.255`, ví dụ `192.168.122.101/32`. Khi bỏ cả hai trường, rule tiếp tục nhận event từ mọi thiết bị như trước. Tên trường đúng là `subnet_mask` (không phải `subnetmazk`).
 
 ## 3. Action đang hỗ trợ
 
@@ -85,6 +89,8 @@ Mỗi command tối đa 512 ký tự và tổng `commands` tối đa 16 KiB. Kh�
   },
   "match": {
     "event_type": "ICMP_FLOOD",
+    "network": "192.168.122.0",
+    "subnet_mask": "255.255.255.0",
     "require_attributes": [],
     "attributes": {
       "protocol": "icmp"
@@ -109,7 +115,7 @@ Mỗi command tối đa 512 ký tự và tổng `commands` tối đa 16 KiB. Kh�
 
 1. Mở **Automation → Rule Editor**.
 2. Chọn **Quick Builder**.
-3. Nhập Rule ID, tên, `event_type`, interface và giới hạn chạy.
+3. Nhập Rule ID, tên, `event_type`, interface và giới hạn chạy. Có thể nhập thêm `Device network` và `Subnet mask`; phải nhập đủ cả hai trường.
 4. Chọn **Shutdown** hoặc **No shutdown**.
 5. Bấm **Build & Save Rule**.
 6. Kiểm tra thanh trạng thái phải báo **Automation Engine active**.
@@ -117,6 +123,10 @@ Mỗi command tối đa 512 ký tự và tổng `commands` tối đa 16 KiB. Kh�
 8. Theo dõi kết quả trong **Automation → Action History**.
 
 Nút **Generate JSON Preview** chuyển sang Advanced JSON để xem payload chính xác trước khi lưu.
+
+Khi sửa một rule và đổi `metadata.id`, CAMS đổi tên file tương ứng thay vì để lại file cũ. Nếu ID mới đã tồn tại, thao tác bị từ chối để không ghi đè rule khác. Quick Builder chỉ mở các rule v1 mà nó có thể giữ nguyên đầy đủ; rule v2 hoặc rule có điều kiện nâng cao được giữ ở Advanced JSON để tránh làm mất field khi lưu.
+
+Trang **Rule Files** có hai thao tác khác nhau: **Reload** chỉ đọc lại danh sách file trên giao diện, còn **Sync engine** yêu cầu Automation Engine kiểm tra và nạp ngay revision hiện tại. Sau thao tác Save, Import, Enable/Disable hoặc Delete, CAMS cũng tự yêu cầu engine refresh nếu dịch vụ đang chạy.
 
 Để tạo chuỗi CLI v2, bấm **CLI v2 Example**, sửa danh sách command trong **Advanced JSON**, giữ `metadata.enabled: false` khi kiểm tra, rồi mới bật rule trong Rule Files.
 
@@ -138,6 +148,8 @@ Nút **Generate JSON Preview** chuyển sang Advanced JSON để xem payload ch�
   },
   "match": {
     "event_type": "ICMP_FLOOD",
+    "network": "192.168.122.0",
+    "subnet_mask": "255.255.255.0",
     "require_attributes": [],
     "attributes": {
       "protocol": "icmp"
@@ -211,6 +223,8 @@ Các event bị cooldown, rate limit hoặc dedup chặn sẽ tăng bộ đếm 
 | `Device did not recognize interface ...` | IOS không trả dòng chứa đúng tên interface | Kiểm tra tên đầy đủ, ví dụ `GigabitEthernet0/3` |
 | `Cisco CLI rejected ...` | Thiết bị trả `% Invalid input`, thiếu quyền hoặc sai mode | Kiểm tra privilege và loại thiết bị |
 | Rule hiện `INVALID` | JSON sai hoặc có field ngoài schema | Mở Advanced JSON, sửa theo bảng schema rồi Save |
+| `match.network and match.subnet_mask must be provided together` | Rule chỉ khai báo một nửa cặp subnet | Thêm trường còn thiếu hoặc xóa cả hai trường |
+| `canonical IPv4 network` | `network` chứa bit host hoặc subnet mask không hợp lệ | Dùng địa chỉ đầu mạng, ví dụ `192.168.122.0` + `255.255.255.0` |
 | Engine `ERROR` | Go binary không chạy hoặc giao thức lỗi | Chạy `./cams.sh automation-check`, sau đó Start lại engine |
 
 ## 9. Kiểm tra file demo

@@ -46,6 +46,47 @@ class AutomationRuleFileTests(unittest.TestCase):
             self.assertTrue(repository.delete_rule("mitigate-icmp-dos")["ok"])
             self.assertEqual(repository.list_rules(), [])
 
+    def test_edit_can_rename_rule_without_leaving_the_old_file(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = RuleFileRepository(temporary)
+            saved = repository.save_rule_text(sample_icmp_rule_text())
+            edited = json.loads(sample_icmp_rule_text())
+            edited["metadata"]["id"] = "renamed-icmp-rule"
+            edited["metadata"]["name"] = "Renamed ICMP rule"
+
+            result = repository.save_rule_text(
+                json.dumps(edited),
+                saved["file_name"],
+            )
+
+            self.assertTrue(result["renamed"])
+            self.assertFalse(
+                (Path(temporary) / "mitigate-icmp-dos.rule.cams").exists()
+            )
+            self.assertTrue(
+                (Path(temporary) / "renamed-icmp-rule.rule.cams").is_file()
+            )
+            self.assertEqual(
+                [item["id"] for item in repository.list_rules()],
+                ["renamed-icmp-rule"],
+            )
+
+    def test_edit_refuses_to_rename_over_an_existing_rule(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = RuleFileRepository(temporary)
+            first = json.loads(sample_icmp_rule_text())
+            second = json.loads(sample_icmp_rule_text())
+            second["metadata"]["id"] = "second-rule"
+            repository.save_rule_text(json.dumps(first))
+            repository.save_rule_text(json.dumps(second))
+            first["metadata"]["id"] = "second-rule"
+
+            with self.assertRaisesRegex(FileExistsError, "already exists"):
+                repository.save_rule_text(
+                    json.dumps(first),
+                    "mitigate-icmp-dos.rule.cams",
+                )
+
     def test_fixed_interface_shutdown_rule_uses_cams_extension(self) -> None:
         source = (
             Path(__file__).resolve().parents[1]
@@ -84,6 +125,34 @@ class AutomationRuleFileTests(unittest.TestCase):
             value["action"]["verify_commands"],
             ["show interfaces GigabitEthernet0/3"],
         )
+        self.assertEqual(value["match"]["network"], "192.168.122.0")
+        self.assertEqual(value["match"]["subnet_mask"], "255.255.255.0")
+
+    def test_network_scope_is_optional_but_requires_a_valid_pair(self) -> None:
+        unscoped = decode_rule_text(sample_icmp_rule_text())
+        self.assertNotIn("network", unscoped["match"])
+        self.assertNotIn("subnet_mask", unscoped["match"])
+
+        missing_mask = json.loads(sample_icmp_rule_text())
+        missing_mask["match"]["network"] = "192.168.122.0"
+        with self.assertRaisesRegex(ValueError, "must be provided together"):
+            decode_rule_text(json.dumps(missing_mask))
+
+        host_address = json.loads(sample_icmp_rule_text())
+        host_address["match"].update({
+            "network": "192.168.122.101",
+            "subnet_mask": "255.255.255.0",
+        })
+        with self.assertRaisesRegex(ValueError, "canonical IPv4 network"):
+            decode_rule_text(json.dumps(host_address))
+
+        invalid_mask = json.loads(sample_icmp_rule_text())
+        invalid_mask["match"].update({
+            "network": "192.168.122.0",
+            "subnet_mask": "255.0.255.0",
+        })
+        with self.assertRaisesRegex(ValueError, "canonical IPv4 network"):
+            decode_rule_text(json.dumps(invalid_mask))
 
     def test_rule_versions_keep_separate_action_contracts(self) -> None:
         version_1 = json.loads(sample_icmp_rule_text())

@@ -46,6 +46,15 @@ Rectangle {
         return "%1 · %2".arg(String(rule.action_type)).arg(String(rule.target || "event data"))
     }
 
+    function matchSummary(rule) {
+        const eventType = String(rule && rule.event_type || "")
+        const network = String(rule && rule.network || "")
+        const subnetMask = String(rule && rule.subnet_mask || "")
+        return network !== "" && subnetMask !== ""
+                ? "%1 @ %2 / %3".arg(eventType).arg(network).arg(subnetMask)
+                : eventType + " @ any device"
+    }
+
     function importRuleFile(fileUrl) {
         if (backend === null)
             return
@@ -131,6 +140,19 @@ Rectangle {
                 type: "Text"
                 icon.source: AppAssets.actionRefresh
                 onClicked: root.reloadRules()
+            }
+            StandardButton {
+                objectName: "automationSyncRulesButton"
+                text: "Sync engine"
+                type: "Text"
+                icon.source: AppAssets.actionRefresh
+                enabled: root.backend !== null
+                         && root.backend.running
+                         && !root.backend.busy
+                onClicked: root.showResult(
+                    root.backend.syncRules(),
+                    "Unable to synchronize rules."
+                )
             }
             StandardButton {
                 objectName: "automationImportRuleButton"
@@ -232,11 +254,13 @@ Rectangle {
                                         checked: Boolean(ruleCard.modelData.enabled)
                                         enabled: root.backend !== null
                                                  && Boolean(ruleCard.modelData.valid)
-                                        onToggled: {
+                                        onClicked: {
                                             const result = root.backend.setRuleEnabled(
                                                 String(ruleCard.modelData.file_name), checked
                                             )
                                             root.showResult(result, "Unable to update the rule.")
+                                            if (!result || !result.ok)
+                                                root.reloadRules()
                                         }
                                     }
 
@@ -294,7 +318,7 @@ Rectangle {
                                     Layout.fillWidth: true
                                     text: ruleCard.modelData.valid
                                           ? "%1 → %2 · cooldown %3s · max %4/hour · scan %5s"
-                                               .arg(ruleCard.modelData.event_type)
+                                               .arg(root.matchSummary(ruleCard.modelData))
                                                .arg(root.actionSummary(ruleCard.modelData))
                                                .arg(ruleCard.modelData.cooldown_seconds)
                                                .arg(ruleCard.modelData.max_actions_per_hour)
