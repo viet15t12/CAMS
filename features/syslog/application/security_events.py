@@ -45,6 +45,14 @@ _TOKEN_RE = re.compile(r"[0-9A-Fa-f:.]+")
 _PORT_RE = re.compile(r"\((\d+)\)")
 _DHCP_SERVER_MESSAGE_RE = re.compile(r"\bDHCP(?:OFFER|ACK|NAK)\b", re.IGNORECASE)
 _DAI_COUNT_RE = re.compile(r"\b(\d+)\s+Invalid\s+ARPs?\b", re.IGNORECASE)
+_ICMP_FLOOD_DETAIL_RE = re.compile(
+    r"\bICMP[-_ ]FLOOD\b.*?\b(?:vao|vào)\s+"
+    r"(?P<reported_device>[A-Za-z0-9][A-Za-z0-9_.-]*)\s+"
+    r"(?:tu|từ)\s+IP\s+(?P<offender_ip>[0-9.]+)\s+"
+    r"(?:tai|tại)\s+(?:cong|cổng)\s+"
+    r"(?P<interface>[A-Za-z][A-Za-z0-9./_-]*)\b",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -92,6 +100,8 @@ class SecurityEvent:
     detail: str = ""
     protocol: str = ""
     interface: str = ""
+    offender_ip: str = ""
+    reported_device: str = ""
 
 
 def _text(row: dict[str, Any]) -> str:
@@ -163,11 +173,23 @@ def _classify_icmp_flood(row: dict[str, Any]) -> SecurityEvent | None:
     device = str(row.get("device_host") or row.get("source_ip") or "")
     if not device:
         return None
+    detail = _ICMP_FLOOD_DETAIL_RE.search(text)
+    offender_ip = ""
+    interface = ""
+    reported_device = ""
+    if detail is not None:
+        offender_ip = _valid_ip(detail.group("offender_ip")) or ""
+        interface = detail.group("interface")
+        reported_device = detail.group("reported_device")
     return SecurityEvent(
         rule="ICMP_FLOOD",
         key=device,
         description="HA_EM ICMP flood threshold",
         protocol="icmp",
+        target=interface,
+        interface=interface,
+        offender_ip=offender_ip,
+        reported_device=reported_device,
     )
 
 
@@ -363,6 +385,12 @@ class SecurityEventDetector:
                 attributes["target"] = event.target
         elif rule.name == "ICMP_FLOOD":
             attributes["protocol"] = "icmp"
+            if event.offender_ip:
+                attributes["offender_ip"] = event.offender_ip
+            if event.interface:
+                attributes["interface"] = event.interface
+            if event.reported_device:
+                attributes["reported_device"] = event.reported_device
         else:
             if event.target:
                 attributes["interface"] = event.target

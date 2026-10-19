@@ -128,6 +128,35 @@ class SecurityMonitoringTests(unittest.TestCase):
         self.assertEqual(event["evidence"]["source_message_ids"], [41])
         self.assertEqual(detector.process_detections([row]), [])
 
+    def test_ha_em_icmp_flood_extracts_any_valid_reported_interface(self):
+        interfaces = (
+            "Gi0/3.10",
+            "Gi0/0",
+            "GigabitEthernet1/0/24",
+            "Te1/1/1",
+        )
+        for index, interface in enumerate(interfaces, start=1):
+            with self.subTest(interface=interface):
+                row = {
+                    "id": 100 + index,
+                    "device_host": f"192.168.122.{100 + index}",
+                    "source_ip": f"192.168.122.{100 + index}",
+                    "protocol": "udp",
+                    "cisco_facility": "HA_EM",
+                    "mnemonic": "LOG",
+                    "message": (
+                        "DETECT-DOS: NGHI DOS: ICMP flood vao R4 "
+                        f"tu IP 10.1.1.5 tai cong {interface}"
+                    ),
+                }
+
+                detection = SecurityEventDetector().process_detections([row])[0]
+                attributes = detection.event.to_dict()["attributes"]
+
+                self.assertEqual(attributes["interface"], interface)
+                self.assertEqual(attributes["offender_ip"], "10.1.1.5")
+                self.assertEqual(attributes["reported_device"], "R4")
+
     def test_permit_operational_and_recovery_messages_do_not_trigger_violation_alerts(self):
         rows = [
             {"cisco_facility": "SW_DAI", "mnemonic": "DHCP_SNOOPING_PERMIT",

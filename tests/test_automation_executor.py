@@ -87,12 +87,32 @@ def _auto_plan(event_id: str) -> dict[str, Any]:
     }
 
 
-def _cli_plan(event_id: str, *, mode: str = "config") -> dict[str, Any]:
+def _cli_plan(
+    event_id: str, *, mode: str = "config", rule_version: int = 2,
+) -> dict[str, Any]:
     commands = (
         ["router ospf 1", "network 10.0.0.0 0.0.0.255 area 0"]
         if mode == "config"
         else ["show clock", "show ip interface brief"]
     )
+    request = {
+        "driver": "ssh.cli",
+        "rule_version": rule_version,
+        "transport": "ssh",
+        "device_host": "192.168.122.101",
+        "mode": mode,
+        "commands": commands,
+        "verify_commands": ["show ip ospf interface brief"],
+        "ttl_seconds": 0,
+        "dry_run": False,
+    }
+    if rule_version == 3:
+        request.update({
+            "commands": ["interface Te1/1/1", "shutdown"],
+            "verify_commands": ["show interfaces Te1/1/1"],
+            "variables": {"interface": "Te1/1/1"},
+            "variable_source_message_ids": {"interface": 91},
+        })
     return {
         "event_id": event_id,
         "device_host": "192.168.122.101",
@@ -105,17 +125,7 @@ def _cli_plan(event_id: str, *, mode: str = "config") -> dict[str, Any]:
         "dedup_key": f"cli-{mode}-v2-dedup",
         "cooldown_seconds": 300,
         "max_actions_per_hour": 2,
-        "request_redacted": {
-            "driver": "ssh.cli",
-            "rule_version": 2,
-            "transport": "ssh",
-            "device_host": "192.168.122.101",
-            "mode": mode,
-            "commands": commands,
-            "verify_commands": ["show ip ospf interface brief"],
-            "ttl_seconds": 0,
-            "dry_run": False,
-        },
+        "request_redacted": request,
     }
 
 
@@ -238,6 +248,25 @@ class AutomationActionExecutorTests(unittest.TestCase):
             self.assertEqual(
                 connector.show_commands, ["show ip ospf interface brief"]
             )
+
+    def test_version_3_rendered_interface_commands_execute(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = self._repository_with_action(
+                Path(temporary),
+                lambda event_id: _cli_plan(event_id, rule_version=3),
+            )
+            connection = _Connection(["Te1/1/1 is administratively down"])
+            connector = _Connector(connection)
+            executor = AutomationActionExecutor(_Registry(connector))
+
+            result = executor.execute_ready(repository)
+
+            self.assertEqual(result, {"verified": 1, "noop_verified": 0, "failed": 0})
+            self.assertEqual(
+                connection.config_batches,
+                [["interface Te1/1/1", "shutdown"]],
+            )
+            self.assertEqual(connector.show_commands, ["show interfaces Te1/1/1"])
             action = repository.query_automation_actions()[0]
             after = json.loads(action["after_json"])
             self.assertEqual(action["status"], "verified")

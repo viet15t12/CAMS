@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	Version             = 2
+	Version             = 3
 	MinVersion          = 1
 	MaxRuleBytes        = 256 << 10
 	MaxRuleFiles        = 256
@@ -34,10 +34,15 @@ const (
 	maxVerifyCommands   = 20
 	maxCLICommandLength = 512
 	maxCLITotalLength   = 16 << 10
+	maxVariables        = 16
+	maxVariablePattern  = 1024
 )
 
 var identifierPattern = regexp.MustCompile(`^[a-z0-9]+(?:[._-][a-z0-9]+)*$`)
 var interfacePattern = regexp.MustCompile(`^[A-Za-z][A-Za-z0-9./_-]*$`)
+var variableNamePattern = regexp.MustCompile(`^[a-z][a-z0-9_]*$`)
+var identifierValuePattern = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9_.-]*$`)
+var templatePattern = regexp.MustCompile(`\{\{\s*variables\.([a-z][a-z0-9_]*)\s*\}\}`)
 
 type Metadata struct {
 	ID          string `json:"id"`
@@ -78,15 +83,25 @@ type Action struct {
 	VerifyCommands []string `json:"verify_commands,omitempty"`
 }
 
+// Variable describes a typed value extracted from a Syslog row selected by
+// the Python host with a parameterized SQLite query. Rules never contain SQL.
+type Variable struct {
+	Source       string `json:"source"`
+	Pattern      string `json:"pattern"`
+	CaptureGroup int    `json:"capture_group"`
+	Type         string `json:"type"`
+}
+
 type Rule struct {
-	Version  int      `json:"version"`
-	Metadata Metadata `json:"metadata"`
-	Schedule Schedule `json:"schedule"`
-	Match    Match    `json:"match"`
-	Policy   Policy   `json:"policy"`
-	Action   Action   `json:"action"`
-	Revision string   `json:"-"`
-	Source   string   `json:"-"`
+	Version   int                 `json:"version"`
+	Metadata  Metadata            `json:"metadata"`
+	Schedule  Schedule            `json:"schedule"`
+	Match     Match               `json:"match"`
+	Policy    Policy              `json:"policy"`
+	Variables map[string]Variable `json:"variables,omitempty"`
+	Action    Action              `json:"action"`
+	Revision  string              `json:"-"`
+	Source    string              `json:"-"`
 }
 
 type LoadError struct {
@@ -206,6 +221,9 @@ func (value Rule) Validate() error {
 	if value.Policy.MaxActionsPerHour < 1 || value.Policy.MaxActionsPerHour > 1000 {
 		return errors.New("policy.max_actions_per_hour must be between 1 and 1000")
 	}
+	if err := value.validateVariables(); err != nil {
+		return err
+	}
 	if err := value.Action.validate(value.Version); err != nil {
 		return err
 	}
@@ -225,15 +243,15 @@ func (value Action) validate(version int) error {
 	if value.TTLSeconds < 0 || value.TTLSeconds > 86400 {
 		return errors.New("action.ttl_seconds must be between 0 and 86400")
 	}
-	if version == 2 {
+	if version >= 2 {
 		if value.Type != "ssh.cli" {
-			return errors.New("rule version 2 requires action.type ssh.cli")
+			return fmt.Errorf("rule version %d requires action.type ssh.cli", version)
 		}
 		if value.Transport != "ssh" {
-			return errors.New("version 2 CLI actions require transport ssh")
+			return fmt.Errorf("version %d CLI actions require transport ssh", version)
 		}
 		if value.Mode != "config" && value.Mode != "exec" {
-			return errors.New("version 2 action.mode must be config or exec")
+			return fmt.Errorf("version %d action.mode must be config or exec", version)
 		}
 		if err := validateCLICommands(value.Commands, "action.commands", maxCLICommands, true); err != nil {
 			return err
@@ -242,11 +260,11 @@ func (value Action) validate(version int) error {
 			return err
 		}
 		if value.TTLSeconds != 0 {
-			return errors.New("version 2 CLI actions require ttl_seconds 0")
+			return fmt.Errorf("version %d CLI actions require ttl_seconds 0", version)
 		}
 		if value.Protocol != "" || value.SourceFrom != "" || value.InterfaceFrom != "" ||
 			value.Interface != "" || value.Enabled != nil {
-			return errors.New("version 2 CLI action contains version 1 fields")
+			return fmt.Errorf("version %d CLI action contains version 1 fields", version)
 		}
 		return nil
 	}
@@ -292,6 +310,59 @@ func (value Action) validate(version int) error {
 		}
 	default:
 		return fmt.Errorf("unsupported action.type %q", value.Type)
+	}
+	return nil
+}
+
+func (value Rule) validateVariables() error {
+	if value.Version < 3 {
+		if len(value.Variables) != 0 {
+			return errors.New("rule versions 1 and 2 do not accept variables")
+		}
+		return nil
+	}
+	if len(value.Variables) == 0 || len(value.Variables) > maxVariables {
+		return fmt.Errorf("rule version 3 requires between 1 and %d variables", maxVariables)
+	}
+	for name, variable := range value.Variables {
+		if !variableNamePattern.MatchString(name) || len(name) > maxIdentifier {
+			return fmt.Errorf("invalid variable name %q", name)
+		}
+		if variable.Source != "sqlite.syslog_message.message" &&
+			variable.Source != "sqlite.syslog_message.raw_message" {
+			return fmt.Errorf("variable %q has unsupported source", name)
+		}
+		if variable.Pattern == "" || len(variable.Pattern) > maxVariablePattern {
+			return fmt.Errorf("variable %q pattern is required and must not exceed %d characters", name, maxVariablePattern)
+		}
+		compiled, err := regexp.Compile(variable.Pattern)
+		if err != nil {
+			return fmt.Errorf("variable %q pattern: %w", name, err)
+		}
+		if variable.CaptureGroup < 1 || variable.CaptureGroup > compiled.NumSubexp() {
+			return fmt.Errorf("variable %q capture_group must identify a regex capture", name)
+		}
+		if variable.Type != "interface" && variable.Type != "ipv4" && variable.Type != "identifier" {
+			return fmt.Errorf("variable %q type must be interface, ipv4 or identifier", name)
+		}
+	}
+	used := make(map[string]struct{})
+	for _, command := range append(append([]string(nil), value.Action.Commands...), value.Action.VerifyCommands...) {
+		matches := templatePattern.FindAllStringSubmatch(command, -1)
+		withoutTemplates := templatePattern.ReplaceAllString(command, "")
+		if strings.Contains(withoutTemplates, "{{") || strings.Contains(withoutTemplates, "}}") {
+			return errors.New("version 3 commands contain an invalid variable template")
+		}
+		for _, match := range matches {
+			name := match[1]
+			if _, ok := value.Variables[name]; !ok {
+				return fmt.Errorf("version 3 command references undefined variable %q", name)
+			}
+			used[name] = struct{}{}
+		}
+	}
+	if len(used) == 0 {
+		return errors.New("rule version 3 requires at least one variable reference in commands")
 	}
 	return nil
 }
@@ -547,11 +618,35 @@ func planAction(currentRule Rule, currentEvent event.Event, attributes map[strin
 		request["enabled"] = *currentRule.Action.Enabled
 		request["ttl_seconds"] = currentRule.Action.TTLSeconds
 	case "ssh.cli":
+		commands := append([]string(nil), currentRule.Action.Commands...)
+		verifyCommands := append([]string(nil), currentRule.Action.VerifyCommands...)
+		if currentRule.Version == 3 {
+			variables, sourceIDs, ok := resolveVariables(currentRule, currentEvent)
+			if !ok {
+				return PlannedAction{}, false
+			}
+			commands, ok = renderCommands(commands, variables)
+			if !ok {
+				return PlannedAction{}, false
+			}
+			verifyCommands, ok = renderCommands(verifyCommands, variables)
+			if !ok {
+				return PlannedAction{}, false
+			}
+			if err := validateCLICommands(commands, "rendered action.commands", maxCLICommands, true); err != nil {
+				return PlannedAction{}, false
+			}
+			if err := validateCLICommands(verifyCommands, "rendered action.verify_commands", maxVerifyCommands, false); err != nil {
+				return PlannedAction{}, false
+			}
+			request["variables"] = variables
+			request["variable_source_message_ids"] = sourceIDs
+		}
 		request["rule_version"] = currentRule.Version
 		request["transport"] = currentRule.Action.Transport
 		request["mode"] = currentRule.Action.Mode
-		request["commands"] = append([]string(nil), currentRule.Action.Commands...)
-		request["verify_commands"] = append([]string(nil), currentRule.Action.VerifyCommands...)
+		request["commands"] = commands
+		request["verify_commands"] = verifyCommands
 		request["ttl_seconds"] = currentRule.Action.TTLSeconds
 	default:
 		return PlannedAction{}, false
@@ -572,6 +667,99 @@ func planAction(currentRule Rule, currentEvent event.Event, attributes map[strin
 		MaxActionsPerHour: currentRule.Policy.MaxActionsPerHour,
 		RequestRedacted:   request,
 	}, true
+}
+
+type sourceMessage struct {
+	ID         int64  `json:"id"`
+	Message    string `json:"message"`
+	RawMessage string `json:"raw_message"`
+}
+
+type eventEvidence struct {
+	SourceMessages []sourceMessage `json:"source_messages"`
+}
+
+func resolveVariables(currentRule Rule, currentEvent event.Event) (map[string]string, map[string]int64, bool) {
+	var evidence eventEvidence
+	if err := json.Unmarshal(currentEvent.Evidence, &evidence); err != nil || len(evidence.SourceMessages) == 0 {
+		return nil, nil, false
+	}
+	values := make(map[string]string, len(currentRule.Variables))
+	sourceIDs := make(map[string]int64, len(currentRule.Variables))
+	for name, variable := range currentRule.Variables {
+		compiled, err := regexp.Compile(variable.Pattern)
+		if err != nil {
+			return nil, nil, false
+		}
+		found := false
+		for _, source := range evidence.SourceMessages {
+			if source.ID <= 0 {
+				continue
+			}
+			text := source.Message
+			if variable.Source == "sqlite.syslog_message.raw_message" {
+				text = source.RawMessage
+			}
+			match := compiled.FindStringSubmatch(text)
+			if len(match) <= variable.CaptureGroup {
+				continue
+			}
+			candidate := strings.TrimSpace(match[variable.CaptureGroup])
+			if !validVariableValue(variable.Type, candidate) {
+				continue
+			}
+			values[name] = candidate
+			sourceIDs[name] = source.ID
+			found = true
+			break
+		}
+		if !found {
+			return nil, nil, false
+		}
+	}
+	return values, sourceIDs, true
+}
+
+func validVariableValue(variableType string, value string) bool {
+	if value == "" || len(value) > 128 || strings.ContainsAny(value, "\r\n\x00") {
+		return false
+	}
+	switch variableType {
+	case "interface":
+		return interfacePattern.MatchString(value)
+	case "ipv4":
+		address, err := netip.ParseAddr(value)
+		return err == nil && address.Is4()
+	case "identifier":
+		return identifierValuePattern.MatchString(value)
+	default:
+		return false
+	}
+}
+
+func renderCommands(commands []string, variables map[string]string) ([]string, bool) {
+	rendered := make([]string, 0, len(commands))
+	for _, command := range commands {
+		valid := true
+		value := templatePattern.ReplaceAllStringFunc(command, func(placeholder string) string {
+			match := templatePattern.FindStringSubmatch(placeholder)
+			if len(match) != 2 {
+				valid = false
+				return ""
+			}
+			replacement, ok := variables[match[1]]
+			if !ok {
+				valid = false
+				return ""
+			}
+			return replacement
+		})
+		if !valid || strings.Contains(value, "{{") || strings.Contains(value, "}}") {
+			return nil, false
+		}
+		rendered = append(rendered, value)
+	}
+	return rendered, true
 }
 
 func validAttributeName(value string) bool {

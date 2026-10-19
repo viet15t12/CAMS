@@ -128,6 +128,40 @@ class AutomationRuleFileTests(unittest.TestCase):
         self.assertEqual(value["match"]["network"], "192.168.122.0")
         self.assertEqual(value["match"]["subnet_mask"], "255.255.255.0")
 
+    def test_version_3_accepts_typed_sqlite_syslog_variables(self) -> None:
+        source = (
+            Path(__file__).resolve().parents[1]
+            / "00_report/doc-ruleCams/demo/06-dynamic-syslog-variables-v3.rule.cams"
+        )
+
+        value = decode_rule_text(source.read_text(encoding="utf-8"))
+
+        self.assertEqual(value["version"], 3)
+        self.assertEqual(
+            value["variables"]["interface"]["source"],
+            "sqlite.syslog_message.message",
+        )
+        self.assertEqual(value["variables"]["interface"]["type"], "interface")
+        self.assertEqual(
+            value["action"]["commands"][0],
+            "interface {{ variables.interface }}",
+        )
+
+    def test_version_3_rejects_undefined_or_untyped_templates(self) -> None:
+        source = (
+            Path(__file__).resolve().parents[1]
+            / "00_report/doc-ruleCams/demo/06-dynamic-syslog-variables-v3.rule.cams"
+        )
+        value = json.loads(source.read_text(encoding="utf-8"))
+        value["action"]["commands"][0] = "interface {{ variables.missing }}"
+        with self.assertRaisesRegex(ValueError, "undefined variable"):
+            decode_rule_text(json.dumps(value))
+
+        value = json.loads(source.read_text(encoding="utf-8"))
+        value["variables"]["interface"]["source"] = "sqlite.arbitrary_query"
+        with self.assertRaisesRegex(ValueError, "source is unsupported"):
+            decode_rule_text(json.dumps(value))
+
     def test_network_scope_is_optional_but_requires_a_valid_pair(self) -> None:
         unscoped = decode_rule_text(sample_icmp_rule_text())
         self.assertNotIn("network", unscoped["match"])

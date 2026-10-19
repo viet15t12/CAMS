@@ -11,18 +11,20 @@ from pathlib import Path
 from typing import Any
 
 
-RULE_VERSION = 2
-SUPPORTED_RULE_VERSIONS = frozenset({1, 2})
+RULE_VERSION = 3
+SUPPORTED_RULE_VERSIONS = frozenset({1, 2, 3})
 MAX_RULE_BYTES = 256 * 1024
 MAX_RULE_FILES = 256
 MAX_CLI_COMMANDS = 100
 MAX_VERIFY_COMMANDS = 20
 MAX_CLI_COMMAND_LENGTH = 512
 MAX_CLI_TOTAL_LENGTH = 16 * 1024
+MAX_VARIABLES = 16
+MAX_VARIABLE_PATTERN = 1024
 RULE_SUFFIX = ".rule.cams"
 LEGACY_RULE_SUFFIX = ".json"
 _IDENTIFIER = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
-_TOP_LEVEL = {"version", "metadata", "schedule", "match", "policy", "action"}
+_BASE_TOP_LEVEL = {"version", "metadata", "schedule", "match", "policy", "action"}
 _V1_ACTION_FIELDS = {
     "type", "transport", "protocol", "source_from", "interface_from",
     "interface", "enabled", "ttl_seconds",
@@ -30,6 +32,13 @@ _V1_ACTION_FIELDS = {
 _V2_ACTION_FIELDS = {
     "type", "transport", "mode", "commands", "verify_commands", "ttl_seconds",
 }
+_VARIABLE_NAME = re.compile(r"^[a-z][a-z0-9_]*$")
+_VARIABLE_TEMPLATE = re.compile(r"\{\{\s*variables\.([a-z][a-z0-9_]*)\s*\}\}")
+_VARIABLE_SOURCES = {
+    "sqlite.syslog_message.message",
+    "sqlite.syslog_message.raw_message",
+}
+_VARIABLE_TYPES = {"interface", "ipv4", "identifier"}
 
 
 def _require_keys(value: dict[str, Any], allowed: set[str], label: str) -> None:
@@ -105,15 +114,78 @@ def _validate_network_scope(match: dict[str, Any]) -> None:
     match["subnet_mask"] = str(scope.netmask)
 
 
+def _validate_v3_variables(rule: dict[str, Any], action: dict[str, Any]) -> None:
+    variables = _mapping(rule.get("variables"), "variables")
+    if not 1 <= len(variables) <= MAX_VARIABLES:
+        raise ValueError(
+            f"Rule version 3 requires between 1 and {MAX_VARIABLES} variables"
+        )
+    for name, raw_variable in variables.items():
+        if not isinstance(name, str) or not _VARIABLE_NAME.fullmatch(name) or len(name) > 96:
+            raise ValueError(f"Invalid variable name: {name}")
+        variable = _mapping(raw_variable, f"variables.{name}")
+        _require_keys(
+            variable,
+            {"source", "pattern", "capture_group", "type"},
+            f"variables.{name}",
+        )
+        if set(variable) != {"source", "pattern", "capture_group", "type"}:
+            raise ValueError(f"variables.{name} is incomplete")
+        if variable.get("source") not in _VARIABLE_SOURCES:
+            raise ValueError(f"variables.{name}.source is unsupported")
+        pattern = variable.get("pattern")
+        if not isinstance(pattern, str) or not pattern or len(pattern) > MAX_VARIABLE_PATTERN:
+            raise ValueError(
+                f"variables.{name}.pattern is required and must not exceed "
+                f"{MAX_VARIABLE_PATTERN} characters"
+            )
+        try:
+            compiled = re.compile(pattern)
+        except re.error as exc:
+            raise ValueError(f"variables.{name}.pattern is invalid: {exc}") from exc
+        capture_group = variable.get("capture_group")
+        if (
+            isinstance(capture_group, bool)
+            or not isinstance(capture_group, int)
+            or not 1 <= capture_group <= compiled.groups
+        ):
+            raise ValueError(
+                f"variables.{name}.capture_group must identify a regex capture"
+            )
+        if variable.get("type") not in _VARIABLE_TYPES:
+            raise ValueError(
+                f"variables.{name}.type must be interface, ipv4 or identifier"
+            )
+
+    used: set[str] = set()
+    for command in [*action["commands"], *action["verify_commands"]]:
+        matches = list(_VARIABLE_TEMPLATE.finditer(command))
+        without_templates = _VARIABLE_TEMPLATE.sub("", command)
+        if "{{" in without_templates or "}}" in without_templates:
+            raise ValueError("Version 3 commands contain an invalid variable template")
+        for match in matches:
+            variable_name = match.group(1)
+            if variable_name not in variables:
+                raise ValueError(
+                    f"Version 3 command references undefined variable: {variable_name}"
+                )
+            used.add(variable_name)
+    if not used:
+        raise ValueError(
+            "Rule version 3 requires at least one variable reference in commands"
+        )
+
+
 def validate_rule_payload(value: Any) -> dict[str, Any]:
     rule = _mapping(value, "rule")
-    _require_keys(rule, _TOP_LEVEL, "rule")
-    if set(rule) != _TOP_LEVEL:
-        missing = _TOP_LEVEL - set(rule)
+    version = rule.get("version")
+    allowed_top_level = _BASE_TOP_LEVEL | ({"variables"} if version == 3 else set())
+    _require_keys(rule, allowed_top_level, "rule")
+    if set(rule) != allowed_top_level:
+        missing = allowed_top_level - set(rule)
         raise ValueError(f"rule is missing: {', '.join(sorted(missing))}")
-    version = rule["version"]
     if isinstance(version, bool) or version not in SUPPORTED_RULE_VERSIONS:
-        raise ValueError("Only rule versions 1 and 2 are supported")
+        raise ValueError("Only rule versions 1, 2 and 3 are supported")
 
     metadata = _mapping(rule["metadata"], "metadata")
     _require_keys(metadata, {"id", "name", "description", "enabled"}, "metadata")
@@ -180,13 +252,13 @@ def validate_rule_payload(value: Any) -> dict[str, Any]:
     ttl = action.get("ttl_seconds", 0)
     if isinstance(ttl, bool) or not isinstance(ttl, int) or not 0 <= ttl <= 86400:
         raise ValueError("action.ttl_seconds must be between 0 and 86400")
-    if version == 2:
+    if version >= 2:
         if action_type != "ssh.cli":
-            raise ValueError("Rule version 2 requires action.type ssh.cli")
+            raise ValueError(f"Rule version {version} requires action.type ssh.cli")
         if action.get("transport") != "ssh":
-            raise ValueError("Version 2 CLI actions require transport ssh")
+            raise ValueError(f"Version {version} CLI actions require transport ssh")
         if action.get("mode") not in {"config", "exec"}:
-            raise ValueError("Version 2 action.mode must be config or exec")
+            raise ValueError(f"Version {version} action.mode must be config or exec")
         action["commands"] = _cli_commands(
             action.get("commands"),
             "action.commands",
@@ -200,7 +272,9 @@ def validate_rule_payload(value: Any) -> dict[str, Any]:
             required=False,
         )
         if ttl != 0:
-            raise ValueError("Version 2 CLI actions require ttl_seconds 0")
+            raise ValueError(f"Version {version} CLI actions require ttl_seconds 0")
+        if version == 3:
+            _validate_v3_variables(rule, action)
         return rule
 
     if action_type == "acl.deny-protocol-source":

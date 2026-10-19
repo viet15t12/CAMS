@@ -150,8 +150,8 @@ class AutomationActionExecutor:
     def _validated_cli_request(
         cls, request: dict[str, Any],
     ) -> tuple[str, list[str], list[str]]:
-        if request.get("rule_version") != 2:
-            raise ValueError("SSH CLI actions require rule version 2")
+        if request.get("rule_version") not in {2, 3}:
+            raise ValueError("SSH CLI actions require rule version 2 or 3")
         if request.get("transport") != "ssh":
             raise ValueError("SSH CLI actions require SSH transport")
         mode = str(request.get("mode") or "")
@@ -186,18 +186,18 @@ class AutomationActionExecutor:
                 read_timeout=120,
                 cmd_verify=False,
             ) or "")
-            self._raise_cli_error(output, "version 2 configuration")
+            self._raise_cli_error(output, "SSH CLI configuration")
             outputs.append({"stage": "config", "output": output[-4000:]})
         else:
             for command in commands:
                 output = self._send_show(connector, command)
-                self._raise_cli_error(output, f"version 2 exec command {command}")
+                self._raise_cli_error(output, f"SSH CLI exec command {command}")
                 outputs.append({"stage": "exec", "output": output[-4000:]})
 
         verification: list[dict[str, str]] = []
         for command in verify_commands:
             output = self._send_show(connector, command)
-            self._raise_cli_error(output, f"version 2 verification command {command}")
+            self._raise_cli_error(output, f"SSH CLI verification command {command}")
             verification.append({"command": command, "output": output[-4000:]})
         return {
             "before": {"mode": mode, "command_count": len(commands)},

@@ -1,0 +1,54 @@
+{
+  "version": 3,
+  "metadata": {
+    "id": "demo-dynamic-syslog-variables-v3",
+    "name": "Demo: dynamic Syslog variables v3",
+    "description": "Extracts a typed interface and offender IP from the source Syslog row stored in SQLite, then renders a bounded SSH command sequence.",
+    "enabled": false
+  },
+  "schedule": {
+    "interval_seconds": 5
+  },
+  "match": {
+    "event_type": "ICMP_FLOOD",
+    "network": "192.168.122.0",
+    "subnet_mask": "255.255.255.0",
+    "require_attributes": [],
+    "attributes": {
+      "protocol": "icmp"
+    }
+  },
+  "policy": {
+    "mode": "auto",
+    "cooldown_seconds": 600,
+    "max_actions_per_hour": 1
+  },
+  "variables": {
+    "interface": {
+      "source": "sqlite.syslog_message.message",
+      "pattern": "(?i)\\b(?:tai|tại)\\s+(?:cong|cổng)\\s+([A-Za-z][A-Za-z0-9./_-]*)[\\s,.;]*$",
+      "capture_group": 1,
+      "type": "interface"
+    },
+    "offender_ip": {
+      "source": "sqlite.syslog_message.message",
+      "pattern": "(?i)\\b(?:tu|từ)\\s+IP\\s+([0-9.]+)\\b",
+      "capture_group": 1,
+      "type": "ipv4"
+    }
+  },
+  "action": {
+    "type": "ssh.cli",
+    "transport": "ssh",
+    "mode": "config",
+    "commands": [
+      "interface {{ variables.interface }}",
+      "description CAMS_AUTO_ICMP_FLOOD_{{ variables.offender_ip }}",
+      "shutdown"
+    ],
+    "verify_commands": [
+      "show interfaces {{ variables.interface }}"
+    ],
+    "ttl_seconds": 0
+  }
+}

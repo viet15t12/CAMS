@@ -55,6 +55,36 @@ const cliRuleV2 = `{
   }
 }`
 
+const cliRuleV3 = `{
+  "version": 3,
+  "metadata": {"id":"dynamic-icmp-response-v3","name":"Dynamic ICMP response","enabled":true},
+  "schedule": {"interval_seconds":1},
+  "match": {"event_type":"ICMP_FLOOD","require_attributes":[],"attributes":{"protocol":"icmp"}},
+  "policy": {"mode":"auto","cooldown_seconds":300,"max_actions_per_hour":2},
+  "variables": {
+    "interface": {
+      "source":"sqlite.syslog_message.message",
+      "pattern":"(?i)\\btai\\s+cong\\s+([A-Za-z][A-Za-z0-9./_-]*)[\\s,.;]*$",
+      "capture_group":1,
+      "type":"interface"
+    },
+    "offender_ip": {
+      "source":"sqlite.syslog_message.message",
+      "pattern":"(?i)\\btu\\s+IP\\s+([0-9.]+)\\b",
+      "capture_group":1,
+      "type":"ipv4"
+    }
+  },
+  "action": {
+    "type":"ssh.cli",
+    "transport":"ssh",
+    "mode":"config",
+    "commands":["interface {{ variables.interface }}","description CAMS_BLOCK_{{ variables.offender_ip }}","shutdown"],
+    "verify_commands":["show interfaces {{ variables.interface }}"],
+    "ttl_seconds":0
+  }
+}`
+
 func TestDecodeAndEvaluateICMPRule(t *testing.T) {
 	value, err := Decode(strings.NewReader(icmpRule))
 	if err != nil {
@@ -156,6 +186,89 @@ func TestVersion2PlansSSHCLICommands(t *testing.T) {
 		request["mode"] != "config" || plans[0].ActionType != "ssh.cli" ||
 		plans[0].Status != "ready" {
 		t.Fatalf("unexpected version 2 plan: %#v", plans[0])
+	}
+}
+
+func TestVersion3RendersTypedVariablesFromSQLiteSourceMessages(t *testing.T) {
+	value, err := Decode(strings.NewReader(cliRuleV3))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, interfaceName := range []string{"Gi0/3.10", "Gi0/0"} {
+		t.Run(interfaceName, func(t *testing.T) {
+			message := "%HA_EM-1-LOG: DETECT-DOS: NGHI DOS: ICMP flood vao R4 tu IP 10.1.1.5 tai cong " + interfaceName
+			evidence, err := json.Marshal(map[string]any{
+				"source_message_ids": []int{41},
+				"source_messages": []map[string]any{{
+					"id": 41, "message": message, "raw_message": message,
+				}},
+			})
+			if err != nil {
+				t.Fatal(err)
+			}
+			eventValue := event.Event{
+				SchemaVersion: 1, EventID: "evt-v3-" + interfaceName,
+				EventType: "ICMP_FLOOD", DeviceHost: "192.168.122.101",
+				SubjectKey: "192.168.122.101", DetectedAt: "2026-10-15T02:45:15Z",
+				Fingerprint: "fp-v3-" + interfaceName,
+				Attributes:  json.RawMessage(`{"protocol":"icmp"}`),
+				Evidence:    evidence,
+			}
+			plans, err := Evaluate([]Rule{value}, []event.Event{eventValue})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if len(plans) != 1 {
+				t.Fatalf("Evaluate() returned %d plans", len(plans))
+			}
+			request := plans[0].RequestRedacted
+			commands, ok := request["commands"].([]string)
+			if !ok || len(commands) != 3 || commands[0] != "interface "+interfaceName ||
+				commands[1] != "description CAMS_BLOCK_10.1.1.5" {
+				t.Fatalf("unexpected rendered commands: %#v", request["commands"])
+			}
+			verify, ok := request["verify_commands"].([]string)
+			if !ok || len(verify) != 1 || verify[0] != "show interfaces "+interfaceName {
+				t.Fatalf("unexpected rendered verify commands: %#v", request["verify_commands"])
+			}
+			if request["rule_version"] != 3 {
+				t.Fatalf("unexpected rule version: %#v", request["rule_version"])
+			}
+		})
+	}
+}
+
+func TestVersion3FailsClosedForMissingOrInvalidVariables(t *testing.T) {
+	value, err := Decode(strings.NewReader(cliRuleV3))
+	if err != nil {
+		t.Fatal(err)
+	}
+	newEvent := func(message string) event.Event {
+		evidence, marshalErr := json.Marshal(map[string]any{
+			"source_messages": []map[string]any{{"id": 41, "message": message}},
+		})
+		if marshalErr != nil {
+			t.Fatal(marshalErr)
+		}
+		return event.Event{
+			SchemaVersion: 1, EventID: "evt-invalid", EventType: "ICMP_FLOOD",
+			DeviceHost: "192.168.122.101", SubjectKey: "192.168.122.101",
+			DetectedAt: "2026-10-15T02:45:15Z", Fingerprint: "fp-invalid",
+			Attributes: json.RawMessage(`{"protocol":"icmp"}`), Evidence: evidence,
+		}
+	}
+	for _, message := range []string{
+		"ICMP flood without structured values",
+		"ICMP flood tu IP 999.1.1.1 tai cong Gi0/0",
+		"ICMP flood tu IP 10.1.1.5 tai cong Gi0/0;reload",
+	} {
+		plans, err := Evaluate([]Rule{value}, []event.Event{newEvent(message)})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(plans) != 0 {
+			t.Fatalf("unsafe variable produced plans for %q: %#v", message, plans)
+		}
 	}
 }
 

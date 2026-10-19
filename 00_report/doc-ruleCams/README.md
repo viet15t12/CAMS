@@ -1,6 +1,6 @@
 # Hướng dẫn Automation Rule `.rule.cams`
 
-Tài liệu này mô tả định dạng CAMS Automation Rule phiên bản 1 và 2 đang được ứng dụng và Go sidecar hỗ trợ. Các file mẫu có thể import trực tiếp nằm trong thư mục [`demo`](demo/).
+Tài liệu này mô tả định dạng CAMS Automation Rule phiên bản 1, 2 và 3 đang được ứng dụng và Go sidecar hỗ trợ. Các file mẫu có thể import trực tiếp nằm trong thư mục [`demo`](demo/).
 
 ## 1. Cách hoạt động
 
@@ -21,7 +21,7 @@ Automation Engine được tự khởi động cùng ứng dụng. Thanh trạng
 
 | Nhóm | Trường | Kiểu/giới hạn | Ý nghĩa |
 |---|---|---|---|
-| Gốc | `version` | số nguyên `1` hoặc `2` | Phiên bản schema; v1 dùng typed action, v2 dùng SSH CLI action |
+| Gốc | `version` | số nguyên `1`, `2` hoặc `3` | V1 dùng typed action, v2 dùng SSH CLI literal, v3 thêm biến có kiểu lấy từ Syslog trong SQLite |
 | `metadata` | `id` | chữ thường, số, `.`, `_`, `-`; tối đa 96 ký tự | ID duy nhất, đồng thời tạo tên file |
 | `metadata` | `name` | chuỗi 1–200 ký tự | Tên hiển thị |
 | `metadata` | `description` | chuỗi tối đa 2000 ký tự | Mô tả rule |
@@ -35,12 +35,13 @@ Automation Engine được tự khởi động cùng ứng dụng. Thanh trạng
 | `policy` | `mode` | `dry-run` hoặc `auto` | Mô phỏng hoặc thực thi |
 | `policy` | `cooldown_seconds` | `0..86400` | Chờ trước khi cùng rule/đối tượng được chạy lại |
 | `policy` | `max_actions_per_hour` | `1..1000` | Giới hạn số action trong một giờ |
-| `action` | `type` | xem bảng action | V1 dùng typed action; v2 chỉ nhận `ssh.cli` có giới hạn |
+| `variables` | object, chỉ v3 | 1–16 biến | Khai báo nguồn Syslog, regex capture và kiểu dữ liệu trước khi render command |
+| `action` | `type` | xem bảng action | V1 dùng typed action; v2/v3 chỉ nhận `ssh.cli` có giới hạn |
 | `action` | `ttl_seconds` | `0..86400` | Auto SSH hiện bắt buộc bằng `0` |
 
 Schema là strict: viết sai tên trường hoặc thêm trường lạ sẽ bị từ chối khi import/save.
 
-`network` và `subnet_mask` là một cặp tùy chọn dùng chung cho cả version 1 và 2. Nếu khai báo một trường thì phải khai báo trường còn lại. `network` phải là địa chỉ đầu mạng chuẩn, ví dụ `192.168.122.0` với mask `255.255.255.0`; không dùng địa chỉ host như `192.168.122.101` với mask `/24`. CAMS đối chiếu subnet này với trường `device_host` của security event. Muốn chỉ nhận đúng một thiết bị, dùng địa chỉ host đó với mask `255.255.255.255`, ví dụ `192.168.122.101/32`. Khi bỏ cả hai trường, rule tiếp tục nhận event từ mọi thiết bị như trước. Tên trường đúng là `subnet_mask` (không phải `subnetmazk`).
+`network` và `subnet_mask` là một cặp tùy chọn dùng chung cho cả ba version. Nếu khai báo một trường thì phải khai báo trường còn lại. `network` phải là địa chỉ đầu mạng chuẩn, ví dụ `192.168.122.0` với mask `255.255.255.0`; không dùng địa chỉ host như `192.168.122.101` với mask `/24`. CAMS đối chiếu subnet này với trường `device_host` của security event. Muốn chỉ nhận đúng một thiết bị, dùng địa chỉ host đó với mask `255.255.255.255`, ví dụ `192.168.122.101/32`. Khi bỏ cả hai trường, rule tiếp tục nhận event từ mọi thiết bị như trước. Tên trường đúng là `subnet_mask` (không phải `subnetmazk`).
 
 ## 3. Action đang hỗ trợ
 
@@ -51,12 +52,14 @@ Schema là strict: viết sai tên trường hoặc thêm trường lạ sẽ b�
 | `acl.deny-protocol-source` | `dry-run` | Không | `protocol`, `source_from`, `interface_from`, `ttl_seconds` |
 | `ssh.cli` (v2) | `auto` | Có, qua SSH | `mode`, `commands`, `verify_commands`, `ttl_seconds: 0` |
 | `ssh.cli` (v2) | `dry-run` | Không | Lưu kế hoạch command nhưng không gửi thiết bị |
+| `ssh.cli` (v3) | `auto` | Có, qua SSH | Như v2, thêm `variables` và template có kiểu |
+| `ssh.cli` (v3) | `dry-run` | Không | Render và lưu kế hoạch nhưng không gửi thiết bị |
 
 Với `interface.admin-state`:
 
 - `enabled: false` tạo chuỗi cấu hình `interface <tên>` rồi `shutdown`.
 - `enabled: true` tạo chuỗi cấu hình `interface <tên>` rồi `no shutdown`.
-- Auto mode bắt buộc `transport: "ssh"` và một interface cố định.
+- Auto mode bắt buộc `transport: "ssh"` và một interface hợp lệ.
 - Executor luôn kiểm tra trạng thái trước và sau khi cấu hình.
 
 ### Action version 2 `ssh.cli`
@@ -124,7 +127,7 @@ Mỗi command tối đa 512 ký tự và tổng `commands` tối đa 16 KiB. Kh�
 
 Nút **Generate JSON Preview** chuyển sang Advanced JSON để xem payload chính xác trước khi lưu.
 
-Khi sửa một rule và đổi `metadata.id`, CAMS đổi tên file tương ứng thay vì để lại file cũ. Nếu ID mới đã tồn tại, thao tác bị từ chối để không ghi đè rule khác. Quick Builder chỉ mở các rule v1 mà nó có thể giữ nguyên đầy đủ; rule v2 hoặc rule có điều kiện nâng cao được giữ ở Advanced JSON để tránh làm mất field khi lưu.
+Khi sửa một rule và đổi `metadata.id`, CAMS đổi tên file tương ứng thay vì để lại file cũ. Nếu ID mới đã tồn tại, thao tác bị từ chối để không ghi đè rule khác. Quick Builder chỉ mở các rule v1 mà nó có thể giữ nguyên đầy đủ; rule v2/v3 hoặc rule có điều kiện nâng cao được giữ ở Advanced JSON để tránh làm mất field khi lưu.
 
 Trang **Rule Files** có hai thao tác khác nhau: **Reload** chỉ đọc lại danh sách file trên giao diện, còn **Sync engine** yêu cầu Automation Engine kiểm tra và nạp ngay revision hiện tại. Sau thao tác Save, Import, Enable/Disable hoặc Delete, CAMS cũng tự yêu cầu engine refresh nếu dịch vụ đang chạy.
 
@@ -179,7 +182,7 @@ Trang **Rule Files** có hai thao tác khác nhau: **Reload** chỉ đọc lại
 
 Với `mode: "config"`, không thêm `configure terminal` hoặc `end`; Netmiko tự vào/thoát configuration mode. Các lệnh con như `interface ...`, `router ospf ...`, `network ...`, `exit` vẫn có thể đặt theo đúng thứ tự trong mảng. Chỉ dùng command không yêu cầu trả lời prompt tương tác.
 
-Với các workflow cần tham số động lấy từ event, rollback tự động hoặc kiểm tra trạng thái theo cấu trúc, nên tạo một **typed action mới**, ví dụ `ospf.ensure-network`, rồi bổ sung đồng thời:
+Với workflow cần rollback tự động hoặc kiểm tra trạng thái theo cấu trúc, nên tạo một **typed action mới**, ví dụ `ospf.ensure-network`, rồi bổ sung đồng thời:
 
 | Thành phần cần mở rộng | Trách nhiệm |
 |---|---|
@@ -189,7 +192,7 @@ Với các workflow cần tham số động lấy từ event, rollback tự đ�
 | Verification | Chạy lệnh `show ...` để chứng minh trạng thái sau cùng |
 | Tests | Kiểm tra validate, dedup/cooldown, command generation và lỗi thiết bị |
 
-V2 cố ý cho phép CLI nên chỉ import rule từ nguồn tin cậy, đọc toàn bộ `commands`, để rule ở trạng thái tắt khi thử nghiệm và dùng `verify_commands` để lưu bằng chứng sau khi push.
+V2/v3 cố ý cho phép CLI nên chỉ import rule từ nguồn tin cậy, đọc toàn bộ `commands`, để rule ở trạng thái tắt khi thử nghiệm và dùng `verify_commands` để lưu bằng chứng sau khi push.
 
 Nếu cần action mới, hãy cung cấp các thông tin sau để triển khai:
 
@@ -200,7 +203,45 @@ Nếu cần action mới, hãy cung cấp các thông tin sau để triển khai
 - Lệnh `show` dùng để xác minh.
 - Cách rollback khi một bước thất bại.
 
-## 7. Trạng thái Action History
+## 7. Nhúng interface động từ Syslog bằng version 3
+
+Version 3 giữ giới hạn CLI của v2 nhưng cho phép khai báo biến có kiểu. CAMS dùng `source_message_ids` của event để đọc bằng truy vấn SQLite tham số hóa đúng bản ghi trong `t12_syslog_messages`; rule không được cung cấp SQL tùy ý.
+
+Ví dụ message:
+
+```text
+%HA_EM-1-LOG: DETECT-DOS: NGHI DOS: ICMP flood vao R4 tu IP 10.1.1.5 tai cong Gi0/3.10
+```
+
+Khai báo tổng quát sau lấy bất kỳ tên cổng hợp lệ nào nằm sau `tai cong`, không khóa vào `Gi0/3.10` hay `Gi0/0`:
+
+```json
+"variables": {
+  "interface": {
+    "source": "sqlite.syslog_message.message",
+    "pattern": "(?i)\\b(?:tai|tại)\\s+(?:cong|cổng)\\s+([A-Za-z][A-Za-z0-9./_-]*)[\\s,.;]*$",
+    "capture_group": 1,
+    "type": "interface"
+  }
+},
+"action": {
+  "type": "ssh.cli",
+  "transport": "ssh",
+  "mode": "config",
+  "commands": [
+    "interface {{ variables.interface }}",
+    "shutdown"
+  ],
+  "verify_commands": [
+    "show interfaces {{ variables.interface }}"
+  ],
+  "ttl_seconds": 0
+}
+```
+
+Nguồn hợp lệ là `sqlite.syslog_message.message` và `sqlite.syslog_message.raw_message`. Kiểu hợp lệ là `interface`, `ipv4` và `identifier`. Nếu thiếu bản ghi nguồn, regex không match, IPv4 sai hoặc interface chứa ký tự nguy hiểm, core không tạo action. Xem file hoàn chỉnh [`06-dynamic-syslog-variables-v3.rule.cams`](demo/06-dynamic-syslog-variables-v3.rule.cams).
+
+## 8. Trạng thái Action History
 
 | Trạng thái | Ý nghĩa |
 |---|---|
@@ -214,7 +255,7 @@ Nếu cần action mới, hãy cung cấp các thông tin sau để triển khai
 
 Các event bị cooldown, rate limit hoặc dedup chặn sẽ tăng bộ đếm `suppressed`; chúng không tạo thêm một action history có trạng thái riêng.
 
-## 8. Xử lý lỗi thường gặp
+## 9. Xử lý lỗi thường gặp
 
 | Thông báo | Nguyên nhân thường gặp | Cách xử lý |
 |---|---|---|
@@ -227,7 +268,7 @@ Các event bị cooldown, rate limit hoặc dedup chặn sẽ tăng bộ đếm 
 | `canonical IPv4 network` | `network` chứa bit host hoặc subnet mask không hợp lệ | Dùng địa chỉ đầu mạng, ví dụ `192.168.122.0` + `255.255.255.0` |
 | Engine `ERROR` | Go binary không chạy hoặc giao thức lỗi | Chạy `./cams.sh automation-check`, sau đó Start lại engine |
 
-## 9. Kiểm tra file demo
+## 10. Kiểm tra file demo
 
 Các file trong `demo/` đều được đặt `metadata.enabled: false` để tránh tự động thay đổi thiết bị ngay khi import. Sau khi sửa host/interface phù hợp, bật rule bằng checkbox trong trang Rule Files.
 

@@ -5,6 +5,7 @@ from contextlib import closing
 from pathlib import Path
 
 from features.syslog.application.security_events import SecurityEventDetector
+from features.syslog.parser import parse_message
 from features.syslog.persistence.message_repository import MessageRepository
 
 
@@ -64,6 +65,28 @@ class AutomationOutboxTests(unittest.TestCase):
                 ).fetchone()[0]
             self.assertEqual(alert_count, 1)
             self.assertEqual(action_count, 0)
+
+    def test_pending_event_is_enriched_from_its_sqlite_syslog_row(self) -> None:
+        raw = (
+            "%HA_EM-1-LOG: DETECT-DOS: NGHI DOS: ICMP flood vao R4 "
+            "tu IP 10.1.1.5 tai cong Te1/1/1"
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database = Path(temp_dir) / "info.db"
+            database.touch()
+            repository = MessageRepository(database)
+            message = parse_message(raw.encode(), "192.168.122.101", "udp")
+            message.device_host = "192.168.122.101"
+            stored = repository.insert_messages([message])[0]
+            detection = SecurityEventDetector().process_detections([stored])[0]
+            repository.insert_security_detections([detection])
+
+            event = repository.query_pending_automation_events()[0]
+
+            source = event["evidence"]["source_messages"][0]
+            self.assertEqual(source["id"], stored["id"])
+            self.assertIn("tai cong Te1/1/1", source["message"])
+            self.assertIn("%HA_EM-1-LOG", source["raw_message"])
 
     def test_materialized_actions_are_audited_and_rate_limited(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

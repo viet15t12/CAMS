@@ -22,6 +22,7 @@ _AUTOMATION_MAX_CLI_COMMANDS = 100
 _AUTOMATION_MAX_VERIFY_COMMANDS = 20
 _AUTOMATION_MAX_CLI_COMMAND_LENGTH = 512
 _AUTOMATION_MAX_CLI_TOTAL_LENGTH = 16 * 1024
+_AUTOMATION_SOURCE_TEXT_LENGTH = 2048
 
 
 def _validated_cli_commands(
@@ -147,7 +148,7 @@ class MessageRepository:
         return result
 
     def query_pending_automation_events(self, limit: int = 100) -> list[dict[str, Any]]:
-        """Return the stable event contract consumed by the Go rule engine."""
+        """Return events plus the newest trusted source Syslog row for v3 bindings."""
         row_limit = max(1, min(int(limit), 100))
         with closing(info_connection(self.info_db)) as conn:
             rows = conn.execute(
@@ -159,7 +160,41 @@ class MessageRepository:
                    ORDER BY id LIMIT ?""",
                 (row_limit,),
             ).fetchall()
-        return [self._automation_event_contract(row) for row in rows]
+            events = [self._automation_event_contract(row) for row in rows]
+            for event in events:
+                evidence = event.get("evidence")
+                if not isinstance(evidence, dict):
+                    continue
+                source_ids = [
+                    int(value)
+                    for value in evidence.get("source_message_ids", [])
+                    if isinstance(value, int)
+                    and not isinstance(value, bool)
+                    and value > 0
+                ]
+                if not source_ids:
+                    continue
+                # One newest row keeps the sidecar protocol bounded while covering
+                # the single HA_EM record that raises an ICMP_FLOOD event.
+                source = conn.execute(
+                    """SELECT id, message, raw_message
+                       FROM t12_syslog_messages
+                       WHERE id = ? AND device_host = ?""",
+                    (max(source_ids), str(event.get("device_host") or "")),
+                ).fetchone()
+                if source is None:
+                    continue
+                source_row = dict(source)
+                evidence["source_messages"] = [{
+                    "id": int(source_row["id"]),
+                    "message": str(source_row.get("message") or "")[
+                        -_AUTOMATION_SOURCE_TEXT_LENGTH:
+                    ],
+                    "raw_message": str(source_row.get("raw_message") or "")[
+                        -_AUTOMATION_SOURCE_TEXT_LENGTH:
+                    ],
+                }]
+        return events
 
     def materialize_automation_actions(
         self,
@@ -182,7 +217,7 @@ class MessageRepository:
             conn.execute("BEGIN IMMEDIATE")
             try:
                 pending_rows = conn.execute(
-                    "SELECT event_id, device_host, subject_key, attributes_json "
+                    "SELECT event_id, device_host, subject_key, attributes_json, evidence_json "
                     "FROM t13_automation_events WHERE status = 'pending'"
                 ).fetchall()
                 events: dict[str, dict[str, Any]] = {}
@@ -190,6 +225,9 @@ class MessageRepository:
                     event_row = dict(row)
                     event_row["attributes"] = json.loads(
                         event_row.pop("attributes_json") or "{}"
+                    )
+                    event_row["evidence"] = json.loads(
+                        event_row.pop("evidence_json") or "{}"
                     )
                     events[str(row["event_id"])] = event_row
                 for action in pending_actions:
@@ -272,8 +310,8 @@ class MessageRepository:
         """Atomically lease the oldest executable auto action.
 
         Interface admin-state changes are idempotent, so an expired claim can
-        safely return to ``ready`` after a process interruption. Version 2 CLI
-        sequences fail closed instead of being replayed after an expired lease.
+        safely return to ``ready`` after a process interruption. Version 2/3
+        CLI sequences fail closed instead of being replayed after an expired lease.
         """
         owner = str(lease_owner or uuid.uuid4().hex).strip()
         if not owner or len(owner) > 128:
@@ -641,8 +679,9 @@ class MessageRepository:
             else:
                 raise ValueError("Interface action binding is invalid")
         else:
-            if request.get("rule_version") != 2:
-                raise ValueError("SSH CLI actions require rule version 2")
+            rule_version = request.get("rule_version")
+            if rule_version not in {2, 3}:
+                raise ValueError("SSH CLI actions require rule version 2 or 3")
             if request.get("transport") != "ssh":
                 raise ValueError("SSH CLI actions require SSH transport")
             if request.get("mode") not in {"config", "exec"}:
@@ -662,6 +701,41 @@ class MessageRepository:
             ttl_seconds = request.get("ttl_seconds", 0)
             if isinstance(ttl_seconds, bool) or ttl_seconds != 0:
                 raise ValueError("SSH CLI actions require ttl_seconds 0")
+            if rule_version == 3:
+                variables = request.get("variables")
+                source_ids = request.get("variable_source_message_ids")
+                evidence = event.get("evidence")
+                allowed_source_ids = {
+                    int(value)
+                    for value in (
+                        evidence.get("source_message_ids", [])
+                        if isinstance(evidence, dict) else []
+                    )
+                    if isinstance(value, int)
+                    and not isinstance(value, bool)
+                    and value > 0
+                }
+                if (
+                    not isinstance(variables, dict)
+                    or not variables
+                    or not isinstance(source_ids, dict)
+                    or set(variables) != set(source_ids)
+                ):
+                    raise ValueError("Version 3 variable audit data is invalid")
+                for name, resolved in variables.items():
+                    if (
+                        not isinstance(name, str)
+                        or not re.fullmatch(r"[a-z][a-z0-9_]*", name)
+                        or not isinstance(resolved, str)
+                        or not resolved
+                        or len(resolved) > 128
+                        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9./:_-]*", resolved)
+                        or isinstance(source_ids.get(name), bool)
+                        or not isinstance(source_ids.get(name), int)
+                        or source_ids[name] <= 0
+                        or source_ids[name] not in allowed_source_ids
+                    ):
+                        raise ValueError("Version 3 variable audit data is invalid")
         return (
             event_id, rule_id, revision, mode, action_type, status, dedup_key,
             json.dumps(request, ensure_ascii=False, sort_keys=True, separators=(",", ":")),
