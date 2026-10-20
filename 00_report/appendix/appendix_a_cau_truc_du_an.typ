@@ -59,4 +59,4 @@ Các bảng dưới đây sử dụng tên tệp và mô-đun có trong kho mã 
   caption: [Ánh xạ giao diện, mô-đun và lưu trữ theo mã nguồn hiện tại],
 ) <tab-system-component-mapping-continued>
 
-Đầu cuối đồng hành được tổ chức trong `features/terminal/`, gồm `launcher.py`, `ipc_server.py` và `managed_manager.py`. Thành phần này giao tiếp với ứng dụng chính qua IPC. Bộ duyệt dữ liệu được mở qua `core/external_tools.py`; các bảng khả dụng phụ thuộc vào không gian làm việc, không mặc định luôn có 93 bảng.
+Đầu cuối đồng hành được tổ chức trong `features/terminal/`, gồm `launcher.py`, `ipc_server.py` và `managed_manager.py`. Thành phần này giao tiếp với ứng dụng chính qua IPC. Bộ duyệt dữ liệu được mở qua `core/external_tools.py`; các bảng khả dụng phụ thuộc vào không gian làm việc, không mặc định luôn có 95 bảng.

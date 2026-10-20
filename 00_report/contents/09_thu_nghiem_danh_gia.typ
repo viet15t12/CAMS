@@ -640,7 +640,7 @@ Các số bộ đếm ở từng kịch bản là những lần quan sát độc
 - *Giao diện quản lý tập trung:* CAMS cung cấp một không gian làm việc thống nhất cho các chức năng mạng Lớp 2 và Lớp 3, qua đó giảm số thao tác CLI trực tiếp trên từng thiết bị.
 - *Quy trình kiểm duyệt trước khi thực thi:* Cơ chế lưu chờ tách trạng thái mong muốn khỏi trạng thái đã áp dụng. Cửa sổ *View & Push* cho phép kiểm tra tập lệnh trước khi gửi xuống thiết bị.
 - *Khả năng xử lý nhiều thiết bị:* cơ chế khóa theo thiết bị (`Host Lock`) tuần tự hóa các lệnh trên cùng một thiết bị, trong khi `BatchExecutor` cho phép xử lý song song các thiết bị độc lập.
-- *Các tiện ích hỗ trợ vận hành:* hệ thống tích hợp sao lưu phiên bản bằng Dulwich, bộ thu nhận Syslog, cảnh báo qua thư điện tử, SFTP và đầu cuối nhúng.
+- *Các tiện ích hỗ trợ vận hành:* hệ thống tích hợp sao lưu phiên bản bằng Dulwich, bộ thu nhận Syslog, cảnh báo qua thư điện tử, SFTP và đầu cuối ngoài do CAMS quản lý.
 
 === Hạn chế của thực nghiệm
 

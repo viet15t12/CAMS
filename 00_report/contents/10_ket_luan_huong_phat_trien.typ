@@ -13,7 +13,7 @@
   header: ([Nhóm kết quả], [Nội dung hiện thực], [Minh chứng và phạm vi]),
   rows: (
     ([Kiến trúc và giao diện], [Qt Quick/QML, điều phối PyQt6, tác vụ nền và biểu mẫu theo chức năng.], [Ảnh của năm kịch bản minh họa thao tác khai báo, xem trước và kiểm tra; chưa đo mức phản hồi giao diện dưới tải.]),
-    ([Dữ liệu và sao lưu], [Hai tệp SQLite; 93 tên bảng trong lược đồ SQL nguồn (74 + 19); lịch sử Git bằng Dulwich.], [Đối chiếu mã nguồn ở Chương 3–4; số bảng khi vận hành phụ thuộc không gian làm việc và phiên bản.]),
+    ([Dữ liệu và sao lưu], [Hai tệp SQLite; 95 tên bảng trong lược đồ SQL nguồn (74 + 21); lịch sử Git bằng Dulwich.], [Đối chiếu mã nguồn ở Chương 3–4; số bảng khi vận hành phụ thuộc không gian làm việc và phiên bản.]),
     ([Cấu hình mạng], [Sinh lệnh và triển khai các nghiệp vụ Lớp 2, định tuyến, DHCP, GLBP, NAT/PAT và ACL.], [Năm kịch bản EVE-NG ở Chương 5; kịch bản 2 có kết quả trên năm bộ định tuyến và sáu loạt kiểm tra ICMP đều nhận đủ 5/5 hồi đáp. Kịch bản 3 mới xác nhận cấu hình GLBP/PAT, chưa kiểm thử chuyển đổi dự phòng.]),
     ([Giám sát an ninh], [Thu nhận Syslog, lọc sự kiện và gửi thư điện tử; hỗ trợ cấu hình chính sách trên thiết bị.], [Kịch bản 1 kiểm tra DHCP Snooping/DAI; kịch bản 4 có hai mẫu thư cảnh báo; kịch bản 5 đối chiếu lưu lượng ACL bị chặn, lưu lượng được phép và nhật ký. Chưa đo tỷ lệ mất bản tin dưới tải.]),
     ([Tiện ích và bảo vệ dữ liệu], [SFTP, đầu cuối, gói dự án `.ntp`; `ENC$v2$`, Argon2id/AES-256-GCM và khóa theo thiết bị.], [Cơ chế được đối chiếu theo mã nguồn và ảnh chức năng ở Chương 3–4; chưa có kịch bản riêng đánh giá toàn bộ cơ chế mật mã, đặc quyền và truyền tệp.]),

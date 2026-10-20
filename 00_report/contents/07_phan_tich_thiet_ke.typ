@@ -67,7 +67,7 @@ Người dùng nhập tham số trên biểu mẫu của từng chức năng. Sa
 
 === Xem trước và thực thi
 
-Luồng *View & Push* được mô tả tại @fig-state-flow. Bộ điều khiển lấy dữ liệu chờ và dùng Jinja2 tạo khối lệnh. Người dùng kiểm tra thiết bị đích, nội dung thay đổi và thứ tự lệnh trước khi chọn *Push*. Tác vụ nền sử dụng phiên kết nối có khóa, gửi lệnh và xử lý phản hồi.
+Luồng *View & Push* được mô tả tại @fig-state-flow. Bộ điều khiển lấy dữ liệu chờ và tạo khối lệnh bằng mẫu Jinja2 hoặc hàm Python của mô-đun tương ứng. Người dùng kiểm tra thiết bị đích, nội dung thay đổi và thứ tự lệnh trước khi chọn *Push*. Tác vụ nền sử dụng phiên kết nối có khóa, gửi lệnh và xử lý phản hồi.
 
 #figure(
   image("/00_book/figures/report/diagrams/02_state_flow.svg", width: 100%),
@@ -108,16 +108,18 @@ CAMS kiểm soát quyền thực thi trên thiết bị và bảo vệ dữ li�
 === Kiểm tra đặc quyền và xử lý lỗi xác thực
 CAMS lựa chọn mức đặc quyền 15 cho các luồng quản trị Cisco IOS hiện có. Đây là chính sách của ứng dụng, không phải yêu cầu mọi lệnh Cisco IOS đều cần mức 15. Quy trình kiểm tra gồm:
 - *Bước 1 – nhận diện dấu nhắc:* CAMS nhận diện dấu nhắc lệnh ban đầu của thiết bị để xác định sơ bộ chế độ thực thi người dùng (User EXEC) hoặc chế độ thực thi đặc quyền (Privileged EXEC).
-- *Bước 2:* Với thiết bị Cisco, gửi `show privilege` để đọc mức quyền. Khi xác định mức quyền dưới 15, thiếu mật khẩu đặc quyền gây lỗi; nếu có mật khẩu, ứng dụng gọi `enable` hoặc `enable 15` rồi kiểm tra lại. Nhánh xác minh sau nâng quyền từ chối khi không xác nhận được mức quyền yêu cầu.
+- *Bước 2:* Với thiết bị Cisco, gửi `show privilege` để đọc mức quyền. Khi xác định mức quyền dưới 15, ứng dụng gọi `enable` hoặc `enable 15` với mật khẩu đặc quyền rồi kiểm tra lại. Nếu trường Enable Secret bỏ trống, CAMS dùng mật khẩu đăng nhập làm giá trị thử; chỉ khi cả hai đều trống thì quy trình dừng với lỗi thiếu mật khẩu đặc quyền. Nhánh xác minh sau nâng quyền từ chối khi không xác nhận được mức quyền yêu cầu.
 
 Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` khi lần kiểm tra ban đầu không đọc được mức quyền. Vì dấu nhắc này cũng có thể xuất hiện ở mức quyền trung gian, chưa thể mô tả toàn bộ cơ chế là từ chối khi chưa xác minh trong mọi tình huống. Đây là giới hạn cần kiểm thử và hoàn thiện.
 
 === Vòng đời khóa phiên Argon2id và mã hóa AES-256-GCM (ENC\$v2\$)
 Để hạn chế nguy cơ dò mật khẩu ngoại tuyến và hoán đổi bản mã, CAMS áp dụng cơ chế mã hóa có xác thực:
-- Khi dự án có mật khẩu, khóa mã hóa dữ liệu (Data Encryption Key – DEK) được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn song song @rfc9106.
+- Khi dự án có mật khẩu, khóa mã hóa dữ liệu (Data Encryption Key – DEK) được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn song song @rfc9106. Muối (salt) của khóa này là 16 byte đầu của giá trị băm SHA-256 tính từ mã dự án, nên cố định theo dự án chứ không sinh ngẫu nhiên như muối của mã hóa toàn gói `.ntp`.
 - Các trường mật khẩu được mã hóa bằng AES-256-GCM và lưu theo định dạng nội bộ `ENC$v2$`. Đây là phiên bản phong bì dữ liệu của CAMS, không phải tên một tiêu chuẩn mật mã @nistSp80038d.
 - Dữ liệu xác thực bổ sung (Additional Authenticated Data – AAD) chứa ngữ cảnh `host:column`. Với bản ghi phiên bản 2 và đúng ngữ cảnh, việc đổi bản mã sang thiết bị hoặc cột khác làm xác minh thẻ thất bại (`InvalidTag`).
 - Khóa do đối tượng mã hóa quản lý được giữ trong mảng byte để ghi đè khi hủy. Cơ chế này không xóa được mọi bản sao do môi trường chạy tạo ra. Dự án không có mật khẩu sử dụng khóa dẫn xuất từ dữ liệu cục bộ, nên không có cùng mức bảo vệ với khóa dựa trên bí mật người dùng.
+- Để tiến trình con (như đầu cuối ngoài) giải mã được dữ liệu, khóa phiên được chuyển qua biến môi trường `CAMS_CREDENTIAL_KEY` và tệp tạm `.credential_key` trong thư mục làm việc với quyền `0600`. Khóa vì vậy không chỉ nằm trong bộ nhớ của tiến trình chính. Tệp tạm được dọn cùng thư mục làm việc khi dự án đóng bình thường; cơ chế này không bảo đảm xóa tệp khi ứng dụng dừng đột ngột. Riêng tiến trình tự động hóa viết bằng Go được khởi chạy với môi trường đã loại bỏ biến chứa khóa.
+- Để tương thích dữ liệu cũ, bộ giải mã thử thêm các khóa thế hệ trước (`ENC$v1$`, Argon2id 32 MiB) và chuyển khóa giải mã thành công lên làm khóa chính của phiên. Bước chuyển đổi định dạng chỉ quét hai cột mật khẩu trong bảng `t01_devices`; khi giải mã lỗi, tầng truy xuất trả lại giá trị gốc thay vì dừng thao tác.
 
 #report-table(
   columns: (22%, 35%, 43%),
@@ -132,11 +134,11 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
 #pagebreak(weak: true)
 == Thiết kế cơ sở dữ liệu
 
-CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị, cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch và các đích Syslog cần cấu hình; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT và bản tin Syslog đã nhận. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
+CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị, cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch và các đích Syslog cần cấu hình; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT, bản tin Syslog đã nhận, cùng hàng đợi sự kiện và trạng thái hành động của bộ tự động hóa. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
 
 Các bảng liên kết bằng khóa chính, khóa ngoại và mã thiết bị. Tầng nghiệp vụ kiểm tra địa chỉ, dải giá trị và quan hệ phụ thuộc trước khi ghi dữ liệu. Bản ghi trong luồng View \& Push có trạng thái chờ áp dụng, đã đồng bộ hoặc chờ xóa; các trạng thái này phục vụ sinh lệnh và theo dõi tiến trình, không thay thế việc đồng bộ lại từ thiết bị.
 
-Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 19 tên bảng trong nhóm `info_collected`, tổng cộng 93 tên bảng. Đây là số đếm của lược đồ nguồn, không khẳng định mọi không gian làm việc đang chạy đều có đúng 93 bảng.
+Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 21 tên bảng trong nhóm `info_collected`, tổng cộng 95 tên bảng. Hai bảng `t13_automation_events` và `t13_automation_actions` lưu sự kiện chờ xử lý và trạng thái hành động của bộ tự động hóa. Đây là số đếm của lược đồ nguồn, không khẳng định mọi không gian làm việc đang chạy đều có đúng 95 bảng.
 
 Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/database/schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
 

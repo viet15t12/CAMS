@@ -47,7 +47,7 @@ Lịch sử này cung cấp dữ liệu tham chiếu khi kiểm tra sự cố. V
 
 === Quy trình *View & Push* dùng chung
 
-Các chức năng thực hiện cùng một quy trình: kiểm tra dữ liệu biểu mẫu, lưu cấu hình chờ, lấy bản ghi cần thay đổi, kết xuất mẫu Jinja2 và mở cửa sổ xem trước. Khi người dùng chọn *Push*, tác vụ nền gửi lệnh qua phiên thiết bị, xử lý phản hồi và cập nhật kết quả. Với bản ghi chờ xóa, mẫu sinh lệnh gỡ bỏ tương ứng.
+Các chức năng thực hiện cùng một quy trình: kiểm tra dữ liệu biểu mẫu, lưu cấu hình chờ, lấy bản ghi cần thay đổi, sinh tập lệnh và mở cửa sổ xem trước. Bộ sinh lệnh được tổ chức theo từng mô-đun: định tuyến, DHCP, FHRP, ACL và NAT dùng mẫu Jinja2; cổng mạng, chuyển mạch và cấu hình Syslog trên thiết bị dùng hàm Python dựng lệnh trực tiếp. Khi người dùng chọn *Push*, tác vụ nền gửi lệnh qua phiên thiết bị, xử lý phản hồi và cập nhật kết quả. Với bản ghi chờ xóa, mẫu sinh lệnh gỡ bỏ tương ứng.
 
 #figure(
   image("/00_book/figures/gui/chapter-05/07-view-push-preview.png", width: 100%),

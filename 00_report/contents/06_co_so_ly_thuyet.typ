@@ -194,7 +194,7 @@ Việc tách giao diện khỏi logic giúp kiểm thử nghiệp vụ mà khôn
     ([Dulwich], [Lưu phiên bản cấu hình trong kho Git cục bộ, hỗ trợ lịch sử và so sánh.]),
     ([Argon2id, AES-256-GCM], [Dẫn xuất khóa từ mật khẩu và mã hóa có xác thực cho gói dự án khi bật bảo vệ.]),
     ([C++ và ổ cắm POSIX], [Bộ thu Syslog dùng ổ cắm và vòng lặp `poll` ở tiến trình riêng; lưu dữ liệu vào SQLite và phát sự kiện JSON Lines.]),
-    ([Alacritty], [Trình giả lập đầu cuối được nhúng vào ứng dụng, hỗ trợ thao tác dòng lệnh qua SSH hoặc Telnet.]),
+    ([Alacritty], [Trình giả lập đầu cuối chạy thành cửa sổ ngoài do CAMS khởi chạy và quản lý, hỗ trợ thao tác dòng lệnh qua SSH hoặc Telnet.]),
     ([IPC NTTP/1], [Giao thức nội bộ giữa ứng dụng và đầu cuối đồng hành Alacritty; độc lập với kênh sự kiện của bộ thu Syslog.]),
   ),
   caption: [Các thành phần công nghệ phục vụ quy trình quản trị],
