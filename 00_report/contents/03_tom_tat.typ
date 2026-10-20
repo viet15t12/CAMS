@@ -2,7 +2,7 @@
 
 #front-heading[TÓM TẮT]
 
-Trong công tác quản trị và thực hành mạng máy tính, cấu hình thiết bị qua giao diện dòng lệnh (CLI) thường đòi hỏi nhiều thao tác lặp lại, tiềm ẩn lỗi cú pháp và gây khó khăn khi kiểm soát sai lệch cấu hình. Để khắc phục những hạn chế đó, đề tài xây dựng CAMS, một hệ thống hỗ trợ quản lý tập trung, tự động hóa cấu hình và giám sát an ninh mạng cho thiết bị Cisco IOS trong môi trường học tập và thực nghiệm.
+Trong công tác quản trị và thực hành mạng máy tính, cấu hình thiết bị qua giao diện dòng lệnh (CLI) thường đòi hỏi nhiều thao tác lặp lại, tiềm ẩn lỗi cú pháp và gây khó khăn khi kiểm soát sai lệch cấu hình. Để khắc phục những hạn chế đó, đề tài *Xây dựng hệ thống quản lý tập trung, tự động hóa cấu hình và giám sát an ninh mạng* được thực hiện. Hệ thống được gọi tắt là CAMS (*Centralized Automation and Monitoring System*), được thiết kế và đóng gói dưới dạng phần mềm máy tính để bàn, vận hành cục bộ và cung cấp một giao diện thống nhất để quản lý, cấu hình và giám sát an ninh mạng cho thiết bị Cisco IOS trong môi trường học tập và thực nghiệm.
 
 CAMS được thiết kế theo kiến trúc phân lớp, kết hợp giao diện khai báo bằng Qt Quick/QML, lớp điều phối PyQt6, hai cơ sở dữ liệu SQLite phân biệt cấu hình và dữ liệu quan sát, các tác vụ nền sử dụng Netmiko/Paramiko và bộ tạo mẫu Jinja2. Hệ thống vận hành theo quy trình quản trị dựa trên trạng thái: quản lý danh mục thiết bị, thu thập và sao lưu `running-config` vào kho Git cục bộ bằng Dulwich, xác lập cấu hình mong muốn, kiểm duyệt lệnh rồi triển khai xuống thiết bị.
 

@@ -40,7 +40,7 @@ Mục tiêu là tạo văn phong khoa học, mạch lạc, nhất quán; ưu ti�
 
 - Dùng hiện tại để mô tả kiến thức nền, cấu trúc và chức năng đang có: “OSPF là giao thức trạng thái liên kết”; “CAMS lưu dữ liệu trong SQLite”.
 - Dùng quá khứ hoặc cụm “trong thử nghiệm” để mô tả thao tác đã thực hiện: “Trong thử nghiệm, hệ thống triển khai cấu hình trên sáu bộ định tuyến”.
-- Chỉ dùng tương lai trong mục hướng phát triển: “Hệ thống sẽ bổ sung hỗ trợ NETCONF”.
+- Chỉ dùng tương lai trong mục hướng phát triển: “Hệ thống sẽ bổ sung cơ chế phê duyệt nhiều cấp”.
 - Không dùng tương lai để mô tả sản phẩm đã hoàn thành. Viết “Hệ thống gồm bốn phân hệ”, không viết “Hệ thống sẽ gồm bốn phân hệ”.
 
 ### 4.2. Phân biệt trạng thái của nội dung
@@ -50,7 +50,7 @@ Mục tiêu là tạo văn phong khoa học, mạch lạc, nhất quán; ưu ti�
 - **Chưa kiểm chứng:** viết “chưa được đánh giá trong phạm vi thử nghiệm”, không suy rộng thành kết luận.
 - **Hướng phát triển:** dùng “đề xuất”, “dự kiến”, “có thể xem xét”; không trình bày như chức năng hiện có.
 
-Ví dụ: “CAMS hỗ trợ SSH và Telnet cho các luồng CLI hiện có. NETCONF và RESTCONF là hướng mở rộng.”
+Ví dụ: “CAMS hỗ trợ SSH và Telnet cho các luồng CLI hiện có. Cơ chế phê duyệt nhiều cấp là hướng mở rộng.”
 
 ## 5. Ưu tiên tiếng Việt và sử dụng thuật ngữ nước ngoài
 

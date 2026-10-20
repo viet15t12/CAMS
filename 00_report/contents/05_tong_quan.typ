@@ -7,7 +7,7 @@
 
 Trong quản trị mạng, cấu hình trực tiếp qua CLI cho phép kiểm soát từng thiết bị nhưng đòi hỏi nhiều thao tác lặp lại. Khi số lượng bộ định tuyến và bộ chuyển mạch tăng, người quản trị khó theo dõi đồng thời danh mục thiết bị, cấu hình đang chạy và các sự kiện phát sinh. Việc nhập nhầm địa chỉ IP, áp dụng sai chính sách hoặc bỏ sót nhật ký có thể làm gián đoạn dịch vụ và kéo dài thời gian xác định nguyên nhân.
 
-Đề tài xây dựng hệ thống quản lý tập trung, tự động hóa cấu hình và giám sát (Centralized Automation and Monitoring System – CAMS). CAMS kết hợp quản lý thiết bị, sinh và triển khai cấu hình, thu thập trạng thái và khai thác nhật ký trên một giao diện. Hệ thống được kiểm chứng với Cisco IOS trên EVE-NG trong các kịch bản có kiểm soát.
+Đề tài *Xây dựng hệ thống quản lý tập trung, tự động hóa cấu hình và giám sát an ninh mạng* được thực hiện; hệ thống được gọi tắt là CAMS (*Centralized Automation and Monitoring System*). CAMS kết hợp quản lý thiết bị, sinh và triển khai cấu hình, thu thập trạng thái và khai thác nhật ký trên một giao diện. Sản phẩm được thiết kế, đóng gói và phân phối dưới dạng phần mềm máy tính để bàn (desktop); hệ thống được kiểm chứng với Cisco IOS trên EVE-NG trong các kịch bản có kiểm soát.
 
 == Tổng quan nghiên cứu và giải pháp hiện có
 
@@ -46,7 +46,7 @@ Các tiêu chí tại @tab-objectives được đối chiếu với minh chứng
 
 == Đối tượng và phạm vi nghiên cứu
 
-Đối tượng nghiên cứu gồm thiết bị Cisco IOS, quy trình tự động hóa CLI và cơ chế thu thập nhật ký tập trung. Hoạt động kiểm chứng sử dụng Cisco vIOS L2 và vIOS L3 trên EVE-NG; phần mềm được xây dựng bằng Python, PyQt6/Qt Quick và SQLite.
+Đối tượng nghiên cứu gồm thiết bị Cisco IOS, quy trình tự động hóa CLI và cơ chế thu thập nhật ký tập trung. Hoạt động kiểm chứng sử dụng Cisco vIOS L2 và vIOS L3 trên EVE-NG; phần mềm desktop được xây dựng bằng Python, PyQt6/Qt Quick và SQLite, sau đó đóng gói để có thể cài đặt và chạy như một ứng dụng độc lập trên máy tính người dùng.
 
 Đề tài hướng đến quản lý tập trung thiết bị và dịch vụ mạng. Trong phạm vi hiện thực của báo cáo, CAMS tập trung vào thiết bị mạng cùng các chức năng DHCP, định tuyến, NAT và Syslog; SFTP hỗ trợ trao đổi tệp với máy chủ có dịch vụ tương ứng. Hệ thống chưa bao gồm việc quản trị đầy đủ hệ điều hành, ứng dụng và vòng đời máy chủ.
 

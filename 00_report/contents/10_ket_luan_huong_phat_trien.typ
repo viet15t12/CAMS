@@ -5,7 +5,7 @@
 
 == Kết quả đạt được
 
-Đề tài đã xây dựng CAMS theo định hướng quản lý tập trung, tự động hóa cấu hình và giám sát thiết bị mạng trong môi trường thực hành. Hệ thống không chỉ cung cấp các biểu mẫu cấu hình, mà còn tổ chức một quy trình thống nhất từ khai báo thiết bị, chuẩn bị và kiểm duyệt lệnh, triển khai cấu hình, thu thập trạng thái đến tiếp nhận nhật ký và phản ứng trước sự kiện an ninh.
+Đề tài đã xây dựng CAMS theo định hướng quản lý tập trung, tự động hóa cấu hình và giám sát thiết bị mạng trong môi trường thực hành. Hệ thống được thiết kế và đóng gói như một phần mềm desktop vận hành cục bộ; phần mềm không chỉ cung cấp các biểu mẫu cấu hình mà còn tổ chức một quy trình thống nhất từ khai báo thiết bị, chuẩn bị và kiểm duyệt lệnh, triển khai cấu hình, thu thập trạng thái đến tiếp nhận nhật ký và phản ứng trước sự kiện an ninh.
 
 Kết quả thực nghiệm ở Chương 5 cho thấy các thành phần chính có thể phối hợp trong một bài thực hành tích hợp. CAMS đã triển khai cấu hình trên nhiều thiết bị, thu nhận các bản tin phát sinh, chuyển cảnh báo ra ngoài ứng dụng và thực hiện phản ứng tự động theo quy tắc. Mức độ đạt được của từng nhóm mục tiêu được tổng hợp tại @tab-project-results-summary.
 
@@ -60,7 +60,7 @@ Hướng phát triển của CAMS được đề xuất theo ba mức ưu tiên.
 
 *Thứ nhất, củng cố độ tin cậy và an toàn.* Hệ thống cần có bộ kiểm thử lặp lại cho các luồng chính, ghi nhận đầy đủ trạng thái trước và sau mỗi thay đổi, đồng thời tạo lệnh hoàn tác để người quản trị kiểm duyệt khi cần khôi phục. Phản ứng tự động nên bổ sung bước phê duyệt, thời hạn hiệu lực và giới hạn phạm vi tác động. Thông tin xác thực cần được tích hợp với kho bí mật của hệ điều hành và quản lý vòng đời khóa chặt chẽ hơn.
 
-*Thứ hai, mở rộng khả năng quản trị.* CAMS có thể sử dụng CDP/LLDP để khám phá liên kết và trực quan hóa mô hình mạng; hoàn thiện các chức năng BGP, VRF và hỗ trợ nhiều nhà sản xuất. Việc tích hợp NETCONF/RESTCONF cùng mô hình YANG hoặc OpenConfig sẽ giảm phụ thuộc vào việc phân tích văn bản CLI và tạo nền tảng cho quản trị dữ liệu có cấu trúc @rfc6241 @rfc8040 @rfc7950.
+*Thứ hai, mở rộng khả năng quản trị.* CAMS có thể sử dụng CDP/LLDP để khám phá liên kết và trực quan hóa mô hình mạng; hoàn thiện các chức năng BGP, VRF và hỗ trợ nhiều nhà sản xuất. Lớp kết nối và bộ phân tích phản hồi CLI cần được chuẩn hóa theo từng nền tảng thiết bị để giảm phụ thuộc vào cách trình bày văn bản của một phiên bản Cisco IOS cụ thể.
 
 *Thứ ba, nâng cao giám sát và đánh giá.* Hệ thống cần hoàn thiện tương quan sự kiện, bổ sung webhook và mở rộng quy tắc cảnh báo. Các phép thử tiếp theo nên đo thông lượng, độ trễ, tỷ lệ lỗi, khả năng phục hồi sau mất kết nối và mức độ chính xác của phản ứng tự động trước nhiều loại sự kiện.
 
@@ -74,4 +74,4 @@ Nếu thí điểm ngoài phòng thực hành, CAMS nên được triển khai t
 
 == Kết luận chung
 
-Đề tài đã xây dựng CAMS thành một hệ thống quản trị mạng tập trung, hỗ trợ quản lý thiết bị, triển khai cấu hình, thu thập Syslog, gửi cảnh báo và phản ứng theo quy tắc. Bài thực hành tích hợp đã chứng minh tính khả thi của mô hình trong môi trường đào tạo đối với các chức năng định tuyến, dự phòng, chuyển mạch và giám sát. Để mở rộng phạm vi sử dụng, CAMS cần ưu tiên kiểm thử định lượng, hoàn tác an toàn, bảo vệ thông tin xác thực và kiểm soát phản ứng tự động.
+Đề tài đã xây dựng và đóng gói CAMS thành phần mềm desktop quản trị mạng tập trung, hỗ trợ quản lý thiết bị, triển khai cấu hình, thu thập Syslog, gửi cảnh báo và phản ứng theo quy tắc. Bài thực hành tích hợp đã chứng minh tính khả thi của mô hình trong môi trường đào tạo đối với các chức năng định tuyến, dự phòng, chuyển mạch và giám sát. Để mở rộng phạm vi sử dụng, CAMS cần ưu tiên kiểm thử định lượng, hoàn tác an toàn, bảo vệ thông tin xác thực và kiểm soát phản ứng tự động.

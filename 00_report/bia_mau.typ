@@ -1,46 +1,29 @@
+// Bìa chính và bìa phụ theo bố cục Mẫu 3.2 và 3.3.
 #import "config/info.typ": *
 
-#let cover-navy = rgb("#08233d")
-
 #let cover-students = (
-  (name: [Nguyễn Quốc Việt], id: [N24DCVT113]),
-  (name: [Nguyễn Phan Kiên], id: [N24DCVT046]),
-  (name: [Nguyễn Trần Đạt Phú], id: [N24DCVT072]),
+  (name: [Nguyễn Quốc Việt], id: [N24DCVT113], gender: [Nam]),
+  (name: [Nguyễn Phan Kiên], id: [N24DCVT046], gender: [Nam]),
+  (name: [Nguyễn Trần Đạt Phú], id: [N24DCVT072], gender: [Nam]),
 )
 
+// Khung đơn, cách mép giấy 10 mm như mẫu.
 #let cover-frame() = context {
-  let w = page.width
-  let h = page.height
-
-  let A = (w - 15mm, 20mm)
-  let B = (25mm, 20mm)
-  let C = (25mm, h - 20mm)
-  let D = (w - 15mm, h - 20mm)
-
-  let off(c, sx, sy, m) = (c.at(0) + sx * m, c.at(1) - sy * m)
-  let path(m, pts) = polygon(
-    stroke: 0.4pt + cover-navy,
-    ..pts.map(((c, sx, sy)) => off(c, sx, sy, m)),
+  place(
+    top + left,
+    dx: 10mm,
+    dy: 10mm,
+    rect(
+      width: page.width - 20mm,
+      height: page.height - 20mm,
+      stroke: 0.5pt + black,
+    ),
   )
-
-  place(top + left, polygon(stroke: 4pt + cover-navy, A, B, C, D))
-
-  place(top + left, path(5mm, (
-    (A, -1, +1), (B, +1, +1), (B, +1, -1), (B, -1, -1),
-    (C, -1, +1), (C, +1, +1), (C, +1, -1), (D, -1, -1),
-    (D, -1, +1), (D, +1, +1), (A, +1, -1), (A, -1, -1),
-  )))
-
-  place(top + left, path(3mm, (
-    (A, +1, -1), (B, -1, -1), (B, -1, +1), (B, +1, +1),
-    (C, +1, -1), (C, -1, -1), (C, -1, +1), (D, +1, +1),
-    (D, +1, -1), (D, -1, -1), (A, -1, +1), (A, +1, +1),
-  )))
 }
 
 #let cover-page(body) = page(
   paper: "a4",
-  margin: (left: 30mm, right: 20mm, top: 28mm, bottom: 25mm),
+  margin: (left: 30mm, right: 25mm, top: 22mm, bottom: 36mm),
   numbering: none,
   header: none,
   footer: none,
@@ -51,97 +34,94 @@
     size: 13pt,
     lang: "vi",
   )
-  #set par(justify: false, first-line-indent: 0pt, leading: 0.62em, spacing: 0pt)
+  #set par(justify: false, first-line-indent: 0pt, leading: 0.58em, spacing: 0pt)
   #body
 ]
 
-// Bìa chính theo Mẫu 3.2 của QĐ 521.
-#cover-page[
-  #align(center)[
-    #text(size: 15.5pt, weight: "bold")[
-      #academy \
-          ]
-    #v(7pt)
-    #text(size: 12pt, weight: "bold")[#faculty]
-
-    #v(27mm)
-
-    #text(size: 20pt, weight: "bold")[#report-type]
-    #v(8mm)
-    #text(size: 14.5pt, weight: "bold")[
-      ĐỀ TÀI NGHIÊN CỨU KHOA HỌC CỦA SINH VIÊN \
-      NĂM HỌC #academic-year
-    ]
-
-    #v(25mm)
-    #text(size: 16.2pt, weight: "bold")[#project-title]
-    #v(9mm)
-    #text(size: 14.5pt, weight: "bold")[MÃ SỐ ĐỀ TÀI: #project-code]
+#let institution-header() = align(center)[
+  #text(size: 14pt, weight: "bold")[
+    #academy \
+    #campus \
+    #faculty
   ]
+  #v(3mm)
+  #text(size: 10pt, fill: luma(95))[----------------------]
+]
 
-  #v(18mm)
-  #align(left, text(size: 13pt)[
-    *Thuộc nhóm ngành khoa học:* #field
-  ])
+#let report-heading(size: 18pt) = align(center)[
+  #text(size: size, weight: "bold")[#report-type]
+  #v(2mm)
+  #text(size: 13.5pt, weight: "bold")[
+    ĐỀ TÀI NGHIÊN CỨU KHOA HỌC CỦA SINH VIÊN \
+    NĂM HỌC: #academic-year
+  ]
+]
+
+#let project-heading(size: 15.5pt, prefix: true) = align(center)[
+  #text(size: size, weight: "bold")[
+    #if prefix [ĐỀ TÀI: ]#project-title
+  ]
+  #v(2mm)
+  #text(size: 13.5pt, weight: "bold")[MÃ SỐ ĐỀ TÀI: #project-code]
+]
+
+// Bìa chính.
+#cover-page[
+  #institution-header()
+
+  #v(46mm)
+  #report-heading()
+
+  #v(47mm)
+  #project-heading()
 
   #v(1fr)
-  #align(center, text(size: 13pt, weight: "bold")[
-    TP. HỒ CHÍ MINH, 10/2026
+  #align(center, text(size: 12pt)[
+    Thuộc nhóm ngành khoa học: #field
+  ])
+
+  #v(15mm)
+  #align(center, text(size: 12pt, weight: "bold")[
+    TP.HCM-10/2026
   ])
 ]
 
-// Bìa phụ theo Mẫu 3.3 của QĐ 521.
+// Bìa phụ.
 #cover-page[
-  #align(center)[
-    #text(size: 15.5pt, weight: "bold")[
-      #academy \
-      // #campus
-    ]
-    #v(7pt)
-    #text(size: 12pt, weight: "bold")[#faculty]
+  #institution-header()
 
-    #v(17mm)
+  #v(17mm)
+  #report-heading(size: 17pt)
 
-    #text(size: 19pt, weight: "bold")[#report-type]
-    #v(7mm)
-    #text(size: 13.5pt, weight: "bold")[
-      ĐỀ TÀI NGHIÊN CỨU KHOA HỌC CỦA SINH VIÊN \
-      NĂM HỌC #academic-year
-    ]
+  #v(38mm)
+  #project-heading(size: 14.5pt, prefix: false)
 
-    #v(16mm)
-    #text(size: 15.2pt, weight: "bold")[#project-title]
-    #v(7mm)
-    #text(size: 14pt, weight: "bold")[MÃ SỐ ĐỀ TÀI: #project-code]
-  ]
-
-  #v(10mm)
-  #align(left, text(size: 12pt)[
-    *Thuộc nhóm ngành khoa học:* #field
-  ])
-
-  #v(7mm)
+  #v(15mm)
   #table(
-    columns: (34%, 66%),
+    columns: (40mm, 1fr, 35mm),
     stroke: none,
-    inset: (x: 0pt, y: 3pt),
-    align: (left, left),
-    [*Sinh viên thực hiện:*], [
-      #set par(leading: 0.8em)
-      #for (index, student) in cover-students.enumerate() {
-        student.name
-        text(" - MSSV: ")
-        student.id
-        if index < cover-students.len() - 1 { linebreak() }
-      }
-    ],
-    [*Lớp, khoa:*], [#student-class, Khoa Viễn Thông 2],
-    [*Ngành học:*], [#major],
-    [*Người hướng dẫn:*], [#advisor],
+    inset: (x: 0pt, y: 2.2pt),
+    align: (left, left, left),
+    [Sinh viên thực hiện:], [#cover-students.at(0).name], [Nam, Nữ: #cover-students.at(0).gender],
+    [], [#cover-students.at(1).name], [Nam, Nữ: #cover-students.at(1).gender],
+    [], [#cover-students.at(2).name], [Nam, Nữ: #cover-students.at(2).gender],
+  )
+
+  #v(21mm)
+  #table(
+    columns: (37mm, 5mm, 1fr, 23mm, 13mm),
+    stroke: none,
+    inset: (x: 0pt, y: 2pt),
+    align: left,
+    [Dân tộc], [:], [#ethnicity], [], [],
+    [Lớp], [:], [#student-class], [Năm thứ:], [#study-year],
+    [Khoa], [:], [Khoa Viễn thông 2], [], [],
+    [Ngành học], [:], [#major], [], [],
+    [Người hướng dẫn], [:], [#advisor], [], [],
   )
 
   #v(1fr)
-  #align(center, text(size: 13pt, weight: "bold")[
-    TP. HỒ CHÍ MINH, 10/2026
+  #align(center, text(size: 12pt, weight: "bold")[
+    TP.HCM-10/2026
   ])
 ]

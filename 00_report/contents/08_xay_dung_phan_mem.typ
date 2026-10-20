@@ -9,7 +9,7 @@ Nội dung được sắp xếp theo chuỗi sử dụng của hệ thống: kh�
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn được phát triển chủ yếu bằng Python, sử dụng Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để kết nối thiết bị và Dulwich để quản lý lịch sử cấu hình. Automation Engine được xây dựng bằng Go, còn bộ thu Syslog sử dụng C++ để hoạt động độc lập với giao diện. Sự kết hợp này đáp ứng ba nhu cầu chính của đề tài: tương tác trực quan, xử lý nghiệp vụ mạng và tiếp nhận dữ liệu vận hành.
+CAMS được thiết kế và đóng gói dưới dạng phần mềm máy tính để bàn (desktop) để cài đặt và vận hành cục bộ trên máy tính người dùng. Phần mềm được phát triển chủ yếu bằng Python, sử dụng Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để kết nối thiết bị và Dulwich để quản lý lịch sử cấu hình. Automation Engine được xây dựng bằng Go, còn bộ thu Syslog sử dụng C++ để hoạt động độc lập với giao diện. Sự kết hợp này đáp ứng ba nhu cầu chính của đề tài: tương tác trực quan, xử lý nghiệp vụ mạng và tiếp nhận dữ liệu vận hành.
 
 Phần mềm được tổ chức thành các nhóm trách nhiệm gồm giao diện, xử lý nghiệp vụ, lưu trữ dữ liệu và giao tiếp với thiết bị. Mỗi nhóm chức năng như quản lý thiết bị, cấu hình, giám sát hay bảo vệ dự án sử dụng chung các dịch vụ nền tảng nhưng vẫn tách biệt về nghiệp vụ. Cấu trúc mã nguồn chi tiết được trình bày trong phụ lục; chương này tập trung vào các chức năng đã xây dựng.
 
@@ -58,7 +58,7 @@ Các chức năng thực hiện cùng một quy trình: kiểm tra dữ liệu b
 
 === Quản lý cổng mạng, DHCP và định tuyến
 
-Chức năng *Interfaces* quản lý địa chỉ IPv4, mô tả và trạng thái cổng; đồng thời hỗ trợ các cổng logic như Loopback, cổng con và đường hầm GRE. Cổng vật lý được lấy từ thiết bị để chỉnh sửa thông số; các cổng logic được tạo hoặc gỡ theo nghiệp vụ tương ứng.
+Chức năng *Interfaces* quản lý địa chỉ IPv4, mô tả và trạng thái cổng; đồng thời hỗ trợ các cổng logic như Loopback, cổng con. Cổng vật lý được lấy từ thiết bị để chỉnh sửa thông số; các cổng logic được tạo hoặc gỡ theo nghiệp vụ tương ứng.
 
 DHCP quản lý vùng cấp phát, dải địa chỉ loại trừ và tác nhân chuyển tiếp. Định tuyến cung cấp tuyến tĩnh, tuyến mặc định, OSPFv2 và EIGRP. Các nhóm biểu mẫu phản ánh quan hệ giữa tiến trình, mạng quảng bá và tham số cổng. Chức năng *Routing Group* hỗ trợ chuẩn bị cấu hình cho nhóm bộ định tuyến nhằm giảm thao tác nhập lặp; kết quả vẫn cần được kiểm tra trên từng thiết bị.
 
@@ -174,11 +174,15 @@ Nhóm xây dựng website hướng dẫn sử dụng CAMS để người dùng t
   align: top,
   [
     #set par(justify: false)
-    Tài liệu được công bố tại:
+    *Tài liệu hướng dẫn sử dụng:*
 
     #link("https://viet15t12.github.io/CAMS/")[#raw("https://viet15t12.github.io/CAMS/")]
 
-    Người đọc có thể mở trực tiếp đường dẫn hoặc quét mã QR trong @fig-cams-online-manual. Vì website có thể được cập nhật sau khi báo cáo được in, ngày truy cập và phiên bản phần mềm vẫn cần được ghi nhận khi dùng tài liệu làm căn cứ đối chiếu.
+    *Kho mã nguồn CAMS:*
+
+    #link("https://github.com/viet15t12/CAMS.git")[#raw("https://github.com/viet15t12/CAMS.git")]
+
+    Người đọc có thể mở trực tiếp các đường dẫn hoặc quét mã QR trong @fig-cams-online-manual. Vì nội dung trực tuyến có thể được cập nhật sau khi báo cáo được in, ngày truy cập và phiên bản phần mềm vẫn cần được ghi nhận khi dùng tài liệu làm căn cứ đối chiếu.
   ],
   [
     #set text(size: 9pt)

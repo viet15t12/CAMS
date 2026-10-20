@@ -22,7 +22,6 @@
 #set page(numbering: "i")
 #counter(page).update(1)
 
-#include "contents/01_loi_cam_doan.typ"
 #include "contents/02_loi_cam_on.typ"
 #include "contents/03_tom_tat.typ"
 #include "contents/04_danh_muc_tu_viet_tat.typ"
@@ -52,7 +51,11 @@
 // NỘI DUNG CHÍNH
 // ----------------------------------------------------------
 #pagebreak()
-#set page(numbering: "1")
+#set page(
+  numbering: "1",
+  margin: (left: 3cm, right: 2cm, top: 3cm, bottom: 2.5cm),
+  header: none,
+)
 #counter(page).update(1)
 
 #include "contents/05_tong_quan.typ"
@@ -66,6 +69,10 @@
 // TÀI LIỆU THAM KHẢO
 // ----------------------------------------------------------
 #pagebreak()
+#set page(
+  margin: (left: 3cm, right: 2cm, top: 2.5cm, bottom: 2.5cm),
+  header: none,
+)
 #[
 #set text(lang: "en")
 #bibliography(

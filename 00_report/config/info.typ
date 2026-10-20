@@ -9,8 +9,10 @@
 #let project-code = [30-SV-2026-VT2]
 #let project-title = [NGHIÊN CỨU VÀ XÂY DỰNG HỆ THỐNG QUẢN LÝ TẬP TRUNG, TỰ ĐỘNG HÓA CẤU HÌNH VÀ GIÁM SÁT AN NINH MẠNG]
 #let product-name = [CAMS]
-#let field = [Mạng và dịch vụ internet]
-#let major = [Kỹ thuật Điện tử viễn thông]
+#let field = [Điện tử Viễn thông - Mạng và Dịch vụ]
+#let major = [Kỹ thuật Điện tử Viễn thông]
+#let ethnicity = [Kinh]
+#let study-year = [3]
 
 #let advisor = [ThS. Phan Thanh Toản]
 #let project-lead = [Nguyễn Quốc Việt (MSSV: N24DCVT113)]

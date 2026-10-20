@@ -4,7 +4,7 @@ Tệp này tổng hợp các tài liệu thực sự được trích dẫn trong
 
 - Nguồn đối chiếu: `00_report/bibliography/networktools_references.bib`
 - Phạm vi rà soát: các tệp từ `05_tong_quan.typ` đến `10_ket_luan_huong_phat_trien.typ`
-- Tổng số tài liệu được trích dẫn: **19**
+- Tổng số tài liệu được trích dẫn: **16**
 - Ngày tổng hợp: **20/10/2026**
 
 ## 1. Tổng quan danh mục tài liệu
@@ -23,13 +23,10 @@ Tệp này tổng hợp các tài liệu thực sự được trích dẫn trong
 | 10 | RFC 3022 | NAT truyền thống | Chương 2 |
 | 11 | IEEE 802.1Q-2022 | Cầu nối, VLAN và STP | Chương 2 |
 | 12 | Cisco Dynamic ARP Inspection Guide | DAI và DHCP Snooping | Chương 2 |
-| 13 | RFC 6241 | NETCONF | Chương 2, 6 |
-| 14 | RFC 8040 | RESTCONF | Chương 2, 6 |
-| 15 | RFC 7950 | Ngôn ngữ mô hình dữ liệu YANG 1.1 | Chương 2, 6 |
-| 16 | RFC 5424 | Giao thức Syslog | Chương 2, 4 |
-| 17 | NIST SP 800-92 | Quản lý nhật ký an toàn | Chương 2 |
-| 18 | NIST SP 800-38D | AES-GCM và GMAC | Chương 2, 3, 4 |
-| 19 | RFC 9106 | Argon2 | Chương 2, 3, 4 |
+| 13 | RFC 5424 | Giao thức Syslog | Chương 2, 4 |
+| 14 | NIST SP 800-92 | Quản lý nhật ký an toàn | Chương 2 |
+| 15 | NIST SP 800-38D | AES-GCM và GMAC | Chương 2, 3, 4 |
+| 16 | RFC 9106 | Argon2 | Chương 2, 3, 4 |
 
 ## 2. Tự động hóa và các nền tảng quản trị mạng
 
@@ -243,60 +240,6 @@ Tài liệu giải thích cách Dynamic ARP Inspection kiểm tra bản tin ARP 
 
 Được dùng ở Chương 2 làm cơ sở cho quan hệ giữa DHCP Snooping, bảng liên kết IP–MAC và DAI.
 
-### 3.6. RFC 6241 – NETCONF
-
-**Thông tin tài liệu**
-
-- Tác giả: R. Enns và các cộng sự.
-- Tên tài liệu: *Network Configuration Protocol (NETCONF)*.
-- Cơ quan ban hành: IETF, 2011.
-- Liên kết: <https://www.rfc-editor.org/rfc/rfc6241.html>
-- Khóa trích dẫn: `rfc6241`.
-
-**Nội dung chính**
-
-NETCONF là giao thức quản lý cấu hình sử dụng dữ liệu có cấu trúc và các thao tác như lấy cấu hình, chỉnh sửa, khóa kho dữ liệu và xác nhận thay đổi. Giao thức thường sử dụng XML và vận hành trên một kênh truyền bảo mật.
-
-**Vai trò trong báo cáo**
-
-Được giới thiệu ở Chương 2 như một hướng quản trị có cấu trúc và được đề xuất ở Chương 6 để giảm sự phụ thuộc của CAMS vào việc phân tích văn bản CLI.
-
-### 3.7. RFC 8040 – RESTCONF
-
-**Thông tin tài liệu**
-
-- Tác giả: A. Bierman, M. Björklund và K. Watsen.
-- Tên tài liệu: *RESTCONF Protocol*.
-- Cơ quan ban hành: IETF, 2017.
-- Liên kết: <https://www.rfc-editor.org/rfc/rfc8040.html>
-- Khóa trích dẫn: `rfc8040`.
-
-**Nội dung chính**
-
-RESTCONF cung cấp giao diện HTTP bảo mật để truy cập dữ liệu cấu hình và trạng thái được mô hình hóa bằng YANG. Tài nguyên có thể được biểu diễn bằng XML hoặc JSON và được thao tác theo các phương thức của HTTP.
-
-**Vai trò trong báo cáo**
-
-Được dùng cùng NETCONF ở Chương 2 và Chương 6 như hướng phát triển cho quản trị mạng dựa trên mô hình dữ liệu.
-
-### 3.8. RFC 7950 – YANG 1.1
-
-**Thông tin tài liệu**
-
-- Tác giả: M. Björklund.
-- Tên tài liệu: *The YANG 1.1 Data Modeling Language*.
-- Cơ quan ban hành: IETF, 2016.
-- Liên kết: <https://www.rfc-editor.org/rfc/rfc7950.html>
-- Khóa trích dẫn: `rfc7950`.
-
-**Nội dung chính**
-
-YANG là ngôn ngữ dùng để mô tả cấu trúc dữ liệu cấu hình, dữ liệu trạng thái, thao tác và thông báo của thiết bị mạng. Mô hình YANG định nghĩa kiểu dữ liệu, quan hệ, điều kiện và ràng buộc để các hệ thống quản trị trao đổi dữ liệu nhất quán.
-
-**Vai trò trong báo cáo**
-
-Được dùng để giải thích nền tảng mô hình dữ liệu của NETCONF/RESTCONF và là một hướng phát triển giúp CAMS hỗ trợ dữ liệu có cấu trúc.
-
 ## 4. Thu thập và quản lý nhật ký
 
 ### 4.1. RFC 5424 – The Syslog Protocol
@@ -380,11 +323,11 @@ RFC 9106 mô tả Argon2 và các biến thể Argon2d, Argon2i, Argon2id. Argon
 | Chương | Nhóm tài liệu hỗ trợ |
 |---|---|
 | Chương 1 – Giới thiệu đề tài | Ansible, Nornir, NetBox, Oxidized, Cisco Catalyst Center và RFC 9315 |
-| Chương 2 – Cơ sở lý thuyết | Tự động hóa mạng, SSH, OSPF, NAT, VLAN/STP, DAI, NETCONF/RESTCONF/YANG, Syslog, quản lý nhật ký và mật mã |
+| Chương 2 – Cơ sở lý thuyết | Tự động hóa mạng, SSH, OSPF, NAT, VLAN/STP, DAI, Syslog, quản lý nhật ký và mật mã |
 | Chương 3 – Phân tích và thiết kế | RFC 9106 và NIST SP 800-38D cho thiết kế bảo vệ dữ liệu |
 | Chương 4 – Xây dựng phần mềm | RFC 5424 cho Syslog; RFC 9106 và NIST SP 800-38D cho bảo vệ dữ liệu |
 | Chương 5 – Thử nghiệm và đánh giá | Sử dụng các cơ sở lý thuyết đã trình bày; không phát sinh khóa trích dẫn mới trong tệp chương chính |
-| Chương 6 – Kết luận và hướng phát triển | RFC 6241, RFC 8040 và RFC 7950 cho định hướng NETCONF/RESTCONF/YANG |
+| Chương 6 – Kết luận và hướng phát triển | Tổng hợp kết quả và đề xuất hướng phát triển; không phát sinh khóa trích dẫn mới |
 
 ## 7. Ghi chú sử dụng
 

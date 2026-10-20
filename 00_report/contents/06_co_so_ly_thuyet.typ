@@ -69,12 +69,6 @@ Telnet truyền nội dung phiên quản trị dưới dạng không mã hóa, n
 
 Phiên kết nối được tái sử dụng nhằm giảm số lần bắt tay và xác thực. Do mỗi phiên CLI duy trì một ngữ cảnh riêng, các tác vụ dùng chung phiên phải được tuần tự hóa. Phần mềm cũng phải xử lý trường hợp mất kết nối, hết thời gian chờ hoặc thiết bị từ chối lệnh, thay vì suy ra thành công chỉ từ việc đã gửi dữ liệu.
 
-=== Giao thức quản lý theo mô hình dữ liệu
-
-NETCONF cung cấp các thao tác quản lý cấu hình trên dữ liệu có cấu trúc và thường dùng XML để mã hóa nội dung. RESTCONF biểu diễn tài nguyên quản lý qua HTTP bảo mật và hỗ trợ dữ liệu XML hoặc JSON. Cả hai giao thức đều có thể sử dụng mô hình YANG để mô tả cấu trúc, kiểu dữ liệu và ràng buộc của thông tin quản lý @rfc6241 @rfc8040 @rfc7950.
-
-So với việc phân tích văn bản CLI, giao thức theo mô hình dữ liệu giúp chương trình nhận biết trường dữ liệu và lỗi theo cấu trúc rõ ràng hơn. Đổi lại, thiết bị phải hỗ trợ giao thức, mô hình YANG và cơ chế xác thực tương ứng. Phiên bản CAMS trong phạm vi báo cáo mới triển khai đầy đủ các luồng cấu hình chính qua SSH hoặc Telnet; NETCONF và RESTCONF là hướng mở rộng, không được xem là chức năng đã hoàn thiện.
-
 == Nghiệp vụ mạng phục vụ tự động hóa
 
 === Dịch vụ và định tuyến Lớp 3

@@ -79,7 +79,7 @@ Nhằm mở rộng tính năng và nâng cao độ tin cậy của phần mềm 
 + *Giai đoạn 3 (Tự động khám phá Topology mạng):* Ứng dụng các giao thức khám phá láng giềng (CDP - Cisco Discovery Protocol, LLDP - Link Layer Discovery Protocol) để tự động quét, vẽ sơ đồ topo mạng trực quan và tự động tính toán các tuyến đường định tuyến tĩnh tối ưu.
 + *Giai đoạn 4 (Mở rộng giao thức định tuyến nâng cao):* Bổ sung giao diện và bộ mẫu Jinja2 cho giao thức định tuyến liên miền BGP (Border Gateway Protocol) và công nghệ mạng riêng ảo VRF (Virtual Routing and Forwarding) phục vụ các kịch bản mạng nhà cung cấp dịch vụ (ISP / Enterprise Core).
 + *Giai đoạn 5 (Hỗ trợ thiết bị Đa nhà sản xuất - Multi-Vendor):* Xây dựng kiến trúc Driver / Plugin trừu tượng hóa, hỗ trợ cấu hình cho các thiết bị chạy MikroTik RouterOS, VyOS, Juniper và thiết bị Linux Router.
-+ *Giai đoạn 6 (Mở rộng giao thức quản trị hiện đại):* Tích hợp sâu các giao thức quản trị hướng mô hình dữ liệu (Model-driven Programmability) như NETCONF / RESTCONF dựa trên các mô hình dữ liệu chuẩn hóa YANG (IETF / OpenConfig).
++ *Giai đoạn 6 (Chuẩn hóa lớp kết nối):* Chuẩn hóa driver và bộ phân tích phản hồi CLI theo từng nền tảng thiết bị để nâng cao khả năng bảo trì và mở rộng.
 + *Giai đoạn 7 (Tích hợp phân tích thông minh và Cảnh báo):* Phát triển bộ công cụ phân tích lưu lượng thông minh dựa trên Syslog và luồng gói tin, tự động phát hiện bất thường an ninh mạng (như bão broadcast, tấn công ARP Spoofing) và gửi thông báo cảnh báo tức thời qua Webhook / Email.
 
 == Tổng kết
