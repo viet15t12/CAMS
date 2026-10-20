@@ -6,7 +6,7 @@
 
 == Mục tiêu và môi trường thử nghiệm
 
-Chương này đánh giá CAMS qua năm kịch bản mạng trên EVE-NG: bảo vệ Lớp 2, định tuyến, dịch vụ Lớp 3, Syslog và chính sách ACL. Bằng chứng gồm ảnh giao diện, cấu hình đang chạy, kết quả lệnh kiểm tra và phép thử lưu lượng. Các cơ chế phân quyền, mã hóa và SFTP được mô tả theo mã nguồn ở Chương 3–4; năm kịch bản dưới đây không thay thế kiểm thử riêng cho các cơ chế đó.
+Chương này đánh giá CAMS qua năm kịch bản mạng trên EVE-NG: bảo vệ Lớp 2, định tuyến, dịch vụ Lớp 3, Syslog và chính sách ACL. Bằng chứng gồm ảnh giao diện, cấu hình đang chạy, kết quả lệnh kiểm tra và phép thử lưu lượng. Các cơ chế phân quyền, mã hóa và SFTP được mô tả theo mã nguồn ở Chương 3–4; năm kịch bản dưới đây không thay thế kiểm thử riêng cho các cơ chế đó. Các chức năng bổ sung gồm triển khai theo lô, đánh giá cấu hình, cảnh báo Telegram và tự động hóa theo sự kiện chưa có kịch bản EVE-NG riêng; mức kiểm chứng hiện tại của chúng là kiểm thử tự động ở @sec-automated-tests.
 
 === Môi trường thử nghiệm phần mềm và phần cứng
 
@@ -613,7 +613,26 @@ Trường `SEC` trong bảng là mã phân hệ Cisco IOS; nhóm nguồn Syslog 
 
 Kết quả cho thấy hai ACL được áp dụng đúng chiều trên ba cổng con của R1. Ba lưu lượng khớp luật từ chối đều bị R1 chặn và tạo bản tin Syslog; các lưu lượng đối chứng vẫn được chuyển tiếp. CAMS tiếp nhận, phân tích và hiển thị đúng thiết bị nguồn `192.168.122.104`, mã phân hệ `SEC`, mức độ nghiêm trọng bằng 6, mã sự kiện cùng thông tin địa chỉ và dịch vụ. Phạm vi kết luận giới hạn ở các địa chỉ, giao thức và số lần thử nêu trong bảng; kịch bản chưa đo thông lượng ghi nhật ký hoặc tỷ lệ mất bản tin khi tải cao.
 
+== Kiểm thử tự động các mô-đun <sec-automated-tests>
 
+Ngoài năm kịch bản trên EVE-NG, nhóm tác giả chạy lại một tập kiểm thử đơn vị và kiểm thử tích hợp bằng `unittest` của Python. Tập kiểm thử được chọn theo các chức năng an ninh và các chức năng mới bổ sung; đây không phải toàn bộ bộ kiểm thử của dự án. Lần chạy ngày 20/10/2026 dùng Python 3.14.8 trên máy trạm của kịch bản 1, 2 và 5, giao diện Qt ở chế độ không hiển thị (`offscreen`) và thư mục cấu hình tạm để không ảnh hưởng thiết lập người dùng. Kết quả tổng hợp tại @tab-automated-tests.
+
+#report-table(
+  columns: (26%, 52%, 11%, 11%),
+  header: ([Nhóm], [Mô-đun kiểm thử], [Số ca], [Kết quả]),
+  rows: (
+    ([An ninh và dữ liệu xác thực], [#table-code("test_credential_cipher", size: 8.5pt), #table-code("test_privilege_escalation", size: 8.5pt), #table-code("test_managed_terminal", size: 8.5pt), #table-code("test_audit_engine", size: 8.5pt), #table-code("test_email_alerts", size: 8.5pt), #table-code("test_acl_view_push", size: 8.5pt), #table-code("test_dhcp_acl_persistence", size: 8.5pt)], [81], [Đạt]),
+    ([Triển khai theo lô và chọn thiết bị], [#table-code("test_view_push_batch", size: 8.5pt), #table-code("test_multi_device_batch", size: 8.5pt), #table-code("test_host_pattern", size: 8.5pt), #table-code("test_routing_group_fhrp", size: 8.5pt)], [44], [Đạt]),
+    ([Tự động hóa theo sự kiện], [#table-code("test_automation_rules", size: 8.5pt), #table-code("test_automation_executor", size: 8.5pt), #table-code("test_automation_manager", size: 8.5pt), #table-code("test_automation_outbox", size: 8.5pt)], [29], [Đạt]),
+    ([Cảnh báo và phát hiện], [#table-code("test_telegram_alerts", size: 8.5pt), #table-code("test_telegram_alert_manager", size: 8.5pt), #table-code("test_security_monitoring", size: 8.5pt)], [20], [Đạt]),
+    ([Không gian làm việc], [#table-code("test_workspace_package", size: 8.5pt), #table-code("test_workspace_save_and_snapshots", size: 8.5pt)], [51], [Đạt]),
+    ([*Tổng*], [], [*225*], [*Đạt*]),
+  ),
+  text-size: 9pt,
+  caption: [Kết quả kiểm thử tự động theo nhóm chức năng],
+) <tab-automated-tests>
+
+Các kiểm thử dùng kết nối giả lập và cơ sở dữ liệu tạm, không kết nối thiết bị thật và không gửi tới máy chủ thư hay Telegram thật. Vì vậy, kết quả xác nhận logic xử lý như kiểm tra quy tắc, thứ tự đợt thử, ngưỡng dừng, cú pháp chọn thiết bị, chống gửi trùng và đóng gói dự án; kết quả không chứng minh hành vi trên thiết bị thật, độ trễ cảnh báo hay khả năng chịu tải. Phần mã Go chưa được kiểm thử trong lần chạy này vì máy trạm chưa cài trình biên dịch Go, nên kết quả trên chưa bao gồm bộ lập kế hoạch `cams-automation`.
 
 == Đánh giá tổng hợp
 
@@ -640,10 +659,12 @@ Các số bộ đếm ở từng kịch bản là những lần quan sát độc
 - *Giao diện quản lý tập trung:* CAMS cung cấp một không gian làm việc thống nhất cho các chức năng mạng Lớp 2 và Lớp 3, qua đó giảm số thao tác CLI trực tiếp trên từng thiết bị.
 - *Quy trình kiểm duyệt trước khi thực thi:* Cơ chế lưu chờ tách trạng thái mong muốn khỏi trạng thái đã áp dụng. Cửa sổ *View & Push* cho phép kiểm tra tập lệnh trước khi gửi xuống thiết bị.
 - *Khả năng xử lý nhiều thiết bị:* cơ chế khóa theo thiết bị (`Host Lock`) tuần tự hóa các lệnh trên cùng một thiết bị, trong khi `BatchExecutor` cho phép xử lý song song các thiết bị độc lập.
-- *Các tiện ích hỗ trợ vận hành:* hệ thống tích hợp sao lưu phiên bản bằng Dulwich, bộ thu nhận Syslog, cảnh báo qua thư điện tử, SFTP và đầu cuối ngoài do CAMS quản lý.
+- *Triển khai theo lô có kiểm soát:* đợt thử và ngưỡng dừng giới hạn số thiết bị bị ảnh hưởng khi một cấu hình nhóm có lỗi; logic này được xác nhận bằng kiểm thử tự động.
+- *Các tiện ích hỗ trợ vận hành:* hệ thống tích hợp sao lưu phiên bản bằng Dulwich, bộ thu nhận Syslog, cảnh báo qua thư điện tử và Telegram, đánh giá cấu hình theo bộ quy tắc, SFTP và đầu cuối ngoài do CAMS quản lý.
 
 === Hạn chế của thực nghiệm
 
 - *Mẫu thử và điều kiện chạy:* các kết quả được lấy từ những loạt thử cụ thể trên hai môi trường độc lập. Phiên bản IOS đầy đủ và tài nguyên EVE-NG chưa được ghi nhận cho mọi kịch bản; các kết quả này không được dùng để so sánh hiệu năng giữa hai máy.
 - *Đánh giá thời gian và khả năng chịu tải:* chưa có phép đo tái lập thời gian thao tác giữa CLI và CAMS, thời gian hội tụ, thông lượng Syslog, tỷ lệ mất bản tin hoặc độ trễ cảnh báo qua thư điện tử. RTT biến động trong kịch bản 2 nên không được dùng để kết luận độ trễ ổn định.
 - *Kịch bản sự cố:* DAI và ACL đã có lưu lượng vi phạm cùng đối chứng. Chưa có ca thử mất kết nối khi triển khai, sai thông tin xác thực, thay đổi cấu hình một phần hay ngắt cổng GLBP. Khi lỗi thực thi xảy ra, cần đối chiếu phản hồi và đồng bộ lại; hủy tác vụ không tự hoàn tác lệnh đã gửi. Hạn chế sản phẩm và hướng phát triển được tổng hợp ở Chương 6.
+- *Chức năng chưa có kịch bản EVE-NG:* triển khai theo lô trên nhiều thiết bị, Compliance Audit, cảnh báo Telegram và tự động hóa theo sự kiện mới được kiểm chứng ở mức kiểm thử tự động (@tab-automated-tests). Chưa có kịch bản đo thời gian triển khai trên số lượng lớn thiết bị hay minh chứng một quy tắc tự động tắt cổng trên thiết bị thật.

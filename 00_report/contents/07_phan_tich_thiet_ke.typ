@@ -14,18 +14,18 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
   header: ([Nhóm], [Yêu cầu], [Dữ liệu hoặc kết quả]),
   rows: (
     ([Quản lý], [Thêm, sửa, xóa và nhập danh mục; quản lý phiên; đồng bộ và lưu lịch sử cấu hình.], [Danh mục, trạng thái kết nối, bản sao cấu hình.]),
-    ([Tự động hóa], [Kiểm tra dữ liệu; tạo lệnh theo từng chức năng; xem trước, áp dụng và trả kết quả riêng từng thiết bị.], [Cấu hình chờ, lệnh dự kiến, phản hồi thực thi.]),
-    ([Giám sát], [Thu thập thông tin vận hành; nhận, lưu, lọc và xuất Syslog.], [Trạng thái quan sát, nhật ký có nguồn và thời gian.]),
-    ([Bảo mật], [Triển khai ACL, bảo mật cổng (Port Security), DHCP Snooping và DAI; hỗ trợ xem các sự kiện cảnh báo liên quan.], [Chính sách đã gửi, trạng thái và nhật ký để đối chiếu.]),
+    ([Tự động hóa], [Kiểm tra dữ liệu; tạo lệnh theo từng chức năng; xem trước, áp dụng và trả kết quả riêng từng thiết bị; chọn thiết bị theo mẫu và triển khai theo lô có đợt thử; thực thi quy tắc phản ứng theo sự kiện.], [Cấu hình chờ, lệnh dự kiến, phản hồi thực thi, nhật ký hành động tự động.]),
+    ([Giám sát], [Thu thập thông tin vận hành; nhận, lưu, lọc và xuất Syslog; phát hiện mẫu sự kiện theo ngưỡng; gửi cảnh báo qua thư điện tử và Telegram.], [Trạng thái quan sát, nhật ký có nguồn và thời gian, cảnh báo đã gửi.]),
+    ([Bảo mật], [Triển khai ACL, bảo mật cổng (Port Security), DHCP Snooping và DAI; hỗ trợ xem các sự kiện cảnh báo liên quan; đánh giá cấu hình đã sao lưu theo bộ quy tắc an ninh.], [Chính sách đã gửi, trạng thái và nhật ký để đối chiếu; điểm và kết quả từng quy tắc.]),
   ),
   caption: [Yêu cầu chức năng theo phạm vi đề tài],
 )
 
-SFTP, đầu cuối và chức năng đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1.
+SFTP, đầu cuối và chức năng đóng gói dự án là các tiện ích hỗ trợ vận hành. Syslog thuộc nhóm chức năng giám sát chính vì trực tiếp phục vụ mục tiêu giám sát an ninh tập trung. Khả năng cảnh báo được giới hạn ở việc khai thác sự kiện do thiết bị cung cấp, phù hợp với phạm vi đã xác định tại Chương 1. Bộ phản ứng tự động cũng chỉ dựa trên các sự kiện này; nó không phân tích gói tin và không thay thế quyết định của người quản trị đối với những thay đổi ngoài phạm vi quy tắc đã khai báo.
 
 === Tác nhân và luồng tương tác
 
-Người quản trị khởi tạo thao tác trên CAMS; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký. Máy chủ SFTP và SMTP là các dịch vụ ngoài hỗ trợ truyền tệp và gửi cảnh báo. Luồng cấu hình gồm đồng bộ trạng thái, chuẩn bị dữ liệu, xem trước lệnh, triển khai và xác minh.
+Người quản trị khởi tạo thao tác trên CAMS; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký. Máy chủ SFTP, máy chủ SMTP và giao diện lập trình Telegram Bot là các dịch vụ ngoài hỗ trợ truyền tệp và gửi cảnh báo. Luồng cấu hình gồm đồng bộ trạng thái, chuẩn bị dữ liệu, xem trước lệnh, triển khai và xác minh.
 
 CAMS kiểm tra tham số và lưu phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra hoặc lưu lượng thử. Nguyên tắc này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
 
@@ -50,7 +50,7 @@ CAMS tổ chức trách nhiệm thành bốn lớp như @fig-layer-architecture.
   caption: [Kiến trúc phân lớp của CAMS],
 ) <fig-layer-architecture>
 
-Bộ thu Syslog C++ và đầu cuối Alacritty là các tiến trình đồng hành ngoài luồng giao diện. Bộ thu Syslog trao đổi sự kiện JSON Lines với Python; NTTP/1 phục vụ đầu cuối. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
+Bộ thu Syslog C++, đầu cuối Alacritty và bộ lập kế hoạch tự động hóa viết bằng Go là các tiến trình đồng hành ngoài luồng giao diện. Bộ thu Syslog trao đổi sự kiện JSON Lines với Python; NTTP/1 phục vụ đầu cuối; tiến trình Go nhận yêu cầu và trả kết quả dạng JSON Lines qua đầu vào và đầu ra chuẩn. @fig-layer-architecture chưa thể hiện tiến trình Go; vai trò của tiến trình này được mô tả tại @fig-automation-flow. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
 
 Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
 
@@ -86,6 +86,16 @@ Trình tự trao đổi chi tiết được thể hiện tại @fig-view-push-se
 
 Khóa phiên tuần tự hóa truy cập cùng thiết bị nhưng không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
 
+=== Triển khai trên nhiều thiết bị
+
+Khi một cấu hình nhóm được gửi tới nhiều thiết bị, mỗi thiết bị có bộ điều khiển và kết quả riêng. Lớp thực thi giới hạn số thiết bị chạy đồng thời, mặc định là 20 và tối đa 50. Ý tưởng triển khai theo đợt được tham khảo từ các tham số `serial` và `max_fail_percentage` của Ansible @ansibleNetworkDocs:
+
++ Nếu số thiết bị lớn hơn kích thước đợt thử (mặc định 5), các thiết bị đầu danh sách chạy trước. Các thiết bị còn lại chỉ bắt đầu khi đợt thử kết thúc.
++ Sau khi đủ số mẫu bằng kích thước đợt thử, nếu tỷ lệ lỗi vượt ngưỡng (mặc định 30%), không thiết bị mới nào được bắt đầu. Các thiết bị chưa chạy được đánh dấu bỏ qua và không bị thay đổi cấu hình.
++ Ba tham số trên được chỉnh trong *Settings* hoặc qua biến môi trường; giá trị mặc định không phải giới hạn cố định của mọi môi trường.
+
+Ngưỡng dừng chỉ áp dụng cho bước gửi lệnh. Các thiết bị đã gửi thành công vẫn đi tiếp qua bước đối chiếu sau triển khai gồm bốn giai đoạn: lưu `running-config` thành `startup-config`, thu lại `running-config`, ghi bản sao lưu và đồng bộ cơ sở dữ liệu theo trạng thái thiết bị. Mỗi giai đoạn có mã lỗi riêng (`save`, `collect`, `backup`, `sync`). Nhờ đó giao diện phân biệt được trường hợp lệnh đã được thiết bị nhận nhưng bước lưu hoặc đồng bộ sau đó thất bại, thay vì gộp tất cả thành "thất bại".
+
 
 == Luồng giám sát và khai thác cảnh báo
 
@@ -93,12 +103,73 @@ Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn v�
 
 Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiêm trọng, mã sự kiện nếu phân tích được và nội dung gốc. Giao diện hỗ trợ lọc theo thiết bị, thời gian, mức độ và từ khóa, qua đó giúp người quản trị khoanh vùng các sự kiện như thay đổi kết nối hoặc vi phạm chính sách. Khi đồng hồ trên thiết bị chưa được đồng bộ, hệ thống phải phân biệt thời gian do thiết bị ghi với thời gian CAMS nhận bản tin.
 
-@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu dữ liệu vào SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau khi lưu trữ, bộ phát hiện theo ngưỡng và dịch vụ thư điện tử xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
+@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu dữ liệu vào SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau khi lưu trữ, bộ phát hiện theo ngưỡng cùng hai dịch vụ cảnh báo qua thư điện tử và Telegram xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
 
 #figure(
   image("/00_book/figures/report/diagrams/review-syslog-sequence.svg", width: 100%),
   caption: [Sơ đồ tuần tự thu nhận, lưu trữ và khai thác Syslog],
 ) <fig-syslog-sequence>
+
+=== Phát hiện mẫu sự kiện theo ngưỡng
+
+Bộ phát hiện `SecurityEventDetector` đếm các bản tin cùng loại theo khóa nguồn (địa chỉ, cổng hoặc địa chỉ MAC) trong một cửa sổ thời gian trượt. Khi số bản tin hoặc số gói được nêu trong bản tin đạt ngưỡng, bộ phát hiện tạo một cảnh báo `%CAMS-...` và tạm ngừng cảnh báo lặp cho cùng khóa trong thời gian chờ mặc định 300 giây. Sáu quy tắc mặc định được liệt kê tại @tab-security-detectors.
+
+#report-table(
+  columns: (27%, 13%, 25%, 35%),
+  header: ([Quy tắc], [Cửa sổ], [Ngưỡng], [Nguồn sự kiện]),
+  rows: (
+    ([#table-code("ICMP_FLOOD")], [10 giây], [1 bản tin], [Chính sách EEM trên thiết bị đã đếm lưu lượng ICMP và phát bản tin #table-code("HA_EM", size: 8.5pt).]),
+    ([#table-code("ACL_DROP_FLOOD")], [60 giây], [10 bản tin hoặc 100 gói], [Bản tin ACL từ chối từ cùng một nguồn.]),
+    ([#table-code("DHCP_ROGUE_SERVER")], [60 giây], [3 bản tin], [DHCPOFFER, DHCPACK hoặc DHCPNAK nhận trên cổng không tin cậy.]),
+    ([#table-code("DHCP_SNOOPING_FLOOD")], [60 giây], [10 bản tin], [Các lần DHCP Snooping loại bỏ gói từ cùng một nguồn.]),
+    ([#table-code("DAI_ARP_SPOOF")], [60 giây], [5 bản tin hoặc 5 gói], [Bản tin ARP không hợp lệ do DAI ghi nhận.]),
+    ([#table-code("PORT_SECURITY_REPEAT")], [60 giây], [3 bản tin], [Vi phạm Port Security lặp lại trên cùng một cổng.]),
+  ),
+  text-size: 9.5pt,
+  caption: [Quy tắc phát hiện mặc định của bộ giám sát an ninh],
+) <tab-security-detectors>
+
+Cảnh báo của bộ phát hiện là dấu hiệu cần điều tra, không phải kết luận chắc chắn có tấn công. Thiết bị Cisco IOS có thể gộp hoặc giới hạn tốc độ phát bản tin, nên số bản tin không tương ứng một–một với số gói. Bộ phát hiện chỉ dùng Syslog; hệ thống không phân tích lưu lượng nên không phải một hệ thống phát hiện xâm nhập hoàn chỉnh.
+
+== Luồng tự động hóa phản ứng theo sự kiện
+
+Bộ tự động hóa nối kết quả của bộ phát hiện với hành động trên thiết bị. Thiết kế tách ba trách nhiệm cho ba thành phần như @fig-automation-flow:
+
+- *Python (CAMS):* chuyển cảnh báo thành sự kiện trong bảng hàng đợi `t13_automation_events`, giữ phiên SSH, thông tin xác thực và cơ sở dữ liệu, thực thi hành động và ghi kết quả vào `t13_automation_actions`.
+- *Tiến trình Go (`cams-automation`):* đọc các tệp quy tắc `.rule.cams` đang bật, đối chiếu sự kiện với điều kiện, kiểm tra thời gian chờ và giới hạn số hành động mỗi giờ, rồi trả về danh sách hành động có kiểu xác định. Tiến trình này không nhận mật khẩu và không tự mở kết nối tới thiết bị; khi khởi chạy, CAMS loại bỏ biến môi trường chứa khóa phiên.
+- *Thiết bị mạng:* nhận lệnh qua phiên SSH mà người dùng đã mở trong CAMS. Nếu không có phiên đang hoạt động, hành động được ghi là thất bại; hệ thống không tự mở phiên mới hay chuyển sang giao thức khác.
+
+#figure(
+  kind: image,
+  {
+    set text(size: 8.5pt)
+    show raw: set text(size: 7.5pt)
+    let node(body, fill) = block(
+      width: 100%, inset: 6pt, radius: 3pt, fill: fill,
+      stroke: 0.6pt + rgb("#5a6b7d"), align(center, body),
+    )
+    let py = rgb("#e3eef9")
+    let go = rgb("#e4f4e4")
+    let cpp = rgb("#fbeede")
+    grid(
+      columns: (1fr, 14pt, 1fr, 14pt, 1fr),
+      row-gutter: 6pt,
+      align: center + horizon,
+      node([*Bộ thu Syslog (C++)* \ lưu `t12_syslog_messages`], cpp), [→],
+      node([*Bộ phát hiện (Python)* \ cảnh báo theo ngưỡng], py), [→],
+      node([*Hàng đợi sự kiện* \ `t13_automation_events`], py),
+      [], [], [], [], [↓],
+      node([*Bộ thực thi (Python)* \ phiên SSH đang mở, lệnh xác minh, ghi `verified` hoặc `failed`], py), [←],
+      node([*Hành động chờ* \ `t13_automation_actions` trạng thái `ready`], py), [←],
+      node([*Bộ lập kế hoạch (Go)* \ đối chiếu quy tắc, thời gian chờ, giới hạn mỗi giờ], go),
+    )
+  },
+  caption: [Luồng tự động hóa phản ứng theo sự kiện (màu cam: tiến trình C++, xanh lam: Python, xanh lục: Go)],
+) <fig-automation-flow>
+
+Python và Go trao đổi qua đầu vào và đầu ra chuẩn bằng các thông điệp JSON Lines có số phiên bản giao thức và mã yêu cầu. Mỗi chu kỳ, CAMS gửi tối đa 100 sự kiện chờ xử lý; tiến trình Go trả về hành động mới, danh sách sự kiện đã xử lý và lỗi của từng tệp quy tắc nếu có. Sau đó bộ thực thi nhận tối đa 10 hành động ở trạng thái `ready`, giữ quyền xử lý bằng một hợp đồng thuê (lease) lưu trong SQLite rồi chuyển hành động qua các trạng thái `claimed`, `applying` và kết thúc ở `verified`, `noop_verified` hoặc `failed`. Nếu hợp đồng thuê hết hạn giữa chừng, hành động đổi trạng thái giao diện cổng được trả về `ready` vì có thể lặp lại an toàn; chuỗi lệnh CLI được chuyển sang `failed` thay vì tự gửi lại.
+
+Lược đồ bảng hành động đã có sẵn các trạng thái chờ phê duyệt và hoàn tác theo thời gian (`pending_approval`, `revert_due`, `reverted`). Bộ kiểm tra quy tắc hiện chỉ chấp nhận hai chế độ `dry-run` và `auto`, đồng thời buộc trường `ttl_seconds` bằng 0 với hành động tự động. Do đó quy trình phê duyệt và tự hoàn tác chưa hoạt động; các trạng thái trên chỉ là phần chuẩn bị của lược đồ.
 
 
 == Thiết kế cơ chế an ninh phân quyền và bảo mật dữ liệu

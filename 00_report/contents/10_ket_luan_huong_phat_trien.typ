@@ -15,7 +15,9 @@
     ([Kiến trúc và giao diện], [Qt Quick/QML, điều phối PyQt6, tác vụ nền và biểu mẫu theo chức năng.], [Ảnh của năm kịch bản minh họa thao tác khai báo, xem trước và kiểm tra; chưa đo mức phản hồi giao diện dưới tải.]),
     ([Dữ liệu và sao lưu], [Hai tệp SQLite; 95 tên bảng trong lược đồ SQL nguồn (74 + 21); lịch sử Git bằng Dulwich.], [Đối chiếu mã nguồn ở Chương 3–4; số bảng khi vận hành phụ thuộc không gian làm việc và phiên bản.]),
     ([Cấu hình mạng], [Sinh lệnh và triển khai các nghiệp vụ Lớp 2, định tuyến, DHCP, GLBP, NAT/PAT và ACL.], [Năm kịch bản EVE-NG ở Chương 5; kịch bản 2 có kết quả trên năm bộ định tuyến và sáu loạt kiểm tra ICMP đều nhận đủ 5/5 hồi đáp. Kịch bản 3 mới xác nhận cấu hình GLBP/PAT, chưa kiểm thử chuyển đổi dự phòng.]),
-    ([Giám sát an ninh], [Thu nhận Syslog, lọc sự kiện và gửi thư điện tử; hỗ trợ cấu hình chính sách trên thiết bị.], [Kịch bản 1 kiểm tra DHCP Snooping/DAI; kịch bản 4 có hai mẫu thư cảnh báo; kịch bản 5 đối chiếu lưu lượng ACL bị chặn, lưu lượng được phép và nhật ký. Chưa đo tỷ lệ mất bản tin dưới tải.]),
+    ([Giám sát an ninh], [Thu nhận Syslog, lọc sự kiện, sáu quy tắc phát hiện theo ngưỡng và gửi cảnh báo qua thư điện tử hoặc Telegram; hỗ trợ cấu hình chính sách trên thiết bị.], [Kịch bản 1 kiểm tra DHCP Snooping/DAI; kịch bản 4 có hai mẫu thư cảnh báo; kịch bản 5 đối chiếu lưu lượng ACL bị chặn, lưu lượng được phép và nhật ký. Bộ phát hiện và kênh Telegram mới có kiểm thử tự động. Chưa đo tỷ lệ mất bản tin dưới tải.]),
+    ([Triển khai theo lô], [Chọn thiết bị theo mẫu; tham số nhóm hàng loạt; đợt thử, ngưỡng dừng và đối chiếu sau triển khai.], [44 ca kiểm thử tự động đạt; chưa đo thời gian triển khai trên số lượng lớn thiết bị thật.]),
+    ([Đánh giá cấu hình và tự động hóa], [Compliance Audit với 16 quy tắc; quy tắc `.rule.cams` phiên bản 1–3 do tiến trình Go lập kế hoạch và Python thực thi qua phiên SSH.], [Kiểm thử tự động cho bộ đánh giá và phần Python của bộ tự động hóa đạt; phần Go chưa được kiểm thử trong lần chạy gần nhất; chưa có kịch bản EVE-NG.]),
     ([Tiện ích và bảo vệ dữ liệu], [SFTP, đầu cuối, gói dự án `.ntp`; `ENC$v2$`, Argon2id/AES-256-GCM và khóa theo thiết bị.], [Cơ chế được đối chiếu theo mã nguồn và ảnh chức năng ở Chương 3–4; chưa có kịch bản riêng đánh giá toàn bộ cơ chế mật mã, đặc quyền và truyền tệp.]),
     ([Tài liệu hướng dẫn], [Website hướng dẫn sử dụng gồm các quy trình theo từng nhóm chức năng.], [Đường dẫn website và mã QR được trình bày trong Chương 4 để người dùng truy cập trực tiếp.]),
   ),
@@ -44,6 +46,8 @@ Các hạn chế chính gồm:
 + *Phụ thuộc bộ phân tích cú pháp CLI:* một số chức năng thu thập trạng thái vẫn phân tích văn bản thô từ lệnh `show`, nên có thể bị ảnh hưởng khi Cisco IOS thay đổi định dạng kết quả.
 + *Đánh giá định lượng:* chưa đo thời gian thao tác, tỷ lệ lỗi triển khai, thời gian hội tụ, chuyển đổi dự phòng GLBP hoặc khả năng chịu tải.
 + *Hoàn tác tự động:* điểm khôi phục dự án và lịch sử Git chưa tự sinh lệnh hoàn tác xuống thiết bị khi thực thi chỉ thành công một phần.
++ *Tự động hóa theo sự kiện:* chưa có bước phê duyệt và chưa tự hoàn tác theo thời gian; hành động cần phiên SSH đang mở; quy tắc phiên bản 2 và 3 cho phép chuỗi CLI tùy ý nên an toàn phụ thuộc nguồn quy tắc và việc kiểm tra ở chế độ `dry-run`.
++ *Đánh giá cấu hình:* 16 quy tắc của Compliance Audit là bộ quy tắc nội bộ, chỉ đọc bản sao lưu gần nhất và không thay thế đánh giá đầy đủ theo tiêu chuẩn như CIS Benchmark.
 
 == Lộ trình phát triển ưu tiên
 
@@ -51,6 +55,7 @@ Các hướng phát triển ưu tiên gồm:
 
 + *Bảo vệ thông tin xác thực:* tích hợp kho bí mật của hệ điều hành, kiểm tra di chuyển dữ liệu cũ sang `ENC$v2$` và quản lý vòng đời khóa.
 + *Hoàn tác:* sinh tập lệnh hoàn tác cho từng lần triển khai và yêu cầu người quản trị kiểm duyệt trước khi gửi.
++ *Tự động hóa theo sự kiện:* kích hoạt quy trình phê duyệt và tự hoàn tác theo thời gian đã chuẩn bị sẵn trong lược đồ; bổ sung các hành động có kiểu (ví dụ chặn nguồn bằng ACL) thay cho chuỗi CLI tự do; xây dựng kịch bản EVE-NG đo thời gian từ bản tin Syslog đến khi hành động được xác minh.
 + *Khám phá mô hình mạng:* dùng CDP/LLDP để thu thập liên kết và vẽ cấu trúc mạng.
 + *Mở rộng nền tảng:* hoàn thiện BGP/VRF và xây dựng kiến trúc trình điều khiển cho nhiều nhà sản xuất.
 + *Mở rộng giao thức quản trị hiện đại:* tích hợp NETCONF/RESTCONF dựa trên mô hình dữ liệu YANG (IETF/OpenConfig) @rfc6241 @rfc8040 @rfc7950.
@@ -64,4 +69,4 @@ Trong giảng dạy, người học nên chuẩn bị cấu hình, đọc bản 
 
 == Kết luận chung
 
-CAMS đã hình thành quy trình quản trị tập trung gồm lưu trữ dữ liệu, kiểm duyệt và thực thi lệnh, thu thập trạng thái và khai thác Syslog. Năm kịch bản cung cấp bằng chứng chức năng trong phòng thực hành, nhưng chưa thay thế đánh giá định lượng về thời gian, độ tin cậy, tải Syslog và khả năng phục hồi. Vì vậy, giai đoạn tiếp theo cần ưu tiên kiểm thử, bảo vệ thông tin xác thực và xử lý lỗi trước khi mở rộng nền tảng hoặc giao thức.
+CAMS đã hình thành quy trình quản trị tập trung gồm lưu trữ dữ liệu, kiểm duyệt và thực thi lệnh, thu thập trạng thái và khai thác Syslog. Các chức năng bổ sung gồm triển khai theo lô có đợt thử, đánh giá cấu hình, cảnh báo Telegram và phản ứng tự động theo sự kiện mở rộng quy trình đó, nhưng hiện mới được kiểm chứng bằng kiểm thử tự động. Năm kịch bản cung cấp bằng chứng chức năng trong phòng thực hành, nhưng chưa thay thế đánh giá định lượng về thời gian, độ tin cậy, tải Syslog và khả năng phục hồi. Vì vậy, giai đoạn tiếp theo cần ưu tiên kiểm thử, bảo vệ thông tin xác thực và xử lý lỗi trước khi mở rộng nền tảng hoặc giao thức.

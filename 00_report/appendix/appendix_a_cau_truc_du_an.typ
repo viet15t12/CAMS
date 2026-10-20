@@ -55,8 +55,13 @@ Các bảng dưới đây sử dụng tên tệp và mô-đun có trong kho mã 
     ([#table-code("SyslogWorkspace.qml", size: 8.5pt)], [#table-code("features/syslog/qt/manager.py", size: 8.5pt)], [#table-code("t10_syslog_servers; t12_syslog_messages", size: 8.5pt)], [#table-code("features/syslog/transport/receiver.py", size: 8.5pt)]),
     ([#table-code("SftpView.qml", size: 8.5pt)], [#table-code("features/sftp/controller.py", size: 8.5pt)], [#table-code("Hàng đợi phiên, không phải bảng cấu hình mạng", size: 8.5pt)], [#table-code("features/sftp/sftp_service.py", size: 8.5pt)]),
     ([#table-code("DatabaseBrowserView.qml", size: 8.5pt)], [#table-code("core/external_tools.py", size: 8.5pt)], [#table-code("Các bảng có trong không gian làm việc được mở", size: 8.5pt)], [#table-code("infrastructure/database/browser/", size: 8.5pt)]),
+    ([#table-code("TelegramAlertSettings.qml", size: 8.5pt)], [#table-code("features/syslog/telegram/service.py", size: 8.5pt)], [#table-code("Tệp cấu hình cảnh báo, mã bot được mã hóa", size: 8.5pt)], [#table-code("features/syslog/telegram/renderer.py", size: 8.5pt)]),
+    ([#table-code("ComplianceWorkspace.qml", size: 8.5pt)], [#table-code("features/compliance/service.py", size: 8.5pt)], [#table-code("Bản sao lưu running-config gần nhất", size: 8.5pt)], [#table-code("features/compliance/engine.py; rules.py", size: 8.5pt)]),
+    ([#table-code("AutomationWorkspace.qml", size: 8.5pt)], [#table-code("features/automation/manager.py", size: 8.5pt)], [#table-code("t13_automation_events; t13_automation_actions", size: 8.5pt)], [#table-code("features/automation/executor.py; gocore/", size: 8.5pt)]),
   ),
   caption: [Ánh xạ giao diện, mô-đun và lưu trữ theo mã nguồn hiện tại],
 ) <tab-system-component-mapping-continued>
 
 Đầu cuối đồng hành được tổ chức trong `features/terminal/`, gồm `launcher.py`, `ipc_server.py` và `managed_manager.py`. Thành phần này giao tiếp với ứng dụng chính qua IPC. Bộ duyệt dữ liệu được mở qua `core/external_tools.py`; các bảng khả dụng phụ thuộc vào không gian làm việc, không mặc định luôn có 95 bảng.
+
+Mã nguồn Go của bộ lập kế hoạch tự động hóa nằm trong `gocore/`, gồm `cmd/gocore` (điểm vào của tiến trình) và `internal/` với ba gói `event`, `protocol` và `rule`. Sơ đồ tại @fig-appendix-project-structure được vẽ trước khi bổ sung thư mục này nên chưa thể hiện `gocore/`.

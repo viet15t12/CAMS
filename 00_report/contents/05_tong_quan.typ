@@ -25,6 +25,7 @@ Theo RFC 9315, quản trị mạng dựa trên ý định gồm diễn giải m�
 - *Giao diện cấu hình bằng biểu mẫu:* Thay vì viết kịch bản, người quản trị khai báo thông số qua biểu mẫu. Hệ thống sinh lệnh CLI, kiểm tra phụ thuộc và triển khai cấu hình theo nhóm thiết bị.
 - *Mô hình phân biệt trạng thái cấu hình:* Hệ thống phân biệt trạng thái mong muốn, tức cấu hình đang chuẩn bị, với trạng thái quan sát thu thập từ thiết bị. Quy trình *View & Push* cung cấp bước kiểm duyệt trước khi thực thi nhằm hạn chế sai sót.
 - *Tích hợp vòng lặp quản trị:* Kết nối triển khai chính sách với giám sát Syslog trên cùng một giao diện để truy vết thay đổi và sự kiện.
+- *Phản ứng theo sự kiện có kiểm soát:* Sự kiện an ninh suy ra từ Syslog được đối chiếu với quy tắc `.rule.cams` do người quản trị khai báo. Hành động chỉ được gửi qua phiên SSH đang mở, có giới hạn tần suất và được ghi lại để truy vết.
 
 == Mục tiêu đề tài
 
@@ -35,9 +36,9 @@ Mục tiêu tổng quát là xây dựng hệ thống hỗ trợ quản lý hạ
   header: ([Nhóm chức năng], [Nội dung triển khai], [Đầu ra cần kiểm chứng]),
   rows: (
     ([Quản lý], [Tập trung danh mục thiết bị, phiên kết nối, cấu hình và lịch sử sao lưu.], [Tra cứu thiết bị và đồng bộ thành công `running-config`.]),
-    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách.], [Đối chiếu lệnh sinh với cấu hình đang chạy; kiểm tra trạng thái láng giềng, bảng định tuyến và kết nối sau khi triển khai trên năm bộ định tuyến ở kịch bản 2.]),
-    ([Giám sát], [Thu thập trạng thái vận hành và tiếp nhận Syslog tập trung.], [Đối chiếu nguồn, PRI, mức độ, mã sự kiện và nội dung gốc của bản tin Syslog; kiểm tra cảnh báo thư điện tử ở kịch bản 4.]),
-    ([Bảo mật], [Cấu hình ACL, bảo vệ Lớp 2 và khai thác cảnh báo do thiết bị gửi về.], [Kiểm tra chính sách chặn lưu lượng và phản hồi sự kiện trên Syslog.]),
+    ([Tự động hóa], [Kiểm tra tham số, sinh lệnh, xem trước và triển khai cấu hình hoặc chính sách; triển khai theo lô có đợt thử; thực thi quy tắc phản ứng theo sự kiện.], [Đối chiếu lệnh sinh với cấu hình đang chạy; kiểm tra trạng thái láng giềng, bảng định tuyến và kết nối sau khi triển khai trên năm bộ định tuyến ở kịch bản 2; kiểm thử tự động cho chính sách lô và bộ tự động hóa.]),
+    ([Giám sát], [Thu thập trạng thái vận hành, tiếp nhận Syslog tập trung và gửi cảnh báo qua thư điện tử hoặc Telegram.], [Đối chiếu nguồn, PRI, mức độ, mã sự kiện và nội dung gốc của bản tin Syslog; kiểm tra cảnh báo thư điện tử ở kịch bản 4.]),
+    ([Bảo mật], [Cấu hình ACL, bảo vệ Lớp 2, khai thác cảnh báo do thiết bị gửi về và đánh giá cấu hình theo bộ quy tắc an ninh.], [Kiểm tra chính sách chặn lưu lượng và phản hồi sự kiện trên Syslog; kiểm thử tự động cho bộ đánh giá cấu hình.]),
   ),
   caption: [Mục tiêu phát triển],
 ) <tab-objectives>
@@ -46,7 +47,7 @@ Các tiêu chí tại @tab-objectives được đối chiếu với minh chứng
 
 == Đối tượng và phạm vi nghiên cứu
 
-Đối tượng nghiên cứu gồm thiết bị Cisco IOS, quy trình tự động hóa CLI và cơ chế thu thập nhật ký tập trung. Hoạt động kiểm chứng sử dụng Cisco vIOS L2 và vIOS L3 trên EVE-NG; phần mềm được xây dựng bằng Python, PyQt6/Qt Quick và SQLite.
+Đối tượng nghiên cứu gồm thiết bị Cisco IOS, quy trình tự động hóa CLI và cơ chế thu thập nhật ký tập trung. Hoạt động kiểm chứng sử dụng Cisco vIOS L2 và vIOS L3 trên EVE-NG; phần mềm được xây dựng bằng Python, PyQt6/Qt Quick và SQLite, kèm bộ thu Syslog viết bằng C++ và bộ lập kế hoạch tự động hóa viết bằng Go.
 
 Đề tài hướng đến quản lý tập trung thiết bị và dịch vụ mạng. Trong phạm vi hiện thực của báo cáo, CAMS tập trung vào thiết bị mạng cùng các chức năng DHCP, định tuyến, NAT và Syslog; SFTP hỗ trợ trao đổi tệp với máy chủ có dịch vụ tương ứng. Hệ thống chưa bao gồm việc quản trị đầy đủ hệ điều hành, ứng dụng và vòng đời máy chủ.
 
