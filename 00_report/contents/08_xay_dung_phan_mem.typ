@@ -15,7 +15,7 @@ Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện v
 
 == Khởi tạo và kết nối giao diện với nghiệp vụ
 
-Ứng dụng nạp màn hình chào để người dùng tạo hoặc mở dự án, thiết lập đường dẫn dữ liệu rồi chuyển vào giao diện chính. Khi khởi tạo, `main.py` tạo các thành phần dùng chung như bộ quản lý cơ sở dữ liệu, sổ đăng ký phiên thiết bị, bộ điều khiển không gian làm việc, SFTP, Syslog và Automation Engine (Go core); sau đó công bố các đối tượng cần thiết cho QML qua ngữ cảnh của Qt.
+Khi khởi tạo, `main.py` tạo các thành phần dùng chung như bộ quản lý cơ sở dữ liệu, sổ đăng ký phiên thiết bị, bộ điều khiển không gian làm việc, SFTP, Syslog và Automation Engine; sau đó truyền các đối tượng cần thiết cho QML qua ngữ cảnh của Qt.
 
 QML tiếp nhận thao tác và gọi phương thức của bộ điều khiển Python. Tầng nghiệp vụ kiểm tra dữ liệu, thực hiện tác vụ rồi phát tín hiệu để giao diện cập nhật trạng thái hoặc hiển thị lỗi. Các thao tác mạng và lưu gói dự án được đưa sang tác vụ nền để không chặn luồng giao diện. @fig-cams-workspace minh họa không gian làm việc sau khi quá trình khởi tạo hoàn tất.
 
@@ -97,15 +97,13 @@ Màn hình *Email Alerts* cho phép khai báo máy chủ và cổng SMTP, tài k
 
 Màn hình *Telegram Alerts* cho phép bật dịch vụ, chọn mức Syslog, nhập Bot Token, Chat ID, thời gian chống lặp và cửa sổ gom đợt. Dịch vụ kết xuất bản tin văn bản thuần, giới hạn nội dung theo mức 4.096 ký tự của Telegram và tóm tắt phần vượt giới hạn. Bot Token được mã hóa trong tệp thiết lập; thông báo lỗi thay thế token bằng giá trị đã che và phân biệt các trường hợp token bị từ chối, Chat ID không tồn tại, lỗi DNS hoặc hết thời gian chờ.
 
-=== Phân tích sự kiện và phản ứng tự động bằng Automation Engine (Go core)
+=== Phân tích sự kiện và phản ứng tự động bằng Automation Engine
 
-`SecurityEventDetector` chuẩn hóa các mẫu nhật ký liên quan đến ICMP flood, ACL drop, DHCP Snooping, DAI và Port Security thành security event có `event_type`, thiết bị, thuộc tính và bằng chứng nguồn. Sự kiện được lưu trong `info_collected.db` cùng định danh xác định để việc phát lại không tạo bản ghi trùng.
+Automation Engine là thành phần giúp CAMS chuyển từ giám sát thụ động sang phản ứng tự động trước các sự kiện an ninh. Từ nhật ký Syslog, hệ thống nhận biết những dấu hiệu cần chú ý như lưu lượng ICMP bất thường, số lần bị ACL từ chối tăng cao hoặc vi phạm DHCP Snooping, DAI và Port Security. Mỗi sự kiện được gắn với thiết bị và thông tin liên quan để phục vụ bước xử lý tiếp theo.
 
-`AutomationManager` khởi động Automation Engine (Go core) dưới dạng tiến trình đồng hành và giao tiếp bằng JSON Lines. Bộ định thời một giây yêu cầu đánh giá các sự kiện chờ. Automation Engine (Go core) nạp tệp `*.rule.cams`, áp dụng `schedule.interval_seconds` của từng rule, kiểm tra điều kiện, chống lặp và giới hạn hành động. Với rule version 3, thành phần này đọc phần bằng chứng gắn với sự kiện, lấy `message` hoặc `raw_message` của bản tin Syslog nguồn, trích biến và kiểm tra kiểu `interface`, `ipv4` hoặc `identifier` trước khi kết xuất lệnh.
+Khi có sự kiện mới, Automation Engine đối chiếu sự kiện đó với các quy tắc tự động hóa do người quản trị thiết lập. Nếu sự kiện đáp ứng điều kiện của một quy tắc, hệ thống xác định phản ứng phù hợp, tạo các lệnh cấu hình cần thiết và gửi tới đúng thiết bị thông qua kết nối đang hoạt động. Sau khi thực hiện, CAMS kiểm tra kết quả và lưu lại trạng thái xử lý để người quản trị theo dõi.
 
-Rule ở chế độ `dry-run` tạo hành động `simulated`. Rule `auto` tạo hành động `ready`; `AutomationActionExecutor` nhận hành động, yêu cầu phiên SSH đang hoạt động, gửi khối lệnh qua khóa của phiên rồi chạy `verify_commands`. Kết quả được lưu với trạng thái như `verified`, `noop_verified` hoặc `failed`. Chuỗi này tách quyết định chính sách khỏi giao tiếp thiết bị và giữ bằng chứng để đối chiếu, nhưng không làm nhiều lệnh CLI trở thành một giao dịch có hoàn tác nguyên tử.
-
-Ngoài nhật ký, dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT, bộ đếm cổng và bảng MAC hỗ trợ kiểm tra hoạt động của các chức năng. Các giá trị này chỉ phản ánh thời điểm thu thập; muốn kết luận về trạng thái hiện tại, người dùng phải cập nhật dữ liệu trước khi đối chiếu.
+Nhờ cơ chế này, CAMS có thể thực hiện các phản ứng như cô lập cổng liên quan đến sự cố, bổ sung cấu hình hạn chế nguồn lưu lượng bất thường hoặc khôi phục cấu hình theo quy tắc đã định trước. Người quản trị có thể xem lại sự kiện, hành động đã thực hiện và kết quả kiểm tra trên cùng hệ thống. Các dữ liệu như thống kê ACL, bảng liên kết DHCP, bộ đếm cổng và bảng MAC cũng hỗ trợ đối chiếu trạng thái thiết bị sau khi phản ứng được áp dụng.
 
 == Hiện thực chính sách bảo mật và liên kết sự kiện
 

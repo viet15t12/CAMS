@@ -141,7 +141,7 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
   ),
   caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
 ) <tab-security-architecture>
-#pagebreak(weak: true)
+// #pagebreak(weak: true)
 == Thiết kế cơ sở dữ liệu
 
 CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị, cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch và các đích Syslog cần cấu hình; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT và bản tin Syslog đã nhận. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
@@ -150,7 +150,7 @@ Các bảng liên kết bằng khóa chính, khóa ngoại và mã thiết bị.
 
 Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 19 tên bảng trong nhóm `info_collected`, tổng cộng 93 tên bảng. Đây là số đếm của lược đồ nguồn, không khẳng định mọi không gian làm việc đang chạy đều có đúng 93 bảng.
 
-Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/database/schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
+// Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/database/schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
 
 #report-table(
   columns: (34%, 29%, 37%),
@@ -176,11 +176,11 @@ Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `
   caption: [Lược đồ khóa ngoại đại diện trong cơ sở dữ liệu `device_network.db`],
 ) <fig-core-erd>
 
-== Thiết kế giao diện và xử lý lỗi
+// == Thiết kế giao diện và xử lý lỗi
 
-Giao diện gồm khu vực danh mục thiết bị, thẻ làm việc, vùng chức năng và thanh trạng thái. Các biểu mẫu dùng chung cách nhập, lưu và xem trước thay đổi. *System Logs* cung cấp không gian đọc nhật ký tập trung; các tiện ích SFTP và đầu cuối được mở theo nhu cầu. Hình minh họa giao diện được trình bày tại Chương 4 để gắn thiết kế với phần hiện thực.
+// Giao diện gồm khu vực danh mục thiết bị, thẻ làm việc, vùng chức năng và thanh trạng thái. Các biểu mẫu dùng chung cách nhập, lưu và xem trước thay đổi. *System Logs* cung cấp không gian đọc nhật ký tập trung; các tiện ích SFTP và đầu cuối được mở theo nhu cầu. Hình minh họa giao diện được trình bày tại Chương 4 để gắn thiết kế với phần hiện thực.
 
-Cơ chế khóa theo thiết bị (`Host Lock`) bảo vệ truy cập phiên dùng chung; bộ thực thi theo lô (`BatchExecutor`) điều phối tác vụ giữa các thiết bị. Mỗi lỗi cần gắn với thiết bị và thao tác gây lỗi. Hủy tác vụ hoặc hết thời gian chờ không đồng nghĩa hoàn tác lệnh đã gửi; sau sự cố cần đồng bộ lại để xác định phần cấu hình thực tế đã thay đổi.
+// Cơ chế khóa theo thiết bị (`Host Lock`) bảo vệ truy cập phiên dùng chung; bộ thực thi theo lô (`BatchExecutor`) điều phối tác vụ giữa các thiết bị. Mỗi lỗi cần gắn với thiết bị và thao tác gây lỗi. Hủy tác vụ hoặc hết thời gian chờ không đồng nghĩa hoàn tác lệnh đã gửi; sau sự cố cần đồng bộ lại để xác định phần cấu hình thực tế đã thay đổi.
 
 // == Tiểu kết chương
 
