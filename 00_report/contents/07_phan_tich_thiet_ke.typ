@@ -16,7 +16,7 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
     ([Quản lý], [Thêm, sửa, xóa và nhập danh mục; quản lý phiên; đồng bộ và lưu lịch sử cấu hình.], [Danh mục, trạng thái kết nối, bản sao cấu hình.]),
     ([Tự động hóa], [Kiểm tra dữ liệu; tạo lệnh theo từng chức năng; xem trước, áp dụng và trả kết quả riêng từng thiết bị.], [Cấu hình chờ, lệnh dự kiến, phản hồi thực thi.]),
     ([Giám sát], [Thu thập thông tin vận hành; nhận, lưu, lọc và xuất Syslog; gửi cảnh báo Email/Telegram.], [Trạng thái quan sát, nhật ký có nguồn và thời gian, kết quả gửi cảnh báo.]),
-    ([Bảo mật], [Triển khai chính sách; chuẩn hóa sự kiện an ninh; đánh giá Automation Rule và thực thi hành động đã kiểm soát.], [Chính sách đã gửi, security event, kế hoạch hành động và kết quả xác minh.]),
+    ([Bảo mật], [Triển khai chính sách; chuẩn hóa sự kiện an ninh; đánh giá quy tắc tự động hóa và thực hiện phản ứng có kiểm soát.], [Chính sách đã gửi, sự kiện an ninh, hành động phản ứng và kết quả xác minh.]),
   ),
   caption: [Yêu cầu chức năng theo phạm vi đề tài],
 )
@@ -50,9 +50,9 @@ CAMS tổ chức trách nhiệm thành bốn lớp như @fig-layer-architecture.
   caption: [Kiến trúc phân lớp của CAMS],
 ) <fig-layer-architecture>
 
-Bộ thu Syslog C++, Automation Engine (Go core) và đầu cuối Alacritty là các tiến trình đồng hành ngoài luồng giao diện. Bộ thu Syslog trao đổi sự kiện JSON Lines với Python. Automation Engine (Go core) nhận tập sự kiện cùng các tệp `*.rule.cams`, sau đó trả về kế hoạch hành động đã kiểm tra. NTTP/1 phục vụ đầu cuối. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
+Bộ thu Syslog, Automation Engine và đầu cuối được tổ chức thành các thành phần hoạt động độc lập với giao diện. Bộ thu chịu trách nhiệm tiếp nhận nhật ký, Automation Engine đánh giá sự kiện theo quy tắc, còn đầu cuối phục vụ thao tác CLI trực tiếp. Việc tách riêng giúp các tác vụ kéo dài không làm gián đoạn giao diện và cho phép từng thành phần được phát triển, kiểm tra theo đúng trách nhiệm.
 
-Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
+Tầng dữ liệu và nghiệp vụ làm đầu mối xử lý yêu cầu từ giao diện, đồng thời điều phối các chức năng Syslog, truyền tệp và quản lý không gian làm việc. Nhờ đó, giao diện chỉ tập trung tiếp nhận thao tác và trình bày kết quả, không trực tiếp xử lý kết nối hoặc truy vấn cơ sở dữ liệu.
 
 #pagebreak(weak: true)
 == Luồng quản lý và tự động hóa cấu hình
@@ -67,14 +67,14 @@ Người dùng nhập tham số trên biểu mẫu của từng chức năng. Sa
 
 === Xem trước và thực thi
 
-Luồng *View & Push* được mô tả tại @fig-state-flow. Bộ điều khiển lấy dữ liệu chờ và dùng Jinja2 tạo khối lệnh. Người dùng kiểm tra thiết bị đích, nội dung thay đổi và thứ tự lệnh trước khi chọn *Push*. Tác vụ nền sử dụng phiên kết nối có khóa, gửi lệnh và xử lý phản hồi.
+Luồng *View & Push* được mô tả tại @fig-state-flow. Hệ thống lấy dữ liệu chờ và chuyển thành khối lệnh theo mẫu của từng chức năng. Người dùng kiểm tra thiết bị đích, nội dung thay đổi và thứ tự lệnh trước khi chọn *Push*. Sau khi được xác nhận, tác vụ nền gửi lệnh qua phiên kết nối và xử lý phản hồi của thiết bị.
 
 #figure(
   image("/00_book/figures/report/diagrams/02_state_flow.svg", width: 100%),
   caption: [Luồng cấu hình từ dữ liệu chờ đến thực thi và cập nhật kết quả],
 ) <fig-state-flow>
 
-Trình tự trao đổi chi tiết được thể hiện tại @fig-view-push-sequence. Giao diện chỉ tạo tác vụ thực thi sau khi người dùng xác nhận bản xem trước. Tác vụ nền lấy khóa của phiên thiết bị, gửi lệnh, nhận phản hồi và cập nhật trạng thái liên quan. Kết quả được trả riêng theo thiết bị để một lỗi không che khuất kết quả của các thiết bị còn lại.
+Trình tự trao đổi được thể hiện tại @fig-view-push-sequence. Giao diện chỉ bắt đầu thực thi sau khi người dùng xác nhận bản xem trước. Hệ thống lần lượt gửi lệnh, nhận phản hồi và cập nhật trạng thái liên quan. Kết quả được ghi nhận riêng theo thiết bị để một lỗi không che khuất kết quả của các thiết bị còn lại.
 
 #pagebreak(weak: true)
 #figure(
@@ -84,7 +84,7 @@ Trình tự trao đổi chi tiết được thể hiện tại @fig-view-push-se
 
 Ứng dụng cập nhật trạng thái khi thành công và giữ thông tin lỗi để người dùng xử lý. Việc gửi lệnh thành công chưa chứng minh dịch vụ hoạt động đúng; người dùng vẫn phải kiểm tra trạng thái hoặc lưu lượng, nhất là khi khối lệnh có thể chỉ được áp dụng một phần.
 
-Khóa phiên tuần tự hóa truy cập cùng thiết bị nhưng không biến nhiều lệnh CLI thành một giao dịch có khả năng hoàn tác tự động.
+Các thao tác trên cùng một thiết bị được xử lý tuần tự để tránh xung đột. Tuy nhiên, một nhóm lệnh CLI vẫn có thể chỉ được áp dụng một phần và không mặc nhiên có khả năng hoàn tác tự động.
 
 
 == Luồng giám sát và khai thác cảnh báo
@@ -93,7 +93,7 @@ Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn v�
 
 Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiêm trọng, mã sự kiện nếu phân tích được và nội dung gốc. Giao diện hỗ trợ lọc theo thiết bị, thời gian, mức độ và từ khóa, qua đó giúp người quản trị khoanh vùng các sự kiện như thay đổi kết nối hoặc vi phạm chính sách. Khi đồng hồ trên thiết bị chưa được đồng bộ, hệ thống phải phân biệt thời gian do thiết bị ghi với thời gian CAMS nhận bản tin.
 
-@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu dữ liệu vào SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau khi lưu trữ, bộ phát hiện theo ngưỡng tạo security event; dịch vụ Email/Telegram xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
+@fig-syslog-sequence mô tả quá trình tiếp nhận, phân tích, lưu trữ và khai thác Syslog. Hệ thống phân biệt nhóm nguồn của chuẩn Syslog với mã phân hệ của Cisco để tránh nhầm lẫn khi lọc. Sau khi được lưu, các bản tin phù hợp có thể tạo sự kiện an ninh, kích hoạt cảnh báo Email/Telegram hoặc được người dùng truy vấn trên giao diện.
 
 #figure(
   image("/00_book/figures/report/diagrams/review-syslog-sequence.svg", width: 100%),
@@ -101,15 +101,15 @@ Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiê
 ) <fig-syslog-sequence>
 
 #pagebreak(weak: true)
-=== Thiết kế Automation Engine (Go core)
+=== Thiết kế vòng phản ứng tự động
 
-Automation Engine (Go core) tạo vòng phản ứng riêng trên dữ liệu đã lưu. Bộ định thời của Python lấy các security event chưa xử lý và gửi sang tiến trình Go. Thành phần này nạp rule đang bật, kiểm tra loại sự kiện, phạm vi thiết bị, thuộc tính, chu kỳ, thời gian chống lặp và giới hạn tần suất. Rule version 3 còn lấy dữ liệu từ đúng bản tin Syslog nguồn, trích biến bằng biểu thức chính quy và kiểm tra kiểu trước khi kết xuất lệnh.
+Automation Engine tiếp nhận các sự kiện an ninh đã được chuẩn hóa và đối chiếu với bộ quy tắc do người quản trị thiết lập. Mỗi quy tắc xác định loại sự kiện cần quan tâm, phạm vi thiết bị, các điều kiện đi kèm và phản ứng tương ứng. Hệ thống đồng thời kiểm soát việc xử lý lặp và tần suất thực hiện để một sự kiện lặp lại liên tục không tạo ra quá nhiều hành động.
 
-Hành động hợp lệ được ghi vào SQLite; executor chỉ áp dụng hành động `auto` khi có phiên SSH đang hoạt động, sau đó chạy lệnh xác minh và lưu trạng thái. Rule `dry-run` dừng ở kế hoạch, không thay đổi thiết bị. @fig-automation-go-sequence làm rõ ranh giới: Automation Engine (Go core) đánh giá và lập kế hoạch, còn Python cùng executor quản lý bộ định thời, phiên SSH, kết quả và cập nhật giao diện.
+Khi một sự kiện đáp ứng đầy đủ điều kiện, hệ thống tạo lệnh phản ứng, gửi tới thiết bị qua phiên kết nối đang hoạt động, thực hiện bước kiểm tra và lưu kết quả. @fig-automation-go-sequence thể hiện ranh giới giữa ba nhiệm vụ: nhận biết sự kiện, quyết định phản ứng theo quy tắc và thực hiện phản ứng trên thiết bị. Cách phân chia này giúp quy tắc độc lập với cơ chế kết nối, đồng thời duy trì thông tin để người quản trị theo dõi và đối chiếu.
 
 #figure(
   image("/00_book/figures/report/diagrams/automation-go-core-sequence.svg", width: 100%),
-  caption: [Sơ đồ tuần tự của Automation Engine (Go core) từ Syslog đến hành động đã xác minh],
+  caption: [Sơ đồ tuần tự từ sự kiện Syslog đến hành động phản ứng đã được xác minh],
 ) <fig-automation-go-sequence>
 
 
@@ -117,27 +117,25 @@ Hành động hợp lệ được ghi vào SQLite; executor chỉ áp dụng hà
 
 CAMS kiểm soát quyền thực thi trên thiết bị và bảo vệ dữ liệu xác thực khi lưu trữ. Hai cơ chế này có phạm vi khác nhau: quyền thiết bị do Cisco IOS quyết định, còn mã hóa cục bộ phụ thuộc vào khóa của phiên dự án.
 
-=== Kiểm tra đặc quyền và xử lý lỗi xác thực
-CAMS lựa chọn mức đặc quyền 15 cho các luồng quản trị Cisco IOS hiện có. Đây là chính sách của ứng dụng, không phải yêu cầu mọi lệnh Cisco IOS đều cần mức 15. Quy trình kiểm tra gồm:
-- *Bước 1 – nhận diện dấu nhắc:* CAMS nhận diện dấu nhắc lệnh ban đầu của thiết bị để xác định sơ bộ chế độ thực thi người dùng (User EXEC) hoặc chế độ thực thi đặc quyền (Privileged EXEC).
-- *Bước 2:* Với thiết bị Cisco, gửi `show privilege` để đọc mức quyền. Khi xác định mức quyền dưới 15, thiếu mật khẩu đặc quyền gây lỗi; nếu có mật khẩu, ứng dụng gọi `enable` hoặc `enable 15` rồi kiểm tra lại. Nhánh xác minh sau nâng quyền từ chối khi không xác nhận được mức quyền yêu cầu.
+=== Kiểm soát quyền thực thi và lỗi xác thực
 
-Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` khi lần kiểm tra ban đầu không đọc được mức quyền. Vì dấu nhắc này cũng có thể xuất hiện ở mức quyền trung gian, chưa thể mô tả toàn bộ cơ chế là từ chối khi chưa xác minh trong mọi tình huống. Đây là giới hạn cần kiểm thử và hoàn thiện.
+CAMS sử dụng mức đặc quyền 15 cho các luồng quản trị Cisco IOS hiện có. Trước khi triển khai cấu hình, hệ thống nhận biết chế độ làm việc, kiểm tra mức quyền và thực hiện nâng quyền khi có thông tin xác thực phù hợp. Nếu không thể xác nhận quyền cần thiết, thao tác phải dừng và trả về thông báo để tránh gửi lệnh trong một phiên không đủ quyền.
 
-=== Vòng đời khóa phiên Argon2id và mã hóa AES-256-GCM (ENC\$v2\$)
-Để hạn chế nguy cơ dò mật khẩu ngoại tuyến và hoán đổi bản mã, CAMS áp dụng cơ chế mã hóa có xác thực:
-- Khi dự án có mật khẩu, khóa mã hóa dữ liệu (Data Encryption Key – DEK) được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn song song @rfc9106.
-- Các trường mật khẩu được mã hóa bằng AES-256-GCM và lưu theo định dạng nội bộ `ENC$v2$`. Đây là phiên bản phong bì dữ liệu của CAMS, không phải tên một tiêu chuẩn mật mã @nistSp80038d.
-- Dữ liệu xác thực bổ sung (Additional Authenticated Data – AAD) chứa ngữ cảnh `host:column`. Với bản ghi phiên bản 2 và đúng ngữ cảnh, việc đổi bản mã sang thiết bị hoặc cột khác làm xác minh thẻ thất bại (`InvalidTag`).
-- Khóa do đối tượng mã hóa quản lý được giữ trong mảng byte để ghi đè khi hủy. Cơ chế này không xóa được mọi bản sao do môi trường chạy tạo ra. Dự án không có mật khẩu sử dụng khóa dẫn xuất từ dữ liệu cục bộ, nên không có cùng mức bảo vệ với khóa dựa trên bí mật người dùng.
+Dấu nhắc lệnh chỉ cung cấp dấu hiệu ban đầu về chế độ làm việc và không phải lúc nào cũng chứng minh chính xác mức đặc quyền. Vì vậy, thiết kế ưu tiên kết quả kiểm tra trực tiếp từ thiết bị; các trường hợp chỉ dựa vào dấu nhắc vẫn cần được tiếp tục kiểm thử và hoàn thiện.
+
+=== Thiết kế bảo vệ thông tin xác thực và dữ liệu dự án
+
+Để hạn chế nguy cơ dò mật khẩu và sửa đổi dữ liệu lưu trữ, CAMS kết hợp dẫn xuất khóa bằng Argon2id với mã hóa có xác thực AES-256-GCM @rfc9106 @nistSp80038d. Khi dự án có mật khẩu, khóa bảo vệ được tạo từ chính mật khẩu đó; các trường thông tin xác thực và gói dự án sau đó được mã hóa trước khi ghi xuống bộ nhớ lưu trữ.
+
+Dữ liệu mã hóa được liên kết với đúng ngữ cảnh sử dụng để hạn chế việc sao chép bản mã sang thiết bị hoặc trường dữ liệu khác. Nếu mật khẩu không đúng hoặc nội dung đã bị sửa, quá trình xác thực thất bại và dữ liệu không được chấp nhận. Đối với dự án không đặt mật khẩu, khóa tạo từ dữ liệu cục bộ chỉ cung cấp mức bảo vệ hạn chế hơn. Ngoài ra, thông tin rõ vẫn phải tồn tại tạm thời trong bộ nhớ khi thiết lập kết nối, nên mã hóa lưu trữ không loại bỏ mọi rủi ro.
 
 #report-table(
   columns: (22%, 35%, 43%),
   header: ([Tính năng], [Công nghệ và thuật toán], [Cơ chế hoạt động]),
   rows: (
-    ([Kiểm tra đặc quyền], [Phân tích mức quyền, Netmiko `enable`], [Đọc mức quyền, nâng quyền khi cần và kiểm tra lại; còn nhánh dự phòng dấu nhắc ở lần kiểm tra ban đầu.]),
-    ([Mã hóa dữ liệu lưu trữ (`ENC$v2$`)], [Argon2id (RFC 9106), AES-256-GCM], [Lưu bản mã theo cấu trúc `ENC$v2$...`; liên kết AAD với ngữ cảnh bản ghi để chống tráo đổi; ghi đè mảng byte khi hủy khóa.]),
-    ([Nhật ký ACL], [Jinja2, cơ chế ghi nhật ký Cisco IOS], [Sinh tùy chọn ghi nhật ký cho các quy tắc hỗ trợ; thiết bị phải có đích Syslog và ngưỡng gửi phù hợp.]),
+    ([Kiểm tra đặc quyền], [Cơ chế xác thực và nâng quyền của Cisco IOS], [Kiểm tra quyền trước khi cấu hình, nâng quyền khi cần và thông báo lỗi nếu không đáp ứng.]),
+    ([Mã hóa dữ liệu lưu trữ], [Argon2id và AES-256-GCM], [Dẫn xuất khóa từ mật khẩu, mã hóa có xác thực và phát hiện dữ liệu bị sửa đổi.]),
+    ([Nhật ký ACL], [Mẫu cấu hình và cơ chế ghi nhật ký Cisco IOS], [Tạo tùy chọn ghi nhật ký cho các quy tắc được hỗ trợ; thiết bị phải có đích Syslog và ngưỡng gửi phù hợp.]),
   ),
   caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
 ) <tab-security-architecture>
@@ -176,14 +174,8 @@ Các bảng liên kết bằng khóa chính, khóa ngoại và mã thiết bị.
   caption: [Lược đồ khóa ngoại đại diện trong cơ sở dữ liệu `device_network.db`],
 ) <fig-core-erd>
 
-// == Thiết kế giao diện và xử lý lỗi
+== Tiểu kết chương
 
-// Giao diện gồm khu vực danh mục thiết bị, thẻ làm việc, vùng chức năng và thanh trạng thái. Các biểu mẫu dùng chung cách nhập, lưu và xem trước thay đổi. *System Logs* cung cấp không gian đọc nhật ký tập trung; các tiện ích SFTP và đầu cuối được mở theo nhu cầu. Hình minh họa giao diện được trình bày tại Chương 4 để gắn thiết kế với phần hiện thực.
+Thiết kế CAMS liên kết các yêu cầu quản lý, tự động hóa, giám sát và bảo mật trong một kiến trúc phân lớp. Ba luồng chính gồm quản lý trạng thái thiết bị, triển khai cấu hình có bước kiểm duyệt và khai thác sự kiện để cảnh báo hoặc phản ứng tự động. Dữ liệu cấu hình dự kiến được tách khỏi dữ liệu quan sát, còn kết quả được ghi nhận theo từng thiết bị để hỗ trợ truy vết.
 
-// Cơ chế khóa theo thiết bị (`Host Lock`) bảo vệ truy cập phiên dùng chung; bộ thực thi theo lô (`BatchExecutor`) điều phối tác vụ giữa các thiết bị. Mỗi lỗi cần gắn với thiết bị và thao tác gây lỗi. Hủy tác vụ hoặc hết thời gian chờ không đồng nghĩa hoàn tác lệnh đã gửi; sau sự cố cần đồng bộ lại để xác định phần cấu hình thực tế đã thay đổi.
-
-// == Tiểu kết chương
-
-// Thiết kế CAMS liên kết ba luồng: quản lý trạng thái, thực thi có kiểm duyệt và giám sát kết quả. Dữ liệu chờ được tách khỏi trạng thái quan sát; tác vụ mạng chạy ngoài luồng giao diện; phản hồi được lưu theo thiết bị để hỗ trợ truy vết.
-
-// Chương 4 trình bày phần hiện thực trong mã nguồn và giao diện; Chương 5 kiểm tra bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký. Các sơ đồ không thay thế bằng chứng vận hành.
+Các mô hình trong chương này là cơ sở để xây dựng giao diện và chức năng được trình bày ở Chương 4. Hiệu quả vận hành của thiết kế tiếp tục được kiểm chứng bằng cấu hình thực tế, lệnh xác minh, lưu lượng thử và bản tin nhật ký ở Chương 5.

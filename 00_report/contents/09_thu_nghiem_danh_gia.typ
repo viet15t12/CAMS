@@ -391,8 +391,3 @@ Kết quả xác nhận chuỗi phản ứng khép kín trong lab: bộ thu nh�
 
 So với cấu trúc năm kịch bản trước, một bài thực hành tích hợp làm rõ quan hệ giữa cấu hình và giám sát: cùng các thay đổi OSPF, HSRP và VTP tạo dữ liệu cho System Logs; cùng dữ liệu này được chuyển thành cảnh báo và đầu vào cho phản ứng tự động. Các ảnh nhập liệu lặp lại được lược bỏ, trong khi toàn bộ thao tác OSPF và các kết quả đầu cuối quan trọng được giữ lại.
 
-== Hạn chế của phép thử
-
-- Phép thử chưa đo lặp lại thời gian hội tụ OSPF, chuyển đổi HSRP và độ trễ Email/Telegram. Số `received` chỉ là bộ đếm tại thời điểm chụp, không phải thông lượng hay tỷ lệ nhận đúng.
-- Tác động của rule được xác nhận bằng cấu hình và sự kiện giao thức, nhưng bộ ảnh chưa có Action History cuối để đối chiếu trạng thái `verified`; các lỗi mất phiên SSH, regex không khớp hoặc lệnh IOS bị từ chối cũng chưa được thử.
-- `shutdown` cô lập cả cổng và chưa có hoàn tác tự động. Khi dùng ngoài lab phải bắt đầu bằng `dry-run`, giới hạn thiết bị đích, kiểm duyệt lệnh, chuẩn bị đường quản trị độc lập và xác định điều kiện khôi phục.

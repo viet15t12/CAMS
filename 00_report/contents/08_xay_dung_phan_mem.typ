@@ -3,21 +3,21 @@
 
 = Xây dựng phần mềm CAMS
 
-Chương 3 đã xác định kiến trúc phân lớp, mô hình dữ liệu và các luồng quản lý cấu hình, giám sát cùng bảo vệ dữ liệu. Chương này trình bày cách các thiết kế đó được hiện thực trong mã nguồn và giao diện CAMS. Trọng tâm là trách nhiệm của từng thành phần, đường đi của dữ liệu và cách ứng dụng xử lý tác vụ nền; kết quả vận hành trên mô hình mạng được dành cho Chương 5.
+Chương 3 đã xác định kiến trúc phân lớp, mô hình dữ liệu và các luồng quản lý cấu hình, giám sát cùng bảo vệ dữ liệu. Chương này trình bày cách các thiết kế đó được xây dựng thành những chức năng cụ thể trên CAMS. Trọng tâm là quy trình hoạt động, khả năng mà phần mềm cung cấp và cách người dùng tương tác với hệ thống; kết quả vận hành trên mô hình mạng được dành cho Chương 5.
 
 Nội dung được sắp xếp theo chuỗi sử dụng của hệ thống: khởi tạo ứng dụng, quản lý thiết bị, tự động hóa cấu hình, thu thập dữ liệu, triển khai chính sách bảo mật và sử dụng các tiện ích hỗ trợ. Cách trình bày này giữ liên kết giữa yêu cầu ở Chương 3 với bằng chứng kiểm thử ở chương tiếp theo.
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn dùng Python 3.11 trở lên, Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Automation Engine (Go core) cung cấp tiến trình đánh giá Automation Rule; bộ thu Syslog C++ tiếp nhận nhật ký độc lập với luồng giao diện. Công cụ `uv` quản lý môi trường và gói phụ thuộc Python.
+CAMS là ứng dụng máy tính để bàn được phát triển chủ yếu bằng Python, sử dụng Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để kết nối thiết bị và Dulwich để quản lý lịch sử cấu hình. Automation Engine được xây dựng bằng Go, còn bộ thu Syslog sử dụng C++ để hoạt động độc lập với giao diện. Sự kết hợp này đáp ứng ba nhu cầu chính của đề tài: tương tác trực quan, xử lý nghiệp vụ mạng và tiếp nhận dữ liệu vận hành.
 
-Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và các thành phần dùng chung; `core/` chứa đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và quản lý không gian làm việc. Tệp `main.py` khởi tạo ứng dụng và liên kết các thành phần. Cấu trúc chi tiết được trình bày trong phụ lục; chương này tập trung vào cách hiện thực các chức năng chính.
+Phần mềm được tổ chức thành các nhóm trách nhiệm gồm giao diện, xử lý nghiệp vụ, lưu trữ dữ liệu và giao tiếp với thiết bị. Mỗi nhóm chức năng như quản lý thiết bị, cấu hình, giám sát hay bảo vệ dự án sử dụng chung các dịch vụ nền tảng nhưng vẫn tách biệt về nghiệp vụ. Cấu trúc mã nguồn chi tiết được trình bày trong phụ lục; chương này tập trung vào các chức năng đã xây dựng.
 
 == Khởi tạo và kết nối giao diện với nghiệp vụ
 
-Khi khởi tạo, `main.py` tạo các thành phần dùng chung như bộ quản lý cơ sở dữ liệu, sổ đăng ký phiên thiết bị, bộ điều khiển không gian làm việc, SFTP, Syslog và Automation Engine; sau đó truyền các đối tượng cần thiết cho QML qua ngữ cảnh của Qt.
+Khi khởi tạo, ứng dụng chuẩn bị cơ sở dữ liệu, không gian làm việc, các phiên kết nối và những dịch vụ hỗ trợ như SFTP, Syslog và Automation Engine. Sau đó, giao diện chính được liên kết với phần xử lý nghiệp vụ để người dùng có thể thao tác trên cùng một không gian làm việc.
 
-QML tiếp nhận thao tác và gọi phương thức của bộ điều khiển Python. Tầng nghiệp vụ kiểm tra dữ liệu, thực hiện tác vụ rồi phát tín hiệu để giao diện cập nhật trạng thái hoặc hiển thị lỗi. Các thao tác mạng và lưu gói dự án được đưa sang tác vụ nền để không chặn luồng giao diện. @fig-cams-workspace minh họa không gian làm việc sau khi quá trình khởi tạo hoàn tất.
+Giao diện tiếp nhận thao tác và chuyển yêu cầu tới tầng nghiệp vụ. Dữ liệu được kiểm tra trước khi thực hiện; tiến trình và kết quả sau đó được trả về để cập nhật trạng thái hoặc hiển thị lỗi. Các thao tác mạng và lưu gói dự án được thực hiện ở chế độ nền để không làm gián đoạn giao diện. @fig-cams-workspace minh họa không gian làm việc sau khi quá trình khởi tạo hoàn tất.
 
 #figure(
   image("/00_book/figures/gui/chapter-03/01-workspace-overview.png", width: 88%),
@@ -30,7 +30,7 @@ QML tiếp nhận thao tác và gọi phương thức của bộ điều khiển
 
 Giao diện *Inventory* lưu mã định danh, địa chỉ quản trị, tham số kết nối và vai trò bộ định tuyến, bộ chuyển mạch Lớp 2 hoặc bộ chuyển mạch Lớp 3. Người dùng có thể thêm từng thiết bị hoặc nhập danh sách từ JSON/Excel, tìm kiếm và chọn các thiết bị cần thao tác. Danh mục này liên kết phiên làm việc với dữ liệu cấu hình và thông tin thu thập của từng thiết bị.
 
-`DeviceSessionRegistry` quản lý các phiên kết nối và cho phép tái sử dụng phiên đang hoạt động. Khóa `operation_lock` điều phối những tác vụ cùng truy cập phiên; `BatchExecutor` hỗ trợ thực hiện trên nhiều thiết bị với kết quả tách riêng. Cách tổ chức này hạn chế việc gửi lệnh đan xen trên một kênh CLI và giúp xác định thiết bị gặp lỗi trong tác vụ hàng loạt.
+Các phiên kết nối đang hoạt động được quản lý tập trung và có thể tái sử dụng cho nhiều thao tác liên tiếp. Hệ thống xử lý tuần tự những yêu cầu cùng truy cập một thiết bị, đồng thời cho phép thực hiện trên nhiều thiết bị độc lập và ghi nhận kết quả riêng cho từng thiết bị. Cách tổ chức này hạn chế lệnh bị đan xen trên cùng một phiên CLI và giúp xác định rõ thiết bị gặp lỗi trong tác vụ hàng loạt.
 
 === Đồng bộ và lịch sử cấu hình
 
@@ -47,7 +47,7 @@ Lịch sử này cung cấp dữ liệu tham chiếu khi kiểm tra sự cố. V
 
 === Quy trình *View & Push* dùng chung
 
-Các chức năng thực hiện cùng một quy trình: kiểm tra dữ liệu biểu mẫu, lưu cấu hình chờ, lấy bản ghi cần thay đổi, kết xuất mẫu Jinja2 và mở cửa sổ xem trước. Khi người dùng chọn *Push*, tác vụ nền gửi lệnh qua phiên thiết bị, xử lý phản hồi và cập nhật kết quả. Với bản ghi chờ xóa, mẫu sinh lệnh gỡ bỏ tương ứng.
+Các chức năng thực hiện cùng một quy trình: kiểm tra dữ liệu biểu mẫu, lưu cấu hình chờ, tạo lệnh theo mẫu và mở cửa sổ xem trước. Khi người dùng chọn *Push*, hệ thống gửi lệnh qua phiên thiết bị ở chế độ nền, xử lý phản hồi và cập nhật kết quả. Với nội dung chờ xóa, phần mềm tạo lệnh gỡ bỏ tương ứng.
 
 #figure(
   image("/00_book/figures/gui/chapter-05/07-view-push-preview.png", width: 100%),
@@ -68,7 +68,7 @@ Các biểu mẫu FHRP hỗ trợ khai báo cổng mặc định dự phòng và
 
 Chức năng ACL cung cấp biểu mẫu cho ACL chuẩn, mở rộng, động, phản xạ và ACL theo địa chỉ MAC, tùy theo khả năng của thiết bị. Quy tắc được quản lý theo thứ tự, kèm cổng và chiều áp dụng.
 
-Các mẫu Jinja2 sinh tập lệnh ACL tự động gắn từ khóa `log` vào cuối những quy tắc được hỗ trợ. Khi lưu lượng khớp với danh sách kiểm soát, thiết bị tạo bản tin Syslog, chẳng hạn `%SEC-6-IPACCESSLOGP`, rồi gửi về bộ thu nhận của CAMS. Cơ chế này hỗ trợ giám sát mà không cần bổ sung thủ công từ khóa ghi nhật ký cho từng quy tắc. Sau khi triển khai, người quản trị phải kiểm tra thứ tự khớp luật và thử cả lưu lượng được phép lẫn lưu lượng bị chặn.
+Khi tạo lệnh ACL, CAMS bổ sung tùy chọn ghi nhật ký cho những quy tắc được hỗ trợ. Nhờ đó, khi lưu lượng khớp với danh sách kiểm soát, thiết bị có thể gửi sự kiện Syslog về CAMS mà người dùng không phải thêm tùy chọn này cho từng quy tắc. Sau khi triển khai, người quản trị vẫn phải kiểm tra thứ tự khớp luật và thử cả lưu lượng được phép lẫn lưu lượng bị chặn.
 
 NAT/PAT quản lý ánh xạ tĩnh, vùng địa chỉ động, chế độ quá tải, vai trò phía trong hoặc phía ngoài của cổng và điều kiện chọn lưu lượng. Dữ liệu từ bảng chuyển đổi địa chỉ giúp đối chiếu cấu hình với các phiên thực tế. NAT là chức năng chuyển đổi địa chỉ, không thay thế cơ chế lọc truy cập.
 
@@ -82,7 +82,7 @@ Port Security, DHCP Snooping và DAI được trình bày trong nhóm bảo mậ
 
 Chức năng Syslog gồm hai phần: cấu hình đích gửi trên thiết bị và vận hành bộ nhận trong System Logs. Địa chỉ, cổng và giao thức hai phía phải khớp nhau. Cấu hình hiện tại dùng cổng 5514 theo mặc định và cho phép thay đổi theo môi trường.
 
-Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi dữ liệu vào SQLite, sau đó chuyển sự kiện qua cầu nối Python để cập nhật QML. Đây là luồng xử lý chính; bộ nhận Python được giữ lại để tương thích và kiểm thử. Hệ thống lưu bản tin gốc cùng trạng thái phân tích theo các trường của Syslog @rfc5424. Hai chỉ số `received` và `dropped` hỗ trợ theo dõi khả năng tiếp nhận khi lưu lượng tăng.
+Bộ thu nhận hoạt động độc lập với giao diện, tiếp nhận bản tin qua UDP/TCP, phân tích các trường Syslog và lưu vào cơ sở dữ liệu. Giao diện được cập nhật khi có dữ liệu mới nhưng không phải chờ quá trình tiếp nhận hoàn tất. Hệ thống lưu cả nội dung gốc và dữ liệu đã phân tích theo @rfc5424; đồng thời theo dõi số bản tin đã nhận và số bản tin bị loại bỏ để đánh giá khả năng tiếp nhận khi lưu lượng tăng.
 
 #figure(
   image("/00_book/figures/gui/chapter-13/01-system-logs-overview.png", width: 100%),
@@ -91,11 +91,11 @@ Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi d�
 
 Giao diện tại @fig-cams-system-logs hỗ trợ lọc theo thiết bị, mức độ nghiêm trọng, giao thức, khoảng thời gian và nội dung. Chức năng *Smart Filter* kết hợp điều kiện theo nhóm nguồn Syslog, mã sự kiện và từ khóa; cửa sổ chi tiết cho phép đối chiếu thời gian nhận với thời gian trên thiết bị và đọc bản tin gốc. Chức năng *Export Excel* xuất các dòng sau khi lọc để phục vụ phân tích.
 
-Sau khi lưu bản tin, `SyslogManager` đồng thời chuyển bản ghi tới `EmailAlertService` và `TelegramAlertService`. Hai dịch vụ chỉ tiếp nhận các mức độ nghiêm trọng đã chọn, loại bản tin trùng theo cặp thiết bị - mã Cisco trong khoảng chống gửi lặp và có thể gom nhiều bản tin trong một cửa sổ thời gian. Mỗi dịch vụ dùng hàng đợi cùng luồng gửi riêng, vì vậy thời gian kết nối SMTP hoặc Telegram Bot API không chặn bộ thu nhận nhật ký.
+Sau khi bản tin được lưu, hệ thống kiểm tra xem sự kiện có đáp ứng điều kiện gửi cảnh báo qua Email hoặc Telegram hay không. Người dùng có thể chọn mức độ nghiêm trọng, khoảng thời gian hạn chế gửi trùng và cách gom nhiều bản tin liên tiếp. Việc gửi cảnh báo được xử lý riêng với quá trình thu nhận, vì vậy thời gian kết nối tới dịch vụ bên ngoài không làm gián đoạn luồng nhật ký.
 
-Màn hình *Email Alerts* cho phép khai báo máy chủ và cổng SMTP, tài khoản gửi, danh sách người nhận, các mức Syslog cần cảnh báo, thời gian chống gửi trùng và thời gian gom bản tin. Mỗi thư gồm nội dung văn bản thuần và HTML; màu, tiêu đề cùng khuyến nghị xử lý thay đổi theo mức độ nghiêm trọng. Với Gmail, CAMS dùng kết nối SMTP qua TLS ngầm định trên cổng `465` và mật khẩu ứng dụng. Giá trị bí mật được mã hóa khi lưu, không được trả về QML và chỉ hiển thị dưới dạng che khuất trên giao diện.
+Màn hình *Email Alerts* cho phép khai báo máy chủ SMTP, tài khoản gửi, danh sách người nhận, mức Syslog cần cảnh báo và khoảng thời gian hạn chế gửi trùng. Nội dung thư được trình bày theo mức độ nghiêm trọng, kèm thông tin sự kiện và khuyến nghị xử lý. Thông tin xác thực được mã hóa khi lưu và chỉ hiển thị dưới dạng che khuất trên giao diện.
 
-Màn hình *Telegram Alerts* cho phép bật dịch vụ, chọn mức Syslog, nhập Bot Token, Chat ID, thời gian chống lặp và cửa sổ gom đợt. Dịch vụ kết xuất bản tin văn bản thuần, giới hạn nội dung theo mức 4.096 ký tự của Telegram và tóm tắt phần vượt giới hạn. Bot Token được mã hóa trong tệp thiết lập; thông báo lỗi thay thế token bằng giá trị đã che và phân biệt các trường hợp token bị từ chối, Chat ID không tồn tại, lỗi DNS hoặc hết thời gian chờ.
+Màn hình *Telegram Alerts* cho phép bật dịch vụ, chọn mức Syslog, khai báo thông tin bot, đặt thời gian hạn chế gửi lặp và khoảng gom bản tin. Nội dung được rút gọn khi vượt giới hạn của Telegram nhưng vẫn giữ những thông tin chính phục vụ xử lý sự cố. Bot Token được mã hóa khi lưu và được che khỏi các thông báo lỗi hiển thị cho người dùng.
 
 === Phân tích sự kiện và phản ứng tự động bằng Automation Engine
 
@@ -137,32 +137,32 @@ Trong phạm vi hiện tại, CAMS hỗ trợ khoanh vùng dấu hiệu bất th
 
 === Truyền tệp và đầu cuối
 
-`SftpController` điều phối không gian truyền tệp gồm hai khung cục bộ và từ xa, danh sách kết nối đã lưu, hàng đợi truyền cùng nhật ký thao tác. Bên cạnh SFTP, CAMS hỗ trợ giao thức sao chép an toàn (Secure Copy Protocol – SCP). Các lời gọi SFTP/SCP chạy ngoài luồng giao diện và được tuần tự hóa vì phiên Paramiko không an toàn khi nhiều luồng cùng sử dụng. Với máy chủ chưa biết, ứng dụng hiển thị loại khóa và dấu vân tay để người dùng xác nhận trước khi ghi vào `known_hosts`.
+Không gian truyền tệp gồm hai vùng cục bộ và từ xa, danh sách kết nối đã lưu, hàng đợi truyền và nhật ký thao tác. CAMS hỗ trợ cả SFTP và giao thức sao chép an toàn (Secure Copy Protocol – SCP); quá trình truyền chạy ở chế độ nền để giao diện tiếp tục phản hồi. Khi kết nối đến máy chủ chưa được nhận diện, ứng dụng hiển thị loại khóa và dấu vân tay để người dùng xác nhận trước khi ghi nhớ máy chủ đó.
 
-Đầu cuối Alacritty chạy như tiến trình đồng hành và trao đổi trạng thái phiên với CAMS qua NTTP/1. Công cụ này phục vụ chẩn đoán hoặc thao tác CLI trực tiếp, không đi qua dữ liệu chờ và cửa sổ *View & Push*. Vì vậy, sau khi thay đổi cấu hình thủ công, người quản trị cần đồng bộ lại để cơ sở dữ liệu phản ánh trạng thái mới của thiết bị.
+Đầu cuối tích hợp phục vụ chẩn đoán hoặc thao tác CLI trực tiếp ngay trong không gian làm việc của CAMS. Những thay đổi thực hiện tại đây không đi qua dữ liệu chờ và cửa sổ *View & Push*; vì vậy, người quản trị cần đồng bộ lại sau khi cấu hình thủ công để dữ liệu trong ứng dụng phản ánh đúng trạng thái mới của thiết bị.
 
 === Đóng gói không gian làm việc và điểm khôi phục
 
-`WorkspaceService` quản lý vòng đời tạo, mở, lưu và đóng dự án. Gói `.ntp` chứa tệp mô tả, hai cơ sở dữ liệu SQLite, dữ liệu sao lưu cấu hình và các snapshot của không gian làm việc. Mỗi snapshot lưu trạng thái nhất quán cần thiết cho việc khôi phục; số snapshot tự động được giới hạn theo chính sách lưu giữ để tránh tăng kích thước gói không kiểm soát.
+Chức năng quản lý không gian làm việc hỗ trợ tạo, mở, lưu và đóng dự án. Gói `.ntp` tập hợp thông tin mô tả, dữ liệu cấu hình, dữ liệu quan sát, các bản sao cấu hình và những điểm khôi phục cần thiết. Số điểm khôi phục tự động được giới hạn theo chính sách lưu giữ để tránh làm kích thước gói tăng không kiểm soát.
 
-Khi khôi phục, hệ thống kiểm tra snapshot, tạo một điểm an toàn cho trạng thái hiện tại, thay thế dữ liệu trong không gian làm việc rồi ghi lại gói theo cơ chế thay thế nguyên tử. Thao tác này chỉ khôi phục dữ liệu dự án; nó không tự gửi lệnh hoàn tác xuống thiết bị. Phần mở rộng `.ntp` là định dạng dự án của CAMS, không liên quan đến giao thức đồng bộ thời gian NTP.
+Khi khôi phục, hệ thống kiểm tra điểm đã chọn, tạo bản sao an toàn của trạng thái hiện tại rồi phục hồi dữ liệu dự án. Thao tác này chỉ tác động đến không gian làm việc và không tự gửi lệnh hoàn tác xuống thiết bị. Phần mở rộng `.ntp` là định dạng dự án của CAMS, không liên quan đến giao thức đồng bộ thời gian NTP.
 
 === Bảo vệ thông tin xác thực
 
-Mô-đun `credential_cipher` mã hóa mật khẩu thiết bị theo định dạng `ENC$v2$` bằng AES-256-GCM. Dữ liệu xác thực bổ sung gắn bản mã với ngữ cảnh `host:column`, nên bản mã bị chuyển sang thiết bị hoặc trường khác sẽ không vượt qua bước xác minh. Khi dự án có mật khẩu, khóa được dẫn xuất bằng Argon2id; nếu không, hệ thống dùng khóa HKDF từ dữ liệu cục bộ với mức bảo vệ thấp hơn @rfc9106 @nistSp80038d.
+CAMS mã hóa mật khẩu thiết bị bằng AES-256-GCM và liên kết dữ liệu mã hóa với đúng thiết bị, đúng mục đích sử dụng. Khi dự án có mật khẩu, khóa bảo vệ được dẫn xuất bằng Argon2id; nếu không, hệ thống sử dụng khóa cục bộ với mức bảo vệ thấp hơn @rfc9106 @nistSp80038d.
 
-Mật khẩu ứng dụng thư điện tử trong `alert_settings.json` được xử lý qua cùng giao diện mã hóa với ngữ cảnh `smtp:sender_app_password`. Tệp được ghi bằng thao tác thay thế và đặt quyền `0600` trên hệ điều hành hỗ trợ. Đây là bảo vệ ở mức trường dữ liệu, khác với mã hóa toàn bộ gói dự án.
+Mật khẩu dùng cho dịch vụ thư điện tử cũng được bảo vệ theo cùng nguyên tắc. Cơ chế này giúp hạn chế việc đọc trực tiếp các trường nhạy cảm trong tệp dữ liệu, nhưng khác với mã hóa toàn bộ gói dự án được trình bày ở mục tiếp theo.
 
 === Bảo vệ toàn bộ gói dự án
 
-Khi người dùng đặt mật khẩu dự án, mô-đun `workspace.crypto` mã hóa tải ZIP của gói `.ntp` bằng AES-256-GCM. Khóa 256 bit được dẫn xuất bằng Argon2id với 64 MiB bộ nhớ, ba lượt và bốn làn. Phần đầu có phiên bản chứa dấu nhận dạng `NTPAES1`, tham số dẫn xuất khóa, nonce và độ dài dữ liệu; phần đầu này được xác thực cùng bản mã. Dự án không có mật khẩu vẫn được đóng gói nhưng toàn bộ gói không được mã hóa.
+Khi người dùng đặt mật khẩu dự án, toàn bộ nội dung gói `.ntp` được mã hóa bằng AES-256-GCM với khóa dẫn xuất từ mật khẩu bằng Argon2id. Hệ thống lưu kèm thông tin cần thiết để nhận diện định dạng và kiểm tra tính toàn vẹn khi mở gói, nhưng không lưu trực tiếp mật khẩu hoặc khóa đã tạo. Dự án không có mật khẩu vẫn được đóng gói, song toàn bộ gói không được mã hóa.
 
 #figure(
   image("/00_book/figures/report/misc/xxd-ntp.png", width: 100%),
   caption: [Phần đầu tệp dự án được bảo vệ, quan sát bằng công cụ xxd],
 ) <fig-cams-encrypted-project>
 
-@fig-cams-encrypted-project cho thấy dấu nhận dạng và phần thông tin có thể đọc để bộ giải mã xác định định dạng. Hình chỉ minh họa cấu trúc lưu trữ, không chứng minh quy trình mở gói đúng mật khẩu, từ chối sai mật khẩu hoặc phát hiện bản mã bị sửa. Các cơ chế này chưa có kịch bản kiểm thử riêng trong Chương 5.
+@fig-cams-encrypted-project minh họa phần nhận diện của một gói dự án đã được bảo vệ. Hình này cho thấy định dạng lưu trữ đã được tạo, nhưng chưa thay thế cho các phép thử mở gói bằng mật khẩu đúng, từ chối mật khẩu sai hoặc phát hiện nội dung bị sửa. Các cơ chế này chưa có kịch bản kiểm thử riêng trong Chương 5.
 #pagebreak(weak: true)
 == Website hướng dẫn sử dụng
 
@@ -188,7 +188,3 @@ Nhóm xây dựng website hướng dẫn sử dụng CAMS để người dùng t
     ) <fig-cams-online-manual>
   ],
 )
-
-// == Tiểu kết chương
-
-// Chương 4 đã ánh xạ thiết kế ở Chương 3 vào các mô-đun hiện thực: QML và PyQt6 cho giao diện, SQLite cho trạng thái, tác vụ nền cho kết nối cùng các dịch vụ riêng cho Syslog, SFTP và không gian làm việc. Các nhóm nghiệp vụ dùng chung bước kiểm duyệt và trả kết quả theo thiết bị. Chương 5 tiếp tục đánh giá bằng cấu hình, lệnh xác minh, lưu lượng thử và bản tin nhật ký.

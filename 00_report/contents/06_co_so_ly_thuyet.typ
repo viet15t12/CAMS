@@ -147,7 +147,7 @@ Dấu thời gian do thiết bị tạo cần đi kèm múi giờ hoặc đượ
 
 Định dạng sự kiện Cisco IOS thường chứa chuỗi `%FACILITY-SEVERITY-MNEMONIC`. Thành phần `FACILITY` trong chuỗi này, chẳng hạn `LINEPROTO`, là mã phân hệ của Cisco IOS, không phải giá trị *facility* được mã hóa trong PRI của Syslog. Bộ phân tích và giao diện phải đặt tên hai trường riêng để tránh nhầm lẫn.
 
-Trong CAMS, bộ thu nhận viết bằng C++ tiếp nhận bản tin UDP và TCP ở tiến trình riêng, sau đó chuyển dữ liệu đã phân tích vào `info_collected.db`. Lựa chọn C++ giảm phụ thuộc vào vòng lặp giao diện Python khi lưu lượng nhật ký tăng; hiệu quả thực tế vẫn phải được xác định bằng phép đo thông lượng, độ trễ và số bản tin bị loại bỏ.
+Để việc tiếp nhận nhật ký không làm gián đoạn thao tác trên giao diện, CAMS tổ chức bộ thu nhận thành một thành phần hoạt động độc lập. Thành phần này tiếp nhận bản tin UDP/TCP, phân tích các trường cần thiết và lưu dữ liệu để giao diện truy vấn. Hiệu quả của cách tổ chức này cần được đánh giá bằng thông lượng, độ trễ và số bản tin bị loại bỏ khi lưu lượng tăng.
 
 === Khai thác cảnh báo
 
@@ -156,11 +156,11 @@ Nhật ký tập trung có thể được lọc theo thiết bị, khoảng th�
 Tương quan sự kiện là quá trình liên kết nhiều bản tin theo thời gian, nguồn và ngữ cảnh để tìm mẫu bất thường. CAMS hiện có chức năng thu nhận, phân tích trường, lọc nhật ký, gửi cảnh báo qua thư điện tử và phát hiện sự kiện theo ngưỡng trong cửa sổ thời gian. Các quy tắc này nhận diện dấu hiệu trong nhật ký, chưa tương đương một hệ thống phát hiện xâm nhập dựa trên phân tích lưu lượng. Nếu thiết bị không phát sinh hoặc không chuyển bản tin về bộ thu nhận, CAMS không thể tự suy ra toàn bộ sự kiện đã xảy ra.
 
 #pagebreak(weak: true)
-=== Automation Engine (Go core) và vòng phản ứng theo quy tắc
+=== Automation Engine và vòng phản ứng theo quy tắc
 
-Automation Engine (Go core) là thành phần đánh giá chính sách sau bước thu nhận Syslog, không thay thế bộ thu hoặc bộ phân tích. Python định kỳ lấy các security event chưa xử lý cùng bằng chứng nguồn, gửi sang tiến trình Go qua JSON Lines; tiến trình này nạp Automation Rule đang bật, kiểm tra loại sự kiện, phạm vi thiết bị, thuộc tính và lịch đánh giá trước khi tạo kế hoạch hành động.
+Automation Engine tạo cầu nối giữa hoạt động giám sát và phản ứng tự động. Sau khi nhật ký được chuyển thành sự kiện an ninh, thành phần này đối chiếu loại sự kiện, thiết bị liên quan và các thuộc tính đi kèm với những quy tắc do người quản trị xây dựng. Kết quả đối chiếu cho biết sự kiện có cần xử lý hay không và phản ứng nào phù hợp với chính sách đã đặt ra.
 
-Rule version 3 cho phép trích biến từ `message` hoặc `raw_message` của đúng bản tin nguồn và kiểm tra kiểu như `interface`, `ipv4` hoặc `identifier`. Cơ chế chống lặp, thời gian chờ và giới hạn tần suất được áp dụng trước khi trả kế hoạch. Chế độ `dry-run` chỉ tạo kết quả mô phỏng; chế độ `auto` mới cho phép executor Python gửi lệnh qua phiên SSH đang hoạt động và chạy lệnh xác minh. Vì vậy, Automation Engine (Go core) quyết định *hành động nào đủ điều kiện*, còn executor chịu trách nhiệm *thực thi và ghi nhận kết quả trên thiết bị*.
+Trước khi thực hiện phản ứng, hệ thống kiểm tra thông tin lấy từ sự kiện, hạn chế xử lý lặp và kiểm soát tần suất hành động. Khi các điều kiện được đáp ứng, CAMS tạo lệnh, gửi tới thiết bị, kiểm tra kết quả và lưu lại quá trình xử lý. Cách tổ chức này giúp phản ứng nhất quán hơn so với thao tác thủ công, nhưng hiệu quả vẫn phụ thuộc vào chất lượng nhật ký, quy tắc tự động hóa và trạng thái kết nối với thiết bị.
 
 == Cơ sở dữ liệu và hệ thống lưu trữ
 
@@ -186,7 +186,7 @@ Chuyển động và hiệu ứng chỉ được dùng để phản hồi thao t
 
 === PyQt6
 
-PyQt6 tạo cầu nối giữa QML và logic Python. Các lớp `QObject` công bố thuộc tính, phương thức và tín hiệu để giao diện gọi nghiệp vụ hoặc nhận kết quả bất đồng bộ. Kiểm tra dữ liệu, truy cập cơ sở dữ liệu và kết nối mạng được xử lý ở lớp nghiệp vụ.
+PyQt6 tạo cầu nối giữa giao diện QML và phần xử lý nghiệp vụ bằng Python. Cơ chế thuộc tính, lời gọi và tín hiệu cho phép giao diện gửi yêu cầu, nhận tiến trình và cập nhật kết quả mà không phải trực tiếp xử lý kết nối hay truy vấn dữ liệu. Việc kiểm tra dữ liệu, truy cập cơ sở dữ liệu và giao tiếp với thiết bị được đặt ở tầng nghiệp vụ.
 
 Việc tách giao diện khỏi logic giúp kiểm thử nghiệp vụ mà không cần mở toàn bộ cửa sổ ứng dụng. Đồng thời, tác vụ mạng không được chạy trực tiếp trên luồng giao diện vì thời gian chờ thiết bị có thể làm cửa sổ ngừng phản hồi.
 
@@ -200,35 +200,35 @@ Việc tách giao diện khỏi logic giúp kiểm thử nghiệp vụ mà khôn
     ([Jinja2], [Kết xuất dữ liệu đã kiểm tra thành mẫu lệnh Cisco IOS.]),
     ([Dulwich], [Lưu phiên bản cấu hình trong kho Git cục bộ, hỗ trợ lịch sử và so sánh.]),
     ([Argon2id, AES-256-GCM], [Dẫn xuất khóa từ mật khẩu và mã hóa có xác thực cho gói dự án khi bật bảo vệ.]),
-    ([C++ và ổ cắm POSIX], [Bộ thu Syslog dùng ổ cắm và vòng lặp `poll` ở tiến trình riêng; lưu dữ liệu vào SQLite và phát sự kiện JSON Lines.]),
-    ([Automation Engine (Go core)], [Nạp và kiểm tra Automation Rule, đánh giá sự kiện theo chu kỳ, áp dụng chống lặp/giới hạn tần suất và kết xuất biến có kiểu thành kế hoạch hành động.]),
+    ([C++], [Xây dựng bộ thu Syslog độc lập để tiếp nhận, phân tích và lưu nhật ký mà không làm gián đoạn giao diện.]),
+    ([Automation Engine bằng Go], [Đối chiếu sự kiện với quy tắc, kiểm soát việc lặp hành động và tạo phản ứng phù hợp.]),
     ([Alacritty], [Trình giả lập đầu cuối được nhúng vào ứng dụng, hỗ trợ thao tác dòng lệnh qua SSH hoặc Telnet.]),
-    ([IPC NTTP/1], [Giao thức nội bộ giữa ứng dụng và đầu cuối đồng hành Alacritty; độc lập với kênh sự kiện của bộ thu Syslog.]),
+    ([Kênh liên lạc nội bộ], [Trao đổi trạng thái giữa ứng dụng với các thành phần vận hành độc lập.]),
   ),
   caption: [Các thành phần công nghệ phục vụ quy trình quản trị],
 )
 
-Tác vụ mạng chạy ở luồng nền để giao diện tiếp tục phản hồi. `Host Lock` tuần tự hóa tác vụ dùng chung một phiên CLI, còn `BatchExecutor` xử lý đồng thời trên các thiết bị độc lập.
+Các tác vụ mạng được thực hiện ở chế độ nền để giao diện tiếp tục phản hồi. Những thao tác dùng chung một phiên thiết bị được xử lý lần lượt, trong khi các thiết bị độc lập có thể được xử lý đồng thời để rút ngắn thời gian thực hiện.
 
 Mỗi tác vụ phải có thời gian chờ và kết quả gắn với thiết bị cụ thể. Việc hủy tác vụ hoặc mất kết nối không đồng nghĩa với hoàn tác các lệnh đã gửi; sau sự cố, hệ thống cần thu thập lại trạng thái để xác định phần cấu hình thực tế đã được áp dụng.
 
-=== Các thành phần hỗ trợ vận hành
+=== Tổ chức các thành phần hỗ trợ vận hành
 
-CAMS dùng bộ thu Syslog C++ để tách tiếp nhận nhật ký khỏi tiến trình giao diện. Automation Engine (Go core) chạy như tiến trình đồng hành, nhận sự kiện có cấu trúc và trả về kế hoạch hành động qua JSON Lines. Alacritty chạy như tiến trình đồng hành cho thao tác CLI trực tiếp; giao thức nội bộ NTTP/1 trao đổi thông điệp điều khiển với ứng dụng.
+CAMS tách các công việc có đặc điểm khác nhau thành những thành phần chuyên trách: bộ thu Syslog tiếp nhận nhật ký, Automation Engine đánh giá sự kiện và đầu cuối hỗ trợ thao tác CLI trực tiếp. Các thành phần trao đổi dữ liệu với ứng dụng qua kênh nội bộ. Cách tổ chức này giúp giao diện tập trung vào tương tác với người dùng, đồng thời hạn chế một tác vụ chậm làm ảnh hưởng đến toàn bộ phần mềm.
 
 == Bảo mật và mã hóa
 
 === Bảo vệ dữ liệu dự án
 
-*Thư viện cryptography.* CAMS gọi Argon2id và AES-GCM qua gói `cryptography` thay vì tự hiện thực thuật toán. An toàn của hệ thống vẫn phụ thuộc vào sinh số ngẫu nhiên, quản lý khóa và lựa chọn tham số.
+*Thư viện mật mã.* CAMS sử dụng các thư viện đã được kiểm chứng để áp dụng Argon2id và AES-GCM thay vì tự xây dựng thuật toán. Mức an toàn vẫn phụ thuộc vào việc sinh số ngẫu nhiên, quản lý khóa và lựa chọn tham số phù hợp.
 
 *Argon2id.* Argon2id là hàm dẫn xuất khóa từ mật khẩu có chi phí bộ nhớ. Biến thể này kết hợp cách truy cập bộ nhớ của Argon2i và Argon2d để cân bằng khả năng hạn chế rò rỉ qua kênh kề với khả năng chống đánh đổi thời gian–bộ nhớ. Các tham số chính gồm muối, dung lượng bộ nhớ, số lượt xử lý, số làn song song và độ dài khóa đầu ra. Muối không cần giữ bí mật nhưng phải đủ dài và khác nhau giữa các lần tạo gói để cùng một mật khẩu không luôn sinh cùng kết quả @rfc9106.
 
-Khi bảo vệ gói dự án, CAMS sinh ngẫu nhiên muối 16 byte và dùng Argon2id với 64 MiB bộ nhớ, ba lượt xử lý, bốn làn song song để tạo khóa 32 byte. Cấu hình này tương ứng phương án thứ hai được RFC 9106 khuyến nghị cho môi trường hạn chế bộ nhớ. Các tham số và muối được ghi trong phần đầu của gói để có thể dẫn xuất lại khóa khi mở tệp; mật khẩu và khóa dẫn xuất không được ghi vào gói.
+Khi bảo vệ gói dự án, CAMS kết hợp mật khẩu với một giá trị ngẫu nhiên để dẫn xuất khóa bằng Argon2id. Các tham số cần thiết được lưu cùng gói để có thể tạo lại khóa khi người dùng nhập đúng mật khẩu, trong khi mật khẩu và khóa đã dẫn xuất không được ghi trực tiếp vào tệp. Cách làm này hạn chế việc cùng một mật khẩu luôn tạo ra cùng một kết quả mã hóa @rfc9106.
 
 *AES-256-GCM.* AES-256-GCM sử dụng AES với khóa 256 bit trong chế độ Galois/Counter Mode. Đây là cơ chế mã hóa có xác thực với dữ liệu bổ sung: nội dung được bảo mật thành bản mã, đồng thời thẻ xác thực bảo vệ cả bản mã và phần dữ liệu bổ sung không mã hóa. Nếu mật khẩu sai hoặc tệp bị sửa, bước xác minh thẻ thất bại và dữ liệu rõ không được chấp nhận @nistSp80038d.
 
-CAMS sinh nonce 12 byte và thẻ xác thực 16 byte cho mỗi gói. Phần đầu chứa phiên bản, thuật toán, tham số Argon2id, muối, nonce và độ dài nội dung, đồng thời được dùng làm dữ liệu xác thực bổ sung. Hệ thống chỉ thay thế tệp đích sau khi xác minh thẻ thành công.
+CAMS sử dụng một giá trị dùng một lần cho mỗi lần mã hóa và xác thực cả nội dung lẫn thông tin mô tả của gói. Tệp đích chỉ được thay thế sau khi dữ liệu đã được kiểm tra thành công, qua đó hạn chế nguy cơ chấp nhận gói bị sửa đổi hoặc ghi dở dang.
 
 Quy trình bảo vệ được thực hiện theo chuỗi: mật khẩu và muối đi qua Argon2id để tạo khóa 256 bit; khóa cùng giá trị dùng một lần được chuyển cho AES-GCM để mã hóa gói ZIP; thẻ xác thực được ghi cuối gói. Argon2id làm tăng chi phí thử mật khẩu, còn AES-GCM bảo vệ tính bí mật và phát hiện sửa đổi. Hai thành phần giải quyết các mục tiêu khác nhau và phải được dùng kết hợp đúng tham số.
 
@@ -236,10 +236,7 @@ SHA-256 tạo giá trị kiểm tra cho tệp trong gói dự án. Giá trị b�
 
 === Quản lý thông tin xác thực
 
-Thông tin đăng nhập thiết bị là dữ liệu nhạy cảm vì phần mềm cần khôi phục giá trị gốc khi thiết lập phiên SSH hoặc Telnet. Phiên bản CAMS hiện tại mã hóa các trường thông tin xác thực trong SQLite bằng AES-256-GCM. Khi dự án có mật khẩu, khóa được dẫn xuất bằng Argon2id; khi dự án không có mật khẩu, khóa dẫn xuất từ dữ liệu cục bộ chỉ làm giảm nguy cơ đọc trực tiếp và không cung cấp mức bảo vệ tương đương một bí mật do người dùng nắm giữ.
+Thông tin đăng nhập thiết bị là dữ liệu nhạy cảm vì phần mềm phải khôi phục giá trị gốc khi thiết lập phiên SSH hoặc Telnet. CAMS mã hóa các trường này bằng AES-256-GCM. Khi dự án có mật khẩu, khóa được dẫn xuất bằng Argon2id; khi dự án không có mật khẩu, khóa tạo từ dữ liệu cục bộ chỉ giúp hạn chế việc đọc trực tiếp và không cung cấp mức bảo vệ tương đương một bí mật do người dùng nắm giữ.
 
-Khóa và mật khẩu sau giải mã vẫn phải xuất hiện trong bộ nhớ để thiết lập kết nối. Hướng hoàn thiện là tích hợp kho thông tin xác thực của hệ điều hành, giới hạn thời gian tồn tại của dữ liệu rõ và che thông tin nhạy cảm trong nhật ký.
+Mã hóa khi lưu trữ không loại bỏ hoàn toàn rủi ro trong lúc sử dụng, vì khóa và mật khẩu vẫn phải xuất hiện tạm thời trong bộ nhớ để thiết lập kết nối. Do đó, hệ thống cần tiếp tục hạn chế thời gian tồn tại của dữ liệu rõ, che thông tin nhạy cảm trong nhật ký và hướng tới tích hợp kho thông tin xác thực của hệ điều hành.
 
-Cơ chế ghi đè chỉ tác động lên vùng khóa dạng mảng byte do ứng dụng quản lý. Python và thư viện kết nối có thể tạo bản sao chuỗi hoặc byte; vì vậy, thao tác này không bảo đảm xóa mọi bản sao bí mật khỏi bộ nhớ. Các bản ghi cũ cũng cần được di chuyển và kiểm tra trước khi khẳng định toàn bộ dữ liệu xác thực đã mã hóa.
-
-Các cơ sở lý thuyết và công nghệ trên là căn cứ cho mô hình phân tích, thiết kế và quy trình xử lý được trình bày ở Chương 3.
