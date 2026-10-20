@@ -1,0 +1,642 @@
+[
+  {
+    "path": "00_report/30-SV-2026-VT2.pdf",
+    "kind": ".pdf",
+    "sha": "912801948b995f3ae3511deb4f53661a39807c5a3dc1fc8e6cb77d28a70e079b"
+  },
+  {
+    "path": "00_report/ARGON2ID_AES_256_GCM.md",
+    "kind": ".md",
+    "sha": "8c2289c3028b83fc22a8712bbd06420dbe85ae2d87811ed56f1bc7c13fae29b7"
+  },
+  {
+    "path": "00_report/BAO_CAO_NANG_CAP_ENABLE_SECRET_VA_PHAN_QUYEN.md",
+    "kind": ".md",
+    "sha": "ca30f6428bb6b736d57a7a9b19aa123b97114037d52d33a822ede5e5fb548b63"
+  },
+  {
+    "path": "00_report/BAO_CAO_TONG_HOP_3_TINH_NANG_AN_NINH.md",
+    "kind": ".md",
+    "sha": "4e2546047251e48050a68230403405a3170eeefd7470e73da55815120db0edbe"
+  },
+  {
+    "path": "00_report/BAO_CAO_TONG_HOP_TOAN_DIEN_THAY_DOI_HOM_NAY.md",
+    "kind": ".md",
+    "sha": "41fa65bfeaceb723a8e19900f6b3b46c9a2c3be7885915dc78debdd507ffa9fb"
+  },
+  {
+    "path": "00_report/CAP_NHAT_THONG_SO_BAO_CAO_2026-10-06.md",
+    "kind": ".md",
+    "sha": "a7de7f09981da20a8083bd8c2e7e32f3b541b958ad74cccc95629a0e591f8dd5"
+  },
+  {
+    "path": "00_report/DANH_GIA_DOI_CHIEU_GOP_Y_THAY_2026-10-06.md",
+    "kind": ".md",
+    "sha": "bab317bacd43e71ddb26ebf6903f264d4b0aa997ea8c926550ae4ddfc87fcb8a"
+  },
+  {
+    "path": "00_report/DETAILED_OUTLINE.md",
+    "kind": ".md",
+    "sha": "e1603d8d660315699a51e3f05d76027892a2f0fd948265b2548f12eadc661d68"
+  },
+  {
+    "path": "00_report/DOI_CHIEU_GOP_Y_THAY_2026-10-05.md",
+    "kind": ".md",
+    "sha": "f2bf9202382404dbb8143c78351486b8daf67046ea1fe03ea4f726100803b5fd"
+  },
+  {
+    "path": "00_report/Góp ý chỉnh sửa báo cáo_nhóm Kiên.pdf",
+    "kind": ".pdf",
+    "sha": "9cf4b1bbef2fe5f8b9511088b309635e2b568762c7e20324151a637dc854b049"
+  },
+  {
+    "path": "00_report/QUY_TAC_VAN_PHONG.md",
+    "kind": ".md",
+    "sha": "2a2a7040133339819ca87b711de80545f37170f62e1fb977bea6ad753b5a143a"
+  },
+  {
+    "path": "00_report/README.md",
+    "kind": ".md",
+    "sha": "89c9730ef7a67cc2846677677020f51105e91e72290b89c970f667a3372f0aef"
+  },
+  {
+    "path": "00_report/Tai_lieu_lab/LAB2/DOI_CHIEU_23_ANH.md",
+    "kind": ".md",
+    "sha": "87d336979f517b821ecf2481321e462892b300f9127f25c5dd1d5ff470621465"
+  },
+  {
+    "path": "00_report/Tai_lieu_lab/LAB2/KICH_BAN_OSPF_TOPO_5_ROUTER.md",
+    "kind": ".md",
+    "sha": "521c5e5423a4a3f4f56f61600cb04c2f52d3246d7ff902b27edef42b642d60d7"
+  },
+  {
+    "path": "00_report/Tai_lieu_lab/LAB2/KICH_BAN_OSPF_VA_CHUP_ANH.md",
+    "kind": ".md",
+    "sha": "77528d718e2345ef7f9c9a655f777d8f3912ccb0f498b9ea5008421b5ef9182a"
+  },
+  {
+    "path": "00_report/Tai_lieu_lab/LAB2/ket_qua_kiem_thu_ospf.csv",
+    "kind": ".csv",
+    "sha": "080776ec20e85ed0e625146de80d50b7cb3c18ac3986f2c0b3ca52d89e948e09"
+  },
+  {
+    "path": "00_report/Tai_lieu_lab/LAB2/nhat_ky_do_ospf.csv",
+    "kind": ".csv",
+    "sha": "6cbe20d59c4a6ed3657d63ce2393825c8f47a5292e7158affd5bd852a2e6663a"
+  },
+  {
+    "path": "00_report/Tai_lieu_lab/LAB5/KICH_BAN_KIEM_THU_ACL.md",
+    "kind": ".md",
+    "sha": "144086d0bfe12f278699160ff76f977ce38b31429e4ad764209c17271151b2e8"
+  },
+  {
+    "path": "00_report/appendix/appendix_a_cau_truc_du_an.typ",
+    "kind": ".typ",
+    "sha": "094f289ac7deb0d6ebeffe8ea2a7bd19e2a3739e9f34b4a6453d5d7d98793d1c"
+  },
+  {
+    "path": "00_report/bia_mau.typ",
+    "kind": ".typ",
+    "sha": "7812cf45b6c486a5e8eb70ba7a9e59762246d5152f3d26b8a16abc544d502a37"
+  },
+  {
+    "path": "00_report/chapters/01_tong_quan.typ",
+    "kind": ".typ",
+    "sha": "e6c9e6e57ad32ad7d664539f9a701821259e6de5d1327b4e67aaa4bebce1d75f"
+  },
+  {
+    "path": "00_report/chapters/02_co_so_ly_thuyet.typ",
+    "kind": ".typ",
+    "sha": "c13c4ec02212f05f48cdb4abb68e831668b6d961f6a31087cd91f2afca664150"
+  },
+  {
+    "path": "00_report/config/commands.typ",
+    "kind": ".typ",
+    "sha": "46906510a69fbb0716784b534c7e1ed640383570f49e784136b3482cda7ecc4f"
+  },
+  {
+    "path": "00_report/config/equations.typ",
+    "kind": ".typ",
+    "sha": "861bc9ed3139b8b7c067c41f3bf72a0ae3215857cda46e0bda9f280e5b091058"
+  },
+  {
+    "path": "00_report/config/images.typ",
+    "kind": ".typ",
+    "sha": "133b77d5a474764e0d006055b386c049ef9fe0b9a7b2dc411599fe2ae2d2b45b"
+  },
+  {
+    "path": "00_report/config/info.typ",
+    "kind": ".typ",
+    "sha": "f8c214277bfa0f11252fb7f994e85b93a19dedc5a5dee9a23808ee933d7146ab"
+  },
+  {
+    "path": "00_report/config/listings.typ",
+    "kind": ".typ",
+    "sha": "f4834e2e9975ea62b6c01ed23e5df1106637d8440f63d76555d77a84bd831767"
+  },
+  {
+    "path": "00_report/config/settings.typ",
+    "kind": ".typ",
+    "sha": "335f72eef4a022466e85a72a365f5ab5cc9552d72f4e384d415b8921df425371"
+  },
+  {
+    "path": "00_report/config/tables.typ",
+    "kind": ".typ",
+    "sha": "b3a6065fe825ca080fadc7d2dcbbc079776a14a51b34bc312b2d03ff3e9f63b6"
+  },
+  {
+    "path": "00_report/contents/01_loi_cam_doan.typ",
+    "kind": ".typ",
+    "sha": "ae807cc2e8ab9f68cdc3989ae2d0d1b5e0449b1cc09af48cb26f59f3fc2e16d9"
+  },
+  {
+    "path": "00_report/contents/01_tong_quan.typ",
+    "kind": ".typ",
+    "sha": "07a9721f5a26205bbbb0ca98749c2e943eaae85596374651b51025e7e0bafd97"
+  },
+  {
+    "path": "00_report/contents/02_loi_cam_on.typ",
+    "kind": ".typ",
+    "sha": "c61836871ed5b15283fdd4aeaaba2632094a5a3f8ee5b48d28e814e2b3deb224"
+  },
+  {
+    "path": "00_report/contents/03_tom_tat.typ",
+    "kind": ".typ",
+    "sha": "07ac9df81232297d56b340a5351c722a9a8e0426b3faf013fa8b18aadcf0c813"
+  },
+  {
+    "path": "00_report/contents/04_danh_muc_tu_viet_tat.typ",
+    "kind": ".typ",
+    "sha": "d2a7eb025681af9c2a49779ec56ff154b5f0e33004ab48f113569418b7490977"
+  },
+  {
+    "path": "00_report/contents/05_tong_quan.typ",
+    "kind": ".typ",
+    "sha": "4a27d2bae934beb4ca0c9ac21190bcfeef8c701d72125b4d078ecc40e86429f2"
+  },
+  {
+    "path": "00_report/contents/06_co_so_ly_thuyet.typ",
+    "kind": ".typ",
+    "sha": "952b8c9f334b1ab00fda91210478e944a03d269fe98415d782aca2a758c37218"
+  },
+  {
+    "path": "00_report/contents/07_phan_tich_thiet_ke.typ",
+    "kind": ".typ",
+    "sha": "8ef9722eb0d1e3102c2d4b2481646e59543f45aa4f45f54008bf8e81ecb1cd90"
+  },
+  {
+    "path": "00_report/contents/08_xay_dung_phan_mem.typ",
+    "kind": ".typ",
+    "sha": "96be7eb5c4fc670276280b75bbf5a7a59a2aff5de8e27dbaf788320a7d633835"
+  },
+  {
+    "path": "00_report/contents/09_kich_ban_1_dai.typ",
+    "kind": ".typ",
+    "sha": "6ef02e0d9a81e21539a1924d12037175acbf6b984efd7b49d0aca30c8a396979"
+  },
+  {
+    "path": "00_report/contents/09_kich_ban_1_snooping.typ",
+    "kind": ".typ",
+    "sha": "848f71a275bf40006b2b7600627e65619560f9c40b5104e0a4407b083910a658"
+  },
+  {
+    "path": "00_report/contents/09_kich_ban_2_ospf.typ",
+    "kind": ".typ",
+    "sha": "fb6b027174763704c9aa2c0efe08cfd106c85f9f4394981d445fbcf3550e588d"
+  },
+  {
+    "path": "00_report/contents/09_kich_ban_5_acl.typ",
+    "kind": ".typ",
+    "sha": "2118996a109cac81837b8d432697333cfabffa2afeec2eae9a2e09b540f669be"
+  },
+  {
+    "path": "00_report/contents/09_thu_nghiem_danh_gia.typ",
+    "kind": ".typ",
+    "sha": "61db7125ff37c4ca5d3a686cf58893a39c07f212ac6a236e3448ad973791b120"
+  },
+  {
+    "path": "00_report/contents/10_ket_luan_huong_phat_trien.typ",
+    "kind": ".typ",
+    "sha": "e0425374301b416a1ce9850d589c1799926307cf427407405b036d25f008eb8b"
+  },
+  {
+    "path": "00_report/cover/cover.typ",
+    "kind": ".typ",
+    "sha": "eceb87ca6a993a863cd7e9bf137cf22c3b6b76b25b4f117ddcfed9064b4fe27c"
+  },
+  {
+    "path": "00_report/doc-ruleCams/README.md",
+    "kind": ".md",
+    "sha": "b6a99422e2f0597724ac209cadba63044273eb2efa576b596a66feec3d41004f"
+  },
+  {
+    "path": "00_report/main.typ",
+    "kind": ".typ",
+    "sha": "ff21a05f6971f1a2048078bf70d85477bf19257b876a9b583d403fc6ea434fed"
+  },
+  {
+    "path": "00_report/mainv2.pdf",
+    "kind": ".pdf",
+    "sha": "bbf9c93e04a990a8daefd5eb533f7b0bf626158d5faaf450c0c1b3534268cd2b"
+  },
+  {
+    "path": "00_report/md/chuong-1-2.md",
+    "kind": ".md",
+    "sha": "911e88b19dc84510545014d6694245119224b6ac9ed4a8c60d58b67df5a714ea"
+  },
+  {
+    "path": "00_report/md/chuong-3.md",
+    "kind": ".md",
+    "sha": "6608806279319883fdf2b6babafb6fdfcaf457958432b914369e4bee3bab4a89"
+  },
+  {
+    "path": "00_report/md/chuong-4.md",
+    "kind": ".md",
+    "sha": "1e18dc3318df3cdfc96abf34a8d16702030fce1f3623c16c90c8592221c08828"
+  },
+  {
+    "path": "00_report/nhan_xet.md",
+    "kind": ".md",
+    "sha": "b09903ad1d78ae880c212842bfbd97da67782f2d3ccaa9d442b33f6fd27f0931"
+  },
+  {
+    "path": "00_report/noi dung mau/chuong_2_co_so_ly_thuyet_va_cong_nghe.md",
+    "kind": ".md",
+    "sha": "67232cd91edffc18b91ff2c71fdc0a9f95410db36d9263d1c7a6eae55bc60aff"
+  },
+  {
+    "path": "00_book/DOC/00_loi_mo_dau.md",
+    "kind": ".md",
+    "sha": "f621ccd8e4aec414a4ddd2e58bfa5c48731631b10651c1f9c6fcfc197bbb72d0"
+  },
+  {
+    "path": "00_book/DOC/01_tong_quan.md",
+    "kind": ".md",
+    "sha": "f14c5bb901a4aaa00278a42a5dac221087a45c45d05fcac18db66b4bbb73d320"
+  },
+  {
+    "path": "00_book/DOC/02_cai_dat_su_dung.md",
+    "kind": ".md",
+    "sha": "a94f5a313f25651cd316475f8c4fa3bc1ee70391a1cd19580a6740f3faa6b798"
+  },
+  {
+    "path": "00_book/DOC/03_giao_dien_dieu_huong.md",
+    "kind": ".md",
+    "sha": "c08ec6ad3df3f453f3a0469334bd1dcf9a79fcf41ea083b610bea816fd71fcb8"
+  },
+  {
+    "path": "00_book/DOC/04_quan_ly_thiet_bi.md",
+    "kind": ".md",
+    "sha": "a6a08e64bf8809b934910dd05b8c32b735d0ea1b0bd8e9ace0f56bea6d95fae8"
+  },
+  {
+    "path": "00_book/DOC/05_cau_hinh_interface_router.md",
+    "kind": ".md",
+    "sha": "ea11991250430c45d565e301717c95b113dbeb8966ca126a03f5bf2e9f738756"
+  },
+  {
+    "path": "00_book/DOC/06_cau_hinh_routing.md",
+    "kind": ".md",
+    "sha": "ed0054acd3587cd6a40177577dbc4e68b8e1d13842d614f240e16b29eb956b3f"
+  },
+  {
+    "path": "00_book/DOC/07_cau_hinh_dhcp.md",
+    "kind": ".md",
+    "sha": "1d5509957071463ee7ca276e10cae05afca877f142e39efc537369c33c96379c"
+  },
+  {
+    "path": "00_book/DOC/08_cau_hinh_acl.md",
+    "kind": ".md",
+    "sha": "ba9c3f9e377241cab73e26ad6287662df456eaeec3c759fd0e42b1f56f7126a7"
+  },
+  {
+    "path": "00_book/DOC/09_cau_hinh_fhrp.md",
+    "kind": ".md",
+    "sha": "a592de99923000bd1f8404ce636593dc2bd9b24e2b8087e5a7ef4e97564c18d8"
+  },
+  {
+    "path": "00_book/DOC/10_cau_hinh_syslog_server.md",
+    "kind": ".md",
+    "sha": "5a39ec0f60b05232d359c1e9d8a6afb2937fde9111d659401fe7ac0a61b27d74"
+  },
+  {
+    "path": "00_book/DOC/11_cau_hinh_nat.md",
+    "kind": ".md",
+    "sha": "6494c95ea7d5c8c308eab3b6eaa5fb3e10f0e6c95674ada5a997f03a9aab2db9"
+  },
+  {
+    "path": "00_book/DOC/12_truyen_tep_sftp.md",
+    "kind": ".md",
+    "sha": "95ba0b263873580f75f3468b75756012fb5a561d9f6be95f8a17cdcf1c6b0961"
+  },
+  {
+    "path": "00_book/DOC/13_xem_system_logs.md",
+    "kind": ".md",
+    "sha": "1426384bb7a91b1a225486f4f25623109c824d7263389efbbd884cfda0e9f22e"
+  },
+  {
+    "path": "00_book/DOC/14_interface_switch_l2.md",
+    "kind": ".md",
+    "sha": "0472c0e3caf86fae0fe698910bdf0e78781c322dcb106b2341f748e0a139bd42"
+  },
+  {
+    "path": "00_book/DOC/15_vlan_etherchannel_stp_vtp.md",
+    "kind": ".md",
+    "sha": "09c723dc573e93b03f42e4a7165c57cf085e12ee9b1752fd94b8ad2b4c90ee07"
+  },
+  {
+    "path": "00_book/DOC/16_bao_mat_switch_l2.md",
+    "kind": ".md",
+    "sha": "47fb47a7e95ec7789e5bbae67ff51858bec3491648cf8f77344d9d73e320a077"
+  },
+  {
+    "path": "00_book/DOC/17_giam_sat_switch_l2.md",
+    "kind": ".md",
+    "sha": "0dc7dc862f0c091cbdf03254388870732b5f7820c21b29daa3d947f54e1fa930"
+  },
+  {
+    "path": "00_book/DOC/18_interface_switch_l3.md",
+    "kind": ".md",
+    "sha": "4399f28d19ab6eecdf07875fe62768dd3bb51f0221c5602cee67c6a8269c2f1a"
+  },
+  {
+    "path": "00_book/DOC/19_dhcp_acl_switch_l3.md",
+    "kind": ".md",
+    "sha": "942d2a6367e41828180b98f71c0bb10b9e9d7d9d2491cc20e60c684920967197"
+  },
+  {
+    "path": "00_book/config/commands.typ",
+    "kind": ".typ",
+    "sha": "bddee421707c82f1c708d105f1ac77dbcd9b7279c0d0cd85bd4425e0215b5d20"
+  },
+  {
+    "path": "00_book/config/diagrams.typ",
+    "kind": ".typ",
+    "sha": "fcb41f9479b2917e5d49537272b61465c6130a6974464322280edcdddd6c77b4"
+  },
+  {
+    "path": "00_book/config/equations.typ",
+    "kind": ".typ",
+    "sha": "861bc9ed3139b8b7c067c41f3bf72a0ae3215857cda46e0bda9f280e5b091058"
+  },
+  {
+    "path": "00_book/config/images.typ",
+    "kind": ".typ",
+    "sha": "db22bd9c39f89515885004e6daf4437a4560b1bfb619f7e4dc929311035b7a4b"
+  },
+  {
+    "path": "00_book/config/info.typ",
+    "kind": ".typ",
+    "sha": "a41fee0dd9090851b533a3db4679c4d714dbecefd886a3f6915bf4bd892cf882"
+  },
+  {
+    "path": "00_book/config/listings.typ",
+    "kind": ".typ",
+    "sha": "f4834e2e9975ea62b6c01ed23e5df1106637d8440f63d76555d77a84bd831767"
+  },
+  {
+    "path": "00_book/config/settings.typ",
+    "kind": ".typ",
+    "sha": "99aa1702a4b98d526b772157837221644e2dc93f6b314d2dc83f4a4f85a9976b"
+  },
+  {
+    "path": "00_book/config/tables.typ",
+    "kind": ".typ",
+    "sha": "d30f76a5567645e647388e33d0473abd7075fba6f06e7eceea3c94b71355bf5f"
+  },
+  {
+    "path": "00_book/contents/00_loi_mo_dau.typ",
+    "kind": ".typ",
+    "sha": "d1cae2c248ef22306f97cdb803267d47ff0bc514b4c0a3ebf575a1794ed293b6"
+  },
+  {
+    "path": "00_book/contents/01_tong_quan.typ",
+    "kind": ".typ",
+    "sha": "09160cc7cf41feee0f4a8f47c707b0e7d599d0dc8b9968d86aa6a57f8dcf123d"
+  },
+  {
+    "path": "00_book/contents/02_cai_dat_su_dung.typ",
+    "kind": ".typ",
+    "sha": "23cd54f32a12536283eaa7bebcdde3505978fadcb21c8e4c4deba32d846223f4"
+  },
+  {
+    "path": "00_book/contents/03_giao_dien_dieu_huong.typ",
+    "kind": ".typ",
+    "sha": "f80e7a3cc48d0a6107abdcbe87b11357201882bd0c5247844875ca8bc8ef2c15"
+  },
+  {
+    "path": "00_book/contents/04_quan_ly_thiet_bi.typ",
+    "kind": ".typ",
+    "sha": "2bbe628ca6ea31b512a17caeed2ac1092224fa2ac78fbbbe65e363ce54a79e08"
+  },
+  {
+    "path": "00_book/contents/05_cau_hinh_interface_router.typ",
+    "kind": ".typ",
+    "sha": "91bf65c3cb0a4b46cab3d9529905b8b817aab40c219207a89f66530d0f85a4ea"
+  },
+  {
+    "path": "00_book/contents/06_cau_hinh_routing.typ",
+    "kind": ".typ",
+    "sha": "c2f0ed5ca5d1781818a255cf6f7854d3b2fcb7cc9dfea6e2b87ed27d5711fd3d"
+  },
+  {
+    "path": "00_book/contents/07_cau_hinh_dhcp.typ",
+    "kind": ".typ",
+    "sha": "2f71ddfd80a0126730f4e880b9a7b3aa9fe43909fa637672b6aca692fc9e260c"
+  },
+  {
+    "path": "00_book/contents/08_cau_hinh_acl.typ",
+    "kind": ".typ",
+    "sha": "b3099661fb972e4db78f99875e947df2df9787f6181fdd02dd217b590ab55e0c"
+  },
+  {
+    "path": "00_book/contents/09_cau_hinh_fhrp.typ",
+    "kind": ".typ",
+    "sha": "06b97c091d6d255f7950868fab54357d42b725e3cfb5e44424539c3521316c3e"
+  },
+  {
+    "path": "00_book/contents/10_cau_hinh_syslog_server.typ",
+    "kind": ".typ",
+    "sha": "3296d1102fd9824c2f9fbadddba134321dda073a2a5e8264b4cc2379b80953f0"
+  },
+  {
+    "path": "00_book/contents/11_cau_hinh_nat.typ",
+    "kind": ".typ",
+    "sha": "d280bcf5054adc7f5397fd8cc1098b489b62eb8dac9bf5922d5c9368df58802c"
+  },
+  {
+    "path": "00_book/contents/12_truyen_tep_sftp.typ",
+    "kind": ".typ",
+    "sha": "b6811348d4d96ad597c06959e8a0b162ff3b00e9c731f9272bef615b47a943bc"
+  },
+  {
+    "path": "00_book/contents/13_xem_system_logs.typ",
+    "kind": ".typ",
+    "sha": "734058980f1113fe796645f4d8c8d4531e7cbc8d40e51fa136b9b8071cc96e27"
+  },
+  {
+    "path": "00_book/contents/14_interface_switch_l2.typ",
+    "kind": ".typ",
+    "sha": "cdf40318b7ea8d1fc57006dd845cdcf821cb4d39953551e0b6eabc0fa30aed37"
+  },
+  {
+    "path": "00_book/contents/15_vlan_etherchannel_stp_vtp.typ",
+    "kind": ".typ",
+    "sha": "2e0b2276df54fd0d005ec7bacf6836343c31763aa5756748ae809d8916ef372c"
+  },
+  {
+    "path": "00_book/contents/16_bao_mat_switch_l2.typ",
+    "kind": ".typ",
+    "sha": "41c857dc1792fa0adb734dfcc38232ddc7881718df9a228ac829f05f205ebeb3"
+  },
+  {
+    "path": "00_book/contents/17_giam_sat_switch_l2.typ",
+    "kind": ".typ",
+    "sha": "027476945eb901408e6e3ed4d28033b3f8a5cf8d65b2b555f863a4f220c4077b"
+  },
+  {
+    "path": "00_book/contents/18_interface_switch_l3.typ",
+    "kind": ".typ",
+    "sha": "88a29dcacb18469419f96d91916b6fad27a41bc7d144674ae6b2f799af4309d4"
+  },
+  {
+    "path": "00_book/contents/19_dhcp_acl_switch_l3.typ",
+    "kind": ".typ",
+    "sha": "51b488f8be8820a7eb0e72e76ada16408e385fa9f9b1558a18fc0e4f7710fff9"
+  },
+  {
+    "path": "00_book/figures/report/diagrams/acl-lab5/README.md",
+    "kind": ".md",
+    "sha": "8527fd2465cb4aa570b21cef36a37cc0903817daa36a413e9db16a5f96437d56"
+  },
+  {
+    "path": "00_book/figures/report/diagrams/dai-lab/README.md",
+    "kind": ".md",
+    "sha": "933020e5eb8b0ce9727536ab3c4cb2683dc7971de46e045647586855fbdadf98"
+  },
+  {
+    "path": "00_book/figures/report/diagrams/dhcp-snooping-lab/README.md",
+    "kind": ".md",
+    "sha": "575c7663cc7640aca2296a4b2b6e0a7b932c90ae45781d221c71062e368324ee"
+  },
+  {
+    "path": "00_book/figures/report/diagrams/ospf-lab2-five-routers/README.md",
+    "kind": ".md",
+    "sha": "756cd5932bb2cf0aa2ebc46d97a98959a766bf080231f81b5e5cff40b9243e8e"
+  },
+  {
+    "path": "00_book/figures/tree.md",
+    "kind": ".md",
+    "sha": "14b157060bebed03280845144730bacaf439a07f53d0100eb2704e96d75ecdad"
+  },
+  {
+    "path": "00_book/index.md",
+    "kind": ".md",
+    "sha": "4c707a08f0338cc3c7e32d9e6da5f227b7e891d4c649e6996f94d9cbe8bd3afc"
+  },
+  {
+    "path": "00_book/main.pdf",
+    "kind": ".pdf",
+    "sha": "b58bd19c63dcbafadb8638049890455786e791fd3154882dc864b4d26a593d6e"
+  },
+  {
+    "path": "00_book/main.typ",
+    "kind": ".typ",
+    "sha": "a70f96a10b43072c60ff06edc5ba925d672e703ea2f771b8819bb78194b08a95"
+  },
+  {
+    "path": "output/pdf/bao-cao-cams-cap-nhat-email-syslog.pdf",
+    "kind": ".pdf",
+    "sha": "45c708a9fbc37618a8a626402c4e4c33ac1d7c742f445e9c91805087da2eaf51"
+  },
+  {
+    "path": "output/pdf/bao_cao_CAMS_da_chinh_sua.pdf",
+    "kind": ".pdf",
+    "sha": "234dca83464ed9032c9c035106ead0d53da277cc4496794c52728d450e162ed6"
+  },
+  {
+    "path": "output/pdf/bao_cao_CAMS_tinh_gon.pdf",
+    "kind": ".pdf",
+    "sha": "47d0ed01ca9146af620e150a1f0e032a0b39c857d57586498ae980a9fa924a32"
+  },
+  {
+    "path": "output/presentations/CAMS_4_LAB_ANH_DEMO.pptx",
+    "kind": ".pptx",
+    "sha": "dfdab49db523a60395518a18821c06130537f71f104dc0a1c6802eae85ca0390"
+  },
+  {
+    "path": "output/presentations/CAMS_4_LAB_ANH_DEMO_CO_TOPO_LAB4.pptx",
+    "kind": ".pptx",
+    "sha": "0f0e98d359a70b185343a602bc7154ffa89329891b701ac2a60c9037764c6593"
+  },
+  {
+    "path": "output/presentations/CAMS_4_LAB_DEMO_BANG_ANH.pptx",
+    "kind": ".pptx",
+    "sha": "0b5891b68a2596cdfe621b2c2dfc296643b2816a8d59b37c51117d4a372e3efe"
+  },
+  {
+    "path": "output/presentations/CAMS_4_lab_15_phut.pptx",
+    "kind": ".pptx",
+    "sha": "f679054ca92150c98489983587d978185f31247e85dc5a3de366098d529fc568"
+  },
+  {
+    "path": "output/presentations/CAMS_LAB_1_2_3_4_BO_SUNG_THIET_LAP_DAI.pptx",
+    "kind": ".pptx",
+    "sha": "5cd0b61d517287703b02814420b3d7dbcef42f2a76c4745784cac9b18e83b48a"
+  },
+  {
+    "path": "output/presentations/CAMS_LAB_1_2_3_4_THAO_TAC_VA_KET_QUA.pptx",
+    "kind": ".pptx",
+    "sha": "c57195c75cd3f97abe0f615e1bac1e0bd094b445e46f3fd65faf78b3c94c3506"
+  },
+  {
+    "path": "output/presentations/CAU_HOI_PHAN_BIEN_CAMS_BO_SUNG_29_DEN_68.docx",
+    "kind": ".docx",
+    "sha": "504447d40554ada47a65426893e6498674de3c1b735f9cf988b94b0f57fd1036"
+  },
+  {
+    "path": "output/presentations/CAU_HOI_PHAN_BIEN_CAMS_BO_SUNG_29_DEN_68.md",
+    "kind": ".md",
+    "sha": "f06813be64e6939f2447fa96d44e90ae7b0b3077332937b779ad6299f75a69ae"
+  },
+  {
+    "path": "output/presentations/KICH_BAN_NOI_CAMS_4_LAB.md",
+    "kind": ".md",
+    "sha": "bcfd3f7a287d6930d5b25b3abc6ff0cba4df8dac6d29f7c91498e640e59fa1ab"
+  },
+  {
+    "path": "output/presentations/KICH_BAN_NOI_CAMS_4_LAB_BO_SUNG_DAI.md",
+    "kind": ".md",
+    "sha": "b9f0849070bd6fccf9592551e5bf149c65933a3a10a2de294018233669a111e7"
+  },
+  {
+    "path": "output/presentations/KICH_BAN_QUAY_VIDEO_4_LAB.md",
+    "kind": ".md",
+    "sha": "530a836c3118ae1b0dbf9f4df2bf2177c8ebd3c50d6ad89ca85ebc5077764c6c"
+  },
+  {
+    "path": "output/presentations/KICH_BAN_THUYET_TRINH_CAMS_45_SLIDE_VA_PHAN_BIEN.docx",
+    "kind": ".docx",
+    "sha": "04b13fa422e79ffc8afbdc4974472c8b984ccd00c82e50752c1c9674e64edb5e"
+  },
+  {
+    "path": "output/presentations/KICH_BAN_THUYET_TRINH_CAMS_45_SLIDE_VA_PHAN_BIEN.md",
+    "kind": ".md",
+    "sha": "c8ebea8b5fd498f67e6609af8d509d7c8537e733e128faec470b54c50810909f"
+  },
+  {
+    "path": "docs/reports/BAO_CAO_CAI_TIEN_TU_DONG_HOA.md",
+    "kind": ".md",
+    "sha": "fb8c4852b1ce1d77e5595229dd6f822db4e89585a7702a66c669e0af2dde5ee4"
+  },
+  {
+    "path": "docs/reports/BAO_CAO_NANG_CAP_ENABLE_SECRET_VA_PHAN_QUYEN.md",
+    "kind": ".md",
+    "sha": "ca30f6428bb6b736d57a7a9b19aa123b97114037d52d33a822ede5e5fb548b63"
+  },
+  {
+    "path": "docs/reports/BAO_CAO_TONG_HOP_3_TINH_NANG_AN_NINH.md",
+    "kind": ".md",
+    "sha": "4e2546047251e48050a68230403405a3170eeefd7470e73da55815120db0edbe"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "module": "tests/test_view_push_batch.py",
+    "returncode": 0,
+    "tests": 8,
+    "seconds": 0.21,
+    "log": "tests__test_view_push_batch.py.txt"
+  },
+  {
+    "module": "tests/test_multi_device_batch.py",
+    "returncode": 0,
+    "tests": 1,
+    "seconds": 0.21,
+    "log": "tests__test_multi_device_batch.py.txt"
+  },
+  {
+    "module": "tests/test_host_pattern.py",
+    "returncode": 0,
+    "tests": 8,
+    "seconds": 0.14,
+    "log": "tests__test_host_pattern.py.txt"
+  },
+  {
+    "module": "tests/test_routing_group_fhrp.py",
+    "returncode": 0,
+    "tests": 27,
+    "seconds": 1.11,
+    "log": "tests__test_routing_group_fhrp.py.txt"
+  },
+  {
+    "module": "tests/test_automation_rules.py",
+    "returncode": 0,
+    "tests": 12,
+    "seconds": 0.09,
+    "log": "tests__test_automation_rules.py.txt"
+  },
+  {
+    "module": "tests/test_automation_executor.py",
+    "returncode": 0,
+    "tests": 8,
+    "seconds": 0.25,
+    "log": "tests__test_automation_executor.py.txt"
+  },
+  {
+    "module": "tests/test_automation_manager.py",
+    "returncode": 0,
+    "tests": 3,
+    "seconds": 0.11,
+    "log": "tests__test_automation_manager.py.txt"
+  },
+  {
+    "module": "tests/syslog/test_automation_outbox.py",
+    "returncode": 0,
+    "tests": 6,
+    "seconds": 0.5,
+    "log": "tests__syslog__test_automation_outbox.py.txt"
+  },
+  {
+    "module": "tests/syslog/test_telegram_alerts.py",
+    "returncode": 0,
+    "tests": 8,
+    "seconds": 0.44,
+    "log": "tests__syslog__test_telegram_alerts.py.txt"
+  },
+  {
+    "module": "tests/syslog/test_telegram_alert_manager.py",
+    "returncode": 0,
+    "tests": 1,
+    "seconds": 0.58,
+    "log": "tests__syslog__test_telegram_alert_manager.py.txt"
+  },
+  {
+    "module": "tests/syslog/test_security_monitoring.py",
+    "returncode": 0,
+    "tests": 11,
+    "seconds": 0.52,
+    "log": "tests__syslog__test_security_monitoring.py.txt"
+  },
+  {
+    "module": "tests/test_workspace_package.py",
+    "returncode": 0,
+    "tests": 31,
+    "seconds": 0.44,
+    "log": "tests__test_workspace_package.py.txt"
+  },
+  {
+    "module": "tests/test_workspace_save_and_snapshots.py",
+    "returncode": 0,
+    "tests": 20,
+    "seconds": 3.44,
+    "log": "tests__test_workspace_save_and_snapshots.py.txt"
+  }
+]

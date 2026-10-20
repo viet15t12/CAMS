@@ -1,0 +1,9 @@
+{
+  "session_key_file_written": true,
+  "session_key_exported_to_environment": true,
+  "clear_session_credentials_alone_leaves_key_file": true,
+  "same_passphrase_project_without_explicit_salt_produces_same_field_key": true,
+  "successful_hkdf_fallback_promoted_to_primary_key": true,
+  "unreadable_initial_privilege_with_hash_prompt_accepted": true,
+  "missing_enable_secret_falls_back_to_login_password": true
+}

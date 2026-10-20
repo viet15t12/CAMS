@@ -9,7 +9,7 @@ Nội dung được sắp xếp theo chuỗi sử dụng của hệ thống: kh�
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn dùng Python 3.11 trở lên, Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Bộ thu Syslog được viết bằng C++; bộ lập kế hoạch tự động hóa được viết bằng Go và biên dịch thành tệp thực thi `cams-automation` trong bước cài đặt. Công cụ `uv` quản lý môi trường và gói phụ thuộc.
+CAMS là ứng dụng máy tính để bàn dùng Python 3.11 trở lên, Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp, Nornir để đẩy cấu hình song song và Dulwich để quản lý lịch sử cấu hình. Bộ thu Syslog được viết bằng C++; bộ lập kế hoạch tự động hóa được viết bằng Go và biên dịch thành tệp thực thi `cams-automation` trong bước cài đặt. Công cụ `uv` quản lý môi trường và gói phụ thuộc.
 
 Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và các thành phần dùng chung; `core/` chứa đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và quản lý không gian làm việc; `gocore/` chứa mã nguồn Go của bộ lập kế hoạch tự động hóa. Tệp `main.py` khởi tạo ứng dụng và liên kết các thành phần. Cấu trúc chi tiết được trình bày trong phụ lục; chương này tập trung vào cách hiện thực các chức năng chính.
 
@@ -210,7 +210,9 @@ Mục này mô tả cách hiện thực luồng đã thiết kế tại @fig-aut
 
 === Định dạng quy tắc `.rule.cams`
 
-Mỗi quy tắc là một tệp JSON đặt trong thư mục `automation/rules` của không gian làm việc. Lược đồ được kiểm tra chặt: trường sai tên hoặc trường không có trong lược đồ làm quy tắc bị từ chối khi nhập hoặc lưu. Python và Go kiểm tra cùng một tập ràng buộc. @tab-rule-cams-structure tóm tắt các khối chính.
+Tệp `.rule.cams` là định dạng do nhóm đặt ra để lưu một quy tắc tự động hóa theo dạng "khi xảy ra sự kiện X thì thực hiện hành động Y". Ví dụ: khi bộ phát hiện ghi nhận lưu lượng ICMP bất thường từ dải 192.168.122.0/24, CAMS tắt cổng `GigabitEthernet0/3` và kiểm tra lại trạng thái cổng. Nội dung tệp là JSON chuẩn; phần mở rộng riêng giúp CAMS và người dùng phân biệt tệp quy tắc với các tệp JSON khác trong dự án. Người dùng có thể soạn quy tắc trên giao diện *Automation Rules* hoặc nhập tệp có sẵn.
+
+Mỗi quy tắc là một tệp đặt trong thư mục `automation/rules` của không gian làm việc. Lược đồ được kiểm tra chặt: trường sai tên hoặc trường không có trong lược đồ làm quy tắc bị từ chối khi nhập hoặc lưu. Python và Go kiểm tra cùng một tập ràng buộc. @tab-rule-cams-structure tóm tắt các khối chính.
 
 #report-table(
   columns: (18%, 30%, 52%),

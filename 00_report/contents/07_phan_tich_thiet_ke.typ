@@ -29,7 +29,6 @@ Người quản trị khởi tạo thao tác trên CAMS; thiết bị mạng cun
 
 CAMS kiểm tra tham số và lưu phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra hoặc lưu lượng thử. Nguyên tắc này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
 
-#pagebreak(weak: true)
 == Yêu cầu phi chức năng
 
 - *Khả năng phản hồi:* các tác vụ mạng chạy nền; giao diện hiển thị tiến trình và kết quả thay vì chờ đồng bộ trên luồng chính.
@@ -39,7 +38,7 @@ CAMS kiểm tra tham số và lưu phản hồi CLI, nhưng kết luận một c
 - *Khả năng truy vết:* giữ lịch sử cấu hình, thiết bị nguồn, thời gian nhận nhật ký và bản tin gốc để đối chiếu khi có sự cố.
 - *Khả năng bảo trì:* tách giao diện, nghiệp vụ, lưu trữ và giao tiếp mạng để có thể kiểm thử từng thành phần.
 
-Các yêu cầu này là tiêu chí thiết kế và đánh giá. Mức đáp ứng cần được kiểm tra bằng các kịch bản ở Chương 5, không suy ra chỉ từ việc lựa chọn thư viện hoặc mô hình kiến trúc.
+
 
 == Kiến trúc phân lớp
 
@@ -133,7 +132,7 @@ Cảnh báo của bộ phát hiện là dấu hiệu cần điều tra, không p
 
 == Luồng tự động hóa phản ứng theo sự kiện
 
-Bộ tự động hóa nối kết quả của bộ phát hiện với hành động trên thiết bị. Thiết kế tách ba trách nhiệm cho ba thành phần như @fig-automation-flow:
+Bộ tự động hóa nối kết quả của bộ phát hiện với hành động trên thiết bị. Hành vi của nó được khai báo bằng *quy tắc tự động hóa*: mỗi quy tắc nêu loại sự kiện cần theo dõi, lệnh cần thực thi khi sự kiện xảy ra và giới hạn an toàn khi thực thi. Mỗi quy tắc được lưu thành một tệp riêng có phần mở rộng `.rule.cams`; cấu trúc tệp được trình bày tại Mục 4.7.1. Thiết kế tách ba trách nhiệm cho ba thành phần như @fig-automation-flow:
 
 - *Python (CAMS):* chuyển cảnh báo thành sự kiện trong bảng hàng đợi `t13_automation_events`, giữ phiên SSH, thông tin xác thực và cơ sở dữ liệu, thực thi hành động và ghi kết quả vào `t13_automation_actions`.
 - *Tiến trình Go (`cams-automation`):* đọc các tệp quy tắc `.rule.cams` đang bật, đối chiếu sự kiện với điều kiện, kiểm tra thời gian chờ và giới hạn số hành động mỗi giờ, rồi trả về danh sách hành động có kiểu xác định. Tiến trình này không nhận mật khẩu và không tự mở kết nối tới thiết bị; khi khởi chạy, CAMS loại bỏ biến môi trường chứa khóa phiên.
@@ -202,7 +201,6 @@ Mã nguồn hiện vẫn có nhánh dự phòng chấp nhận dấu nhắc `#` k
   ),
   caption: [Bảng tham chiếu kiến trúc an ninh, phân quyền và giám sát hệ thống],
 ) <tab-security-architecture>
-#pagebreak(weak: true)
 == Thiết kế cơ sở dữ liệu
 
 CAMS sử dụng hai cơ sở dữ liệu SQLite. Tệp `device_network.db` lưu danh mục thiết bị, cấu hình cổng mạng, DHCP, định tuyến, ACL, NAT, chuyển mạch và các đích Syslog cần cấu hình; tệp `info_collected.db` lưu dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT, bản tin Syslog đã nhận, cùng hàng đợi sự kiện và trạng thái hành động của bộ tự động hóa. Cách tách này giúp dữ liệu cấu hình không bị trộn với dữ liệu thu thập trong quá trình vận hành.
@@ -211,21 +209,21 @@ Các bảng liên kết bằng khóa chính, khóa ngoại và mã thiết bị.
 
 Đối chiếu các khai báo `CREATE TABLE` trong mã nguồn SQL hiện tại ghi nhận 74 tên bảng trong nhóm `device_network` và 21 tên bảng trong nhóm `info_collected`, tổng cộng 95 tên bảng. Hai bảng `t13_automation_events` và `t13_automation_actions` lưu sự kiện chờ xử lý và trạng thái hành động của bộ tự động hóa. Đây là số đếm của lược đồ nguồn, không khẳng định mọi không gian làm việc đang chạy đều có đúng 95 bảng.
 
-Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/database/schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
+Lược đồ được đối chiếu trực tiếp với các tệp SQL trong `infrastructure/`#sym.zws`database/`#sym.zws`schemas/`. Không dùng tổng số bảng như thước đo mức hoàn thiện vì số này phụ thuộc phiên bản, bảng di chuyển và bảng tạo bổ sung khi chạy. @tab-core-erd liệt kê các thực thể đại diện với đúng tên và khóa trong lược đồ hiện tại.
 
 #report-table(
-  columns: (34%, 29%, 37%),
-  header: ([Bảng], [Khóa chính / khóa ngoại], [Vai trò]),
+  columns: (28%, 20%, 17%, 35%),
+  header: ([Bảng], [Khóa chính], [Khóa ngoại], [Vai trò]),
   rows: (
-    ([#table-code("t01_devices")], [PK: #table-code("host")], [Danh mục và thông tin kết nối thiết bị.]),
-    ([#table-code("t02_interface_name")], [PK: #table-code("iface_id"); FK: #table-code("host")], [Cổng mạng và trạng thái cấu hình.]),
-    ([#table-code("t04_ospf_processes")], [PK: #table-code("ospf_id"); FK: #table-code("host")], [Tiến trình OSPF và Router ID.]),
-    ([#table-code("t04_ospf_networks")], [PK: #table-code("id"); FK: #table-code("ospf_id")], [Mạng, wildcard và vùng OSPF.]),
-    ([#table-code("t05_ACL_DB")], [PK: #table-code("Acl_id"); FK: #table-code("host")], [Tên, loại ACL và trạng thái cấu hình.]),
-    ([#table-code("t05_extended_acl_rules")], [PK: #table-code("id"); FK: #table-code("acl_id")], [Thứ tự, hành động và điều kiện khớp luật.]),
-    ([#table-code("t05_router_iface_acl")], [PK: #table-code("id"); FK: #table-code("iface_id"), #table-code("acl_id")], [Gắn ACL vào cổng mạng theo chiều vào hoặc ra.]),
-    ([#table-code("t05_NAT_DB")], [PK: #table-code("nat_id"); FK: #table-code("host")], [Cấu hình NAT và loại chuyển đổi.]),
-    ([#table-code("t10_syslog_servers")], [PK ghép: #table-code("device_host"), #table-code("server_ip"), #table-code("protocol"), #table-code("port"); FK: #table-code("device_host")], [Đích Syslog và trạng thái triển khai cấu hình theo thiết bị.]),
+    ([#table-code("t01_devices")], [#table-code("host")], [—], [Danh mục và thông tin kết nối thiết bị.]),
+    ([#table-code("t02_interface_name")], [#table-code("iface_id")], [#table-code("host")], [Cổng mạng và trạng thái cấu hình.]),
+    ([#table-code("t04_ospf_processes")], [#table-code("ospf_id")], [#table-code("host")], [Tiến trình OSPF và Router ID.]),
+    ([#table-code("t04_ospf_networks")], [#table-code("id")], [#table-code("ospf_id")], [Mạng, wildcard và vùng OSPF.]),
+    ([#table-code("t05_ACL_DB")], [#table-code("Acl_id")], [#table-code("host")], [Tên, loại ACL và trạng thái cấu hình.]),
+    ([#table-code("t05_extended_acl_rules")], [#table-code("id")], [#table-code("acl_id")], [Thứ tự, hành động và điều kiện khớp luật.]),
+    ([#table-code("t05_router_iface_acl")], [#table-code("id")], [#table-code("iface_id"), #table-code("acl_id")], [Gắn ACL vào cổng mạng theo chiều vào hoặc ra.]),
+    ([#table-code("t05_NAT_DB")], [#table-code("nat_id")], [#table-code("host")], [Cấu hình NAT và loại chuyển đổi.]),
+    ([#table-code("t10_syslog_servers")], [Ghép 4 cột: #table-code("device_host"), #table-code("server_ip"), #table-code("protocol"), #table-code("port")], [#table-code("device_host")], [Đích Syslog và trạng thái triển khai cấu hình theo thiết bị.]),
   ),
   caption: [Các bảng và khóa đại diện trong lược đồ dữ liệu CAMS],
 ) <tab-core-erd>

@@ -38,6 +38,8 @@ Lưu phiên bản cấu hình hỗ trợ truy vết và so sánh thay đổi. Tu
 
 Ansible tổ chức tác vụ bằng tệp mô tả; Nornir cung cấp khung lập trình Python. NetBox giữ vai trò nguồn dữ liệu cho IPAM/DCIM, còn Oxidized thu thập và lưu phiên bản cấu hình. Cisco Catalyst Center cung cấp quản lý tập trung ở quy mô doanh nghiệp @ansibleNetworkDocs @nornirDocs @netboxDocs @oxidizedDocs @ciscoCatalystCenter.
 
+CAMS không thay thế Nornir mà dùng Nornir làm lõi thực thi bên trong. Người dùng khai báo qua biểu mẫu; CAMS sinh lệnh và giao cho Nornir đẩy xuống thiết bị, nên người dùng không phải viết mã Python.
+
 #report-table(
   columns: (18%, 27%, 27%, 28%),
   header: ([Công cụ], [Trọng tâm], [Ưu điểm chính], [Khác biệt so với CAMS]),
@@ -68,12 +70,6 @@ Giao thức vỏ bảo mật (Secure Shell – SSH) cung cấp xác thực, bả
 Telnet truyền nội dung phiên quản trị dưới dạng không mã hóa, nên thông tin xác thực và lệnh có thể bị quan sát trên đường truyền. CAMS hỗ trợ SSH và Telnet cho các luồng CLI hiện có; SSH là lựa chọn mặc định, còn Telnet chỉ phù hợp với phòng thực hành cô lập hoặc thiết bị cũ chưa hỗ trợ SSH.
 
 Phiên kết nối được tái sử dụng nhằm giảm số lần bắt tay và xác thực. Do mỗi phiên CLI duy trì một ngữ cảnh riêng, các tác vụ dùng chung phiên phải được tuần tự hóa. Phần mềm cũng phải xử lý trường hợp mất kết nối, hết thời gian chờ hoặc thiết bị từ chối lệnh, thay vì suy ra thành công chỉ từ việc đã gửi dữ liệu.
-
-=== Giao thức quản lý theo mô hình dữ liệu
-
-NETCONF cung cấp các thao tác quản lý cấu hình trên dữ liệu có cấu trúc và thường dùng XML để mã hóa nội dung. RESTCONF biểu diễn tài nguyên quản lý qua HTTP bảo mật và hỗ trợ dữ liệu XML hoặc JSON. Cả hai giao thức đều có thể sử dụng mô hình YANG để mô tả cấu trúc, kiểu dữ liệu và ràng buộc của thông tin quản lý @rfc6241 @rfc8040 @rfc7950.
-
-So với việc phân tích văn bản CLI, giao thức theo mô hình dữ liệu giúp chương trình nhận biết trường dữ liệu và lỗi theo cấu trúc rõ ràng hơn. Đổi lại, thiết bị phải hỗ trợ giao thức, mô hình YANG và cơ chế xác thực tương ứng. Phiên bản CAMS trong phạm vi báo cáo mới triển khai đầy đủ các luồng cấu hình chính qua SSH hoặc Telnet; NETCONF và RESTCONF là hướng mở rộng, không được xem là chức năng đã hoàn thiện.
 
 == Nghiệp vụ mạng phục vụ tự động hóa
 
@@ -145,7 +141,7 @@ Syslog thường dùng cổng 514 cho UDP hoặc TCP; truyền qua TLS thường
 
 Dấu thời gian do thiết bị tạo cần đi kèm múi giờ hoặc được chuẩn hóa. CAMS giữ cả thời gian trong bản tin và thời gian nhận để đối chiếu khi đồng hồ thiết bị chưa đồng bộ. Số thứ tự và độ chính xác mili giây hỗ trợ sắp xếp sự kiện nhưng không thay thế NTP.
 
-Định dạng sự kiện Cisco IOS thường chứa chuỗi `%FACILITY-SEVERITY-MNEMONIC`. Thành phần `FACILITY` trong chuỗi này, chẳng hạn `LINEPROTO`, là mã phân hệ của Cisco IOS, không phải giá trị *facility* được mã hóa trong PRI của Syslog. Bộ phân tích và giao diện phải đặt tên hai trường riêng để tránh nhầm lẫn.
+Mỗi sự kiện Cisco IOS thường mang mã theo dạng `%FACILITY-`#sym.zws`SEVERITY-`#sym.zws`MNEMONIC`, ví dụ `%LINEPROTO-5-UPDOWN`. Thành phần `FACILITY` trong mã này, chẳng hạn `LINEPROTO`, là mã phân hệ của Cisco IOS, không phải giá trị *facility* được mã hóa trong PRI của Syslog. Bộ phân tích và giao diện phải đặt tên hai trường riêng để tránh nhầm lẫn.
 
 Trong CAMS, bộ thu nhận viết bằng C++ tiếp nhận bản tin UDP và TCP ở tiến trình riêng, sau đó chuyển dữ liệu đã phân tích vào `info_collected.db`. Lựa chọn C++ giảm phụ thuộc vào vòng lặp giao diện Python khi lưu lượng nhật ký tăng; hiệu quả thực tế vẫn phải được xác định bằng phép đo thông lượng, độ trễ và số bản tin bị loại bỏ.
 
@@ -190,6 +186,7 @@ Việc tách giao diện khỏi logic giúp kiểm thử nghiệp vụ mà khôn
   header: ([Thành phần], [Vai trò trong CAMS]),
   rows: (
     ([Netmiko, Paramiko], [Kết nối thiết bị qua SSH, xử lý phiên CLI và hỗ trợ truyền tệp.]),
+    ([Nornir, nornir-netmiko], [Điều phối việc đẩy cấu hình ACL, DHCP, NAT và định tuyến song song trên nhiều thiết bị (tối đa ba luồng); trả kết quả riêng cho từng thiết bị.]),
     ([Jinja2], [Kết xuất dữ liệu đã kiểm tra thành mẫu lệnh Cisco IOS.]),
     ([Dulwich], [Lưu phiên bản cấu hình trong kho Git cục bộ, hỗ trợ lịch sử và so sánh.]),
     ([Argon2id, AES-256-GCM], [Dẫn xuất khóa từ mật khẩu và mã hóa có xác thực cho gói dự án khi bật bảo vệ.]),
