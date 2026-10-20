@@ -56,14 +56,20 @@ class FhrpRepository:
         with closing(self.db._connect()) as conn:
             rows = conn.execute(
                 f"""
-                SELECT i.iface_id, i.host, i.interface_name, i.ip_address,
-                       i.subnet_mask, 'router' AS interface_kind
+                SELECT i.iface_id, i.host, i.interface_name,
+                       COALESCE(sub.ip_address, i.ip_address) AS ip_address,
+                       COALESCE(sub.subnet_mask, i.subnet_mask) AS subnet_mask,
+                       'router' AS interface_kind
                 FROM t02_interface_name AS i
+                LEFT JOIN t02_router_iface_subif AS sub
+                  ON sub.host = i.host
+                 AND sub.subif_name = i.interface_name
                 WHERE i.host IN ({placeholders})
                   AND i.sync_status = 'synchronized'
-                  AND COALESCE(i.shutdown, 0) = 0
-                  AND COALESCE(i.ip_address, '') != ''
-                  AND COALESCE(i.subnet_mask, '') != ''
+                  AND (sub.id IS NULL OR sub.sync_status = 'synchronized')
+                  AND COALESCE(sub.shutdown, i.shutdown, 0) = 0
+                  AND COALESCE(sub.ip_address, i.ip_address, '') != ''
+                  AND COALESCE(sub.subnet_mask, i.subnet_mask, '') != ''
                 UNION ALL
                 SELECT s.id AS iface_id, s.host,
                        'Vlan' || CAST(s.vlan_id AS TEXT) AS interface_name,

@@ -27,6 +27,8 @@ class LauncherContractTests(unittest.TestCase):
         self.assertIn('exec "$python" "$app_dir/main.py"', launcher)
         self.assertIn("CAMS_DATA_DIR", launcher)
         self.assertIn("update.sh", installer)
+        self.assertIn("https://github.com/viet15t12/CAMS.git", installer)
+        self.assertIn("examples/automation-rules", installer)
         self.assertIn("CAMS_INSTALL_BASE", launcher)
 
     @unittest.skipIf(os.name == "nt", "POSIX updater test")
@@ -138,6 +140,12 @@ class LauncherContractTests(unittest.TestCase):
             self.assertTrue(scalable_icon.is_file())
             self.assertTrue(bitmap_icon.is_file())
             self.assertTrue((root / "share/cams/app/main.py").is_file())
+            example_rule = (
+                root
+                / "share/cams/app/examples/automation-rules/"
+                "06-dynamic-syslog-variables-v3.rule.cams"
+            )
+            self.assertTrue(example_rule.is_file())
             self.assertFalse((root / "share/cams/app/docs").exists())
 
             sentinel = root / "share/cams/data/preserved"
@@ -147,6 +155,7 @@ class LauncherContractTests(unittest.TestCase):
                 capture_output=True, timeout=30, check=False,
             )
             self.assertEqual(update.returncode, 0, update.stdout + update.stderr)
+            self.assertIn("CAMS was updated successfully.", update.stdout)
             self.assertEqual(sentinel.read_text(encoding="utf-8"), "keep")
 
             removed = subprocess.run(

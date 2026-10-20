@@ -1,0 +1,6 @@
+$ sudo ping -f -w 60 192.168.100.254
+PING 192.168.100.254 (192.168.100.254) 56(84) bytes of data.
+........................................................................
+--- 192.168.100.254 ping statistics ---
+5787 packets transmitted, 2421 received, +5 errors, 58.1649% packet loss
+rtt min/avg/max/mdev = 1.134/2.255/34.452/1.351 ms

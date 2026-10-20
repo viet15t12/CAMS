@@ -17,8 +17,8 @@
 
 #let table-code(value, size: 9pt) = {
   // Inline `raw` text is an unbreakable box in Typst. Technical identifiers in
-  // narrow table columns therefore cross cell borders. Render them as
-  // monospaced text and add invisible wrap opportunities at safe separators
+  // narrow table columns therefore cross cell borders. Keep the report's Times
+  // New Roman typeface and add invisible wrap opportunities at safe separators
   // and camelCase boundaries instead.
   let breakable = value
     .replace(
@@ -30,7 +30,7 @@
     .replace(".", ".\u{200b}")
     .replace("-", "-\u{200b}")
 
-  text(font: "DejaVu Sans Mono", size: size, breakable)
+  text(font: "Times New Roman", size: size, breakable)
 }
 
 #let report-table(
@@ -57,6 +57,10 @@
     // Nội dung trong ô cần căn trái tự nhiên. Kế thừa chế độ căn đều của
     // thân bài sẽ kéo giãn khoảng trắng, đặc biệt ở tiêu đề và cột hẹp.
     #set par(justify: false, first-line-indent: 0pt, leading: 0.7em)
+    // Dấu backtick trong ô mặc định kích hoạt font đơn cách của Typst. Đổi
+    // toàn bộ mã nội tuyến trong bảng về cùng font serif và cho phép ngắt tại
+    // dấu phân cách, tránh lỗi font hoặc tràn ô ở các bảng kỹ thuật.
+    #show raw.where(block: false): value => table-code(value.text, size: text-size)
 
     #table(
       columns: columns,
@@ -67,6 +71,9 @@
       stroke: (x, y) => (
         left: 0.45pt + rgb("#666666"),
         right: 0.45pt + rgb("#666666"),
+        // Đường phân cách mảnh giúp các hàng dài không bị đọc nhầm sang
+        // hàng kế tiếp khi xuất PDF hoặc in ở kích thước thu nhỏ.
+        bottom: 0.25pt + rgb("#b5b5b5"),
       ),
       table.header(
         table.hline(stroke: 0.8pt + black),

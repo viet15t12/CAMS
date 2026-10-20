@@ -15,8 +15,8 @@ Yêu cầu chức năng được phân theo bốn nhóm của đề tài để l
   rows: (
     ([Quản lý], [Thêm, sửa, xóa và nhập danh mục; quản lý phiên; đồng bộ và lưu lịch sử cấu hình.], [Danh mục, trạng thái kết nối, bản sao cấu hình.]),
     ([Tự động hóa], [Kiểm tra dữ liệu; tạo lệnh theo từng chức năng; xem trước, áp dụng và trả kết quả riêng từng thiết bị.], [Cấu hình chờ, lệnh dự kiến, phản hồi thực thi.]),
-    ([Giám sát], [Thu thập thông tin vận hành; nhận, lưu, lọc và xuất Syslog.], [Trạng thái quan sát, nhật ký có nguồn và thời gian.]),
-    ([Bảo mật], [Triển khai ACL, bảo mật cổng (Port Security), DHCP Snooping và DAI; hỗ trợ xem các sự kiện cảnh báo liên quan.], [Chính sách đã gửi, trạng thái và nhật ký để đối chiếu.]),
+    ([Giám sát], [Thu thập thông tin vận hành; nhận, lưu, lọc và xuất Syslog; gửi cảnh báo Email/Telegram.], [Trạng thái quan sát, nhật ký có nguồn và thời gian, kết quả gửi cảnh báo.]),
+    ([Bảo mật], [Triển khai chính sách; chuẩn hóa sự kiện an ninh; đánh giá Automation Rule và thực thi hành động đã kiểm soát.], [Chính sách đã gửi, security event, kế hoạch hành động và kết quả xác minh.]),
   ),
   caption: [Yêu cầu chức năng theo phạm vi đề tài],
 )
@@ -25,7 +25,7 @@ SFTP, đầu cuối và chức năng đóng gói dự án là các tiện ích h
 
 === Tác nhân và luồng tương tác
 
-Người quản trị khởi tạo thao tác trên CAMS; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký. Máy chủ SFTP và SMTP là các dịch vụ ngoài hỗ trợ truyền tệp và gửi cảnh báo. Luồng cấu hình gồm đồng bộ trạng thái, chuẩn bị dữ liệu, xem trước lệnh, triển khai và xác minh.
+Người quản trị khởi tạo thao tác trên CAMS; thiết bị mạng cung cấp trạng thái, nhận cấu hình và phát nhật ký. Máy chủ SFTP, SMTP và Telegram Bot API là các dịch vụ ngoài hỗ trợ truyền tệp và gửi cảnh báo. Luồng cấu hình gồm đồng bộ trạng thái, chuẩn bị dữ liệu, xem trước lệnh, triển khai và xác minh.
 
 CAMS kiểm tra tham số và lưu phản hồi CLI, nhưng kết luận một chính sách hoạt động vẫn cần lệnh kiểm tra hoặc lưu lượng thử. Nguyên tắc này được dùng để xây dựng tiêu chí cho các kịch bản ở Chương 5.
 
@@ -50,7 +50,7 @@ CAMS tổ chức trách nhiệm thành bốn lớp như @fig-layer-architecture.
   caption: [Kiến trúc phân lớp của CAMS],
 ) <fig-layer-architecture>
 
-Bộ thu Syslog C++ và đầu cuối Alacritty là các tiến trình đồng hành ngoài luồng giao diện. Bộ thu Syslog trao đổi sự kiện JSON Lines với Python; NTTP/1 phục vụ đầu cuối. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
+Bộ thu Syslog C++, Automation Engine (Go core) và đầu cuối Alacritty là các tiến trình đồng hành ngoài luồng giao diện. Bộ thu Syslog trao đổi sự kiện JSON Lines với Python. Automation Engine (Go core) nhận tập sự kiện cùng các tệp `*.rule.cams`, sau đó trả về kế hoạch hành động đã kiểm tra. NTTP/1 phục vụ đầu cuối. Thành phần giao diện được nạp theo nhu cầu để trì hoãn khởi tạo các vùng chưa sử dụng.
 
 Lớp `DatabaseManager` làm đầu mối cho nhiều thao tác từ giao diện; các bộ điều khiển Syslog, SFTP và không gian làm việc đảm nhiệm chức năng tương ứng. Cách tổ chức này hạn chế việc đặt logic kết nối hoặc truy vấn dữ liệu trực tiếp trong QML.
 
@@ -93,12 +93,24 @@ Giám sát có hai luồng: thu thập trạng thái bằng lệnh truy vấn v�
 
 Mỗi bản tin cần lưu nguồn gửi, thời gian nhận, mức độ nghiêm trọng, mã sự kiện nếu phân tích được và nội dung gốc. Giao diện hỗ trợ lọc theo thiết bị, thời gian, mức độ và từ khóa, qua đó giúp người quản trị khoanh vùng các sự kiện như thay đổi kết nối hoặc vi phạm chính sách. Khi đồng hồ trên thiết bị chưa được đồng bộ, hệ thống phải phân biệt thời gian do thiết bị ghi với thời gian CAMS nhận bản tin.
 
-@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu dữ liệu vào SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau khi lưu trữ, bộ phát hiện theo ngưỡng và dịch vụ thư điện tử xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
+@fig-syslog-sequence mô tả luồng tiếp nhận ở tiến trình C++, lưu dữ liệu vào SQLite và thông báo sang Python bằng JSON Lines. Bộ phân tích giữ riêng nhóm nguồn Syslog từ PRI và mã phân hệ Cisco. Sau khi lưu trữ, bộ phát hiện theo ngưỡng tạo security event; dịch vụ Email/Telegram xử lý các bản tin đáp ứng điều kiện; giao diện truy vấn dữ liệu qua bộ lọc.
 
 #figure(
   image("/00_book/figures/report/diagrams/review-syslog-sequence.svg", width: 100%),
   caption: [Sơ đồ tuần tự thu nhận, lưu trữ và khai thác Syslog],
 ) <fig-syslog-sequence>
+
+#pagebreak(weak: true)
+=== Thiết kế Automation Engine (Go core)
+
+Automation Engine (Go core) tạo vòng phản ứng riêng trên dữ liệu đã lưu. Bộ định thời của Python lấy các security event chưa xử lý và gửi sang tiến trình Go. Thành phần này nạp rule đang bật, kiểm tra loại sự kiện, phạm vi thiết bị, thuộc tính, chu kỳ, thời gian chống lặp và giới hạn tần suất. Rule version 3 còn lấy dữ liệu từ đúng bản tin Syslog nguồn, trích biến bằng biểu thức chính quy và kiểm tra kiểu trước khi kết xuất lệnh.
+
+Hành động hợp lệ được ghi vào SQLite; executor chỉ áp dụng hành động `auto` khi có phiên SSH đang hoạt động, sau đó chạy lệnh xác minh và lưu trạng thái. Rule `dry-run` dừng ở kế hoạch, không thay đổi thiết bị. @fig-automation-go-sequence làm rõ ranh giới: Automation Engine (Go core) đánh giá và lập kế hoạch, còn Python cùng executor quản lý bộ định thời, phiên SSH, kết quả và cập nhật giao diện.
+
+#figure(
+  image("/00_book/figures/report/diagrams/automation-go-core-sequence.svg", width: 100%),
+  caption: [Sơ đồ tuần tự của Automation Engine (Go core) từ Syslog đến hành động đã xác minh],
+) <fig-automation-go-sequence>
 
 
 == Thiết kế cơ chế an ninh phân quyền và bảo mật dữ liệu

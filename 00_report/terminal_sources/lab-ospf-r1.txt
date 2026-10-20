@@ -1,0 +1,8 @@
+Router1#show running-config | section router ospf
+router ospf 2
+ router-id 1.1.1.1
+ network 1.1.1.1 0.0.0.0 area 0
+ network 10.0.12.0 0.0.0.3 area 0
+ network 10.0.13.0 0.0.0.3 area 0
+ network 10.0.14.0 0.0.0.3 area 0
+Router1#

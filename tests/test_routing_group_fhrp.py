@@ -699,6 +699,65 @@ class RoutingGroupAndFhrpTests(unittest.TestCase):
         self.assertEqual(svi_task["config"]["interface_name"], "Vlan10")
         self.assertIn("interface Vlan10", render_fhrp_commands(svi_task))
 
+    def test_fhrp_matches_synchronized_router_subinterfaces(self) -> None:
+        with self.db._connect() as connection:
+            for index, host in enumerate(("10.0.0.1", "10.0.0.2"), start=1):
+                parent_id = connection.execute(
+                    "SELECT iface_id FROM t02_interface_name "
+                    "WHERE host = ? AND interface_name = 'GigabitEthernet0/0'",
+                    (host,),
+                ).fetchone()[0]
+                connection.execute(
+                    """
+                    INSERT INTO t02_interface_name(
+                        host, interface_name, sync_status
+                    ) VALUES (?, 'GigabitEthernet0/0.100', 'synchronized')
+                    """,
+                    (host,),
+                )
+                connection.execute(
+                    """
+                    INSERT INTO t02_router_iface_subif(
+                        parent_iface_id, host, subif_name, vlan_id,
+                        ip_address, subnet_mask, shutdown, sync_status
+                    ) VALUES (
+                        ?, ?, 'GigabitEthernet0/0.100', 100,
+                        ?, '255.255.255.0', 0, 'synchronized'
+                    )
+                    """,
+                    (parent_id, host, f"192.168.100.{index + 1}"),
+                )
+            connection.commit()
+
+        service = FhrpService(self.db)
+        interfaces = service.matching_interfaces(
+            ["10.0.0.1", "10.0.0.2"], "192.168.100.1"
+        )["interfaces"]
+
+        self.assertEqual(
+            [row["interface_name"] for row in interfaces],
+            ["GigabitEthernet0/0.100", "GigabitEthernet0/0.100"],
+        )
+        result = service.save({
+            "protocol": "glbp",
+            "group_number": 100,
+            "default_gateway": "192.168.100.1",
+            "members": [
+                {
+                    "host": row["host"],
+                    "iface_id": row["iface_id"],
+                    "interface_kind": row["interface_kind"],
+                }
+                for row in interfaces
+            ],
+        })
+        self.assertTrue(result["ok"], result)
+        commands = render_fhrp_commands(
+            collect_fhrp_tasks(self.db, "10.0.0.1")[0]
+        )
+        self.assertIn("interface GigabitEthernet0/0.100", commands)
+        self.assertIn("glbp 100 ip 192.168.100.1", commands)
+
     def test_fhrp_excludes_interfaces_that_are_still_waiting_for_push(self) -> None:
         with self.db._connect() as connection:
             connection.execute(

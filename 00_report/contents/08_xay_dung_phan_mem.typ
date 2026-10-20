@@ -9,13 +9,13 @@ Nội dung được sắp xếp theo chuỗi sử dụng của hệ thống: kh�
 
 == Môi trường phát triển và tổ chức mã nguồn
 
-CAMS là ứng dụng máy tính để bàn dùng Python 3.11 trở lên, Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Công cụ `uv` quản lý môi trường và gói phụ thuộc.
+CAMS là ứng dụng máy tính để bàn dùng Python 3.11 trở lên, Qt Quick/QML và PyQt6 cho giao diện, SQLite để lưu trữ, Jinja2 để tạo lệnh, Netmiko/Paramiko để giao tiếp và Dulwich để quản lý lịch sử cấu hình. Automation Engine (Go core) cung cấp tiến trình đánh giá Automation Rule; bộ thu Syslog C++ tiếp nhận nhật ký độc lập với luồng giao diện. Công cụ `uv` quản lý môi trường và gói phụ thuộc Python.
 
 Mã nguồn được tổ chức theo trách nhiệm: `UI/` chứa giao diện và các thành phần dùng chung; `core/` chứa đầu mối điều phối; `features/` tổ chức nghiệp vụ theo tính năng; `infrastructure/` cung cấp kết nối, lưu trữ và quản lý không gian làm việc. Tệp `main.py` khởi tạo ứng dụng và liên kết các thành phần. Cấu trúc chi tiết được trình bày trong phụ lục; chương này tập trung vào cách hiện thực các chức năng chính.
 
 == Khởi tạo và kết nối giao diện với nghiệp vụ
 
-Ứng dụng nạp màn hình chào để người dùng tạo hoặc mở dự án, thiết lập đường dẫn dữ liệu rồi chuyển vào giao diện chính. Khi khởi tạo, `main.py` tạo các thành phần dùng chung như bộ quản lý cơ sở dữ liệu, sổ đăng ký phiên thiết bị, bộ điều khiển không gian làm việc, SFTP và Syslog; sau đó công bố các đối tượng cần thiết cho QML qua ngữ cảnh của Qt.
+Ứng dụng nạp màn hình chào để người dùng tạo hoặc mở dự án, thiết lập đường dẫn dữ liệu rồi chuyển vào giao diện chính. Khi khởi tạo, `main.py` tạo các thành phần dùng chung như bộ quản lý cơ sở dữ liệu, sổ đăng ký phiên thiết bị, bộ điều khiển không gian làm việc, SFTP, Syslog và Automation Engine (Go core); sau đó công bố các đối tượng cần thiết cho QML qua ngữ cảnh của Qt.
 
 QML tiếp nhận thao tác và gọi phương thức của bộ điều khiển Python. Tầng nghiệp vụ kiểm tra dữ liệu, thực hiện tác vụ rồi phát tín hiệu để giao diện cập nhật trạng thái hoặc hiển thị lỗi. Các thao tác mạng và lưu gói dự án được đưa sang tác vụ nền để không chặn luồng giao diện. @fig-cams-workspace minh họa không gian làm việc sau khi quá trình khởi tạo hoàn tất.
 
@@ -91,9 +91,19 @@ Bộ thu nhận C++ tiếp nhận bản tin qua UDP/TCP, phân tích và ghi d�
 
 Giao diện tại @fig-cams-system-logs hỗ trợ lọc theo thiết bị, mức độ nghiêm trọng, giao thức, khoảng thời gian và nội dung. Chức năng *Smart Filter* kết hợp điều kiện theo nhóm nguồn Syslog, mã sự kiện và từ khóa; cửa sổ chi tiết cho phép đối chiếu thời gian nhận với thời gian trên thiết bị và đọc bản tin gốc. Chức năng *Export Excel* xuất các dòng sau khi lọc để phục vụ phân tích.
 
-Sau khi lưu bản tin, `SyslogManager` đồng thời chuyển bản ghi tới `EmailAlertService`. Dịch vụ chỉ tiếp nhận các mức độ nghiêm trọng đã chọn, loại bản tin trùng theo cặp thiết bị–mã Cisco trong khoảng chống gửi lặp và có thể gom nhiều bản tin trong một cửa sổ thời gian. Hàng đợi cùng một luồng gửi riêng tách thao tác SMTP khỏi luồng nhận Syslog, nhờ đó thời gian kết nối máy chủ thư không chặn bộ thu nhận nhật ký.
+Sau khi lưu bản tin, `SyslogManager` đồng thời chuyển bản ghi tới `EmailAlertService` và `TelegramAlertService`. Hai dịch vụ chỉ tiếp nhận các mức độ nghiêm trọng đã chọn, loại bản tin trùng theo cặp thiết bị - mã Cisco trong khoảng chống gửi lặp và có thể gom nhiều bản tin trong một cửa sổ thời gian. Mỗi dịch vụ dùng hàng đợi cùng luồng gửi riêng, vì vậy thời gian kết nối SMTP hoặc Telegram Bot API không chặn bộ thu nhận nhật ký.
 
 Màn hình *Email Alerts* cho phép khai báo máy chủ và cổng SMTP, tài khoản gửi, danh sách người nhận, các mức Syslog cần cảnh báo, thời gian chống gửi trùng và thời gian gom bản tin. Mỗi thư gồm nội dung văn bản thuần và HTML; màu, tiêu đề cùng khuyến nghị xử lý thay đổi theo mức độ nghiêm trọng. Với Gmail, CAMS dùng kết nối SMTP qua TLS ngầm định trên cổng `465` và mật khẩu ứng dụng. Giá trị bí mật được mã hóa khi lưu, không được trả về QML và chỉ hiển thị dưới dạng che khuất trên giao diện.
+
+Màn hình *Telegram Alerts* cho phép bật dịch vụ, chọn mức Syslog, nhập Bot Token, Chat ID, thời gian chống lặp và cửa sổ gom đợt. Dịch vụ kết xuất bản tin văn bản thuần, giới hạn nội dung theo mức 4.096 ký tự của Telegram và tóm tắt phần vượt giới hạn. Bot Token được mã hóa trong tệp thiết lập; thông báo lỗi thay thế token bằng giá trị đã che và phân biệt các trường hợp token bị từ chối, Chat ID không tồn tại, lỗi DNS hoặc hết thời gian chờ.
+
+=== Phân tích sự kiện và phản ứng tự động bằng Automation Engine (Go core)
+
+`SecurityEventDetector` chuẩn hóa các mẫu nhật ký liên quan đến ICMP flood, ACL drop, DHCP Snooping, DAI và Port Security thành security event có `event_type`, thiết bị, thuộc tính và bằng chứng nguồn. Sự kiện được lưu trong `info_collected.db` cùng định danh xác định để việc phát lại không tạo bản ghi trùng.
+
+`AutomationManager` khởi động Automation Engine (Go core) dưới dạng tiến trình đồng hành và giao tiếp bằng JSON Lines. Bộ định thời một giây yêu cầu đánh giá các sự kiện chờ. Automation Engine (Go core) nạp tệp `*.rule.cams`, áp dụng `schedule.interval_seconds` của từng rule, kiểm tra điều kiện, chống lặp và giới hạn hành động. Với rule version 3, thành phần này đọc phần bằng chứng gắn với sự kiện, lấy `message` hoặc `raw_message` của bản tin Syslog nguồn, trích biến và kiểm tra kiểu `interface`, `ipv4` hoặc `identifier` trước khi kết xuất lệnh.
+
+Rule ở chế độ `dry-run` tạo hành động `simulated`. Rule `auto` tạo hành động `ready`; `AutomationActionExecutor` nhận hành động, yêu cầu phiên SSH đang hoạt động, gửi khối lệnh qua khóa của phiên rồi chạy `verify_commands`. Kết quả được lưu với trạng thái như `verified`, `noop_verified` hoặc `failed`. Chuỗi này tách quyết định chính sách khỏi giao tiếp thiết bị và giữ bằng chứng để đối chiếu, nhưng không làm nhiều lệnh CLI trở thành một giao dịch có hoàn tác nguyên tử.
 
 Ngoài nhật ký, dữ liệu quan sát như bảng định tuyến, bảng liên kết DHCP, thống kê ACL, phiên NAT, bộ đếm cổng và bảng MAC hỗ trợ kiểm tra hoạt động của các chức năng. Các giá trị này chỉ phản ánh thời điểm thu thập; muốn kết luận về trạng thái hiện tại, người dùng phải cập nhật dữ liệu trước khi đối chiếu.
 

@@ -1,0 +1,13 @@
+Router3#show standby all
+GigabitEthernet0/3.100 - Group 1 (version 2)
+  State is Active
+    2 state changes, last state change 00:00:09
+  Virtual IP address is 192.168.100.128
+  Active virtual MAC address is 0000.0c9f.f001
+  Local virtual MAC address is 0000.0c9f.f001 (v2 default)
+  Hello time 3 sec, hold time 10 sec
+  Preemption enabled
+  Active router is local
+  Standby router is 192.168.100.254, priority 100
+  Priority 101 (configured 101)
+Router3#

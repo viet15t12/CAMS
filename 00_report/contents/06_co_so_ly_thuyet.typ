@@ -155,6 +155,13 @@ Nhật ký tập trung có thể được lọc theo thiết bị, khoảng th�
 
 Tương quan sự kiện là quá trình liên kết nhiều bản tin theo thời gian, nguồn và ngữ cảnh để tìm mẫu bất thường. CAMS hiện có chức năng thu nhận, phân tích trường, lọc nhật ký, gửi cảnh báo qua thư điện tử và phát hiện sự kiện theo ngưỡng trong cửa sổ thời gian. Các quy tắc này nhận diện dấu hiệu trong nhật ký, chưa tương đương một hệ thống phát hiện xâm nhập dựa trên phân tích lưu lượng. Nếu thiết bị không phát sinh hoặc không chuyển bản tin về bộ thu nhận, CAMS không thể tự suy ra toàn bộ sự kiện đã xảy ra.
 
+#pagebreak(weak: true)
+=== Automation Engine (Go core) và vòng phản ứng theo quy tắc
+
+Automation Engine (Go core) là thành phần đánh giá chính sách sau bước thu nhận Syslog, không thay thế bộ thu hoặc bộ phân tích. Python định kỳ lấy các security event chưa xử lý cùng bằng chứng nguồn, gửi sang tiến trình Go qua JSON Lines; tiến trình này nạp Automation Rule đang bật, kiểm tra loại sự kiện, phạm vi thiết bị, thuộc tính và lịch đánh giá trước khi tạo kế hoạch hành động.
+
+Rule version 3 cho phép trích biến từ `message` hoặc `raw_message` của đúng bản tin nguồn và kiểm tra kiểu như `interface`, `ipv4` hoặc `identifier`. Cơ chế chống lặp, thời gian chờ và giới hạn tần suất được áp dụng trước khi trả kế hoạch. Chế độ `dry-run` chỉ tạo kết quả mô phỏng; chế độ `auto` mới cho phép executor Python gửi lệnh qua phiên SSH đang hoạt động và chạy lệnh xác minh. Vì vậy, Automation Engine (Go core) quyết định *hành động nào đủ điều kiện*, còn executor chịu trách nhiệm *thực thi và ghi nhận kết quả trên thiết bị*.
+
 == Cơ sở dữ liệu và hệ thống lưu trữ
 
 === SQLite
@@ -194,6 +201,7 @@ Việc tách giao diện khỏi logic giúp kiểm thử nghiệp vụ mà khôn
     ([Dulwich], [Lưu phiên bản cấu hình trong kho Git cục bộ, hỗ trợ lịch sử và so sánh.]),
     ([Argon2id, AES-256-GCM], [Dẫn xuất khóa từ mật khẩu và mã hóa có xác thực cho gói dự án khi bật bảo vệ.]),
     ([C++ và ổ cắm POSIX], [Bộ thu Syslog dùng ổ cắm và vòng lặp `poll` ở tiến trình riêng; lưu dữ liệu vào SQLite và phát sự kiện JSON Lines.]),
+    ([Automation Engine (Go core)], [Nạp và kiểm tra Automation Rule, đánh giá sự kiện theo chu kỳ, áp dụng chống lặp/giới hạn tần suất và kết xuất biến có kiểu thành kế hoạch hành động.]),
     ([Alacritty], [Trình giả lập đầu cuối được nhúng vào ứng dụng, hỗ trợ thao tác dòng lệnh qua SSH hoặc Telnet.]),
     ([IPC NTTP/1], [Giao thức nội bộ giữa ứng dụng và đầu cuối đồng hành Alacritty; độc lập với kênh sự kiện của bộ thu Syslog.]),
   ),
@@ -206,7 +214,7 @@ Mỗi tác vụ phải có thời gian chờ và kết quả gắn với thiết
 
 === Các thành phần hỗ trợ vận hành
 
-CAMS dùng bộ thu Syslog C++ để tách tiếp nhận nhật ký khỏi tiến trình giao diện. Alacritty chạy như tiến trình đồng hành cho thao tác CLI trực tiếp; giao thức nội bộ NTTP/1 trao đổi thông điệp điều khiển với ứng dụng.
+CAMS dùng bộ thu Syslog C++ để tách tiếp nhận nhật ký khỏi tiến trình giao diện. Automation Engine (Go core) chạy như tiến trình đồng hành, nhận sự kiện có cấu trúc và trả về kế hoạch hành động qua JSON Lines. Alacritty chạy như tiến trình đồng hành cho thao tác CLI trực tiếp; giao thức nội bộ NTTP/1 trao đổi thông điệp điều khiển với ứng dụng.
 
 == Bảo mật và mã hóa
 

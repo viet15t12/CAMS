@@ -1,0 +1,16 @@
+Switch6#show vtp status
+VTP version capable             : 1 to 3
+VTP version running             : 2
+VTP Domain Name                 : cams.local
+VTP Pruning Mode                : Disabled
+VTP Traps Generation            : Disabled
+Device ID                       : 5000.0006.0000
+Configuration last modified by 192.168.122.16 at 10-19-26 12:47:30
+
+Feature VLAN:
+--------------
+VTP Operating Mode              : Client
+Maximum VLANs supported locally : 1005
+Number of existing VLANs        : 6
+Configuration Revision          : 2
+Switch6#

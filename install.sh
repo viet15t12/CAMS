@@ -2,13 +2,14 @@
 set -eu
 
 SOURCE_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+DEFAULT_UPDATE_REPOSITORY=https://github.com/viet15t12/CAMS.git
 
 if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
     cat <<'EOF'
 Usage: ./install.sh
 
-Installs CAMS for the current Linux user, creates the `cams` command and adds
-CAMS to the desktop application menu. Existing user data is preserved.
+Installs or updates CAMS for the current Linux user, creates the `cams` command
+and adds CAMS to the desktop application menu. Existing user data is preserved.
 
 Optional environment variables:
   CAMS_INSTALL_BASE  Program/data base directory (default: XDG data/cams)
@@ -119,6 +120,7 @@ data_home=${XDG_DATA_HOME:-$HOME/.local/share}
 install_base=${CAMS_INSTALL_BASE:-$data_home/cams}
 app_dir=$install_base/app
 user_data_dir=$install_base/data
+example_rules_dir=$app_dir/examples/automation-rules
 bin_dir=${CAMS_BIN_DIR:-$HOME/.local/bin}
 applications_dir=$data_home/applications
 icon_theme_dir=$data_home/icons/hicolor
@@ -131,6 +133,11 @@ case "$app_dir" in
         exit 1
         ;;
 esac
+
+install_action=installed
+if [ -d "$app_dir" ]; then
+    install_action=updated
+fi
 
 archive=$(mktemp "${TMPDIR:-/tmp}/cams-install.XXXXXX.tar")
 cleanup() {
@@ -158,17 +165,25 @@ tar -C "$SOURCE_ROOT" \
 # directory and are deliberately never removed during an install or upgrade.
 rm -rf -- "$app_dir"
 mkdir -p "$app_dir" "$app_dir/bin" "$user_data_dir" "$bin_dir" "$applications_dir" \
-    "$scalable_icons_dir" "$bitmap_icons_dir"
+    "$scalable_icons_dir" "$bitmap_icons_dir" "$example_rules_dir"
 tar -C "$app_dir" -xf "$archive"
 install -m 0755 "$app_dir/packaging/linux/cams-launcher" "$app_dir/cams-launcher"
 chmod 0755 "$app_dir/update.sh"
+
+# Keep executable examples with the installed program, not in the writable
+# user-data directory. Updating CAMS refreshes these examples without changing
+# rules that users imported into their own workspace.
+for rule_file in "$SOURCE_ROOT"/00_report/doc-ruleCams/demo/*.rule.cams; do
+    [ -f "$rule_file" ] || continue
+    install -m 0644 "$rule_file" "$example_rules_dir/${rule_file##*/}"
+done
 
 release_commit=${CAMS_UPDATE_COMMIT:-$(git -C "$SOURCE_ROOT" rev-parse HEAD 2>/dev/null || true)}
 release_branch=${CAMS_UPDATE_BRANCH:-$(git -C "$SOURCE_ROOT" branch --show-current 2>/dev/null || true)}
 release_repository=${CAMS_UPDATE_REPOSITORY:-$(git -C "$SOURCE_ROOT" config --get remote.origin.url 2>/dev/null || true)}
 [ -n "$release_commit" ] || release_commit=unknown
 [ -n "$release_branch" ] || release_branch=main
-[ -n "$release_repository" ] || release_repository=https://github.com/viet15t12/NetworkTools.git
+[ -n "$release_repository" ] || release_repository=$DEFAULT_UPDATE_REPOSITORY
 case "$release_repository" in
     git@github.com:*) release_repository="https://github.com/${release_repository#git@github.com:}" ;;
     ssh://git@github.com/*) release_repository="https://github.com/${release_repository#ssh://git@github.com/}" ;;
@@ -235,7 +250,7 @@ if command -v gtk-update-icon-cache >/dev/null 2>&1; then
 fi
 
 echo
-echo "CAMS was installed successfully."
+echo "CAMS was $install_action successfully."
 echo "  Application menu: CAMS"
 echo "  Command:          $bin_dir/cams"
 if [ -x "$app_dir/bin/cams-automation" ]; then
@@ -244,6 +259,8 @@ if [ -x "$app_dir/bin/cams-automation" ]; then
 fi
 echo "  Program files:    $app_dir"
 echo "  User data:        $user_data_dir"
+echo "  Automation rules: $example_rules_dir"
+echo "  Update command:   $app_dir/update.sh --update"
 case ":${PATH:-}:" in
     *:"$bin_dir":*) ;;
     *) echo "  PATH note: add $bin_dir to PATH to run 'cams' from a terminal." ;;
